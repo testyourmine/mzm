@@ -50,7 +50,7 @@ def ConvertGbaPalToPngPal(pal_file: BufferedReader):
         #print(hex(palette[-1]))
 
 # Create PNG image of palette, where each row is 16 colors
-def CreatePalPng_Rows(png_pal: array):
+def CreatePalPng_Rows():
     # Create a new image
     width = 16
     height = int(len(palette) / 16)
@@ -81,7 +81,7 @@ def CreatePalPng_Rows(png_pal: array):
     image.save("palette.png")
 
 # Create PNG image of palette, all in one row
-def CreatePalPng(png_pal: array):
+def CreatePalPng():
     # Create a new image
     width = len(palette)
     height = 1
