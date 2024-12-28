@@ -52,14 +52,15 @@ def ConvertGbaPalToPngPal(pal_file: BufferedReader):
 # Create PNG image of palette, where each row is 16 colors
 def CreatePalPng_Rows():
     # Create a new image
+    scale = 1
     width = 16
     height = int(len(palette) / 16)
-    image = Image.new("RGB", (width, height))
+    image = Image.new("RGB", (width * scale, height * scale))
     draw = ImageDraw.Draw(image)
 
     # Draw each color in the palette
-    box_width = 1
-    box_height = 1
+    box_width = 1 * scale
+    box_height = 1 * scale
     for i, color in enumerate(palette):
         #print(hex(color))
         # Get the RGB values as a tuple, since that's what it expects
@@ -108,7 +109,7 @@ def CreatePalPng():
     image.save("palette.png")
 
 # Example palette
-pal_file_path = GetFile("Beams.pal")
+pal_file_path = GetFile("AcidWorm.pal")
 pal_file: BufferedReader = open(pal_file_path, "rb")
 
 #ConvertGbaPalToPngPal(pal_file)

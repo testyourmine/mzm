@@ -1,8 +1,9 @@
 from array import array
-from io import BufferedReader
+from io import BufferedReader, BytesIO
 import shutil
 import os
 import paletteConverter as pal
+import compress as comp
 from PIL import Image, ImageDraw
 
 rom: BufferedReader = open("../mzm_us_baserom.gba", "rb")
@@ -34,10 +35,12 @@ def ConvertGbaGfxToPng(spr_file: BufferedReader):
         # 4 BPP, so each 4 bits indexes into the palette
         high_nybble = (byte >> 4) & 0xF
         low_nybble = (byte >> 0) & 0xF
+
+        palette_offset = 0
         
         # Get the color index for the high and low 4 bits (nybble)
-        high_indexed_color = pal.palette[16 * 2 + high_nybble]
-        low_indexed_color = pal.palette[16 * 2 + low_nybble]
+        high_indexed_color = pal.palette[high_nybble + palette_offset*16]
+        low_indexed_color = pal.palette[low_nybble + palette_offset*16]
 
         sprite.append(low_indexed_color)
         sprite.append(high_indexed_color)
@@ -46,8 +49,8 @@ def ConvertGbaGfxToPng(spr_file: BufferedReader):
 def CreateSprPng_Rows():
     # Create a new image
     # Each sprite is 8x8, laid out horizontally
-    width = 8 * 8 * 2
-    height = 8 * 4
+    width = 8 * 8 * 2 * 2
+    height = 8 * 4 * 2
     image = Image.new("RGB", (width, height))
     draw = ImageDraw.Draw(image)
 
@@ -69,7 +72,7 @@ def CreateSprPng_Rows():
             offset_x += 8
         
         # After 16 sprites, go back to next row
-        if i > 0 and i % (64 * 16) == 0:
+        if i > 0 and i % (8*8*2 * 16) == 0:
             offset_x = 0
             offset_y += 8
 
@@ -88,24 +91,14 @@ def CreateSprPng_Rows():
 # Example sprite
 pal.ConvertGbaPalToPngPal(pal.pal_file)
 
-sprite_file_path = GetFile("IceBeamTop.gfx")
+sprite_file_path = GetFile("AcidWorm.gfx.lz")
 sprite_file: BufferedReader = open(sprite_file_path, "rb")
-ConvertGbaGfxToPng(sprite_file)
-sprite_file.close()
 
-sprite_file_path = GetFile("IceBeamBottom.gfx")
-sprite_file: BufferedReader = open(sprite_file_path, "rb")
-ConvertGbaGfxToPng(sprite_file)
-sprite_file.close()
+content = sprite_file.read()
 
-sprite_file_path = GetFile("IceBeamChargedTop.gfx")
-sprite_file: BufferedReader = open(sprite_file_path, "rb")
-ConvertGbaGfxToPng(sprite_file)
-sprite_file.close()
+raw, size = comp.decomp_lz77(content, 0)
 
-sprite_file_path = GetFile("IceBeamChargedBottom.gfx")
-sprite_file: BufferedReader = open(sprite_file_path, "rb")
-ConvertGbaGfxToPng(sprite_file)
+ConvertGbaGfxToPng(BufferedReader(BytesIO(raw)))
 sprite_file.close()
 
 CreateSprPng_Rows()

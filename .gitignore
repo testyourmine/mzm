@@ -16,4 +16,5 @@
 include/**/*.s
 tools/*.txt
 tools/c_extractor
+tools/__pycache__
 .vscode
