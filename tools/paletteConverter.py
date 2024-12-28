@@ -8,8 +8,6 @@ rom: BufferedReader = open("../mzm_us_baserom.gba", "rb")
 
 subDirs: array = []
 
-palette: array = []
-
 # Get the file path of the desired file name
 def GetFile(filename: str):
     for root, dirs, files in os.walk(".."):
@@ -42,26 +40,32 @@ def Bgr555toRgb888(rgb555: int):
     return rgb888
 
 # Convert the GBA palette to a PNG palette
-def ConvertGbaPalToPngPal(pal_file: BufferedReader):
+def ConvertGbaPalToPngPal(pal_file: BufferedReader, palette_array: array):
     while pal_file.peek():
         bgr555 = int.from_bytes(pal_file.read(2), "little")
         rgb888 = Bgr555toRgb888(bgr555)
-        palette.append(rgb888)
+        palette_array.append(rgb888)
         #print(hex(palette[-1]))
 
 # Create PNG image of palette, where each row is 16 colors
-def CreatePalPng_Rows():
+def CreatePalPng_Rows(
+    palette_array: array, # The data for the palette
+    output_image: str, # The file name/directory to output the image
+    palette_length: int, # The number of colors per row
+):
     # Create a new image
     scale = 1
-    width = 16
-    height = int(len(palette) / 16)
+    width = palette_length
+    height = int(len(palette_array) / palette_length)
     image = Image.new("RGB", (width * scale, height * scale))
     draw = ImageDraw.Draw(image)
 
-    # Draw each color in the palette
+    # Size of each pixel
     box_width = 1 * scale
     box_height = 1 * scale
-    for i, color in enumerate(palette):
+
+    # Draw each color in the palette
+    for i, color in enumerate(palette_array):
         #print(hex(color))
         # Get the RGB values as a tuple, since that's what it expects
         r = (color >> 16) & 0xFF
@@ -70,29 +74,35 @@ def CreatePalPng_Rows():
         rgb = (r, g, b)
 
         # Get the coordinates of square, in terms of (x0, y0) and (x1, y1)
-        x0 = (i % 16) * box_width
+        x0 = (i % palette_length) * box_width
         x1 = x0 + box_width
-        y0 = int(i // 16) * box_height
+        y0 = (i // palette_length) * box_height
         y1 = y0 + box_height
 
         #print(f'{x0},{y0} {x1},{y1}')
         draw.rectangle([x0, y0, x1, y1], fill=rgb)
 
     # Save the image
-    image.save("palette.png")
+    image.save(output_image)
 
 # Create PNG image of palette, all in one row
-def CreatePalPng():
+def CreatePalPng(
+    palette_array: array, # The data for the palette
+    output_image: str, # The file name/directory to output the image
+):
     # Create a new image
-    width = len(palette)
+    scale = 1
+    width = len(palette_array)
     height = 1
-    image = Image.new("RGB", (width, height))
+    image = Image.new("RGB", (width * scale, height * scale))
     draw = ImageDraw.Draw(image)
 
+    # Size of each pixel
+    box_width = 1 * scale
+    box_height = 1 * scale
+
     # Draw each color in the palette
-    box_width = 1
-    # Draw each color in the palette
-    for i, color in enumerate(palette):
+    for i, color in enumerate(palette_array):
         #print(hex(color))
         # Get the RGB values as a tuple, since that's what it expects
         r = (color >> 16) & 0xFF
@@ -100,18 +110,36 @@ def CreatePalPng():
         b = color & 0xFF
         rgb = (r, g, b)
 
+        # Get the coordinates of square, in terms of (x0, y0) and (x1, y1)
         x0 = i * box_width
         x1 = (i + 1) * box_width
+        y0 = 0
+        y1 = y0 + box_height
+
         #print(f'{x0},{y0} {x1},{y1}')
-        draw.rectangle([x0, 0, x1, height], fill=rgb)
+        draw.rectangle([x0, y0, x1, y1], fill=rgb)
     
     # Save the image
-    image.save("palette.png")
+    image.save(output_image)
 
-# Example palette
-pal_file_path = GetFile("AcidWorm.pal")
-pal_file: BufferedReader = open(pal_file_path, "rb")
+def PaletteConverter(
+    input_palette: str, # The file name/directory of the palette to input
+    png_flag: int, # 0: No PNG, 1: One row, 2: Multiple rows
+    output_image: str, # The file name/directory to output the image
+    colors_per_row = 16, # Number of colors per row
+) -> array:
+    pal_file_path = GetFile(input_palette)
+    pal_file: BufferedReader = open(pal_file_path, "rb")
 
-#ConvertGbaPalToPngPal(pal_file)
-#CreatePalPng_Rows()
+    pal_array = []
+    ConvertGbaPalToPngPal(pal_file, pal_array)
 
+    if png_flag == 1:
+        CreatePalPng(pal_array, output_image)
+    if png_flag == 2:
+        CreatePalPng_Rows(pal_array, output_image, colors_per_row)
+    
+    pal_file.close()
+    return pal_array
+
+#PaletteConverter("Ridley.pal", 2, "palette.png")
