@@ -26,7 +26,7 @@ def GetAllFileExtensions(fileextension: str):
                 subDirs.append(file_path)
 
 # Convert the GBA GFX file to a PNG format
-def ConvertGbaGfxToPng(sprite_file: BufferedReader, sprite_array: array, palette_array: array, palette_offset = 0):
+def ConvertGbaGfxToPng(sprite_file: BufferedReader, sprite_array: array, palette_array: array, palette_offset: int):
     while sprite_file.peek():
         byte = int.from_bytes(sprite_file.read(1), "little")
 
@@ -45,6 +45,7 @@ def ConvertGbaGfxToPng(sprite_file: BufferedReader, sprite_array: array, palette
 # Create PNG image of sprite
 def CreateSprPng_Rows(
     sprite_array: array, # The data for the sprite
+    sprites_per_row: int, # The number of sprites per row
     scale: int, # The amount to scale the image by
     output_image: str, # The file name/directory to output the image
 ):
@@ -53,8 +54,7 @@ def CreateSprPng_Rows(
     sprite_height = 8
     sprite_size = sprite_width * sprite_height
 
-    # 32 sprites per row and number of rows
-    sprites_per_row = 32
+    # Number of rows
     num_rows = int(len(sprite_array) / (sprite_size * sprites_per_row)) #16
 
     # Create a new image that is 32 sprites wide and 16 sprites tall
@@ -106,27 +106,38 @@ def DecompressImage(sprite_file: BufferedReader) -> BufferedReader:
     return BufferedReader(BytesIO(raw))
 
 def ImageConverter(
-    input_sprite: str, # The file name/directory of the GFX to input
+    input_sprites: list[str], # The file name/directory of the GFX to input
     input_palette: str, # The file name/directory of the palette the GFX uses
+    palette_offset: int, # The palette number to use
     png_flag: int, # 0: No PNG, 1: Output PNG
+    sprites_per_row: int, # The number of sprites per row
     scale: int, # The amount to scale the image by
     output_image: str, # The file name/directory to output the image
 ) -> array:
     palette_array = pal.PaletteConverter(input_palette, 0, "")
-
-    sprite_file_path = GetFile(input_sprite)
-    sprite_file: BufferedReader = open(sprite_file_path, "rb")
-
-    if sprite_file_path.endswith(".lz"):
-        sprite_file = DecompressImage(sprite_file)
-
     sprite_array = []
-    ConvertGbaGfxToPng(sprite_file, sprite_array, palette_array)
+
+    for input_sprite in input_sprites:
+        sprite_file_path = GetFile(input_sprite)
+        sprite_file: BufferedReader = open(sprite_file_path, "rb")
+
+        if sprite_file_path.endswith(".lz"):
+            sprite_file = DecompressImage(sprite_file)
+
+        ConvertGbaGfxToPng(sprite_file, sprite_array, palette_array, palette_offset)
+        sprite_file.close()
 
     if png_flag == 1:
-        CreateSprPng_Rows(sprite_array, scale, output_image)
+        CreateSprPng_Rows(sprite_array, sprites_per_row, scale, output_image)
 
-    sprite_file.close()
     return sprite_array
 
-#ImageConverter("Ridley.gfx.lz", "Ridley.pal", 1, 4, "sprite.png")
+'''ImageConverter(
+    input_sprites=["PlasmaBeamTop.gfx", "PlasmaBeamBottom.gfx", "PlasmaBeamChargedTop.gfx", "PlasmaBeamChargedBottom.gfx"],
+    input_palette="Beams.pal",
+    palette_offset=4,
+    png_flag=1,
+    sprites_per_row=16,
+    scale=3,
+    output_image="sprite.png"
+)'''

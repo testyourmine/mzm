@@ -142,4 +142,8 @@ def PaletteConverter(
     pal_file.close()
     return pal_array
 
-#PaletteConverter("Ridley.pal", 2, "palette.png")
+'''PaletteConverter(
+    input_palette="Beams.pal",
+    png_flag=2,
+    output_image="palette.png",
+)'''
