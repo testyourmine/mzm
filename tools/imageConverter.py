@@ -2,9 +2,11 @@ from array import array
 from io import BufferedReader, BytesIO
 import shutil
 import os
+from math import ceil
 import paletteConverter as pal
 import compress as comp
 from PIL import Image, ImageDraw
+from pathlib import Path
 
 rom: BufferedReader = open("../mzm_us_baserom.gba", "rb")
 
@@ -16,6 +18,7 @@ def GetFile(filename: str):
         if filename in files:
             filepath = os.path.join(root, filename)
             return filepath
+    return ""
 
 # Get all file paths of the desired file extension
 def GetAllFileExtensions(fileextension: str):
@@ -35,8 +38,13 @@ def ConvertGbaGfxToPng(sprite_file: BufferedReader, sprite_array: array, palette
         high_nybble = (byte >> 4) & 0xF
         
         # Get the color index for the high and low 4 bits (nybble)
-        low_indexed_color = palette_array[low_nybble + palette_offset*16]
-        high_indexed_color = palette_array[high_nybble + palette_offset*16]
+        try:
+            low_indexed_color = palette_array[low_nybble + palette_offset*16]
+            high_indexed_color = palette_array[high_nybble + palette_offset*16]
+        except:
+            #print(f'Out of range, Byte: {hex(byte)} Size:{len(palette_array)} Nybbles:{low_nybble},{high_nybble}, Offset:{palette_offset}')
+            low_indexed_color = 0
+            high_indexed_color = 0
 
         # Little endian, so low then high
         sprite_array.append(low_indexed_color)
@@ -99,11 +107,11 @@ def CreateSprPng_Rows(
     # Save the image
     image.save(output_image)
 
-def DecompressImage(sprite_file: BufferedReader) -> BufferedReader:
+def DecompressImage(sprite_file: BufferedReader) -> tuple[BufferedReader, int]:
     content = sprite_file.read()
     raw, size = comp.decomp_lz77(content, 0)
     sprite_file.close()
-    return BufferedReader(BytesIO(raw))
+    return BufferedReader(BytesIO(raw)), size
 
 def ImageConverter(
     input_sprites: list[str], # The file name/directory of the GFX to input
@@ -119,10 +127,13 @@ def ImageConverter(
 
     for input_sprite in input_sprites:
         sprite_file_path = GetFile(input_sprite)
+        if sprite_file_path == "":
+            print(f'File not found: {input_sprite}')
+            continue
         sprite_file: BufferedReader = open(sprite_file_path, "rb")
 
         if sprite_file_path.endswith(".lz"):
-            sprite_file = DecompressImage(sprite_file)
+            sprite_file, size = DecompressImage(sprite_file)
 
         ConvertGbaGfxToPng(sprite_file, sprite_array, palette_array, palette_offset)
         sprite_file.close()
@@ -132,12 +143,67 @@ def ImageConverter(
 
     return sprite_array
 
-'''ImageConverter(
-    input_sprites=["PlasmaBeamTop.gfx", "PlasmaBeamBottom.gfx", "PlasmaBeamChargedTop.gfx", "PlasmaBeamChargedBottom.gfx"],
-    input_palette="Beams.pal",
-    palette_offset=4,
-    png_flag=1,
-    sprites_per_row=16,
-    scale=3,
-    output_image="sprite.png"
-)'''
+# ImageConverter(
+#     input_sprites=["DelayBeforeBallsparking_Frame1.gfx"],
+#     input_palette="PowerSuit_Speedboost.pal",
+#     palette_offset=0,
+#     png_flag=1,
+#     sprites_per_row=1,
+#     scale=3,
+#     output_image="sprite.png"
+# )
+
+def ConvertAllImages():
+    db: BufferedReader = open("../image_database.txt", "r")
+
+    line: str = db.readline()
+    while line != '':
+        # Formatted as follows : image_name;palette_name;palette_offset;sprites_per_row
+        # The symbol # can be used as the first character of a line to make the extractor ignore it
+        if line[0] != '\n' and line[0] != '#':
+            info: list[str] = line.split(";")
+            image_name: str = info[0].split("/")[-1]
+            palette_name: str = info[1].split("/")[-1]
+            palette_offset: int = int(info[2])
+            sprites_per_row: int = int(info[3])
+
+            print(f'Image:{image_name}, Palette:{palette_name}, Offset:{palette_offset}, Rows:{sprites_per_row}')
+            ImageConverter([image_name], palette_name, palette_offset, 1, sprites_per_row, 3, image_name + ".png")
+            
+        line = db.readline()
+
+def TempConvertDatabaseToImageDatabase():
+    db: BufferedReader = open("../database.txt", "r")
+
+    line: str = db.readline()
+    while line != '':
+        # Formatted as follows : image_name;palette_name;palette_offset;sprites_per_row
+        # The symbol # can be used as the first character of a line to make the extractor ignore it
+        if line[0] != '\n' and line[0] != '#':
+            info: array = line.split(";")
+            image_name: str = info[0]
+            if image_name.endswith(".lz") or image_name.endswith(".gfx"):
+                palette_name: str = Path(image_name.rstrip(".lz")).with_suffix(".pal")
+                palette_offset = 0
+                sprites_per_row = 32
+                sprite_size = int(info[1])
+                if image_name.endswith(".lz"):
+                    input_sprite = image_name.split("/")[-1]
+                    sprite_file_path = GetFile(input_sprite)
+                    sprite_file: BufferedReader = open(sprite_file_path, "rb")
+                    content = sprite_file.read()
+                    e, sprite_size = comp.decomp_lz77(content, 0)
+                    sprite_file.close()
+                sprites_per_row = sprite_size // 64
+                if sprite_size // 64 == 0:
+                    sprites_per_row = ceil(sprite_size / 8)
+
+                print(f'{image_name};{palette_name};{palette_offset};{sprites_per_row}')
+        
+        else:
+            print(line, end="")
+            
+        line = db.readline()
+
+#TempConvertDatabaseToImageDatabase()
+#ConvertAllImages()

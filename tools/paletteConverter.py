@@ -14,6 +14,7 @@ def GetFile(filename: str):
         if filename in files:
             filepath = os.path.join(root, filename)
             return filepath
+    return ""
 
 # Get all file paths of the desired file extension
 def GetAllFileExtensions(fileextension: str):
@@ -129,6 +130,9 @@ def PaletteConverter(
     colors_per_row = 16, # Number of colors per row
 ) -> array:
     pal_file_path = GetFile(input_palette)
+    if pal_file_path == "":
+        print(f'File not found: {input_palette}')
+        return []
     pal_file: BufferedReader = open(pal_file_path, "rb")
 
     pal_array = []
