@@ -15,8 +15,8 @@ const s16 sDeoremThornYVelocity[40] = {
     SHORT_MAX
 };
 
-const u32 sDeoremGfx[1569] = INCBIN_U32("data/sprites/deorem.gfx.lz");
-const u16 sDeoremPal[16 * 5] = INCBIN_U16("data/sprites/deorem.pal");
+const u32 sDeoremGfx[1569] = INCBIN_U32("data/sprites/Deorem.gfx.lz");
+const u16 sDeoremPal[16 * 5] = INCBIN_U16("data/sprites/Deorem.pal");
 
 static const u16 sDeoremSegmentOam_Middle_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,

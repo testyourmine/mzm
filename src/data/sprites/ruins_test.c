@@ -1,7 +1,7 @@
 #include "data/sprites/ruins_test.h"
 #include "macros.h"
 
-const u32 sRuinsTestGfx[1951] = INCBIN_U32("data/sprites/RuinsTest.gfx");
+const u32 sRuinsTestGfx[1951] = INCBIN_U32("data/sprites/RuinsTest.gfx.lz");
 const u32 sRuinsTestGfx_SamusReflectionTurningRightTop[96] = INCBIN_U32("data/sprites/RuinsTest_SamusReflectionTurningRightTop.gfx");
 const u32 sRuinsTestGfx_SamusReflectionTurningRightBottom[64] = INCBIN_U32("data/sprites/RuinsTest_SamusReflectionTurningRightBottom.gfx");
 const u32 sRuinsTestGfx_SamusReflectionTurningLeftTop[96] = INCBIN_U32("data/sprites/RuinsTest_SamusReflectionTurningLeftTop.gfx");

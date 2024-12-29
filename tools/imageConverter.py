@@ -126,7 +126,8 @@ def ImageConverter(
     sprite_array = []
 
     for input_sprite in input_sprites:
-        sprite_file_path = GetFile(input_sprite)
+        #sprite_file_path = GetFile(input_sprite)
+        sprite_file_path = input_sprite
         if sprite_file_path == "":
             print(f'File not found: {input_sprite}')
             continue
@@ -144,12 +145,12 @@ def ImageConverter(
     return sprite_array
 
 # ImageConverter(
-#     input_sprites=["DelayBeforeBallsparking_Frame1.gfx"],
-#     input_palette="PowerSuit_Speedboost.pal",
+#     input_sprites=["../data/sprites/MechaRidleyDestroyed.gfx"],
+#     input_palette="../data/sprites/MechaRidley.pal",
 #     palette_offset=0,
 #     png_flag=1,
-#     sprites_per_row=1,
-#     scale=3,
+#     sprites_per_row=6,
+#     scale=2,
 #     output_image="sprite.png"
 # )
 

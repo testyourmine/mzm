@@ -129,7 +129,8 @@ def PaletteConverter(
     output_image: str, # The file name/directory to output the image
     colors_per_row = 16, # Number of colors per row
 ) -> array:
-    pal_file_path = GetFile(input_palette)
+    #pal_file_path = GetFile(input_palette)
+    pal_file_path = input_palette
     if pal_file_path == "":
         print(f'File not found: {input_palette}')
         return []

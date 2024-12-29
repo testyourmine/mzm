@@ -1,307 +1,307 @@
 # Unused sprites
 
-sprites/UnusedSprites.gfx.lz;sprites/UnusedSprites.pal;0;3
+sprites/UnusedSprites.gfx.lz;sprites/UnusedSprites.pal;0;4
 
 # Item banner
 
-sprites/ItemBanner.gfx.lz;sprites/ItemBanner.pal;0;8
+sprites/ItemBanner.gfx.lz;sprites/ItemBanner.pal;0;32
 
 # Zoomer
 
-sprites/Zoomer.gfx.lz;sprites/Zoomer.pal;0;23
+sprites/Zoomer.gfx.lz;sprites/Zoomer.pal;0;32
 
 # Zeela
 
-sprites/Zeela.gfx.lz;sprites/Zeela.pal;0;36
+sprites/Zeela.gfx.lz;sprites/Zeela.pal;0;32
 
 # Ripper
 
-sprites/RipperBrown.gfx.lz;sprites/RipperBrown.pal;0;8
+sprites/RipperBrown.gfx.lz;sprites/RipperBrown.pal;0;32
 
-sprites/RipperPurple.gfx.lz;sprites/RipperPurple.pal;0;8
+sprites/RipperPurple.gfx.lz;sprites/RipperPurple.pal;0;32
 
 # Zeb
 
-sprites/ZebPink.gfx.lz;sprites/ZebPink.pal;0;10
+sprites/ZebPink.gfx.lz;sprites/ZebPink.pal;0;32
 
-sprites/ZebBlue.gfx.lz;sprites/ZebBlue.pal;0;10
+sprites/ZebBlue.gfx.lz;sprites/ZebBlue.pal;0;32
 
 # Skree
 
-sprites/SkreeGreen.gfx.lz;sprites/SkreeGreen.pal;0;16
+sprites/SkreeGreen.gfx.lz;sprites/SkreeGreen.pal;0;32
 
-sprites/SkreeBlue.gfx.lz;sprites/SkreeBlue.pal;0;16
+sprites/SkreeBlue.gfx.lz;sprites/SkreeBlue.pal;0;32
 
 # Morph ball
 
-sprites/MorphBall.gfx.lz;sprites/MorphBall.pal;0;10
+sprites/MorphBall.gfx.lz;sprites/MorphBall.pal;0;32
 
 # Chozo statue
 
-sprites/ChozoStatueLongBeam.gfx.lz;sprites/ChozoStatueLongBeam.pal;0;83
+sprites/ChozoStatueLongBeam.gfx.lz;sprites/ChozoStatueLongBeam.pal;0;32
 
-sprites/ChozoStatueIceBeam.gfx.lz;sprites/ChozoStatueIceBeam.pal;0;83
+sprites/ChozoStatueIceBeam.gfx.lz;sprites/ChozoStatueIceBeam.pal;0;32
 
-sprites/ChozoStatueWaveBeam.gfx.lz;sprites/ChozoStatueWaveBeam.pal;0;83
+sprites/ChozoStatueWaveBeam.gfx.lz;sprites/ChozoStatueWaveBeam.pal;0;32
 
-sprites/ChozoStatueBomb.gfx.lz;sprites/ChozoStatueBomb.pal;0;83
+sprites/ChozoStatueBomb.gfx.lz;sprites/ChozoStatueBomb.pal;0;32
 
-sprites/ChozoStatueSpeedbooster.gfx.lz;sprites/ChozoStatueSpeedbooster.pal;0;83
+sprites/ChozoStatueSpeedbooster.gfx.lz;sprites/ChozoStatueSpeedbooster.pal;0;32
 
-sprites/ChozoStatueHighJump.gfx.lz;sprites/ChozoStatueHighJump.pal;0;85
+sprites/ChozoStatueHighJump.gfx.lz;sprites/ChozoStatueHighJump.pal;0;32
 
-sprites/ChozoStatueScrewAttack.gfx.lz;sprites/ChozoStatueScrewAttack.pal;0;86
+sprites/ChozoStatueScrewAttack.gfx.lz;sprites/ChozoStatueScrewAttack.pal;0;32
 
-sprites/ChozoStatueVariaSuit.gfx.lz;sprites/ChozoStatueVariaSuit.pal;0;84
+sprites/ChozoStatueVariaSuit.gfx.lz;sprites/ChozoStatueVariaSuit.pal;0;32
 
 # Sova
 
-sprites/Sova.gfx.lz;sprites/Sova.pal;0;53
+sprites/Sova.gfx.lz;sprites/Sova.pal;0;32
 
 # Multiviola
 
-sprites/Multiviola.gfx.lz;sprites/Multiviola.pal;0;13
+sprites/Multiviola.gfx.lz;sprites/Multiviola.pal;0;32
 
 # Geruta
 
-sprites/GerutaRed.gfx.lz;sprites/GerutaRed.pal;0;20
+sprites/GerutaRed.gfx.lz;sprites/GerutaRed.pal;0;32
 
-sprites/GerutaGreen.gfx.lz;sprites/GerutaGreen.pal;0;19
+sprites/GerutaGreen.gfx.lz;sprites/GerutaGreen.pal;0;32
 
 # Squeept
 
-sprites/Squeept.gfx.lz;sprites/Squeept.pal;0;16
+sprites/Squeept.gfx.lz;sprites/Squeept.pal;0;32
 
 # Map station
 
-sprites/MapStation.gfx.lz;sprites/MapStation.pal;0;42
+sprites/MapStation.gfx.lz;sprites/MapStation.pal;0;32
 
 # Dragon
 
-sprites/Dragon.gfx.lz;sprites/Dragon.pal;0;31
+sprites/Dragon.gfx.lz;sprites/Dragon.pal;0;32
 
 # Deorem
 
-sprites/deorem.gfx.lz;sprites/deorem.pal;0;98
+sprites/Deorem.gfx.lz;sprites/Deorem.pal;0;32
 
 # Zipline
 
-sprites/Zipline.gfx.lz;sprites/Zipline.pal;0;16
+sprites/Zipline.gfx.lz;sprites/Zipline.pal;0;32
 
 # Reo
 
-sprites/ReoGreenWings.gfx.lz;sprites/ReoGreenWings.pal;0;17
+sprites/ReoGreenWings.gfx.lz;sprites/ReoGreenWings.pal;0;32
 
-sprites/ReoPurpleWings.gfx.lz;sprites/ReoPurpleWings.pal;0;17
+sprites/ReoPurpleWings.gfx.lz;sprites/ReoPurpleWings.pal;0;32
 
 # Gunship
 
-sprites/Gunship.gfx.lz;sprites/Gunship.pal;0;64
+sprites/Gunship.gfx.lz;sprites/Gunship.pal;0;32
 
 # Charge beam
 
-sprites/ChargeBeam.gfx.lz;sprites/ChargeBeam.pal;0;15
+sprites/ChargeBeam.gfx.lz;sprites/ChargeBeam.pal;0;32
 
 # Skultera
 
-sprites/Skultera.gfx.lz;sprites/Skultera.pal;0;17
+sprites/Skultera.gfx.lz;sprites/Skultera.pal;0;32
 
 # Dessgeega
 
-sprites/Dessgeega.gfx.lz;sprites/Dessgeega.pal;0;16
+sprites/Dessgeega.gfx.lz;sprites/Dessgeega.pal;0;32
 
 # Waver
 
-sprites/Waver.gfx.lz;sprites/Waver.pal;0;18
+sprites/Waver.gfx.lz;sprites/Waver.pal;0;32
 
 # Hive
 
-sprites/Hive.gfx.lz;sprites/Hive.pal;0;112
+sprites/Hive.gfx.lz;sprites/Hive.pal;0;32
 
 # Power grip
 
-sprites/PowerGrip.gfx.lz;sprites/PowerGrip.pal;0;17
+sprites/PowerGrip.gfx.lz;sprites/PowerGrip.pal;0;32
 
 # Imago larva
 
-sprites/ImagoLarva.gfx.lz;sprites/ImagoLarva.pal;0;74
+sprites/ImagoLarva.gfx.lz;sprites/ImagoLarva.pal;0;32
 
 # Morph ball launcher
 
-sprites/MorphBallLauncher.gfx.lz;sprites/MorphBallLauncher.pal;0;18
+sprites/MorphBallLauncher.gfx.lz;sprites/MorphBallLauncher.pal;0;32
 
 # Imago cocoon
 
-sprites/ImagoCocoon.gfx.lz;sprites/ImagoCocoon.pal;0;109
+sprites/ImagoCocoon.gfx.lz;sprites/ImagoCocoon.pal;0;32
 
 # Elevator pad
 
-sprites/ElevatorPad.gfx.lz;sprites/ElevatorPad.pal;0;8
+sprites/ElevatorPad.gfx.lz;sprites/ElevatorPad.pal;0;32
 
 # Space pirate
 
-sprites/SpacePirate.gfx.lz;sprites/SpacePirate.pal;0;50
+sprites/SpacePirate.gfx.lz;sprites/SpacePirate.pal;0;32
 
 # Gamet
 
-sprites/GametBlue.gfx.lz;sprites/GametBlue.pal;0;10
+sprites/GametBlue.gfx.lz;sprites/GametBlue.pal;0;32
 
-sprites/GametRed.gfx.lz;sprites/GametRed.pal;0;10
+sprites/GametRed.gfx.lz;sprites/GametRed.pal;0;32
 
 # Unknown item chozo statue
 
-sprites/ChozoStatueSpaceJump.gfx.lz;sprites/ChozoStatueSpaceJump.pal;0;84
+sprites/ChozoStatueSpaceJump.gfx.lz;sprites/ChozoStatueSpaceJump.pal;0;32
 
-sprites/ChozoStatueGravitySuit.gfx.lz;sprites/ChozoStatueGravitySuit.pal;0;84
+sprites/ChozoStatueGravitySuit.gfx.lz;sprites/ChozoStatueGravitySuit.pal;0;32
 
-sprites/ChozoStatuePlasmaBeam.gfx.lz;sprites/ChozoStatuePlasmaBeam.pal;0;84
+sprites/ChozoStatuePlasmaBeam.gfx.lz;sprites/ChozoStatuePlasmaBeam.pal;0;32
 
 # Security gate
 
-sprites/SecurityGate.gfx.lz;sprites/SecurityGate.pal;0;7
+sprites/SecurityGate.gfx.lz;sprites/SecurityGate.pal;0;32
 
 # Zebbo
 
-sprites/ZebboGreen.gfx.lz;sprites/ZebboGreen.pal;0;7
+sprites/ZebboGreen.gfx.lz;sprites/ZebboGreen.pal;0;32
 
-sprites/ZebboYellow.gfx.lz;sprites/ZebboYellow.pal;0;7
+sprites/ZebboYellow.gfx.lz;sprites/ZebboYellow.pal;0;32
 
 # Worker robot
 
-sprites/WorkerRobot.gfx.lz;sprites/WorkerRobot.pal;0;23
+sprites/WorkerRobot.gfx.lz;sprites/WorkerRobot.pal;0;32
 
 # Parasite
 
-sprites/Parasite.gfx.lz;sprites/Parasite.pal;0;19
+sprites/Parasite.gfx.lz;sprites/Parasite.pal;0;32
 
 # Piston 
 
-sprites/Piston.gfx.lz;sprites/Piston.pal;0;11
+sprites/Piston.gfx.lz;sprites/Piston.pal;0;32
 
 # Ridley
 
-sprites/Ridley.gfx.lz;sprites/Ridley.pal;0;138
+sprites/Ridley.gfx.lz;sprites/Ridley.pal;0;32
 
 # Zipline generator
 
-sprites/ZiplineGenerator.gfx.lz;sprites/ZiplineGenerator.pal;0;70
+sprites/ZiplineGenerator.gfx.lz;sprites/ZiplineGenerator.pal;0;32
 
 # Metroid
 
-sprites/Metroid.gfx.lz;sprites/Metroid.pal;0;49
+sprites/Metroid.gfx.lz;sprites/Metroid.pal;0;32
 
 # Rinka
 
-sprites/RinkaOrange.gfx.lz;sprites/RinkaOrange.pal;0;15
+sprites/RinkaOrange.gfx.lz;sprites/RinkaOrange.pal;0;32
 
-sprites/RinkaGreen.gfx.lz;sprites/RinkaGreen.pal;0;15
+sprites/RinkaGreen.gfx.lz;sprites/RinkaGreen.pal;0;32
 
 # Polyp
 
-sprites/Polyp.gfx.lz;sprites/Polyp.pal;0;15
+sprites/Polyp.gfx.lz;sprites/Polyp.pal;0;32
 
 # Viola
 
-sprites/ViolaBlue.gfx.lz;sprites/ViolaBlue.pal;0;18
+sprites/ViolaBlue.gfx.lz;sprites/ViolaBlue.pal;0;32
 
-sprites/ViolaOrange.gfx.lz;sprites/ViolaOrange.pal;0;19
+sprites/ViolaOrange.gfx.lz;sprites/ViolaOrange.pal;0;32
 
 # Geron norfair
 
-sprites/GeronNorfair.gfx.lz;sprites/GeronNorfair.pal;0;16
+sprites/GeronNorfair.gfx.lz;sprites/GeronNorfair.pal;0;32
 
 # Holtz
 
-sprites/Holtz.gfx.lz;sprites/Holtz.pal;0;12
+sprites/Holtz.gfx.lz;sprites/Holtz.pal;0;32
 
 # Gekitai machine
 
-sprites/GekitaiMachine.gfx.lz;sprites/GekitaiMachine.pal;0;22
+sprites/GekitaiMachine.gfx.lz;sprites/GekitaiMachine.pal;0;32
 
 # Ruins test
 
-sprites/RuinsTest.gfx;sprites/RuinsTest.pal;0;30
+sprites/RuinsTest.gfx.lz;sprites/RuinsTest.pal;0;32
 
-sprites/RuinsTest_SamusReflectionTurningRightTop.gfx;sprites/RuinsTest_SamusReflection.pal;0;1
-sprites/RuinsTest_SamusReflectionTurningRightBottom.gfx;sprites/RuinsTest_SamusReflection.pal;0;1
-sprites/RuinsTest_SamusReflectionTurningLeftTop.gfx;sprites/RuinsTest_SamusReflection.pal;0;1
-sprites/RuinsTest_SamusReflectionTurningLeftBottom.gfx;sprites/RuinsTest_SamusReflection.pal;0;1
+sprites/RuinsTest_SamusReflectionTurningRightTop.gfx;sprites/RuinsTest_SamusReflection.pal;0;12
+sprites/RuinsTest_SamusReflectionTurningRightBottom.gfx;sprites/RuinsTest_SamusReflection.pal;0;8
+sprites/RuinsTest_SamusReflectionTurningLeftTop.gfx;sprites/RuinsTest_SamusReflection.pal;0;12
+sprites/RuinsTest_SamusReflectionTurningLeftBottom.gfx;sprites/RuinsTest_SamusReflection.pal;0;8
 
-sprites/RuinsTest_SamusReflectionFullSuitTop.gfx;sprites/RuinsTest_SamusReflectionFullSuit.pal;0;1
-sprites/RuinsTest_SamusReflectionFullSuitBottom.gfx;sprites/RuinsTest_SamusReflectionFullSuit.pal;0;1
-sprites/RuinsTest_SamusReflectionSuitlessTop.gfx;sprites/RuinsTest_SamusReflection.pal;0;1
-sprites/RuinsTest_SamusReflectionSuitlessBottom.gfx;sprites/RuinsTest_SamusReflection.pal;0;1
+sprites/RuinsTest_SamusReflectionFullSuitTop.gfx;sprites/RuinsTest_SamusReflectionFullSuit.pal;0;12
+sprites/RuinsTest_SamusReflectionFullSuitBottom.gfx;sprites/RuinsTest_SamusReflectionFullSuit.pal;0;8
+sprites/RuinsTest_SamusReflectionSuitlessTop.gfx;sprites/RuinsTest_SamusReflection.pal;0;12
+sprites/RuinsTest_SamusReflectionSuitlessBottom.gfx;sprites/RuinsTest_SamusReflection.pal;0;8
 
 
 
 # Save platform
 
-sprites/SavePlatform.gfx.lz;sprites/SavePlatform.pal;0;37
+sprites/SavePlatform.gfx.lz;sprites/SavePlatform.pal;0;32
 
 # Kraid
 
-sprites/Kraid.gfx.lz;sprites/Kraid.pal;0;170
+sprites/Kraid.gfx.lz;sprites/Kraid.pal;0;32
 
 # Ripper 2
 
-sprites/Ripper2.gfx.lz;sprites/Ripper2.pal;0;13
+sprites/Ripper2.gfx.lz;sprites/Ripper2.pal;0;32
 
 # Mella
 
-sprites/Mella.gfx.lz;sprites/Mella.pal;0;10
+sprites/Mella.gfx.lz;sprites/Mella.pal;0;32
 
 # Atomic
 
-sprites/Atomic.gfx.lz;sprites/Atomic.pal;0;46
+sprites/Atomic.gfx.lz;sprites/Atomic.pal;0;32
 
 # Area banner
 
-sprites/AreaBanner.gfx.lz;sprites/AreaBanner.pal;0;4
+sprites/AreaBanner.gfx.lz;sprites/AreaBanner.pal;0;32
 
 # Mother brain
 
-sprites/MotherBrain.gfx.lz;sprites/MotherBrain.pal;0;170
+sprites/MotherBrain.gfx.lz;sprites/MotherBrain.pal;0;32
 
 # Acid worm
 
-sprites/AcidWorm.gfx.lz;sprites/AcidWorm.pal;0;62
+sprites/AcidWorm.gfx.lz;sprites/AcidWorm.pal;0;32
 
 # Escape ship
 
-sprites/EscapeShip.gfx.lz;sprites/EscapeShip.pal;0;57
+sprites/EscapeShip.gfx.lz;sprites/EscapeShip.pal;0;32
 
 # Sidehopper
 
-sprites/Sidehopper.gfx.lz;sprites/Sidehopper.pal;0;18
+sprites/Sidehopper.gfx.lz;sprites/Sidehopper.pal;0;32
 
 # Geega
 
-sprites/Geega.gfx.lz;sprites/Geega.pal;0;9
-sprites/GeegaWhite.gfx.lz;sprites/GeegaWhite.pal;0;9
+sprites/Geega.gfx.lz;sprites/Geega.pal;0;32
+sprites/GeegaWhite.gfx.lz;sprites/GeegaWhite.pal;0;32
 
 # Zebetite, rinka, cannon
 
-sprites/ZebetiteRinkaCannon.gfx.lz;sprites/ZebetiteRinkaCannon.pal;0;29
+sprites/ZebetiteRinkaCannon.gfx.lz;sprites/ZebetiteRinkaCannon.pal;0;32
 
 # Imago larva right side
 
-sprites/ImagoLarvaRightSide.gfx.lz;sprites/ImagoLarvaRightSide.pal;0;36
+sprites/ImagoLarvaRightSide.gfx.lz;sprites/ImagoLarvaRightSide.pal;0;32
 
 # Tangle vine
 
-sprites/TangleVine.gfx.lz;sprites/TangleVine.pal;0;81
+sprites/TangleVine.gfx.lz;sprites/TangleVine.pal;0;32
 
 # Imago
 
-sprites/Imago.gfx.lz;sprites/Imago.pal;0;93
+sprites/Imago.gfx.lz;sprites/Imago.pal;0;32
 
 # Crocomire
 
-sprites/Crocomire.gfx.lz;sprites/Crocomire.pal;0;122
+sprites/Crocomire.gfx.lz;sprites/Crocomire.pal;0;32
 
 # Geron
 
-sprites/Geron.gfx.lz;sprites/Geron.pal;0;44
+sprites/Geron.gfx.lz;sprites/Geron.pal;0;32
 
 # Glass tube
 
@@ -309,65 +309,65 @@ sprites/GlassTube.gfx.lz;sprites/GlassTube.pal;0;32
 
 # Save platform chozodia
 
-sprites/SavePlatformChozodia.gfx.lz;sprites/SavePlatformChozodia.pal;0;34
+sprites/SavePlatformChozodia.gfx.lz;sprites/SavePlatformChozodia.pal;0;32
 
 # Baristute
 
-sprites/Baristute.gfx.lz;sprites/Baristute.pal;0;37
+sprites/Baristute.gfx.lz;sprites/Baristute.pal;0;32
 
 # Elevator statues
 
-sprites/ElevatorStatues.gfx.lz;sprites/ElevatorStatues.pal;0;70
+sprites/ElevatorStatues.gfx.lz;sprites/ElevatorStatues.pal;0;32
 
 # Rising chozo pillar
 
-sprites/RisingChozoPillar.gfx.lz;sprites/RisingChozoPillar.pal;0;41
+sprites/RisingChozoPillar.gfx.lz;sprites/RisingChozoPillar.pal;0;32
 
 # Security laser
 
-sprites/SecurityLaser.gfx.lz;sprites/SecurityLaser.pal;0;6
+sprites/SecurityLaser.gfx.lz;sprites/SecurityLaser.pal;0;32
 
 # Boss statues
 
-sprites/BossStatues.gfx.lz;sprites/BossStatues.pal;0;149
+sprites/BossStatues.gfx.lz;sprites/BossStatues.pal;0;32
 
 # Searchlight eye
 
-sprites/SearchlightEye.gfx.lz;sprites/SearchlightEye.pal;0;11
+sprites/SearchlightEye.gfx.lz;sprites/SearchlightEye.pal;0;32
 
 # Steam
 
-sprites/Steam.gfx.lz;sprites/Steam.pal;0;12
+sprites/Steam.gfx.lz;sprites/Steam.pal;0;32
 
 # Unknown item block
 
-sprites/PlasmaBeamBlock.gfx.lz;sprites/PlasmaBeamBlock.pal;0;19
+sprites/PlasmaBeamBlock.gfx.lz;sprites/PlasmaBeamBlock.pal;0;32
 
-sprites/GravitySuitBlock.gfx.lz;sprites/GravitySuitBlock.pal;0;18
+sprites/GravitySuitBlock.gfx.lz;sprites/GravitySuitBlock.pal;0;32
 
-sprites/SpaceJumpBlock.gfx.lz;sprites/SpaceJumpBlock.pal;0;18
+sprites/SpaceJumpBlock.gfx.lz;sprites/SpaceJumpBlock.pal;0;32
 
 # Gadora
 
-sprites/Gadora.gfx.lz;sprites/Gadora.pal;0;36
+sprites/Gadora.gfx.lz;sprites/Gadora.pal;0;32
 
 # Searchlight
 
-sprites/Searchlight.gfx.lz;sprites/Searchlight.pal;0;10
+sprites/Searchlight.gfx.lz;sprites/Searchlight.pal;0;32
 
 # Fake power bomb
 
-sprites/FakePowerBomb.gfx.lz;sprites/FakePowerBomb.pal;0;7
+sprites/FakePowerBomb.gfx.lz;sprites/FakePowerBomb.pal;0;32
 
 # Falling chozo pillar
 
-sprites/FallingChozoPillar.gfx.lz;sprites/FallingChozoPillar.pal;0;13
+sprites/FallingChozoPillar.gfx.lz;sprites/FallingChozoPillar.pal;0;32
 
 # Mecha Ridley
 
-sprites/MechaRidley.gfx.lz;sprites/MechaRidley.pal;0;157
-sprites/MechaRidleyWeapons.gfx;sprites/MechaRidley.pal;0;16
-sprites/MechaRidleyDestroyed.gfx;sprites/MechaRidley.pal;0;5
+sprites/MechaRidley.gfx.lz;sprites/MechaRidley.pal;0;32
+sprites/MechaRidleyWeapons.gfx;sprites/MechaRidley.pal;0;32
+sprites/MechaRidleyDestroyed.gfx;sprites/MechaRidley.pal;0;6
 
 # Escape gate
 

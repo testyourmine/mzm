@@ -108,8 +108,8 @@ sprites/Dragon.pal;32;0x2d59d4;2
 
 # Deorem
 
-sprites/deorem.gfx.lz;1569;0x2d5c34;4
-sprites/deorem.pal;80;0x2d74b8;2
+sprites/Deorem.gfx.lz;1569;0x2d5c34;4
+sprites/Deorem.pal;80;0x2d74b8;2
 
 # Zipline
 
@@ -286,7 +286,7 @@ sprites/GekitaiMachine.pal;80;0x2f1bdc;2
 
 # Ruins test
 
-sprites/RuinsTest.gfx;1951;0x2f1de0;4
+sprites/RuinsTest.gfx.lz;1951;0x2f1de0;4
 
 sprites/RuinsTest_SamusReflectionTurningRightTop.gfx;96;0x2f3c5c;4
 sprites/RuinsTest_SamusReflectionTurningRightBottom.gfx;64;0x2f3ddc;4
@@ -298,7 +298,7 @@ sprites/RuinsTest_SamusReflectionFullSuitBottom.gfx;64;0x2f42dc;4
 sprites/RuinsTest_SamusReflectionSuitlessTop.gfx;96;0x2f43dc;4
 sprites/RuinsTest_SamusReflectionSuitlessBottom.gfx;64;0x2f455c;4
 
-sprites/RuinsTest.pal;128;0x2f465c;2
+sprites/RuinsTest.p1al;128;0x2f465c;2
 sprites/RuinsTest_SymbolShotFrame1.pal;8;0x2f475c;2
 sprites/RuinsTest_SymbolShotFrame2.pal;8;0x2f476c;2
 sprites/RuinsTest_SymbolShotFrame3.pal;8;0x2f477c;2
