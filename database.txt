@@ -298,7 +298,7 @@ sprites/RuinsTest_SamusReflectionFullSuitBottom.gfx;64;0x2f42dc;4
 sprites/RuinsTest_SamusReflectionSuitlessTop.gfx;96;0x2f43dc;4
 sprites/RuinsTest_SamusReflectionSuitlessBottom.gfx;64;0x2f455c;4
 
-sprites/RuinsTest.p1al;128;0x2f465c;2
+sprites/RuinsTest.pal;128;0x2f465c;2
 sprites/RuinsTest_SymbolShotFrame1.pal;8;0x2f475c;2
 sprites/RuinsTest_SymbolShotFrame2.pal;8;0x2f476c;2
 sprites/RuinsTest_SymbolShotFrame3.pal;8;0x2f477c;2
@@ -1264,7 +1264,7 @@ menus/PauseScreen/40dcd0.pal;16;0x40dcd0;2
 
 menus/PauseScreen/sMinimapTiles.gfx;5120;0x40e0c4;1
 menus/PauseScreen/40f4c4.gfx;1792;0x40f4c4;4
-menus/PauseScreen/MapScreenAreaNames.gfx;167;0x4110c4;4
+menus/PauseScreen/MapScreenAreaNames.gfx.lz;167;0x4110c4;4
 
 menus/PauseScreen/MinimapTiles.pal;80;0x411360;2
 

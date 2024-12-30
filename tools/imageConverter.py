@@ -63,7 +63,7 @@ def CreateSprPng_Rows(
     sprite_size = sprite_width * sprite_height
 
     # Number of rows
-    num_rows = int(len(sprite_array) / (sprite_size * sprites_per_row)) #16
+    num_rows = ceil(len(sprite_array) / (sprite_size * sprites_per_row)) #16
 
     # Create a new image that is 32 sprites wide and 16 sprites tall
     width = sprite_width * sprites_per_row
@@ -145,11 +145,11 @@ def ImageConverter(
     return sprite_array
 
 # ImageConverter(
-#     input_sprites=["../data/sprites/MechaRidleyDestroyed.gfx"],
-#     input_palette="../data/sprites/MechaRidley.pal",
+#     input_sprites=["../data/tilesets/8.gfx.lz"],
+#     input_palette="../data/tilesets/8.pal",
 #     palette_offset=0,
 #     png_flag=1,
-#     sprites_per_row=6,
+#     sprites_per_row=32,
 #     scale=2,
 #     output_image="sprite.png"
 # )
@@ -163,13 +163,13 @@ def ConvertAllImages():
         # The symbol # can be used as the first character of a line to make the extractor ignore it
         if line[0] != '\n' and line[0] != '#':
             info: list[str] = line.split(";")
-            image_name: str = info[0].split("/")[-1]
-            palette_name: str = info[1].split("/")[-1]
+            image_name: str = info[0]#.split("/")[-1]
+            palette_name: str = info[1]#.split("/")[-1]
             palette_offset: int = int(info[2])
             sprites_per_row: int = int(info[3])
 
             print(f'Image:{image_name}, Palette:{palette_name}, Offset:{palette_offset}, Rows:{sprites_per_row}')
-            ImageConverter([image_name], palette_name, palette_offset, 1, sprites_per_row, 3, image_name + ".png")
+            ImageConverter(["../data/" + image_name], "../data/" + palette_name, palette_offset, 1, sprites_per_row, 3, image_name.split("/")[-1].split(".")[0] + ".png")
             
         line = db.readline()
 
