@@ -42,7 +42,7 @@ def ConvertGbaGfxToPng(sprite_file: BufferedReader, sprite_array: array, palette
             low_indexed_color = palette_array[low_nybble + palette_offset*16]
             high_indexed_color = palette_array[high_nybble + palette_offset*16]
         except:
-            #print(f'Out of range, Byte: {hex(byte)} Size:{len(palette_array)} Nybbles:{low_nybble},{high_nybble}, Offset:{palette_offset}')
+            print(f'Out of range, Byte: {hex(byte)} Size:{len(palette_array)} Nybbles:{low_nybble},{high_nybble}, Offset:{palette_offset}')
             low_indexed_color = 0
             high_indexed_color = 0
 
@@ -145,11 +145,11 @@ def ImageConverter(
     return sprite_array
 
 # ImageConverter(
-#     input_sprites=["../data/tilesets/8.gfx.lz"],
-#     input_palette="../data/tilesets/8.pal",
+#     input_sprites=["../data/samus/graphics/power_suit/Top_Right_Running_Frame8.gfx"],
+#     input_palette="../data/samus/palettes/PowerSuit_Default.pal",
 #     palette_offset=0,
 #     png_flag=1,
-#     sprites_per_row=32,
+#     sprites_per_row=7,
 #     scale=2,
 #     output_image="sprite.png"
 # )
@@ -207,4 +207,4 @@ def TempConvertDatabaseToImageDatabase():
         line = db.readline()
 
 #TempConvertDatabaseToImageDatabase()
-#ConvertAllImages()
+ConvertAllImages()
