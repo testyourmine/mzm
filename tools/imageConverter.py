@@ -28,31 +28,42 @@ def GetAllFileExtensions(fileextension: str):
                 file_path = os.path.join(root, file)
                 subDirs.append(file_path)
 
-# Convert the GBA GFX file to a PNG format
-def ConvertGbaGfxToPng(sprite_file: BufferedReader, sprite_array: array, palette_array: array, palette_offset: int):
+# Convert the GBA GFX file to PNG file
+def ConvertGbaGfxToPng(
+    sprite_file: BufferedReader, # The sprite data to read from
+    sprite_array: array, # The sprite data to write to
+    palette_array: array, # The palette data to read from
+    palette_offset: int, # The palette number to use
+    png_mode: int # 0: Truecolor, 1: Indexed
+):
     while sprite_file.peek():
         byte = int.from_bytes(sprite_file.read(1), "little")
 
-        # 4 BPP, so each 4 bits indexes into the palette
-        low_nybble = (byte >> 0) & 0xF
-        high_nybble = (byte >> 4) & 0xF
+        # 4 BPP, so each 4 bits (nybble) indexes into the palette
+        low_index = (byte >> 0) & 0xF
+        high_index = (byte >> 4) & 0xF
         
-        # Get the color index for the high and low 4 bits (nybble)
-        try:
-            low_indexed_color = palette_array[low_nybble + palette_offset*16]
-            high_indexed_color = palette_array[high_nybble + palette_offset*16]
-        except:
-            print(f'Out of range, Byte: {hex(byte)} Size:{len(palette_array)} Nybbles:{low_nybble},{high_nybble}, Offset:{palette_offset}')
-            low_indexed_color = 0
-            high_indexed_color = 0
+        # If PNG is Truecolor, then each pixel is a direct RGB value
+        if png_mode == 0:
+            # Get the colors from the low and high index
+            low_color = palette_array[low_index + palette_offset*16]
+            high_color = palette_array[high_index + palette_offset*16]
 
-        # Little endian, so low then high
-        sprite_array.append(low_indexed_color)
-        sprite_array.append(high_indexed_color)
+            # Little endian, so low then high
+            sprite_array.append(low_color)
+            sprite_array.append(high_color)
+        
+        # If PNG is Indexed, then each pixel is an index into the palette
+        elif png_mode == 1:
+            # Little endian, so low then high
+            sprite_array.append(low_index)
+            sprite_array.append(high_index)
 
 # Create PNG image of sprite
-def CreateSprPng_Rows(
+def CreateSpritePng(
+    png_mode: int, # 0: Truecolor, 1: Indexed
     sprite_array: array, # The data for the sprite
+    palette_array: array, # The data for the palette
     sprites_per_row: int, # The number of sprites per row
     scale: int, # The amount to scale the image by
     output_image: str, # The file name/directory to output the image
@@ -63,43 +74,54 @@ def CreateSprPng_Rows(
     sprite_size = sprite_width * sprite_height
 
     # Number of rows
-    num_rows = ceil(len(sprite_array) / (sprite_size * sprites_per_row)) #16
+    num_rows = ceil(len(sprite_array) / (sprite_size * sprites_per_row))
 
-    # Create a new image that is 32 sprites wide and 16 sprites tall
+    # Create a new image that is sprites_per_row sprites wide and num_rows sprites tall
     width = sprite_width * sprites_per_row
     height = sprite_height * num_rows
-    image = Image.new("RGB", (width * scale, height * scale))
+    image = 0
+    # If PNG is Truecolor, then each pixel is a direct RGB value
+    if png_mode == 0:
+        image = Image.new("RGB", (width * scale, height * scale))
+    # If PNG is Indexed, then each pixel is an index into the palette
+    elif png_mode == 1:
+        image = Image.new("P", (width * scale, height * scale))
+        image.putpalette(palette_array)
     draw = ImageDraw.Draw(image)
 
     # Size of each pixel and offset for laying out sprites
-    box_width = 1 * scale
-    box_height = 1 * scale
+    pixel_width = 1 * scale
+    pixel_height = 1 * scale
     offset_x = 0
     offset_y = 0
+    rgb = 0
 
     # Draw each color in the palette
     for i, color in enumerate(sprite_array):
         #print(hex(color))
-        # Get the RGB values as a tuple, since that's what it expects
-        r = (color >> 16) & 0xFF
-        g = (color >> 8) & 0xFF
-        b = color & 0xFF
-        rgb = (r, g, b)
+        if png_mode == 0:
+            # Get the RGB values as a tuple, since that's what it expects
+            r = (color >> 16) & 0xFF
+            g = (color >> 8) & 0xFF
+            b = color & 0xFF
+            rgb = (r, g, b)
+        elif png_mode == 1:
+            rgb = color
 
         # After each 8x8 sprite, lay the next sprite horizontal to it
         if i > 0 and i % sprite_size == 0:
-            offset_x += sprite_width * box_width
+            offset_x += sprite_width * pixel_width
         
-        # After 32 sprites, go back to next row
+        # After sprites_per_row sprites, go to next row
         if i > 0 and i % (sprite_size * sprites_per_row) == 0:
             offset_x = 0
-            offset_y += sprite_height * box_height
+            offset_y += sprite_height * pixel_height
 
         # Get the coordinates of square, in terms of (x0, y0) and (x1, y1)
-        x0 = (i % sprite_width) * box_width + offset_x
-        x1 = x0 + box_width
-        y0 = ((i // sprite_width) % sprite_height) * box_height + offset_y
-        y1 = y0 + box_height
+        x0 = (i % sprite_width) * pixel_width + offset_x
+        x1 = x0 + pixel_width
+        y0 = ((i // sprite_width) % sprite_height) * pixel_height + offset_y
+        y1 = y0 + pixel_height
 
         #print(f'{x0},{y0} {x1},{y1}')
         draw.rectangle([x0, y0, x1, y1], fill=rgb)
@@ -118,11 +140,12 @@ def ImageConverter(
     input_palette: str, # The file name/directory of the palette the GFX uses
     palette_offset: int, # The palette number to use
     png_flag: int, # 0: No PNG, 1: Output PNG
+    png_mode: int, # 0: Truecolor, 1: Indexed
     sprites_per_row: int, # The number of sprites per row
     scale: int, # The amount to scale the image by
     output_image: str, # The file name/directory to output the image
 ) -> array:
-    palette_array = pal.PaletteConverter(input_palette, 0, "")
+    palette_array = pal.PaletteConverter(input_palette, 0, png_mode, "")
     sprite_array = []
 
     for input_sprite in input_sprites:
@@ -136,23 +159,24 @@ def ImageConverter(
         if sprite_file_path.endswith(".lz"):
             sprite_file, size = DecompressImage(sprite_file)
 
-        ConvertGbaGfxToPng(sprite_file, sprite_array, palette_array, palette_offset)
+        ConvertGbaGfxToPng(sprite_file, sprite_array, palette_array, palette_offset, png_mode)
         sprite_file.close()
 
     if png_flag == 1:
-        CreateSprPng_Rows(sprite_array, sprites_per_row, scale, output_image)
+        CreateSpritePng(png_mode, sprite_array, palette_array, sprites_per_row, scale, output_image)
 
     return sprite_array
 
-# ImageConverter(
-#     input_sprites=["../data/samus/graphics/power_suit/Top_Right_Running_Frame8.gfx"],
-#     input_palette="../data/samus/palettes/PowerSuit_Default.pal",
-#     palette_offset=0,
-#     png_flag=1,
-#     sprites_per_row=7,
-#     scale=2,
-#     output_image="sprite.png"
-# )
+ImageConverter(
+    input_sprites=["../data/sprites/Multiviola.gfx.lz"],
+    input_palette="../data/sprites/Multiviola.pal",
+    palette_offset=0,
+    png_flag=1,
+    png_mode=0,
+    sprites_per_row=32,
+    scale=2,
+    output_image="sprite.png"
+)
 
 def ConvertAllImages():
     db: BufferedReader = open("../image_database.txt", "r")
@@ -168,8 +192,14 @@ def ConvertAllImages():
             palette_offset: int = int(info[2])
             sprites_per_row: int = int(info[3])
 
+            input_sprites = ["../data/" + image_name]
+            input_palette = "../data/" + palette_name
+            png_flag = 1
+            png_mode = 1
+            scale = 2
+            output_image = image_name.split("/")[-1].split(".")[0] + ".png"
             print(f'Image:{image_name}, Palette:{palette_name}, Offset:{palette_offset}, Rows:{sprites_per_row}')
-            ImageConverter(["../data/" + image_name], "../data/" + palette_name, palette_offset, 1, sprites_per_row, 3, image_name.split("/")[-1].split(".")[0] + ".png")
+            ImageConverter(input_sprites, input_palette, palette_offset, png_flag, png_mode, sprites_per_row, scale, output_image)
             
         line = db.readline()
 
@@ -207,4 +237,4 @@ def TempConvertDatabaseToImageDatabase():
         line = db.readline()
 
 #TempConvertDatabaseToImageDatabase()
-ConvertAllImages()
+#ConvertAllImages()

@@ -799,11 +799,11 @@ menus/PauseScreen/ChozoHintBackground.gfx.lz;menus/PauseScreen/3fcef0.pal;0;32
 menus/PauseScreen/EquipmentNamesHiragana.gfx.lz;menus/PauseScreen/3fcef0.pal;6;32
 menus/PauseScreen/EquipmentNamesEnglish.gfx.lz;menus/PauseScreen/3fcef0.pal;6;32
 menus/PauseScreen/MapScreenAreaNamesHiragana.gfx.lz;menus/PauseScreen/MinimapTiles.pal;0;32
-menus/PauseScreen/MenuNamesHiragana.gfx.lz;menus/PauseScreen/3fd252.pal;0;22
-menus/PauseScreen/MenuNamesEnglish.gfx.lz;menus/PauseScreen/3fd252.pal;0;22
-menus/PauseScreen/MapScreenUnknownItemsNamesHiragana.gfx.lz;menus/PauseScreen/3fd252.pal;0;20
-menus/PauseScreen/MapScreenUnknownItemsNamesEnglish.gfx.lz;menus/PauseScreen/3fd252.pal;0;20
-menus/PauseScreen/MapScreenChozoStatueAreaNamesHiragana.gfx.lz;menus/PauseScreen/3fd252.pal;0;32
+menus/PauseScreen/MenuNamesHiragana.gfx.lz;menus/PauseScreen/3fd250.pal;0;22
+menus/PauseScreen/MenuNamesEnglish.gfx.lz;menus/PauseScreen/3fd250.pal;0;22
+menus/PauseScreen/MapScreenUnknownItemsNamesHiragana.gfx.lz;menus/PauseScreen/3fd250.pal;0;20
+menus/PauseScreen/MapScreenUnknownItemsNamesEnglish.gfx.lz;menus/PauseScreen/3fd250.pal;0;20
+menus/PauseScreen/MapScreenChozoStatueAreaNamesHiragana.gfx.lz;menus/PauseScreen/3fd250.pal;0;32
 
 menus/PauseScreen/40d6fc.gfx;menus/PauseScreen/40dc90.pal;0;1
 menus/PauseScreen/40d74c.gfx;menus/PauseScreen/40dcb0.pal;0;1
