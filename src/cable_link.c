@@ -32,7 +32,7 @@ u8 CableLinkProcess(void)
             break;
 
         case 1:
-            gIoTransferInfo.timer++;
+            APPLY_DELTA_TIME_INC(gIoTransferInfo.timer);
             if (gIoTransferInfo.timer > CONVERT_SECONDS(.5f))
             {
                 ClearSoundData();
@@ -57,7 +57,7 @@ u8 CableLinkProcess(void)
             break;
 
         case 3:
-            gIoTransferInfo.timer++;
+            APPLY_DELTA_TIME_INC(gIoTransferInfo.timer);
             if (gMultiBootParamData.clientBit & (2 | 4 | 8))
             {
                 probeCount = gMultiBootParamData.probeCount;
@@ -1061,7 +1061,7 @@ void unk_89600(struct MultiBootData* pMultiBoot, const u8* src, s32 length, u8 p
     s8 var_1;
     s32 var_2;
 
-    var_2 = (s8)param_5;
+    var_2 = (s8)param_5; // 1
     
     if (pMultiBoot->probeCount != 0 || pMultiBoot->clientBit == 0 || pMultiBoot->checkWait)
     {
@@ -1093,7 +1093,7 @@ void unk_89600(struct MultiBootData* pMultiBoot, const u8* src, s32 length, u8 p
             break;
 
         case 4:
-            paletteData = param_4 | 0x38;
+            paletteData = param_4 | (7 << 3);
             break;
 
         case 5:
@@ -1243,6 +1243,7 @@ void unk_897d0(void)
     i = 0;
     if (read16(REG_SIO) & SIO_START_BIT_ACTIVE)
     {
+        // Wait for 31069 loops or SIO become inactive
         while (++i < 0x795D && read16(REG_SIO) & SIO_START_BIT_ACTIVE);
     }
 
@@ -1543,6 +1544,7 @@ void CableLinkInitializeTimer3(void)
  */
 void CableLinkBeginTransferWithTimer3(void)
 {
+    // Called when timer3 interrupt
     CableLinkStopAndReloadTimer3();
     CableLinkStartSerialTransfer();
 }
@@ -1729,7 +1731,7 @@ u8 unk_89e30(void)
     u16* ptr;
 
     gIoTransferInfo.result = 0;
-    gIoTransferInfo.timer++;
+    APPLY_DELTA_TIME_INC(gIoTransferInfo.timer);
 
     switch (gIoTransferInfo.unk_A)
     {
@@ -1776,7 +1778,7 @@ u8 unk_89e30(void)
                 CableLinkCheckError();
                 if (gIoTransferInfo.unk_E == 0x3300 || gIoTransferInfo.errorFlag != 0)
                     gIoTransferInfo.unk_4 = 0;
-                else if (gIoTransferInfo.timer > 60 * 3)
+                else if (gIoTransferInfo.timer > CONVERT_SECONDS(3.f))
                     gIoTransferInfo.unk_4 = gIoTransferInfo.errorFlag;
             }
             break;
@@ -1872,6 +1874,7 @@ u8* CableLinkCheckError(void)
  */
 void unk_8a12c(u16 param_1)
 {
+    // param_1 is gIoTransferInfo.unk_E
     u32 value;
     
     switch (param_1)
@@ -1880,10 +1883,10 @@ void unk_8a12c(u16 param_1)
             gUnk_30058c0[0] |= param_1;
             gUnk_30058c0[1] = gButtonInput;
 
-            // Buffer overflow
+            // Buffer overflow into gUnk_30058c4
             value = gChangedInput;
-            gUnk_30058c0[3] = gLanguage;
-            gUnk_30058c0[2] = value;
+            gUnk_30058c0[3] = gLanguage; // gUnk_30058c4[1] = gLanguage;
+            gUnk_30058c0[2] = value;     // gUnk_30058c4[0] = value;
             break;
 
         case 0x5500:
@@ -1926,6 +1929,7 @@ void unk_8a1d4(void)
         gIoTransferInfo.fusionGalleryImages = gUnk_30058c4[1][1];
 
         var = gIoTransferInfo.fusionGalleryImages - 1;
+        // if only one fusion gallery image
         if (var < 3)
         {
             gIoTransferInfo.unk_E = 0x2200;
@@ -1949,15 +1953,18 @@ void unk_8a260(void)
 {
     u32 buffer;
     
+    // Disable timer3 and serial interrupt
     gUnk_30058d0 = read16(REG_IME);
     write16(REG_IME, FALSE);
     write16(REG_IE, read16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
     write16(REG_IME, gUnk_30058d0);
 
+    // Clear timer3, set SIO to multiplayer mode, acknowledge outstanding timer3 and serial interrupts
     write16(REG_SIO, SIO_NON_NORMAL_MODE);
     write16(REG_TM3CNT_H, 0);
     write16(REG_IF, IF_TIMER3 | IF_SERIAL);
 
+    // Clear gCableLinkInfo
     buffer = 0;
     CpuSet(&buffer, &gCableLinkInfo, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gCableLinkInfo) / sizeof(u32)));
 }
@@ -2118,6 +2125,7 @@ void unk_8a39c(void)
  */
 u32 CableLinkDetectError(u8* param_1, u16* param_2, CableLinkBuffer1_T param_3)
 {
+    // param_1 is &gUnk_30058cc, param_2 is gUnk_30058c0, param_3 is gUnk_30058c4
     u32 error;
     u32 errorFlag_0;
     u32 errorFlag_1;
@@ -2146,10 +2154,11 @@ u32 CableLinkDetectError(u8* param_1, u16* param_2, CableLinkBuffer1_T param_3)
             switch (*param_1)
             {
                 case 1:
-                    if (gCableLinkInfo.unk_0 != 0 && gCableLinkInfo.unk_3 > 1)
+                    if (gCableLinkInfo.unk_0 && gCableLinkInfo.unk_3 > 1)
                         gCableLinkInfo.unk_10 = 1;
                     break;
 
+                // Never 2?
                 case 2:
                     gCableLinkInfo.unk_1 = 0;
                     write16(REG_SIO_DATA8, 0);
@@ -2251,23 +2260,24 @@ void unk_8a4f8(void)
  */
 void unk_8a548(u16* param_1)
 {
+    // param_1 is gUnk_30058c0
     u8 offset;
     u8 i;
 
     gUnk_30058d0 = read16(REG_IME);
     write16(REG_IME, FALSE);
 
-    if (gCableLinkInfo.unk_9D < ARRAY_SIZE(gCableLinkInfo.unk_A0[0][0]))
+    if (gCableLinkInfo.unk_9D < ARRAY_SIZE(gCableLinkInfo.unk_1C[0]))
     {
         offset = gCableLinkInfo.unk_9C + gCableLinkInfo.unk_9D;
-        if (offset >= ARRAY_SIZE(gCableLinkInfo.unk_A0[0][0]))
-            offset -= ARRAY_SIZE(gCableLinkInfo.unk_A0[0][0]);
+        if (offset >= ARRAY_SIZE(gCableLinkInfo.unk_1C[0]))
+            offset -= ARRAY_SIZE(gCableLinkInfo.unk_1C[0]);
 
-        for (i = 0; i < ARRAY_SIZE(gCableLinkInfo.unk_A0); i++)
+        for (i = 0; i < ARRAY_SIZE(gCableLinkInfo.unk_1C); i++)
         {
             gUnk_30058d8 |= *param_1;
-            gCableLinkInfo.unk_1C[i][offset] = *param_1;
-            *param_1++ = 0;
+            gCableLinkInfo.unk_1C[i][offset] = *param_1; // Data from gUnk_30058c0
+            *param_1++ = 0; // Clears gUnk_30058c0
         }
     }
     else
@@ -2293,6 +2303,7 @@ void unk_8a548(u16* param_1)
  */
 void unk_8a628(CableLinkBuffer1_T param_1)
 {
+    // param_1 is gUnk_30058c4
     u8 i;
     u8 j;
 
@@ -2389,11 +2400,12 @@ void unk_8a730(void)
 }
 
 /**
- * @brief 8a7a0 | 10 | To document
+ * @brief 8a7a0 | 10 | Initialize timer 3 if the GBA is the parent and start serial transfer
  * 
  */
 void unk_8a7a0(void)
 {
+    // // Called when timer3 interrupt
     unk_8aaf0();
     CableLinkStartSerialTransfer_Duplicate();
 }
@@ -2404,6 +2416,7 @@ void unk_8a7a0(void)
  */
 void unk_8a7b0(void)
 {
+    // Called when serial communication interrupt
     u32 control;
 
     control = read32(REG_SIO);
@@ -2439,6 +2452,7 @@ void unk_8a7b0(void)
     gCableLinkInfo.unk_D++;
     gUnk_30058d2 = FALSE;
 
+    // gUnk_3005b54 is unused, so condition is pointless?
     if (gCableLinkInfo.unk_D == 2)
         gUnk_3005b54 = gCableLinkInfo.unk_1A1;
 }
@@ -2486,18 +2500,19 @@ u8 unk_8a850(void)
 
     for (i = 0; i < 2; i++)
     {    
-        if ((gCableLinkInfo.sioIncomingData[i] & -4) == 0x7C40 || gCableLinkInfo.sioIncomingData[i] == 0x8FFF)
+        if ((gCableLinkInfo.sioIncomingData[i] & ~3) == 0x7C40 || gCableLinkInfo.sioIncomingData[i] == 0x8FFF)
         {
             var_0++;
 
             if (data8 > gCableLinkInfo.sioIncomingData[i] && gCableLinkInfo.sioIncomingData[i])
                 data8 = gCableLinkInfo.sioIncomingData[i];
         }
-        else if (gCableLinkInfo.sioIncomingData[i] != 0xFFFF)
+        else if (gCableLinkInfo.sioIncomingData[i] != USHORT_MAX)
         {
             var_0 = 0;
             break;
         }
+        // If current index is the multiplayer ID
         else if (i == gCableLinkInfo.unk_2)
             var_0 = 0;
     }
@@ -2542,8 +2557,8 @@ void unk_8a94c(void)
     u8 offset;
 
     ptr = REG_SIO_MULTI;
-    data_1 = ptr[1];
-    data_0 = ptr[0];
+    data_1 = ptr[1];  // SIOMULTI2 and SIOMULTI3
+    data_0 = ptr[0];  // SIOMULTI0 and SIOMULTI1
 
     *(u32*)&buffer[0] = data_0;
     *(u32*)&buffer[2] = data_1;
@@ -2581,7 +2596,7 @@ void unk_8a94c(void)
         }
 
         gCableLinkInfo.unk_19++;
-        if (gCableLinkInfo.unk_19 == 2 && gUnk_30058da != 0)
+        if (gCableLinkInfo.unk_19 == ARRAY_SIZE(gCableLinkInfo.unk_A0[0]) && gUnk_30058da != 0)
         {
             gCableLinkInfo.unk_1A1++;
             gUnk_30058da = 0;
@@ -2595,7 +2610,7 @@ void unk_8a94c(void)
  */
 void unk_8aa54(void)
 {
-    if (gCableLinkInfo.unk_18 == 2)
+    if (gCableLinkInfo.unk_18 == ARRAY_SIZE(gCableLinkInfo.unk_1C))
     {
         write16(REG_SIO_DATA8, gCableLinkInfo.unk_16);
 
@@ -2604,7 +2619,7 @@ void unk_8aa54(void)
             gCableLinkInfo.unk_9D--;
             gCableLinkInfo.unk_9C++;
 
-            if (gCableLinkInfo.unk_9C > 31)
+            if (gCableLinkInfo.unk_9C >= ARRAY_SIZE(gCableLinkInfo.unk_1C[0]))
                 gCableLinkInfo.unk_9C = 0;
         }
         else
@@ -2631,11 +2646,12 @@ void unk_8aa54(void)
 }
 
 /**
- * @brief 8aaf0 | 34 | To document
+ * @brief 8aaf0 | 34 | Stop and reload timer with -132 if the GBA is the parent
  * 
  */
 void unk_8aaf0(void)
 {
+    // If the GBA is parent and ready
     if (gCableLinkInfo.unk_0)
     {
         // Turn off timer 3 and load in -132
@@ -2650,13 +2666,15 @@ void unk_8aaf0(void)
  */
 void unk_8ab24(void)
 {
-    if (gCableLinkInfo.unk_19 == 2)
+    // If reached end of the second dimension of unk_A0
+    if (gCableLinkInfo.unk_19 == ARRAY_SIZE(gCableLinkInfo.unk_A0[0]))
     {
         gCableLinkInfo.unk_18 = 0;
         gCableLinkInfo.unk_19 = 0;
     }
     else if (gCableLinkInfo.unk_0)
     {
+        // Start timer3
         write16(REG_TM3CNT_H, read16(REG_TM3CNT_H) | TIMER_CONTROL_ACTIVE);
     }
 }
@@ -2673,6 +2691,7 @@ void unk_8ab54(void)
     gCableLinkInfo.unk_9D = 0;
     gCableLinkInfo.unk_9C = 0;
 
+    // Fill out unk_1C with 0xEFFF
     for (i = 0; i < ARRAY_SIZE(gCableLinkInfo.unk_1C); i++)
     {
         for (j = 0; j < ARRAY_SIZE(gCableLinkInfo.unk_1C[0]); j++)
@@ -2695,6 +2714,7 @@ void unk_8ab9c(void)
     gCableLinkInfo.unk_1A1 = 0;
     gCableLinkInfo.unk_1A0 = 0;
 
+    // Fill out unk_A0 with 0xEFFF
     for (i = 0; i < ARRAY_SIZE(gCableLinkInfo.unk_A0); i++)
     {
         for (j = 0; j < ARRAY_SIZE(gCableLinkInfo.unk_A0[0]); j++)
