@@ -40,4 +40,45 @@ struct Unk_2a0
     u8 _pad2[4];     // offset 4–7, padding or unused
 };
 
+struct LinkSession {
+    u8 isParent;
+    u8 state;
+    u8 localId;
+    u8 playerCount;
+    u16 handshakeBuffer[4];
+    u8 receivedNothing;
+    u8 serialIntrCounter;
+};
+
+struct LinkConnection {
+    u8 handshakeAsParent;
+    u8 unk_11;
+    u8 hardwareErrorFlag;
+    u8 checksumErrorFlag;
+    u8 overflowErrorFlags;
+    u8 sioErrorFlags;
+    u16 checksum;
+    u8 sendCmdIndex;
+    u8 recvCmdIndex;
+};
+
+struct SendQueue {
+    u16 data[2][32];
+    u8 pos;
+    u8 count;
+};
+
+struct RecvQueue {
+    u16 data[2][2][32];
+    u8 pos;
+    u8 count;
+};
+
+struct LinkInfo {
+    struct LinkSession session;
+    struct LinkConnection connection;
+    struct SendQueue sendQueue;
+    struct RecvQueue recvQueue;
+};
+
 #endif /* STRUCT_H */

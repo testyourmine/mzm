@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "structs/structs.h"
+#include "constants/constants.h"
 
 void AgbMain(void); // 0200023c
 u32 LoadGraphics(void); // 020003c8
@@ -20,11 +21,11 @@ void ApplyMonochromeToPalette(const u16* src, u16* dst, s8 additionalValue); // 
 void LinkDisableSerial(void); // 02000a38
 void LinkEnableSerial(void); // 02000aa0
 void LinkResetSerial(void); // 02000b74
-u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[2], u16 recvCmds[2][2]); // 02000b84
+u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH]); // 02000b84
 void LinkCheckParentOrChild(void); // 02000ca4
 void LinkInitTimer(void); // 02000cd0
-void LinkEnqueueSendCmd(u16 sendCmd[2]); // 02000d20
-void LinkDequeueRecvCmds(u16 recvCmds[2][2]); // 02000e00
+void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH]); // 02000d20
+void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH]); // 02000e00
 void LinkVSync(void); // 02000f08
 void LinkReloadTransfer(void); // 02000f78
 void LinkCommunicate(void); // 02000f88

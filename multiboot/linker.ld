@@ -15,8 +15,16 @@ SECTIONS {
     . = 0x03000000;
     iwram(NOLOAD) : ALIGN(4)
     {
+        . = 0x00000000; gLinkSavedIme = .;
+        . = 0x00000002; gNumVBlanksWithoutSerialIntr = .;
+        . = 0x00000003; gSendBufferEmpty = .;
+        . = 0x00000005; gHandshakePlayerCount = .;
+        . = 0x00000006; gChecksumAvailable = .;
+        . = 0x00000008; gSendNonzeroCheck = .;
+        . = 0x0000000a; gRecvNonzeroCheck = .;
         . = 0x00000010; gMainGameMode = .;
         . = 0x00000018; gRecvCmds = .;
+        . = 0x00000020; gUnk_20 = .;
         . = 0x00000024; gUnk_24 = .;
         . = 0x00000068; gLinkLocalId = .;
         . = 0x0000006c; gUnk_6c = .;
@@ -37,11 +45,15 @@ SECTIONS {
         . = 0x000006a8; gUnk_6a8 = .;
         . = 0x000006ac; gUnk_6ac = .;
         . = 0x000006b0; gLinkPlayerCount = .;
+        . = 0x000006b4; gSendCmd = .;
         . = 0x000006b4; gSendCmd0 = .;
         . = 0x000006b6; gSendCmd1 = .;
         . = 0x000006b8; gSendCmd2 = .;
         . = 0x000006bc; gUnk_6bc = .;
         . = 0x000006c0; gUnk_6c0 = .;
+        . = 0x000006d0; gLastSendQueueCount = .;
+        . = 0x000006d4; gLastRecvQueueCount = .;
+        . = 0x000006e0; gLink = .;
 
         . = 0x00007f00; sp_sys = .;
         . = 0x00007fa0; sp_irq = .;

@@ -4,8 +4,16 @@
 #include "types.h"
 #include "structs/structs.h"
 
+extern u16 gLinkSavedIme; // 0x03000000
+extern u8 gNumVBlanksWithoutSerialIntr; // 0x03000002
+extern u8 gSendBufferEmpty; // 0x03000003
+extern u8 gHandshakePlayerCount; // 0x03000005
+extern u8 gChecksumAvailable; // 0x03000006
+extern u16 gSendNonzeroCheck; // 0x03000008
+extern u16 gRecvNonzeroCheck; // 0x0300000a
 extern u8 gMainGameMode; // 0x03000010
 extern u16 gRecvCmds[2][2]; // 0x03000018
+extern u8 gUnk_20; // 0x03000020
 extern u16 gUnk_24; // 0x03000024
 extern u8 gLinkLocalId; // 0x03000068
 extern s8 gUnk_6c; // 0x0300006c
@@ -26,12 +34,15 @@ extern u16 gPreviousButtonInput; // 0x030006a4
 extern u8 gUnk_6a8; // 0x030006a8
 extern u16 gUnk_6ac; // 0x030006ac
 extern u8 gLinkPlayerCount; // 0x030006b0
-// extern u16 gSendCmd[2]; // 0x030006b4
+extern u16 gSendCmd[3]; // 0x030006b4
 extern u16 gSendCmd0; // 0x030006b4
 extern u16 gSendCmd1; // 0x030006b6
 extern u16 gSendCmd2; // 0x030006b8
 extern u8 gUnk_6bc; // 0x030006bc
 extern u16 gUnk_6c0; // 0x030006c0
+extern u8 gLastSendQueueCount; // 0x030006D0
+extern u8 gLastRecvQueueCount; // 0x030006d4
+extern struct LinkInfo gLink; //0x030006e0
 
 extern u16 gInterruptCheckFlag; // 0x03007ff8
 extern u16 (*gIntrCodePointer)[0x100]; // 0x0x03007ffc
