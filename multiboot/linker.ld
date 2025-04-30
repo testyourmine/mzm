@@ -5,7 +5,7 @@ SECTIONS {
         asm/crt0.o(.text);
         asm/intr_main.o(.text);
         src/main.o(.text);
-        asm/rom.o(.text);
+        asm/disasm.o(.text);
     } =0
 
     .rodata : ALIGN(2) {
@@ -21,12 +21,14 @@ SECTIONS {
         . = 0x00000070; gUnk_70 = .;
         . = 0x00000078; gUnk_78 = .;
         . = 0x0000007c; gUnk_7c = .;
+        . = 0x00000080; gUnk_80 = .;
         . = 0x00000088; gUnk_88 = .;
         . = 0x0000008c; gUnk_8c = .;
         . = 0x00000290; gUnk_290 = .;
         . = 0x000006a0; gFrameCounter8Bit = .;
         . = 0x000006a8; gUnk_6a8 = .;
         . = 0x000006ac; gUnk_6ac = .;
+        . = 0x000006b8; gUnk_6b8 = .;
         . = 0x000006bc; gUnk_6bc = .;
         . = 0x000006c0; gUnk_6c0 = .;
 
