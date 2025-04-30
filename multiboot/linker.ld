@@ -16,19 +16,30 @@ SECTIONS {
     iwram(NOLOAD) : ALIGN(4)
     {
         . = 0x00000010; gMainGameMode = .;
+        . = 0x00000018; gRecvCmds = .;
         . = 0x00000024; gUnk_24 = .;
+        . = 0x00000068; gLinkLocalId = .;
         . = 0x0000006c; gUnk_6c = .;
         . = 0x00000070; gUnk_70 = .;
+        . = 0x00000074; gChangedInput = .;
         . = 0x00000078; gUnk_78 = .;
         . = 0x0000007c; gUnk_7c = .;
         . = 0x00000080; gUnk_80 = .;
+        . = 0x00000084; gErrorFlag = .;
         . = 0x00000088; gUnk_88 = .;
         . = 0x0000008c; gUnk_8c = .;
         . = 0x00000290; gUnk_290 = .;
+        . = 0x00000298; gShouldAdvanceLinkState = .;
+        . = 0x0000029c; gLinkUnkFlag9 = .;
+        . = 0x000002a0; gUnk_2a0 = .;
         . = 0x000006a0; gFrameCounter8Bit = .;
+        . = 0x000006a4; gPreviousButtonInput = .;
         . = 0x000006a8; gUnk_6a8 = .;
         . = 0x000006ac; gUnk_6ac = .;
-        . = 0x000006b8; gUnk_6b8 = .;
+        . = 0x000006b0; gLinkPlayerCount = .;
+        . = 0x000006b4; gSendCmd0 = .;
+        . = 0x000006b6; gSendCmd1 = .;
+        . = 0x000006b8; gSendCmd2 = .;
         . = 0x000006bc; gUnk_6bc = .;
         . = 0x000006c0; gUnk_6c0 = .;
 

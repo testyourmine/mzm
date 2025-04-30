@@ -7,12 +7,13 @@
 void AgbMain(void); // 0200023c
 u32 LoadGraphics(void); // 020003c8
 void InitializeGame(void); // 02000490
-/* u8* */void LinkHandleConnection(void); // 020006bc
+void LinkHandleConnection(void); // 020006bc
 void UpdateDisplay(void); // 020007b8
-// missing function at 020007fc?
+void unk_020007fc(void);
 void UpdateInput(void); // 02000848
-void FillPalette(void); // 02000878
+void FillPalette(const u8 *src, u16 *dst, u8 palette); // 02000878
 void empty_89c(void); // 0200089c
+
 void LinkBuildSendCmd(u16 command); // 020008a0
 void LinkProcessRecvCmds(void); // 02000940
 void ApplyMonochromeToPalette(const u16* src, u16* dst, s8 additionalValue); // 020009d0
@@ -35,12 +36,9 @@ void LinkStopTimer(void); // 020012c8
 void LinkSendRecvDone(void); // 020012fc
 void LinkResetSendBuffer(void); // 0200132c
 void LinkResetRecvBuffer(void); // 02001374
+
 void FormatNumber(u8 xPosition, u8 yPosition, u8 *format, u32 value, u8 length, u16* output); // 020013d0
 u32 CheckSameString(const char * a, const char * b, u8 size); // 0200161c
 void ValidateGameVersion(void); // 0200164c
-
-//struct Unk_7e44 UNK_7E44;
-// u8 *PTR_ARRAY_02007fac[];
-// u8 *PTR_ARRAY_02007fc8[];
 
 #endif /* FUNCS_H */

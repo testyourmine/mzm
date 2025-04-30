@@ -31,4 +31,13 @@ struct Unk_7e44
     //u8 v23;
 };
 
+struct Unk_2a0
+{
+    u8 field0;       // offset 0
+    u8 _pad1;        // offset 1, padding
+    u32 field1_0:9;
+    u16 field1_9:7;      // offset 2
+    u8 _pad2[4];     // offset 4–7, padding or unused
+};
+
 #endif /* STRUCT_H */

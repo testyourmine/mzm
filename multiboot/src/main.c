@@ -154,7 +154,7 @@ void InitializeGame(void)
     write16(REG_BG0CNT, UNK_7E44.v18 | UNK_7E44.v22 | (UNK_7E44.v17 << 8) | (UNK_7E44.v16 << 2));
     write16(REG_BG2CNT, UNK_7E44.v2 | UNK_7E44.v6 | (tmp3 << 8) | (UNK_7E44.v0 << 2));
     write16(REG_BG3CNT, UNK_7E44.v10 | UNK_7E44.v14 | (tmp << 8) | (tmp2 << 2));
-    gUnk_6b8 = 0x5500;
+    gSendCmd2 = 0x5500;
     gMainGameMode = 0;
     gUnk_88 = 0;
     gUnk_6c = 0xfe;
@@ -170,4 +170,91 @@ void InitializeGame(void)
     write16(REG_BLDALPHA, tmp4 << 8);
     write16(REG_BLDCNT, 0x2844);
     gUnk_24 = UNK_7E44.v12;
+}
+
+void LinkHandleConnection(void)
+{
+    vu32 c;
+    u32* link_stat;
+    
+    gShouldAdvanceLinkState = gFrameCounter8Bit & 1;
+    link_stat = &gErrorFlag;
+    *link_stat = LinkMain(&gShouldAdvanceLinkState,&gSendCmd0,gRecvCmds);
+    gLinkLocalId = *link_stat & 3;
+    gLinkPlayerCount = ((*link_stat & 0x1c) >> 2);
+    gLinkUnkFlag9 = ((*link_stat & 0xe00) >> 9);
+    if ((*link_stat & 0x40)) {
+        gUnk_6ac = 0;
+        LinkBuildSendCmd(gSendCmd2);
+        LinkProcessRecvCmds();
+    }
+    if ((*link_stat & 0x400000)) {
+        gUnk_6bc = 1;
+    }
+    if ((*link_stat & 0x20000)) {
+        gUnk_6bc = 2;
+    }
+    if ((*link_stat & 0x10000)) {
+        gUnk_6bc = 3;
+    }
+    if ((*link_stat & 0x40000)) {
+        gUnk_6bc = 4;
+    }
+    if ((*link_stat & 0x80000)) {
+        gUnk_6bc = 5;
+    }
+    if ((*link_stat & 0x100000)) {
+        gUnk_6bc = 6;
+    }
+    if ((*link_stat & 0x200000)) {
+        gUnk_6bc = 7;
+    }
+}
+
+void UpdateDisplay(void)
+{
+    LinkVSync();
+    write16(REG_DISPCNT, gUnk_24);
+    write16(REG_BLDALPHA, C_16_2_8(gUnk_8c, gUnk_78));
+    gInterruptCheckFlag |= 1;
+}
+
+void unk_020007fc(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (i < gLinkPlayerCount) {
+            gUnk_2a0[i].field0 = i * 16 + 0x30;
+            gUnk_2a0[i].field1_0 = 0xDC;
+        }
+        else {
+            gUnk_2a0[i].field0 = 0xA0;
+        }
+    }
+}
+
+void UpdateInput(void)
+{
+    u16 keys;
+
+    keys = read16(REG_KEY_INPUT) ^ KEY_MASK;
+    gChangedInput = keys & ~gPreviousButtonInput;
+    gPreviousButtonInput = keys;
+}
+
+void FillPalette(const u8 *src, u16 *dst, u8 palette)
+{
+    while (*src != 0)
+    {
+        *dst = (u16)*src | (palette << 0xc);
+        src++;
+        dst++;
+    }
+}
+
+void empty_89c(void)
+{
+    return;
 }
