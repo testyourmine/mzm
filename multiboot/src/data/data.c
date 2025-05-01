@@ -9,81 +9,82 @@
 
 #include "data/data.h"
 
-const u8 ARRAY_02001854[512] = INCBIN_U8("data/ARRAY_02001854");
-const u8 ARRAY_02001a54[15100] = INCBIN_U8("data/ARRAY_02001a54");
-const u8 ARRAY_02005550[1472] = INCBIN_U8("data/ARRAY_02005550");
-const u8 ARRAY_02005b10[504] = INCBIN_U8("data/ARRAY_02005b10");
-const u8 ARRAY_02005d08[876] = INCBIN_U8("data/ARRAY_02005d08");
-const u8 ARRAY_02006074[4268] = INCBIN_U8("data/ARRAY_02006074");
-const u8 ARRAY_02007120[584] = INCBIN_U8("data/ARRAY_02007120");
-const u8 ARRAY_02007368[2780] = INCBIN_U8("data/ARRAY_02007368");
+const u16 sPalette[16 * 16] = INCBIN_U16("data/Palette.pal");
+const u8 sBackgroundImageGfx[15100] = INCBIN_U8("data/BackgroundImage.gfx.lz");
+const u8 sBackgroundImageTileTable[1472] = INCBIN_U8("data/BackgroundImage.tt");
+const u8 sLinkTextTileTable[504] = INCBIN_U8("data/LinkText.tt");
+const u8 sLinkCompleteJapaneseGfx[876] = INCBIN_U8("data/LinkCompleteJapanese.gfx.lz");
+const u8 sLinkCompleteEnglishGfx[4268] = INCBIN_U8("data/LinkCompleteEnglish.gfx.lz");
+const u8 sLinkErrorJapaneseGfx[584] = INCBIN_U8("data/LinkErrorJapanese.gfx.lz");
+const u8 sLinkErrorEnglishGfx[2780] = INCBIN_U8("data/LinkErrorEnglish.gfx.lz");
 
-const struct Unk_7e44 UNK_7E44 = {
-    .v0 = 0x2,
-    .v1 = 0xe,
-    .v2 = 0x2,
-    .v3 = 0x0,
-    .v4 = 0x400,
-    .v6 = 0x0,
-    .v8 = 0x2,
-    .v9 = 0xf,
-    .v10 = 0x3,
-    .v11 = 0x0,
-    .v12 = 0x800,
-    .v14 = 0x0,
-    .v16 = 0x0,
-    .v17 = 0xd,
-    .v18 = 0x0,
-    .v19 = 0x0,
-    .v20 = 0x0,
-    .v21 = 0x1,
-    .v22 = 0x0,
+const struct DispRegsSettings sDispRegsSettings = {
+    .bg2CntCharBase = 2,
+    .bg2CntScreenBase = 14,
+    .bg2CntPriority = BGCNT_LOW_MID_PRIORITY,
+    .v3 = 0,
+    .dispCntBg2 = DCNT_BG2,
+    .v6 = 0,
+
+    .bg3CntCharBase = 2,
+    .bg3CntScreenBase = 15,
+    .bg3CntPriority = BGCNT_LOW_PRIORITY,
+    .v11 = 0,
+    .dispCntBg3 = DCNT_BG3,
+    .v14 = 0,
+
+    .bg0CntCharBase = 0,
+    .bg0CntScreenBase = 13,
+    .bg0CntPriority = BGCNT_HIGH_PRIORITY,
+    .v19 = 0,
+    .dispCntBg0 = DCNT_BG0,
+    .v22 = 0,
 };
 
-const Func_T InterruptTable[13] = {
+const Func_T sIntrTable[13] = {
     LinkCommunicate,
     LinkReloadTransfer,
     UpdateDisplay,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c,
-    empty_89c
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty,
+    Callback_Empty
 };
 
-const char DAT_02007e90[4] = { 0x30, 0x31, 0x96, 0x0 };
+const char sMakerCodeMagicNumber[4] = { '0', '1', 0x96, 0x0 };
 
-const char DAT_02007e94[4] = { 'A', 'M', 'T', 'J' };
-const char DAT_02007e98[4] = { 'A', 'M', 'T', 'E' };
-const char DAT_02007e9c[4] = { 'A', 'M', 'T', 'P' };
+const char sMetroidFusionJapaneseGameCode[4] = { 'A', 'M', 'T', 'J' };
+const char sMetroidFusionEnglishGameCode[4] = { 'A', 'M', 'T', 'E' };
+const char sMetroidFusionPalGameCode[4] = { 'A', 'M', 'T', 'P' };
 
-const char DAT_02007ea0[4] = { 'B', 'M', 'X', 'J' };
-const char DAT_02007ea4[4] = { 'B', 'M', 'X', 'E' };
-const char DAT_02007ea8[4] = { 'B', 'M', 'X', 'P' };
+const char sMetroidZeroMissionJapaneseGameCode[4] = { 'B', 'M', 'X', 'J' };
+const char sMetroidZeroMissionEnglishGameCode[4] = { 'B', 'M', 'X', 'E' };
+const char sMetroidZeroMissionPalGameCode[4] = { 'B', 'M', 'X', 'P' };
 
-const u8 EMPTY_02007eac[256] = { 0 };
+const u8 sEmpty_02007eac[256] = { 0 };
 
-const u8 * const PTR_ARRAY_02007fac[7] = {
-    ARRAY_02005d08,
-    ARRAY_02005d08,
-    ARRAY_02006074,
-    ARRAY_02006074,
-    ARRAY_02006074,
-    ARRAY_02006074,
-    ARRAY_02006074
+const u8 * const sLinkCompleteGraphicsEntries[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sLinkCompleteJapaneseGfx,
+    [LANGUAGE_HIRAGANA] = sLinkCompleteJapaneseGfx,
+    [LANGUAGE_ENGLISH] = sLinkCompleteEnglishGfx,
+    [LANGUAGE_GERMAN] = sLinkCompleteEnglishGfx,
+    [LANGUAGE_FRENCH] = sLinkCompleteEnglishGfx,
+    [LANGUAGE_ITALIAN] = sLinkCompleteEnglishGfx,
+    [LANGUAGE_SPANISH] = sLinkCompleteEnglishGfx
 };
 
-const u8 * const PTR_ARRAY_02007fc8[7] = {
-    ARRAY_02007120,
-    ARRAY_02007120,
-    ARRAY_02007368,
-    ARRAY_02007368,
-    ARRAY_02007368,
-    ARRAY_02007368,
-    ARRAY_02007368
+const u8 * const sLinkErrorGraphicsEntries[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sLinkErrorJapaneseGfx,
+    [LANGUAGE_HIRAGANA] = sLinkErrorJapaneseGfx,
+    [LANGUAGE_ENGLISH] = sLinkErrorEnglishGfx,
+    [LANGUAGE_GERMAN] = sLinkErrorEnglishGfx,
+    [LANGUAGE_FRENCH] = sLinkErrorEnglishGfx,
+    [LANGUAGE_ITALIAN] = sLinkErrorEnglishGfx,
+    [LANGUAGE_SPANISH] = sLinkErrorEnglishGfx
 };

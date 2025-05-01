@@ -4,47 +4,49 @@
 #include "types.h"
 #include "structs/structs.h"
 
-extern u16 gLinkSavedIme; // 0x03000000
-extern u8 gNumVBlanksWithoutSerialIntr; // 0x03000002
-extern u8 gSendBufferEmpty; // 0x03000003
-extern u8 gHandshakePlayerCount; // 0x03000005
-extern u8 gChecksumAvailable; // 0x03000006
-extern u16 gSendNonzeroCheck; // 0x03000008
-extern u16 gRecvNonzeroCheck; // 0x0300000a
-extern u8 gMainGameMode; // 0x03000010
-extern u16 gRecvCmds[2][2]; // 0x03000018
-extern u8 gUnk_20; // 0x03000020
-extern u16 gUnk_24; // 0x03000024
-extern u8 gLinkLocalId; // 0x03000068
-extern s8 gUnk_6c; // 0x0300006c
-extern u8 gUnk_70; // 0x03000070
-extern u16 gChangedInput; // 0x03000074
-extern u16 gUnk_78; // 0x03000078
-extern u8 gUnk_7c; // 0x0300007c
-extern u16 gUnk_80; // 0x03000080
-extern u32 gErrorFlag; // 0x03000084
-extern u8 gUnk_88; // 0x03000088
-extern u16 gUnk_8c; // 0x0300008c
-extern u8 gUnk_290; // 0x03000290
-extern u8 gShouldAdvanceLinkState; // 0x03000298
-extern u8 gLinkUnkFlag9; // 0x0300029c
-extern struct Unk_2a0 gUnk_2a0[4];
-extern u8 gFrameCounter8Bit; // 0x030006a0
-extern u16 gPreviousButtonInput; // 0x030006a4
-extern u8 gUnk_6a8; // 0x030006a8
-extern u16 gUnk_6ac; // 0x030006ac
-extern u8 gLinkPlayerCount; // 0x030006b0
-extern u16 gSendCmd[3]; // 0x030006b4
-extern u16 gSendCmd0; // 0x030006b4
-extern u16 gSendCmd1; // 0x030006b6
-extern u16 gSendCmd2; // 0x030006b8
-extern u8 gUnk_6bc; // 0x030006bc
-extern u16 gUnk_6c0; // 0x030006c0
-extern u8 gLastSendQueueCount; // 0x030006D0
-extern u8 gLastRecvQueueCount; // 0x030006d4
-extern struct LinkInfo gLink; //0x030006e0
+extern u16 gLinkSavedIme;
+extern u8 gNumVBlanksWithoutSerialIntr;
+extern u8 gSendBufferEmpty;
+extern u8 gHandshakePlayerCount;
+extern u8 gChecksumAvailable;
+extern u16 gSendNonzeroCheck;
+extern u16 gRecvNonzeroCheck;
+extern u8 gMainGameMode;
+extern u16 gRecvCmds[MAX_LINK_PLAYERS][CMD_LENGTH];
+extern u8 gFusionGameCode;
+extern u16 gDispCnt;
+extern const Func_T gIntrTable[13];
+extern u8 gLinkLocalId;
+extern s8 gLanguage;
+extern u8 gUnk_70; // set but never read
+extern u16 gChangedInput;
+extern u16 gBldAlpha_L;
+extern u8 gUnk_7c; // set but never read
+extern u16 gBldY;
+extern u32 gLinkStatus;
+extern u8 gLinkFinished;
+extern u16 gBldAlpha_H;
+extern u16 gInterruptCode[0x100];
+extern u8 gLinkFinishedDelayTimer;
+extern u8 gShouldAdvanceLinkState;
+extern u8 gLinkUnkFlag9;
+extern struct Unk_2a0 gUnk_2a0[0x400];
+extern u8 gFrameCounter8Bit;
+extern u16 gPreviousButtonInput;
+extern u8 gZeroMissionGameCode;
+extern u16 gLinkTimer;
+extern u8 gLinkPlayerCount;
+extern u16 gSendCmd[CMD_LENGTH];
+extern u16 gSendCmd0;
+extern u16 gSendCmd1;
+extern u16 gCommand;
+extern u8 gLinkErrorFlag;
+extern u16 gUnk_6c0; // set but never read
+extern u8 gLastSendQueueCount;
+extern u8 gLastRecvQueueCount;
+extern struct LinkInfo gLink;
 
-extern u16 gInterruptCheckFlag; // 0x03007ff8
-extern u16 (*gIntrCodePointer)[0x100]; // 0x0x03007ffc
+extern u16 gInterruptCheckFlag;
+extern u16 (*gIntrCodePointer)[0x100];
 
-#endif /* VAIRABLES_H */
+#endif /* VARIABLES_H */

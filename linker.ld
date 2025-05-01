@@ -353,7 +353,7 @@ SECTIONS {
         . = 0x000058b6; gRegTm3Cnt_H_Backup = .;
         . = 0x000058b8; gRegSiocnt_Backup = .;
         . = 0x000058ba; gRegRcnt_Backup = .;
-        . = 0x000058bc; gErrorFlag = .;
+        . = 0x000058bc; gLinkStatus = .;
         . = 0x000058c0; gSendCmd = .;
         . = 0x000058c4; gRecvCmds = .;
         . = 0x000058cc; gShouldAdvanceLinkState = .;

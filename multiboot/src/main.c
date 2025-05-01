@@ -9,6 +9,10 @@
 #include "data/data.h"
 #include "constants/constants.h"
 
+/**
+ * @brief 23c | 18c | Main game loop
+ * 
+ */
 void AgbMain(void)
 {
     InitializeGame();
@@ -16,24 +20,24 @@ void AgbMain(void)
     while (TRUE)
     {
         UpdateInput();
-        gFrameCounter8Bit++;
+        APPLY_DELTA_TIME_INC(gFrameCounter8Bit);
         switch (gMainGameMode)
         {
-            case 0:
+            case GM_INIT_LINK:
                 LinkResetSerial();
-                gUnk_290 = 0;
-                gUnk_6ac = 0;
-                gUnk_6bc = 0;
+                gLinkFinishedDelayTimer = 0;
+                gLinkTimer = 0;
+                gLinkErrorFlag = 0;
                 gMainGameMode++;
                 break;
 
-            case 1:
-                gUnk_6ac++;
+            case GM_HANDLE_LINK:
+                APPLY_DELTA_TIME_INC(gLinkTimer);
                 LinkHandleConnection();
-                if (gUnk_88 & 1)
+                if (gLinkFinished & TRUE)
                 {
-                    gUnk_290++;
-                    if (gUnk_290 > 3)
+                    APPLY_DELTA_TIME_INC(gLinkFinishedDelayTimer);
+                    if (gLinkFinishedDelayTimer > CONVERT_SECONDS(.05f))
                     {
                         gUnk_70 = 0;
                         gUnk_7c = 0;
@@ -41,26 +45,26 @@ void AgbMain(void)
                         gMainGameMode++;
                     }
                 }
-                else if (gUnk_6bc != 0)
+                else if (gLinkErrorFlag != 0)
                 {
                     gUnk_70 = 0;
                     gUnk_7c = 0;
                     gUnk_6c0 = 0;
                     gMainGameMode++;
                 }
-                if (gUnk_6ac > 90)
+                if (gLinkTimer > CONVERT_SECONDS(1.5f))
                 {
-                    gUnk_88 |= 1;
-                    gUnk_6bc = 0x20;
-                    gUnk_6ac = 0;
+                    gLinkFinished |= TRUE;
+                    gLinkErrorFlag = LINK_STAT_PARENT; // why set to parent?
+                    gLinkTimer = 0;
                 }
                 break;
 
-            case 2:
+            case GM_EXIT_LINK:
                 LinkDisableSerial();
                 if (LoadGraphics() != 0)
                 {
-                    gUnk_24 |= (*(struct Unk_7e44*)0x02007e44).v4;
+                    gDispCnt |= sDispRegsSettings.dispCntBg2;
                     gMainGameMode++;
                 }
                 else
@@ -69,57 +73,62 @@ void AgbMain(void)
                 }
                 break;
 
-            case 3:
-                if (gUnk_8c != 0)
+            case GM_FADE_IN_LINK_TEXT:
+                if (gBldAlpha_H != 0)
                 {
-                    if (gUnk_8c >= 3)
-                        gUnk_8c -= 2;
+                    if (gBldAlpha_H > 2)
+                        gBldAlpha_H -= 2;
                     else
-                        gUnk_8c = 0;
+                        gBldAlpha_H = 0;
 
-                    gUnk_78 = 0x10 - gUnk_8c;
-                    if (gUnk_8c == 0)
+                    gBldAlpha_L = BLDALPHA_MAX_VALUE - gBldAlpha_H;
+                    if (gBldAlpha_H == 0)
                         gMainGameMode++;
                 }
                 break;
 
-            case 4:
+            case GM_FINISHED:
         }
 
         VBlankIntrWait();
     }
 }
 
+/**
+ * @brief 3c8 | c8 | Load the link complete or link error graphics
+ * 
+ * @return u32 bool, graphics loaded
+ */
 u32 LoadGraphics(void)
 {
     u8 loadedGraphics;
     u8 graphicsOffset;
 
     graphicsOffset = 0x80;
-    if ((u8)gUnk_6c <= 7)
+    if ((u8)gLanguage <= LANGUAGE_END)
     {
-        graphicsOffset = (u8)gUnk_6c;
+        graphicsOffset = (u8)gLanguage;
     }
-    else if (gUnk_6a8 == 1)
+    else if (gZeroMissionGameCode == 1)
     {
-        graphicsOffset = 0;
+        graphicsOffset = LANGUAGE_JAPANESE;
     }
-    else if(gUnk_6a8 == 2 || (graphicsOffset = 0x80, gUnk_6a8 == 3))
+    else if(gZeroMissionGameCode == 2 || (graphicsOffset = 0x80, gZeroMissionGameCode == 3))
     {
-        graphicsOffset = 2;
+        graphicsOffset = LANGUAGE_ENGLISH;
     }
     
     if (graphicsOffset != 0x80)
     {
-        if (gUnk_6bc != 0)
+        if (gLinkErrorFlag != 0)
         {
-            LZ77UncompVRAM(PTR_ARRAY_02007fc8[graphicsOffset], (UNK_7E44.v8 << 14) + VRAM_BASE + 0x5000);
-            DMA_SET(3, VRAM_BASE + 0x1000, PALRAM_BASE, C_32_2_16(DMA_ENABLE, 0xF0));
+            LZ77UncompVRAM(sLinkErrorGraphicsEntries[graphicsOffset], (sDispRegsSettings.bg3CntCharBase << BGCNT_SCREEN_SIZE_SHIFT) + VRAM_BASE + 0x5000);
+            DMA_SET(3, VRAM_BASE + 0x1000, PALRAM_BASE, C_32_2_16(DMA_ENABLE, 240));
         }
         else
         {
-            LZ77UncompVRAM(PTR_ARRAY_02007fac[graphicsOffset], (UNK_7E44.v8 << 14) + VRAM_BASE + 0x5000);
-            DMA_SET(3, ARRAY_02001854, PALRAM_BASE, C_32_2_16(DMA_ENABLE, 0x100));
+            LZ77UncompVRAM(sLinkCompleteGraphicsEntries[graphicsOffset], (sDispRegsSettings.bg3CntCharBase << BGCNT_SCREEN_SIZE_SHIFT) + VRAM_BASE + 0x5000);
+            DMA_SET(3, sPalette, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sPalette)));
         }
         loadedGraphics = TRUE;
     }
@@ -130,96 +139,117 @@ u32 LoadGraphics(void)
     return loadedGraphics;
 }
 
+/**
+ * @brief 490 | 22c | Initialize game
+ * 
+ */
 void InitializeGame(void)
 {
     u8 tmp;
     u8 tmp2;
     u8 tmp3;
-    u16 tmp4;
     
     dma_fill32(3, 0, IWRAM_BASE, IWRAM_SIZE - 0x15D);
     write16(REG_WAITCNT, WAIT_GAMEPACK_CGB | WAIT_BANK0_SUBSEQUENT_1CYCLE | WAIT_BANK0_3CYCLES);
-    DMA_SET(3, InterruptTable, 0x3000030, 0x8400000e);
-    DMA_SET(3, 0x2000104, 0x3000090, 0x84000080);
-    gIntrCodePointer = (void*)0x3000090;
+
+    DMA_SET(3, sIntrTable, gIntrTable, C_32_2_16(DMA_ENABLE | DMA_32BIT, 56 / sizeof(u32)));
+    DMA_SET(3, IntrMain, gInterruptCode, C_32_2_16(DMA_ENABLE | DMA_32BIT, sizeof(gInterruptCode) / sizeof(u32)));
+    gIntrCodePointer = &gInterruptCode;
+
     dma_fill16(3, 0, VRAM_BASE, VRAM_SIZE);
-    DMA_SET(3, ARRAY_02001854, PALRAM_OBJ, 0x80000100);
-    ApplyMonochromeToPalette((u16*)ARRAY_02001854, PALRAM_BASE, 0);
-    ApplyMonochromeToPalette((u16*)ARRAY_02001854, VRAM_BASE + 0x1000, -8);
-    LZ77UncompVRAM(ARRAY_02001a54, ((tmp2 = UNK_7E44.v8) << 14) + VRAM_BASE);
-    LZ77UncompVRAM(ARRAY_02005550, ((tmp = UNK_7E44.v9) << 11) + VRAM_BASE);
-    LZ77UncompVRAM(ARRAY_02005b10, ((tmp3 = UNK_7E44.v1) << 11) + VRAM_BASE);
-    dma_fill32(3, 0xA0, 0x30002a0, 0x400);
-    dma_fill32(3, 0xA0, 0x7000000, 0x400);
+    DMA_SET(3, sPalette, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sPalette)));
+    ApplyMonochromeToPalette(sPalette, PALRAM_BASE, 0);
+    ApplyMonochromeToPalette(sPalette, VRAM_BASE + 0x1000, -8);
+
+    LZ77UncompVRAM(sBackgroundImageGfx, ((tmp2 = sDispRegsSettings.bg3CntCharBase) << BGCNT_SCREEN_SIZE_SHIFT) + VRAM_BASE);
+    LZ77UncompVRAM(sBackgroundImageTileTable, ((tmp = sDispRegsSettings.bg3CntScreenBase) << 11) + VRAM_BASE);
+    LZ77UncompVRAM(sLinkTextTileTable, ((tmp3 = sDispRegsSettings.bg2CntScreenBase) << 11) + VRAM_BASE);
+
+    dma_fill32(3, 0xA0, gUnk_2a0, ARRAY_SIZE(gUnk_2a0));
+    dma_fill32(3, 0xA0, OAM_BASE, OAM_SIZE);
     ValidateGameVersion();
-    write16(REG_BG0CNT, UNK_7E44.v18 | UNK_7E44.v22 | (UNK_7E44.v17 << 8) | (UNK_7E44.v16 << 2));
-    write16(REG_BG2CNT, UNK_7E44.v2 | UNK_7E44.v6 | (tmp3 << 8) | (UNK_7E44.v0 << 2));
-    write16(REG_BG3CNT, UNK_7E44.v10 | UNK_7E44.v14 | (tmp << 8) | (tmp2 << 2));
-    gSendCmd2 = 0x5500;
-    gMainGameMode = 0;
-    gUnk_88 = 0;
-    gUnk_6c = 0xfe;
+
+    write16(REG_BG0CNT, sDispRegsSettings.bg0CntPriority | sDispRegsSettings.v22 | (sDispRegsSettings.bg0CntScreenBase << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (sDispRegsSettings.bg0CntCharBase << BGCNT_CHAR_BASE_BLOCK_SHIFT));
+    write16(REG_BG2CNT, sDispRegsSettings.bg2CntPriority | sDispRegsSettings.v6 | (tmp3 << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (sDispRegsSettings.bg2CntCharBase << BGCNT_CHAR_BASE_BLOCK_SHIFT));
+    write16(REG_BG3CNT, sDispRegsSettings.bg3CntPriority | sDispRegsSettings.v14 | (tmp << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (tmp2 << BGCNT_CHAR_BASE_BLOCK_SHIFT));
+
+    gCommand = LINKCMD_5500;
+    gMainGameMode = GM_INIT_LINK;
+    gLinkFinished = FALSE;
+    gLanguage = 0xfe;
     gUnk_70 = 1;
-    write16(REG_IE, 0x2001);
-    write16(REG_DISPSTAT, 8);
+    write16(REG_IE, IF_GAMEPAK | IF_VBLANK);
+    write16(REG_DISPSTAT, DSTAT_IF_VBLANK);
     write16(REG_IF, 0xffff);
     write16(REG_IME, 1);
-    gUnk_8c = tmp4 = 0x10;
-    gUnk_78 = 0;
-    gUnk_80 = 0x10;
-    write16(REG_BLDY, tmp4);
-    write16(REG_BLDALPHA, tmp4 << 8);
-    write16(REG_BLDCNT, 0x2844);
-    gUnk_24 = UNK_7E44.v12;
+    gBldAlpha_H = BLDALPHA_MAX_VALUE;
+    gBldAlpha_L = 0;
+    gBldY = BLDY_MAX_VALUE;
+    write16(REG_BLDY, gBldY);
+    write16(REG_BLDALPHA, C_16_2_8(gBldAlpha_H, gBldAlpha_L));
+    write16(REG_BLDCNT, BLDCNT_BACKDROP_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG2_FIRST_TARGET_PIXEL);
+    gDispCnt = sDispRegsSettings.dispCntBg3;
 }
 
+/**
+ * @brief 6bc | fc | Handle connection, sending/receiving commands, and errors
+ * 
+ */
 void LinkHandleConnection(void)
 {
     vu32 c;
     u32* link_stat;
     
     gShouldAdvanceLinkState = gFrameCounter8Bit & 1;
-    link_stat = &gErrorFlag;
+    link_stat = &gLinkStatus;
     *link_stat = LinkMain(&gShouldAdvanceLinkState,&gSendCmd0,gRecvCmds);
-    gLinkLocalId = *link_stat & 3;
-    gLinkPlayerCount = ((*link_stat & 0x1c) >> 2);
-    gLinkUnkFlag9 = ((*link_stat & 0xe00) >> 9);
-    if ((*link_stat & 0x40)) {
-        gUnk_6ac = 0;
-        LinkBuildSendCmd(gSendCmd2);
+    gLinkLocalId = *link_stat & LINK_STAT_LOCAL_ID;
+    gLinkPlayerCount = EXTRACT_PLAYER_COUNT(*link_stat);
+    gLinkUnkFlag9 = EXTRACT_LINK_ERRORS(*link_stat);
+    if ((*link_stat & LINK_STAT_CONN_ESTABLISHED)) {
+        gLinkTimer = 0;
+        LinkBuildSendCmd(gCommand);
         LinkProcessRecvCmds();
     }
-    if ((*link_stat & 0x400000)) {
-        gUnk_6bc = 1;
+    if ((*link_stat & LINK_ERROR_ID_OVER)) {
+        gLinkErrorFlag = 1;
     }
-    if ((*link_stat & 0x20000)) {
-        gUnk_6bc = 2;
+    if ((*link_stat & LINK_ERROR_CHECKSUM)) {
+        gLinkErrorFlag = 2;
     }
-    if ((*link_stat & 0x10000)) {
-        gUnk_6bc = 3;
+    if ((*link_stat & LINK_ERROR_HARDWARE)) {
+        gLinkErrorFlag = 3;
     }
-    if ((*link_stat & 0x40000)) {
-        gUnk_6bc = 4;
+    if ((*link_stat & LINK_ERROR_SEND_OVERFLOW)) {
+        gLinkErrorFlag = 4;
     }
-    if ((*link_stat & 0x80000)) {
-        gUnk_6bc = 5;
+    if ((*link_stat & LINK_ERROR_RECEIVE_OVERFLOW)) {
+        gLinkErrorFlag = 5;
     }
-    if ((*link_stat & 0x100000)) {
-        gUnk_6bc = 6;
+    if ((*link_stat & LINK_ERROR_SIO_INTERNAL)) {
+        gLinkErrorFlag = 6;
     }
-    if ((*link_stat & 0x200000)) {
-        gUnk_6bc = 7;
+    if ((*link_stat & LINK_ERROR_SIO_STOP)) {
+        gLinkErrorFlag = 7;
     }
 }
 
+/**
+ * @brief 7b8 | 44 | Update the display for v-blank
+ * 
+ */
 void UpdateDisplay(void)
 {
     LinkVSync();
-    write16(REG_DISPCNT, gUnk_24);
-    write16(REG_BLDALPHA, C_16_2_8(gUnk_8c, gUnk_78));
+    write16(REG_DISPCNT, gDispCnt);
+    write16(REG_BLDALPHA, C_16_2_8(gBldAlpha_H, gBldAlpha_L));
     gInterruptCheckFlag |= 1;
 }
 
+/**
+ * @brief 7fc | 4c | (Unused) To document
+ * 
+ */
 void unk_020007fc(void)
 {
     u8 i;
@@ -236,6 +266,10 @@ void unk_020007fc(void)
     }
 }
 
+/**
+ * @brief 848 | 30 | Updates the input
+ * 
+ */
 void UpdateInput(void)
 {
     u16 keys;
@@ -245,75 +279,109 @@ void UpdateInput(void)
     gPreviousButtonInput = keys;
 }
 
+/**
+ * @brief 878 | 24 | (Unused) Fill the destination with the source using palette
+ * 
+ * @param src The pointer to the source to copy from
+ * @param dst The pointer to the destination to copy to
+ * @param palette The palette to use
+ */
 void FillPalette(const u8 *src, u16 *dst, u8 palette)
 {
     while (*src != 0)
     {
-        *dst = (u16)*src | (palette << 0xc);
+        *dst = (u16)*src | (palette << 12);
         src++;
         dst++;
     }
 }
 
-void empty_89c(void)
+/**
+ * @brief 89c | 4 | Empty callback
+ * 
+ */
+void Callback_Empty(void)
 {
     return;
 }
 
+/**
+ * @brief 8a0 | a0 | Input commands into the send queue
+ * 
+ * @param command The command to send
+ */
 void LinkBuildSendCmd(u16 command)
 {
     switch (command)
     {
-        case 0x8800:
+        case LINKCMD_8800:
             gSendCmd[0] |= command;
             gSendCmd[1] = gPreviousButtonInput;
+            // Buffer overflow
             gSendCmd[2] = gChangedInput;
             return;
-        case 0x6600:
+        case LINKCMD_6600:
             gSendCmd[0] |= command;
-            gSendCmd[1] = gUnk_20;
+            gSendCmd[1] = gFusionGameCode;
             break;
-        case 0x5500:
+        case LINKCMD_5500:
             gSendCmd[0] |= command;
-            gSendCmd[1] = gUnk_6c;
+            gSendCmd[1] = gLanguage;
             break;
-        case 0x3300:
+        case LINKCMD_3300:
             gSendCmd[0] |= command;
-            gSendCmd[1] = gUnk_88;
+            gSendCmd[1] = gLinkFinished;
             break;
     }
     return;
 }
 
+/**
+ * @brief 940 | 90 | Process commands from the receive queue
+ * 
+ */
 void LinkProcessRecvCmds(void)
 {
     u8 tmp;
-    if ((gErrorFlag & 0x100)) {
+    if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING))
         return;
+
+    if (gRecvCmds[0][0] == LINKCMD_5500)
+    {
+        gLanguage = gRecvCmds[1][0];
+        gLinkFinished = FALSE;
     }
 
-    if (gRecvCmds[0][0] == 0x5500) {
-        gUnk_6c = gRecvCmds[1][0];
-        gUnk_88 = 0;
+    if (gRecvCmds[0][0] == LINKCMD_4400)
+    {
+        gCommand = LINKCMD_6600;
+        gLinkFinished = FALSE;
     }
-    if (gRecvCmds[0][0] == 0x4400) {
-        gSendCmd2 = 0x6600;
-        gUnk_88 = 0;
+
+    if (gRecvCmds[0][0] == LINKCMD_2200)
+    {
+        gCommand = LINKCMD_3300;
     }
-    if (gRecvCmds[0][0] == 0x2200) {
-        gSendCmd2 = 0x3300;
-    }
-    if (gRecvCmds[0][1] == 0x3300) {
-        gSendCmd2 = 0;
-        tmp = gUnk_20 - 1;
+
+    if (gRecvCmds[0][1] == LINKCMD_3300)
+    {
+        gCommand = 0;
+        tmp = gFusionGameCode - 1;
         if (tmp < 3)
         {
-            gUnk_88 = 1;
+            gLinkFinished = TRUE;
         }
     }
     return;
 }
 
+/**
+ * @brief 9d0 | 68 | Applies a monochrome effect to a palette
+ * 
+ * @param src Source address
+ * @param dst Destination address
+ * @param additionalValue Additional color
+ */
 void ApplyMonochromeToPalette(const u16* src, u16* dst, s8 additionalValue)
 {
     s32 i;
@@ -337,6 +405,10 @@ void ApplyMonochromeToPalette(const u16* src, u16* dst, s8 additionalValue)
     }
 }
 
+/**
+ * @brief a38 | 68 | Disable serial transfer
+ * 
+ */
 void LinkDisableSerial(void)
 {
     u32 buffer;
@@ -355,6 +427,10 @@ void LinkDisableSerial(void)
     CpuSet(&buffer, &gLink, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gLink) / sizeof(u32)));
 }
 
+/**
+ * @brief aa0 | d4 | Enable serial transfer
+ * 
+ */
 void LinkEnableSerial(void)
 {
     u32 buffer;
@@ -392,12 +468,23 @@ void LinkEnableSerial(void)
     gRecvNonzeroCheck = 0;
 }
 
+/**
+ * @brief b74 | 10 | Reset the state of the serial transfer
+ */
 void LinkResetSerial(void)
 {
     LinkEnableSerial();
     LinkDisableSerial();
 }
 
+/**
+ * @brief b84 | 120 | Handle connection, sending data, and checking errors
+ * 
+ * @param shouldAdvanceLinkState Should advance link state
+ * @param sendCmd The commands to send
+ * @param recvCmds A queue of received commands
+ * @return u32 The state of the connection
+ */
 u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
 {
     u32 retval;
@@ -497,6 +584,10 @@ u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[M
     return retval;
 }
 
+/**
+ * @brief ca4 | 2c | Check if the current connection is parent or child
+ * 
+ */
 void LinkCheckParentOrChild(void)
 {
     u32 terminals;
@@ -512,6 +603,10 @@ void LinkCheckParentOrChild(void)
     }
 }
 
+/**
+ * @brief cd0 | 50 | Load timer 3 if the GBA is the parent
+ * 
+ */
 void LinkInitTimer(void)
 {
     if (gLink.session.isParent)
@@ -528,6 +623,11 @@ void LinkInitTimer(void)
     }
 }
 
+/**
+ * @brief d20 | e0 | Put commands into send queue
+ * 
+ * @param sendCmd The commands to send
+ */
 void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
 {
     u8 offset;
@@ -566,6 +666,11 @@ void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
     gLastSendQueueCount = gLink.sendQueue.count;
 }
 
+/**
+ * @brief e00 | 108 | Get commands from recieve queue
+ * 
+ * @param recvCmds A queue of received commands
+ */
 void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
 {
     u8 i;
@@ -610,6 +715,10 @@ void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
     write16(REG_IME, gLinkSavedIme);
 }
 
+/**
+ * @brief f08 | 70 | Keep track of VSync frames and either start a transfer or lag out if enough frames has passed
+ * 
+ */
 void LinkVSync(void)
 {
     if (gLink.session.isParent)
@@ -662,6 +771,10 @@ void LinkVSync(void)
     }
 }
 
+/**
+ * @brief f78 | 10 | Reload timer 3 and start serial transfer
+ * 
+ */
 void LinkReloadTransfer(void)
 {
     // Called when timer 3 interrupts
@@ -669,6 +782,10 @@ void LinkReloadTransfer(void)
     LinkStartTransfer();
 }
 
+/**
+ * @brief f88 | 90 | Establish a connection and send data
+ * 
+ */
 void LinkCommunicate(void)
 {
     u32 control;
@@ -711,11 +828,20 @@ void LinkCommunicate(void)
     }
 }
 
+/**
+ * @brief 1018 | 10 | Start a serial transfer
+ * 
+ */
 void LinkStartTransfer(void)
 {
     write16(REG_SIO, read16(REG_SIO) | SIO_START_BIT_ACTIVE);
 }
 
+/**
+ * @brief 1028 | fc | Try to perform the handshake between the parent and child connections
+ * 
+ * @return u8 bool, handshake was successfully performed
+ */
 u8 LinkDoHandshake(void)
 {
     u16 minRecv;
@@ -786,6 +912,10 @@ u8 LinkDoHandshake(void)
     return FALSE;
 }
 
+/**
+ * @brief 1124 | 108 | Receive a command from the receive queue
+ * 
+ */
 void LinkDoRecv(void)
 {
     u16 recv[4];
@@ -837,6 +967,10 @@ void LinkDoRecv(void)
     }
 }
 
+/**
+ * @brief 122c | 9c | Send a command from the send queue
+ * 
+ */
 void LinkDoSend(void)
 {
     if (gLink.connection.sendCmdIndex == CMD_LENGTH)
@@ -878,6 +1012,10 @@ void LinkDoSend(void)
     }
 }
 
+/**
+ * @brief 12c8 | 34 | Stops the timer for the parent
+ * 
+ */
 void LinkStopTimer(void)
 {
     if (gLink.session.isParent)
@@ -888,6 +1026,10 @@ void LinkStopTimer(void)
     }
 }
 
+/**
+ * @brief 12fc | 30 | Send a signal that the receive command is done
+ * 
+ */
 void LinkSendRecvDone(void)
 {
     if (gLink.connection.recvCmdIndex == CMD_LENGTH)
@@ -901,6 +1043,10 @@ void LinkSendRecvDone(void)
     }
 }
 
+/**
+ * @brief 132c | 48 | Clear the commands in the send queue
+ * 
+ */
 void LinkResetSendBuffer(void)
 {
     u8 i;
@@ -918,6 +1064,10 @@ void LinkResetSendBuffer(void)
     }
 }
 
+/**
+ * @brief 1374 | 5c | Clear the commands in the receive queue
+ * 
+ */
 void LinkResetRecvBuffer(void)
 {
     u8 i;
@@ -935,6 +1085,322 @@ void LinkResetRecvBuffer(void)
             {
                 gLink.recvQueue.data[i][j][k] = LINKCMD_NONE;
             }
+        }
+    }
+}
+
+/**
+ * @brief 13d0 | 24c | (Unused) Formats the number in a print statement
+ */
+NAKED_FUNCTION
+void FormatNumber(u8 xPosition, u8 yPosition, u8 *format, u32 value, u8 length, u16* output)
+{
+    asm(" \n\
+    push {r4, r5, r6, r7, lr}\n\
+	mov r7, sl\n\
+	mov r6, sb\n\
+	mov r5, r8\n\
+	push {r5, r6, r7}\n\
+	sub sp, #0xc\n\
+	mov ip, r2\n\
+	add r5, r3, #0\n\
+	ldr r2, [sp, #0x2c]\n\
+	lsl r0, r0, #0x18\n\
+	lsr r0, r0, #0x18\n\
+	str r0, [sp, #8]\n\
+	lsl r1, r1, #0x18\n\
+	lsr r1, r1, #0x18\n\
+	mov r8, r1\n\
+	lsl r2, r2, #0x18\n\
+	lsr r7, r2, #0x18\n\
+	mov r4, sp\n\
+	movs r6, #1\n\
+	ldr r0, [sp, #0x30]\n\
+	mov sl, r0\n\
+	mov r1, ip\n\
+	ldrb r0, [r1]\n\
+	add ip, r6\n\
+	cmp r0, #0x25\n\
+	beq _02001406\n\
+	b _02001606\n\
+_02001406:\n\
+	movs r0, #0\n\
+	movs r1, #0\n\
+	str r0, [sp]\n\
+	str r1, [sp, #4]\n\
+	mov r2, ip\n\
+	ldrb r0, [r2]\n\
+	sub r0, #0x42\n\
+	mov r1, r8\n\
+	lsl r1, r1, #5\n\
+	mov sb, r1\n\
+	cmp r0, #0x36\n\
+	bls _02001420\n\
+	b _020015C4\n\
+_02001420:\n\
+	lsl r0, r0, #2\n\
+	ldr r1, _0200142C @ =_02001430\n\
+	add r0, r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_0200142C: .4byte _02001430\n\
+_02001430: @ jump table\n\
+	.4byte _02001594 @ case 0\n\
+	.4byte _020015C4 @ case 1\n\
+	.4byte _02001536 @ case 2\n\
+	.4byte _020015C4 @ case 3\n\
+	.4byte _020015C4 @ case 4\n\
+	.4byte _020015C4 @ case 5\n\
+	.4byte _020015C4 @ case 6\n\
+	.4byte _020015C4 @ case 7\n\
+	.4byte _020015C4 @ case 8\n\
+	.4byte _020015C4 @ case 9\n\
+	.4byte _020015C4 @ case 10\n\
+	.4byte _020015C4 @ case 11\n\
+	.4byte _020015C4 @ case 12\n\
+	.4byte _020015C4 @ case 13\n\
+	.4byte _020015C4 @ case 14\n\
+	.4byte _020015C4 @ case 15\n\
+	.4byte _020015C4 @ case 16\n\
+	.4byte _020015C4 @ case 17\n\
+	.4byte _020015C4 @ case 18\n\
+	.4byte _020015C4 @ case 19\n\
+	.4byte _020015C4 @ case 20\n\
+	.4byte _020015C4 @ case 21\n\
+	.4byte _0200150C @ case 22\n\
+	.4byte _020015C4 @ case 23\n\
+	.4byte _020015C4 @ case 24\n\
+	.4byte _020015C4 @ case 25\n\
+	.4byte _020015C4 @ case 26\n\
+	.4byte _020015C4 @ case 27\n\
+	.4byte _020015C4 @ case 28\n\
+	.4byte _020015C4 @ case 29\n\
+	.4byte _020015C4 @ case 30\n\
+	.4byte _020015C4 @ case 31\n\
+	.4byte _02001594 @ case 32\n\
+	.4byte _020015C4 @ case 33\n\
+	.4byte _02001536 @ case 34\n\
+	.4byte _020015C4 @ case 35\n\
+	.4byte _020015C4 @ case 36\n\
+	.4byte _020015C4 @ case 37\n\
+	.4byte _020015C4 @ case 38\n\
+	.4byte _020015C4 @ case 39\n\
+	.4byte _020015C4 @ case 40\n\
+	.4byte _020015C4 @ case 41\n\
+	.4byte _020015C4 @ case 42\n\
+	.4byte _020015C4 @ case 43\n\
+	.4byte _020015C4 @ case 44\n\
+	.4byte _020015C4 @ case 45\n\
+	.4byte _020015C4 @ case 46\n\
+	.4byte _020015C4 @ case 47\n\
+	.4byte _020015C4 @ case 48\n\
+	.4byte _020015C4 @ case 49\n\
+	.4byte _020015C4 @ case 50\n\
+	.4byte _020015C4 @ case 51\n\
+	.4byte _020015C4 @ case 52\n\
+	.4byte _020015C4 @ case 53\n\
+	.4byte _0200150C @ case 54\n\
+_0200150C:\n\
+	movs r3, #1\n\
+	mov r2, r8\n\
+	lsl r2, r2, #5\n\
+	mov sb, r2\n\
+	cmp r3, r7\n\
+	bhi _020015C4\n\
+	movs r2, #0xf\n\
+_0200151A:\n\
+	sub r0, r7, r3\n\
+	lsl r0, r0, #2\n\
+	add r1, r2, #0\n\
+	lsl r1, r0\n\
+	and r1, r5\n\
+	lsr r1, r0\n\
+	strb r1, [r4]\n\
+	add r4, #1\n\
+	add r0, r3, #1\n\
+	lsl r0, r0, #0x18\n\
+	lsr r3, r0, #0x18\n\
+	cmp r3, r7\n\
+	bls _0200151A\n\
+	b _020015C4\n\
+_02001536:\n\
+	movs r3, #1\n\
+	mov r0, r8\n\
+	lsl r0, r0, #5\n\
+	mov sb, r0\n\
+	cmp r3, r7\n\
+	bhs _02001552\n\
+_02001542:\n\
+	lsl r0, r6, #2\n\
+	add r0, r0, r6\n\
+	lsl r6, r0, #1\n\
+	add r0, r3, #1\n\
+	lsl r0, r0, #0x18\n\
+	lsr r3, r0, #0x18\n\
+	cmp r3, r7\n\
+	blo _02001542\n\
+_02001552:\n\
+	lsl r0, r6, #2\n\
+	add r0, r0, r6\n\
+	lsl r1, r0, #1\n\
+	cmp r5, r1\n\
+	blo _0200156E\n\
+	add r0, r5, #0\n\
+	bl __udivsi3\n\
+	add r1, r0, #0\n\
+	mul r1, r6, r1\n\
+	lsl r0, r1, #2\n\
+	add r0, r0, r1\n\
+	lsl r0, r0, #1\n\
+	sub r5, r5, r0\n\
+_0200156E:\n\
+	cmp r5, #0\n\
+	beq _020015C4\n\
+_02001572:\n\
+	add r0, r5, #0\n\
+	add r1, r6, #0\n\
+	bl __udivsi3\n\
+	strb r0, [r4]\n\
+	ldrb r0, [r4]\n\
+	mul r0, r6, r0\n\
+	sub r5, r5, r0\n\
+	add r4, #1\n\
+	add r0, r6, #0\n\
+	movs r1, #0xa\n\
+	bl __udivsi3\n\
+	add r6, r0, #0\n\
+	cmp r5, #0\n\
+	bne _02001572\n\
+	b _020015C4\n\
+_02001594:\n\
+	movs r1, #0xff\n\
+	and r1, r5\n\
+	movs r3, #1\n\
+	mov r2, r8\n\
+	lsl r2, r2, #5\n\
+	mov sb, r2\n\
+	cmp r3, r7\n\
+	bhi _020015C4\n\
+	movs r5, #1\n\
+_020015A6:\n\
+	sub r0, r7, r3\n\
+	add r2, r5, #0\n\
+	lsl r2, r0\n\
+	and r2, r1\n\
+	cmp r2, #0\n\
+	beq _020015B6\n\
+	strb r5, [r4]\n\
+	b _020015B8\n\
+_020015B6:\n\
+	strb r2, [r4]\n\
+_020015B8:\n\
+	add r4, #1\n\
+	add r0, r3, #1\n\
+	lsl r0, r0, #0x18\n\
+	lsr r3, r0, #0x18\n\
+	cmp r3, r7\n\
+	bls _020015A6\n\
+_020015C4:\n\
+	mov r4, sp\n\
+	ldr r1, [sp, #8]\n\
+	add r1, sb\n\
+	movs r3, #0\n\
+	cmp r3, r7\n\
+	bhs _02001606\n\
+	lsl r0, r1, #1\n\
+	mov r6, sl\n\
+	add r1, r0, r6\n\
+	ldr r0, _020015EC @ =0x0000F030\n\
+	add r5, r0, #0\n\
+_020015DA:\n\
+	lsl r0, r3, #1\n\
+	add r2, r0, r1\n\
+	ldrb r0, [r4]\n\
+	cmp r0, #9\n\
+	bhi _020015F0\n\
+	ldrb r6, [r4]\n\
+	add r0, r5, r6\n\
+	b _020015F8\n\
+	.align 2, 0\n\
+_020015EC: .4byte 0x0000F030\n\
+_020015F0:\n\
+	ldr r6, _02001618 @ =0x0000F037\n\
+	add r0, r6, #0\n\
+	ldrb r6, [r4]\n\
+	add r0, r0, r6\n\
+_020015F8:\n\
+	add r4, #1\n\
+	strh r0, [r2]\n\
+	add r0, r3, #1\n\
+	lsl r0, r0, #0x18\n\
+	lsr r3, r0, #0x18\n\
+	cmp r3, r7\n\
+	blo _020015DA\n\
+_02001606:\n\
+	add sp, #0xc\n\
+	pop {r3, r4, r5}\n\
+	mov r8, r3\n\
+	mov sb, r4\n\
+	mov sl, r5\n\
+	pop {r4, r5, r6, r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_02001618: .4byte 0x0000F037\n\
+    ");
+}
+
+/**
+ * @brief 161c | 30 | Compares two strings
+ * 
+ * @param a The first string to compare
+ * @param b The second string to compare
+ * @param size The amount of characters to compare
+ * @return u32 bool, strings not the same
+ */
+u32 CheckSameString(const char *a, const char *b, u8 size)
+{
+    s32 i;
+
+    for (i = 0; i < size; i++) {
+        if (b[i] != a[i]) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+/**
+ * @brief 164c | e8 | Validate the game version for Fusion and Zero Mission
+ */
+void ValidateGameVersion(void)
+{
+    gFusionGameCode = 0x50;
+    if (CheckSameString(sMakerCodeMagicNumber, (u8*)0x80000b0, 3) == 0) {
+        gFusionGameCode = 0x51;
+        if (CheckSameString(sMetroidFusionJapaneseGameCode, (u8*)0x80000ac, 4) == 0) {
+            gFusionGameCode = 1;
+        }
+        else if (CheckSameString(sMetroidFusionPalGameCode, (u8*)0x80000ac, 4) == 0) {
+            gFusionGameCode = 2;
+        }
+        else if (CheckSameString(sMetroidFusionEnglishGameCode, (u8*)0x80000ac, 4) == 0) {
+            gFusionGameCode = 3;
+        }
+    }
+
+    gZeroMissionGameCode = 0x28;
+    if (CheckSameString(sMakerCodeMagicNumber, (u8*)0x20000b0, 3) == 0) {
+        gZeroMissionGameCode = 0x41;
+        if (CheckSameString(sMetroidZeroMissionJapaneseGameCode, (u8*)0x20000ac, 4) == 0) {
+            gZeroMissionGameCode = 1;
+        }
+        else if (CheckSameString(sMetroidZeroMissionPalGameCode, (u8*)0x20000ac, 4) == 0) {
+            gZeroMissionGameCode = 2;
+        }
+        else if (CheckSameString(sMetroidZeroMissionEnglishGameCode, (u8*)0x20000ac, 4) == 0) {
+            gZeroMissionGameCode = 3;
         }
     }
 }

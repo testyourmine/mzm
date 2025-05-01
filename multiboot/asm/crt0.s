@@ -23,4 +23,4 @@ _start: @ 0x080000c0
 sp_sys_ptr: .4byte sp_sys
 sp_irq_ptr: .4byte sp_irq
 intr_vector_ptr: .4byte intr_vector
-agbmain_ptr: .4byte 0x0200023D // agbmain
+agbmain_ptr: .4byte AgbMain

@@ -82,4 +82,24 @@ enum LagStatus {
     LAG_CHILD
 };
 
+enum Language {
+    LANGUAGE_JAPANESE,
+    LANGUAGE_HIRAGANA,
+    LANGUAGE_ENGLISH,
+    LANGUAGE_GERMAN,
+    LANGUAGE_FRENCH,
+    LANGUAGE_ITALIAN,
+    LANGUAGE_SPANISH,
+
+    LANGUAGE_END
+};
+
+enum GameMode {
+    GM_INIT_LINK,
+    GM_HANDLE_LINK,
+    GM_EXIT_LINK,
+    GM_FADE_IN_LINK_TEXT,
+    GM_FINISHED
+};
+
 #endif /* CONSTANTS_H */

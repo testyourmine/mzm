@@ -35,7 +35,7 @@ u8 FusionGalleryLinkProcess(void)
             buffer = 0;
             DMA_SET(3, ptr, gRecvCmds, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, MAX_LINK_PLAYERS * CMD_LENGTH));
 
-            gErrorFlag = 0;
+            gLinkStatus = 0;
             gShouldAdvanceLinkState = 0;
             gLinkPlayerCount = 0;
             gLinkLocalId = 0;
@@ -103,7 +103,7 @@ u8* LinkHandleConnection(void)
     u32* link_stat;
     
     gShouldAdvanceLinkState = gFrameCounter8Bit & 1;
-    link_stat = &gErrorFlag;
+    link_stat = &gLinkStatus;
     *link_stat = LinkMain(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
     gLinkLocalId = *link_stat & LINK_STAT_LOCAL_ID;
     gLinkPlayerCount = EXTRACT_PLAYER_COUNT(*link_stat);
@@ -205,7 +205,7 @@ void LinkProcessRecvCmds(void)
 {
     u8 var;
 
-    if (gErrorFlag & LINK_STAT_RECEIVED_NOTHING)
+    if (gLinkStatus & LINK_STAT_RECEIVED_NOTHING)
         return;
 
     if (gRecvCmds[0][1] == LINKCMD_5500)
@@ -435,7 +435,7 @@ void LinkCheckParentOrChild(void)
 }
 
 /**
- * @brief 8a4f8 | 50 | Load timer 3 if all GBA's are ready
+ * @brief 8a4f8 | 50 | Load timer 3 if the GBA is the parent
  * 
  */
 void LinkInitTimer(void)
