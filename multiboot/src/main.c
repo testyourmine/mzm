@@ -1091,264 +1091,75 @@ void LinkResetRecvBuffer(void)
 
 /**
  * @brief 13d0 | 24c | (Unused) Formats the number in a print statement
+ * 
+ * @param xPosition The x position of the text
+ * @param yPosition The y position of the text
+ * @param format The address of the format characters
+ * @param value The value of the text to format
+ * @param length The length of the text
+ * @param output The address to output the formatted number text to
  */
-NAKED_FUNCTION
 void FormatNumber(u8 xPosition, u8 yPosition, u8 *format, u32 value, u8 length, u16* output)
 {
-    asm(" \n\
-    push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #0xc\n\
-	mov ip, r2\n\
-	add r5, r3, #0\n\
-	ldr r2, [sp, #0x2c]\n\
-	lsl r0, r0, #0x18\n\
-	lsr r0, r0, #0x18\n\
-	str r0, [sp, #8]\n\
-	lsl r1, r1, #0x18\n\
-	lsr r1, r1, #0x18\n\
-	mov r8, r1\n\
-	lsl r2, r2, #0x18\n\
-	lsr r7, r2, #0x18\n\
-	mov r4, sp\n\
-	movs r6, #1\n\
-	ldr r0, [sp, #0x30]\n\
-	mov sl, r0\n\
-	mov r1, ip\n\
-	ldrb r0, [r1]\n\
-	add ip, r6\n\
-	cmp r0, #0x25\n\
-	beq _02001406\n\
-	b _02001606\n\
-_02001406:\n\
-	movs r0, #0\n\
-	movs r1, #0\n\
-	str r0, [sp]\n\
-	str r1, [sp, #4]\n\
-	mov r2, ip\n\
-	ldrb r0, [r2]\n\
-	sub r0, #0x42\n\
-	mov r1, r8\n\
-	lsl r1, r1, #5\n\
-	mov sb, r1\n\
-	cmp r0, #0x36\n\
-	bls _02001420\n\
-	b _020015C4\n\
-_02001420:\n\
-	lsl r0, r0, #2\n\
-	ldr r1, _0200142C @ =_02001430\n\
-	add r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0200142C: .4byte _02001430\n\
-_02001430: @ jump table\n\
-	.4byte _02001594 @ case 0\n\
-	.4byte _020015C4 @ case 1\n\
-	.4byte _02001536 @ case 2\n\
-	.4byte _020015C4 @ case 3\n\
-	.4byte _020015C4 @ case 4\n\
-	.4byte _020015C4 @ case 5\n\
-	.4byte _020015C4 @ case 6\n\
-	.4byte _020015C4 @ case 7\n\
-	.4byte _020015C4 @ case 8\n\
-	.4byte _020015C4 @ case 9\n\
-	.4byte _020015C4 @ case 10\n\
-	.4byte _020015C4 @ case 11\n\
-	.4byte _020015C4 @ case 12\n\
-	.4byte _020015C4 @ case 13\n\
-	.4byte _020015C4 @ case 14\n\
-	.4byte _020015C4 @ case 15\n\
-	.4byte _020015C4 @ case 16\n\
-	.4byte _020015C4 @ case 17\n\
-	.4byte _020015C4 @ case 18\n\
-	.4byte _020015C4 @ case 19\n\
-	.4byte _020015C4 @ case 20\n\
-	.4byte _020015C4 @ case 21\n\
-	.4byte _0200150C @ case 22\n\
-	.4byte _020015C4 @ case 23\n\
-	.4byte _020015C4 @ case 24\n\
-	.4byte _020015C4 @ case 25\n\
-	.4byte _020015C4 @ case 26\n\
-	.4byte _020015C4 @ case 27\n\
-	.4byte _020015C4 @ case 28\n\
-	.4byte _020015C4 @ case 29\n\
-	.4byte _020015C4 @ case 30\n\
-	.4byte _020015C4 @ case 31\n\
-	.4byte _02001594 @ case 32\n\
-	.4byte _020015C4 @ case 33\n\
-	.4byte _02001536 @ case 34\n\
-	.4byte _020015C4 @ case 35\n\
-	.4byte _020015C4 @ case 36\n\
-	.4byte _020015C4 @ case 37\n\
-	.4byte _020015C4 @ case 38\n\
-	.4byte _020015C4 @ case 39\n\
-	.4byte _020015C4 @ case 40\n\
-	.4byte _020015C4 @ case 41\n\
-	.4byte _020015C4 @ case 42\n\
-	.4byte _020015C4 @ case 43\n\
-	.4byte _020015C4 @ case 44\n\
-	.4byte _020015C4 @ case 45\n\
-	.4byte _020015C4 @ case 46\n\
-	.4byte _020015C4 @ case 47\n\
-	.4byte _020015C4 @ case 48\n\
-	.4byte _020015C4 @ case 49\n\
-	.4byte _020015C4 @ case 50\n\
-	.4byte _020015C4 @ case 51\n\
-	.4byte _020015C4 @ case 52\n\
-	.4byte _020015C4 @ case 53\n\
-	.4byte _0200150C @ case 54\n\
-_0200150C:\n\
-	movs r3, #1\n\
-	mov r2, r8\n\
-	lsl r2, r2, #5\n\
-	mov sb, r2\n\
-	cmp r3, r7\n\
-	bhi _020015C4\n\
-	movs r2, #0xf\n\
-_0200151A:\n\
-	sub r0, r7, r3\n\
-	lsl r0, r0, #2\n\
-	add r1, r2, #0\n\
-	lsl r1, r0\n\
-	and r1, r5\n\
-	lsr r1, r0\n\
-	strb r1, [r4]\n\
-	add r4, #1\n\
-	add r0, r3, #1\n\
-	lsl r0, r0, #0x18\n\
-	lsr r3, r0, #0x18\n\
-	cmp r3, r7\n\
-	bls _0200151A\n\
-	b _020015C4\n\
-_02001536:\n\
-	movs r3, #1\n\
-	mov r0, r8\n\
-	lsl r0, r0, #5\n\
-	mov sb, r0\n\
-	cmp r3, r7\n\
-	bhs _02001552\n\
-_02001542:\n\
-	lsl r0, r6, #2\n\
-	add r0, r0, r6\n\
-	lsl r6, r0, #1\n\
-	add r0, r3, #1\n\
-	lsl r0, r0, #0x18\n\
-	lsr r3, r0, #0x18\n\
-	cmp r3, r7\n\
-	blo _02001542\n\
-_02001552:\n\
-	lsl r0, r6, #2\n\
-	add r0, r0, r6\n\
-	lsl r1, r0, #1\n\
-	cmp r5, r1\n\
-	blo _0200156E\n\
-	add r0, r5, #0\n\
-	bl __udivsi3\n\
-	add r1, r0, #0\n\
-	mul r1, r6, r1\n\
-	lsl r0, r1, #2\n\
-	add r0, r0, r1\n\
-	lsl r0, r0, #1\n\
-	sub r5, r5, r0\n\
-_0200156E:\n\
-	cmp r5, #0\n\
-	beq _020015C4\n\
-_02001572:\n\
-	add r0, r5, #0\n\
-	add r1, r6, #0\n\
-	bl __udivsi3\n\
-	strb r0, [r4]\n\
-	ldrb r0, [r4]\n\
-	mul r0, r6, r0\n\
-	sub r5, r5, r0\n\
-	add r4, #1\n\
-	add r0, r6, #0\n\
-	movs r1, #0xa\n\
-	bl __udivsi3\n\
-	add r6, r0, #0\n\
-	cmp r5, #0\n\
-	bne _02001572\n\
-	b _020015C4\n\
-_02001594:\n\
-	movs r1, #0xff\n\
-	and r1, r5\n\
-	movs r3, #1\n\
-	mov r2, r8\n\
-	lsl r2, r2, #5\n\
-	mov sb, r2\n\
-	cmp r3, r7\n\
-	bhi _020015C4\n\
-	movs r5, #1\n\
-_020015A6:\n\
-	sub r0, r7, r3\n\
-	add r2, r5, #0\n\
-	lsl r2, r0\n\
-	and r2, r1\n\
-	cmp r2, #0\n\
-	beq _020015B6\n\
-	strb r5, [r4]\n\
-	b _020015B8\n\
-_020015B6:\n\
-	strb r2, [r4]\n\
-_020015B8:\n\
-	add r4, #1\n\
-	add r0, r3, #1\n\
-	lsl r0, r0, #0x18\n\
-	lsr r3, r0, #0x18\n\
-	cmp r3, r7\n\
-	bls _020015A6\n\
-_020015C4:\n\
-	mov r4, sp\n\
-	ldr r1, [sp, #8]\n\
-	add r1, sb\n\
-	movs r3, #0\n\
-	cmp r3, r7\n\
-	bhs _02001606\n\
-	lsl r0, r1, #1\n\
-	mov r6, sl\n\
-	add r1, r0, r6\n\
-	ldr r0, _020015EC @ =0x0000F030\n\
-	add r5, r0, #0\n\
-_020015DA:\n\
-	lsl r0, r3, #1\n\
-	add r2, r0, r1\n\
-	ldrb r0, [r4]\n\
-	cmp r0, #9\n\
-	bhi _020015F0\n\
-	ldrb r6, [r4]\n\
-	add r0, r5, r6\n\
-	b _020015F8\n\
-	.align 2, 0\n\
-_020015EC: .4byte 0x0000F030\n\
-_020015F0:\n\
-	ldr r6, _02001618 @ =0x0000F037\n\
-	add r0, r6, #0\n\
-	ldrb r6, [r4]\n\
-	add r0, r0, r6\n\
-_020015F8:\n\
-	add r4, #1\n\
-	strh r0, [r2]\n\
-	add r0, r3, #1\n\
-	lsl r0, r0, #0x18\n\
-	lsr r3, r0, #0x18\n\
-	cmp r3, r7\n\
-	blo _020015DA\n\
-_02001606:\n\
-	add sp, #0xc\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_02001618: .4byte 0x0000F037\n\
-    ");
+    u8 formatted[8];
+    u8 i;
+    u32 powerOfTen;
+    u8* caret;
+    u32 truncatedValue;
+    u16* outputCopy;
+
+    caret = formatted;
+    powerOfTen = 1;
+    outputCopy = output;
+    if (*format++ != '%')
+        return;
+
+    write64(formatted, 0);
+    switch (*format)
+    {
+        case 'x':
+        case 'X':
+            for (i = 1; i <= length; i++)
+                *caret++ = ((0xF << ((length - i) * 4)) & value) >> ((length - i) * 4);
+            break;
+    
+        case 'd':
+        case 'D':
+            for (i = 1; i < length; i++)
+                powerOfTen *= 10;
+
+            truncatedValue = powerOfTen * 10;
+            if (value >= truncatedValue)
+                value -= (value / truncatedValue) * powerOfTen * 10;
+
+            while (value != 0)
+            {
+                *caret = value / powerOfTen;
+                value -= *caret * powerOfTen;
+                caret++;
+                powerOfTen /= 10;
+            }
+            break;
+    
+        case 'b':
+        case 'B':
+            truncatedValue = value & 0xFF;
+            for (i = 1; i <= length; i++)
+            {
+                if ((1 << (length - i)) & truncatedValue)
+                    *caret++ = 1;
+                else
+                    *caret++ = 0;
+            }
+            break;
+    }
+
+    caret = formatted;
+    truncatedValue = yPosition * 32 + xPosition;
+    for (i = 0; i < length; i++)
+    {
+        (outputCopy + truncatedValue)[i] = (*caret < 10) ? 0xF030 + *caret++ : 0xF037 + *caret++;
+    }
 }
 
 /**
