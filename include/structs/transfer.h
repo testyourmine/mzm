@@ -33,7 +33,7 @@ extern u16 gRegRcnt_Backup;
 extern u8 gTransferUnk_30058aa; // set but never read
 extern u16 gTransferDataTimer;
 extern u8 gTransferStartupTimer;
-extern u8 gTransferUnk_30058af; // set but never read
+extern u8 gTransferTimeoutTimer; // set but never read
 extern u8 gTransferGbaDetectedCount;
 extern u8 gTransferGbaId; // unused, 0 = parent, 1-3 = child 1-3 GBA
 

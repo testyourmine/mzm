@@ -86,7 +86,7 @@ void TransferInit(void)
     gTransferUnk_30058aa = 0;
     gTransferDataTimer = 0;
     gTransferStartupTimer = 0;
-    gTransferUnk_30058af = 0;
+    gTransferTimeoutTimer = 0;
     gTransferGbaDetectedCount = 0;
     gTransferGbaId = 0;
 
@@ -321,6 +321,7 @@ void TransferExchangeData(void)
     u16 i;
     u16 numGbaDetected;
     u16 numGbaSendingData;
+    u32 recv32;
 
     control = read32(REG_SIO);
 
@@ -359,7 +360,7 @@ void TransferExchangeData(void)
             break;
 
         case TRANSFER_STAGE_TRANSFER_DATA:
-            read32(REG_SIO_MULTI); // why the read?
+            recv32 = read32(REG_SIO_MULTI);
 
             // If data still left to transfer
             if (gTransferManager.data.cursor < gTransferManager.data.sizeInt)

@@ -345,7 +345,7 @@ SECTIONS {
         . = 0x000058aa; gTransferUnk_30058aa = .;
         . = 0x000058ac; gTransferDataTimer = .;
         . = 0x000058ae; gTransferStartupTimer = .;
-        . = 0x000058af; gTransferUnk_30058af = .;
+        . = 0x000058af; gTransferTimeoutTimer = .;
         . = 0x000058b0; gTransferGbaDetectedCount = .;
         . = 0x000058b1; gTransferGbaId = .;
         . = 0x000058b2; gRegIme_Backup = .;

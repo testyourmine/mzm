@@ -1,0 +1,8 @@
+# Formatted as follows : name;length;address;size
+
+# Data
+
+Palette.pal;16;0x131c;2
+LinkErrorJapanese.gfx.lz;1144;0x133c;1
+LinkErrorEnglish.gfx.lz;936;0x17b4;1
+LinkText.tt;500;0x1b5c;1
