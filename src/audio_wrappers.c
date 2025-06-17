@@ -4,10 +4,6 @@
 #include "gba.h"
 #include "macros.h"
 
-extern void call_soundcode_a(void);
-extern void call_soundcode_b(void);
-extern void call_soundcode_c(void);
-
 /**
  * @brief 2564 | 294 | Initializes the audio
  * 
