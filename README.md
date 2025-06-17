@@ -24,7 +24,7 @@ Debug simply indicates whether the ROM contains the debug features, it is option
 The default built ROM is mzm_us.gba
 
 **Discords**: 
-- https://discord.gg/2MGB9Xbr9y MAGret
+- https://discord.gg/2MGB9Xbr9y Metroidret
 - https://discord.gg/WtekHKb MAGConst
 
 ## Dependencies
