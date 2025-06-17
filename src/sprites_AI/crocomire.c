@@ -9,11 +9,19 @@
 
 #include "structs/sprite.h"
 
+#define CROCOMIRE_POSE_IDLE_INIT 0x8
+#define CROCOMIRE_POSE_IDLE 0x9
+
+// Crocomire part
+
+#define CROCOMIRE_PART_POSE_IDLE 0x9
+#define CROCOMIRE_PART_POSE_DYING 0x67
+
 /**
  * @brief 43d88 | 68 | Synchronize the sub sprites of Crocomire
  * 
  */
-void CrocomireSyncSubSprites(void)
+static void CrocomireSyncSubSprites(void)
 {
     MultiSpriteDataInfo_T pData;
     u16 oamIdx;
@@ -37,7 +45,7 @@ void CrocomireSyncSubSprites(void)
  * @brief 43df0 | 120 | Initializes a Crocomire sprite
  * 
  */
-void CrocomireInit(void)
+static void CrocomireInit(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -89,7 +97,7 @@ void CrocomireInit(void)
  * @brief 43f10 | 24 | Initializes Crocomire to be idle
  * 
  */
-void CrocomireIdleInit(void)
+static void CrocomireIdleInit(void)
 {
     gSubSpriteData1.pMultiOam = sCrocomireMultiSpriteData_Idle;
     gSubSpriteData1.animationDurationCounter = 0;
@@ -98,7 +106,7 @@ void CrocomireIdleInit(void)
     gCurrentSprite.pose = CROCOMIRE_POSE_IDLE;
 }
 
-void Crocomire_Empty(void)
+static void Crocomire_Empty(void)
 {
     return;
 }
@@ -107,7 +115,7 @@ void Crocomire_Empty(void)
  * @brief 43f38 | 160 | Initializes a crocomire part sprite
  * 
  */
-void CrocomirePartInit(void)
+static void CrocomirePartInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
     gCurrentSprite.health = 1;

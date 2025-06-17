@@ -11,29 +11,29 @@ extern const s16 sAtomicIdleXMovement[81];
 extern const u32 sAtomicGfx[752];
 extern const u16 sAtomicPal[64];
 
-extern const u16 sAtomicOAM_Idle_Frame0[13];
+extern const u16 sAtomicOam_Idle_Frame0[13];
 
-extern const u16 sAtomicOAM_Idle_Frame1[10];
+extern const u16 sAtomicOam_Idle_Frame1[10];
 
-extern const u16 sAtomicOAM_Idle_Frame2[13];
+extern const u16 sAtomicOam_Idle_Frame2[13];
 
-extern const u16 sAtomicOAM_Idle_Frame3[13];
+extern const u16 sAtomicOam_Idle_Frame3[13];
 
-extern const u16 sAtomicOAM_Idle_Frame4[13];
+extern const u16 sAtomicOam_Idle_Frame4[13];
 
-extern const u16 sAtomicOAM_Idle_Frame5[13];
+extern const u16 sAtomicOam_Idle_Frame5[13];
 
-extern const u16 sAtomicOAM_Idle_Frame6[13];
+extern const u16 sAtomicOam_Idle_Frame6[13];
 
-extern const u16 sAtomicOAM_Idle_Frame7[10];
+extern const u16 sAtomicOam_Idle_Frame7[10];
 
-extern const u16 sAtomicOAM_Idle_Frame8[13];
+extern const u16 sAtomicOam_Idle_Frame8[13];
 
-extern const u16 sAtomicOAM_Idle_Frame9[13];
+extern const u16 sAtomicOam_Idle_Frame9[13];
 
-extern const u16 sAtomicOAM_Idle_Frame10[13];
+extern const u16 sAtomicOam_Idle_Frame10[13];
 
-extern const u16 sAtomicOAM_Idle_Frame11[13];
+extern const u16 sAtomicOam_Idle_Frame11[13];
 
 extern const u16 sAtomicElectricityOAM_MovingVertical_Frame0[7];
 
@@ -143,7 +143,7 @@ extern const u16 sAtomicElectricityOAM_Charging_Frame5[4];
 
 extern const u16 sAtomicElectricityOAM_Charging_Frame7[4];
 
-extern const struct FrameData sAtomicOAM_Idle[13];
+extern const struct FrameData sAtomicOam_Idle[13];
 
 extern const struct FrameData sAtomicElectricityOAM_MovingVertical[13];
 

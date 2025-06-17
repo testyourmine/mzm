@@ -36,7 +36,7 @@
  * 
  * @return bool, samus is near
  */
-u8 BaristuteCheckSamusInRange(void)
+static u8 BaristuteCheckSamusInRange(void)
 {
     if (SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE * 8, BLOCK_SIZE * 8) != NSLR_OUT_OF_RANGE)
     {
@@ -51,7 +51,7 @@ u8 BaristuteCheckSamusInRange(void)
  * @brief 47620 | 90 | Initializes a baristute sprite
  * 
  */
-void BaristuteInit(void)
+static void BaristuteInit(void)
 {
     // Check for kraid baristutes
     if (gCurrentSprite.spriteId == PSPRITE_BARISTUTE_KRAID_UPPER || gCurrentSprite.spriteId == PSPRITE_BARISTUTE_KRAID_LOWER)
@@ -90,7 +90,7 @@ void BaristuteInit(void)
  * @brief 476b0 | 34 | Initializes a baristute to do the warning before a jump
  * 
  */
-void BaristuteJumpWarningInit(void)
+static void BaristuteJumpWarningInit(void)
 {
     gCurrentSprite.pose = BARISTUTE_POSE_CHECK_WARNING_ENDED;
 
@@ -106,7 +106,7 @@ void BaristuteJumpWarningInit(void)
  * @brief 476e4 | 7c | Checks if the animation before jumping has ended
  * 
  */
-void BaristuteCheckBeforeJumpingAnimEnded(void)
+static void BaristuteCheckBeforeJumpingAnimEnded(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -141,7 +141,7 @@ void BaristuteCheckBeforeJumpingAnimEnded(void)
  * @brief 47760 | 100 | Handles the baristute jumping
  * 
  */
-void BaristuteJumping(void)
+static void BaristuteJumping(void)
 {
     s32 movement;
     u32 blockTop;
@@ -211,7 +211,7 @@ void BaristuteJumping(void)
  * @brief 47860 | 3c | Initializes a baristute to be landing
  * 
  */
-void BaristuteLandingInit(void)
+static void BaristuteLandingInit(void)
 {
     gCurrentSprite.pose = BARISTUTE_POSE_LANDING;
 
@@ -230,7 +230,7 @@ void BaristuteLandingInit(void)
  * @brief 4789c | 1c | Checks if the landing animation has nearly ended
  * 
  */
-void BaristuteCheckLandingAnimNearEnded(void)
+static void BaristuteCheckLandingAnimNearEnded(void)
 {
     if (SpriteUtilCheckNearEndCurrentSpriteAnim())
         gCurrentSprite.pose = BARISTUTE_POSE_IDLE_INIT; // Set idle
@@ -240,7 +240,7 @@ void BaristuteCheckLandingAnimNearEnded(void)
  * @brief 478b8 | 30 | Initializes a baristute to be idle
  * 
  */
-void BaristuteIdleInit(void)
+static void BaristuteIdleInit(void)
 {
     gCurrentSprite.pose = BARISTUTE_POSE_IDLE;
 
@@ -256,7 +256,7 @@ void BaristuteIdleInit(void)
  * @brief 478e8 | cc | Handles a baristute being idle
  * 
  */
-void BaristuteIdle(void)
+static void BaristuteIdle(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -337,7 +337,7 @@ void BaristuteIdle(void)
  * @brief 479b4 | 74 | Initializes a baristute to be walking
  * 
  */
-void BaristuteWalkingInit(void)
+static void BaristuteWalkingInit(void)
 {
     u8 paletteRow;
     
@@ -375,7 +375,7 @@ void BaristuteWalkingInit(void)
  * @brief 47a28 | 50 | Checks if the walking sound should play, if yes plays it
  * 
  */
-void BaristutePlayWalkingSound(void)
+static void BaristutePlayWalkingSound(void)
 {
     if (gCurrentSprite.animationDurationCounter == 1 * DELTA_TIME && (gCurrentSprite.currentAnimationFrame == 1 || gCurrentSprite.currentAnimationFrame == 4))
     {
@@ -398,7 +398,7 @@ void BaristutePlayWalkingSound(void)
  * @brief 47a78 | d4 | Handles a baristute walking
  * 
  */
-void BaristuteWalking(void)
+static void BaristuteWalking(void)
 {
     u16 velocity;
     u16 walkingDistance;
@@ -469,7 +469,7 @@ void BaristuteWalking(void)
  * @brief 47b4c | 24 | Initializes a baristute to bve falling
  * 
  */
-void BaristuteFallingInit(void)
+static void BaristuteFallingInit(void)
 {
     gCurrentSprite.pose = BARISTUTE_POSE_FALLING;
 
@@ -483,7 +483,7 @@ void BaristuteFallingInit(void)
  * @brief 47b70 | 70 | Handles a baristute falling
  * 
  */
-void BaristuteFalling(void)
+static void BaristuteFalling(void)
 {
     u32 blockTop;
     s32 velocity;
@@ -520,7 +520,7 @@ void BaristuteFalling(void)
  * @brief 47be0 | 150 | Handles a baristute death
  * 
  */
-void BaristuteDeath(void)
+static void BaristuteDeath(void)
 {
     u8 spriteId;
     struct SpriteData* pSprite;

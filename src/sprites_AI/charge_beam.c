@@ -26,7 +26,7 @@
  * @brief 13498 | a4 | Initializes the charge beam sprite
  * 
  */
-void ChargeBeamInit(void)
+static void ChargeBeamInit(void)
 {
     if (gEquipment.beamBombs & BBF_CHARGE_BEAM)
     {
@@ -62,7 +62,7 @@ void ChargeBeamInit(void)
  * @brief 1353c | 4c | Spawns the charge beam glow
  * 
  */
-void ChargeBeamSpawnGlow(void)
+static void ChargeBeamSpawnGlow(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
@@ -79,7 +79,7 @@ void ChargeBeamSpawnGlow(void)
  * @brief 13588 | 44 | Initializes the charge beam to be visible/idle
  * 
  */
-void ChargeBeamVisibleInit(void)
+static void ChargeBeamVisibleInit(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
     gCurrentSprite.pose = CHARGE_BEAM_POSE_IDLE;
@@ -97,7 +97,7 @@ void ChargeBeamVisibleInit(void)
  * @brief 135cc | 44 | Handles the charge beam being idle
  * 
  */
-void ChargeBeamIdle(void)
+static void ChargeBeamIdle(void)
 {
     u8 offset;
     s32 velocity;
@@ -146,7 +146,7 @@ void ChargeBeamIdle(void)
  * @brief 13694 | 44 | Handles the flashing animation of the charge beam
  * 
  */
-void ChargeBeamFlashingAnim(void)
+static void ChargeBeamFlashingAnim(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
     APPLY_DELTA_TIME_DEC(gCurrentSprite.animationDurationCounter);
@@ -165,7 +165,7 @@ void ChargeBeamFlashingAnim(void)
  * @brief 136d8 | 64 | Initializes the charge beam glow sprite
  * 
  */
-void ChargeBeamGlowInit(void)
+static void ChargeBeamGlowInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
     gCurrentSprite.drawOrder = 3;

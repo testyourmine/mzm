@@ -1,5 +1,6 @@
 #include "sprites_AI/area_banner.h"
 #include "macros.h"
+#include "location_text.h"
 
 #include "data/sprites/area_banner.h"
 
@@ -19,15 +20,14 @@
  * @brief 3c704 | a4 | Initializes an area banner sprite
  * 
  */
-void AreaBannerInit(void)
+static void AreaBannerInit(void)
 {
     gCurrentSprite.samusCollision = SSC_NONE;
     gCurrentSprite.properties |= SP_ALWAYS_ACTIVE;
 
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
-    gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 8);
-    //gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(SCREEN_SIZE_X_SUB_PIXEL / 2 + HALF_BLOCK_SIZE);
+    gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(SCREEN_SIZE_X_SUB_PIXEL / 2 + HALF_BLOCK_SIZE);
 
     gCurrentSprite.hitboxTop = -PIXEL_SIZE;
     gCurrentSprite.hitboxBottom = PIXEL_SIZE;
@@ -66,7 +66,7 @@ void AreaBannerInit(void)
  * @brief 3c7a8 | 20 | Handles the area banner spawning
  * 
  */
-void AreaBannerSpawningInit(void)
+static void AreaBannerSpawningInit(void)
 {
     APPLY_DELTA_TIME_DEC(gCurrentSprite.animationDurationCounter);
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN; // Remove not drawn
@@ -77,7 +77,7 @@ void AreaBannerSpawningInit(void)
  * @brief 3c7c8 | 60 | Handles the area banner scrolling up, determines the static behavior
  * 
  */
-void AreaBannerSpawning(void)
+static void AreaBannerSpawning(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -112,7 +112,7 @@ void AreaBannerSpawning(void)
  * @brief 3c828 | 44 | Handles the area banner being static
  * 
  */
-void AreaBannerStatic(void)
+static void AreaBannerStatic(void)
 {
     APPLY_DELTA_TIME_DEC(gCurrentSprite.AREA_BANNER_TIMER);
     if (gCurrentSprite.AREA_BANNER_TIMER == 0)
@@ -133,7 +133,7 @@ void AreaBannerStatic(void)
  * @brief 3c86c | 18 | Checks if the removing anim ended
  * 
  */
-void AreaBannerLeaving(void)
+static void AreaBannerLeaving(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
         gCurrentSprite.status = 0; // Kill sprite

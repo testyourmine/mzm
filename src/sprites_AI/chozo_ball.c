@@ -20,7 +20,7 @@
  * 
  * @param spriteId Chozo statue sprite ID
  */
-void ChozoBallSpawnItemBanner(u8 spriteId)
+static void ChozoBallSpawnItemBanner(u8 spriteId)
 {
     u8 text;
 
@@ -79,7 +79,7 @@ void ChozoBallSpawnItemBanner(u8 spriteId)
  * 
  * @param spriteId Chozo statue sprite ID
  */
-void ChozoBallSetClosedOam(u8 spriteId)
+static void ChozoBallSetClosedOam(u8 spriteId)
 {
     // Check whether to use the normal of unknown version
     switch (spriteId)
@@ -117,7 +117,7 @@ void ChozoBallSetClosedOam(u8 spriteId)
  * 
  * @param spriteId Chozo statue sprite ID
  */
-void ChozoBallSetRevealingOam(u8 spriteId)
+static void ChozoBallSetRevealingOam(u8 spriteId)
 {
     // Check whether to use the normal of unknown version
     switch (spriteId)
@@ -155,7 +155,7 @@ void ChozoBallSetRevealingOam(u8 spriteId)
  * 
  * @param spriteId Chozo statue sprite ID
  */
-void ChozoBallSetRevealedOam(u8 spriteId)
+static void ChozoBallSetRevealedOam(u8 spriteId)
 {
     // Check whether to use the normal of unknown version
     switch (spriteId)
@@ -192,7 +192,7 @@ void ChozoBallSetRevealedOam(u8 spriteId)
  * 16470 | 74 | Initializes a chozo ball sprite
  * 
  */
-void ChozoBallInit(void)
+static void ChozoBallInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
 
@@ -219,7 +219,7 @@ void ChozoBallInit(void)
  * 164e4 | 4 | Empty function
  * 
  */
-void ChozoBallEmpty(void)
+static void ChozoBallEmpty(void)
 {
     return;
 }
@@ -228,7 +228,7 @@ void ChozoBallEmpty(void)
  * 164e8 | 70 | Initializes a chozo ball to be revealing
  * 
  */
-void ChozoBallRevealingInit(void)
+static void ChozoBallRevealingInit(void)
 {
     gCurrentSprite.properties |= SP_IMMUNE_TO_PROJECTILES;
     gCurrentSprite.health = 1;
@@ -249,7 +249,7 @@ void ChozoBallRevealingInit(void)
  * 16558 | 3c | Checks if the revealing animation has ended
  * 
  */
-void ChozoBallCheckRevealingAnimEnded(void)
+static void ChozoBallCheckRevealingAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -265,7 +265,7 @@ void ChozoBallCheckRevealingAnimEnded(void)
  * 16594 | 1c | Registers the item grabbed and calls ChozoBallSpawnItemBanner
  * 
  */
-void ChozoBallRegisterItem(void)
+static void ChozoBallRegisterItem(void)
 {
     u8 spriteId;
 
@@ -288,7 +288,7 @@ void ChozoBallRegisterItem(void)
  * 16600 | 3c | Handles the flashing animation when the item gets grabbed 
  * 
  */
-void ChozoBallFlashAnimation(void)
+static void ChozoBallFlashAnimation(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
     // Missing a timer increment?

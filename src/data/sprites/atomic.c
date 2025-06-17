@@ -21,7 +21,7 @@ const s16 sAtomicIdleXMovement[81] = {
 const u32 sAtomicGfx[752] = INCBIN_U32("data/sprites/Atomic.gfx.lz");
 const u16 sAtomicPal[64] = INCBIN_U16("data/sprites/Atomic.pal");
 
-const u16 sAtomicOAM_Idle_Frame0[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf4, 0x1fc, OBJ_SPRITE_OAM | 0x292,
     0xfc, 0x4, OBJ_SPRITE_OAM | 0x291,
@@ -29,14 +29,14 @@ const u16 sAtomicOAM_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     0x1, 0x1f7, OBJ_SPRITE_OAM | 0x293
 };
 
-const u16 sAtomicOAM_Idle_Frame1[OAM_DATA_SIZE(3)] = {
+const u16 sAtomicOam_Idle_Frame1[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, 0x1f6, OBJ_SPRITE_OAM | 0x293,
     0x0, 0x1, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21c
 };
 
-const u16 sAtomicOAM_Idle_Frame2[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     0xfc, 0x1f4, OBJ_SPRITE_OAM | 0x291,
     0x3, 0x1fe, OBJ_SPRITE_OAM | 0x292,
@@ -44,7 +44,7 @@ const u16 sAtomicOAM_Idle_Frame2[OAM_DATA_SIZE(4)] = {
     0xf7, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1, OBJ_SPRITE_OAM | 0x293
 };
 
-const u16 sAtomicOAM_Idle_Frame3[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf8, 0x0, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21c,
@@ -52,7 +52,7 @@ const u16 sAtomicOAM_Idle_Frame3[OAM_DATA_SIZE(4)] = {
     0x3, 0x1fc, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAtomicOAM_Idle_Frame4[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame4[OAM_DATA_SIZE(4)] = {
     0x4,
     0xfd, 0x1fe, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21a,
@@ -60,7 +60,7 @@ const u16 sAtomicOAM_Idle_Frame4[OAM_DATA_SIZE(4)] = {
     0x3, 0x1fa, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAtomicOAM_Idle_Frame5[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame5[OAM_DATA_SIZE(4)] = {
     0x4,
     0x1, OBJ_X_FLIP | 0x1, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x218,
@@ -68,7 +68,7 @@ const u16 sAtomicOAM_Idle_Frame5[OAM_DATA_SIZE(4)] = {
     0xff, OBJ_X_FLIP | 0x1f6, OBJ_SPRITE_OAM | 0x291
 };
 
-const u16 sAtomicOAM_Idle_Frame6[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame6[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf4, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x292,
     0xfc, OBJ_X_FLIP | 0x1f4, OBJ_SPRITE_OAM | 0x291,
@@ -76,14 +76,14 @@ const u16 sAtomicOAM_Idle_Frame6[OAM_DATA_SIZE(4)] = {
     0x1, OBJ_X_FLIP | 0x1, OBJ_SPRITE_OAM | 0x293
 };
 
-const u16 sAtomicOAM_Idle_Frame7[OAM_DATA_SIZE(3)] = {
+const u16 sAtomicOam_Idle_Frame7[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, OBJ_X_FLIP | 0x2, OBJ_SPRITE_OAM | 0x293,
     0x0, OBJ_X_FLIP | 0x1f7, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21c
 };
 
-const u16 sAtomicOAM_Idle_Frame8[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame8[OAM_DATA_SIZE(4)] = {
     0x4,
     0xfc, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x291,
     0x3, OBJ_X_FLIP | 0x1fa, OBJ_SPRITE_OAM | 0x292,
@@ -91,7 +91,7 @@ const u16 sAtomicOAM_Idle_Frame8[OAM_DATA_SIZE(4)] = {
     0xf7, OBJ_Y_FLIP | 0x1f7, OBJ_SPRITE_OAM | 0x293
 };
 
-const u16 sAtomicOAM_Idle_Frame9[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame9[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf8, OBJ_X_FLIP | 0x1f8, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21c,
@@ -99,7 +99,7 @@ const u16 sAtomicOAM_Idle_Frame9[OAM_DATA_SIZE(4)] = {
     0x3, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAtomicOAM_Idle_Frame10[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame10[OAM_DATA_SIZE(4)] = {
     0x4,
     0xfd, OBJ_X_FLIP | 0x1fa, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21a,
@@ -107,7 +107,7 @@ const u16 sAtomicOAM_Idle_Frame10[OAM_DATA_SIZE(4)] = {
     0x3, OBJ_X_FLIP | 0x1fe, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAtomicOAM_Idle_Frame11[OAM_DATA_SIZE(4)] = {
+const u16 sAtomicOam_Idle_Frame11[OAM_DATA_SIZE(4)] = {
     0x4,
     0x1, 0x1f7, OBJ_SPRITE_OAM | 0x293,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x218,
@@ -443,53 +443,53 @@ const u16 sAtomicElectricityOAM_Charging_Frame7[OAM_DATA_SIZE(1)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x125b
 };
 
-const struct FrameData sAtomicOAM_Idle[13] = {
+const struct FrameData sAtomicOam_Idle[13] = {
     [0] = {
-        .pFrame = sAtomicOAM_Idle_Frame0,
+        .pFrame = sAtomicOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [1] = {
-        .pFrame = sAtomicOAM_Idle_Frame1,
+        .pFrame = sAtomicOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [2] = {
-        .pFrame = sAtomicOAM_Idle_Frame2,
+        .pFrame = sAtomicOam_Idle_Frame2,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [3] = {
-        .pFrame = sAtomicOAM_Idle_Frame3,
+        .pFrame = sAtomicOam_Idle_Frame3,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [4] = {
-        .pFrame = sAtomicOAM_Idle_Frame4,
+        .pFrame = sAtomicOam_Idle_Frame4,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [5] = {
-        .pFrame = sAtomicOAM_Idle_Frame5,
+        .pFrame = sAtomicOam_Idle_Frame5,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [6] = {
-        .pFrame = sAtomicOAM_Idle_Frame6,
+        .pFrame = sAtomicOam_Idle_Frame6,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [7] = {
-        .pFrame = sAtomicOAM_Idle_Frame7,
+        .pFrame = sAtomicOam_Idle_Frame7,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [8] = {
-        .pFrame = sAtomicOAM_Idle_Frame8,
+        .pFrame = sAtomicOam_Idle_Frame8,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [9] = {
-        .pFrame = sAtomicOAM_Idle_Frame9,
+        .pFrame = sAtomicOam_Idle_Frame9,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [10] = {
-        .pFrame = sAtomicOAM_Idle_Frame10,
+        .pFrame = sAtomicOam_Idle_Frame10,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [11] = {
-        .pFrame = sAtomicOAM_Idle_Frame11,
+        .pFrame = sAtomicOam_Idle_Frame11,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [12] = FRAME_DATA_TERMINATOR

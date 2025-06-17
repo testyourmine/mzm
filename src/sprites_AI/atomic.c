@@ -18,6 +18,25 @@
 #include "structs/samus.h"
 #include "structs/sprite.h"
 
+#define ATOMIC_POSE_IDLE_INIT 0x8
+#define ATOMIC_POSE_IDLE 0x9
+#define ATOMIC_POSE_MOVE 0x23
+#define ATOMIC_POSE_MOVE_BACK_IDLE 0x25
+#define ATOMIC_POSE_CHASING_SAMUS_INIT 0x26
+#define ATOMIC_POSE_CHASING_SAMUS 0x27
+
+#define ATOMIC_ELECTRICITY_POSE_SPAWN 0x8
+#define ATOMIC_ELECTRICITY_POSE_MOVE 0x9
+#define ATOMIC_ELECTRICITY_POSE_EXPLODING 0x23
+#define ATOMIC_ELECTRICITY_POSE_ON_GROUND 0x25
+
+enum AtomicElectricityDirection {
+    ATOMIC_DIRECTION_DIAGONAL,
+    ATOMIC_DIRECTION_HORIZONTAL,
+    ATOMIC_DIRECTION_VERTICAL
+};
+
+
 #define ATOMIC_HORIZONTAL_DECELERATION_SPEED work1
 #define ATOMIC_HORIZONTAL_CHASE_SPEED work2
 #define ATOMIC_VERTICAL_DECELERATION_SPEED work0
@@ -41,7 +60,7 @@
  * @brief 3b944 | 254 | Handles the atomic smooth movement
  * 
  */
-void AtomicSmoothMovement(void)
+static void AtomicSmoothMovement(void)
 {
     u16 dstY;
     u16 dstX;
@@ -254,7 +273,7 @@ void AtomicSmoothMovement(void)
  * @brief 3bb98 | 9c | Updates the direction of an atomic to flee samus if in range
  * 
  */
-void AtomicUpdateDirectionToFleeSamus(void)
+static void AtomicUpdateDirectionToFleeSamus(void)
 {
     u16 spriteY;
     u16 spriteX;
@@ -295,7 +314,7 @@ void AtomicUpdateDirectionToFleeSamus(void)
  * @brief 3bc34 | b8 | Checks if an atomic should shoot electricity, also updates the palette
  * 
  */
-void AtomicCheckShootElectricity(void)
+static void AtomicCheckShootElectricity(void)
 {
     u8 palette;
     u8 offset;
@@ -343,7 +362,7 @@ void AtomicCheckShootElectricity(void)
  * @brief 3bcec | 90 | Initializes an atomic sprite
  * 
  */
-void AtomicInit(void)
+static void AtomicInit(void)
 {
     if (gDifficulty == DIFF_EASY)
     {
@@ -360,7 +379,7 @@ void AtomicInit(void)
     gCurrentSprite.hitboxLeft = -HALF_BLOCK_SIZE;
     gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE;
 
-    gCurrentSprite.pOam = sAtomicOAM_Idle;
+    gCurrentSprite.pOam = sAtomicOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
@@ -377,10 +396,10 @@ void AtomicInit(void)
  * @brief 3bd7c | 2c | Initializes an atomic to be idle
  * 
  */
-void AtomicIdleInit(void)
+static void AtomicIdleInit(void)
 {
     gCurrentSprite.pose = ATOMIC_POSE_IDLE;
-    gCurrentSprite.pOam = sAtomicOAM_Idle;
+    gCurrentSprite.pOam = sAtomicOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.ATOMIC_IDLE_Y_MOVEMENT_TABLE_OFFSET = 0;
@@ -391,7 +410,7 @@ void AtomicIdleInit(void)
  * @brief 3bda8 | 90 | Handles an atomic being idle
  * 
  */
-void AtomicIdle(void)
+static void AtomicIdle(void)
 {
     s32 movement;
     u8 offset;
@@ -433,7 +452,7 @@ void AtomicIdle(void)
  * @brief 3be38 | 144 | Handles the atomic moving (fleeing samus)
  * 
  */
-void AtomicMove(void)
+static void AtomicMove(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -511,7 +530,7 @@ void AtomicMove(void)
  * @brief 3bf7c | 16c | Handles an atomic moving back to an idle position
  * 
  */
-void AtomicMaybeMoveBackToIdle(void)
+static void AtomicMaybeMoveBackToIdle(void)
 {
     u16 ySpawn;
     u16 xSpawn;
@@ -588,7 +607,7 @@ void AtomicMaybeMoveBackToIdle(void)
  * @brief 3c0e8 | 30 | Initializes an atomic to be chasing samus
  * 
  */
-void AtomicChasingSamusInit(void)
+static void AtomicChasingSamusInit(void)
 {
     gCurrentSprite.pose = ATOMIC_POSE_CHASING_SAMUS;
     gCurrentSprite.absolutePaletteRow = 0;
@@ -603,7 +622,7 @@ void AtomicChasingSamusInit(void)
  * @brief 3c118 | 38 | Handles the atomic moving (chasing samus) while charging a beam
  * 
  */
-void AtomicChaseSamus(void)
+static void AtomicChaseSamus(void)
 {
     if (gSamusWeaponInfo.chargeCounter == 0)
     {
@@ -626,7 +645,7 @@ void AtomicChaseSamus(void)
  * @param ramSlot RAM slot
  * @return u8 bool dead or not an atomic
  */
-u8 AtomicElectricityCheckAtomicDead(u8 ramSlot)
+static u8 AtomicElectricityCheckAtomicDead(u8 ramSlot)
 {
     if (!(gSpriteData[ramSlot].status & SPRITE_STATUS_EXISTS) || gSpriteData[ramSlot].spriteId != PSPRITE_ATOMIC)
         return TRUE;
@@ -638,7 +657,7 @@ u8 AtomicElectricityCheckAtomicDead(u8 ramSlot)
  * @brief 3c180 | 7c | Initializes an atomic electricity sprite
  * 
  */
-void AtomicElectricityInit(void)
+static void AtomicElectricityInit(void)
 {
     u8 dead;
 
@@ -674,7 +693,7 @@ void AtomicElectricityInit(void)
  * @brief 3c1fc | 1ac | Handles an atomic electricity spawning
  * 
  */
-void AtomicElectricitySpawn(void)
+static void AtomicElectricitySpawn(void)
 {
     u8 dead;
     u8 ramSlot;
@@ -795,7 +814,7 @@ void AtomicElectricitySpawn(void)
  * @brief 3c3a8 | c8 | Handles an atomic electricity moving
  * 
  */
-void AtomicElectricityMove(void)
+static void AtomicElectricityMove(void)
 {
     u16 speed;
 
@@ -847,7 +866,7 @@ void AtomicElectricityMove(void)
  * @brief 3c470 | 54 | Handles an atomic discharge exploding
  * 
  */
-void AtomicElectricityExploding(void)
+static void AtomicElectricityExploding(void)
 {
     if (gCurrentSprite.currentAnimationFrame < 4)
         gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
@@ -870,7 +889,7 @@ void AtomicElectricityExploding(void)
  * @brief 3c4c4 | 18 | Checks if the on ground animation ended
  * 
  */
-void AtomicElectricityCheckOnGroundAnimEnded(void)
+static void AtomicElectricityCheckOnGroundAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
         gCurrentSprite.status = 0; // Kill sprite
