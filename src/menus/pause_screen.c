@@ -501,8 +501,10 @@ u8 PauseScreenStatusScreenShouldDrawHeader(u8 samusWireframeDataIndex)
             case SAMUS_WIREFRAME_DATA_BEAM:
             case SAMUS_WIREFRAME_DATA_SUIT:
                 result = TRUE << 1;
+                break;
 
             case SAMUS_WIREFRAME_DATA_SAMUS_POWER_SUIT_WIREFRAME:
+                break;
         }
     }
 

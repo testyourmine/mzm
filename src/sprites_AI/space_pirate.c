@@ -807,6 +807,7 @@ void SpacePirateSamusDetection(void)
         case SPACE_PIRATE_POSE_JUMPING_INIT:
         case SPACE_PIRATE_POSE_JUMPING:
         case SPACE_PIRATE_POSE_WALL_JUMPING:
+            break;
     }
     
     gSpriteDrawOrder[2] = FALSE;

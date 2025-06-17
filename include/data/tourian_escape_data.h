@@ -64,7 +64,7 @@ extern const u16 sTourianEscape_47a6ba[OAM_DATA_SIZE(1)];
 
 extern const u16 sTourianEscape_47a6c2[OAM_DATA_SIZE(4)];
 extern const u16 sTourianEscape_47a6dc[OAM_DATA_SIZE(4)];
-extern const u16 sTourianEscape_47a6f8[OAM_DATA_SIZE(4)];
+extern const u16 sTourianEscape_47a6f6[OAM_DATA_SIZE(4)];
 extern const u16 sTourianEscape_47a710[OAM_DATA_SIZE(4)];
 extern const u16 sTourianEscape_47a72a[OAM_DATA_SIZE(4)];
 extern const u16 sTourianEscape_47a744[OAM_DATA_SIZE(4)];

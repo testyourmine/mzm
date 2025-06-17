@@ -420,7 +420,7 @@ const u16 sCannonOam_ShootingDownRight_Frame2[OAM_DATA_SIZE(2)] = {
     0x3, OBJ_X_FLIP | 0x3, OBJ_SPRITE_OAM | 0x248
 };
 
-const u16 sCannonOam_RightToRightTransition_Frame0[OAM_DATA_SIZE(2)] = {
+const u16 sCannonOam_DownRightToRightTransition_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21c,
     OBJ_SHAPE_HORIZONTAL | 0x1, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x267
@@ -837,7 +837,7 @@ const struct FrameData sCannonOam_ShootingDownRight[4] = {
 
 const struct FrameData sCannonOam_DownRightToRightTransition[2] = {
     [0] = {
-        .pFrame = sCannonOam_RightToRightTransition_Frame0,
+        .pFrame = sCannonOam_DownRightToRightTransition_Frame0,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [1] = FRAME_DATA_TERMINATOR

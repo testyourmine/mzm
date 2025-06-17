@@ -46,8 +46,8 @@ void DmaTransfer(u8 channel, void *src, void *dst, u32 len, u8 bitSize)
         CHECK_DMA_ENDED(channel);
 
         len -= 0x800;
-        (char*)src += 0x800;
-        (char*)dst += 0x800;
+        src += 0x800;
+        dst += 0x800;
     }
 
     pDma->pSrc = src;
