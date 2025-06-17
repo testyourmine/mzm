@@ -13,12 +13,36 @@
 #include "structs/samus.h"
 #include "structs/sprite.h"
 
+#define ESCAPE_SHIP_POSE_CHECK_OPEN 0x8
+#define ESCAPE_SHIP_POSE_OPENING 0x9
+#define ESCAPE_SHIP_POSE_OPENED 0x22
+#define ESCAPE_SHIP_POSE_DELAY_BEFORE_CLOSING 0x23
+#define ESCAPE_SHIP_POSE_CLOSING 0x24
+#define ESCAPE_SHIP_POSE_CLOSED 0x25
+#define ESCAPE_SHIP_POSE_HOVERING 0x26
+#define ESCAPE_SHIP_POSE_ESCAPING 0x27
+#define ESCAPE_SHIP_POSE_ESCAPED 0x28
+
+// Escape ship part
+
+enum EscapeShipPart {
+    ESCAPE_SHIP_PART_TOP,
+    ESCAPE_SHIP_PART_BODY,
+    ESCAPE_SHIP_PART_TAIL,
+    ESCAPE_SHIP_PART_FLAMES,
+};
+
+#define ESCAPE_SHIP_PART_POSE_WAIT_FOR_MOVING_TAIL 0x8
+#define ESCAPE_SHIP_PART_POSE_UPDATE_PALETTE 0x9
+#define ESCAPE_SHIP_PART_POSE_UPDATE_TOP 0xE
+#define ESCAPE_SHIP_PART_POSE_UPDATE_FLAMES 0x32
+
 /**
  * @brief 4ac00 | 94 | Updates the palette of the escape ship
  * 
  * @param delay Delay before next update
  */
-void EscapeShipPartUpdatePalette(u8 delay)
+static void EscapeShipPartUpdatePalette(u8 delay)
 {
     u32 timer;
     u8 flag;
@@ -49,7 +73,7 @@ void EscapeShipPartUpdatePalette(u8 delay)
         }
 
         offset = MOD_AND(gCurrentSprite.work1, 128);
-        DMA_SET(3, (sEscapeShipFlashingPal + offset * 16), (PALRAM_OBJ + 9 * PAL_ROW_SIZE + (gCurrentSprite.spritesetGfxSlot * PAL_ROW_SIZE)), C_32_2_16(DMA_ENABLE, 0x10));
+        DMA_SET(3, &sEscapeShipFlashingPal[offset * 16], (PALRAM_OBJ + 9 * PAL_ROW_SIZE + (gCurrentSprite.spritesetGfxSlot * PAL_ROW_SIZE)), C_32_2_16(DMA_ENABLE, 0x10));
     }
 }
 
@@ -57,7 +81,7 @@ void EscapeShipPartUpdatePalette(u8 delay)
  * @brief 4ac94 | 34 | Sets the ignore samus collision timer of every currently alive sprite to 0xF
  * 
  */
-void EscapeShipSetIgnoreSamus(void)
+static void EscapeShipSetIgnoreSamus(void)
 {
     struct SpriteData* pSprite;
 
@@ -72,7 +96,7 @@ void EscapeShipSetIgnoreSamus(void)
  * @brief 4acc8 | 40 | Sets the draw order of all the space pirates to 2
  * 
  */
-void EscapeShipSetPirateDrawOrder(void)
+static void EscapeShipSetPirateDrawOrder(void)
 {
     struct SpriteData* pSprite;
     u8 collision;
@@ -90,7 +114,7 @@ void EscapeShipSetPirateDrawOrder(void)
  * @brief 4ad08 | c4 | Checks if the escape ship is colliding with a space pirate
  * 
  */
-void EscapeShipPirateCollision(void)
+static void EscapeShipPirateCollision(void)
 {
     u16 spriteY;
     u16 spriteX;
@@ -139,7 +163,7 @@ void EscapeShipPirateCollision(void)
  * @brief 4adcc | c4 | Checks if the escape ship is colliding with a space pirate laser
  * 
  */
-void EscapeShipCheckCollidingWithLaser(void)
+static void EscapeShipCheckCollidingWithLaser(void)
 {
     u16 spriteY;
     u16 spriteX;

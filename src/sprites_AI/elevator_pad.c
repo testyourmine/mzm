@@ -9,6 +9,8 @@
 #include "structs/sprite.h"
 #include "structs/samus.h"
 
+#define ELEVATOR_PAD_POSE_IDLE 0x9
+
 /**
  * @brief 2872c | b8 | Elevator pad AI
  * 
@@ -22,7 +24,7 @@ void ElevatorPad(void)
         gCurrentSprite.yPosition -= PIXEL_SIZE * 2;
         gCurrentSprite.properties |= SP_ALWAYS_ACTIVE;
         gCurrentSprite.samusCollision = SSC_NONE;
-        gCurrentSprite.pose = 0x9;
+        gCurrentSprite.pose = ELEVATOR_PAD_POSE_IDLE;
 
         gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(PIXEL_SIZE);
         gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);

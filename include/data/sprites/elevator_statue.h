@@ -7,33 +7,33 @@
 extern const u32 sElevatorStatuesGfx[1122];
 extern const u16 sElevatorStatuesPal[64];
 
-extern const u16 sKraidElevatorStatueOAM_Idle_Frame0[64];
+extern const u16 sKraidElevatorStatueOam_Idle_Frame0[64];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame0[52];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame0[52];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame1[52];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame1[52];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame2[52];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame2[52];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame3[55];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame3[55];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame4[46];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame4[46];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame5[46];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame5[46];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame6[58];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame6[58];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame7[64];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame7[64];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame8[64];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame8[64];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame9[70];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame9[70];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame10[70];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame10[70];
 
-extern const u16 sKraidElevatorStatueOAM_Falling_Frame11[70];
+extern const u16 sKraidElevatorStatueOam_Falling_Frame11[70];
 
-extern const u16 sKraidElevatorStatueOAM_Fallen_Frame0[70];
+extern const u16 sKraidElevatorStatueOam_Fallen_Frame0[70];
 
 extern const u16 sElevatorStatueDebrisOAM_Kraid_Frame0[7];
 
@@ -57,33 +57,33 @@ extern const u16 sElevatorStatueDebrisOAM_Kraid_Frame9[13];
 
 extern const u16 sElevatorStatueDebrisOAM_Kraid_Frame10[13];
 
-extern const u16 sRidleyElevatorStatueOAM_Idle_Frame0[58];
+extern const u16 sRidleyElevatorStatueOam_Idle_Frame0[58];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame0[46];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame0[46];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame1[46];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame1[46];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame2[46];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame2[46];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame3[49];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame3[49];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame4[52];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame4[52];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame5[52];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame5[52];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame6[64];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame6[64];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame7[70];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame7[70];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame8[67];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame8[67];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame9[73];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame9[73];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame10[73];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame10[73];
 
-extern const u16 sRidleyElevatorStatueOAM_Falling_Frame11[73];
+extern const u16 sRidleyElevatorStatueOam_Falling_Frame11[73];
 
-extern const u16 sRidleyElevatorStatueOAM_Fallen_Frame0[73];
+extern const u16 sRidleyElevatorStatueOam_Fallen_Frame0[73];
 
 extern const u16 sElevatorStatueDebrisOAM_Ridley_Frame0[7];
 
@@ -129,21 +129,21 @@ extern const u16 sElevatorStatueDebrisOAM_Dust_Frame18[13];
 
 extern const u16 sElevatorStatueDebrisOAM_Dust_Frame1[4];
 
-extern const struct FrameData sKraidElevatorStatueOAM_Idle[2];
+extern const struct FrameData sKraidElevatorStatueOam_Idle[2];
 
-extern const struct FrameData sKraidElevatorStatueOAM_Falling[13];
+extern const struct FrameData sKraidElevatorStatueOam_Falling[13];
 
 extern const struct FrameData sElevatorStatueDebrisOAM_Kraid[12];
 
-extern const struct FrameData sKraidElevatorStatueOAM_Fallen[2];
+extern const struct FrameData sKraidElevatorStatueOam_Fallen[2];
 
-extern const struct FrameData sRidleyElevatorStatueOAM_Idle[2];
+extern const struct FrameData sRidleyElevatorStatueOam_Idle[2];
 
-extern const struct FrameData sRidleyElevatorStatueOAM_Falling[13];
+extern const struct FrameData sRidleyElevatorStatueOam_Falling[13];
 
 extern const struct FrameData sElevatorStatueDebrisOAM_Ridley[12];
 
-extern const struct FrameData sRidleyElevatorStatueOAM_Fallen[2];
+extern const struct FrameData sRidleyElevatorStatueOam_Fallen[2];
 
 extern const struct FrameData sElevatorStatueDebrisOAM_Dust[20];
 

@@ -13,13 +13,16 @@
 #include "structs/samus.h"
 #include "structs/sprite.h"
 
+#define ESCAPE_SHIP_SPACE_PIRATE_SPAWN 0x1
+#define ESCAPE_SHIP_SPACE_PIRATE_DELAY_BEFORE_JUMPING 0x2
+
 #define ESCAPE_SHIP_SPACE_PIRATE_JUMP_DELAY work0
 
 /**
  * @brief 2dc78 | 60 | Initializes an escape ship space pirate sprite
  * 
  */
-void EscapeShipSpacePirateInit(void)
+static void EscapeShipSpacePirateInit(void)
 {
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(4 * BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);
@@ -62,7 +65,7 @@ void EscapeShipSpacePirateSpawn(void)
  * @brief 2dd1c | 7c | Handle delay and set an escape ship space pirate to jump
  * 
  */
-void EscapeShipSpacePirateDelayBeforeJumping(void)
+static void EscapeShipSpacePirateDelayBeforeJumping(void)
 {
     APPLY_DELTA_TIME_DEC(gCurrentSprite.ESCAPE_SHIP_SPACE_PIRATE_JUMP_DELAY);
     if (gCurrentSprite.ESCAPE_SHIP_SPACE_PIRATE_JUMP_DELAY == 0)

@@ -15,6 +15,21 @@
 #include "structs/display.h"
 #include "structs/sprite.h"
 
+#define GADORA_POSE_IDLE_INIT 0x8
+#define GADORA_POSE_SAMUS_DETECTION 0x9
+#define GADORA_POSE_CHECK_WARNING_ENDED 0x23
+#define GADORA_POSE_CHECK_OPENING_EYE_ENDED 0x25
+#define GADORA_POSE_EYE_OPENED 0x27
+#define GADORA_POSE_CHECK_CLOSING_EYE_ENDED 0x29
+#define GADORA_POSE_DEATH 0x67
+
+#define GADORA_EYE_POSE_IDLE 0x9
+#define GADORA_EYE_POSE_DEATH 0x67
+
+#define GADORA_BEAM_POSE_MOVING 0x9
+
+#define GADORA_COMPUTE_TIMER(min) (gSpriteRng * 4 + (min))
+
 #define GADORA_DETECTION_DELAY_TIMER work0
 #define GADORA_EYE_OPEN_TIMER work0
 #define GADORA_DEATH_ANIMATION_TIMER work0
@@ -25,7 +40,7 @@
  * @brief 49eb8 | 134 | Initializes a gadora sprite
  * 
  */
-void GadoraInit(void)
+static void GadoraInit(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -107,7 +122,7 @@ void GadoraInit(void)
  * @brief 49fec | 30 | Initializes a gadora to be idle
  * 
  */
-void GadoraIdleInit(void)
+static void GadoraIdleInit(void)
 {
     gCurrentSprite.pose = GADORA_POSE_SAMUS_DETECTION;
 
@@ -122,7 +137,7 @@ void GadoraIdleInit(void)
  * @brief 4a01c | 54 | Checks if samus is in range to open the eye
  * 
  */
-void GadoraSamusDetection(void)
+static void GadoraSamusDetection(void)
 {
     APPLY_DELTA_TIME_DEC(gCurrentSprite.GADORA_DETECTION_DELAY_TIMER); // Timer before checking for samus
     if (gCurrentSprite.GADORA_DETECTION_DELAY_TIMER == 0)
@@ -147,7 +162,7 @@ void GadoraSamusDetection(void)
  * @brief 4a070 | 34 | Checks if the warning animation ended
  * 
  */
-void GadoraCheckWarningAnimEnded(void)
+static void GadoraCheckWarningAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -165,7 +180,7 @@ void GadoraCheckWarningAnimEnded(void)
  * @brief 4a0a4 | 38 | Checks if the opening eye animation ended
  * 
  */
-void GadoraCheckOpeningEyeAnimEnded(void)
+static void GadoraCheckOpeningEyeAnimEnded(void)
 {
     u16 xPosition;
     u16 status;
@@ -197,7 +212,7 @@ void GadoraCheckOpeningEyeAnimEnded(void)
  * @brief 4a10c | 74 | Handles the gadora having its eye opened
  * 
  */
-void GadoraEyeOpened(void)
+static void GadoraEyeOpened(void)
 {
     if (gCurrentSprite.GADORA_EYE_OPEN_TIMER == 0)
     {
@@ -237,7 +252,7 @@ void GadoraEyeOpened(void)
  * @brief 4a180 | 1c | Checks if the closing eye animation almost ended
  * 
  */
-void GadoraCheckClosingEyeAnimNearEnded(void)
+static void GadoraCheckClosingEyeAnimNearEnded(void)
 {
     if (SpriteUtilCheckNearEndCurrentSpriteAnim())
         gCurrentSprite.pose = GADORA_POSE_IDLE_INIT; // Set idle
@@ -247,7 +262,7 @@ void GadoraCheckClosingEyeAnimNearEnded(void)
  * @brief 4a19c | 30 | Initializes a gadara to be dying
  * 
  */
-void GadoraDeathGfxInit(void)
+static void GadoraDeathGfxInit(void)
 {
     gCurrentSprite.pose = GADORA_POSE_DEATH;
 
@@ -263,7 +278,7 @@ void GadoraDeathGfxInit(void)
  * @brief 4a1cc | d4 | Handles the death of a gadora
  * 
  */
-void GadoraDeath(void)
+static void GadoraDeath(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -419,7 +434,7 @@ void GadoraEye(void)
             gCurrentSprite.currentAnimationFrame = 0.;
 
             gCurrentSprite.samusCollision = SSC_NONE;
-            gCurrentSprite.pose = 0x9;
+            gCurrentSprite.pose = GADORA_EYE_POSE_IDLE;
             break;
 
         case SPRITE_POSE_DESTROYED: // Killed

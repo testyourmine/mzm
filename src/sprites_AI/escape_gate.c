@@ -17,7 +17,7 @@
  * 
  * @param caa Clipdata Affecting Action
  */
-void EscapeGateChangeCcaa(u8 caa)
+static void EscapeGateChangeCcaa(u8 caa)
 {
     u16 yPosition;
     u16 xPosition;
@@ -27,31 +27,31 @@ void EscapeGateChangeCcaa(u8 caa)
 
     // Left part
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition, xPosition); // Top
+    ClipdataProcess(yPosition - BLOCK_SIZE * 0, xPosition); // Top
 
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition - BLOCK_SIZE, xPosition); // Middle top
+    ClipdataProcess(yPosition - BLOCK_SIZE * 1, xPosition); // Middle top
 
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition - (BLOCK_SIZE * 2), xPosition); // Middle bottom
+    ClipdataProcess(yPosition - BLOCK_SIZE * 2, xPosition); // Middle bottom
 
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition - (BLOCK_SIZE * 3), xPosition); // Bottom
+    ClipdataProcess(yPosition - BLOCK_SIZE * 3, xPosition); // Bottom
 
     xPosition += BLOCK_SIZE;
 
     // Right part
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition, xPosition); // Top
+    ClipdataProcess(yPosition - BLOCK_SIZE * 0, xPosition); // Top
 
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition - BLOCK_SIZE, xPosition); // Middle top
+    ClipdataProcess(yPosition - BLOCK_SIZE * 1, xPosition); // Middle top
 
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition - (BLOCK_SIZE * 2), xPosition); // Middle bottom
+    ClipdataProcess(yPosition - BLOCK_SIZE * 2, xPosition); // Middle bottom
 
     gCurrentClipdataAffectingAction = caa;
-    ClipdataProcess(yPosition - (BLOCK_SIZE * 3), xPosition); // Bottom
+    ClipdataProcess(yPosition - BLOCK_SIZE * 3, xPosition); // Bottom
 }
 
 /**
@@ -107,10 +107,10 @@ void EscapeGate(void)
                 DMA_SET(3, sEscapeGateAndTimerPal, PALRAM_OBJ + (PAL_SIZE - 1 * PAL_ROW_SIZE), C_32_2_16(DMA_ENABLE, 0x10));
 
                 SpriteSpawnPrimary(PSPRITE_BLACK_SPACE_PIRATE, 0x80, gCurrentSprite.spritesetGfxSlot,
-                    gCurrentSprite.yPosition, gCurrentSprite.xPosition - (BLOCK_SIZE * 2), 0);
+                    gCurrentSprite.yPosition, gCurrentSprite.xPosition - BLOCK_SIZE * 2, 0);
 
                 SpriteSpawnPrimary(PSPRITE_BLACK_SPACE_PIRATE, 0x80, gCurrentSprite.spritesetGfxSlot,
-                    gCurrentSprite.yPosition, gCurrentSprite.xPosition - (BLOCK_SIZE * 10), SPRITE_STATUS_X_FLIP);
+                    gCurrentSprite.yPosition, gCurrentSprite.xPosition - BLOCK_SIZE * 10, SPRITE_STATUS_X_FLIP);
             }
             gCurrentSprite.pose = ESCAPE_GATE_POSE_IDLE;
             gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;

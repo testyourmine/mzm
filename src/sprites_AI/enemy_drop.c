@@ -10,11 +10,21 @@
 #include "structs/sprite.h"
 #include "structs/samus.h"
 
+#define ENEMY_DROP_POSE_IDLE 0x9
+
+// Amount refilled by each drop
+
+#define SMALL_ENERGY_DROP_REFILL 5
+#define LARGE_ENERGY_DROP_REFILL 20
+#define MISSILE_DROP_REFILL 2
+#define SUPER_MISSILE_DROP_REFILL 2
+#define POWER_BOMB_DROP_REFILL 1
+
 /**
  * @brief 12d14 | 17a | Initializes an enemy drop sprite
  * 
  */
-void EnemyDropInit(void)
+static void EnemyDropInit(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = ONE_THIRD_SECOND;
     gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
@@ -83,7 +93,7 @@ void EnemyDropInit(void)
  * @brief 12e98 | 158 | Handles an enemy drop being idle
  * 
  */
-void EnemyDropIdle(void)
+static void EnemyDropIdle(void)
 {
     u16 status;
     u8 timer;
