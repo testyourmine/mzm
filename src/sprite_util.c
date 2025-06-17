@@ -3011,7 +3011,7 @@ void SpriteUtilUpdateStunTimer(struct SpriteData* pSprite)
     if (MOD_BLOCK_AND(isft, CONVERT_SECONDS(1.f / 15)))
     {
         if (pSprite->health != 0)
-            pSprite->paletteRow = NBR_OF_PALETTE_ROWS - (pSprite->spritesetGfxSlot + pSprite->frozenPaletteRowOffset) - SPRITE_STUN_PALETTE_OFFSET;
+            pSprite->paletteRow = SPRITE_GET_STUN_PALETTE(*pSprite);
     }
     else
     {

@@ -2763,7 +2763,7 @@ const u16 sSecondarySpriteStats[SSPRITE_END][9] = {
         0,
         0
     },
-    [SSPRITE_ACID_WORM_BODY] = {
+    [SSPRITE_ACID_WORM_PART] = {
         1,
         10,
         WEAKNESS_BEAM_BOMBS | WEAKNESS_MISSILES | WEAKNESS_POWER_BOMB,

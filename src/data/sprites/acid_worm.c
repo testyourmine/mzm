@@ -1,16 +1,16 @@
 #include "data/sprites/acid_worm.h"
 #include "macros.h"
 
-const s16 sAcidWormSpitTwoYVelocity[16] = {
+const s16 sAcidWormSpitCloseYVelocity[16] = {
     0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xE, 0x10, 0x12, SHORT_MAX
 };
 
-const s16 sAcidWormSpitOneYVelocity[26] = {
+const s16 sAcidWormSpitFarYVelocity[26] = {
     -0x10, -0xC, -0x8, -0x4, -0x3, -0x2, -0x1, 0x0, 0x0, 0x0, 0x1, 0x2, 0x3, 0x4,
     0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xE, 0x10, 0x12, SHORT_MAX
 };
 
-const s16 sAcidWormSpitThreeYVelocity[20] = {
+const s16 sAcidWormSpitMiddleYVelocity[20] = {
     0x0, 0x0, 0x0, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB,
     0xC, 0xE, 0x10, 0x12, SHORT_MAX
 };
@@ -29,7 +29,7 @@ const s16 sAcidWormHeadRandomXVelocity[45] = {
 const u32 sAcidWormGfx[1000] = INCBIN_U32("data/sprites/AcidWorm.gfx.lz");
 const u16 sAcidWormPal[64] = INCBIN_U16("data/sprites/AcidWorm.pal");
 
-const u16 sAcidWormBodyOam_Unused2_Frame0[OAM_DATA_SIZE(17)] = {
+const u16 sAcidWormPartOam_Unused2_Frame0[OAM_DATA_SIZE(17)] = {
     0x11,
     0xf7, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x206,
     0x9, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x212,
@@ -50,7 +50,7 @@ const u16 sAcidWormBodyOam_Unused2_Frame0[OAM_DATA_SIZE(17)] = {
     0x39, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAcidWormBodyOam_Unused2_Frame1[OAM_DATA_SIZE(17)] = {
+const u16 sAcidWormPartOam_Unused2_Frame1[OAM_DATA_SIZE(17)] = {
     0x11,
     0xf6, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x206,
     0x8, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x212,
@@ -71,7 +71,7 @@ const u16 sAcidWormBodyOam_Unused2_Frame1[OAM_DATA_SIZE(17)] = {
     0x38, OBJ_SIZE_32x32 | 0x1f2, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAcidWormBodyOam_Unused2_Frame2[OAM_DATA_SIZE(17)] = {
+const u16 sAcidWormPartOam_Unused2_Frame2[OAM_DATA_SIZE(17)] = {
     0x11,
     0xf6, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x206,
     0x7, OBJ_SIZE_32x32 | 0x1f3, OBJ_SPRITE_OAM | 0x212,
@@ -242,37 +242,37 @@ const u16 sAcidWormOam_Moving_Frame1[OAM_DATA_SIZE(11)] = {
     0xf1, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormBodyOam_AroundMouth_Frame0[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_AroundMouth_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x281
 };
 
-const u16 sAcidWormBodyOam_WeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_WeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sAcidWormBodyOam_WeakPoint_Frame1[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_WeakPoint_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x20a
 };
 
-const u16 sAcidWormBodyOam_WeakPoint_Frame2[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_WeakPoint_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x20e
 };
 
-const u16 sAcidWormBodyOam_BelowWeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_BelowWeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sAcidWormBodyOam_AboveSegments_Frame0[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_AboveSegments_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x28e
 };
 
-const u16 sAcidWormBodyOam_Segment_Frame0[OAM_DATA_SIZE(1)] = {
+const u16 sAcidWormPartOam_Segment_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x292
 };
@@ -444,109 +444,109 @@ const struct FrameData sAcidWormOam_MouthClosed[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_AroundMouth[2] = {
+const struct FrameData sAcidWormPartOam_AroundMouth[2] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_AroundMouth_Frame0,
+        .pFrame = sAcidWormPartOam_AroundMouth_Frame0,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_WeakPoint[9] = {
+const struct FrameData sAcidWormPartOam_WeakPoint[9] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame0,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame0,
         .timer = ONE_THIRD_SECOND
     },
     [1] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame1,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame1,
         .timer = CONVERT_SECONDS(4.f / 15)
     },
     [2] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame2,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame1,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame1,
         .timer = CONVERT_SECONDS(4.f / 15)
     },
     [4] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame0,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame0,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [5] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame1,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [6] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame2,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame2,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [7] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame1,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame1,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [8] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_Unused[5] = {
+const struct FrameData sAcidWormPartOam_Unused[5] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame0,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame1,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame2,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sAcidWormBodyOam_WeakPoint_Frame1,
+        .pFrame = sAcidWormPartOam_WeakPoint_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_BelowWeakPoint[2] = {
+const struct FrameData sAcidWormPartOam_BelowWeakPoint[2] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_BelowWeakPoint_Frame0,
+        .pFrame = sAcidWormPartOam_BelowWeakPoint_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_AboveSegments[2] = {
+const struct FrameData sAcidWormPartOam_AboveSegments[2] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_AboveSegments_Frame0,
+        .pFrame = sAcidWormPartOam_AboveSegments_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_Segment[2] = {
+const struct FrameData sAcidWormPartOam_Segment[2] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_Segment_Frame0,
+        .pFrame = sAcidWormPartOam_Segment_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormBodyOam_Unused2[5] = {
+const struct FrameData sAcidWormPartOam_Unused2[5] = {
     [0] = {
-        .pFrame = sAcidWormBodyOam_Unused2_Frame0,
+        .pFrame = sAcidWormPartOam_Unused2_Frame0,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [1] = {
-        .pFrame = sAcidWormBodyOam_Unused2_Frame1,
+        .pFrame = sAcidWormPartOam_Unused2_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sAcidWormBodyOam_Unused2_Frame2,
+        .pFrame = sAcidWormPartOam_Unused2_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = {
-        .pFrame = sAcidWormBodyOam_Unused2_Frame1,
+        .pFrame = sAcidWormPartOam_Unused2_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [4] = FRAME_DATA_TERMINATOR
