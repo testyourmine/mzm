@@ -1,5 +1,8 @@
 #include "gba.h"
 #include "power_bomb_explosion.h"
+#include "audio_wrappers.h"
+#include "haze.h"
+#include "screen_shake.h"
 
 #include "data/engine_pointers.h"
 
@@ -18,6 +21,16 @@
 #include "structs/room.h"
 #include "structs/power_bomb_explosion.h"
 #include "temp_globals.h"
+
+// FIXME, find a better solution
+void BlockApplyCcaa(s32, s32, u16); // From block.h
+// block.h must not be included, as declaring the correct signature for this
+// function produces non-matching code here.
+
+static void PowerBombExplosion(void);
+static void PowerBombExplosionSet0x12To0(void);
+static void PowerBombExplosionBegin(void);
+static void PowerBombExplosionEnd(void);
 
 /**
  * 5745c | 48 | Subroutine for the power bomb explosion
@@ -43,7 +56,7 @@ void PowerBombExplosionProcess(void)
  * @brief 574a4 | 248 | Updates the power bomb explosion, handles interacting with blocks
  * 
  */
-void PowerBombExplosion(void)
+static void PowerBombExplosion(void)
 {
     s32 verticalAxis;
     s32 horizontalAxis;
@@ -223,7 +236,7 @@ void PowerBombExplosionStart(u16 xPosition, u16 yPosition, u8 owner)
  * 57734 | c | Sets the field at offset 0x12 of the current power bomb to 0x0, purpose is unknown 
  * 
  */
-void PowerBombExplosionSet0x12To0(void)
+static void PowerBombExplosionSet0x12To0(void)
 {
     gCurrentPowerBomb.unk_12 = 0;
 }
@@ -232,7 +245,7 @@ void PowerBombExplosionSet0x12To0(void)
  * @brief 57740 | 78 | Begins a power bomb explosion
  * 
  */
-void PowerBombExplosionBegin(void)
+static void PowerBombExplosionBegin(void)
 {
     if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
         return;
@@ -265,7 +278,7 @@ void PowerBombExplosionBegin(void)
  * @brief 577b8 | 154 | Handles ending a power bomb explosion
  * 
  */
-void PowerBombExplosionEnd(void)
+static void PowerBombExplosionEnd(void)
 {
     u8 eva;
     u8 evb;
