@@ -1184,6 +1184,7 @@ void TextProcessDescription(void)
             break;
 
         case 6:
+            break;
     }
 }
 

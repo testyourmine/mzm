@@ -85,7 +85,7 @@ enum Event {
     EVENT_COUNT
 };
 
-enum {
+enum EventAction {
     EVENT_ACTION_CLEARING,
     EVENT_ACTION_SETTING,
     EVENT_ACTION_TOGGLING,

@@ -3,6 +3,10 @@
 
 #include "structs/audio.h"
 
+extern void call_soundcode_a(void);
+extern void call_soundcode_b(void);
+extern void call_soundcode_c(void);
+
 void InitializeAudio(void);
 void DoSoundAction(u32 action);
 void SetupSoundTransfer(void);
