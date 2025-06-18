@@ -64,7 +64,7 @@ void UnknownItemChozoStatueSleeping(void);
 void UnknownItemChozoStatuePartInit(void);
 void UnknownItemChozoStatuePartGlowIdle(void);
 void UnknownItemChozoStatuePartArmCheckGrabSamusHint(void);
-void UnknownItemChozoStatuePartSyncSamus(void);
+void UnknownItemChozoStatuePartSyncSamusPosition(void);
 void UnknownItemChozoStatuePartArmSitting(void);
 void UnknownItemChozoStatuePartArmSeated(void);
 void UnknownItemChozoStatuePartArmCheckGrabSamusRefill(void);

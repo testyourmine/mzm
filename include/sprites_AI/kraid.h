@@ -86,7 +86,7 @@ void KraidPartInit(void);
 void KraidPartThrowNails(void);
 void KraidPartCheckAttack(void);
 void KraidPartCallKraidCheckProjectilesCollidingWithBelly(void);
-void KraidPartCheckShouldSpawnSpike(void);
+void KraidPartCheckShouldSpawnSpikes(void);
 void KraidPartSpawnSpike(void);
 void KraidPartDyingInit(void);
 void KraidPartDyingSinking(void);

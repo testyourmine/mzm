@@ -74,7 +74,7 @@ void GunshipPartInit(void);
 void GunshipPartCheckSetVerticalFlames(void);
 void GunshipPartCheckSetHorizontalFlames(void);
 void GunshipPartCheckSetVerticalFlamesBeforeLanding(void);
-void GunshipPartCheckLandingEnded(void);
+void GunshipPartCheckSetHorizontalFlamesBeforeLanding(void);
 void GunshipPartFlickFlames_Unused(void);
 void GunshipPartEntranceFrontIdle(void);
 void GunshipPartEntranceFrontOpenClose(void);
