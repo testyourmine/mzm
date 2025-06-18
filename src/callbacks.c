@@ -3,6 +3,7 @@
 #include "gba.h"
 #include "globals.h"
 #include "io.h"
+#include "audio/track_internal.h"
 #include "structs/game_state.h"
 
 /**

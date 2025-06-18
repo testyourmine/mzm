@@ -2,6 +2,7 @@
 #include "data/generic_data.h"
 
 #include "gba.h"
+#include "audio/track_internal.h"
 #include "constants/game_state.h"
 
 #include "structs/cutscene.h"

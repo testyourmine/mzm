@@ -19,8 +19,8 @@ void DMA2IntrCode(void)
     if (gMusicInfo.unk_10 == gMusicInfo.unk_E)
     {
         // Flush DMA 1 and 2
-        write32(REG_DMA1_CNT, (DMA_DEST_FIXED | DMA_32BIT | DMA_ENABLE) << 16 | 4);
-        write32(REG_DMA2_CNT, (DMA_DEST_FIXED | DMA_32BIT | DMA_ENABLE) << 16 | 4);
+        write32(REG_DMA1_CNT, C_32_2_16(DMA_DEST_FIXED | DMA_32BIT | DMA_ENABLE, sizeof(u32)));
+        write32(REG_DMA2_CNT, C_32_2_16(DMA_DEST_FIXED | DMA_32BIT | DMA_ENABLE, sizeof(u32)));
         write16(REG_DMA1_CNT + 2, DMA_SRC_FIXED | DMA_32BIT);
         write16(REG_DMA2_CNT + 2, DMA_SRC_FIXED | DMA_32BIT);
 
