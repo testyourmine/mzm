@@ -22,7 +22,7 @@
 
 void DeoremChangeLeftCcaa(u8 caa);
 void DeoremChangeRightCcaa(u8 caa);
-void DeoremMoveDiagonaly(u8 velocity, u16 dstPosition);
+void DeoremMoveDiagonally(u8 velocity, u16 dstPosition);
 void DeoremRandomSpriteDebris(u8 rng);
 void DeoremSpriteDebrisSpawn(u16 yPosition, u16 xPosition, u8 timer);
 u8 DeoremCheckLeaving(u8 ramSlot);

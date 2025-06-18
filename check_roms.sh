@@ -43,6 +43,6 @@ for region in "${regions[@]}"; do
         exit 1
     fi
 
-    echo "REGION=$region built successfully"
+    echo "REGION=$region built successfully!"
     echo
 done
