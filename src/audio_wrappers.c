@@ -64,7 +64,7 @@ void InitializeAudio(void)
     {
         sMusicTrackDataRom[i].pTrack->pVariables = sMusicTrackDataRom[i].pVariables;
         sMusicTrackDataRom[i].pTrack->maxAmountOfTracks = sMusicTrackDataRom[i].maxAmountOfTracks;
-        sMusicTrackDataRom[i].pTrack->unk_1D = sMusicTrackDataRom[i].unknonw_A;
+        sMusicTrackDataRom[i].pTrack->unk_1D = sMusicTrackDataRom[i].unk_A;
     }
 
     DoSoundAction((u32)gUnk_Audio0x194F700); // SOUND_ACTION_DISABLE_STEREO | SOUND_ACTION_PWM(9) | SOUND_ACTION_FREQ_INDEX(SOUND_MODE_FREQ_13379) | SOUND_ACTION_VOLUME(15) | SOUND_ACTION_MAX_CHANNELS(7)
@@ -413,7 +413,7 @@ void ApplyMusicSoundFading(struct TrackData* pTrack, u16 timer)
     s32 volume;
 
     if (timer == 0)
-        StopMusicOrSound(pTrack); // Undefined
+        StopMusicOrSound(pTrack);
     else if (!pTrack->occupied)
     {
         pTrack->occupied = TRUE;
@@ -421,7 +421,7 @@ void ApplyMusicSoundFading(struct TrackData* pTrack, u16 timer)
         if (pTrack->flags & 2)
         {
             if (pTrack->flags & 0xF8)
-                ResetTrack(pTrack); // Undefined
+                ResetTrack(pTrack);
             else
             {
                 pTrack->flags |= 8;

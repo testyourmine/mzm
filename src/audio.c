@@ -897,8 +897,13 @@ void unk_1bf0(struct TrackVariables* pVariables)
 
     for (pChannel = pVariables->pChannel; pChannel != NULL; pChannel = pChannel->pChannel2)
     {
-        if (pChannel->unk_E != 0 && pChannel->unk_E-- == 1)
-            pChannel->unk_0 = 5;
+        if (pChannel->unk_E != 0)
+        {
+            if (--pChannel->unk_E == 0)
+            {
+                pChannel->unk_0 = 5;
+            }
+        }
     }
 }
 
@@ -915,7 +920,7 @@ void unk_1c18(struct TrackVariables* pVariables)
 
     if (pVariables->unk_E != 0)
     {
-        if (pVariables->unk_E-- == 1)
+        if (--pVariables->unk_E == 0)
         {
             pSound->unk_0 = 5;
             pSound->unk_18 = 0;
@@ -932,8 +937,7 @@ void unk_1c3c(struct TrackVariables* pVariables)
 {
     struct SoundChannel* pChannel;
     s32 frequency;
-    u16 midiKey;
-    s16 tmp;
+    s16 midiKey;
 
     pChannel = pVariables->pChannel;
 
@@ -955,11 +959,10 @@ void unk_1c3c(struct TrackVariables* pVariables)
             for (; pChannel != NULL; pChannel = pChannel->pChannel2)
             {
                 midiKey = pVariables->unk_17 + pChannel->unk_7;
-                tmp = midiKey;
 
-                if (tmp >= 0x80)
+                if (midiKey >= 0x80)
                     midiKey = 0x7F;
-                else if (tmp < 0)
+                else if (midiKey < 0)
                     midiKey = 0;
 
                 frequency = Midikey2Freq(pVariables->pSample1, midiKey, pVariables->unk_18);
@@ -984,8 +987,7 @@ void unk_1c3c(struct TrackVariables* pVariables)
 void unk_1ccc(struct TrackVariables* pVariables, s16 param_2)
 {
     struct PSGSoundData* pSound;
-    u16 var_0;
-    s16 tmp;
+    s16 var_0;
 
     pSound = pVariables->pSoundPSG;
 
@@ -1000,11 +1002,10 @@ void unk_1ccc(struct TrackVariables* pVariables, s16 param_2)
         unk_4eb4(pVariables);
 
         var_0 = pVariables->unk_17 + pVariables->pSoundPSG->unk_1C;
-        tmp = var_0;
 
-        if (tmp >= 0x80)
+        if (var_0 >= 0x80)
             var_0 = 0x7F;
-        else if (tmp < 0)
+        else if (var_0 < 0)
             var_0 = 0;
 
         pSound->maybe_noteDelay = GetNoteDelay(pVariables, var_0, pVariables->unk_18);
@@ -1039,17 +1040,15 @@ void unk_1d78(struct TrackVariables* pVariables)
 {
     struct SoundChannel* pChannel;
     s32 frequency;
-    u16 midiKey;
-    s16 tmp;
+    s16 midiKey;
 
     for (pChannel = pVariables->pChannel; pChannel != NULL; pChannel = pChannel->pChannel2)
     {
         midiKey = pVariables->unk_17 + pChannel->unk_7;
-        tmp = midiKey;
 
-        if (tmp >= 0x80)
+        if (midiKey >= 0x80)
             midiKey = 0x7F;
-        else if (tmp < 0)
+        else if (midiKey < 0)
             midiKey = 0;
 
         frequency = Midikey2Freq(pChannel->pSample, midiKey, pVariables->unk_18);
@@ -1082,15 +1081,13 @@ void unk_1ddc(struct TrackVariables* pVariables)
  */
 void unk_1de8(struct TrackVariables* pVariables)
 {
-    u16 var_0;
-    s16 tmp;
+    s16 var_0;
 
     var_0 = pVariables->unk_17 + pVariables->pSoundPSG->unk_1C;
-    tmp = var_0;
 
-    if (tmp >= 0x80)
+    if (var_0 >= 0x80)
         var_0 = 0x7F;
-    else if (tmp < 0)
+    else if (var_0 < 0)
         var_0 = 0;
 
     pVariables->pSoundPSG->maybe_noteDelay = GetNoteDelay(pVariables, var_0, pVariables->unk_18);
@@ -1269,7 +1266,7 @@ void unk_1fe0(struct TrackData* pTrack, struct TrackVariables* pVariables)
  */
 void unk_2030(struct PSGSoundData* pSound, struct TrackVariables* pVariables, u32 param_3)
 {
-    u16 var_0;
+    s16 var_0;
     s16 tmp;
 
     pSound->unk_16 = param_3;
@@ -1283,11 +1280,10 @@ void unk_2030(struct PSGSoundData* pSound, struct TrackVariables* pVariables, u3
         pSound->unk_1C = pVariables->unk_1;
 
     var_0 = pVariables->unk_17 + pSound->unk_1C;
-    tmp = var_0;
 
-    if (tmp >= 0x80)
+    if (var_0 >= 0x80)
         var_0 = 0x7F;
-    else if (tmp < 0)
+    else if (var_0 < 0)
         var_0 = 0;
 
     pSound->maybe_noteDelay = GetNoteDelay(pVariables, var_0, pVariables->unk_18);

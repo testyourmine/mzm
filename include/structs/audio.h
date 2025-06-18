@@ -216,7 +216,7 @@ struct TrackGroupROMData {
     struct TrackData* pTrack;
     struct TrackVariables* pVariables;
     u16 maxAmountOfTracks;
-    u16 unknonw_A;
+    u16 unk_A;
 };
 
 struct SoundEntry {

@@ -1,4 +1,3 @@
-#include "funcs.h"
 #include "globals.h"
 #include "gba.h"
 
