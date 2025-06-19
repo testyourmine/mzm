@@ -23,9 +23,11 @@ enum DamageContactType {
     DCT_END
 };
 
-#define DEATH_NORMAL 0x0
-#define DEATH_RESPAWNING 0x1
-#define DEATH_NO_DEATH_OR_RESPAWNING_ALREADY_HAS_DROP 0x2
+enum SpriteDeathType {
+    DEATH_NORMAL,
+    DEATH_RESPAWNING,
+    DEATH_NO_DEATH_OR_RESPAWNING_ALREADY_HAS_DROP
+};
 
 enum SplashSize {
     SPLASH_NONE,

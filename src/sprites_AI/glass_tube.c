@@ -14,13 +14,19 @@
 #include "structs/clipdata.h"
 #include "structs/power_bomb_explosion.h"
 
+#define GLASS_TUBE_POSE_POWER_BOMB_COLLISION 0x9
+#define GLASS_TUBE_POSE_IDLE 0xF
+#define GLASS_TUBE_POSE_DELAY_BEFORE_CRACKING 0x23
+#define GLASS_TUBE_POSE_CRACKING 0x25
+#define GLASS_TUBE_POSE_BREAKING 0x27
+
 #define GLASS_TUBE_CRACKING_DELAY_TIMER work0
 
 /**
  * @brief 4627c | 160 | Removes the clipdata for the glass tube
  * 
  */
-void GlassTubeChangeCcaa(void)
+static void GlassTubeChangeCcaa(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -89,7 +95,7 @@ void GlassTubeChangeCcaa(void)
  * 463dc | 90 | Initialize a glass tube sprite
  * 
  */
-void GlassTubeInit(void)
+static void GlassTubeInit(void)
 {
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(3 * BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(3 * BLOCK_SIZE);
@@ -126,7 +132,7 @@ void GlassTubeInit(void)
  * 4646c | c0 | Checks for collision between a power bomb and the glass tube
  * 
  */
-void GlassTubeCheckPowerBombCollision(void)
+static void GlassTubeCheckPowerBombCollision(void)
 {
     u16 bombY;
     u16 bombX;
@@ -141,8 +147,10 @@ void GlassTubeCheckPowerBombCollision(void)
     u16 spriteLeft;
     u16 spriteRight;
 
-    if (EventFunction(EVENT_ACTION_CHECKING, EVENT_FULLY_POWERED_SUIT_OBTAINED)
-        && gCurrentPowerBomb.animationState != PB_STATE_NONE && gEquipment.maxPowerBombs != 0)
+    if (!EventFunction(EVENT_ACTION_CHECKING, EVENT_FULLY_POWERED_SUIT_OBTAINED))
+        return;
+
+    if (gCurrentPowerBomb.animationState != PB_STATE_NONE && gEquipment.maxPowerBombs != 0)
     {
         bombY = gCurrentPowerBomb.yPosition;
         bombX = gCurrentPowerBomb.xPosition;
@@ -163,6 +171,7 @@ void GlassTubeCheckPowerBombCollision(void)
             // Set cracking behavior
             gCurrentSprite.pose = GLASS_TUBE_POSE_DELAY_BEFORE_CRACKING;
             gCurrentSprite.GLASS_TUBE_CRACKING_DELAY_TIMER = CONVERT_SECONDS(2.f);
+
             // Set event
             EventFunction(EVENT_ACTION_SETTING, EVENT_GLASS_TUBE_BROKEN);
         }
@@ -172,7 +181,7 @@ void GlassTubeCheckPowerBombCollision(void)
 /**
  * 4652c | 3c | Delay before the glass tube starts cracking
 */
-void GlassTubeDelayBeforeBreaking(void)
+static void GlassTubeDelayBeforeBreaking(void)
 {
     APPLY_DELTA_TIME_DEC(gCurrentSprite.GLASS_TUBE_CRACKING_DELAY_TIMER);
     if (gCurrentSprite.GLASS_TUBE_CRACKING_DELAY_TIMER == 0)
@@ -190,7 +199,7 @@ void GlassTubeDelayBeforeBreaking(void)
  * 46568 | 8c | Checks if the cracking animation ended, spawn dust particles and starts a global screen shake
  * 
  */
-void GlassTubeCheckCrackingAnimEnded(void)
+static void GlassTubeCheckCrackingAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -219,7 +228,7 @@ void GlassTubeCheckCrackingAnimEnded(void)
  * 46568 | 8c | Checks if the breaking animation ended
  * 
  */
-void GlassTubeCheckBreakingAnimEnded(void)
+static void GlassTubeCheckBreakingAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -238,20 +247,25 @@ void GlassTubeCheckBreakingAnimEnded(void)
 void GlassTube(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
+
     switch (gCurrentSprite.pose)
     {
         case SPRITE_POSE_UNINITIALIZED:
             GlassTubeInit();
             break;
+
         case GLASS_TUBE_POSE_POWER_BOMB_COLLISION:
             GlassTubeCheckPowerBombCollision();
             break;
+
         case GLASS_TUBE_POSE_DELAY_BEFORE_CRACKING:
             GlassTubeDelayBeforeBreaking();
             break;
+
         case GLASS_TUBE_POSE_CRACKING:
             GlassTubeCheckCrackingAnimEnded();
             break;
+
         case GLASS_TUBE_POSE_BREAKING:
             GlassTubeCheckBreakingAnimEnded();
     }

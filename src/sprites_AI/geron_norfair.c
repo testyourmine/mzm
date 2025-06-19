@@ -1,4 +1,5 @@
 #include "sprites_AI/geron_norfair.h"
+#include "sprites_AI/geron.h"
 #include "macros.h"
 
 #include "data/sprites/geron_norfair.h"
@@ -45,7 +46,7 @@ void GeronNorfair(void)
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.samusCollision = SSC_NONE;
 
-        gCurrentSprite.pose = 0x9;
+        gCurrentSprite.pose = GERON_POSE_IDLE;
         gCurrentSprite.health = 1;
         gCurrentSprite.pOam = sGeronNorfairOAM_Idle;
 

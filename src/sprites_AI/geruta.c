@@ -13,13 +13,23 @@
 #include "structs/sprite.h"
 #include "structs/samus.h"
 
+#define GERUTA_POSE_IDLE_INIT 0x8
+#define GERUTA_POSE_IDLE 0x9
+#define GERUTA_POSE_WARNING_INIT 0x32
+#define GERUTA_POSE_WARNING 0x33
+#define GERUTA_POSE_LAUNCHING 0x35
+#define GERUTA_POSE_GOING_DOWN 0x37
+#define GERUTA_POSE_BOUNCING 0x39
+#define GERUTA_POSE_GOING_UP 0x3B
+#define GERUTA_POSE_BOUNCING_ON_CEILING 0x3D
+
 /**
  * @brief 1ea68 | b0 | Handles the Y movement of a geruta
  * 
  * @param movement Y movement
- * @return u8 1 if hitting solid, 0 otherwise
+ * @return u8 bool, hitting solid
  */
-u8 GerutaYMovement(u16 movement)
+static u8 GerutaYMovement(u16 movement)
 {
     if (gCurrentSprite.status & SPRITE_STATUS_SAMUS_COLLIDING)
     {
@@ -27,6 +37,7 @@ u8 GerutaYMovement(u16 movement)
             SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - QUARTER_BLOCK_SIZE * 3) == COLLISION_SOLID ||
             SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + QUARTER_BLOCK_SIZE * 3) == COLLISION_SOLID)
             return TRUE;
+
         gCurrentSprite.yPosition += movement;
     }
     else
@@ -49,9 +60,9 @@ u8 GerutaYMovement(u16 movement)
  * @brief 1eb18 | 74 | Handles the X movement of a geruta
  * 
  * @param movement X movement
- * @return u8 1 if hitting solid, 0 otherwise
+ * @return u8 bool, hitting solid
  */
-u8 GerutaXMovement(u16 movement)
+static u8 GerutaXMovement(u16 movement)
 {
     s16 negMovement;
 
@@ -62,6 +73,7 @@ u8 GerutaXMovement(u16 movement)
         if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE, gCurrentSprite.xPosition + BLOCK_SIZE) == COLLISION_SOLID ||
             SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + HALF_BLOCK_SIZE, gCurrentSprite.xPosition + BLOCK_SIZE) == COLLISION_SOLID)
             return TRUE;
+
         gCurrentSprite.xPosition += movement;
     }
     else
@@ -69,6 +81,7 @@ u8 GerutaXMovement(u16 movement)
         if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE, gCurrentSprite.xPosition - BLOCK_SIZE) == COLLISION_SOLID ||
             SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + HALF_BLOCK_SIZE, gCurrentSprite.xPosition - BLOCK_SIZE) == COLLISION_SOLID)
             return TRUE;
+
         gCurrentSprite.xPosition -= negMovement;
     }
     
@@ -79,7 +92,7 @@ u8 GerutaXMovement(u16 movement)
  * @brief 1eb8c | 80 | Initializes a geruta sprite
  * 
  */
-void GerutaInit(void)
+static void GerutaInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
     SpriteUtilMakeSpriteFaceSamusDirection();
@@ -107,9 +120,10 @@ void GerutaInit(void)
  * @brief 1ec0c | 20 | Initializes a geruta sprite to be idle
  * 
  */
-void GerutaIdleInit(void)
+static void GerutaIdleInit(void)
 {
     gCurrentSprite.pose = GERUTA_POSE_IDLE;
+
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.pOam = sGerutaOAM_Idle;
@@ -119,7 +133,7 @@ void GerutaIdleInit(void)
  * @brief 1ec2c | 6c | Handles a geruta detecting samus
  * 
  */
-void GerutaDetectSamus(void)
+static void GerutaDetectSamus(void)
 {
     u8 nslr;
 
@@ -143,7 +157,7 @@ void GerutaDetectSamus(void)
  * @brief 1ec98 | 34 | Initializes a geruta to do the warning
  * 
  */
-void GerutaWarningInit(void)
+static void GerutaWarningInit(void)
 {
     gCurrentSprite.pose = GERUTA_POSE_WARNING;
     gCurrentSprite.animationDurationCounter = 0;
@@ -158,7 +172,7 @@ void GerutaWarningInit(void)
  * @brief 1eccc | 2c | Checks if the warning has ended
  * 
  */
-void GerutaCheckWarningEnded(void)
+static void GerutaCheckWarningEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -173,7 +187,7 @@ void GerutaCheckWarningEnded(void)
  * @brief 1ecf8 | 50 | Checks if the launching animation has ended
  * 
  */
-void GerutaCheckLaunchingAnimEnded(void)
+static void GerutaCheckLaunchingAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -193,12 +207,13 @@ void GerutaCheckLaunchingAnimEnded(void)
  * @brief 1ed48 | 44 | Handles a geruta going down
  * 
  */
-void GerutaGoingDown(void)
+static void GerutaGoingDown(void)
 {
     u16 oldY;
 
     oldY = gCurrentSprite.yPosition;
     GerutaXMovement(PIXEL_SIZE);
+
     if (GerutaYMovement(3 * PIXEL_SIZE))
     {
         gCurrentSprite.pose = GERUTA_POSE_BOUNCING;
@@ -214,7 +229,7 @@ void GerutaGoingDown(void)
  * @brief 1ed8c | 48 | Checks if the bouning animation has ended
  * 
  */
-void GerutaCheckBouncingAnimEnded(void)
+static void GerutaCheckBouncingAnimEnded(void)
 {
     if (SpriteUtilCheckEndCurrentSpriteAnim())
     {
@@ -234,7 +249,7 @@ void GerutaCheckBouncingAnimEnded(void)
  * @brief 1edd4 | 48 | Handles a geruta going up
  * 
  */
-void GerutaGoingUp(void)
+static void GerutaGoingUp(void)
 {
     GerutaXMovement(PIXEL_SIZE);
     if (GerutaYMovement(3 * PIXEL_SIZE))
@@ -253,7 +268,7 @@ void GerutaGoingUp(void)
  * @brief 1ee1c | 1c | Checks if the bouncing on ceiling animation ended
  * 
  */
-void GerutaCheckBouncingOnCeilingAnimEnded(void)
+static void GerutaCheckBouncingOnCeilingAnimEnded(void)
 {
     if (SpriteUtilCheckNearEndCurrentSpriteAnim())
         gCurrentSprite.pose = GERUTA_POSE_IDLE_INIT;
@@ -273,54 +288,55 @@ void Geruta(void)
     }
 
     if (gCurrentSprite.freezeTimer != 0)
-        SpriteUtilUpdateFreezeTimer();
-    else
     {
-        if (SpriteUtilIsSpriteStunned())
-            return;
+        SpriteUtilUpdateFreezeTimer();
+        return;
+    }
 
-        switch (gCurrentSprite.pose)
-        {
-            case SPRITE_POSE_UNINITIALIZED:
-                GerutaInit();
-                break;
+    if (SpriteUtilIsSpriteStunned())
+        return;
 
-            case GERUTA_POSE_IDLE_INIT:
-                GerutaIdleInit();
+    switch (gCurrentSprite.pose)
+    {
+        case SPRITE_POSE_UNINITIALIZED:
+            GerutaInit();
+            break;
 
-            case GERUTA_POSE_IDLE:
-                GerutaDetectSamus();
-                break;
+        case GERUTA_POSE_IDLE_INIT:
+            GerutaIdleInit();
 
-            case GERUTA_POSE_WARNING_INIT:
-                GerutaWarningInit();
+        case GERUTA_POSE_IDLE:
+            GerutaDetectSamus();
+            break;
 
-            case GERUTA_POSE_WARNING:
-                GerutaCheckWarningEnded();
-                break;
+        case GERUTA_POSE_WARNING_INIT:
+            GerutaWarningInit();
 
-            case GERUTA_POSE_LAUNCHING:
-                GerutaCheckLaunchingAnimEnded();
-                break;
+        case GERUTA_POSE_WARNING:
+            GerutaCheckWarningEnded();
+            break;
 
-            case GERUTA_POSE_GOING_DOWN:
-                GerutaGoingDown();
-                break;
+        case GERUTA_POSE_LAUNCHING:
+            GerutaCheckLaunchingAnimEnded();
+            break;
 
-            case GERUTA_POSE_BOUNCING:
-                GerutaCheckBouncingAnimEnded();
-                break;
+        case GERUTA_POSE_GOING_DOWN:
+            GerutaGoingDown();
+            break;
 
-            case GERUTA_POSE_GOING_UP:
-                GerutaGoingUp();
-                break;
+        case GERUTA_POSE_BOUNCING:
+            GerutaCheckBouncingAnimEnded();
+            break;
 
-            case GERUTA_POSE_BOUNCING_ON_CEILING:
-                GerutaCheckBouncingOnCeilingAnimEnded();
-                break;
+        case GERUTA_POSE_GOING_UP:
+            GerutaGoingUp();
+            break;
 
-            default:
-                SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, TRUE, PE_SPRITE_EXPLOSION_MEDIUM);
-        }
+        case GERUTA_POSE_BOUNCING_ON_CEILING:
+            GerutaCheckBouncingOnCeilingAnimEnded();
+            break;
+
+        default:
+            SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, TRUE, PE_SPRITE_EXPLOSION_MEDIUM);
     }
 }
