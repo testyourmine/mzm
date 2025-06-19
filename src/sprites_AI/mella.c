@@ -27,11 +27,11 @@ u8 MellaYMovement(u16 movement)
         if (gPreviousCollisionCheck == COLLISION_SOLID)
             return TRUE;
         
-        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - (QUARTER_BLOCK_SIZE * 3));
+        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE);
         if (gPreviousCollisionCheck == COLLISION_SOLID)
             return TRUE;
 
-        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + (QUARTER_BLOCK_SIZE * 3));
+        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE);
         if (gPreviousCollisionCheck == COLLISION_SOLID)
             return TRUE;
             
@@ -40,24 +40,24 @@ u8 MellaYMovement(u16 movement)
     else
     {
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-            gCurrentSprite.xPosition - (QUARTER_BLOCK_SIZE * 3));
+            gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE);
 
         if (gPreviousCollisionCheck == COLLISION_SOLID)
         {
             SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-                gCurrentSprite.xPosition - (BLOCK_SIZE + QUARTER_BLOCK_SIZE * 3));
+                gCurrentSprite.xPosition - (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE));
 
             if (gPreviousCollisionCheck == COLLISION_SOLID)
                 return TRUE;
         }
 
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-            gCurrentSprite.xPosition + (QUARTER_BLOCK_SIZE * 3));
+            gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE);
 
         if (gPreviousCollisionCheck == COLLISION_SOLID)
         {
             SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-                gCurrentSprite.xPosition + (BLOCK_SIZE + QUARTER_BLOCK_SIZE * 3));
+                gCurrentSprite.xPosition + (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE));
 
             if (gPreviousCollisionCheck == COLLISION_SOLID)
                 return TRUE;

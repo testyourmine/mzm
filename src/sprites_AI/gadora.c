@@ -491,8 +491,8 @@ void GadoraBeam(void)
             gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
             gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
 
-            gCurrentSprite.hitboxTop = -(QUARTER_BLOCK_SIZE * 3);
-            gCurrentSprite.hitboxBottom = (QUARTER_BLOCK_SIZE * 3);
+            gCurrentSprite.hitboxTop = -(THREE_QUARTER_BLOCK_SIZE);
+            gCurrentSprite.hitboxBottom = THREE_QUARTER_BLOCK_SIZE;
 
             gCurrentSprite.pOam = sGadoraBeamOAM_Moving;
             gCurrentSprite.animationDurationCounter = 0;

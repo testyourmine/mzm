@@ -121,9 +121,9 @@ const struct FrameData* const sImagoCocoonFrameDataPointers[IMAGO_COCOON_OAM_END
     [IMAGO_COCOON_OAM_2e0bb0] = sImagoCocoonOam_2e0bb0,
     [IMAGO_COCOON_OAM_STATIC] = sImagoCocoonOam_Static,
     [IMAGO_COCOON_OAM_SPORE_SPAWNING] = sImagoCocoonSporeOam_Spawning,
-    [IMAGO_COCOON_OAM_SPORE_NEST] = sImagoCocoonSpore_Nest,
-    [IMAGO_COCOON_OAM_SPORE_MOVING] = sImagoCocoonSpore_Moving,
-    [IMAGO_COCOON_OAM_SPORE_EXPLODING] = sImagoCocoonSpore_Exploding,
+    [IMAGO_COCOON_OAM_SPORE_NEST] = sImagoCocoonSporeOam_Nest,
+    [IMAGO_COCOON_OAM_SPORE_MOVING] = sImagoCocoonSporeOam_Moving,
+    [IMAGO_COCOON_OAM_SPORE_EXPLODING] = sImagoCocoonSporeOam_Exploding,
     [IMAGO_COCOON_OAM_WINGED_RIPPER_MOVING] = sWingedRipperOam_Moving,
     [IMAGO_COCOON_OAM_WINGED_RIPPER_TURNING_AROUND] = sWingedRipperOam_TurningAround,
     [IMAGO_COCOON_OAM_DEFEATED_COCOON] = sDefeatedImagoCocoonOam

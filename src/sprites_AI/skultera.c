@@ -46,7 +46,7 @@ u8 SkulteraXMovement(u16 movement)
     if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
     {
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-            gCurrentSprite.xPosition + (QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE * 2));
+            gCurrentSprite.xPosition + (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2));
 
         if (gPreviousCollisionCheck != COLLISION_SOLID)
         {
@@ -59,7 +59,7 @@ u8 SkulteraXMovement(u16 movement)
     else
     {
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-            gCurrentSprite.xPosition - (QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE * 2));
+            gCurrentSprite.xPosition - (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2));
 
         if (gPreviousCollisionCheck != COLLISION_SOLID)
         {

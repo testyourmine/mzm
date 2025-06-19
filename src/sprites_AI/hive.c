@@ -70,8 +70,8 @@ static void HiveInit(void)
 
     gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 2);
     gCurrentSprite.hitboxBottom = BLOCK_SIZE * 2;
-    gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
-    gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
+    gCurrentSprite.hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
+    gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
     gCurrentSprite.samusCollision = SSC_HURTS_SAMUS_SOLID;
     gCurrentSprite.frozenPaletteRowOffset = 1;
@@ -331,7 +331,7 @@ static void MellowInit(struct SpriteData* pSprite)
 
     pSprite->drawDistanceTop = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);
     pSprite->drawDistanceBottom = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);
-    pSprite->drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+    pSprite->drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(THREE_QUARTER_BLOCK_SIZE);
 
     pSprite->hitboxTop = -(QUARTER_BLOCK_SIZE - PIXEL_SIZE);
     pSprite->hitboxBottom = (QUARTER_BLOCK_SIZE - PIXEL_SIZE);

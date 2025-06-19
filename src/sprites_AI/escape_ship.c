@@ -230,7 +230,7 @@ void EscapeShip(void)
 
             gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE + PIXEL_SIZE);
             gCurrentSprite.hitboxBottom = 0;
-            gCurrentSprite.hitboxLeft = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
+            gCurrentSprite.hitboxLeft = THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
             gCurrentSprite.hitboxRight = BLOCK_SIZE + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
 
             gCurrentSprite.samusCollision = SSC_NONE;

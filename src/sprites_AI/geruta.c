@@ -34,20 +34,20 @@ static u8 GerutaYMovement(u16 movement)
     if (gCurrentSprite.status & SPRITE_STATUS_SAMUS_COLLIDING)
     {
         if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition) == COLLISION_SOLID ||
-            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - QUARTER_BLOCK_SIZE * 3) == COLLISION_SOLID ||
-            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + QUARTER_BLOCK_SIZE * 3) == COLLISION_SOLID)
+            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE) == COLLISION_SOLID ||
+            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE) == COLLISION_SOLID)
             return TRUE;
 
         gCurrentSprite.yPosition += movement;
     }
     else
     {
-        if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition - QUARTER_BLOCK_SIZE * 3) == COLLISION_SOLID &&
-            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition - (BLOCK_SIZE + QUARTER_BLOCK_SIZE * 3)) == COLLISION_SOLID)
+        if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE) == COLLISION_SOLID &&
+            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition - (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE)) == COLLISION_SOLID)
             return TRUE;
 
-        if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition + QUARTER_BLOCK_SIZE * 3) == COLLISION_SOLID &&
-            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition + (BLOCK_SIZE + QUARTER_BLOCK_SIZE * 3)) == COLLISION_SOLID)
+        if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE) == COLLISION_SOLID &&
+            SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gCurrentSprite.xPosition + (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE)) == COLLISION_SOLID)
             return TRUE;
 
         gCurrentSprite.yPosition -= movement;
@@ -103,8 +103,8 @@ static void GerutaInit(void)
 
     gCurrentSprite.hitboxTop = -HALF_BLOCK_SIZE;
     gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE;
-    gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
-    gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
+    gCurrentSprite.hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
+    gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
     gCurrentSprite.pOam = sGerutaOAM_Idle;
     gCurrentSprite.animationDurationCounter = 0;
@@ -137,8 +137,8 @@ static void GerutaDetectSamus(void)
 {
     u8 nslr;
 
-    if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - BLOCK_SIZE, gCurrentSprite.xPosition - QUARTER_BLOCK_SIZE * 3) != COLLISION_SOLID &&
-        SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - BLOCK_SIZE, gCurrentSprite.xPosition + QUARTER_BLOCK_SIZE * 3) != COLLISION_SOLID)
+    if (SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - BLOCK_SIZE, gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE) != COLLISION_SOLID &&
+        SpriteUtilGetCollisionAtPosition(gCurrentSprite.yPosition - BLOCK_SIZE, gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE) != COLLISION_SOLID)
     {
         SpriteUtilMakeSpriteFaceSamusDirection();
         gCurrentSprite.pose = GERUTA_POSE_WARNING_INIT;
@@ -255,7 +255,7 @@ static void GerutaGoingUp(void)
     if (GerutaYMovement(3 * PIXEL_SIZE))
     {
         gCurrentSprite.yPosition = (gCurrentSprite.yPosition & BLOCK_POSITION_FLAG);
-        gCurrentSprite.yPosition += HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE;
+        gCurrentSprite.yPosition += THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE;
         gCurrentSprite.pose = GERUTA_POSE_BOUNCING_ON_CEILING;
 
         gCurrentSprite.animationDurationCounter = 0;

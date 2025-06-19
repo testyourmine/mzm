@@ -2977,7 +2977,7 @@ const u16 sTourianEscape_47ced0[8][2] = {
         [1] = BLOCK_SIZE + EIGHTH_BLOCK_SIZE
     },
     [5] = {
-        [0] = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE,
+        [0] = THREE_QUARTER_BLOCK_SIZE,
         [1] = HALF_BLOCK_SIZE
     },
     [6] = {
@@ -2996,7 +2996,7 @@ const u16 sTourianEscape_47cef0[8][2] = {
         [1] = BLOCK_SIZE
     },
     [1] = {
-        [0] = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE,
+        [0] = THREE_QUARTER_BLOCK_SIZE,
         [1] = BLOCK_SIZE * 2 + EIGHTH_BLOCK_SIZE
     },
     [2] = {

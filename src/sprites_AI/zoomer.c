@@ -73,7 +73,7 @@ void ZoomerUpdateHitbox(void)
         {
             gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
             gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE - PIXEL_SIZE;
-            gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE);
+            gCurrentSprite.hitboxLeft = -(THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE);
             gCurrentSprite.hitboxRight = PIXEL_SIZE;
         }
         else
@@ -81,7 +81,7 @@ void ZoomerUpdateHitbox(void)
             gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
             gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE - PIXEL_SIZE;
             gCurrentSprite.hitboxLeft = -PIXEL_SIZE;
-            gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE;
+            gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE;
         }
     }
     else
@@ -89,13 +89,13 @@ void ZoomerUpdateHitbox(void)
         if (gCurrentSprite.status & SPRITE_STATUS_Y_FLIP)
         {
             gCurrentSprite.hitboxTop = -PIXEL_SIZE;
-            gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE;
+            gCurrentSprite.hitboxBottom = THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE;
             gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
             gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE - PIXEL_SIZE;
         }
         else
         {
-            gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE);
+            gCurrentSprite.hitboxTop = -(THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE);
             gCurrentSprite.hitboxBottom = PIXEL_SIZE;
             gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
             gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE - PIXEL_SIZE;

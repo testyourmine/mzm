@@ -2173,7 +2173,7 @@ void RuinsTestSamusReflectionEnd(void)
 
             if (gCurrentSprite.xPosition - (QUARTER_BLOCK_SIZE - PIXEL_SIZE) < gSamusData.xPosition &&
                 gCurrentSprite.xPosition + (QUARTER_BLOCK_SIZE - PIXEL_SIZE) > gSamusData.xPosition &&
-                gSamusData.yPosition == gBossWork.work1 + (BLOCK_SIZE * 4 + QUARTER_BLOCK_SIZE * 3 - ONE_SUB_PIXEL))
+                gSamusData.yPosition == gBossWork.work1 + (BLOCK_SIZE * 4 + THREE_QUARTER_BLOCK_SIZE - ONE_SUB_PIXEL))
             {
                 // Set samus in place
                 gSamusData.xPosition = gCurrentSprite.xPosition;

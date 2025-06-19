@@ -45,6 +45,8 @@ typedef volatile signed long long vs64;
 #define HALF_BLOCK_SIZE (BLOCK_SIZE / 2)
 // Shorthand for a quarter of a block, in sub pixels
 #define QUARTER_BLOCK_SIZE (BLOCK_SIZE / 4)
+// Shorthand for three quarters of a block, in sub pixels
+#define THREE_QUARTER_BLOCK_SIZE (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE)
 // Shorthand for an eighth of a block, in sub pixels
 #define EIGHTH_BLOCK_SIZE (BLOCK_SIZE / 8)
 // Size of a visible pixel, in sub pixels

@@ -161,7 +161,7 @@ void PistonGfxInit(void)
 
     gCurrentSprite.pose = PISTON_POSE_CHECK_FOR_PROJECTILES;
 
-    gCurrentSprite.hitboxTop = -(BLOCK_SIZE + QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE);
+    gCurrentSprite.hitboxTop = -(BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE);
     gCurrentSprite.hitboxBottom = -(BLOCK_SIZE + HALF_BLOCK_SIZE + PIXEL_SIZE * 3);
 }
 
@@ -217,7 +217,7 @@ void PistonOpen(void)
         gCurrentSprite.currentAnimationFrame = 0;
 
         gCurrentSprite.pose = PISTON_POSE_OPENED;
-        gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 2 + QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE);
+        gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 2 + THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE);
         gCurrentSprite.hitboxBottom = -(BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + PIXEL_SIZE * 3);
     }
 }

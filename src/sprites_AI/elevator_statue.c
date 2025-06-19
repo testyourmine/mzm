@@ -81,7 +81,7 @@ static void KraidElevatorStatueFallenInit(void)
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE);
 
-    gCurrentSprite.hitboxTop = -(QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE * 3); // Hitbox even though there's no samus collision?
+    gCurrentSprite.hitboxTop = -(THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3); // Hitbox even though there's no samus collision?
     gCurrentSprite.hitboxBottom = 0;
     gCurrentSprite.hitboxLeft = -(BLOCK_SIZE * 4);
     gCurrentSprite.hitboxRight = BLOCK_SIZE + HALF_BLOCK_SIZE;
@@ -253,7 +253,7 @@ static void RidleyElevatorStatueFallenInit(void)
     gCurrentSprite.drawDistanceTop = HALF_BLOCK_SIZE + PIXEL_SIZE * 2;
     gCurrentSprite.drawDistanceBottom = QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2;
 
-    gCurrentSprite.hitboxTop = -(QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE * 3); // Hitbox even though there's no samus collision?
+    gCurrentSprite.hitboxTop = -(THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3); // Hitbox even though there's no samus collision?
     gCurrentSprite.hitboxBottom = 0;
     gCurrentSprite.hitboxLeft = -(BLOCK_SIZE * 4);
     gCurrentSprite.hitboxRight = BLOCK_SIZE + HALF_BLOCK_SIZE;

@@ -902,7 +902,7 @@ void RidleySpawning(void)
             if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
             {
                 if (SpriteUtilGetCollisionAtPosition(gSubSpriteData1.yPosition,
-                    gSubSpriteData1.xPosition + (BLOCK_SIZE * 5 + QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE * 3)) != COLLISION_AIR)
+                    gSubSpriteData1.xPosition + (BLOCK_SIZE * 5 + THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3)) != COLLISION_AIR)
                     gCurrentSprite.status &= ~SPRITE_STATUS_FACING_RIGHT;
                 else
                     gSubSpriteData1.xPosition += QUARTER_BLOCK_SIZE;
@@ -910,7 +910,7 @@ void RidleySpawning(void)
             else
             {
                 if (SpriteUtilGetCollisionAtPosition(gSubSpriteData1.yPosition,
-                    gSubSpriteData1.xPosition - (BLOCK_SIZE * 5 + QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE * 3)) != COLLISION_AIR)
+                    gSubSpriteData1.xPosition - (BLOCK_SIZE * 5 + THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3)) != COLLISION_AIR)
                     gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT;
                 else
                     gSubSpriteData1.xPosition -= QUARTER_BLOCK_SIZE;

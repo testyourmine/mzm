@@ -360,7 +360,7 @@ void Skree(void)
             break;
 
         default:
-            SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition + (QUARTER_BLOCK_SIZE * 3 + PIXEL_SIZE),
+            SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition + (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE),
                 gCurrentSprite.xPosition, TRUE, PE_SPRITE_EXPLOSION_MEDIUM);
     }
 }

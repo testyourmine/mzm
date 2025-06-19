@@ -733,8 +733,8 @@ void CannonBullet(void)
                 else if (gCurrentSprite.roomSlot == CANNON_AIM_DOWN_LEFT)
                 {
                     gCurrentSprite.pOam = sCannonBulletOam_DownLeft;
-                    gCurrentSprite.yPosition += HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
-                    gCurrentSprite.xPosition -= HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
+                    gCurrentSprite.yPosition += THREE_QUARTER_BLOCK_SIZE;
+                    gCurrentSprite.xPosition -= THREE_QUARTER_BLOCK_SIZE;
                 }
                 else if (gCurrentSprite.roomSlot == CANNON_AIM_DOWN)
                 {
@@ -744,8 +744,8 @@ void CannonBullet(void)
                 else if (gCurrentSprite.roomSlot == CANNON_AIM_DOWN_RIGHT)
                 {
                     gCurrentSprite.pOam = sCannonBulletOam_DownRight;
-                    gCurrentSprite.yPosition += HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
-                    gCurrentSprite.xPosition += HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
+                    gCurrentSprite.yPosition += THREE_QUARTER_BLOCK_SIZE;
+                    gCurrentSprite.xPosition += THREE_QUARTER_BLOCK_SIZE;
                 }
                 else if (gCurrentSprite.roomSlot == CANNON_AIM_RIGHT)
                 {

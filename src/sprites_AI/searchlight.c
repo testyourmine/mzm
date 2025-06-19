@@ -28,10 +28,10 @@ void Searchlight(void)
                 gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(2 * BLOCK_SIZE) + 0;
                 gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(2 * BLOCK_SIZE) + 0;
 
-                gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
-                gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
-                gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
-                gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE;
+                gCurrentSprite.hitboxTop = -THREE_QUARTER_BLOCK_SIZE;
+                gCurrentSprite.hitboxBottom = THREE_QUARTER_BLOCK_SIZE;
+                gCurrentSprite.hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
+                gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
                 gCurrentSprite.pOam = sSearchlightOAM_Moving;
                 gCurrentSprite.animationDurationCounter = 0;

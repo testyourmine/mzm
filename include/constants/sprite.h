@@ -409,6 +409,8 @@ enum SamusStandingOnSpriteStatus {
 
 #define SPRITE_GET_STUN_PALETTE(sprite) (NBR_OF_PALETTE_ROWS - ((sprite).spritesetGfxSlot + (sprite).frozenPaletteRowOffset) - SPRITE_STUN_PALETTE_OFFSET)
 
+#define SPRITE_GFX_SLOT_MAX 8
+
 #define SPRITE_FREEZE_TIMER (CONVERT_SECONDS(4.f))
 
 #endif /* SPRITE_CONSTANTS_H */

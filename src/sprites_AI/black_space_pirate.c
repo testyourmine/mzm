@@ -817,7 +817,7 @@ void BlackSpacePirateWalkingAlerted(void)
             {
                 unk_f978(gCurrentSprite.work2 / 4);
 
-                if (gCurrentSprite.work2 < HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE)
+                if (gCurrentSprite.work2 < THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE)
                     gCurrentSprite.work2 += 2;
             }
             else

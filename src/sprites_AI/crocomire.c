@@ -128,7 +128,7 @@ static void CrocomirePartInit(void)
     {
         case CROCOMIRE_PART_RIGHT_ARM:
             gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
-            gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2 + QUARTER_BLOCK_SIZE * 3);
+            gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2 + THREE_QUARTER_BLOCK_SIZE);
             gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 5 + HALF_BLOCK_SIZE);
 
             gCurrentSprite.hitboxTop = -PIXEL_SIZE;

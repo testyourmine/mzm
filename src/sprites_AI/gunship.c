@@ -169,7 +169,7 @@ static u8 GunshipCheckSamusEnter(void)
     if (!SpriteUtilCheckCrouchingOrMorphed())
     {
         samusX = gSamusData.xPosition;
-        if (gCurrentSprite.xPosition - QUARTER_BLOCK_SIZE * 3 < samusX && gCurrentSprite.xPosition + QUARTER_BLOCK_SIZE * 3 > samusX)
+        if (gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE < samusX && gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE > samusX)
         {
             SamusSetPose(SPOSE_TURNING_FROM_FACING_THE_FOREGROUND);
             gSamusData.timer = 1 * DELTA_TIME;

@@ -668,14 +668,14 @@ static void DessgeegaDeath(void)
     u16 yPosition;
 
     if (gCurrentSprite.status & SPRITE_STATUS_Y_FLIP)
-        yPosition = gCurrentSprite.yPosition + (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+        yPosition = gCurrentSprite.yPosition + THREE_QUARTER_BLOCK_SIZE;
     else
     {
         // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
         EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
         // Unlock doors
         gDoorUnlockTimer = -ONE_THIRD_SECOND;
-        yPosition = gCurrentSprite.yPosition - (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+        yPosition = gCurrentSprite.yPosition - THREE_QUARTER_BLOCK_SIZE;
     }
 
     // Kill sprite
@@ -710,7 +710,7 @@ static void DessgeegaLongBeamDetectSamus(void)
         yPosition = gCurrentSprite.yPosition;
         xPosition = gCurrentSprite.xPosition;
 
-        SpriteDebrisInit(0, 5, yPosition + (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE), xPosition + (BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+        SpriteDebrisInit(0, 5, yPosition + THREE_QUARTER_BLOCK_SIZE, xPosition + (BLOCK_SIZE + QUARTER_BLOCK_SIZE));
         SpriteDebrisInit(0, 7, yPosition + QUARTER_BLOCK_SIZE, xPosition + (3 * EIGHTH_BLOCK_SIZE + PIXEL_SIZE / 2));
         SpriteDebrisInit(0, 8, yPosition + BLOCK_SIZE, xPosition - (BLOCK_SIZE + 3 * EIGHTH_BLOCK_SIZE + PIXEL_SIZE / 2));
         SpriteDebrisInit(0, 6, yPosition + HALF_BLOCK_SIZE, xPosition - QUARTER_BLOCK_SIZE);

@@ -1512,7 +1512,7 @@ const struct FrameData sImagoCocoonSporeOam_Spawning[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sImagoCocoonSpore_Nest[4] = {
+const struct FrameData sImagoCocoonSporeOam_Nest[4] = {
     [0] = {
         .pFrame = sImagoCocoonSporeOam_Nest_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
@@ -1528,7 +1528,7 @@ const struct FrameData sImagoCocoonSpore_Nest[4] = {
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sImagoCocoonSpore_Moving[4] = {
+const struct FrameData sImagoCocoonSporeOam_Moving[4] = {
     [0] = {
         .pFrame = sImagoCocoonSporeOam_Moving_Frame0,
         .timer = CONVERT_SECONDS(1.f / 30)
@@ -1544,7 +1544,7 @@ const struct FrameData sImagoCocoonSpore_Moving[4] = {
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sImagoCocoonSpore_Exploding[5] = {
+const struct FrameData sImagoCocoonSporeOam_Exploding[5] = {
     [0] = {
         .pFrame = sImagoCocoonSporeOam_Spawning_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)

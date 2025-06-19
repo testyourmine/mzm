@@ -8,6 +8,8 @@
 
 #include "structs/sprite.h"
 
+#define IMAGO_LARVA_RIGHT_SIDE_POSE_IDLE 0x9
+
 /**
  * @brief 412a8 | 11c | Imago larva (right side) AI
  * 
@@ -31,11 +33,11 @@ void ImagoLarvaRightSide(void)
 
         gCurrentSprite.samusCollision = SSC_NONE;
 
-        gCurrentSprite.pOam = sImagoLarvaRightSideOAM;
+        gCurrentSprite.pOam = sImagoLarvaRightSideOam;
         gCurrentSprite.currentAnimationFrame = 0;
         gCurrentSprite.animationDurationCounter = 0;
 
-        gCurrentSprite.pose = 0x9;
+        gCurrentSprite.pose = IMAGO_LARVA_RIGHT_SIDE_POSE_IDLE;
     }
 
     if (gCurrentSprite.animationDurationCounter == 1)

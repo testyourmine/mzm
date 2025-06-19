@@ -745,7 +745,7 @@ static void ChozoStatuePartInit(void)
         case CHOZO_STATUE_PART_GLOW:
             gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
             gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(PIXEL_SIZE);
-            gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+            gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(THREE_QUARTER_BLOCK_SIZE);
 
             gCurrentSprite.pOam = sChozoStatuePartOam_GlowIdle;
             gCurrentSprite.animationDurationCounter = 0;

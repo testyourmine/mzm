@@ -36,7 +36,7 @@ u8 MetroidCheckAirCollision(u16 yPosition, u16 xPosition)
     colliding = FALSE;
     if (gSamusPhysics.horizontalMovingDirection == HDMOVING_RIGHT)
     {
-        SpriteUtilCheckCollisionAtPosition(yPosition - (QUARTER_BLOCK_SIZE * 3), xPosition + (BLOCK_SIZE - PIXEL_SIZE));
+        SpriteUtilCheckCollisionAtPosition(yPosition - THREE_QUARTER_BLOCK_SIZE, xPosition + (BLOCK_SIZE - PIXEL_SIZE));
         if (gPreviousCollisionCheck != COLLISION_AIR)
             colliding = TRUE;
         else
@@ -48,7 +48,7 @@ u8 MetroidCheckAirCollision(u16 yPosition, u16 xPosition)
     }
     else if (gSamusPhysics.horizontalMovingDirection == HDMOVING_LEFT)
     {
-        SpriteUtilCheckCollisionAtPosition(yPosition - (QUARTER_BLOCK_SIZE * 3), xPosition - (BLOCK_SIZE - PIXEL_SIZE));
+        SpriteUtilCheckCollisionAtPosition(yPosition - THREE_QUARTER_BLOCK_SIZE, xPosition - (BLOCK_SIZE - PIXEL_SIZE));
         if (gPreviousCollisionCheck != COLLISION_AIR)
             colliding = TRUE;
         else
@@ -87,7 +87,7 @@ void MetroidMove(u16 dstY, u16 dstX, u8 ySpeedCap, u8 xSpeedCap, u8 speedDivisor
     // Check for X collision
     if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
     {
-        SpriteUtilCheckCollisionAtPosition(yPosition - (QUARTER_BLOCK_SIZE * 3), xPosition + (BLOCK_SIZE - PIXEL_SIZE));
+        SpriteUtilCheckCollisionAtPosition(yPosition - THREE_QUARTER_BLOCK_SIZE, xPosition + (BLOCK_SIZE - PIXEL_SIZE));
         if (gPreviousCollisionCheck != COLLISION_AIR)
             hittingSolidX = TRUE;
         else
@@ -99,7 +99,7 @@ void MetroidMove(u16 dstY, u16 dstX, u8 ySpeedCap, u8 xSpeedCap, u8 speedDivisor
     }
     else
     {
-        SpriteUtilCheckCollisionAtPosition(yPosition - (QUARTER_BLOCK_SIZE * 3), xPosition - (BLOCK_SIZE - PIXEL_SIZE));
+        SpriteUtilCheckCollisionAtPosition(yPosition - THREE_QUARTER_BLOCK_SIZE, xPosition - (BLOCK_SIZE - PIXEL_SIZE));
         if (gPreviousCollisionCheck != COLLISION_AIR)
             hittingSolidX = TRUE;
         else
@@ -125,12 +125,12 @@ void MetroidMove(u16 dstY, u16 dstX, u8 ySpeedCap, u8 xSpeedCap, u8 speedDivisor
     }
     else
     {
-        SpriteUtilCheckCollisionAtPosition(yPosition - (QUARTER_BLOCK_SIZE * 3), xPosition - HALF_BLOCK_SIZE);
+        SpriteUtilCheckCollisionAtPosition(yPosition - THREE_QUARTER_BLOCK_SIZE, xPosition - HALF_BLOCK_SIZE);
         if (gPreviousCollisionCheck != COLLISION_AIR)
             hittingSolidY++;
         else
         {
-            SpriteUtilCheckCollisionAtPosition(yPosition - (QUARTER_BLOCK_SIZE * 3), xPosition + HALF_BLOCK_SIZE);
+            SpriteUtilCheckCollisionAtPosition(yPosition - THREE_QUARTER_BLOCK_SIZE, xPosition + HALF_BLOCK_SIZE);
             if (gPreviousCollisionCheck != COLLISION_AIR)
                 hittingSolidY++;
         }
@@ -945,7 +945,7 @@ void Metroid(void)
     if (gCurrentSprite.freezeTimer != 0)
     {
         // Set frozen metroid behavior
-        gCurrentSprite.hitboxTop = -(QUARTER_BLOCK_SIZE * 3);
+        gCurrentSprite.hitboxTop = -(THREE_QUARTER_BLOCK_SIZE);
         gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE + PIXEL_SIZE * 2;
         gCurrentSprite.hitboxLeft = -BLOCK_SIZE;
         gCurrentSprite.hitboxRight = BLOCK_SIZE;

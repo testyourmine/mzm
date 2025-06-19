@@ -81,8 +81,8 @@ void Geron(void)
 
             gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 3);
             gCurrentSprite.hitboxBottom = 0;
-            gCurrentSprite.hitboxLeft = -(QUARTER_BLOCK_SIZE * 3);
-            gCurrentSprite.hitboxRight = (QUARTER_BLOCK_SIZE * 3);
+            gCurrentSprite.hitboxLeft = -(THREE_QUARTER_BLOCK_SIZE);
+            gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
             gCurrentSprite.drawOrder = 5;
             gCurrentSprite.currentAnimationFrame = 0;

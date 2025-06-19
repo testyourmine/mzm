@@ -163,6 +163,31 @@ enum DescriptionTextId {
     DESCRIPTION_TEXT_END
 };
 
+#define MESSAGE_IS_ITEM(msg)                                                                                \
+    (msg) == MESSAGE_LONG_BEAM || (msg) == MESSAGE_CHARGE_BEAM || (msg) == MESSAGE_ICE_BEAM ||              \
+    (msg) == MESSAGE_WAVE_BEAM || (msg) == MESSAGE_UKNOWN_ITEM_PLASMA || (msg) == MESSAGE_BOMB ||           \
+    (msg) == MESSAGE_VARIA_SUIT || (msg) == MESSAGE_UNKNOWN_ITEM_GRAVITY || (msg) == MESSAGE_MORPH_BALL ||  \
+    (msg) == MESSAGE_SPEED_BOOSTER || (msg) == MESSAGE_HIGH_JUMP || (msg) == MESSAGE_SCREW_ATTACK ||        \
+    (msg) == MESSAGE_UNKNOWN_ITEM_SPACE_JUMP || (msg) == MESSAGE_POWER_GRIP
+
+#define MESSAGE_IS_UNKNOWN_ITEM(msg)                                                                                        \
+    (msg) == MESSAGE_UKNOWN_ITEM_PLASMA || (msg) == MESSAGE_UNKNOWN_ITEM_GRAVITY || (msg) == MESSAGE_UNKNOWN_ITEM_SPACE_JUMP
+
+#define MESSAGE_IS_FIRST_TANK(msg)                                                                                              \
+    (msg) == MESSAGE_FIRST_MISSILE_TANK || (msg) == MESSAGE_FIRST_SUPER_MISSILE_TANK || (msg) == MESSAGE_FIRST_POWER_BOMB_TANK
+
+#define MESSAGE_IS_TANK(msg)                                                                    \
+    (msg) == MESSAGE_ENERGY_TANK_ACQUIRED || (msg) == MESSAGE_MISSILE_TANK_ACQUIRED ||          \
+    (msg) == MESSAGE_SUPER_MISSILE_TANK_ACQUIRED || (msg) == MESSAGE_POWER_BOMB_TANK_ACQUIRED
+
+#define MESSAGE_IS_MAP(msg)                                                         \
+    (msg) == MESSAGE_BRINSTAR_MAP_ACQUIRED || (msg) == MESSAGE_KRAID_MAP_ACQUIRED ||\
+    (msg) == MESSAGE_NORFAIR_MAP_ACQUIRED || (msg) == MESSAGE_RIDLEY_MAP_ACQUIRED ||\
+    (msg) == MESSAGE_MOTHER_SHIP_MAP_ACQUIRED
+
+#define MESSAGE_IS_ESCAPE(msg)                                          \
+    (msg) == MESSAGE_ZEBES_ESCAPE || (msg) == MESSAGE_CHOZODIA_ESCAPE
+
 // 0
 #define CHAR_SMALL_0 0
 // 1

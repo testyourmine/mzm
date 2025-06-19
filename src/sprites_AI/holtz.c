@@ -41,12 +41,12 @@ static u8 HoltzYMovement(u16 movement)
             return TRUE;
 
         // Left block
-        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE);
         if (gPreviousCollisionCheck == COLLISION_SOLID)
             return TRUE;
 
         // Right block
-        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE);
         if (gPreviousCollisionCheck == COLLISION_SOLID)
             return TRUE;
 
@@ -58,22 +58,22 @@ static u8 HoltzYMovement(u16 movement)
         // Going up
         // Check on left
         // Middle left block
-        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition - (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition - THREE_QUARTER_BLOCK_SIZE);
         if (gPreviousCollisionCheck == COLLISION_SOLID)
         {
             // Far left block
-            SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition - (BLOCK_SIZE + HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+            SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition - (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE));
             if (gPreviousCollisionCheck == COLLISION_SOLID)
                 return TRUE;
         }
 
         // Check on right
         // Middle right block
-        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition + (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+        SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition + THREE_QUARTER_BLOCK_SIZE);
         if (gPreviousCollisionCheck == COLLISION_SOLID)
         {
             // Far right block
-            SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition + (BLOCK_SIZE + HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+            SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HOLTZ_HEIGHT, gCurrentSprite.xPosition + (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE));
             if (gPreviousCollisionCheck == COLLISION_SOLID)
                 return TRUE;
         }
@@ -130,7 +130,7 @@ static u8 HoltzXMovement(u16 movement)
 static void HoltzInit(void)
 {
     SpriteUtilMakeSpriteFaceSamusDirection();
-    gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+    gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(THREE_QUARTER_BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE);
     gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE);
 

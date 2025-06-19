@@ -1208,7 +1208,7 @@ void ProjectileProcessMissile(struct ProjectileData* pProj)
         else
         {
             pProj->movementStage++;
-            ProjectileMove(pProj, HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+            ProjectileMove(pProj, THREE_QUARTER_BLOCK_SIZE);
         }
     }
     else if (pProj->movementStage == 0)
@@ -1310,7 +1310,7 @@ void ProjectileProcessSuperMissile(struct ProjectileData* pProj)
         else
         {
             pProj->movementStage++;
-            ProjectileMove(pProj, HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+            ProjectileMove(pProj, THREE_QUARTER_BLOCK_SIZE);
         }
     }
     else if (pProj->movementStage == PROJECTILE_STAGE_INIT)
@@ -1485,9 +1485,9 @@ void ProjectileProcessBomb(struct ProjectileData* pProj)
             pProj->drawDistanceOffset = HALF_BLOCK_SIZE;
 
             pProj->hitboxTop = -(BLOCK_SIZE - PIXEL_SIZE);
-            pProj->hitboxBottom = (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
-            pProj->hitboxLeft = -(HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
-            pProj->hitboxRight = (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE);
+            pProj->hitboxBottom = THREE_QUARTER_BLOCK_SIZE;
+            pProj->hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
+            pProj->hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
             // X Flip is cleared to make it always face the same way, cancelling the automatic X Flip if samus is facing right
             pProj->status &= ~(PROJ_STATUS_NOT_DRAWN | PROJ_STATUS_X_FLIP);
@@ -1524,13 +1524,13 @@ void ProjectileProcessBomb(struct ProjectileData* pProj)
                 {
                     // Block right middle
                     gCurrentClipdataAffectingAction = CAA_BOMB_PISTOL;
-                    ClipdataProcess(pProj->yPosition - EIGHTH_BLOCK_SIZE, pProj->xPosition + (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+                    ClipdataProcess(pProj->yPosition - EIGHTH_BLOCK_SIZE, pProj->xPosition + THREE_QUARTER_BLOCK_SIZE);
                 }
                 else if (pProj->timer == BOMB_EXPLOSION_TIMER - DELTA_TIME * 4)
                 {
                     // Block left middle
                     gCurrentClipdataAffectingAction = CAA_BOMB_PISTOL;
-                    ClipdataProcess(pProj->yPosition - EIGHTH_BLOCK_SIZE, pProj->xPosition - (HALF_BLOCK_SIZE + QUARTER_BLOCK_SIZE));
+                    ClipdataProcess(pProj->yPosition - EIGHTH_BLOCK_SIZE, pProj->xPosition - THREE_QUARTER_BLOCK_SIZE);
                 }
                 else if (pProj->timer == BOMB_EXPLOSION_TIMER - DELTA_TIME * 5)
                 {
