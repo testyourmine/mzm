@@ -123,7 +123,7 @@ struct LinkInfo {
     struct RecvQueue recvQueue;
 };
 
-extern u32 gErrorFlag;
+extern u32 gLinkStatus;
 extern u16 gSendCmd[CMD_LENGTH];
 extern u16 gRecvCmds[MAX_LINK_PLAYERS][CMD_LENGTH]; // players and commands are switched?
 

@@ -111,14 +111,14 @@ u8 FusionGalleryConnectProcess(void)
 
             if (gMultiBootParamData.clientBit & (2 | 4 | 8))
             {
-                if (gMultiBootParamData.probeCount != 0 && gMultiBootParamData.probeCount != 0xD1)
+                if (gMultiBootParamData.probeCount != MULTIBOOT_REQ_PREP_REC && gMultiBootParamData.probeCount != MULTIBOOT_REQ_TX_START)
                 {
                     if (gIoTransferInfo.timer & 1)
                         string = sCableLinkDebugString_1_Right;
                     else
                         string = sCableLinkDebugString_2_Right;
                 }
-                else if (gMultiBootParamData.probeCount == 0)
+                else if (gMultiBootParamData.probeCount == MULTIBOOT_REQ_PREP_REC)
                 {
                     if (gBootDebugActive)
                     {
@@ -128,13 +128,13 @@ u8 FusionGalleryConnectProcess(void)
                             string = sCableLinkDebugString_PressAButton2;
                     }
                 }
-                else if (gMultiBootParamData.probeCount == 0xD1)
+                else if (gMultiBootParamData.probeCount == MULTIBOOT_REQ_TX_START)
                 {
                     gIoTransferInfo.timer = 0;
                     string = sCableLinkDebugString_NowSending12;
                 }
                 
-                if (gMultiBootParamData.probeCount > 0xDF)
+                if (gMultiBootParamData.probeCount >= MULTIBOOT_REQ_HANDSHAKE_START)
                 {
                     gIoTransferInfo.timer = 0;
                     string = sCableLinkDebugString_BootChecking2;
@@ -154,10 +154,10 @@ u8 FusionGalleryConnectProcess(void)
             if (gMultiBootParamData.clientBit & (2 | 4 | 8))
             {
                 probeCount = gMultiBootParamData.probeCount;
-                if (probeCount == 0xD1)
+                if (gMultiBootParamData.probeCount == MULTIBOOT_REQ_TX_START)
                     gIoTransferInfo.timer = 0;
                 
-                if (gMultiBootParamData.probeCount >= 0xE0)
+                if (gMultiBootParamData.probeCount >= MULTIBOOT_REQ_HANDSHAKE_START)
                     gIoTransferInfo.timer = 0;
             }
 
@@ -171,7 +171,7 @@ u8 FusionGalleryConnectProcess(void)
             if (i)
             #endif // DEBUG
             {
-                if (gMultiBootParamData.probeCount == 0 && gMultiBootParamData.clientBit)
+                if (gMultiBootParamData.probeCount == MULTIBOOT_REQ_PREP_REC && gMultiBootParamData.clientBit)
                 {
                     MultiBootStartParent(&gMultiBootParamData, gDataSentPointer + MULTIBOOT_HEADER_SIZE, gDataSentSize - MULTIBOOT_HEADER_SIZE, 4, 1);
                     #ifdef DEBUG
@@ -192,7 +192,7 @@ u8 FusionGalleryConnectProcess(void)
                 gIoTransferInfo.connectStage++;
             }
 
-            else if (gMultiBootParamData.probeCount != 0xD1 && (gChangedInput & KEY_B) && gMultiBootParamData.probeCount < 0xE0)
+            else if (gMultiBootParamData.probeCount != MULTIBOOT_REQ_TX_START && (gChangedInput & KEY_B) && gMultiBootParamData.probeCount < MULTIBOOT_REQ_HANDSHAKE_START)
             {
                 gIoTransferInfo.connectStage = CONNECT_STAGE_BACKED_OUT;
             }

@@ -11,6 +11,28 @@
 #include "structs/game_state.h"
 #include "structs/link.h"
 
+static u8* LinkHandleConnection(void);
+static void LinkBuildSendCmd(u16 command);
+static void LinkProcessRecvCmds(void);
+
+static void LinkDisableSerial(void);
+static void LinkEnableSerial(void);
+static void LinkResetSerial(void);
+
+static u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH]);
+static void LinkCheckParentOrChild(void);
+static void LinkInitTimer(void);
+static void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH]);
+static void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH]);
+
+static void LinkReloadTransfer(void);
+static void LinkCommunicate(void);
+static void LinkStartTransfer(void);
+static u8 LinkDoHandshake(void);
+static void LinkDoRecv(void);
+static void LinkDoSend(void);
+static void LinkStopTimer(void);
+static void LinkSendRecvDone(void);
 
 /**
  * @brief 89e30 | 164 | Handle transfer of fusion gallery images
@@ -35,7 +57,7 @@ u8 FusionGalleryLinkProcess(void)
             buffer = 0;
             DMA_SET(3, ptr, gRecvCmds, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, MAX_LINK_PLAYERS * CMD_LENGTH));
 
-            gErrorFlag = 0;
+            gLinkStatus = 0;
             gShouldAdvanceLinkState = 0;
             gLinkPlayerCount = 0;
             gLinkLocalId = 0;
@@ -97,13 +119,13 @@ u8 FusionGalleryLinkProcess(void)
  * 
  * @return u8* Garbage, contains no value/undefined behavior
  */
-u8* LinkHandleConnection(void)
+static u8* LinkHandleConnection(void)
 {
     vu32 c;
     u32* link_stat;
     
     gShouldAdvanceLinkState = gFrameCounter8Bit & 1;
-    link_stat = &gErrorFlag;
+    link_stat = &gLinkStatus;
     *link_stat = LinkMain(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
     gLinkLocalId = *link_stat & LINK_STAT_LOCAL_ID;
     gLinkPlayerCount = EXTRACT_PLAYER_COUNT(*link_stat);
@@ -164,7 +186,7 @@ u8* LinkHandleConnection(void)
  * 
  * @param command The command to send
  */
-void LinkBuildSendCmd(u16 command)
+static void LinkBuildSendCmd(u16 command)
 {
     u32 value;
     
@@ -201,11 +223,11 @@ void LinkBuildSendCmd(u16 command)
  * @brief 8a1d4 | 8c | Process commands from the receive queue
  * 
  */
-void LinkProcessRecvCmds(void)
+static void LinkProcessRecvCmds(void)
 {
     u8 var;
 
-    if (gErrorFlag & LINK_STAT_RECEIVED_NOTHING)
+    if (gLinkStatus & LINK_STAT_RECEIVED_NOTHING)
         return;
 
     if (gRecvCmds[0][1] == LINKCMD_5500)
@@ -239,7 +261,7 @@ void LinkProcessRecvCmds(void)
  * @brief 8a260 | 68 | Disable serial transfer
  * 
  */
-void LinkDisableSerial(void)
+static void LinkDisableSerial(void)
 {
     u32 buffer;
 
@@ -261,7 +283,7 @@ void LinkDisableSerial(void)
  * @brief 8a2c8 | D4 | Enable serial transfer
  * 
  */
-void LinkEnableSerial(void)
+static void LinkEnableSerial(void)
 {
     u32 buffer;
     u32* ptr;
@@ -302,7 +324,7 @@ void LinkEnableSerial(void)
  * @brief 8a39c | 10 | Reset the state of the serial transfer
  * 
  */
-void LinkResetSerial(void)
+static void LinkResetSerial(void)
 {
     LinkEnableSerial();
     LinkDisableSerial();
@@ -316,7 +338,7 @@ void LinkResetSerial(void)
  * @param recvCmds A queue of received commands
  * @return u32 The state of the connection
  */
-u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
+static u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
 {
     u32 retval;
     u32 receivedNothing;
@@ -419,7 +441,7 @@ u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 recvCmds[M
  * @brief 8a4cc | 2c | Check if the current connection is parent or child
  * 
  */
-void LinkCheckParentOrChild(void)
+static void LinkCheckParentOrChild(void)
 {
     u32 terminals;
 
@@ -438,7 +460,7 @@ void LinkCheckParentOrChild(void)
  * @brief 8a4f8 | 50 | Load timer 3 if all GBA's are ready
  * 
  */
-void LinkInitTimer(void)
+static void LinkInitTimer(void)
 {
     if (gLink.session.isParent)
     {
@@ -459,7 +481,7 @@ void LinkInitTimer(void)
  * 
  * @param sendCmd The commands to send
  */
-void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
+static void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
 {
     u8 offset;
     u8 i;
@@ -502,7 +524,7 @@ void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
  * 
  * @param recvCmds A queue of received commands
  */
-void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
+static void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
 {
     u8 i;
     u8 j;
@@ -606,7 +628,7 @@ void LinkVSync(void)
  * @brief 8a7a0 | 10 | Reload timer 3 and start serial transfer
  * 
  */
-void LinkReloadTransfer(void)
+static void LinkReloadTransfer(void)
 {
     // Called when timer 3 interrupts
     LinkStopTimer();
@@ -617,7 +639,7 @@ void LinkReloadTransfer(void)
  * @brief 8a7b0 | 90 | Establish a connection and send data
  * 
  */
-void LinkCommunicate(void)
+static void LinkCommunicate(void)
 {
     u32 control;
 
@@ -663,7 +685,7 @@ void LinkCommunicate(void)
  * @brief 8a840 | 10 | Start a serial transfer
  * 
  */
-void LinkStartTransfer(void)
+static void LinkStartTransfer(void)
 {
     write16(REG_SIO, read16(REG_SIO) | SIO_START_BIT_ACTIVE);
 }
@@ -673,7 +695,7 @@ void LinkStartTransfer(void)
  * 
  * @return u8 bool, handshake was successfully performed
  */
-u8 LinkDoHandshake(void)
+static u8 LinkDoHandshake(void)
 {
     u16 minRecv;
     u8 i;
@@ -747,7 +769,7 @@ u8 LinkDoHandshake(void)
  * @brief 8a94c | 108 | Receive a command from the receive queue
  * 
  */
-void LinkDoRecv(void)
+static void LinkDoRecv(void)
 {
     u16 recv[4];
     u8 i;
@@ -802,7 +824,7 @@ void LinkDoRecv(void)
  * @brief 8aa54 | 9c | Send a command from the send queue
  * 
  */
-void LinkDoSend(void)
+static void LinkDoSend(void)
 {
     if (gLink.connection.sendCmdIndex == CMD_LENGTH)
     {
@@ -847,7 +869,7 @@ void LinkDoSend(void)
  * @brief 8aaf0 | 34 | Stops the timer for the parent
  * 
  */
-void LinkStopTimer(void)
+static void LinkStopTimer(void)
 {
     if (gLink.session.isParent)
     {
@@ -861,7 +883,7 @@ void LinkStopTimer(void)
  * @brief 8ab24 | 30 | Send a signal that the receive command is done
  * 
  */
-void LinkSendRecvDone(void)
+static void LinkSendRecvDone(void)
 {
     if (gLink.connection.recvCmdIndex == CMD_LENGTH)
     {

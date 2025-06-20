@@ -5,6 +5,9 @@
 
 #include "structs/multiboot.h"
 
+static u32 MultiBootSend(struct MultiBootData* pMultiBoot, u16 data);
+static u32 MultiBootHandshake(struct MultiBootData* pMultiBoot);
+static void MultiBootWaitSendDone(void);
 
 /**
  * @brief 89164 | 3c | Initialize multiboot data and set serial communication to multiplayer
@@ -14,9 +17,9 @@
 void MultiBootInit(struct MultiBootData* pMultiBoot)
 {
     pMultiBoot->clientBit = 0;
-    pMultiBoot->probeCount = 0;
+    pMultiBoot->probeCount = MULTIBOOT_REQ_PREP_REC;
     pMultiBoot->responseBit = 0;
-    pMultiBoot->checkWait = 15;
+    pMultiBoot->checkWait = MULTIBOOT_CONNECTION_CHECK_WAIT;
     pMultiBoot->sendFlag = FALSE;
     pMultiBoot->handshakeTimeout = 0;
 
@@ -27,6 +30,7 @@ void MultiBootInit(struct MultiBootData* pMultiBoot)
 
 /**
  * @brief 891a0 | 3f0 | Handles transfer of multiboot data over serial communication
+ * 
  * @param pMultiBoot Multi boot data pointer
  * @return u32 Status of the connection, non-zero is error
  */
@@ -42,12 +46,12 @@ u32 MultiBootMain(struct MultiBootData* pMultiBoot)
         return 0;
     }
 
-    if (pMultiBoot->checkWait > 15)
+    if (pMultiBoot->checkWait > MULTIBOOT_CONNECTION_CHECK_WAIT)
     {
         /* After system call error, do not send anything,
          * and wait for client to have timeout error.
          */
-        pMultiBoot->checkWait--;
+        APPLY_DELTA_TIME_DEC(pMultiBoot->checkWait);
         return 0;
     }
 
@@ -69,7 +73,7 @@ output_burst:
         }
     }
 
-    if (pMultiBoot->probeCount >= 0xe0)
+    if (pMultiBoot->probeCount >= MULTIBOOT_REQ_HANDSHAKE_START)
     {
         /* Check(handshake) to see if all children booted properly. */
         i = MultiBootHandshake(pMultiBoot);
@@ -81,7 +85,7 @@ output_burst:
         /* If Low speed recognition mode, handshake also 2bytes communication, call
          * If High speed recognition mode, handshake also high speed communication.
          */
-        if (pMultiBoot->serverType == MULTIBOOT_SERVER_TYPE_QUICK && pMultiBoot->probeCount > 0xe1 && !MultiBootCheckComplete(pMultiBoot))
+        if (pMultiBoot->serverType == MULTIBOOT_SERVER_TYPE_QUICK && pMultiBoot->probeCount > MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_1 && !MultiBootCheckComplete(pMultiBoot))
         {
             MultiBootWaitSendDone();
             goto output_burst;
@@ -95,7 +99,7 @@ output_burst:
                 MultiBootInit(pMultiBoot);
                 return MULTIBOOT_ERROR_HANDSHAKE_FAILURE;
             }
-            pMultiBoot->handshakeTimeout--;
+            APPLY_DELTA_TIME_DEC(pMultiBoot->handshakeTimeout);
         }
 
         return 0;
@@ -103,7 +107,7 @@ output_burst:
 
     switch (pMultiBoot->probeCount)
     {
-        case 0:
+        case MULTIBOOT_REQ_PREP_REC:
             /* client not doing recognition
              * Value should be CLIENT_INFO 000 0 ccc 0
              * First, check if some kind of response(other than 0xffff) 
@@ -147,12 +151,12 @@ output_burst:
                 /* From client, until at least one returns value other than 
                  * 0xffff, maintain fixed time until redo of recognition processing
                  */
-                pMultiBoot->checkWait = 15;
+                pMultiBoot->checkWait = MULTIBOOT_CONNECTION_CHECK_WAIT;
             }
 
-            if (pMultiBoot->checkWait)
+            if (pMultiBoot->checkWait != 0)
             {
-                pMultiBoot->checkWait--;
+                APPLY_DELTA_TIME_DEC(pMultiBoot->checkWait);
             }
             else
             {
@@ -171,7 +175,7 @@ output_burst:
             return MultiBootSend(pMultiBoot, pMultiBoot->clientBit | (MULTIBOOT_PARENT_INFO << 8));
 
         case_1:
-        case 1:
+        case MULTIBOOT_REQ_START_REC:
             /* Start recognition.
              * Those where in data is CLIENT_INFO 000 0 ccc 0
              * are recognized.
@@ -207,10 +211,10 @@ output_burst:
              * Here the recognized bits are 000, ccc.
              * If not possible that 000 or ccc, not recognized by parent.
              */
-            pMultiBoot->probeCount = 2;
+            pMultiBoot->probeCount = MULTIBOOT_REQ_PROC_REC;
             return MultiBootSend(pMultiBoot, pMultiBoot->probeTargetBit | (MULTIBOOT_PARENT_START_PROBE << 8));
 
-        case 2:
+        case MULTIBOOT_REQ_PROC_REC:
             /* Must be CLIENT_INFO 000 0 ccc 0.
              * Output header +0, +1 bytes.
              */
@@ -227,7 +231,7 @@ output_burst:
             }
             goto output_header;
 
-        case 0xd0:
+        case MULTIBOOT_REQ_TX_CHECK:
             /* Request for start of parent server.
              * If CLIENT_INFO 000 0 ccc 0, not ready
              * to download client.
@@ -271,7 +275,7 @@ output_burst:
             }
 
             /* All machines ready to download */
-            pMultiBoot->probeCount = 0xd1;
+            pMultiBoot->probeCount = MULTIBOOT_REQ_TX_START;
             mask = 0x11;
 
             for (i = MULTIBOOT_MAX_CHILD; i != 0; i--)
@@ -284,7 +288,7 @@ output_burst:
 
             return MultiBootSend(pMultiBoot, (mask & 0xFF) | (MULTIBOOT_PARENT_START_DL << 8));
 
-        case 0xd1:
+        case MULTIBOOT_REQ_TX_START:
             /* Send PARENT_START_DL
              * Should be CLIENT_DL_READY.
              */
@@ -306,8 +310,11 @@ output_burst:
 
             if (i == FALSE)
             {
-                pMultiBoot->probeCount = 0xe0;
-                pMultiBoot->handshakeTimeout = 400;
+                /* complete
+                 * Make mp -> probe_count into 0xe0(request for handshake start).
+                 */
+                pMultiBoot->probeCount = MULTIBOOT_REQ_HANDSHAKE_START;
+                pMultiBoot->handshakeTimeout = MULTIBOOT_HANDSHAKE_TIMEOUT;
                 return 0;
             }
 
@@ -317,7 +324,7 @@ output_burst:
              * Therefore, until retry, do not send anything including PARENT_INFO,
              * during time for "Client has timeout error".
              */
-            pMultiBoot->checkWait = 30;
+            pMultiBoot->checkWait = MULTIBOOT_CONNECTION_CHECK_WAIT * 2;
             return MULTIBOOT_ERROR_BOOT_FAILED;
 
         default:
@@ -328,6 +335,12 @@ output_burst:
              *  :
              * 0xc2 -> +0xbe, 0xbf byte
              * Output header data.
+             */
+
+            /* When client is being recognized,
+             * value is MASTER_START_PROBE - 1, ..-2, ..., 0
+             * 0x61 - 1,               0x5f
+             * lower bytes are 000 0 ccc 0 
              */
             for (i = MULTIBOOT_MAX_CHILD; i != 0; i--)
             {
@@ -343,7 +356,7 @@ output_burst:
                 }
             }
 
-            if (pMultiBoot->probeCount == 0xc4)
+            if (pMultiBoot->probeCount == MULTIBOOT_REC_COMPLETE)
             {
                 /* From recognized, those leftover last are 
                  * qualified as client.
@@ -364,7 +377,7 @@ output_burst:
     }
 
     pMultiBoot->probeCount += 2;
-    if (pMultiBoot->probeCount == 0xc4)
+    if (pMultiBoot->probeCount == MULTIBOOT_REC_COMPLETE)
     {
         /* When getting final data, send PARENT_INFO 000 0 ccc 0.
          * If do not problem with timing.
@@ -400,7 +413,7 @@ output_burst:
  * @param data Data to send
  * @return u16 Status of the connection, non-zero is error
  */
-u32 MultiBootSend(struct MultiBootData* pMultiBoot, u16 data)
+static u32 MultiBootSend(struct MultiBootData* pMultiBoot, u16 data)
 {
     /* If still busy at this point, problem has occurred.
      * There may be a problem with the connection(connected to JOY) and      
@@ -409,7 +422,7 @@ u32 MultiBootSend(struct MultiBootData* pMultiBoot, u16 data)
      * error bit or connection ID.
      */
     u16 control = read16(REG_SIO) & (SIO_START_BIT_ACTIVE | SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
-    if (control != SIO_HIGH_DURING_INACTIVITY)
+    if (control != SIO_MULTI_CONNECTION_READY)
     {
         MultiBootInit(pMultiBoot);
         return control ^ SIO_MULTI_CONNECTION_READY;
@@ -436,7 +449,7 @@ void MultiBootStartProbe(struct MultiBootData* pMultiBoot)
 
     pMultiBoot->checkWait = 0;
     pMultiBoot->clientBit = 0;
-    pMultiBoot->probeCount = 1;
+    pMultiBoot->probeCount = MULTIBOOT_REQ_START_REC;
 }
 
 /**
@@ -455,7 +468,7 @@ void MultiBootStartParent(struct MultiBootData* pMultiBoot, const u8* src, s32 l
 
     var_2 = palette_speed;
     
-    if (pMultiBoot->probeCount != 0 || pMultiBoot->clientBit == 0 || pMultiBoot->checkWait != 0)
+    if (pMultiBoot->probeCount != MULTIBOOT_REQ_PREP_REC || pMultiBoot->clientBit == 0 || pMultiBoot->checkWait != 0)
     {
         /* Recognition processing, cannot do processing */
         MultiBootInit(pMultiBoot);
@@ -495,7 +508,7 @@ void MultiBootStartParent(struct MultiBootData* pMultiBoot, const u8* src, s32 l
     }
 
     pMultiBoot->paletteData = ((paletteData & 0x3F) << 1) | 0x81;
-    pMultiBoot->probeCount = 0xD0;
+    pMultiBoot->probeCount = MULTIBOOT_REQ_TX_CHECK;
 }
 
 /**
@@ -506,7 +519,7 @@ void MultiBootStartParent(struct MultiBootData* pMultiBoot, const u8* src, s32 l
  */
 u32 MultiBootCheckComplete(struct MultiBootData* pMultiBoot)
 {
-    if (pMultiBoot->probeCount == 0xE9)
+    if (pMultiBoot->probeCount == MULTIBOOT_HANDSHAKE_SUCCESS)
     {
         return TRUE;
     }
@@ -517,22 +530,22 @@ u32 MultiBootCheckComplete(struct MultiBootData* pMultiBoot)
 }
 
 /**
- * @brief 896cc | ec | To document
+ * @brief 896cc | ec | Perform handshake to confirm the boot has succeeded
  * 
  * @param pMultiBoot Multi boot param pointer
- * @return u32 SIOCNT
+ * @return u32 Status of handshake, 0 is success, otherwise failure
  */
-u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
+static u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
 {
     s32 i;
     u16 value;
 
     switch (pMultiBoot->probeCount)
     {
-        case 0xe0:
+        case MULTIBOOT_REQ_HANDSHAKE_START:
             c_0xe0:
             /* Parent sends 0x0000. */
-            pMultiBoot->probeCount = 0xe1;
+            pMultiBoot->probeCount = MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_1;
             pMultiBoot->systemWork_1[1] = 0;
             pMultiBoot->systemWork_1[0] = 0x100000; /* Right before next send >> 5  */
 
@@ -559,7 +572,7 @@ u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
             }
 
             pMultiBoot->probeCount++;
-            pMultiBoot->systemWork_1[1] = pMultiBoot->systemWork_1[0] & 0xFFFF;
+            pMultiBoot->systemWork_1[1] = (u16)pMultiBoot->systemWork_1[0];
             if (pMultiBoot->systemWork_1[0] == 0)
             {
                 /* This time send initial code low. */
@@ -572,8 +585,8 @@ u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
             output_common:
             return MultiBootSend(pMultiBoot, pMultiBoot->systemWork_1[0]);
 
-        case 0xe7: /* Parent sent initial code, low. All children must be same. */
-        case 0xe8: /* Parent sent initial code, high. All children must be same. */
+        case MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_7: /* Parent sent initial code, low. All children must be same. */
+        case MULTIBOOT_REQ_HANDSHAKE_HEADER_CHECK_8: /* Parent sent initial code, high. All children must be same. */
             for (i = MULTIBOOT_MAX_CHILD; i != 0; i--)
             {
                 value = READ_SIO_MULTI(i);
@@ -592,7 +605,7 @@ u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
             }
 
             pMultiBoot->probeCount++;
-            if (pMultiBoot->probeCount == 0xe9)
+            if (pMultiBoot->probeCount == MULTIBOOT_HANDSHAKE_SUCCESS)
             {
                 /* Handshake Success! */
                 return 0;
@@ -601,12 +614,7 @@ u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
             /* This time send the initial code, high. */
             pMultiBoot->systemWork_1[0] = C_16_2_8_(pMultiBoot->dataSentPointer[0xAF], pMultiBoot->dataSentPointer[0xAE]);
             pMultiBoot->systemWork_1[1] = pMultiBoot->systemWork_1[0];
-
-            #ifndef NON_MATCHING
             goto output_common;
-            #else // NON_MATCHING
-            return MultiBootSend(pMultiBoot, pMultiBoot->systemWork_1[0]);
-            #endif // NON_MATCHING
     }
 }
 
@@ -616,7 +624,7 @@ u32 MultiBootHandshake(struct MultiBootData* pMultiBoot)
  * @param cycles Cycles to wait
  */
 NAKED_FUNCTION
-void MultiBootWaitCycles(s32 cycles)
+static void MultiBootWaitCycles(s32 cycles)
 {
     // Assumed to be hand written due to the use of PC and no cmp before the bgt
     // Closest approximation: https://decomp.me/scratch/4CRCE
@@ -656,8 +664,9 @@ void MultiBootWaitCycles(s32 cycles)
 
 /**
  * @brief 897d0 | 3c | Wait up to one frame for communication to be completed
+ * 
  */
-void MultiBootWaitSendDone(void)
+static void MultiBootWaitSendDone(void)
 {
     s32 i;
 

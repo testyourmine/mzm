@@ -7,6 +7,15 @@
 #include "structs/cable_link.h"
 #include "structs/transfer.h"
 
+static u16 TransferHandleTransfer(u32 transferMode, u32 size, const u32* pData, u32* recvBuffer);
+static u16 TransferDetermineSendRecvState(u8 transferMode);
+static void TransferSetUpTransferManager(u32 size, const u32* pData, u32* recvBuffer);
+static void TransferInitTimer(void);
+static void TransferStartTransfer(void);
+static void TransferStopTimer(void);
+static void TransferBackupIoRegs(void);
+static void TransferRetrieveIoRegs(void);
+
 /**
  * @brief 8980c | ac | Process the serial transfer
  * 
@@ -79,7 +88,7 @@ u32 TransferProcessSend(u32 size, const u32* pData)
  * @brief 898b8 | 54 | Initialize data for transfer
  * 
  */
-void TransferInit(void)
+static void TransferInit(void)
 {
     u32 buffer;
 
@@ -98,7 +107,7 @@ void TransferInit(void)
  * @brief 8990c | 40 | Stop serial transfer and timer 3
  * 
  */
-void TransferCloseSerial(void)
+static void TransferCloseSerial(void)
 {
     // Disable timer 3 and serial interrupt
     write16(REG_IME, FALSE);
@@ -115,7 +124,7 @@ void TransferCloseSerial(void)
  * @brief 8994c | 58 | Set serial transfer to multi mode
  * 
  */
-void TransferOpenSerialMulti(void)
+static void TransferOpenSerialMulti(void)
 {
     // Disable timer 3 and serial interrupt
     write16(REG_IME, FALSE);
@@ -138,7 +147,7 @@ void TransferOpenSerialMulti(void)
  * @brief 899a4 | 24 | Set serial transfer to 32 bit transfer and set serial out to ready
  * 
  */
-void TransferOpenSerial32(void)
+static void TransferOpenSerial32(void)
 {
     write16(REG_RNCT, 0);
     write16(REG_SIO, SIO_32BIT_MODE | SIO_IRQ_ENABLE);
@@ -154,7 +163,7 @@ void TransferOpenSerial32(void)
  * @param recvBuffer (Unused) Pointer to data to receive
  * @return u16 Bits 0-1 is dataTransferStage, bits 2-3 is verifyTransferResult, bits 4-7 is errorDuringTransfer, bits 8+ is unk_2
  */
-u16 TransferHandleTransfer(u32 transferMode, u32 size, const u32* pData, u32* recvBuffer)
+static u16 TransferHandleTransfer(u32 transferMode, u32 size, const u32* pData, u32* recvBuffer)
 {
     // pData is transfer rom, size is size of transfer rom
     switch (gTransferManager.status.stage)
@@ -248,7 +257,7 @@ u16 TransferHandleTransfer(u32 transferMode, u32 size, const u32* pData, u32* re
  * @param transferMode Transfer mode, 0 is receiving, 1 is sending
  * @return u16 bool Is GBA parent
  */
-u16 TransferDetermineSendRecvState(u8 transferMode)
+static u16 TransferDetermineSendRecvState(u8 transferMode)
 {
     u16 isParent;
     // If all GBA's are ready and is currently the parent GBA
@@ -270,7 +279,7 @@ u16 TransferDetermineSendRecvState(u8 transferMode)
  * @param pData Pointer to data to send
  * @param recvBuffer (Unused) Pointer to data to receive
  */
-void TransferSetUpTransferManager(u32 size, const u32* pData, u32* recvBuffer)
+static void TransferSetUpTransferManager(u32 size, const u32* pData, u32* recvBuffer)
 {
     write16(REG_SIO, read16(REG_SIO) | SIO_BAUD_RATE_38400);
     
@@ -286,7 +295,7 @@ void TransferSetUpTransferManager(u32 size, const u32* pData, u32* recvBuffer)
  * @brief 89ba0 | 34 | Initialize timer 3 for transfer
  * 
  */
-void TransferInitTimer(void)
+static void TransferInitTimer(void)
 {
     // Load -101 into timer 3 (what is -101?)
     write16(REG_TM3CNT_L, -101);
@@ -428,7 +437,7 @@ void TransferExchangeData(void)
  * @brief 89d64 | 10 | Start a serial transfer
  * 
  */
-void TransferStartTransfer(void)
+static void TransferStartTransfer(void)
 {
     write16(REG_SIO, read16(REG_SIO) | SIO_START_BIT_ACTIVE);
 }
@@ -437,7 +446,7 @@ void TransferStartTransfer(void)
  * @brief 89d74 | 24 | Stop and reload timer 3
  * 
  */
-void TransferStopTimer(void)
+static void TransferStopTimer(void)
 {
     write16(REG_TM3CNT_H, read16(REG_TM3CNT_H) & ~TIMER_CONTROL_ACTIVE);
     write16(REG_TM3CNT_L, -101);
@@ -447,7 +456,7 @@ void TransferStopTimer(void)
  * @brief 89d98 | 54 | Makes a backup of the registers used for transfer
  * 
  */
-void TransferBackupIoRegs(void)
+static void TransferBackupIoRegs(void)
 {
     gRegIme_Backup = read16(REG_IME);
     gRegIe_Backup = read16(REG_IE);
@@ -460,7 +469,7 @@ void TransferBackupIoRegs(void)
  * @brief 89dec | 44 | Retrieves the registers used for transfer from the backups
  * 
  */
-void TransferRetrieveIoRegs(void)
+static void TransferRetrieveIoRegs(void)
 {
     write16(REG_IME, gRegIme_Backup);
     write16(REG_IE, gRegIe_Backup);
