@@ -124,7 +124,7 @@ void IoWriteRegistersDuringTransition(void)
  * @param operation Operation (0 = Remove, 1 = Add)
  * @param value Value to apply
  */
-void IoUpdateDISPCNT(u8 operation, u16 value)
+void IoUpdateDispcnt(u8 operation, u16 value)
 {
     if (value != 0)
     {

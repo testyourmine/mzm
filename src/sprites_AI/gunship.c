@@ -456,7 +456,7 @@ static void GunshipRefill(void)
         gCurrentSprite.work0 = CONVERT_SECONDS(.5f);
 
         gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED,
-            6, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+            SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         SoundFade(SOUND_GUNSHIP_REFILL, CONVERT_SECONDS(.25f));
     }
 }
@@ -479,7 +479,7 @@ static void GunshipAfterRefill(void)
             {
                 // Spawn save prompt
                 gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_PROMPT,
-                    6, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+                    SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
             }
         }
         else
@@ -514,7 +514,7 @@ static void GunshipSaving(void)
     {
         gCurrentSprite.pose = GUNSHIP_POSE_AFTER_SAVE;
         gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_COMPLETE,
-            6, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+            SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
     }
 }
 

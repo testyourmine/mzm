@@ -4,7 +4,7 @@
 const u32 sMapStationGfx[680] = INCBIN_U32("data/sprites/MapStation.gfx.lz");
 const u16 sMapStationPal[64] = INCBIN_U16("data/sprites/MapStation.pal");
 
-const u16 sMapStationOAM_Inactive_Frame19[OAM_DATA_SIZE(25)] = {
+static const u16 sMapStationOam_Inactive_Frame19[OAM_DATA_SIZE(25)] = {
     0x19,
     OBJ_SHAPE_HORIZONTAL | 0x82, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e8, OBJ_SPRITE_OAM | 0x280,
@@ -33,7 +33,7 @@ const u16 sMapStationOAM_Inactive_Frame19[OAM_DATA_SIZE(25)] = {
     0xcc, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame18[OAM_DATA_SIZE(25)] = {
+static const u16 sMapStationOam_Inactive_Frame18[OAM_DATA_SIZE(25)] = {
     0x19,
     OBJ_SHAPE_HORIZONTAL | 0x83, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e7, OBJ_SPRITE_OAM | 0x280,
@@ -62,7 +62,7 @@ const u16 sMapStationOAM_Inactive_Frame18[OAM_DATA_SIZE(25)] = {
     0xd0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame17[OAM_DATA_SIZE(25)] = {
+static const u16 sMapStationOam_Inactive_Frame17[OAM_DATA_SIZE(25)] = {
     0x19,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -91,7 +91,7 @@ const u16 sMapStationOAM_Inactive_Frame17[OAM_DATA_SIZE(25)] = {
     0xd4, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame16[OAM_DATA_SIZE(25)] = {
+static const u16 sMapStationOam_Inactive_Frame16[OAM_DATA_SIZE(25)] = {
     0x19,
     OBJ_SHAPE_HORIZONTAL | 0x85, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e5, OBJ_SPRITE_OAM | 0x280,
@@ -120,7 +120,7 @@ const u16 sMapStationOAM_Inactive_Frame16[OAM_DATA_SIZE(25)] = {
     0xd8, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame15[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame15[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x86, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e4, OBJ_SPRITE_OAM | 0x280,
@@ -151,7 +151,7 @@ const u16 sMapStationOAM_Inactive_Frame15[OAM_DATA_SIZE(27)] = {
     0xde, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame14[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame14[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x85, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e5, OBJ_SPRITE_OAM | 0x280,
@@ -182,7 +182,7 @@ const u16 sMapStationOAM_Inactive_Frame14[OAM_DATA_SIZE(27)] = {
     0xdd, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame13[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame13[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -213,7 +213,7 @@ const u16 sMapStationOAM_Inactive_Frame13[OAM_DATA_SIZE(27)] = {
     0xdc, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame12[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame12[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -244,7 +244,7 @@ const u16 sMapStationOAM_Inactive_Frame12[OAM_DATA_SIZE(27)] = {
     0xdd, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame11[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame11[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -275,7 +275,7 @@ const u16 sMapStationOAM_Inactive_Frame11[OAM_DATA_SIZE(27)] = {
     0xdc, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame10[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame10[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -306,7 +306,7 @@ const u16 sMapStationOAM_Inactive_Frame10[OAM_DATA_SIZE(27)] = {
     0xdd, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame9[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame9[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -337,7 +337,7 @@ const u16 sMapStationOAM_Inactive_Frame9[OAM_DATA_SIZE(27)] = {
     0xde, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Inactive_Frame8[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Inactive_Frame8[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -368,7 +368,7 @@ const u16 sMapStationOAM_Inactive_Frame8[OAM_DATA_SIZE(27)] = {
     0xdf, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Idle_Frame0[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Idle_Frame0[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -399,7 +399,7 @@ const u16 sMapStationOAM_Idle_Frame0[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame0[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame0[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -430,7 +430,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame0[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame1[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame1[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -461,7 +461,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame1[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame2[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame2[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -492,7 +492,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame2[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame3[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame3[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -523,7 +523,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame3[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame4[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame4[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -554,7 +554,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame4[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame5[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame5[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -585,7 +585,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame5[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame6[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame6[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -616,7 +616,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame6[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame7[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame7[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -647,7 +647,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame7[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_GrabbingSamus_Frame8[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_GrabbingSamus_Frame8[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -678,7 +678,7 @@ const u16 sMapStationOAM_GrabbingSamus_Frame8[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a0
 };
 
-const u16 sMapStationOAM_Downloading_Frame0[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Downloading_Frame0[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -709,7 +709,7 @@ const u16 sMapStationOAM_Downloading_Frame0[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a2
 };
 
-const u16 sMapStationOAM_Downloading_Frame1[OAM_DATA_SIZE(27)] = {
+static const u16 sMapStationOam_Downloading_Frame1[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0x84, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0x8b, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -740,367 +740,367 @@ const u16 sMapStationOAM_Downloading_Frame1[OAM_DATA_SIZE(27)] = {
     0xe0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x2a4
 };
 
-const u16 sMapStationPartOAM_BackScreenIdle_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenIdle_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x214
 };
 
-const u16 sMapStationPartOAM_BackScreenIdle_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenIdle_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x216
 };
 
-const u16 sMapStationPartOAM_BackScreenIdle_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenIdle_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sMapStationPartOAM_BackScreenIdle_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenIdle_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x21a
 };
 
-const u16 sMapStationPartOAM_BackScreenDownloaded_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenDownloaded_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x25a
 };
 
-const u16 sMapStationPartOAM_BackScreenDownloaded_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenDownloaded_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x258
 };
 
-const u16 sMapStationPartOAM_BackScreenDownloaded_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenDownloaded_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x256
 };
 
-const u16 sMapStationPartOAM_BackScreenDownloaded_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sMapStationPartOam_BackScreenDownloaded_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0xe2, OBJ_SIZE_16x16 | 0x1f4, OBJ_SPRITE_OAM | 0x254
 };
 
-const u16 sMapStationPartOAM_FrontScreenIdle_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sMapStationPartOam_FrontScreenIdle_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xe5, 0x4, OBJ_SPRITE_OAM | 0x209,
     OBJ_SHAPE_HORIZONTAL | 0xed, 0x1fc, OBJ_SPRITE_OAM | 0x228
 };
 
-const u16 sMapStationPartOAM_FrontScreenIdle_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sMapStationPartOam_FrontScreenIdle_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xe5, 0x4, OBJ_SPRITE_OAM | 0x20c,
     OBJ_SHAPE_HORIZONTAL | 0xed, 0x1fc, OBJ_SPRITE_OAM | 0x22b
 };
 
-const u16 sMapStationPartOAM_FrontScreenIdle_Frame2[OAM_DATA_SIZE(2)] = {
+static const u16 sMapStationPartOam_FrontScreenIdle_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xe5, 0x4, OBJ_SPRITE_OAM | 0x20f,
     OBJ_SHAPE_HORIZONTAL | 0xed, 0x1fc, OBJ_SPRITE_OAM | 0x22e
 };
 
-const u16 sMapStationPartOAM_FrontScreenIdle_Frame3[OAM_DATA_SIZE(2)] = {
+static const u16 sMapStationPartOam_FrontScreenIdle_Frame3[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xe5, 0x4, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_HORIZONTAL | 0xed, 0x1fc, OBJ_SPRITE_OAM | 0x231
 };
 
-const u16 sMapStationPartOAM_FrontScreenDownloaded_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sMapStationPartOam_FrontScreenDownloaded_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xe5, 0x4, OBJ_SPRITE_OAM | 0x252,
     OBJ_SHAPE_HORIZONTAL | 0xed, 0x1fc, OBJ_SPRITE_OAM | 0x271
 };
 
-const struct FrameData sMapStationOAM_Idle[2] = {
+const struct FrameData sMapStationOam_Idle[2] = {
     [0] = {
-        .pFrame = sMapStationOAM_Idle_Frame0,
+        .pFrame = sMapStationOam_Idle_Frame0,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationOAM_GrabbingSamus[10] = {
+const struct FrameData sMapStationOam_GrabbingSamus[10] = {
     [0] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame0,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame1,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame2,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame3,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame4,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame4,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [5] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame5,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame5,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [6] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame6,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame6,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [7] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame7,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame7,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [8] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame8,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame8,
         .timer = ONE_THIRD_SECOND
     },
     [9] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationOAM_Downloading[4] = {
+const struct FrameData sMapStationOam_Downloading[4] = {
     [0] = {
-        .pFrame = sMapStationOAM_Downloading_Frame0,
+        .pFrame = sMapStationOam_Downloading_Frame0,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [1] = {
-        .pFrame = sMapStationOAM_Downloading_Frame1,
+        .pFrame = sMapStationOam_Downloading_Frame1,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [2] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame8,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame8,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationOAM_Retracting[2] = {
+const struct FrameData sMapStationOam_Retracting[2] = {
     [0] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame8,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame8,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationOAM_Inactive[21] = {
+const struct FrameData sMapStationOam_Inactive[21] = {
     [0] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame7,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame7,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame6,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame6,
         .timer = ONE_THIRD_SECOND
     },
     [2] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame4,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame4,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame3,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame2,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [5] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame1,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [6] = {
-        .pFrame = sMapStationOAM_GrabbingSamus_Frame0,
+        .pFrame = sMapStationOam_GrabbingSamus_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [7] = {
-        .pFrame = sMapStationOAM_Idle_Frame0,
+        .pFrame = sMapStationOam_Idle_Frame0,
         .timer = ONE_THIRD_SECOND
     },
     [8] = {
-        .pFrame = sMapStationOAM_Inactive_Frame8,
+        .pFrame = sMapStationOam_Inactive_Frame8,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [9] = {
-        .pFrame = sMapStationOAM_Inactive_Frame9,
+        .pFrame = sMapStationOam_Inactive_Frame9,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [10] = {
-        .pFrame = sMapStationOAM_Inactive_Frame10,
+        .pFrame = sMapStationOam_Inactive_Frame10,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [11] = {
-        .pFrame = sMapStationOAM_Inactive_Frame11,
+        .pFrame = sMapStationOam_Inactive_Frame11,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [12] = {
-        .pFrame = sMapStationOAM_Inactive_Frame12,
+        .pFrame = sMapStationOam_Inactive_Frame12,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [13] = {
-        .pFrame = sMapStationOAM_Inactive_Frame13,
+        .pFrame = sMapStationOam_Inactive_Frame13,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [14] = {
-        .pFrame = sMapStationOAM_Inactive_Frame14,
+        .pFrame = sMapStationOam_Inactive_Frame14,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [15] = {
-        .pFrame = sMapStationOAM_Inactive_Frame15,
+        .pFrame = sMapStationOam_Inactive_Frame15,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [16] = {
-        .pFrame = sMapStationOAM_Inactive_Frame16,
+        .pFrame = sMapStationOam_Inactive_Frame16,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [17] = {
-        .pFrame = sMapStationOAM_Inactive_Frame17,
+        .pFrame = sMapStationOam_Inactive_Frame17,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [18] = {
-        .pFrame = sMapStationOAM_Inactive_Frame18,
+        .pFrame = sMapStationOam_Inactive_Frame18,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [19] = {
-        .pFrame = sMapStationOAM_Inactive_Frame19,
+        .pFrame = sMapStationOam_Inactive_Frame19,
         .timer = UCHAR_MAX
     },
     [20] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationPartOAM_BackScreenIdle[5] = {
+const struct FrameData sMapStationPartOam_BackScreenIdle[5] = {
     [0] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame0,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame0,
         .timer = CONVERT_SECONDS(7.f / 30)
     },
     [1] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(7.f / 30)
     },
     [2] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(7.f / 30)
     },
     [3] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame3,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame3,
         .timer = CONVERT_SECONDS(7.f / 30)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationPartOAM_BackScreenDownloading[5] = {
+const struct FrameData sMapStationPartOam_BackScreenDownloading[5] = {
     [0] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame0,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sMapStationPartOAM_BackScreenIdle_Frame3,
+        .pFrame = sMapStationPartOam_BackScreenIdle_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationPartOAM_BackScreenDownloaded[5] = {
+const struct FrameData sMapStationPartOam_BackScreenDownloaded[5] = {
     [0] = {
-        .pFrame = sMapStationPartOAM_BackScreenDownloaded_Frame0,
+        .pFrame = sMapStationPartOam_BackScreenDownloaded_Frame0,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [1] = {
-        .pFrame = sMapStationPartOAM_BackScreenDownloaded_Frame1,
+        .pFrame = sMapStationPartOam_BackScreenDownloaded_Frame1,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [2] = {
-        .pFrame = sMapStationPartOAM_BackScreenDownloaded_Frame2,
+        .pFrame = sMapStationPartOam_BackScreenDownloaded_Frame2,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [3] = {
-        .pFrame = sMapStationPartOAM_BackScreenDownloaded_Frame3,
+        .pFrame = sMapStationPartOam_BackScreenDownloaded_Frame3,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationPartOAM_FrontScreenIdle[7] = {
+const struct FrameData sMapStationPartOam_FrontScreenIdle[7] = {
     [0] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame0,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame0,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [1] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [2] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [3] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame3,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame3,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [4] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [5] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(1.f / 6)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationPartOAM_FrontScreenDownloading[7] = {
+const struct FrameData sMapStationPartOam_FrontScreenDownloading[7] = {
     [0] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame0,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame0,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame3,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame3,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [4] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [5] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMapStationPartOAM_FrontScreenDownloaded[6] = {
+const struct FrameData sMapStationPartOam_FrontScreenDownloaded[6] = {
     [0] = {
-        .pFrame = sMapStationPartOAM_FrontScreenDownloaded_Frame0,
+        .pFrame = sMapStationPartOam_FrontScreenDownloaded_Frame0,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [1] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame3,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame3,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [2] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame2,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame2,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [3] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame1,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [4] = {
-        .pFrame = sMapStationPartOAM_FrontScreenIdle_Frame0,
+        .pFrame = sMapStationPartOam_FrontScreenIdle_Frame0,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [5] = FRAME_DATA_TERMINATOR

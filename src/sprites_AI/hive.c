@@ -109,7 +109,7 @@ static void HiveInit(void)
  * 
  * @return u8 Number of mellows
  */
-u8 HiveCountMellows(void)
+static u8 HiveCountMellows(void)
 {
     u8 count;
     u8 roomSlot;

@@ -409,8 +409,14 @@ enum SamusStandingOnSpriteStatus {
 
 #define SPRITE_GET_STUN_PALETTE(sprite) (NBR_OF_PALETTE_ROWS - ((sprite).spritesetGfxSlot + (sprite).frozenPaletteRowOffset) - SPRITE_STUN_PALETTE_OFFSET)
 
+// The maximum number of gfx slots for sprites
 #define SPRITE_GFX_SLOT_MAX 8
+// A special gfx slot, used to spawn generic sprites such as the item banner
+#define SPRITE_GFX_SLOT_SPECIAL 6
 
 #define SPRITE_FREEZE_TIMER (CONVERT_SECONDS(4.f))
+
+// Computes a probability for the sprite rng value [0;16[
+#define SPRITE_RNG_PROB(prob) ((s32)((prob) * 16))
 
 #endif /* SPRITE_CONSTANTS_H */

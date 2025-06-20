@@ -4,7 +4,6 @@
 #include "types.h"
 #include "structs/sprite.h"
 
-u8 HiveCountMellows(void);
 void Hive(void);
 void HiveRoots(void);
 void Mellow(void);
