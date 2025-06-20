@@ -39,23 +39,23 @@ const struct OamArray sEnterTourianOam[7] = {
         .preAction = OAM_ARRAY_PRE_ACTION_RESET_FRAME
     },
     [2] = {
-        .pOam = sMetroidShellOAM_Idle,
+        .pOam = sMetroidShellOam_Idle,
         .preAction = OAM_ARRAY_PRE_ACTION_CHANGE_FRAME
     },
     [3] = {
-        .pOam = sMetroidOAM_Moving,
+        .pOam = sMetroidOam_Moving,
         .preAction = OAM_ARRAY_PRE_ACTION_CHANGE_FRAME
     },
     [4] = {
-        .pOam = sMetroidOAM_Moving,
+        .pOam = sMetroidOam_Moving,
         .preAction = OAM_ARRAY_PRE_ACTION_LOOP_ON_LAST_FRAME
     },
     [5] = {
-        .pOam = sMetroidOAM_Moving,
+        .pOam = sMetroidOam_Moving,
         .preAction = OAM_ARRAY_PRE_ACTION_RESET_FRAME
     },
     [6] = {
-        .pOam = sMetroidOAM_SamusGrabbed,
+        .pOam = sMetroidOam_SamusGrabbed,
         .preAction = OAM_ARRAY_PRE_ACTION_CHANGE_FRAME
     }
 };

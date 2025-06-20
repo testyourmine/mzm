@@ -412,7 +412,7 @@ void EnterTourianSwitchMetroidPalette(struct CutscenePaletteData* pPalette, u8 g
     if (pPalette->active)
     {
         pPalette->active = FALSE;
-        DmaTransfer(3, &sMetroidOAM_Moving_Frame10[8], PALRAM_OBJ + 12 * PAL_ROW_SIZE, 1 * PAL_ROW_SIZE, 16);
+        DmaTransfer(3, &sMetroidOam_Moving_Frame10[8], PALRAM_OBJ + 12 * PAL_ROW_SIZE, 1 * PAL_ROW_SIZE, 16);
     }
 }
 
