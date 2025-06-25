@@ -1,4 +1,5 @@
 #include "room.h"
+#include "dma.h"
 #include "gba.h"
 
 #include "data/engine_pointers.h"

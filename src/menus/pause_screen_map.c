@@ -1,6 +1,7 @@
 #include "menus/pause_screen_map.h"
 #include "menus/pause_screen.h"
 #include "menus/status_screen.h"
+#include "dma.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/block_data.h"

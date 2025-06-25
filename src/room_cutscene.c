@@ -1,4 +1,5 @@
 #include "types.h"
+#include "dma.h"
 #include "gba.h"
 
 #include "transparency.h"

@@ -1,5 +1,6 @@
 #include "cutscenes/story_text_cutscene.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "text.h" // Required
 
 #include "data/shortcut_pointers.h"

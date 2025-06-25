@@ -1,4 +1,5 @@
 #include "chozodia_escape.h"
+#include "dma.h"
 #include "gba.h"
 #include "callbacks.h"
 #include "complex_oam.h" // Required

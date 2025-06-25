@@ -1,4 +1,5 @@
 #include "text.h"
+#include "dma.h"
 #include "gba.h"
 #include "macros.h"
 

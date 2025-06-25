@@ -1,4 +1,5 @@
 #include "animated_graphics.h"
+#include "dma.h"
 #include "gba.h"
 #include "macros.h"
 #include "sprite.h"

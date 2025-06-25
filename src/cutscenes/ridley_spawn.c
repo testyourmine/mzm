@@ -1,5 +1,6 @@
 #include "cutscenes/ridley_spawn.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/ridley_spawn_data.h"

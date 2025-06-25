@@ -1,3 +1,5 @@
+#include "init_helpers.h"
+#include "dma.h"
 #include "gba.h"
 #include "globals.h"
 #include "interrupts.h"

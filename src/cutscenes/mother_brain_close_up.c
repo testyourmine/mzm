@@ -1,5 +1,6 @@
 #include "cutscenes/mother_brain_close_up.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "temp_globals.h"
 
 #include "data/shortcut_pointers.h"

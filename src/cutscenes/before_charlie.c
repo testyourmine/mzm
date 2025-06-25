@@ -1,5 +1,6 @@
 #include "cutscenes/before_charlie.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "gba.h"
 #include "color_effects.h" // Required
 

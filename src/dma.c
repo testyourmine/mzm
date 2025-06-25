@@ -1,40 +1,53 @@
-#include "globals.h"
+#include "dma.h"
 #include "gba.h"
 
 struct DMA {
-    void* pSrc;
+    const void* pSrc;
     void* pDst;
     u32 control;
 };
 
-#define CHECK_DMA_ENDED(c)                               \
-{                                                        \
-    vu32* _pDma;                                         \
-    _pDma = (vu32*)&gRegDMA[c];                          \
-    do {} while ((_pDma[2] & (DMA_ENABLE << 16)) != 0);  \
-}
-
-void DmaTransfer(u8 channel, void *src, void *dst, u32 len, u8 bitSize)
+void DmaTransfer(u8 channel, const void *src, void *dst, u32 len, u8 bitSize)
 {
-    // https://decomp.me/scratch/j8Gur
-
     volatile struct DMA* pDma;
-    u32 sizeControl;
+    vu32 sizeControl;
     u32 lengthControl;
-    u32 temp;
+    u32 chunkSize;
+    vu32* _pDma;
+    u32 tmp;
+    u32 tmp2;
+    u32 tmp3;
+    u32 tmp4;
+    u32 tmp5;
+    u32 tmp6;
+    u32 dma;
+    volatile struct DMA *regDMA;
 
-    pDma = gRegDMA + channel;
+    pDma = (regDMA = REG_DMA0) + channel;
 
-    if (bitSize == 0x20)
-        sizeControl = (DMA_32BIT << 16);
+    if (bitSize == 32)
+    {
+        tmp = DMA_32BIT;
+        tmp <<= 16;
+        sizeControl = tmp;
+    }
     else
+    {
         sizeControl = 0;
-    
-    temp = bitSize << 0x1;
-    lengthControl = (0x800 >> (temp));
-    lengthControl |= (DMA_ENABLE << 16);
-    
-    while (len > 0x800)
+    }
+
+    tmp2 = channel << 1;
+    lengthControl = 0x800;
+    chunkSize = 0x800;
+    tmp6 = bitSize / 16;
+    lengthControl = (0x800 >> (bitSize / 16));
+    tmp3 = DMA_ENABLE << 16;
+    lengthControl |= tmp3;
+    tmp2 += channel;
+    tmp = tmp2 << 2;
+
+    loop1:
+    while (len > chunkSize)
     {
         pDma->pSrc = src;
         pDma->pDst = dst;
@@ -42,20 +55,36 @@ void DmaTransfer(u8 channel, void *src, void *dst, u32 len, u8 bitSize)
         pDma->control = sizeControl | lengthControl;
         pDma->control;
 
-        CHECK_DMA_ENDED(channel);
+        _pDma = (vu32*)((u8*)regDMA + tmp);
+        if (_pDma[2] & (tmp3))
+        {
+            tmp4 = DMA_ENABLE << 16;
+            loop2:
+            dma = _pDma[2];
+            if ((dma & tmp4) != 0) goto loop2;
+        }
 
         len -= 0x800;
-        src += 0x800;
-        dst += 0x800;
+        src += chunkSize;
+        dst += chunkSize;
+        goto loop1;
     }
 
     pDma->pSrc = src;
     pDma->pDst = dst;
 
-    temp = bitSize << 0x1;
-    lengthControl = (len >> (temp));
-    pDma->control = sizeControl | lengthControl | temp;
+    len = len >> tmp6;
+    tmp4 = tmp3;
+    len = len | tmp4;
+    pDma->control = sizeControl | len;
     pDma->control;
 
-    CHECK_DMA_ENDED(channel);
+    _pDma = (vu32*)((u8*)regDMA + tmp);
+    if (_pDma[2] & (tmp4))
+    {
+        tmp5 = (DMA_ENABLE << 16);
+        loop3:
+        dma = _pDma[2];
+        if ((dma & tmp5) != 0) goto loop3;
+    }
 }

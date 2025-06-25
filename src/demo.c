@@ -1,5 +1,6 @@
 #include "demo.h"
 #include "callbacks.h"
+#include "dma.h"
 
 #include "data/demo_data.h"
 

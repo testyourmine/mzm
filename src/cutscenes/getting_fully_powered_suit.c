@@ -1,5 +1,6 @@
 #include "cutscenes/getting_fully_powered_suit.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "macros.h"
 
 #include "data/shortcut_pointers.h"

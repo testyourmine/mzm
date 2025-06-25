@@ -1,5 +1,7 @@
 #include "cutscenes/samus_in_blue_ship.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
+
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/samus_in_blue_ship_data.h"
 #include "data/cutscenes/internal_samus_in_blue_ship_data.h"

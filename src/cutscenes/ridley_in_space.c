@@ -1,5 +1,6 @@
 #include "cutscenes/ridley_in_space.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "oam_id.h"
 
 #include "data/generic_data.h"

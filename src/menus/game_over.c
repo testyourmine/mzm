@@ -1,4 +1,5 @@
 #include "menus/game_over.h"
+#include "dma.h"
 #include "macros.h"
 #include "callbacks.h"
 #include "oam_id.h"

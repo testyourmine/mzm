@@ -1,4 +1,5 @@
 #include "color_fading.h"
+#include "dma.h"
 #include "gba.h"
 #include "color_effects.h"
 #include "sprites_AI/ruins_test.h"

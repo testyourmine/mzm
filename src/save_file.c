@@ -1,5 +1,6 @@
 #include "save_file.h"
 #include "callbacks.h"
+#include "dma.h"
 #include "macros.h"
 #include "event.h"
 

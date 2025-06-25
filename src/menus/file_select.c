@@ -1,4 +1,5 @@
 #include "menus/file_select.h"
+#include "dma.h"
 #include "oam_id.h"
 #include "macros.h"
 #include "callbacks.h"
@@ -3538,7 +3539,7 @@ void unk_7b854(void)
     u32 low;
     u8* dstHigh;
     u8* dstLow;
-    u32 bitSize;
+    u8 bitSize;
 
     password = FILE_SELECT_DATA.timeAttackPassword;
     if (!(gFileScreenOptionsUnlocked.timeAttack & 1))

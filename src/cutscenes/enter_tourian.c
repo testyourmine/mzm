@@ -1,6 +1,7 @@
 #include "cutscenes/enter_tourian.h"
 #include "cutscenes/cutscene_utils.h"
 #include "color_effects.h"
+#include "dma.h"
 #include "macros.h"
 
 #include "data/shortcut_pointers.h"

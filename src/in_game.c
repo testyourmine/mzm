@@ -1,4 +1,5 @@
 #include "in_game.h"
+#include "dma.h"
 #include "gba.h"
 #include "callbacks.h"
 #include "oam.h"

@@ -1,4 +1,5 @@
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "gba.h"
 #include "oam.h"
 #include "color_effects.h"

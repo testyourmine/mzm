@@ -1,5 +1,6 @@
 #include "cutscenes/ridley_landing.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "temp_globals.h"
 
 #include "data/cutscenes/cutscenes_data.h"

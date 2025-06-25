@@ -205,6 +205,9 @@ $(LD_SCRIPT): linker.ld
 	$(MSG) CC $@
 	$Q$(PREPROC) $< $(PREPROCFLAGS) | $(CPP) $(CPPFLAGS) | $(CC) -o $@ $(CFLAGS) && printf '\t.align 2, 0 @ dont insert nops\n' >> $@
 
+src/dma.s: CFLAGS = -O1 -mthumb-interwork -fhex-asm
+src/dma.s: src/dma.c
+
 src/sram/%.s: CFLAGS = -O1 -mthumb-interwork -fhex-asm
 src/sram/%.s: src/sram/%.c
 

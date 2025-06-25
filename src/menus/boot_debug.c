@@ -1,4 +1,5 @@
 #include "menus/boot_debug.h"
+#include "dma.h"
 
 #include "data/menus/boot_debug_data.h"
 #include "data/menus/internal_boot_debug_data.h"

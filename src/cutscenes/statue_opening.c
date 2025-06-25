@@ -1,5 +1,6 @@
 #include "cutscenes/statue_opening.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/statue_opening_data.h"

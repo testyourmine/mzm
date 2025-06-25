@@ -1,5 +1,6 @@
 #include "block.h"
 #include "macros.h"
+#include "dma.h"
 #include "gba.h"
 
 #include "data/block_data.h"

@@ -1,5 +1,6 @@
 #include "cutscenes/kraid_rising.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "oam.h"
 #include "oam_id.h"
 #include "syscall_wrappers.h"

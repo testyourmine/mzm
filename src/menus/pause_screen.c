@@ -1,4 +1,5 @@
 #include "menus/pause_screen.h"
+#include "dma.h"
 #include "temp_globals.h"
 #include "gba.h"
 #include "macros.h"
@@ -2172,7 +2173,7 @@ void PauseScreenInit(void)
 
     BitFill(3, 0x1140, VRAM_BASE + 0xE800, 0x1800, 16);
     // 0x2034000 = gDecompressedMinimapVisitedTiles
-    DmaTransfer(3, 0x2034000, VRAM_BASE + 0xE000, sizeof(gDecompressedMinimapVisitedTiles), 16);
+    DmaTransfer(3, (const void*)0x2034000, VRAM_BASE + 0xE000, sizeof(gDecompressedMinimapVisitedTiles), 16);
 
     if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_CHOZO_STATUE_HINT)
     {

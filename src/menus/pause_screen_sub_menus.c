@@ -1,6 +1,7 @@
 #include "menus/pause_screen_sub_menus.h"
 #include "menus/pause_screen.h"
 #include "menus/pause_screen_map.h"
+#include "dma.h"
 #include "syscalls.h"
 #include "oam_id.h"
 

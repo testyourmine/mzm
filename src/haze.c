@@ -1,4 +1,5 @@
 #include "haze.h"
+#include "dma.h"
 #include "gba.h"
 #include "macros.h"
 #include "temp_globals.h"

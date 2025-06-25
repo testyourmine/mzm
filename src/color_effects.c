@@ -1,5 +1,6 @@
 #include "color_effects.h"
 #include "macros.h"
+#include "dma.h"
 #include "gba.h"
 
 #include "data/color_fading_data.h"

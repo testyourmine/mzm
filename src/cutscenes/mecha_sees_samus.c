@@ -1,5 +1,6 @@
 #include "cutscenes/mecha_sees_samus.h"
 #include "cutscenes/cutscene_utils.h"
+#include "dma.h"
 #include "syscall_wrappers.h"
 
 #include "data/cutscenes/cutscenes_data.h"
