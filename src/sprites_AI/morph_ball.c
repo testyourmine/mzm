@@ -10,11 +10,16 @@
 #include "structs/sprite.h"
 #include "structs/samus.h"
 
+#define MORPH_BALL_POSE_IDLE 0x9
+#define MORPH_BALL_POSE_BEING_ACQUIRED 0x23
+
+#define MORPH_BALL_OUTSIDE_POSE_IDLE 0x9
+
 /**
  * @brief 13080 | ac | Initializes a morph ball sprite
  * 
  */
-void MorphBallInit(void)
+static void MorphBallInit(void)
 {
     if (gEquipment.suitMisc & SMF_MORPH_BALL)
     {
@@ -23,10 +28,10 @@ void MorphBallInit(void)
     }
 
     gCurrentSprite.properties |= SP_IMMUNE_TO_PROJECTILES;
-    gCurrentSprite.hitboxTop = -(QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3);
-    gCurrentSprite.hitboxBottom = (QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3);
-    gCurrentSprite.hitboxLeft = -(QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3);
-    gCurrentSprite.hitboxRight = (QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3);
+    gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
+    gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE - PIXEL_SIZE;
+    gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
+    gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE - PIXEL_SIZE;
 
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);
@@ -51,7 +56,7 @@ void MorphBallInit(void)
  * @brief 1312c | 74 | Handles a morph ball sprite being idle
  * 
  */
-void MorphBallGet(void)
+static void MorphBallGet(void)
 {
     if (gCurrentSprite.status & SPRITE_STATUS_SAMUS_COLLIDING)
     {
@@ -66,7 +71,7 @@ void MorphBallGet(void)
         // Give morph ball
         gEquipment.suitMisc |= SMF_MORPH_BALL;
 
-        SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_MORPH_BALL, 6, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+        SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_MORPH_BALL, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
     }
 }
 
@@ -74,7 +79,7 @@ void MorphBallGet(void)
  * @brief 131a0 | 3c | Handles a morph ball being acquired
  * 
  */
-void MorphBallFlashAnim(void)
+static void MorphBallFlashAnim(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
@@ -91,7 +96,7 @@ void MorphBallFlashAnim(void)
  * @brief 131dc | 58 | Initializes a morph ball outside sprite
  * 
  */
-void MorphBallOutsideInit(void)
+static void MorphBallOutsideInit(void)
 {
     gCurrentSprite.hitboxTop = -PIXEL_SIZE;
     gCurrentSprite.hitboxBottom = PIXEL_SIZE;
@@ -115,7 +120,7 @@ void MorphBallOutsideInit(void)
  * @brief 13234 | 3c | Handles a morph ball outside being acquired 
  * 
  */
-void MorphBallOutsideFlashAnim(void)
+static void MorphBallOutsideFlashAnim(void)
 {
     u8 ramSlot;
 

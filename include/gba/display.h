@@ -93,7 +93,7 @@
 #define BGCNT_TO_VRAM_CHAR_BASE(val) (VRAM_BASE + (val) * BGCNT_VRAM_CHAR_SIZE)
 #define BGCNT_TO_VRAM_TILE_BASE(val) (VRAM_BASE + (val) * BGCNT_VRAM_TILE_SIZE)
 
-#define BGCNT_GET_PRIORITY(val) (val & 3)
+#define BGCNT_GET_PRIORITY(val) ((val) & 3)
 
 #define CREATE_BGCNT(charBase, screenBase, prio, size) ((size) << BGCNT_SCREEN_SIZE_SHIFT | (screenBase) << BGCNT_SCREEN_BASE_BLOCK_SHIFT | (charBase) << BGCNT_CHAR_BASE_BLOCK_SHIFT | (prio))
 
