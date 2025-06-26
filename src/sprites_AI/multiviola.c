@@ -12,20 +12,22 @@
 
 #include "structs/sprite.h"
 
+#define MULTIVIOLA_POSE_MOVING 0x9
+
 /**
  * @brief 1e854 | 70 | Initializes a multiviola sprite
  * 
  */
-void MultiviolaInit(void)
+static void MultiviolaInit(void)
 {
-    gCurrentSprite.drawDistanceTop = 0x20;
-    gCurrentSprite.drawDistanceBottom = 0xC;
-    gCurrentSprite.drawDistanceHorizontal = 0x10;
+    gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
+    gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(THREE_QUARTER_BLOCK_SIZE);
+    gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
 
-    gCurrentSprite.hitboxTop = -0x20;
-    gCurrentSprite.hitboxBottom = 0x20;
-    gCurrentSprite.hitboxLeft = -0x20;
-    gCurrentSprite.hitboxRight = 0x20;
+    gCurrentSprite.hitboxTop = -HALF_BLOCK_SIZE;
+    gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE;
+    gCurrentSprite.hitboxLeft = -HALF_BLOCK_SIZE;
+    gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE;
 
     gCurrentSprite.pOam = sMultiviolaOAM_Moving;
     gCurrentSprite.animationDurationCounter = 0;
@@ -41,20 +43,24 @@ void MultiviolaInit(void)
  * @brief 1e8c4 | 110 | Handles a multiviola moving
  * 
  */
-void MultiviolaMove(void)
+static void MultiviolaMove(void)
 {
     u8 isBouncing;
     u16 yMovement;
+    u16 xMovement;
 
     isBouncing = FALSE;
-    yMovement = 0x3;
+    yMovement = PIXEL_SIZE - ONE_SUB_PIXEL;
+    xMovement = PIXEL_SIZE - ONE_SUB_PIXEL;
 
     if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
     {
         // Move right
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition, gCurrentSprite.xPosition + gCurrentSprite.hitboxRight);
         if (gPreviousCollisionCheck == COLLISION_AIR)
-            gCurrentSprite.xPosition += 0x3;
+        {
+            gCurrentSprite.xPosition += xMovement;
+        }
         else
         {
             // Bounce X
@@ -67,7 +73,9 @@ void MultiviolaMove(void)
         // Move left
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition, gCurrentSprite.xPosition + gCurrentSprite.hitboxLeft);
         if (gPreviousCollisionCheck == COLLISION_AIR)
-            gCurrentSprite.xPosition -= 0x3;
+        {
+            gCurrentSprite.xPosition -= xMovement;
+        }
         else
         {
             // Bounce X
@@ -81,7 +89,9 @@ void MultiviolaMove(void)
         // Move up
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + gCurrentSprite.hitboxTop, gCurrentSprite.xPosition);
         if (gPreviousCollisionCheck == COLLISION_AIR)
+        {
             gCurrentSprite.yPosition -= yMovement;
+        }
         else
         {
             // Bounce Y
@@ -94,7 +104,9 @@ void MultiviolaMove(void)
         // Move down
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition + gCurrentSprite.hitboxBottom, gCurrentSprite.xPosition);
         if (gPreviousCollisionCheck == COLLISION_AIR)
+        {
             gCurrentSprite.yPosition += yMovement;
+        }
         else
         {
             // Bounce Y
@@ -115,7 +127,6 @@ void MultivioaUnused_Empty1(void)
 {
     return;
 }
-
 
 /**
  * @brief 1e9d0 | 4 | Unused multiviola sprite function
@@ -143,25 +154,24 @@ void Multiviola(void)
     {
         SpriteUtilUpdateFreezeTimer();
         SpriteUtilUpdateSecondarySpriteFreezeTimerOfCurrent(SSPRITE_MULTIVIOLA_UNUSED, gCurrentSprite.primarySpriteRamSlot);
+        return;
     }
-    else
+
+    if (SpriteUtilIsSpriteStunned())
+        return;
+
+    switch (gCurrentSprite.pose)
     {
-        if (SpriteUtilIsSpriteStunned())
-            return;
+        default:
+            SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, TRUE, PE_SPRITE_EXPLOSION_BIG);
+            break;
+            
+        case SPRITE_POSE_UNINITIALIZED:
+            MultiviolaInit();
+            break;
 
-        switch (gCurrentSprite.pose)
-        {
-            default:
-                SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, TRUE, PE_SPRITE_EXPLOSION_BIG);
-                break;
-                
-            case SPRITE_POSE_UNINITIALIZED:
-                MultiviolaInit();
-                break;
-
-            case MULTIVIOLA_POSE_MOVING:
-                MultiviolaMove();
-        }
+        case MULTIVIOLA_POSE_MOVING:
+            MultiviolaMove();
     }
 }
 

@@ -416,7 +416,9 @@ enum SamusStandingOnSpriteStatus {
 
 #define SPRITE_FREEZE_TIMER (CONVERT_SECONDS(4.f))
 
+// Maximum value for a sprite rng
+#define SPRITE_RNG_MAX (16)
 // Computes a probability for the sprite rng value [0;16[
-#define SPRITE_RNG_PROB(prob) ((s32)((prob) * 16))
+#define SPRITE_RNG_PROB(prob) ((s32)((prob) * SPRITE_RNG_MAX))
 
 #endif /* SPRITE_CONSTANTS_H */
