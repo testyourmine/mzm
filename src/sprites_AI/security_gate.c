@@ -22,7 +22,7 @@
  * 
  * @param caa Clipdata affecting action
  */
-static void SecurityGateChangeClidpata(u8 caa)
+static void SecurityGateChangeClipdata(u8 caa)
 {
     u16 yPosition;
     u16 xPosition;
@@ -57,7 +57,7 @@ static void SecurityGateOpen(void)
     gCurrentSprite.currentAnimationFrame = 0;
 
     gCurrentSprite.pose = SECURITY_GATE_POSE_OPENING;
-    SecurityGateChangeClidpata(CAA_REMOVE_SOLID); // Remove collision
+    SecurityGateChangeClipdata(CAA_REMOVE_SOLID); // Remove collision
     SoundPlayNotAlreadyPlaying(SOUND_SECURITY_GATE_OPENING);
 }
 
@@ -86,7 +86,7 @@ static void SecurityGateDefaultOpenInit(void)
         gCurrentSprite.pOam = sSecurityGateOam_Closed;
         gCurrentSprite.pose = SECURITY_GATE_POSE_CLOSED;
         gCurrentSprite.work0 = TRUE;
-        SecurityGateChangeClidpata(CAA_MAKE_NON_POWER_GRIP); // Set collision
+        SecurityGateChangeClipdata(CAA_MAKE_NON_POWER_GRIP); // Set collision
     }
     else
     {
@@ -148,7 +148,7 @@ static void SecurityGateDefaultOpenOpenAfterAlarm(void)
 {
     if (!gCurrentSprite.work0 && !SpriteCheckCollidingWithSamusDrawing()) // ?
     {
-        SecurityGateChangeClidpata(CAA_MAKE_NON_POWER_GRIP);
+        SecurityGateChangeClipdata(CAA_MAKE_NON_POWER_GRIP);
         gCurrentSprite.work0++;
     }
 
@@ -188,7 +188,7 @@ static void SecurityGateDeath(void)
     u16 yPosition;
     u16 xPosition;
 
-    SecurityGateChangeClidpata(CAA_REMOVE_SOLID);
+    SecurityGateChangeClipdata(CAA_REMOVE_SOLID);
 
     yPosition = gCurrentSprite.yPosition - BLOCK_SIZE;
     xPosition = gCurrentSprite.xPosition;
@@ -213,7 +213,7 @@ static void SecurityGateDefaultClosedInit(void)
         gCurrentSprite.pOam = sSecurityGateOam_Closed;
         gCurrentSprite.pose = SECURITY_GATE_POSE_CLOSED;
         gCurrentSprite.work0 = TRUE;
-        SecurityGateChangeClidpata(CAA_MAKE_NON_POWER_GRIP);
+        SecurityGateChangeClipdata(CAA_MAKE_NON_POWER_GRIP);
     }
 
     gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 4);
@@ -251,7 +251,7 @@ static void SecurityGateDefaultClosedCloseAfterAlarm(void)
 {
     if (!gCurrentSprite.work0 && !SpriteCheckCollidingWithSamusDrawing())
     {
-        SecurityGateChangeClidpata(CAA_MAKE_NON_POWER_GRIP);
+        SecurityGateChangeClipdata(CAA_MAKE_NON_POWER_GRIP);
         gCurrentSprite.work0++;
     }
 
