@@ -66,10 +66,12 @@ u8 ZiplineMoving(void)
     if (gCurrentSprite.status & SPRITE_STATUS_SAMUS_COLLIDING)
     {
         samusGrabbing = TRUE;
-        velocity = PIXEL_SIZE * 3;
+        velocity = QUARTER_BLOCK_SIZE - PIXEL_SIZE;
     }
     else
+    {
         velocity = QUARTER_BLOCK_SIZE;
+    }
 
     ZiplineCheckColliding();
     if (gCurrentAffectingClipdata.movement == CLIPDATA_MOVEMENT_STOP_ENEMY_BLOCK_SOLID)
@@ -376,9 +378,9 @@ void ZiplineUpdate(void)
 void ZiplineButtonInit(void)
 {
     if (EventFunction(EVENT_ACTION_CHECKING, EVENT_ZIPLINES_ACTIVATED))
-        gCurrentSprite.pOam = sZiplineButtonOAM_OnIdle;
+        gCurrentSprite.pOam = sZiplineButtonOam_OnIdle;
     else
-        gCurrentSprite.pOam = sZiplineButtonOAM_OffIdle;
+        gCurrentSprite.pOam = sZiplineButtonOam_OffIdle;
 
     gCurrentSprite.yPosition -= BLOCK_SIZE * 2;
 
@@ -389,7 +391,7 @@ void ZiplineButtonInit(void)
     gCurrentSprite.hitboxTop = 0;
     gCurrentSprite.hitboxBottom = BLOCK_SIZE + QUARTER_BLOCK_SIZE;
     gCurrentSprite.hitboxLeft = -(QUARTER_BLOCK_SIZE + PIXEL_SIZE);
-    gCurrentSprite.hitboxRight = (QUARTER_BLOCK_SIZE + PIXEL_SIZE);
+    gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE + PIXEL_SIZE;
 
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
@@ -413,7 +415,7 @@ void ZiplineButtonIdleInit(void)
 
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
-    gCurrentSprite.pOam = sZiplineButtonOAM_OnIdle;
+    gCurrentSprite.pOam = sZiplineButtonOam_OnIdle;
 }
 
 /**
@@ -473,14 +475,16 @@ void ZiplineButtonIdle(void)
         SoundPlay(SOUND_ZIPLING_CALLED);
     }
     else if (gSpriteData[ramSlot].health == ZIPLINE_HEALTH_MOVING)
+    {
         moving = TRUE; // Already moving
+    }
 
     if (moving)
     {
         gCurrentSprite.pose = ZIPLINE_BUTTON_POSE_ACTIVATED;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sZiplineButtonOAM_Active;
+        gCurrentSprite.pOam = sZiplineButtonOam_Active;
     }
 }
 

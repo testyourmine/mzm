@@ -885,7 +885,7 @@ void MotherBrainBlock(void)
         gCurrentSprite.hitboxLeft = -HALF_BLOCK_SIZE;
         gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE;
 
-        gCurrentSprite.pOam = sMotherBrainBlockOAM;
+        gCurrentSprite.pOam = sMotherBrainBlockOam;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
         
