@@ -457,7 +457,7 @@ void TransparencySpriteUpdateBLDY(u8 value, u32 delay, u32 intensity)
  * @param delay Delay
  * @param intensity Intensity
  */
-void TransparencySpriteUpdateBLDALPHA(u8 eva, u8 evb, s32 delay, u32 intensity)
+void TransparencySpriteUpdateBldalpha(u8 eva, u8 evb, s32 delay, u32 intensity)
 {
     u32 invalid;
     s32 _delay;

@@ -78,7 +78,7 @@ void SavePlatformChozodiaInit(void)
         BLDCNT_BG1_SECOND_TARGET_PIXEL | BLDCNT_BG2_SECOND_TARGET_PIXEL |
         BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL);
     
-    TransparencySpriteUpdateBLDALPHA(0x0, 0x10, 0x0, 0x10);
+    TransparencySpriteUpdateBldalpha(0x0, 0x10, 0x0, 0x10);
 }
 
 /**
@@ -242,7 +242,7 @@ void SavePlatformChozodiaCheckRefill(void)
                 gCurrentSprite.spritesetGfxSlot, gCurrentSprite.primarySpriteRamSlot,
                 gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0x0);
 
-            TransparencySpriteUpdateBLDALPHA(0x7, 0x10, 0x0, 0x10);
+            TransparencySpriteUpdateBldalpha(0x7, 0x10, 0x0, 0x10);
             SoundPlay(SOUND_CHOZODIA_SAVE_PLATFORM_REFILL);
         }
     }
@@ -277,7 +277,7 @@ void SavePlatformChozodiaRefill(void)
             if (gCurrentSprite.work0 == 0x0)
             {
                 gSamusData.timer = TRUE;
-                TransparencySpriteUpdateBLDALPHA(0x0, 0x10, 0x0, 0x10);
+                TransparencySpriteUpdateBldalpha(0x0, 0x10, 0x0, 0x10);
                 SoundFade(SOUND_CHOZODIA_SAVE_PLATFORM_REFILL, ONE_THIRD_SECOND);
             }
         }
@@ -336,7 +336,7 @@ void SavePlatformChozodiaRefill(void)
             if (gCurrentSprite.work0 == 0x0)
             {
                 gSamusData.timer = TRUE;
-                TransparencySpriteUpdateBLDALPHA(0x0, 0x10, 0x0, 0x10);
+                TransparencySpriteUpdateBldalpha(0x0, 0x10, 0x0, 0x10);
                 SoundFade(SOUND_CHOZODIA_SAVE_PLATFORM_REFILL, ONE_THIRD_SECOND);
             }
         }

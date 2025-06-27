@@ -368,6 +368,6 @@ void SecurityLaser(void)
             gCurrentSprite.work2 = TRUE;
         }
 
-        TransparencySpriteUpdateBLDALPHA(0x0, gCurrentSprite.work3, 0x0, 0x10);
+        TransparencySpriteUpdateBldalpha(0x0, gCurrentSprite.work3, 0x0, 0x10);
     }
 }

@@ -26,12 +26,104 @@
 #include "structs/sprite.h"
 #include "structs/projectile.h"
 
+#define RUINS_TEST_POSE_SPAWNING 0x1
+#define RUINS_TEST_POSE_TURNING_INTO_REFLECTION 0x2
+#define RUINS_TEST_POSE_FREE_SAMUS 0x3
+#define RUINS_TEST_POSE_CHECK_SAMUS_NOT_FACING_BACKGROUND 0x4
+#define RUINS_TEST_POSE_MOTIONLESS 0x8
+#define RUINS_TEST_POSE_SPAWN_GHOST 0x9
+#define RUINS_TEST_POSE_MOVING_INIT 0x22
+#define RUINS_TEST_POSE_MOVING_CIRCLE_PATTERN 0x23
+#define RUINS_TEST_POSE_MOVING_ATOM_PATTERN 0x25
+#define RUINS_TEST_POSE_BACK_TO_CENTER 0x67
+#define RUINS_TEST_POSE_CHECK_GHOST_DISAPPEARING 0x68
+#define RUINS_TEST_POSE_DESPAWN 0x69
+#define RUINS_TEST_POSE_DEAD 0x6A
+
+// Ruins test ghost
+
+enum RuinsTestGhostPart {
+    RUINS_TEST_GHOST_PART_GHOST,
+    RUINS_TEST_GHOST_PART_FIRST_SYMBOL,
+    RUINS_TEST_GHOST_PART_SECOND_SYMBOL,
+    RUINS_TEST_GHOST_PART_THIRD_SYMBOL,
+    RUINS_TEST_GHOST_PART_FOURTH_SYMBOL
+};
+
+#define RUINS_TEST_GHOST_POSE_GHOST_SPAWN 0x8
+#define RUINS_TEST_GHOST_POSE_GHOST_IDLE 0x9
+#define RUINS_TEST_GHOST_POSE_SYMBOL_MOVING 0x23
+#define RUINS_TEST_GHOST_POSE_SYMBOL_PLACING 0x25
+#define RUINS_TEST_GHOST_POSE_SYMBOL_SET_GHOST_DISAPPEARING 0x26
+#define RUINS_TEST_GHOST_POSE_SYMBOL_WAIT_FOR_END_OF_FIGHT 0x27
+#define RUINS_TEST_GHOST_POSE_SYMBOL_DELAY_BEFORE_PLACING_END_OF_FIGHT 0x29
+#define RUINS_TEST_GHOST_POSE_SYMBOL_PLACING_END_OF_FIGHT 0x2B
+#define RUINS_TEST_GHOST_POSE_GHOST_DESPAWN 0x43
+#define RUINS_TEST_GHOST_POSE_SYMBOL_DO_NOTHING 0x6C
+
+// Ruins test symbol
+
+#define RUINS_TEST_SYMBOL_POSE_DELAY_BEFORE_MUSIC 0x8
+#define RUINS_TEST_SYMBOL_POSE_UPDATE_PALETTE 0x9
+#define RUINS_TEST_SYMBOL_POSE_MERGING 0x23
+#define RUINS_TEST_SYMBOL_POSE_DISAPPEARING 0x25
+
+// Ruins test samus reflection start
+
+#define RUINS_TEST_SAMUS_REFLECTION_START_POSE_UPDATE_GFX_PAL 0x8
+#define RUINS_TEST_SAMUS_REFLECTION_START_POSE_SPAWN_PARTICLE 0x9
+
+// Ruins test reflection cover
+
+#define RUINS_TEST_REFLECTION_COVER_POSE_IDLE 0x8
+#define RUINS_TEST_REFLECTION_COVER_POSE_KILL 0x9
+
+// Ruins test ghost outline
+
+enum RuinsTestGhostOutlinePart {
+    RUINS_TEST_GHOST_OUTLINE_PART_OUTLINE,
+    RUINS_TEST_GHOST_OUTLINE_PART_SHOOTING_GROUND_LIGHTNING,
+    RUINS_TEST_GHOST_OUTLINE_PART_SHOOTING_LIGHTNING
+};
+
+// Ruins test shootable symbol
+
+#define RUINS_TEST_SHOOTABLE_SYMBOL_POSE_SPAWNING 0x9
+#define RUINS_TEST_SHOOTABLE_SYMBOL_POSE_SPAWNED 0x23
+#define RUINS_TEST_SHOOTABLE_SYMBOL_POSE_DESPAWNING 0x25
+#define RUINS_TEST_SHOOTABLE_SYMBOL_POSE_TURNING_INTO_SYMBOL 0x27
+
+// Ruins test samus reflection end
+
+#define RUINS_TEST_SAMUS_REFLECTION_END_POSE_SUITLESS 0x8
+#define RUINS_TEST_SAMUS_REFLECTION_END_POSE_FULLSUIT 0x9
+#define RUINS_TEST_SAMUS_REFLECTION_END_POSE_UPDATE_PALETTE 0x23
+#define RUINS_TEST_SAMUS_REFLECTION_END_POSE_SET_FADING_STARTED 0x25
+
+// Ruins test lightning
+
+enum RuinsTestLightningPart {
+    RUINS_TEST_LIGHTNING_PART_GROUND_RIGHT,
+    RUINS_TEST_LIGHTNING_PART_GROUND,
+    RUINS_TEST_LIGHTNING_PART_STATIC
+};
+
+#define RUINS_TEST_LIGHTNING_POSE_GOING_DOWN 0x9
+#define RUINS_TEST_LIGHTNING_POSE_GOING_ON_GROUND 0x23
+#define RUINS_TEST_LIGHTNING_POSE_ON_GROUND_HORIZONTAL 0x25
+#define RUINS_TEST_LIGHTNING_POSE_ON_GROUND_VERTICAL 0x27
+
+
+#define RUINS_TEST_DYNAMIC_PAL_ADDR (PALRAM_BASE + (PALRAM_SIZE - 16 * 4))
+#define RUINS_TEST_TRANSFER_DYNAMIC_PAL(pal, size) DMA_SET(3, pal, RUINS_TEST_DYNAMIC_PAL_ADDR, C_32_2_16(DMA_ENABLE, size))
+
+
 /**
  * @brief 38988 | 24 | Calculates the new delay for the symbol
  * 
- * @param delay 
+ * @param delay Initial delay
  */
-void RuinsTestCalculateDelay(u8 delay)
+static void RuinsTestCalculateDelay(u8 delay)
 {
     gBossWork.work5 = sRandomNumberTable[gFrameCounter8Bit] + delay;
 }
@@ -41,7 +133,7 @@ void RuinsTestCalculateDelay(u8 delay)
  * 
  * @param caa Clipdata Affecting Action
  */
-void RuinsTestChangeCcaa(u8 caa)
+static void RuinsTestChangeCcaa(u8 caa)
 {
     u16 yPosition;
     u16 xPosition;
@@ -101,7 +193,7 @@ void RuinsTestChangeCcaa(u8 caa)
  * @param speedMultiplier Speed multiplier
  * @param speed Speed
  */
-void RuinsTestMoveToPosition(u16 yStart, u16 xStart, u16 yTarget, u16 xTarget, u16 speedMultiplier, u16 speed)
+static void RuinsTestMoveToPosition(u16 yStart, u16 xStart, u16 yTarget, u16 xTarget, u16 speedMultiplier, u16 speed)
 {
     u16 distanceY;
     u16 distanceX;
@@ -183,7 +275,7 @@ void RuinsTestMoveToPosition(u16 yStart, u16 xStart, u16 yTarget, u16 xTarget, u
  * 
  * @return u8 
  */
-u8 RuinsTestProjectileCollision(void)
+static u8 RuinsTestProjectileCollision(void)
 {
     u8 damage;
     u16 spriteY;
@@ -216,7 +308,7 @@ u8 RuinsTestProjectileCollision(void)
         if (!(pProj->status & PROJ_STATUS_CAN_AFFECT_ENVIRONMENT))
             continue;
 
-        if (pProj->movementStage <= 1)
+        if (pProj->movementStage <= PROJECTILE_STAGE_SPAWNING)
             continue;
 
         if (pProj->type != PROJ_TYPE_PISTOL && pProj->type != PROJ_TYPE_CHARGED_PISTOL)
@@ -249,7 +341,7 @@ u8 RuinsTestProjectileCollision(void)
  * 
  * @return u8 
  */
-u8 RuinsTestCheckHitByChargedPistol(void)
+static u8 RuinsTestCheckHitByChargedPistol(void)
 {
     struct ProjectileData* pProj;
 
@@ -261,7 +353,7 @@ u8 RuinsTestCheckHitByChargedPistol(void)
         if (!(pProj->status & PROJ_STATUS_CAN_AFFECT_ENVIRONMENT))
             continue;
 
-        if (pProj->movementStage <= 1)
+        if (pProj->movementStage <= PROJECTILE_STAGE_SPAWNING)
             continue;
 
         if (pProj->type == PROJ_TYPE_CHARGED_PISTOL)
@@ -274,9 +366,9 @@ u8 RuinsTestCheckHitByChargedPistol(void)
 /**
  * @brief 38d70 | 84 | Checks if a symbol is getting shot
  * 
- * @return u8 1 if last symbol, 0 otherwise
+ * @return u8 bool, is last symbol
  */
-u8 RuinsTestCheckSymbolShooted(void)
+static u8 RuinsTestCheckSymbolShooted(void)
 {
     if (gCurrentSprite.invincibilityStunFlashTimer != 0 && gCurrentSprite.health != 100)
     {
@@ -295,13 +387,13 @@ u8 RuinsTestCheckSymbolShooted(void)
             gCurrentSprite.samusCollision = SSC_NONE;
 
             gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
-            gCurrentSprite.invincibilityStunFlashTimer += 60;
+            gCurrentSprite.invincibilityStunFlashTimer += CONVERT_SECONDS(1.f);
 
             return TRUE;
         }
 
         gSubSpriteData1.workVariable1 = 128;
-        RuinsTestCalculateDelay(0xF0);
+        RuinsTestCalculateDelay(CONVERT_SECONDS(4.f));
     }
 
     return FALSE;
@@ -310,9 +402,9 @@ u8 RuinsTestCheckSymbolShooted(void)
 /**
  * @brief 38df4 | 34 | Checks if samus is getting hurt
  * 
- * @return u8 1 if getting hurt, 0 otherwise
+ * @return u8 bool, samus getting hurt
  */
-u8 RuinsTestCheckSamusHurting(void)
+static u8 RuinsTestCheckSamusHurting(void)
 {
     if (gCurrentSprite.status & SPRITE_STATUS_MOSAIC)
     {
@@ -330,7 +422,7 @@ u8 RuinsTestCheckSamusHurting(void)
  * 
  * @return u8 1 if should start new movement pattern, 0 otherwise
  */
-u8 RuinsTestUpdateSymbol(void)
+static u8 RuinsTestUpdateSymbol(void)
 {
     u8 ramSlot;
 
@@ -365,7 +457,7 @@ u8 RuinsTestUpdateSymbol(void)
             if (gBossWork.work3 == 0)
             {
                 gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
-                RuinsTestCalculateDelay(0xF0);
+                RuinsTestCalculateDelay(CONVERT_SECONDS(4.f));
                 return TRUE;
             }
 
@@ -373,26 +465,26 @@ u8 RuinsTestUpdateSymbol(void)
             {
                 // Set timer for how long symbol stays active
                 if (gSubSpriteData1.health == 0)
-                    gSubSpriteData1.workVariable1 = 120;
+                    gSubSpriteData1.workVariable1 = CONVERT_SECONDS(2.f);
                 else if (gSubSpriteData1.health == 1)
-                    gSubSpriteData1.workVariable1 = 90;
+                    gSubSpriteData1.workVariable1 = CONVERT_SECONDS(1.5f);
                 else if (gSubSpriteData1.health == 2)
-                    gSubSpriteData1.workVariable1 = 60;
+                    gSubSpriteData1.workVariable1 = CONVERT_SECONDS(1.f);
                 else
-                    gSubSpriteData1.workVariable1 = 40;
+                    gSubSpriteData1.workVariable1 = TWO_THIRD_SECOND;
 
                 // Get new delay
-                RuinsTestCalculateDelay(0x78);
+                RuinsTestCalculateDelay(CONVERT_SECONDS(2.f));
             }
             else
             {
                 // Decrement delay
-                gBossWork.work5--;
+                APPLY_DELTA_TIME_DEC(gBossWork.work5);
                 if (RuinsTestProjectileCollision())
                 {
                     // Reset delay
                     gCurrentSprite.status |= SPRITE_STATUS_MOSAIC;
-                    RuinsTestCalculateDelay(120);
+                    RuinsTestCalculateDelay(CONVERT_SECONDS(2.f));
                 }
             }
         }
@@ -406,7 +498,7 @@ u8 RuinsTestUpdateSymbol(void)
  * 
  * @param dAngle Delta angle
  */
-void RuinsTestGhostMove(u8 dAngle)
+static void RuinsTestGhostMove(u8 dAngle)
 {
     s32 radius;
     s32 s;
@@ -454,7 +546,7 @@ void RuinsTestGhostMove(u8 dAngle)
  * @brief 38fe0 | ec | Initializes the Ruins test sprite
  * 
  */
-void RuinsTestInit(void)
+static void RuinsTestInit(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -472,7 +564,7 @@ void RuinsTestInit(void)
     gCurrentSprite.samusCollision = SSC_HURTS_SAMUS;
     gCurrentSprite.drawOrder = 12;
     gCurrentSprite.health = 100;
-    gCurrentSprite.frozenPaletteRowOffset = 0x1;
+    gCurrentSprite.frozenPaletteRowOffset = 1;
 
     gCurrentSprite.pOam = sRuinsTestOam_Spawning;
     gCurrentSprite.currentAnimationFrame = 0;
@@ -497,14 +589,14 @@ void RuinsTestInit(void)
     gSubSpriteData1.health = 0;
     gSubSpriteData1.workVariable1 = 0;
 
-    RuinsTestCalculateDelay(60 * 2);
+    RuinsTestCalculateDelay(CONVERT_SECONDS(2.f));
 
     SpriteSpawnSecondary(SSPRITE_RUINS_TEST_SYMBOL, 0, gCurrentSprite.spritesetGfxSlot,
         gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
 
     SamusSetPose(SPOSE_FACING_THE_BACKGROUND_SUITLESS);
 
-    gSamusData.yPosition = yPosition + BLOCK_SIZE * 5 - QUARTER_BLOCK_SIZE - PIXEL_SIZE / 4;
+    gSamusData.yPosition = yPosition + BLOCK_SIZE * 5 - QUARTER_BLOCK_SIZE - ONE_SUB_PIXEL;
     gSamusData.xPosition = xPosition;
 
     // Pattern timer
@@ -524,7 +616,7 @@ void RuinsTestInit(void)
  * @brief 390cc | 40 | Handles the Ruins test spawning
  * 
  */
-void RuinsTestSpawning(void)
+static void RuinsTestSpawning(void)
 {
     if (gCurrentSprite.work0 == 0)
     {
@@ -547,7 +639,7 @@ void RuinsTestSpawning(void)
  * @brief 3910c | 88 | Handles the Ruins test turning into the reflection
  * 
  */
-void RuinsTestTurningIntoReflection(void)
+static void RuinsTestTurningIntoReflection(void)
 {
     if (gCurrentSprite.currentAnimationFrame == 7)
     {
@@ -559,7 +651,7 @@ void RuinsTestTurningIntoReflection(void)
         else if (gCurrentSprite.animationDurationCounter == 4)
         {
             SpriteSpawnSecondary(SSPRITE_RUINS_TEST_SAMUS_REFLECTION_START, 0, gCurrentSprite.spritesetGfxSlot,
-                gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition + 0x5C, gCurrentSprite.xPosition, 0);
+                gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition + (BLOCK_SIZE + HALF_BLOCK_SIZE - PIXEL_SIZE), gCurrentSprite.xPosition, 0);
         }
     }
 
@@ -570,7 +662,7 @@ void RuinsTestTurningIntoReflection(void)
         gCurrentSprite.animationDurationCounter = 0;
 
         gCurrentSprite.pose = RUINS_TEST_POSE_FREE_SAMUS;
-        gCurrentSprite.work0 = 32;
+        gCurrentSprite.work0 = CONVERT_SECONDS(.5f + 1.f / 30);
     }
 }
 
@@ -578,11 +670,11 @@ void RuinsTestTurningIntoReflection(void)
  * @brief 39194 | 30 | Allows samus to move again
  * 
  */
-void RuinsTestFreeSamus(void)
+static void RuinsTestFreeSamus(void)
 {
     if (gCurrentSprite.work0 != 0)
     {
-        gCurrentSprite.work0--;
+        APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
         if (gCurrentSprite.work0 == 0)
         {
             // Allow turning
@@ -596,14 +688,14 @@ void RuinsTestFreeSamus(void)
  * @brief 391c4 | 2c | Checks if samus is still facing the background
  * 
  */
-void RuinsTestCheckSamusNotFacingBackground(void)
+static void RuinsTestCheckSamusNotFacingBackground(void)
 {
     if (gSamusData.pose != SPOSE_FACING_THE_BACKGROUND_SUITLESS)
     {
         gCurrentSprite.pose = RUINS_TEST_POSE_MOTIONLESS;
 
         // Delay before moving
-        gBossWork.work3 = 1800;
+        gBossWork.work3 = CONVERT_SECONDS(30.f);
     }
 }
 
@@ -611,7 +703,7 @@ void RuinsTestCheckSamusNotFacingBackground(void)
  * @brief 391f0 | 44 | Handles the ruins test being motionless at the beginning of the fight
  * 
  */
-void RuinsTestMotionless(void)
+static void RuinsTestMotionless(void)
 {
     if (!RuinsTestCheckSamusHurting())
     {
@@ -620,7 +712,7 @@ void RuinsTestMotionless(void)
         if (RuinsTestUpdateSymbol() || gSubSpriteData1.health != 0)
         {
             gCurrentSprite.pose = RUINS_TEST_POSE_SPAWN_GHOST;
-            gCurrentSprite.work0 = 120;
+            gCurrentSprite.work0 = CONVERT_SECONDS(2.f);
             SpriteUtilChooseRandomXDirection();
         }
     }
@@ -630,17 +722,17 @@ void RuinsTestMotionless(void)
  * @brief 39234 | 94 | Spawns the Ruins test ghost
  * 
  */
-void RuinsTestSpawnGhost(void)
+static void RuinsTestSpawnGhost(void)
 {
     if (gSubSpriteData1.health == 0 || gBossWork.work7 != 0)
     {
-        gCurrentSprite.work0--;
-        if (gCurrentSprite.work0 == 84)
+        APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
+        if (gCurrentSprite.work0 == CONVERT_SECONDS(1.4f))
         {
             SpriteSpawnSecondary(SSPRITE_RUINS_TEST_GHOST_OUTLINE, RUINS_TEST_GHOST_OUTLINE_PART_OUTLINE, gCurrentSprite.spritesetGfxSlot,
                 gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         }
-        else if (gCurrentSprite.work0 == 64)
+        else if (gCurrentSprite.work0 == CONVERT_SECONDS(1.f + 1.f / 15))
         {
             SpriteSpawnSecondary(SSPRITE_RUINS_TEST_GHOST, RUINS_TEST_GHOST_PART_GHOST, gCurrentSprite.spritesetGfxSlot,
                 gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
@@ -648,7 +740,7 @@ void RuinsTestSpawnGhost(void)
         else if (gCurrentSprite.work0 == 0)
         {
             gCurrentSprite.pose = RUINS_TEST_POSE_MOVING_INIT;
-            gBossWork.work3 = 1200;
+            gBossWork.work3 = CONVERT_SECONDS(20.f);
         }
     }
 }
@@ -657,9 +749,9 @@ void RuinsTestSpawnGhost(void)
  * @brief 392c8 | 28 | Initializes the Ruins test to be moving
  * 
  */
-void RuinsTestMovingInit(void)
+static void RuinsTestMovingInit(void)
 {
-    gCurrentSprite.work1 = 0x40;
+    gCurrentSprite.work1 = PI / 2;
     gCurrentSprite.scaling = 0;
     gCurrentSprite.pose = RUINS_TEST_POSE_MOVING_CIRCLE_PATTERN;
     gCurrentSprite.status |= SPRITE_STATUS_SAMUS_COLLIDING;
@@ -669,9 +761,10 @@ void RuinsTestMovingInit(void)
  * @brief 392f0 | fc | Handles the Ruins test moving in a circle pattern
  * 
  */
-void RuinsTestMoveCirclePattern(void)
+static void RuinsTestMoveCirclePattern(void)
 {
     u8 speed;
+    u8 radius;
 
     if (RuinsTestCheckSamusHurting())
         return;
@@ -679,7 +772,7 @@ void RuinsTestMoveCirclePattern(void)
     RuinsTestCheckSymbolShooted();
 
     // Get speed
-    if (gBossWork.work3 < 1200 / 2)
+    if (gBossWork.work3 < CONVERT_SECONDS(20.f) / 2)
     {
         if (MOD_AND(gFrameCounter8Bit, 4) == 0)
             speed = 2;
@@ -687,16 +780,20 @@ void RuinsTestMoveCirclePattern(void)
             speed = 1;
     }
     else
+    {
         speed = 1;
+    }
 
     // Update radius
     if (gCurrentSprite.scaling < PI + PI / 2)
     {
-        gCurrentSprite.scaling += 3;
+        gCurrentSprite.scaling += (s32)(PI * .0234375f);
         gBossWork.work6 = 0;
     }
     else
+    {
         gCurrentSprite.scaling = PI + PI / 2;
+    }
 
     // Move 
     if (!gBossWork.work4)
@@ -711,12 +808,13 @@ void RuinsTestMoveCirclePattern(void)
     {
         // Try move to atom pattern
         gCurrentSprite.status &= ~SPRITE_STATUS_SAMUS_COLLIDING;
-        if ((u8)(gCurrentSprite.work1 + 0x41) < 0x3 && gCurrentSprite.scaling == PI + PI / 2)
+        radius = gCurrentSprite.work1 + PI / 2 + 1;
+        if (radius <= (s32)(PI * .015625f) && gCurrentSprite.scaling == PI + PI / 2)
         {
             // In a "corner", set atom pattern
             gCurrentSprite.pose = RUINS_TEST_POSE_MOVING_ATOM_PATTERN;
             gCurrentSprite.work2 = 0;
-            gBossWork.work3 = 1200;
+            gBossWork.work3 = CONVERT_SECONDS(20.f);
 
             if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
             {
@@ -738,7 +836,7 @@ void RuinsTestMoveCirclePattern(void)
  * @brief 393ec | 224 | Handles the Ruins test moving in an atom pattern
  * 
  */
-void RuinsTestMoveAtomPattern(void)
+static void RuinsTestMoveAtomPattern(void)
 {
     u8 speed;
     u8 flag;
@@ -746,7 +844,10 @@ void RuinsTestMoveAtomPattern(void)
     u8 angle;
 
     if (gBossWork.work3 == 0)
-        gBossWork.work3++; // Prevent overflow
+    {
+        // Prevent overflow
+        APPLY_DELTA_TIME_INC(gBossWork.work3);
+    }
 
     bouncing = FALSE;
     if (RuinsTestCheckSamusHurting())
@@ -932,7 +1033,7 @@ void RuinsTestMoveAtomPattern(void)
  * @brief 39610 | 94 | Moves the Ruins test back to the center
  * 
  */
-void RuinsTestMoveToCenter(void)
+static void RuinsTestMoveToCenter(void)
 {
     u16 xOffset;
     u16 yOffset;
@@ -979,15 +1080,15 @@ void RuinsTestMoveToCenter(void)
  * @brief 396a4 | 2c | Checks if the ghost started disappearing
  * 
  */
-void RuinsTestCheckIsGhostDisappearing(void)
+static void RuinsTestCheckIsGhostDisappearing(void)
 {
     if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
     {
         gCurrentSprite.pose = RUINS_TEST_POSE_DESPAWN;
-        gCurrentSprite.work0 = 100;
+        gCurrentSprite.work0 = CONVERT_SECONDS(1.f) + TWO_THIRD_SECOND;
 
         // Samus reflection end delay
-        gCurrentSprite.work1 = 34;
+        gCurrentSprite.work1 = CONVERT_SECONDS(.5f + 1.f / 15);
     }
 }
 
@@ -995,7 +1096,7 @@ void RuinsTestCheckIsGhostDisappearing(void)
  * @brief 396d0 | a4 | Handles the Ruins test despawning
  * 
  */
-void RuinsTestDespawn(void)
+static void RuinsTestDespawn(void)
 {
     if (gCurrentSprite.work0 != 0)
     {
@@ -1014,7 +1115,7 @@ void RuinsTestDespawn(void)
         {
             // Spawn reflection end
             SpriteSpawnSecondary(SSPRITE_RUINS_TEST_SAMUS_REFLECTION_END, 0, gCurrentSprite.spritesetGfxSlot,
-                gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition + (BLOCK_SIZE + QUARTER_BLOCK_SIZE * 2 - PIXEL_SIZE),
+                gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition + (BLOCK_SIZE + HALF_BLOCK_SIZE - PIXEL_SIZE),
                 gCurrentSprite.xPosition, 0);
         }
     }
@@ -1039,7 +1140,7 @@ void RuinsTestDespawn(void)
  * @brief 39774 | 118 | Initializes a Ruins test ghost sprite
  * 
  */
-void RuinsTestGhostInit(void)
+static void RuinsTestGhostInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
 
@@ -1052,7 +1153,7 @@ void RuinsTestGhostInit(void)
         gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 4);
         gCurrentSprite.hitboxBottom = BLOCK_SIZE;
         gCurrentSprite.hitboxLeft = -(BLOCK_SIZE * 2 + HALF_BLOCK_SIZE);
-        gCurrentSprite.hitboxRight = (BLOCK_SIZE * 2 + HALF_BLOCK_SIZE);
+        gCurrentSprite.hitboxRight = BLOCK_SIZE * 2 + HALF_BLOCK_SIZE;
 
         gCurrentSprite.drawOrder = 13;
         gCurrentSprite.pOam = sRuinsTestGhostOam_NotMoving;
@@ -1068,10 +1169,10 @@ void RuinsTestGhostInit(void)
         TransparencyUpdateBldcnt(0x1, BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
             BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL);
 
-        TransparencySpriteUpdateBLDALPHA(16, 0, 0, 16);
+        TransparencySpriteUpdateBldalpha(16, 0, 0, 16);
 
         gCurrentSprite.work0 = 0;
-        gCurrentSprite.work1 = 16;
+        gCurrentSprite.work1 = BLDALPHA_MAX_VALUE;
         gCurrentSprite.work2 = 0;
     }
     else
@@ -1102,7 +1203,7 @@ void RuinsTestGhostInit(void)
         gCurrentSprite.xPositionSpawn = gCurrentSprite.xPosition;
 
         gCurrentSprite.scaling = 0;
-        gCurrentSprite.work0 = 4;
+        gCurrentSprite.work0 = BLDALPHA_MAX_VALUE / 4;
         gCurrentSprite.work1 = 0;
     }
 }
@@ -1111,19 +1212,19 @@ void RuinsTestGhostInit(void)
  * @brief 3988c | 74 | Handles the Ruins test ghost spawning
  * 
  */
-void RuinsTestGhostSpawn(void)
+static void RuinsTestGhostSpawn(void)
 {    
     if (MOD_AND(++gCurrentSprite.work2, 4) == 0)
     {
-        if (gCurrentSprite.work0 < 8)
+        if (gCurrentSprite.work0 < BLDALPHA_MAX_VALUE / 2)
         {
             gCurrentSprite.work0++;
-            TransparencySpriteUpdateBLDALPHA(0x10, gCurrentSprite.work0, 0, 16);
+            TransparencySpriteUpdateBldalpha(BLDALPHA_MAX_VALUE, gCurrentSprite.work0, 0, BLDALPHA_MAX_VALUE);
         }
-        else if (gCurrentSprite.work1 > 9)
+        else if (gCurrentSprite.work1 > BLDALPHA_MAX_VALUE / 2 + 1)
         {
             gCurrentSprite.work1--;
-            TransparencySpriteUpdateBLDALPHA(gCurrentSprite.work1, 8, 0, 16);
+            TransparencySpriteUpdateBldalpha(gCurrentSprite.work1, BLDALPHA_MAX_VALUE / 2, 0, BLDALPHA_MAX_VALUE);
         }
         else
         {
@@ -1141,7 +1242,7 @@ void RuinsTestGhostSpawn(void)
  * @brief 39900 | fc | Handles the Ruins test ghost being idle
  * 
  */
-void RuinsTestGhostIdle(void)
+static void RuinsTestGhostIdle(void)
 {
     u8 ramSlot;
 
@@ -1149,16 +1250,16 @@ void RuinsTestGhostIdle(void)
     {
         if (gCurrentSprite.invincibilityStunFlashTimer == 0)
         {
-            gCurrentSprite.work0--;
+            APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
-                gCurrentSprite.work0 = 0xA;
-                if (gCurrentSprite.work1++ < 0x10)
-                    TransparencySpriteUpdateBLDALPHA(gCurrentSprite.work1, 0x10, 0, 0x10);
+                gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
+                if (gCurrentSprite.work1++ < BLDALPHA_MAX_VALUE)
+                    TransparencySpriteUpdateBldalpha(gCurrentSprite.work1, BLDALPHA_MAX_VALUE, 0, BLDALPHA_MAX_VALUE);
                 else
                 {
                     gCurrentSprite.pose = RUINS_TEST_GHOST_POSE_GHOST_DESPAWN;
-                    gCurrentSprite.work1 = 0x10;
+                    gCurrentSprite.work1 = BLDALPHA_MAX_VALUE;
                     TransparencyUpdateBldcnt(0x1, BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL);
                 }
             }
@@ -1196,14 +1297,14 @@ void RuinsTestGhostIdle(void)
  * @brief 399fc | 44 | Handles the Ruins test ghost despawning
  * 
  */
-void RuinsTestGhostDespawn(void)
+static void RuinsTestGhostDespawn(void)
 {
-    if (--gCurrentSprite.work0 == 0)
+    if (APPLY_DELTA_TIME_DEC(gCurrentSprite.work0) == 0)
     {
-        gCurrentSprite.work0 = 10;
+        gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
 
         if (gCurrentSprite.work1-- != 0)
-            TransparencySpriteUpdateBLDALPHA(gCurrentSprite.work1, 16, 0, 16);
+            TransparencySpriteUpdateBldalpha(gCurrentSprite.work1, BLDALPHA_MAX_VALUE, 0, BLDALPHA_MAX_VALUE);
         else
             gCurrentSprite.status = 0;
     }
@@ -1213,7 +1314,7 @@ void RuinsTestGhostDespawn(void)
  * @brief 39a40 | 234 | Handles moving a symbol that was shot to its place
  * 
  */
-void RuinsTestGhostMoveSymbolToPlace(void)
+static void RuinsTestGhostMoveSymbolToPlace(void)
 {
     u16 xDistance;
     u16 yDistance;
@@ -1221,7 +1322,7 @@ void RuinsTestGhostMoveSymbolToPlace(void)
     u16 targetX;
 
     // Update palette
-    if (--gCurrentSprite.work0 == 0)
+    if (APPLY_DELTA_TIME_DEC(gCurrentSprite.work0) == 0)
     {
         gCurrentSprite.work0 = 4;
         switch (gCurrentSprite.work1++)
@@ -1337,10 +1438,10 @@ void RuinsTestGhostMoveSymbolToPlace(void)
  * @brief 39c74 | 17c | Handles a symbol being placed
  * 
  */
-void RuinsTestGhostSymbolPlacing(void)
+static void RuinsTestGhostSymbolPlacing(void)
 {
     // Update palette
-    if (gCurrentSprite.animationDurationCounter == 1)
+    if (gCurrentSprite.animationDurationCounter == DELTA_TIME)
     {
         switch (gCurrentSprite.currentAnimationFrame)
         {
@@ -1419,7 +1520,7 @@ void RuinsTestGhostSymbolPlacing(void)
  * @brief 39df0 | 24 | Sets the ghost disappearing state
  * 
  */
-void RuinsTestGhostSymbolSetGhostDisappearing(void)
+static void RuinsTestGhostSymbolSetGhostDisappearing(void)
 {
     if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_FADING_BACK)
     {
@@ -1432,11 +1533,11 @@ void RuinsTestGhostSymbolSetGhostDisappearing(void)
  * @brief 39e14 | 28 | Handles a symbol waiting for the fight to end
  * 
  */
-void RuinsTestGhostSymbolWaitForEndOfFight(void)
+static void RuinsTestGhostSymbolWaitForEndOfFight(void)
 {
     if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
     {
-        gCurrentSprite.work0 = 80;
+        gCurrentSprite.work0 = CONVERT_SECONDS(1.f) + ONE_THIRD_SECOND;
         gCurrentSprite.pose = RUINS_TEST_GHOST_POSE_SYMBOL_DELAY_BEFORE_PLACING_END_OF_FIGHT;
     }
 }
@@ -1445,7 +1546,7 @@ void RuinsTestGhostSymbolWaitForEndOfFight(void)
  * @brief 39e3c | 3c | Delay before a symbol replays the placing animation at the end of the fight
  * 
  */
-void RuinsTestGhostSymbolDelayBeforePlacingAtEndOfFight(void)
+static void RuinsTestGhostSymbolDelayBeforePlacingAtEndOfFight(void)
 {
     gCurrentSprite.work0--;
     if (gCurrentSprite.work0 == 0)
@@ -1538,7 +1639,7 @@ void RuinsTest(void)
             }
 
             // Check shoot standing lightning
-            if (gBossWork.work6 > 30 && gFrameCounter8Bit != 0)
+            if (gBossWork.work6 > CONVERT_SECONDS(.5f) && gFrameCounter8Bit != 0)
             {
                 // Reset lightning timer
                 gBossWork.work6 = 0;
@@ -1554,13 +1655,13 @@ void RuinsTest(void)
 
         // Update pattern timer
         if (gBossWork.work3 != 0)
-            gBossWork.work3--;
+            APPLY_DELTA_TIME_DEC(gBossWork.work3);
 
         // Update lightning timer
         if (gCurrentSprite.pose > RUINS_TEST_POSE_MOVING_INIT && gBossWork.work7 != 0)
         {
             if (gSamusData.xPosition == gPreviousXPosition && gSamusData.yPosition == gPreviousYPosition)
-                gBossWork.work6++;
+                APPLY_DELTA_TIME_INC(gBossWork.work6);
             else
                 gBossWork.work6 = 0;
         }
@@ -1597,14 +1698,14 @@ void RuinsTestSymbol(void)
 
             gCurrentSprite.pose = RUINS_TEST_SYMBOL_POSE_DELAY_BEFORE_MUSIC;
             gCurrentSprite.samusCollision = SSC_NONE;
-            gCurrentSprite.work0 = 60;
+            gCurrentSprite.work0 = CONVERT_SECONDS(1.f);
             gCurrentSprite.drawOrder = 13;
 
             gDisablePause = TRUE;
             break;
 
         case RUINS_TEST_SYMBOL_POSE_DELAY_BEFORE_MUSIC:
-            gCurrentSprite.work0--;
+            APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
                 gCurrentSprite.pose = RUINS_TEST_SYMBOL_POSE_UPDATE_PALETTE;
@@ -1663,7 +1764,7 @@ void RuinsTestSymbol(void)
                 gCurrentSprite.currentAnimationFrame = 0;
                 gCurrentSprite.animationDurationCounter = 0;
                 gCurrentSprite.pose = RUINS_TEST_SYMBOL_POSE_MERGING;
-                gCurrentSprite.work0 = 120;
+                gCurrentSprite.work0 = CONVERT_SECONDS(2.f);
             }
             break;
 
@@ -1680,7 +1781,7 @@ void RuinsTestSymbol(void)
                 }
             }
 
-            if (--gCurrentSprite.work0 == 0)
+            if (APPLY_DELTA_TIME_DEC(gCurrentSprite.work0) == 0)
             {
                 gCurrentSprite.pOam = sRuinsTestSymbolOam_Disappearing;
                 gCurrentSprite.currentAnimationFrame = 0;
@@ -1689,9 +1790,9 @@ void RuinsTestSymbol(void)
                 break;
             }
 
-            if (gCurrentSprite.work0 == 60)
+            if (gCurrentSprite.work0 == CONVERT_SECONDS(1.f))
                 gSpriteData[ramSlot].work0 = 2;
-            else if (gCurrentSprite.work0 == 110)
+            else if (gCurrentSprite.work0 == CONVERT_SECONDS(2.f - 1.f / 6))
                 gSpriteData[ramSlot].work0 = 1;
             break;
 
@@ -1741,7 +1842,7 @@ void RuinsTestSamusReflectionStart(void)
             gCurrentSprite.hitboxLeft = 0;
             gCurrentSprite.hitboxRight = 0;
 
-            gCurrentSprite.pOam = sRuinsTestSamusReflectionOAM;
+            gCurrentSprite.pOam = sRuinsTestSamusReflectionOam;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 
@@ -1749,7 +1850,7 @@ void RuinsTestSamusReflectionStart(void)
             gCurrentSprite.samusCollision = SSC_NONE;
             gCurrentSprite.drawOrder = 3;
 
-            DMA_SET(3, sRuinsTestPal_SamusReflection, (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+            DMA_SET(3, sRuinsTestPal_SamusReflection, PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
             gCurrentSprite.work0 = 1;
             break;
 
@@ -1760,11 +1861,11 @@ void RuinsTestSamusReflectionStart(void)
                 timer = gCurrentSprite.work0++;
                 if (timer > 14)
                 {
-                    DMA_SET(3, &sRuinsTestPal[16 * 7], (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+                    DMA_SET(3, &sRuinsTestPal[16 * 7], PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
                 }
                 else
                 {
-                    DMA_SET(3, &sRuinsTestPal_SamusReflection[timer * 16], (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+                    DMA_SET(3, &sRuinsTestPal_SamusReflection[timer * 16], PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
                 }
 
             }
@@ -1772,25 +1873,25 @@ void RuinsTestSamusReflectionStart(void)
             if (gSamusData.pose != SPOSE_FACING_THE_BACKGROUND_SUITLESS)
             {
                 gDisablePause = FALSE;
-                gCurrentSprite.work0 = 2;
+                gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 30);
                 gCurrentSprite.pose = RUINS_TEST_SAMUS_REFLECTION_START_POSE_SPAWN_PARTICLE;
 
                 // Transfer turning graphics
                 if (gSamusData.direction & KEY_RIGHT)
                 {
-                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningRightTop, (VRAM_BASE + 0x14280), (DMA_ENABLE << 16) | 192);
-                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningRightBottom, (VRAM_BASE + 0x14680), (DMA_ENABLE << 16) | 128);
+                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningRightTop, VRAM_OBJ + 0x4280, C_32_2_16(DMA_ENABLE, sizeof(sRuinsTestGfx_SamusReflectionTurningRightTop) / 2));
+                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningRightBottom, VRAM_OBJ + 0x4680, C_32_2_16(DMA_ENABLE, sizeof(sRuinsTestGfx_SamusReflectionTurningRightBottom) / 2));
                 }
                 else
                 {
-                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningLeftTop, (VRAM_BASE + 0x14280), (DMA_ENABLE << 16) | 192);
-                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningLeftBottom, (VRAM_BASE + 0x14680), (DMA_ENABLE << 16) | 128);
+                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningLeftTop, VRAM_OBJ + 0x4280, C_32_2_16(DMA_ENABLE, sizeof(sRuinsTestGfx_SamusReflectionTurningLeftTop) / 2));
+                    DMA_SET(3, sRuinsTestGfx_SamusReflectionTurningLeftBottom, VRAM_OBJ + 0x4680, C_32_2_16(DMA_ENABLE, sizeof(sRuinsTestGfx_SamusReflectionTurningLeftBottom) / 2));
                 }
             }
             break;
 
         case RUINS_TEST_SAMUS_REFLECTION_START_POSE_SPAWN_PARTICLE:
-            gCurrentSprite.work0--;
+            APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
                 // Spawn particle
@@ -1825,7 +1926,7 @@ void RuinsTestReflectionCover(void)
             gCurrentSprite.hitboxLeft = 0;
             gCurrentSprite.hitboxRight = 0;
 
-            gCurrentSprite.pOam = sRuinsTestReflectionCoverOAM;
+            gCurrentSprite.pOam = sRuinsTestReflectionCoverOam;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 
@@ -2120,7 +2221,7 @@ void RuinsTestSamusReflectionEnd(void)
             gCurrentSprite.hitboxLeft = 0;
             gCurrentSprite.hitboxRight = 0;
 
-            gCurrentSprite.pOam = sRuinsTestSamusReflectionOAM;
+            gCurrentSprite.pOam = sRuinsTestSamusReflectionOam;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 
@@ -2128,9 +2229,9 @@ void RuinsTestSamusReflectionEnd(void)
             gCurrentSprite.samusCollision = SSC_NONE;
             gCurrentSprite.drawOrder = 11;
 
-            DMA_SET(3, sRuinsTestGfx_SamusReflectionSuitlessTop, (VRAM_BASE + 0x14280), C_32_2_16(DMA_ENABLE, 192));
-            DMA_SET(3, sRuinsTestGfx_SamusReflectionSuitlessBottom, (VRAM_BASE + 0x14680), C_32_2_16(DMA_ENABLE, 128));
-            DMA_SET(3, sRuinsTestPal_SamusReflection, (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+            DMA_SET(3, sRuinsTestGfx_SamusReflectionSuitlessTop, VRAM_OBJ + 0x4280, C_32_2_16(DMA_ENABLE, 192));
+            DMA_SET(3, sRuinsTestGfx_SamusReflectionSuitlessBottom, VRAM_OBJ + 0x4680, C_32_2_16(DMA_ENABLE, 128));
+            DMA_SET(3, sRuinsTestPal_SamusReflection, PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
 
             gCurrentSprite.work0 = 0;
             gCurrentSprite.work1 = 0;
@@ -2159,7 +2260,7 @@ void RuinsTestSamusReflectionEnd(void)
                 }
 
                 offset = gCurrentSprite.work0;
-                DMA_SET(3, (sRuinsTestPal_SamusReflection + offset * 16), (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+                DMA_SET(3, (sRuinsTestPal_SamusReflection + offset * 16), PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
             }
 
             if (gCurrentSprite.pose == RUINS_TEST_SAMUS_REFLECTION_END_POSE_FULLSUIT)
@@ -2185,42 +2286,42 @@ void RuinsTestSamusReflectionEnd(void)
             break;
 
         case RUINS_TEST_SAMUS_REFLECTION_END_POSE_FULLSUIT:
-            if (--gCurrentSprite.work0 == 0x0)
+            if (APPLY_DELTA_TIME_DEC(gCurrentSprite.work0) == 0)
             {
                 gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
-                DMA_SET(3, sRuinsTestPal_SamusReflectionFullSuit, (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+                DMA_SET(3, sRuinsTestPal_SamusReflectionFullSuit, PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
                 gCurrentSprite.pose = RUINS_TEST_SAMUS_REFLECTION_END_POSE_UPDATE_PALETTE;
-                gCurrentSprite.work0 = 0x1;
-                gCurrentSprite.work1 = 0xC;
+                gCurrentSprite.work0 = 1;
+                gCurrentSprite.work1 = CONVERT_SECONDS(.2f);
                 FadeMusic(CONVERT_SECONDS(3.f) + ONE_THIRD_SECOND);
             }
-            else if (gCurrentSprite.work0 == 0x1E)
+            else if (gCurrentSprite.work0 == CONVERT_SECONDS(.5f))
             {
                 // Transfer fullsuit Gfx
                 gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN;
-                DMA_SET(3, sRuinsTestGfx_SamusReflectionFullSuitTop, (VRAM_BASE + 0x14280), C_32_2_16(DMA_ENABLE, 192));
-                DMA_SET(3, sRuinsTestGfx_SamusReflectionFullSuitBottom, (VRAM_BASE + 0x14680), C_32_2_16(DMA_ENABLE, 128));
+                DMA_SET(3, sRuinsTestGfx_SamusReflectionFullSuitTop, VRAM_OBJ + 0x4280, C_32_2_16(DMA_ENABLE, sizeof(sRuinsTestGfx_SamusReflectionFullSuitTop) / 2));
+                DMA_SET(3, sRuinsTestGfx_SamusReflectionFullSuitBottom, VRAM_OBJ + 0x4680, C_32_2_16(DMA_ENABLE, sizeof(sRuinsTestGfx_SamusReflectionFullSuitBottom) / 2));
             }
             break;
 
         case RUINS_TEST_SAMUS_REFLECTION_END_POSE_UPDATE_PALETTE:
             // Update palette
-            gCurrentSprite.work1--;
+            APPLY_DELTA_TIME_DEC(gCurrentSprite.work1);
             if (gCurrentSprite.work1 == 0)
             {
-                gCurrentSprite.work1 = 12;
+                gCurrentSprite.work1 = CONVERT_SECONDS(.2f);
                 offset = gCurrentSprite.work0++;
-                DMA_SET(3, &sRuinsTestPal_SamusReflectionFullSuit[offset * 16], (PALRAM_BASE + 0x3E0), C_32_2_16(DMA_ENABLE, 16));
+                DMA_SET(3, &sRuinsTestPal_SamusReflectionFullSuit[offset * 16], PALRAM_OBJ + PAL_ROW_SIZE * 15, C_32_2_16(DMA_ENABLE, 16));
                 if (offset > 8)
                 {
                     gCurrentSprite.pose = RUINS_TEST_SAMUS_REFLECTION_END_POSE_SET_FADING_STARTED;
-                    gCurrentSprite.work0 = 20;
+                    gCurrentSprite.work0 = ONE_THIRD_SECOND;
                 }
             }
             break;
 
         case RUINS_TEST_SAMUS_REFLECTION_END_POSE_SET_FADING_STARTED:
-            gCurrentSprite.work0--;
+            APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
                 gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE_FADE;
@@ -2233,7 +2334,7 @@ void RuinsTestSamusReflectionEnd(void)
  * @brief 3b03c | 30 | Initializes a Ruins test lightning sprite to be on the ground (horizontal)
  * 
  */
-void RuinsTestLightningOnGroundInit(void)
+static void RuinsTestLightningOnGroundInit(void)
 {
     gCurrentSprite.pOam = sRuinsTestLightningOam_OnGroundHorizontal;
     gCurrentSprite.currentAnimationFrame = 0;
@@ -2242,7 +2343,7 @@ void RuinsTestLightningOnGroundInit(void)
     gCurrentSprite.hitboxTop = -QUARTER_BLOCK_SIZE;
     gCurrentSprite.hitboxBottom = 0;
     gCurrentSprite.hitboxLeft = -(BLOCK_SIZE + HALF_BLOCK_SIZE);
-    gCurrentSprite.hitboxRight = (BLOCK_SIZE + HALF_BLOCK_SIZE);
+    gCurrentSprite.hitboxRight = BLOCK_SIZE + HALF_BLOCK_SIZE;
 
     gCurrentSprite.pose = RUINS_TEST_LIGHTNING_POSE_ON_GROUND_HORIZONTAL;
 }
@@ -2256,7 +2357,7 @@ void RuinsTestLightning(void)
     u32 topEdge;
     u16 velocity;
 
-    velocity = 16;
+    velocity = QUARTER_BLOCK_SIZE;
     if (gSubSpriteData1.workVariable3 != RUINS_TEST_FIGHT_STAGE_ON_GOING)
     {
         gCurrentSprite.status = 0;
@@ -2268,9 +2369,9 @@ void RuinsTestLightning(void)
         case SPRITE_POSE_UNINITIALIZED:
             gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
 
-            gCurrentSprite.drawDistanceTop = 0x50;
-            gCurrentSprite.drawDistanceBottom = 0x20;
-            gCurrentSprite.drawDistanceHorizontal = 0x28;
+            gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 5);
+            gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
+            gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2 + HALF_BLOCK_SIZE);
 
             gCurrentSprite.samusCollision = SSC_HURTS_SAMUS;
 
@@ -2283,8 +2384,8 @@ void RuinsTestLightning(void)
                 gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE;
 
                 gCurrentSprite.pOam = sRuinsTestLightningOam_InAir;
-                gCurrentSprite.currentAnimationFrame = 0x0;
-                gCurrentSprite.animationDurationCounter = 0x0;
+                gCurrentSprite.currentAnimationFrame = 0;
+                gCurrentSprite.animationDurationCounter = 0;
 
                 gCurrentSprite.pose = RUINS_TEST_LIGHTNING_POSE_GOING_DOWN;
             }

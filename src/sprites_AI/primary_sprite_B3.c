@@ -75,5 +75,5 @@ void PrimarySpriteB3(void)
         }
     }
 
-    TransparencySpriteUpdateBLDALPHA(0, gCurrentSprite.work3, 0, 16);
+    TransparencySpriteUpdateBldalpha(0, gCurrentSprite.work3, 0, 16);
 }

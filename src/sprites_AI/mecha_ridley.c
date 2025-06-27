@@ -372,7 +372,7 @@ void MechaRidleyInit(void)
             BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG3_SECOND_TARGET_PIXEL |
             BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL);
 
-        TransparencySpriteUpdateBLDALPHA(10, 0, 0, 16);
+        TransparencySpriteUpdateBldalpha(10, 0, 0, 16);
 
         gCurrentSprite.xPosition += BLOCK_SIZE;
 
@@ -594,7 +594,7 @@ void MechaRidleyStartBattle(void)
             DMA_SET(3, &sMechaRidleyFadingPal[palRow * 16],
                 PALRAM_BASE + 0x300, (DMA_ENABLE << 16) | 13);
 
-            TransparencySpriteUpdateBLDALPHA(palRow + 10, 0, 0, 16);
+            TransparencySpriteUpdateBldalpha(palRow + 10, 0, 0, 16);
         }
     }
 }
