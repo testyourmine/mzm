@@ -1,13 +1,20 @@
+#include "sprites_AI/searchlight.h"
+#include "gba/display.h"
 #include "macros.h"
 
-#include "sprites_AI/searchlight.h"
 #include "data/sprites/searchlight.h"
+
 #include "constants/clipdata.h"
 #include "constants/particle.h"
 #include "constants/sprite.h"
+
 #include "structs/display.h"
 #include "structs/clipdata.h"
 #include "structs/sprite.h"
+
+#define SEARCHLIGHT_POSE_IDLE 0x9
+#define SEARCHLIGHT_POSE_ACTIVATING 0x23
+#define SEARCHLIGHT_POSE_ACTIVATE_ALARM 0x25
 
 /**
  * @brief 49bd0 | 1fc | Searchlight AI
@@ -20,40 +27,41 @@ void Searchlight(void)
         case SPRITE_POSE_UNINITIALIZED:
             if (gAlarmTimer != 0)
             {
-                gCurrentSprite.status = 0x0; // Kill if alarm is active
+                 // Kill if alarm is active
+                gCurrentSprite.status = 0;
+                break;
             }
-            else
-            {
-                gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(2 * BLOCK_SIZE) + 0;
-                gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(2 * BLOCK_SIZE) + 0;
-                gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(2 * BLOCK_SIZE) + 0;
 
-                gCurrentSprite.hitboxTop = -THREE_QUARTER_BLOCK_SIZE;
-                gCurrentSprite.hitboxBottom = THREE_QUARTER_BLOCK_SIZE;
-                gCurrentSprite.hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
-                gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
+            gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
+            gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
+            gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
 
-                gCurrentSprite.pOam = sSearchlightOAM_Moving;
-                gCurrentSprite.animationDurationCounter = 0;
-                gCurrentSprite.currentAnimationFrame = 0;
+            gCurrentSprite.hitboxTop = -THREE_QUARTER_BLOCK_SIZE;
+            gCurrentSprite.hitboxBottom = THREE_QUARTER_BLOCK_SIZE;
+            gCurrentSprite.hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
+            gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
-                gCurrentSprite.samusCollision = SSC_CHECK_COLLIDING;
-                gCurrentSprite.pose = SEARCHLIGHT_POSE_IDLE;
-                gCurrentSprite.bgPriority = gIoRegistersBackup.BG1CNT & 0x3;
-                gCurrentSprite.drawOrder = 0x1;
+            gCurrentSprite.pOam = sSearchlightOam_Moving;
+            gCurrentSprite.animationDurationCounter = 0;
+            gCurrentSprite.currentAnimationFrame = 0;
 
-                // Set initial direction based on sprite ID
-                if (gCurrentSprite.spriteId == PSPRITE_SEARCHLIGHT)
-                    gCurrentSprite.status |= (SPRITE_STATUS_FACING_RIGHT | SPRITE_STATUS_FACING_DOWN);
-                else if (gCurrentSprite.spriteId == PSPRITE_SEARCHLIGHT2)
-                    gCurrentSprite.status |= SPRITE_STATUS_FACING_DOWN;
-                else if (gCurrentSprite.spriteId == PSPRITE_SEARCHLIGHT3)
-                    gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT;
-            }
+            gCurrentSprite.samusCollision = SSC_CHECK_COLLIDING;
+            gCurrentSprite.pose = SEARCHLIGHT_POSE_IDLE;
+            gCurrentSprite.bgPriority = BGCNT_GET_PRIORITY(gIoRegistersBackup.BG1CNT);
+            gCurrentSprite.drawOrder = 1;
+
+            // Set initial direction based on sprite ID
+            if (gCurrentSprite.spriteId == PSPRITE_SEARCHLIGHT)
+                gCurrentSprite.status |= (SPRITE_STATUS_FACING_RIGHT | SPRITE_STATUS_FACING_DOWN);
+            else if (gCurrentSprite.spriteId == PSPRITE_SEARCHLIGHT2)
+                gCurrentSprite.status |= SPRITE_STATUS_FACING_DOWN;
+            else if (gCurrentSprite.spriteId == PSPRITE_SEARCHLIGHT3)
+                gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT;
             break;
 
         case SEARCHLIGHT_POSE_IDLE:
-            gCurrentSprite.status ^= SPRITE_STATUS_NOT_DRAWN; // Flicker
+            // Flicker
+            gCurrentSprite.status ^= SPRITE_STATUS_NOT_DRAWN;
 
             if (gCurrentSprite.status & SPRITE_STATUS_SAMUS_COLLIDING)
                 gAlarmTimer = ALARM_TIMER_ACTIVE_TIMER; // Activate alarm
@@ -74,7 +82,7 @@ void Searchlight(void)
                     if (gCurrentAffectingClipdata.movement == CLIPDATA_MOVEMENT_STOP_ENEMY_BLOCK_SOLID)
                         gCurrentSprite.status &= ~SPRITE_STATUS_FACING_RIGHT; // Change direction if colliding with stop enemy
                     else
-                        gCurrentSprite.xPosition += 0x2;
+                        gCurrentSprite.xPosition += PIXEL_SIZE / 2;
                 }
                 else
                 {
@@ -83,7 +91,7 @@ void Searchlight(void)
                     if (gCurrentAffectingClipdata.movement == CLIPDATA_MOVEMENT_STOP_ENEMY_BLOCK_SOLID)
                         gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT; // Change direction if colliding with stop enemy
                     else
-                        gCurrentSprite.xPosition -= 0x2;
+                        gCurrentSprite.xPosition -= PIXEL_SIZE / 2;
                 }
 
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_DOWN)
@@ -93,7 +101,7 @@ void Searchlight(void)
                     if (gCurrentAffectingClipdata.movement == CLIPDATA_MOVEMENT_STOP_ENEMY_BLOCK_SOLID)
                         gCurrentSprite.status &= ~SPRITE_STATUS_FACING_DOWN; // Change direction if colliding with stop enemy
                     else
-                        gCurrentSprite.yPosition += 0x2;
+                        gCurrentSprite.yPosition += PIXEL_SIZE / 2;
                 }
                 else
                 {
@@ -102,7 +110,7 @@ void Searchlight(void)
                     if (gCurrentAffectingClipdata.movement == CLIPDATA_MOVEMENT_STOP_ENEMY_BLOCK_SOLID)
                         gCurrentSprite.status |= SPRITE_STATUS_FACING_DOWN; // Change direction if colliding with stop enemy
                     else
-                        gCurrentSprite.yPosition -= 0x2;
+                        gCurrentSprite.yPosition -= PIXEL_SIZE / 2;
                 }
             }
             break;
@@ -112,14 +120,15 @@ void Searchlight(void)
             APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
-                gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN; // Hide
+                gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN;
                 gCurrentSprite.pose = SEARCHLIGHT_POSE_ACTIVATE_ALARM;
             }
             break;
 
 
         case SEARCHLIGHT_POSE_ACTIVATE_ALARM:
-            gAlarmTimer = ALARM_TIMER_ACTIVE_TIMER; // Constantly activate alarm
+            // Constantly activate alarm
+            gAlarmTimer = ALARM_TIMER_ACTIVE_TIMER;
             break;
     }
 }
