@@ -2034,56 +2034,56 @@ const u16 sParticleMainBossDeathOam_Frame16[OAM_DATA_SIZE(3)] = {
     OBJ_SHAPE_VERTICAL | 0xe1, OBJ_X_FLIP | 0x0, 0x3187
 };
 
-const u16 sWaterDropOam_Spawning_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sWaterDropOam_Spawning_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfe, 0x1fc, 0x2161
 };
 
-const u16 sWaterDropOam_Spawning_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sWaterDropOam_Spawning_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xff, 0x1fc, 0x2161
 };
 
-const u16 sWaterDropOam_Spawning_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sWaterDropOam_Spawning_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0x0, 0x1fc, 0x2161
 };
 
-const u16 sWaterDropOam_Spawning_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sWaterDropOam_Spawning_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0x0, 0x1fc, 0x2162
 };
 
-const u16 sWaterDropOam_Falling_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sWaterDropOam_Falling_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, 0x2160
 };
 
-const u16 sWaterDropOam_Splashing_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sWaterDropOam_Splashing_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, 0x1fe, 0x409d,
     0xf8, 0x1fa, 0x409d
 };
 
-const u16 sWaterDropOam_Splashing_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sWaterDropOam_Splashing_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, 0x1fe, 0x409e,
     0xf8, 0x1fa, 0x409e
 };
 
-const u16 sWaterDropOam_Splashing_Frame2[OAM_DATA_SIZE(2)] = {
+static const u16 sWaterDropOam_Splashing_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, 0x1fe, 0x409f,
     0xf8, 0x1fa, 0x409f
 };
 
-const u16 sWaterDropOam_Splashing_Frame3[OAM_DATA_SIZE(2)] = {
+static const u16 sWaterDropOam_Splashing_Frame3[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, 0x1fe, 0x40bd,
     0xf8, 0x1fa, 0x40bd
 };
 
-const u16 sWaterDropOam_Splashing_Frame4[OAM_DATA_SIZE(2)] = {
+static const u16 sWaterDropOam_Splashing_Frame4[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, 0x1fe, 0x40be,
     0xf8, 0x1fa, 0x40be

@@ -42,7 +42,7 @@ void ExplosionZebesEscape(void)
         gCurrentSprite.samusCollision = SSC_NONE;
         
         // Default oam
-        gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy;
+        gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 

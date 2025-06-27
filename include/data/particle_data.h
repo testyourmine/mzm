@@ -460,26 +460,6 @@ extern const u16 sParticleMainBossDeathOam_Frame15[19];
 
 extern const u16 sParticleMainBossDeathOam_Frame16[10];
 
-extern const u16 sWaterDropOam_Spawning_Frame0[4];
-
-extern const u16 sWaterDropOam_Spawning_Frame1[4];
-
-extern const u16 sWaterDropOam_Spawning_Frame2[4];
-
-extern const u16 sWaterDropOam_Spawning_Frame3[4];
-
-extern const u16 sWaterDropOam_Falling_Frame0[4];
-
-extern const u16 sWaterDropOam_Splashing_Frame0[7];
-
-extern const u16 sWaterDropOam_Splashing_Frame1[7];
-
-extern const u16 sWaterDropOam_Splashing_Frame2[7];
-
-extern const u16 sWaterDropOam_Splashing_Frame3[7];
-
-extern const u16 sWaterDropOam_Splashing_Frame4[7];
-
 extern const u16 sSpriteDebrisOAM_Frame0[4];
 
 extern const u16 sSpriteDebrisOAM_Frame1[4];
@@ -541,9 +521,7 @@ extern const struct FrameData sParticleFreezingSpritewithChargedIceBeamOam[16];
 extern const struct FrameData sParticleMainBossDeathOam[18];
 
 extern const struct FrameData sWaterDropOam_Spawning[8];
-
 extern const struct FrameData sWaterDropOam_Falling[2];
-
 extern const struct FrameData sWaterDropOam_Splashing[6];
 
 extern const struct FrameData sSpriteDebrisOAM[5];

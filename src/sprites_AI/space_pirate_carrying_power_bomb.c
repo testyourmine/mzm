@@ -13,6 +13,18 @@
 #include "structs/clipdata.h"
 #include "structs/sprite.h"
 
+#define SPACE_PIRATE_CARRYING_POWER_BOMB_POSE_SPAWNING 0x9
+#define SPACE_PIRATE_CARRYING_POWER_BOMB_POSE_MOVING 0x23
+
+#define FAKE_POWER_BOMB_POSE_IDLE 0x9
+
+#define FAKE_POWER_BOMB_EVENT_TRIGGER_POSE_IDLE 0x8
+
+// The room in the ruins during the suitless sequence
+#define RUINS_ROOM 32
+// The room near the first power bomb tank
+#define POWER_BOMB_ROOM 46
+
 /**
  * @brief 4b604 | 180 | Space pirate carrying power bomb AI
  * 
@@ -28,9 +40,9 @@ void SpacePirateCarryingPowerBomb(void)
     switch (gCurrentSprite.pose)
     {
         case SPRITE_POSE_UNINITIALIZED:
-            if (room == 32 + 1)
+            if (room == RUINS_ROOM + 1)
                 eventCheck = EventFunction(EVENT_ACTION_CHECKING, EVENT_SPACE_PIRATE_WITH_POWER_BOMB_ONE);
-            else if (room == 46 + 1)
+            else if (room == POWER_BOMB_ROOM + 1)
                 eventCheck = EventFunction(EVENT_ACTION_CHECKING, EVENT_SPACE_PIRATE_WITH_POWER_BOMB_TWO);
             else
                 eventCheck = TRUE;
@@ -63,9 +75,9 @@ void SpacePirateCarryingPowerBomb(void)
         case SPACE_PIRATE_CARRYING_POWER_BOMB_POSE_SPAWNING:
             if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
             {
-                if (room == 32 + 1)
+                if (room == RUINS_ROOM + 1)
                     EventFunction(EVENT_ACTION_SETTING, EVENT_SPACE_PIRATE_WITH_POWER_BOMB_ONE);
-                else if (room == 46 + 1)
+                else if (room == POWER_BOMB_ROOM + 1)
                     EventFunction(EVENT_ACTION_SETTING, EVENT_SPACE_PIRATE_WITH_POWER_BOMB_TWO);
 
                 gCurrentSprite.pose = SPACE_PIRATE_CARRYING_POWER_BOMB_POSE_MOVING;
@@ -123,7 +135,7 @@ void FakePowerBomb(void)
         gCurrentSprite.hitboxLeft = 0;
         gCurrentSprite.hitboxRight = 0;
 
-        gCurrentSprite.pOam = sFakePowerBombOAM_Idle;
+        gCurrentSprite.pOam = sFakePowerBombOam_Idle;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 
@@ -162,7 +174,7 @@ void FakePowerBombEventTrigger(void)
 
         gCurrentSprite.pose = FAKE_POWER_BOMB_EVENT_TRIGGER_POSE_IDLE;
         
-        gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy;
+        gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }

@@ -1643,7 +1643,7 @@ void EventTriggerDiscoveredImagoPassage(void)
         gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE;
 
         gCurrentSprite.pose = EVENT_TRIGGER_DISCOVERED_IMAGO_PASSAGE_POSE_IDLE;
-        gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy;
+        gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }

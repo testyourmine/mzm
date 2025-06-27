@@ -1,31 +1,31 @@
 #include "data/sprites/unused_sprites.h"
 #include "macros.h"
 
-const u16 sUnusedSpritesOAM_Idle_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sUnusedSpritesOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, 0x3151
 };
 
-const u16 sUnusedSpritesOAM_Idle_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sUnusedSpritesOam_Idle_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, 0x3150
 };
 
-const struct FrameData sUnusedSpritesOAM_Idle[3] = {
+const struct FrameData sUnusedSpritesOam_Idle[3] = {
     [0] = {
-        .pFrame = sUnusedSpritesOAM_Idle_Frame0,
+        .pFrame = sUnusedSpritesOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(0.5f)
     },
     [1] = {
-        .pFrame = sUnusedSpritesOAM_Idle_Frame1,
+        .pFrame = sUnusedSpritesOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(0.5f)
     },
     [2] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sUnusedSpritesOAM_Unused[2] = {
+const struct FrameData sUnusedSpritesOam_Unused[2] = {
     [0] = {
-        .pFrame = sUnusedSpritesOAM_Idle_Frame0,
+        .pFrame = sUnusedSpritesOam_Idle_Frame0,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR

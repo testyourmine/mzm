@@ -233,7 +233,7 @@ void RisingChozoPillar(void)
             gCurrentSprite.hitboxLeft = 0;
             gCurrentSprite.hitboxRight = 0;
 
-            gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy;
+            gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy;
             gCurrentSprite.animationDurationCounter = 0;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.pose = RISING_CHOZO_PILLAR_POSE_WAIT_FOR_POWER_GRIP;

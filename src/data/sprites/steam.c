@@ -4,25 +4,25 @@
 const u32 sSteamGfx[195] = INCBIN_U32("data/sprites/Steam.gfx.lz");
 const u16 sSteamPal[16] = INCBIN_U16("data/sprites/Steam.pal");
 
-const u16 sSteamOam_HorizontalLarge_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x200
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x200,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x202
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame2[OAM_DATA_SIZE(3)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame2[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0xb, OBJ_SPRITE_OAM | 0x200,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x2, OBJ_SPRITE_OAM | 0x202,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x18, OBJ_SPRITE_OAM | 0x200,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0xc, OBJ_SPRITE_OAM | 0x202,
@@ -30,7 +30,7 @@ const u16 sSteamOam_HorizontalLarge_Frame3[OAM_DATA_SIZE(4)] = {
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame4[OAM_DATA_SIZE(7)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame4[OAM_DATA_SIZE(7)] = {
     0x7,
     0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x207,
     0xfc, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x207,
@@ -41,7 +41,7 @@ const u16 sSteamOam_HorizontalLarge_Frame4[OAM_DATA_SIZE(7)] = {
     0xf8, OBJ_SIZE_16x16 | 0x3, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame5[OAM_DATA_SIZE(8)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame5[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf8, OBJ_Y_FLIP | 0x1fb, OBJ_SPRITE_OAM | 0x208,
     0x0, 0x1fd, OBJ_SPRITE_OAM | 0x208,
@@ -53,7 +53,7 @@ const u16 sSteamOam_HorizontalLarge_Frame5[OAM_DATA_SIZE(8)] = {
     0x0, OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame6[OAM_DATA_SIZE(7)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame6[OAM_DATA_SIZE(7)] = {
     0x7,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | 0x3, OBJ_SPRITE_OAM | 0x208,
     0x0, OBJ_X_FLIP | 0x1, OBJ_SPRITE_OAM | 0x208,
@@ -64,7 +64,7 @@ const u16 sSteamOam_HorizontalLarge_Frame6[OAM_DATA_SIZE(7)] = {
     0xf8, OBJ_X_FLIP | 0xd, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame7[OAM_DATA_SIZE(6)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame7[OAM_DATA_SIZE(6)] = {
     0x6,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | 0xf, OBJ_SPRITE_OAM | 0x208,
     0x0, OBJ_X_FLIP | 0xd, OBJ_SPRITE_OAM | 0x208,
@@ -74,7 +74,7 @@ const u16 sSteamOam_HorizontalLarge_Frame7[OAM_DATA_SIZE(6)] = {
     0x0, OBJ_Y_FLIP | 0x2d, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame8[OAM_DATA_SIZE(5)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame8[OAM_DATA_SIZE(5)] = {
     0x5,
     0xf7, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1a, OBJ_SPRITE_OAM | 0x208,
     0xff, OBJ_X_FLIP | 0x18, OBJ_SPRITE_OAM | 0x208,
@@ -83,26 +83,26 @@ const u16 sSteamOam_HorizontalLarge_Frame8[OAM_DATA_SIZE(5)] = {
     0xf8, OBJ_X_FLIP | 0x38, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame9[OAM_DATA_SIZE(2)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame9[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | 0x32, OBJ_SPRITE_OAM | 0x208,
     0x0, OBJ_X_FLIP | 0x30, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sSteamOam_VerticalLarge_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sSteamOam_VerticalLarge_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x200,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x202
 };
 
-const u16 sSteamOam_VerticalLarge_Frame2[OAM_DATA_SIZE(3)] = {
+static const u16 sSteamOam_VerticalLarge_Frame2[OAM_DATA_SIZE(3)] = {
     0x3,
     0xe2, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x200,
     0xed, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x202,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sSteamOam_VerticalLarge_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sSteamOam_VerticalLarge_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     0xd3, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x200,
     0xe0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x202,
@@ -110,7 +110,7 @@ const u16 sSteamOam_VerticalLarge_Frame3[OAM_DATA_SIZE(4)] = {
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sSteamOam_VerticalLarge_Frame4[OAM_DATA_SIZE(7)] = {
+static const u16 sSteamOam_VerticalLarge_Frame4[OAM_DATA_SIZE(7)] = {
     0x7,
     0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x207,
     0xfc, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x207,
@@ -121,7 +121,7 @@ const u16 sSteamOam_VerticalLarge_Frame4[OAM_DATA_SIZE(7)] = {
     0xef, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sSteamOam_VerticalLarge_Frame5[OAM_DATA_SIZE(8)] = {
+static const u16 sSteamOam_VerticalLarge_Frame5[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf8, OBJ_Y_FLIP | 0x1fb, OBJ_SPRITE_OAM | 0x208,
     0x0, 0x1fd, OBJ_SPRITE_OAM | 0x208,
@@ -133,7 +133,7 @@ const u16 sSteamOam_VerticalLarge_Frame5[OAM_DATA_SIZE(8)] = {
     0xf0, OBJ_Y_FLIP | 0x0, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_VerticalLarge_Frame6[OAM_DATA_SIZE(7)] = {
+static const u16 sSteamOam_VerticalLarge_Frame6[OAM_DATA_SIZE(7)] = {
     0x7,
     0xed, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x208,
     0xf5, OBJ_X_FLIP | 0x1fa, OBJ_SPRITE_OAM | 0x208,
@@ -144,7 +144,7 @@ const u16 sSteamOam_VerticalLarge_Frame6[OAM_DATA_SIZE(7)] = {
     0xdc, OBJ_X_FLIP | 0x1f8, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_VerticalLarge_Frame7[OAM_DATA_SIZE(6)] = {
+static const u16 sSteamOam_VerticalLarge_Frame7[OAM_DATA_SIZE(6)] = {
     0x6,
     0xe5, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1fd, OBJ_SPRITE_OAM | 0x208,
     0xed, OBJ_X_FLIP | 0x1fb, OBJ_SPRITE_OAM | 0x208,
@@ -154,7 +154,7 @@ const u16 sSteamOam_VerticalLarge_Frame7[OAM_DATA_SIZE(6)] = {
     0xd0, 0x0, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_VerticalLarge_Frame8[OAM_DATA_SIZE(5)] = {
+static const u16 sSteamOam_VerticalLarge_Frame8[OAM_DATA_SIZE(5)] = {
     0x5,
     0xda, OBJ_Y_FLIP | 0x1fb, OBJ_SPRITE_OAM | 0x208,
     0xe2, 0x1fd, OBJ_SPRITE_OAM | 0x208,
@@ -163,31 +163,31 @@ const u16 sSteamOam_VerticalLarge_Frame8[OAM_DATA_SIZE(5)] = {
     0xc0, OBJ_X_FLIP | 0x1f8, OBJ_SPRITE_OAM | 0x207
 };
 
-const u16 sSteamOam_VerticalLarge_Frame9[OAM_DATA_SIZE(2)] = {
+static const u16 sSteamOam_VerticalLarge_Frame9[OAM_DATA_SIZE(2)] = {
     0x2,
     0xcc, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1fd, OBJ_SPRITE_OAM | 0x208,
     0xd4, OBJ_X_FLIP | 0x1fb, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_X_FLIP | 0x1fd, OBJ_SPRITE_OAM | 0x209
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x209,
     0xf8, 0x1ff, OBJ_SPRITE_OAM | 0x209
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame2[OAM_DATA_SIZE(3)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame2[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, 0xb, OBJ_SPRITE_OAM | 0x209,
     0xfa, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20b,
     0xf8, 0x3, OBJ_SPRITE_OAM | 0x209
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf8, OBJ_X_FLIP | 0x11, OBJ_SPRITE_OAM | 0x209,
     0xfa, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x20b,
@@ -195,7 +195,7 @@ const u16 sSteamOam_HorizontalSmall_Frame3[OAM_DATA_SIZE(4)] = {
     0xf8, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20c
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame4[OAM_DATA_SIZE(5)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame4[OAM_DATA_SIZE(5)] = {
     0x5,
     0xf9, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x20d,
     0xf8, OBJ_X_FLIP | 0xc, OBJ_SPRITE_OAM | 0x20b,
@@ -204,7 +204,7 @@ const u16 sSteamOam_HorizontalSmall_Frame4[OAM_DATA_SIZE(5)] = {
     0xf8, OBJ_X_FLIP | 0x13, OBJ_SPRITE_OAM | 0x209
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame5[OAM_DATA_SIZE(5)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame5[OAM_DATA_SIZE(5)] = {
     0x5,
     0xf8, OBJ_X_FLIP | 0x3, OBJ_SPRITE_OAM | 0x20d,
     0xf8, OBJ_X_FLIP | 0x16, OBJ_SPRITE_OAM | 0x20b,
@@ -213,7 +213,7 @@ const u16 sSteamOam_HorizontalSmall_Frame5[OAM_DATA_SIZE(5)] = {
     0xf8, OBJ_X_FLIP | 0x1e, OBJ_SPRITE_OAM | 0x20b
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame6[OAM_DATA_SIZE(4)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame6[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf8, OBJ_X_FLIP | 0x24, OBJ_SPRITE_OAM | 0x20c,
     0xf8, OBJ_Y_FLIP | 0x1a, OBJ_SPRITE_OAM | 0x20c,
@@ -221,27 +221,27 @@ const u16 sSteamOam_HorizontalSmall_Frame6[OAM_DATA_SIZE(4)] = {
     0xf7, 0x11, OBJ_SPRITE_OAM | 0x20d
 };
 
-const u16 sSteamOam_HorizontalSmall_Frame7[OAM_DATA_SIZE(3)] = {
+static const u16 sSteamOam_HorizontalSmall_Frame7[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, OBJ_Y_FLIP | 0x1e, OBJ_SPRITE_OAM | 0x20d,
     0xf8, OBJ_X_FLIP | 0x28, OBJ_SPRITE_OAM | 0x20d,
     0xf7, OBJ_X_FLIP | 0x13, OBJ_SPRITE_OAM | 0x20d
 };
 
-const u16 sSteamOam_VerticalSmall_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sSteamOam_VerticalSmall_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf1, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x209,
     0xf8, 0x1fc, OBJ_SPRITE_OAM | 0x209
 };
 
-const u16 sSteamOam_VerticalSmall_Frame2[OAM_DATA_SIZE(3)] = {
+static const u16 sSteamOam_VerticalSmall_Frame2[OAM_DATA_SIZE(3)] = {
     0x3,
     0xec, 0x1fb, OBJ_SPRITE_OAM | 0x209,
     0xfa, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20b,
     0xf2, 0x1fb, OBJ_SPRITE_OAM | 0x209
 };
 
-const u16 sSteamOam_VerticalSmall_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sSteamOam_VerticalSmall_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     0xe7, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x209,
     0xee, 0x1fc, OBJ_SPRITE_OAM | 0x209,
@@ -249,7 +249,7 @@ const u16 sSteamOam_VerticalSmall_Frame3[OAM_DATA_SIZE(4)] = {
     0xf8, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20c
 };
 
-const u16 sSteamOam_VerticalSmall_Frame4[OAM_DATA_SIZE(5)] = {
+static const u16 sSteamOam_VerticalSmall_Frame4[OAM_DATA_SIZE(5)] = {
     0x5,
     0xe1, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x209,
     0xe8, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x209,
@@ -258,7 +258,7 @@ const u16 sSteamOam_VerticalSmall_Frame4[OAM_DATA_SIZE(5)] = {
     0xf1, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20c
 };
 
-const u16 sSteamOam_VerticalSmall_Frame5[OAM_DATA_SIZE(5)] = {
+static const u16 sSteamOam_VerticalSmall_Frame5[OAM_DATA_SIZE(5)] = {
     0x5,
     0xf6, 0x1fc, OBJ_SPRITE_OAM | 0x20d,
     0xe4, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20b,
@@ -267,7 +267,7 @@ const u16 sSteamOam_VerticalSmall_Frame5[OAM_DATA_SIZE(5)] = {
     0xdd, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20b
 };
 
-const u16 sSteamOam_VerticalSmall_Frame6[OAM_DATA_SIZE(4)] = {
+static const u16 sSteamOam_VerticalSmall_Frame6[OAM_DATA_SIZE(4)] = {
     0x4,
     0xda, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20c,
     0xe2, 0x1fc, OBJ_SPRITE_OAM | 0x20c,
@@ -275,7 +275,7 @@ const u16 sSteamOam_VerticalSmall_Frame6[OAM_DATA_SIZE(4)] = {
     0xe7, 0x1fc, OBJ_SPRITE_OAM | 0x20d
 };
 
-const u16 sSteamOam_VerticalSmall_Frame7[OAM_DATA_SIZE(3)] = {
+static const u16 sSteamOam_VerticalSmall_Frame7[OAM_DATA_SIZE(3)] = {
     0x3,
     0xe4, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20d,
     0xd7, OBJ_X_FLIP | 0x1fc, OBJ_SPRITE_OAM | 0x20d,
@@ -416,7 +416,7 @@ const u16 sSteamDiagonalOam_Small_Frame7[OAM_DATA_SIZE(3)] = {
     0xe5, OBJ_X_FLIP | 0x13, OBJ_SPRITE_OAM | 0x20d
 };
 
-const u16 sSteamOam_HorizontalLarge_Frame10[OAM_DATA_SIZE(1)] = {
+static const u16 sSteamOam_HorizontalLarge_Frame10[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x20e
 };

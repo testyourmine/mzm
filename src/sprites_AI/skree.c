@@ -1,5 +1,6 @@
 #include "sprites_AI/skree.h"
 #include "macros.h"
+#include "gba/display.h"
 
 #include "data/sprites/skree.h"
 #include "data/sprite_data.h"
@@ -14,11 +15,27 @@
 #include "structs/sprite.h"
 #include "structs/samus.h"
 
+#define SKREE_POSE_IDLE_INIT 0x8
+#define SKREE_POSE_IDLE 0x9
+#define SKREE_POSE_SPINNING_INIT 0x22
+#define SKREE_POSE_SPINNING 0x23
+#define SKREE_POSE_GOING_DOWN_INIT 0x34
+#define SKREE_POSE_GOING_DOWN 0x35
+#define SKREE_POSE_CRASHING 0x37
+
+#define SKREE_EXPLOSION_PART_GOING_UP 0x0
+#define SKREE_EXPLOSION_PART_GOING_DOWN 0x1
+
+#define SKREE_EXPLOSION_POSE_MOVING 0x9
+
+#define SKREE_Y_RANGE (BLOCK_SIZE * 10 + PIXEL_SIZE)
+#define SKREE_X_RANGE (BLOCK_SIZE * 2 + QUARTER_BLOCK_SIZE + PIXEL_SIZE + PIXEL_SIZE / 2)
+
 /**
  * @brief 1c644 | 50 | Initializes a skree sprite
  * 
  */
-void SkreeInit(void)
+static void SkreeInit(void)
 {
     gCurrentSprite.samusCollision = SSC_HURTS_SAMUS;
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(0);
@@ -28,7 +45,7 @@ void SkreeInit(void)
     gCurrentSprite.hitboxTop = 0;
     gCurrentSprite.hitboxBottom = BLOCK_SIZE + HALF_BLOCK_SIZE;
     gCurrentSprite.hitboxLeft = -(QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
-    gCurrentSprite.hitboxRight = (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
+    gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
 
     gCurrentSprite.health = GET_PSPRITE_HEALTH(gCurrentSprite.spriteId);
     gCurrentSprite.yPosition -= BLOCK_SIZE;
@@ -38,19 +55,19 @@ void SkreeInit(void)
  * @brief 1c694 | 1c | Initializes a skree to be idle
  * 
  */
-void SkreeIdleInit(void)
+static void SkreeIdleInit(void)
 {
-    gCurrentSprite.pOam = sSkreeOAM_Idle;
+    gCurrentSprite.pOam = sSkreeOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
-    gCurrentSprite.pose = SKREE_POSE_DETECTING_SAMUS;
+    gCurrentSprite.pose = SKREE_POSE_IDLE;
 }
 
 /**
  * @brief 1c6b0 | 50 | Checks if samus is in the range of the skree
  * 
  */
-void SkreeDetectSamus(void)
+static void SkreeDetectSamus(void)
 {
     if (gSamusData.yPosition <= gCurrentSprite.yPosition)
         return;
@@ -75,9 +92,9 @@ void SkreeDetectSamus(void)
  * @brief 1c700 | 1c | Initializes a skree to be spinning
  * 
  */
-void SkreeSpinningInit(void)
+static void SkreeSpinningInit(void)
 {
-    gCurrentSprite.pOam = sSkreeOAM_Spinning;
+    gCurrentSprite.pOam = sSkreeOam_Spinning;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.pose = SKREE_POSE_SPINNING;
@@ -87,7 +104,7 @@ void SkreeSpinningInit(void)
  * @brief 1c71c | 1c | Checks if the spin animation ended
  * 
  */
-void SkreeCheckSpinAnimEnded(void)
+static void SkreeCheckSpinAnimEnded(void)
 {
     if (SpriteUtilCheckNearEndCurrentSpriteAnim())
         gCurrentSprite.pose = SKREE_POSE_GOING_DOWN_INIT;
@@ -97,9 +114,9 @@ void SkreeCheckSpinAnimEnded(void)
  * @brief 1c738 | 68 | Initializes a skree to be going down
  * 
  */
-void SkreeGoingDownInit(void)
+static void SkreeGoingDownInit(void)
 {
-    gCurrentSprite.pOam = sSkreeOAM_GoingDown;
+    gCurrentSprite.pOam = sSkreeOam_GoingDown;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
@@ -120,7 +137,7 @@ void SkreeGoingDownInit(void)
  * @brief 1c7a0 | fc | Handles a skree going down
  * 
  */
-void SkreeGoDown(void)
+static void SkreeGoDown(void)
 {
     u32 blockTop;
     u32 xMovement;
@@ -173,7 +190,7 @@ void SkreeGoDown(void)
         }
 
         // X speed threshold
-        if (xMovement < 16)
+        if (xMovement < QUARTER_BLOCK_SIZE)
             gCurrentSprite.work2++;
     }
 }
@@ -182,7 +199,7 @@ void SkreeGoDown(void)
  * @brief 1c89c | 128 | Handles a skree crashing on the ground
  * 
  */
-void SkreeCrashGround(void)
+static void SkreeCrashGround(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -196,7 +213,7 @@ void SkreeCrashGround(void)
     APPLY_DELTA_TIME_INC(gCurrentSprite.work0);
     switch (gCurrentSprite.work0)
     {
-        case 1 * DELTA_TIME:
+        case DELTA_TIME:
             yPosition += BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
             SpriteDebrisInit(0, 0x11, yPosition - QUARTER_BLOCK_SIZE, xPosition);
             SpriteDebrisInit(0, 0x12, yPosition, xPosition + (QUARTER_BLOCK_SIZE - PIXEL_SIZE));
@@ -209,7 +226,7 @@ void SkreeCrashGround(void)
             break;
 
         case TWO_THIRD_SECOND:
-            gCurrentSprite.pOam = sSkreeOAM_Crashing;
+            gCurrentSprite.pOam = sSkreeOam_Crashing;
             break;
 
         case CONVERT_SECONDS(1.f):
@@ -244,7 +261,7 @@ void SkreeCrashGround(void)
  * @brief 1c9c4 | b4 | Initializes a skree explosion sprite
  * 
  */
-void SkreeExplosionInit(void)
+static void SkreeExplosionInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
     gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
@@ -255,9 +272,9 @@ void SkreeExplosionInit(void)
     gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
 
     gCurrentSprite.hitboxTop = -(QUARTER_BLOCK_SIZE - PIXEL_SIZE);
-    gCurrentSprite.hitboxBottom = (QUARTER_BLOCK_SIZE - PIXEL_SIZE);
+    gCurrentSprite.hitboxBottom = QUARTER_BLOCK_SIZE - PIXEL_SIZE;
     gCurrentSprite.hitboxLeft = -(QUARTER_BLOCK_SIZE - PIXEL_SIZE);
-    gCurrentSprite.hitboxRight = (QUARTER_BLOCK_SIZE - PIXEL_SIZE);
+    gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE - PIXEL_SIZE;
     
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
@@ -265,7 +282,7 @@ void SkreeExplosionInit(void)
     gCurrentSprite.pose = SKREE_EXPLOSION_POSE_MOVING;
     gCurrentSprite.samusCollision = SSC_HURTS_SAMUS;
     gCurrentSprite.drawOrder = 3;
-    gCurrentSprite.bgPriority = MOD_AND(gIoRegistersBackup.BG1CNT, 4);
+    gCurrentSprite.bgPriority = BGCNT_GET_PRIORITY(gIoRegistersBackup.BG1CNT);
     
     gCurrentSprite.yPosition += HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
     gCurrentSprite.status |= SPRITE_STATUS_DOUBLE_SIZE | SPRITE_STATUS_ROTATION_SCALING;
@@ -282,7 +299,7 @@ void SkreeExplosionInit(void)
  * @brief 1ca78 | 68 | Handles the movement of a skree explosion sprite
  * 
  */
-void SkreeExplosionMove(void)
+static void SkreeExplosionMove(void)
 {
     if (gCurrentSprite.currentAnimationFrame > 1)
         gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
@@ -334,10 +351,10 @@ void Skree(void)
         case SPRITE_POSE_UNINITIALIZED:
             SkreeInit();
 
-        case 0x8:
+        case SKREE_POSE_IDLE_INIT:
             SkreeIdleInit();
 
-        case SKREE_POSE_DETECTING_SAMUS:
+        case SKREE_POSE_IDLE:
             SkreeDetectSamus();
             break;
 

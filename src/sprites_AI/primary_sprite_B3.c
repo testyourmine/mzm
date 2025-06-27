@@ -32,7 +32,7 @@ void PrimarySpriteB3(void)
         gCurrentSprite.hitboxLeft = 0;
         gCurrentSprite.hitboxRight = 0;
 
-        gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy;
+        gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 

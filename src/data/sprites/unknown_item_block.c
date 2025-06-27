@@ -8,13 +8,13 @@ const u16 sGravityBlockPal[16] = INCBIN_U16("data/sprites/GravitySuitBlock.pal")
 const u32 sSpaceJumpBlockGfx[297] = INCBIN_U32("data/sprites/SpaceJumpBlock.gfx.lz");
 const u16 sSpaceJumpBlockPal[16] = INCBIN_U16("data/sprites/SpaceJumpBlock.pal");
 
-const u16 sUnknownItemBlockOam_Idle_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sUnknownItemBlockOam_Idle_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sUnknownItemBlockOam_Activated_Frame1[OAM_DATA_SIZE(8)] = {
+static const u16 sUnknownItemBlockOam_Activated_Frame1[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x208,
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x208,
@@ -26,7 +26,7 @@ const u16 sUnknownItemBlockOam_Activated_Frame1[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sUnknownItemBlockOam_Activated_Frame2[OAM_DATA_SIZE(8)] = {
+static const u16 sUnknownItemBlockOam_Activated_Frame2[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x20a,
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x20a,
@@ -38,7 +38,7 @@ const u16 sUnknownItemBlockOam_Activated_Frame2[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sUnknownItemBlockOam_Activated_Frame3[OAM_DATA_SIZE(8)] = {
+static const u16 sUnknownItemBlockOam_Activated_Frame3[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf0, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x20c,
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x20c,
@@ -50,13 +50,13 @@ const u16 sUnknownItemBlockOam_Activated_Frame3[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame1[OAM_DATA_SIZE(6)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame1[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xef, OBJ_SIZE_32x16 | 0x1ef, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_HORIZONTAL | 0x1, OBJ_SIZE_32x16 | 0x1ef, OBJ_SPRITE_OAM | 0x212,
@@ -66,7 +66,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame1[OAM_DATA_SIZE(6)] = {
     0xfc, 0x9, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame2[OAM_DATA_SIZE(6)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame2[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xee, OBJ_SIZE_32x16 | 0x1ee, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_HORIZONTAL | 0x2, OBJ_SIZE_32x16 | 0x1ee, OBJ_SPRITE_OAM | 0x212,
@@ -76,7 +76,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame2[OAM_DATA_SIZE(6)] = {
     0xfc, 0xa, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame3[OAM_DATA_SIZE(8)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame3[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xf3, OBJ_SIZE_32x16 | 0x1ed, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_HORIZONTAL | 0xfd, OBJ_SIZE_32x16 | 0x1ed, OBJ_SPRITE_OAM | 0x212,
@@ -88,7 +88,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame3[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0xb, 0x1fe, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame4[OAM_DATA_SIZE(8)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame4[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xf5, OBJ_SIZE_32x16 | 0x1eb, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_HORIZONTAL | 0xfb, OBJ_SIZE_32x16 | 0x1eb, OBJ_SPRITE_OAM | 0x212,
@@ -100,7 +100,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame4[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0x3, 0x5, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame5[OAM_DATA_SIZE(6)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame5[OAM_DATA_SIZE(6)] = {
     0x6,
     0xe6, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x212,
     0xa, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x212,
@@ -110,7 +110,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame5[OAM_DATA_SIZE(6)] = {
     OBJ_SHAPE_HORIZONTAL | 0x4, 0x1f8, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame6[OAM_DATA_SIZE(8)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame6[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_VERTICAL | 0xe0, 0x1fc, OBJ_SPRITE_OAM | 0x212,
     OBJ_SHAPE_VERTICAL | 0xf0, 0x1fc, OBJ_SPRITE_OAM | 0x212,
@@ -122,7 +122,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame6[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x10, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame7[OAM_DATA_SIZE(12)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame7[OAM_DATA_SIZE(12)] = {
     0xc,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x1d0, OBJ_SPRITE_OAM | 0x210,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x1e0, OBJ_SPRITE_OAM | 0x210,
@@ -138,7 +138,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame7[OAM_DATA_SIZE(12)] = {
     OBJ_SHAPE_VERTICAL | 0x20, 0x1fc, OBJ_SPRITE_OAM | 0x20e
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame8[OAM_DATA_SIZE(10)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame8[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x0, OBJ_SPRITE_OAM | 0x230,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x10, OBJ_SPRITE_OAM | 0x230,
@@ -152,7 +152,7 @@ const u16 sUnknownItemBlockOam_Exploding_Frame8[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1fc, OBJ_SPRITE_OAM | 0x20f
 };
 
-const u16 sUnknownItemBlockOam_Exploding_Frame9[OAM_DATA_SIZE(2)] = {
+static const u16 sUnknownItemBlockOam_Exploding_Frame9[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x50, OBJ_SPRITE_OAM | 0x230,
     OBJ_SHAPE_VERTICAL | 0xa0, 0x1fc, OBJ_SPRITE_OAM | 0x20f

@@ -1134,7 +1134,7 @@ void MetroidDoorLock(void)
 
         gCurrentSprite.pose = METROID_DOOR_LOCK_POSE_IDLE;
 
-        gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy;
+        gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 

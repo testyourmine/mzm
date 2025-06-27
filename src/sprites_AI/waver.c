@@ -27,7 +27,7 @@ void WaverInit(void)
     gCurrentSprite.hitboxLeft = -HALF_BLOCK_SIZE;
     gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE;
 
-    gCurrentSprite.pOam = sWaverOAM;
+    gCurrentSprite.pOam = sWaverOam;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 

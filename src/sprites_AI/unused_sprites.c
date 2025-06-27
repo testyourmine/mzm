@@ -27,7 +27,7 @@ void UnusedSprites(void)
         
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sUnusedSpritesOAM_Idle;
+        gCurrentSprite.pOam = sUnusedSpritesOam_Idle;
         
         gCurrentSprite.bgPriority = 1;
     }

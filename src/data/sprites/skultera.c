@@ -4,7 +4,7 @@
 const u32 sSkulteraGfx[285] = INCBIN_U32("data/sprites/Skultera.gfx.lz");
 const u16 sSkulteraPal[16] = INCBIN_U16("data/sprites/Skultera.pal");
 
-const u16 sSkulteraOam_Idle_Frame0[OAM_DATA_SIZE(6)] = {
+static const u16 sSkulteraOam_Idle_Frame0[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_SIZE_32x16 | 0x1ef, OBJ_SPRITE_OAM | 0x207,
     OBJ_SHAPE_HORIZONTAL | 0xf1, OBJ_SIZE_32x8 | 0x1ef, OBJ_SPRITE_OAM | 0x213,
@@ -14,7 +14,7 @@ const u16 sSkulteraOam_Idle_Frame0[OAM_DATA_SIZE(6)] = {
     OBJ_SHAPE_VERTICAL | 0xef, 0xb, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sSkulteraOam_Idle_Frame1[OAM_DATA_SIZE(6)] = {
+static const u16 sSkulteraOam_Idle_Frame1[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_SIZE_32x16 | 0x1e6, OBJ_SPRITE_OAM | 0x20a,
     OBJ_SHAPE_HORIZONTAL | 0xf9, OBJ_SIZE_32x8 | 0x1e7, OBJ_SPRITE_OAM | 0x236,
@@ -24,7 +24,7 @@ const u16 sSkulteraOam_Idle_Frame1[OAM_DATA_SIZE(6)] = {
     0xf3, 0xa, OBJ_SPRITE_OAM | 0x225
 };
 
-const u16 sSkulteraOam_Idle_Frame2[OAM_DATA_SIZE(5)] = {
+static const u16 sSkulteraOam_Idle_Frame2[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_SIZE_32x16 | 0x1e6, OBJ_SPRITE_OAM | 0x20a,
     OBJ_SHAPE_HORIZONTAL | 0xf1, OBJ_SIZE_32x16 | 0x1e6, OBJ_SPRITE_OAM | 0x216,
@@ -33,7 +33,7 @@ const u16 sSkulteraOam_Idle_Frame2[OAM_DATA_SIZE(5)] = {
     0xf3, 0xb, OBJ_SPRITE_OAM | 0x205
 };
 
-const u16 sSkulteraOam_Idle_Frame3[OAM_DATA_SIZE(5)] = {
+static const u16 sSkulteraOam_Idle_Frame3[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xe2, OBJ_SIZE_32x16 | 0x1ee, OBJ_SPRITE_OAM | 0x207,
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_SIZE_32x16 | 0x1ee, OBJ_SPRITE_OAM | 0x213,
@@ -42,7 +42,7 @@ const u16 sSkulteraOam_Idle_Frame3[OAM_DATA_SIZE(5)] = {
     0xf2, OBJ_Y_FLIP | 0xa, OBJ_SPRITE_OAM | 0x225
 };
 
-const u16 sSkulteraOam_TurningAround_Frame0[OAM_DATA_SIZE(6)] = {
+static const u16 sSkulteraOam_TurningAround_Frame0[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_SIZE_32x16 | 0x1e6, OBJ_SPRITE_OAM | 0x20a,
     OBJ_SHAPE_HORIZONTAL | 0xf9, OBJ_SIZE_32x8 | 0x1e7, OBJ_SPRITE_OAM | 0x236,
@@ -52,7 +52,7 @@ const u16 sSkulteraOam_TurningAround_Frame0[OAM_DATA_SIZE(6)] = {
     0xf4, OBJ_Y_FLIP | 0xb, OBJ_SPRITE_OAM | 0x225
 };
 
-const u16 sSkulteraOam_TurningAround_Frame1[OAM_DATA_SIZE(6)] = {
+static const u16 sSkulteraOam_TurningAround_Frame1[OAM_DATA_SIZE(6)] = {
     0x6,
     0xe1, OBJ_SIZE_16x16 | 0x1f2, OBJ_SPRITE_OAM | 0x20e,
     0xf1, OBJ_SIZE_16x16 | 0x1f2, OBJ_SPRITE_OAM | 0x21a,
@@ -62,7 +62,7 @@ const u16 sSkulteraOam_TurningAround_Frame1[OAM_DATA_SIZE(6)] = {
     0xf2, 0x6, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sSkulteraOam_TurningAround_Frame2[OAM_DATA_SIZE(5)] = {
+static const u16 sSkulteraOam_TurningAround_Frame2[OAM_DATA_SIZE(5)] = {
     0x5,
     0xe1, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x210,
     0xf1, OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x21c,
@@ -71,7 +71,7 @@ const u16 sSkulteraOam_TurningAround_Frame2[OAM_DATA_SIZE(5)] = {
     0xf2, 0x3, OBJ_SPRITE_OAM | 0x205
 };
 
-const u16 sSkulteraOam_TurningAround_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sSkulteraOam_TurningAround_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     0xe1, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x20e,
     0xf1, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f0, OBJ_SPRITE_OAM | 0x21a,
@@ -79,14 +79,14 @@ const u16 sSkulteraOam_TurningAround_Frame3[OAM_DATA_SIZE(4)] = {
     0xf3, 0x1fd, OBJ_SPRITE_OAM | 0x203
 };
 
-const u16 sSkulteraOam_TurningAround_Frame4[OAM_DATA_SIZE(3)] = {
+static const u16 sSkulteraOam_TurningAround_Frame4[OAM_DATA_SIZE(3)] = {
     0x3,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x20a,
     OBJ_SHAPE_HORIZONTAL | 0xf1, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x216,
     0xf1, OBJ_X_FLIP | 0x1ee, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sSkulteraOam_TurningAround_Frame5[OAM_DATA_SIZE(4)] = {
+static const u16 sSkulteraOam_TurningAround_Frame5[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xe2, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1eb, OBJ_SPRITE_OAM | 0x207,
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1eb, OBJ_SPRITE_OAM | 0x213,
@@ -94,7 +94,7 @@ const u16 sSkulteraOam_TurningAround_Frame5[OAM_DATA_SIZE(4)] = {
     0xf1, OBJ_X_FLIP | 0x1ee, OBJ_SPRITE_OAM | 0x200
 };
 
-const u16 sSkulteraOam_TurningAround_Frame6[OAM_DATA_SIZE(6)] = {
+static const u16 sSkulteraOam_TurningAround_Frame6[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1ee, OBJ_SPRITE_OAM | 0x207,
     OBJ_SHAPE_HORIZONTAL | 0xf1, OBJ_X_FLIP | OBJ_SIZE_32x8 | 0x1ee, OBJ_SPRITE_OAM | 0x213,
@@ -104,7 +104,7 @@ const u16 sSkulteraOam_TurningAround_Frame6[OAM_DATA_SIZE(6)] = {
     0xf2, OBJ_X_FLIP | 0x1ed, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sSkulteraOam_TurningAround_Frame7[OAM_DATA_SIZE(6)] = {
+static const u16 sSkulteraOam_TurningAround_Frame7[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xe1, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1fa, OBJ_SPRITE_OAM | 0x20a,
     OBJ_SHAPE_HORIZONTAL | 0xf9, OBJ_X_FLIP | OBJ_SIZE_32x8 | 0x1f9, OBJ_SPRITE_OAM | 0x236,

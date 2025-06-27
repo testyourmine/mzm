@@ -429,7 +429,7 @@ void GadoraEye(void)
             gCurrentSprite.hitboxLeft = -QUARTER_BLOCK_SIZE;
             gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE;
 
-            gCurrentSprite.pOam = sEnemyDropOAM_LargeEnergy; // No graphics
+            gCurrentSprite.pOam = sEnemyDropOam_LargeEnergy; // No graphics
             gCurrentSprite.animationDurationCounter = 0.;
             gCurrentSprite.currentAnimationFrame = 0.;
 
