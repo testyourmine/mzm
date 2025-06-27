@@ -379,7 +379,7 @@ const u16 sRisingChozoPillarPlatformShadowOAM_Frame2[OAM_DATA_SIZE(1)] = {
     OBJ_SHAPE_HORIZONTAL | 0x8, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x2b4
 };
 
-const struct FrameData sRisingChozoPillarPlatformOam_Slot0Spawning[28] = {
+const struct FrameData sRisingChozoPillarPlatformOam_NoShadowSpawning[28] = {
     [0] = {
         .pFrame = sRisingChozoPillarPlatformOam_Slot0Spawning_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
@@ -491,7 +491,7 @@ const struct FrameData sRisingChozoPillarPlatformOam_Slot0Spawning[28] = {
     [27] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sRisingChozoPillarPlatformOam_Slot0Spawned[2] = {
+const struct FrameData sRisingChozoPillarPlatformOam_NoShadowSpawned[2] = {
     [0] = {
         .pFrame = sRisingChozoPillarPlatformOam_Slot0Spawned_Frame0,
         .timer = UCHAR_MAX
@@ -499,7 +499,7 @@ const struct FrameData sRisingChozoPillarPlatformOam_Slot0Spawned[2] = {
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sRisingChozoPillarPlatformOam_Spawning[28] = {
+const struct FrameData sRisingChozoPillarPlatformOam_ShadowSpawning[28] = {
     [0] = {
         .pFrame = sRisingChozoPillarPlatformOam_Spawning_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
@@ -611,7 +611,7 @@ const struct FrameData sRisingChozoPillarPlatformOam_Spawning[28] = {
     [27] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sRisingChozoPillarPlatformOam_Spawned[2] = {
+const struct FrameData sRisingChozoPillarPlatformOam_ShadowSpawned[2] = {
     [0] = {
         .pFrame = sRisingChozoPillarPlatformOam_Spawned_Frame0,
         .timer = UCHAR_MAX

@@ -125,13 +125,13 @@ extern const u16 sRisingChozoPillarPlatformShadowOAM_Frame1[4];
 
 extern const u16 sRisingChozoPillarPlatformShadowOAM_Frame2[4];
 
-extern const struct FrameData sRisingChozoPillarPlatformOam_Slot0Spawning[28];
+extern const struct FrameData sRisingChozoPillarPlatformOam_NoShadowSpawning[28];
 
-extern const struct FrameData sRisingChozoPillarPlatformOam_Slot0Spawned[2];
+extern const struct FrameData sRisingChozoPillarPlatformOam_NoShadowSpawned[2];
 
-extern const struct FrameData sRisingChozoPillarPlatformOam_Spawning[28];
+extern const struct FrameData sRisingChozoPillarPlatformOam_ShadowSpawning[28];
 
-extern const struct FrameData sRisingChozoPillarPlatformOam_Spawned[2];
+extern const struct FrameData sRisingChozoPillarPlatformOam_ShadowSpawned[2];
 
 extern const struct FrameData sRisingChozoPillarPlatformShadowOAM[4];
 

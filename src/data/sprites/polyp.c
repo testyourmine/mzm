@@ -10,7 +10,7 @@ const s16 sPolypProjectileYVelocity[44] = {
 const u32 sPolypGfx[241] = INCBIN_U32("data/sprites/Polyp.gfx.lz");
 const u16 sPolypPal[16] = INCBIN_U16("data/sprites/Polyp.pal");
 
-const u16 sPolypOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x204,
@@ -18,7 +18,7 @@ const u16 sPolypOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xff, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220
 };
 
-const u16 sPolypOam_Idle_Frame1[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Idle_Frame1[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x204,
@@ -26,7 +26,7 @@ const u16 sPolypOam_Idle_Frame1[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xff, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220
 };
 
-const u16 sPolypOam_Idle_Frame2[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Idle_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0xff, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220,
@@ -34,7 +34,7 @@ const u16 sPolypOam_Idle_Frame2[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf5, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x224
 };
 
-const u16 sPolypOam_Warning_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Warning_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf9, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0x1, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220,
@@ -42,7 +42,7 @@ const u16 sPolypOam_Warning_Frame3[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x224
 }; 
 
-const u16 sPolypOam_Warning_Frame2[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Warning_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf9, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0x1, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220,
@@ -50,7 +50,7 @@ const u16 sPolypOam_Warning_Frame2[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf7, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x224
 };
 
-const u16 sPolypOam_Warning_Frame1[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Warning_Frame1[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220,
@@ -58,7 +58,7 @@ const u16 sPolypOam_Warning_Frame1[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf5, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x224
 };
 
-const u16 sPolypOam_Warning_Frame0[OAM_DATA_SIZE(4)] = {
+static const u16 sPolypOam_Warning_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220,
@@ -66,7 +66,7 @@ const u16 sPolypOam_Warning_Frame0[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf4, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x224
 };
 
-const u16 sPolypOam_AfterSpitting_Frame2[OAM_DATA_SIZE(5)] = {
+static const u16 sPolypOam_AfterSpitting_Frame2[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x200,
     OBJ_SHAPE_HORIZONTAL | 0x0, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x220,
@@ -75,62 +75,62 @@ const u16 sPolypOam_AfterSpitting_Frame2[OAM_DATA_SIZE(5)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_SIZE_32x8 | 0x1f0, OBJ_SPRITE_OAM | 0x224
 };
 
-const u16 sPolypProjectileOam_Right_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Right_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x210
 };
 
-const u16 sPolypProjectileOam_Right_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Right_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sPolypProjectileOam_Right_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Right_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x214
 };
 
-const u16 sPolypProjectileOam_Right_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Right_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x216
 };
 
-const u16 sPolypProjectileOam_Left_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Left_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x210
 };
 
-const u16 sPolypProjectileOam_Left_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Left_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sPolypProjectileOam_Left_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Left_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x214
 };
 
-const u16 sPolypProjectileOam_Left_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Left_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x216
 };
 
-const u16 sPolypProjectileOam_Exploding_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Exploding_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sPolypProjectileOam_Exploding_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Exploding_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21a
 };
 
-const u16 sPolypProjectileOam_Exploding_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Exploding_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21c
 };
 
-const u16 sPolypProjectileOam_Exploding_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sPolypProjectileOam_Exploding_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x21e
 };

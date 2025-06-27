@@ -4,49 +4,49 @@
 const u32 sRinkaZebetiteAndCannonGfx[476] = INCBIN_U32("data/sprites/ZebetiteRinkaCannon.gfx.lz");
 const u16 sRinkaZebetiteAndCannonPal[32] = INCBIN_U16("data/sprites/ZebetiteRinkaCannon.pal");
 
-const u16 sRinkaMotherBrainOAM_Moving_Frame0[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Moving_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1200,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1200
 };
 
-const u16 sRinkaMotherBrainOAM_Moving_Frame1[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Moving_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1201,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1201
 };
 
-const u16 sRinkaMotherBrainOAM_Moving_Frame2[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Moving_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1202,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1202
 };
 
-const u16 sRinkaMotherBrainOAM_Spawning_Frame0[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Spawning_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1203,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1203
 };
 
-const u16 sRinkaMotherBrainOAM_Spawning_Frame1[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Spawning_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1204,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1204
 };
 
-const u16 sRinkaMotherBrainOAM_Spawning_Frame2[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Spawning_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1205,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1205
 };
 
-const u16 sRinkaMotherBrainOAM_Spawning_Frame3[OAM_DATA_SIZE(2)] = {
+const u16 sRinkaMotherBrainOam_Spawning_Frame3[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1206,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1206
 };
 
-const u16 sRinkaMotherBrainOAM_Spawning_Frame4[OAM_DATA_SIZE(6)] = {
+const u16 sRinkaMotherBrainOam_Spawning_Frame4[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1240,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1240,
@@ -56,7 +56,7 @@ const u16 sRinkaMotherBrainOAM_Spawning_Frame4[OAM_DATA_SIZE(6)] = {
     0xfc, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x1261
 };
 
-const u16 sRinkaMotherBrainOAM_Spawning_Frame5[OAM_DATA_SIZE(6)] = {
+const u16 sRinkaMotherBrainOam_Spawning_Frame5[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1f8, OBJ_SPRITE_OAM | 0x1242,
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1242,
@@ -519,85 +519,85 @@ const u16 sMotherBrainBlockOAM_Frame3[OAM_DATA_SIZE(1)] = {
 
 
 
-const struct FrameData sRinkaMotherBrainOAM_Spawning[16] = {
+const struct FrameData sRinkaMotherBrainOam_Spawning[16] = {
     [0] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame0,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame2,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame3,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame4,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame4,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [5] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame5,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame5,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [6] = {
-        .pFrame = sRinkaMotherBrainOAM_Spawning_Frame3,
+        .pFrame = sRinkaMotherBrainOam_Spawning_Frame3,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [7] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame0,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame0,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [8] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [9] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame2,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame2,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [10] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [11] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame0,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame0,
         .timer = CONVERT_SECONDS(7.f / 60)
     },
     [12] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(7.f / 60)
     },
     [13] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame2,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame2,
         .timer = CONVERT_SECONDS(7.f / 60)
     },
     [14] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(7.f / 60)
     },
     [15] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sRinkaMotherBrainOAM_Moving[5] = {
+const struct FrameData sRinkaMotherBrainOam_Moving[5] = {
     [0] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame0,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame0,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [1] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame2,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = {
-        .pFrame = sRinkaMotherBrainOAM_Moving_Frame1,
+        .pFrame = sRinkaMotherBrainOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [4] = FRAME_DATA_TERMINATOR

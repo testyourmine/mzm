@@ -8,23 +8,23 @@
 extern const u32 sRinkaZebetiteAndCannonGfx[476];
 extern const u16 sRinkaZebetiteAndCannonPal[32];
 
-extern const u16 sRinkaMotherBrainOAM_Moving_Frame0[7];
+extern const u16 sRinkaMotherBrainOam_Moving_Frame0[7];
 
-extern const u16 sRinkaMotherBrainOAM_Moving_Frame1[7];
+extern const u16 sRinkaMotherBrainOam_Moving_Frame1[7];
 
-extern const u16 sRinkaMotherBrainOAM_Moving_Frame2[7];
+extern const u16 sRinkaMotherBrainOam_Moving_Frame2[7];
 
-extern const u16 sRinkaMotherBrainOAM_Spawning_Frame0[7];
+extern const u16 sRinkaMotherBrainOam_Spawning_Frame0[7];
 
-extern const u16 sRinkaMotherBrainOAM_Spawning_Frame1[7];
+extern const u16 sRinkaMotherBrainOam_Spawning_Frame1[7];
 
-extern const u16 sRinkaMotherBrainOAM_Spawning_Frame2[7];
+extern const u16 sRinkaMotherBrainOam_Spawning_Frame2[7];
 
-extern const u16 sRinkaMotherBrainOAM_Spawning_Frame3[7];
+extern const u16 sRinkaMotherBrainOam_Spawning_Frame3[7];
 
-extern const u16 sRinkaMotherBrainOAM_Spawning_Frame4[19];
+extern const u16 sRinkaMotherBrainOam_Spawning_Frame4[19];
 
-extern const u16 sRinkaMotherBrainOAM_Spawning_Frame5[19];
+extern const u16 sRinkaMotherBrainOam_Spawning_Frame5[19];
 
 extern const u16 sZebetiteOam_Phase1_Frame0[19];
 
@@ -142,9 +142,9 @@ extern const u16 sMotherBrainBlockOAM_Frame3[4];
 
 
 
-extern const struct FrameData sRinkaMotherBrainOAM_Spawning[16];
+extern const struct FrameData sRinkaMotherBrainOam_Spawning[16];
 
-extern const struct FrameData sRinkaMotherBrainOAM_Moving[5];
+extern const struct FrameData sRinkaMotherBrainOam_Moving[5];
 
 extern const struct FrameData sZebetiteOam_Phase1[7];
 
