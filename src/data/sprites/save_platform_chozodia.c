@@ -4,7 +4,7 @@
 const u32 sSavePlatformChozodiaGfx[552] = INCBIN_U32("data/sprites/SavePlatformChozodia.gfx.lz");
 const u16 sSavePlatformChozodiaPal[64] = INCBIN_U16("data/sprites/SavePlatformChozodia.pal");
 
-const u16 sSavePlatformChozodiaOAM_Idle_Frame0[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Idle_Frame0[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xf1, 0x1f4, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x214,
@@ -28,7 +28,7 @@ const u16 sSavePlatformChozodiaOAM_Idle_Frame0[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Idle_Frame1[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Idle_Frame1[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xf1, 0x1f4, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x214,
@@ -52,7 +52,7 @@ const u16 sSavePlatformChozodiaOAM_Idle_Frame1[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Idle_Frame2[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Idle_Frame2[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xf1, 0x1f4, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x214,
@@ -76,7 +76,7 @@ const u16 sSavePlatformChozodiaOAM_Idle_Frame2[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Idle_Frame3[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Idle_Frame3[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xf1, 0x1f4, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x214,
@@ -100,7 +100,7 @@ const u16 sSavePlatformChozodiaOAM_Idle_Frame3[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opening_Frame0[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Opening_Frame0[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xf0, 0x1f4, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf0, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x214,
@@ -124,7 +124,7 @@ const u16 sSavePlatformChozodiaOAM_Opening_Frame0[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opening_Frame1[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Opening_Frame1[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xee, 0x1f4, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xee, OBJ_X_FLIP | 0x4, OBJ_SPRITE_OAM | 0x214,
@@ -148,7 +148,7 @@ const u16 sSavePlatformChozodiaOAM_Opening_Frame1[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opening_Frame2[OAM_DATA_SIZE(20)] = {
+static const u16 sSavePlatformChozodiaOam_Opening_Frame2[OAM_DATA_SIZE(20)] = {
     0x14,
     OBJ_SHAPE_VERTICAL | 0xec, 0x1f3, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xec, OBJ_X_FLIP | 0x5, OBJ_SPRITE_OAM | 0x214,
@@ -172,7 +172,7 @@ const u16 sSavePlatformChozodiaOAM_Opening_Frame2[OAM_DATA_SIZE(20)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opening_Frame3[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opening_Frame3[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xed, 0x1f2, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xed, OBJ_X_FLIP | 0x6, OBJ_SPRITE_OAM | 0x214,
@@ -198,7 +198,7 @@ const u16 sSavePlatformChozodiaOAM_Opening_Frame3[OAM_DATA_SIZE(22)] = {
     0x0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sSavePlatformChozodiaOAM_Opening_Frame4[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opening_Frame4[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xef, 0x1f1, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xef, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x214,
@@ -224,7 +224,7 @@ const u16 sSavePlatformChozodiaOAM_Opening_Frame4[OAM_DATA_SIZE(22)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opening_Frame5[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opening_Frame5[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xf3, 0x1f1, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf3, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x214,
@@ -250,7 +250,7 @@ const u16 sSavePlatformChozodiaOAM_Opening_Frame5[OAM_DATA_SIZE(22)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opened_Frame0[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opened_Frame0[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xf2, 0x1f1, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x214,
@@ -276,7 +276,7 @@ const u16 sSavePlatformChozodiaOAM_Opened_Frame0[OAM_DATA_SIZE(22)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opened_Frame1[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opened_Frame1[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xf2, 0x1f1, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x214,
@@ -302,7 +302,7 @@ const u16 sSavePlatformChozodiaOAM_Opened_Frame1[OAM_DATA_SIZE(22)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opened_Frame2[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opened_Frame2[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xf2, 0x1f1, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x214,
@@ -328,7 +328,7 @@ const u16 sSavePlatformChozodiaOAM_Opened_Frame2[OAM_DATA_SIZE(22)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaOAM_Opened_Frame3[OAM_DATA_SIZE(22)] = {
+static const u16 sSavePlatformChozodiaOam_Opened_Frame3[OAM_DATA_SIZE(22)] = {
     0x16,
     OBJ_SHAPE_VERTICAL | 0xf2, 0x1f1, OBJ_SPRITE_OAM | 0x214,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x214,
@@ -354,7 +354,7 @@ const u16 sSavePlatformChozodiaOAM_Opened_Frame3[OAM_DATA_SIZE(22)] = {
     0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopIdle_Frame0[OAM_DATA_SIZE(25)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopIdle_Frame0[OAM_DATA_SIZE(25)] = {
     0x19,
     OBJ_SHAPE_HORIZONTAL | 0xc6, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e8, OBJ_SPRITE_OAM | 0x280,
@@ -383,7 +383,7 @@ const u16 sSavePlatformChozodiaPartOAM_TopIdle_Frame0[OAM_DATA_SIZE(25)] = {
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x32 | 0x8, OBJ_SPRITE_OAM | 0x28e
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame0[OAM_DATA_SIZE(27)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopExtending_Frame0[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0xc7, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e7, OBJ_SPRITE_OAM | 0x280,
@@ -414,7 +414,7 @@ const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame0[OAM_DATA_SIZE(27)] = 
     OBJ_SHAPE_HORIZONTAL | 0xc4, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x2ae
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame1[OAM_DATA_SIZE(27)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopExtending_Frame1[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0xc8, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -445,7 +445,7 @@ const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame1[OAM_DATA_SIZE(27)] = 
     OBJ_SHAPE_HORIZONTAL | 0xc8, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x2ae
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame2[OAM_DATA_SIZE(27)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopExtending_Frame2[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0xc9, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e5, OBJ_SPRITE_OAM | 0x280,
@@ -476,7 +476,7 @@ const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame2[OAM_DATA_SIZE(27)] = 
     OBJ_SHAPE_HORIZONTAL | 0xcc, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x2ae
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame3[OAM_DATA_SIZE(27)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopExtending_Frame3[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0xca, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e4, OBJ_SPRITE_OAM | 0x280,
@@ -507,7 +507,7 @@ const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame3[OAM_DATA_SIZE(27)] = 
     OBJ_SHAPE_HORIZONTAL | 0xd2, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x2ae
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame4[OAM_DATA_SIZE(27)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopExtending_Frame4[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0xc9, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e5, OBJ_SPRITE_OAM | 0x280,
@@ -538,7 +538,7 @@ const u16 sSavePlatformChozodiaPartOAM_TopExtending_Frame4[OAM_DATA_SIZE(27)] = 
     OBJ_SHAPE_HORIZONTAL | 0xd1, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x2ae
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TopExtended_Frame0[OAM_DATA_SIZE(27)] = {
+static const u16 sSavePlatformChozodiaPartOam_TopExtended_Frame0[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_HORIZONTAL | 0xc8, OBJ_Y_FLIP | OBJ_SIZE_32x16 | 0x1f0, OBJ_SPRITE_OAM | 0x292,
     OBJ_SHAPE_HORIZONTAL | 0xcf, OBJ_Y_FLIP | 0x1e6, OBJ_SPRITE_OAM | 0x280,
@@ -569,57 +569,57 @@ const u16 sSavePlatformChozodiaPartOAM_TopExtended_Frame0[OAM_DATA_SIZE(27)] = {
     OBJ_SHAPE_HORIZONTAL | 0xd0, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x2ae
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xcc, 0x1fc, OBJ_SPRITE_OAM | 0x27f
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xcc, 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame4[OAM_DATA_SIZE(1)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame4[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_VERTICAL | 0xc8, 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame6[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame6[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xc4, 0x1fc, OBJ_SPRITE_OAM | 0x218,
     0xd4, 0x1fc, OBJ_SPRITE_OAM | 0x258
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame8[OAM_DATA_SIZE(1)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame8[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_VERTICAL | 0xc0, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame10[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame10[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xbc, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218,
     0xdc, 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame12[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame12[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xb8, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218,
     OBJ_SHAPE_VERTICAL | 0xd8, 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame14[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame14[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xb4, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218,
     OBJ_SHAPE_VERTICAL | 0xcc, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame16[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame16[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x218
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame18[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame18[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1fb, OBJ_SPRITE_OAM | 0x219,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1fb, OBJ_SPRITE_OAM | 0x219,
@@ -627,7 +627,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame18[OAM_DATA_SIZE(4)] = 
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x1fd, OBJ_SPRITE_OAM | 0x219
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame20[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame20[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1f7, OBJ_SPRITE_OAM | 0x219,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f7, OBJ_SPRITE_OAM | 0x219,
@@ -635,7 +635,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame20[OAM_DATA_SIZE(4)] = 
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x1, OBJ_SPRITE_OAM | 0x219
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame22[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame22[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1f4, OBJ_SPRITE_OAM | 0x219,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f4, OBJ_SPRITE_OAM | 0x219,
@@ -643,7 +643,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame22[OAM_DATA_SIZE(4)] = 
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x4, OBJ_SPRITE_OAM | 0x219
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame24[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame24[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1f3, OBJ_SPRITE_OAM | 0x219,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f3, OBJ_SPRITE_OAM | 0x219,
@@ -653,7 +653,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame24[OAM_DATA_SIZE(6)] = 
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame26[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame26[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_Y_FLIP | 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
@@ -663,7 +663,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame26[OAM_DATA_SIZE(6)] = 
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x6, OBJ_SPRITE_OAM | 0x21a
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame28[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame28[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_Y_FLIP | 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
@@ -673,7 +673,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame28[OAM_DATA_SIZE(6)] = 
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x7, OBJ_SPRITE_OAM | 0x21a
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeSpawning_Frame32[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_Y_FLIP | 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
@@ -683,13 +683,13 @@ const u16 sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32[OAM_DATA_SIZE(6)] = 
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_Tube_Unused_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_Tube_Unused_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     0xb0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x210,
     0xd0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x210
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame0[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeShadow_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1ec, OBJ_SPRITE_OAM | 0x21c,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1ec, OBJ_SPRITE_OAM | 0x21c,
@@ -697,7 +697,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame0[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0xc, OBJ_SPRITE_OAM | 0x21c
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame2[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeShadow_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1ee, OBJ_SPRITE_OAM | 0x21d,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1ee, OBJ_SPRITE_OAM | 0x21d,
@@ -705,7 +705,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame2[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0xa, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame4[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeShadow_Frame4[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1f1, OBJ_SPRITE_OAM | 0x21d,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f1, OBJ_SPRITE_OAM | 0x21d,
@@ -713,7 +713,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame4[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x7, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame6[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeShadow_Frame6[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1f5, OBJ_SPRITE_OAM | 0x21d,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f5, OBJ_SPRITE_OAM | 0x21d,
@@ -721,7 +721,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame6[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x3, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame8[OAM_DATA_SIZE(4)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeShadow_Frame8[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1f9, OBJ_SPRITE_OAM | 0x21c,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f9, OBJ_SPRITE_OAM | 0x21c,
@@ -729,13 +729,13 @@ const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame8[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x1ff, OBJ_SPRITE_OAM | 0x21c
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeShadow_Frame10[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeShadow_Frame10[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xb0, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x21e,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1fc, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame0[OAM_DATA_SIZE(10)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame0[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -749,7 +749,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame0[OAM_DATA_SIZE(10)] 
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame2[OAM_DATA_SIZE(10)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame2[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -763,7 +763,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame2[OAM_DATA_SIZE(10)] 
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame4[OAM_DATA_SIZE(10)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame4[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -777,7 +777,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame4[OAM_DATA_SIZE(10)] 
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame6[OAM_DATA_SIZE(10)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame6[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -791,7 +791,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame6[OAM_DATA_SIZE(10)] 
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame8[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame8[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -801,7 +801,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame8[OAM_DATA_SIZE(6)] =
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame10[OAM_DATA_SIZE(12)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame10[OAM_DATA_SIZE(12)] = {
     0xc,
     0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -817,7 +817,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame10[OAM_DATA_SIZE(12)]
     0xe4, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame12[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame12[OAM_DATA_SIZE(6)] = {
     0x6,
     0xb0, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     0xb0, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -827,7 +827,7 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame12[OAM_DATA_SIZE(6)] 
     0xe8, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame14[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_TubeDespawning_Frame14[OAM_DATA_SIZE(6)] = {
     0x6,
     0xac, 0x1f3, OBJ_SPRITE_OAM | 0x21f,
     0xac, 0x1f0, OBJ_SPRITE_OAM | 0x21b,
@@ -837,36 +837,36 @@ const u16 sSavePlatformChozodiaPartOAM_TubeDespawning_Frame14[OAM_DATA_SIZE(6)] 
     0xec, OBJ_X_FLIP | OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x21b
 };
 
-const u16 sSavePlatformChozodiaPartOAM_Ray_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_Ray_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf8, 0x1f0, OBJ_SPRITE_OAM | 0x1296,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x1296
 };
 
-const u16 sSavePlatformChozodiaPartOAM_Ray_Frame2[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_Ray_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf8, 0x1f0, OBJ_SPRITE_OAM | 0x12b6,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12b6
 };
 
-const u16 sSavePlatformChozodiaPartOAM_Ray_Frame4[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_Ray_Frame4[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf8, 0x1f0, OBJ_SPRITE_OAM | 0x12d6,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12d6
 };
 
-const u16 sSavePlatformChozodiaPartOAM_Ray_Frame6[OAM_DATA_SIZE(2)] = {
+static const u16 sSavePlatformChozodiaPartOam_Ray_Frame6[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf8, 0x1f0, OBJ_SPRITE_OAM | 0x12f6,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12f6
 };
 
-const u16 sSavePlatformChozodiaPartOAM_Empty[4] = {
+static const u16 sSavePlatformChozodiaPartOam_Empty[4] = {
     0x1,
     0xfc, 0x1fc, 0x25f
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame0[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame0[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xd8, OBJ_SIZE_8x32 | 0x1f0, OBJ_SPRITE_OAM | 0x1299,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f4, OBJ_SPRITE_OAM | 0x129b,
@@ -876,7 +876,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame0[OAM_DATA_SIZE(6)] = {
     0xe4, 0x1ed, OBJ_SPRITE_OAM | 0x12fa
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame1[OAM_DATA_SIZE(7)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame1[OAM_DATA_SIZE(7)] = {
     0x7,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f0, OBJ_SPRITE_OAM | 0x1299,
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_SIZE_8x32 | 0x1f8, OBJ_SPRITE_OAM | 0x129c,
@@ -887,7 +887,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame1[OAM_DATA_SIZE(7)] = {
     0xe0, 0x1ed, OBJ_SPRITE_OAM | 0x12da
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame2[OAM_DATA_SIZE(10)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame2[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xc8, OBJ_SIZE_8x32 | 0x1f0, OBJ_SPRITE_OAM | 0x1298,
     OBJ_SHAPE_VERTICAL | 0xd8, OBJ_SIZE_8x32 | 0x1f8, OBJ_SPRITE_OAM | 0x129c,
@@ -901,7 +901,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame2[OAM_DATA_SIZE(10)] = {
     0xe8, 0xa, OBJ_SPRITE_OAM | 0x12fa
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame3[OAM_DATA_SIZE(10)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame3[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xc0, 0x1f0, OBJ_SPRITE_OAM | 0x1298,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1f8, OBJ_SPRITE_OAM | 0x129b,
@@ -915,7 +915,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame3[OAM_DATA_SIZE(10)] = {
     0xe4, 0xa, OBJ_SPRITE_OAM | 0x12da
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame4[OAM_DATA_SIZE(11)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame4[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xc8, 0x1f8, OBJ_SPRITE_OAM | 0x129b,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x8, OBJ_SPRITE_OAM | 0x129c,
@@ -930,7 +930,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame4[OAM_DATA_SIZE(11)] = {
     0xe8, 0x1ef, OBJ_SPRITE_OAM | 0x12fa
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame5[OAM_DATA_SIZE(9)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame5[OAM_DATA_SIZE(9)] = {
     0x9,
     OBJ_SHAPE_VERTICAL | 0xc8, OBJ_SIZE_8x32 | 0x8, OBJ_SPRITE_OAM | 0x129b,
     OBJ_SHAPE_VERTICAL | 0xb8, 0x0, OBJ_SPRITE_OAM | 0x1298,
@@ -943,7 +943,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame5[OAM_DATA_SIZE(9)] = {
     0xe4, 0x1ef, OBJ_SPRITE_OAM | 0x12da
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame6[OAM_DATA_SIZE(9)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame6[OAM_DATA_SIZE(9)] = {
     0x9,
     OBJ_SHAPE_VERTICAL | 0xc0, 0x8, OBJ_SPRITE_OAM | 0x129b,
     OBJ_SHAPE_VERTICAL | 0xd0, OBJ_SIZE_8x32 | 0x1fd, OBJ_SPRITE_OAM | 0x1298,
@@ -956,7 +956,7 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame6[OAM_DATA_SIZE(9)] = {
     0xe0, 0x1ef, OBJ_SPRITE_OAM | 0x12ba
 };
 
-const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame7[OAM_DATA_SIZE(6)] = {
+static const u16 sSavePlatformChozodiaPartOam_RefillLight_Frame7[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0xc8, 0x1fd, OBJ_SPRITE_OAM | 0x1298,
     OBJ_SHAPE_VERTICAL | 0xd8, OBJ_SIZE_8x32 | 0x1f4, OBJ_SPRITE_OAM | 0x129c,
@@ -966,601 +966,601 @@ const u16 sSavePlatformChozodiaPartOAM_RefillLight_Frame7[OAM_DATA_SIZE(6)] = {
     0xdc, 0x1ef, OBJ_SPRITE_OAM | 0x129a
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_Idle[7] = {
+const struct FrameData sSavePlatformChozodiaOam_Idle[7] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame3,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame3,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_Opening[7] = {
+const struct FrameData sSavePlatformChozodiaOam_Opening[7] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame0,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame1,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame2,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame3,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame3,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame4,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame4,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame5,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame5,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_Opened[7] = {
+const struct FrameData sSavePlatformChozodiaOam_Opened[7] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame0,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame3,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame3,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_Saving[7] = {
+const struct FrameData sSavePlatformChozodiaOam_Saving[7] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame0,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame3,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame3,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_IdleOff[2] = {
+const struct FrameData sSavePlatformChozodiaOam_IdleOff[2] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opened_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Opened_Frame0,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_Closing[7] = {
+const struct FrameData sSavePlatformChozodiaOam_Closing[7] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame5,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame5,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame4,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame4,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame3,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame3,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame2,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame2,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame1,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame1,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaOAM_Opening_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Opening_Frame0,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [6] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaOAM_OpenedOff[2] = {
+const struct FrameData sSavePlatformChozodiaOam_OpenedOff[2] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaOAM_Idle_Frame0,
+        .pFrame = sSavePlatformChozodiaOam_Idle_Frame0,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TopIdle[2] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TopIdle[2] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopIdle_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TopIdle_Frame0,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TopExtending[6] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TopExtending[6] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame1,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame3,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame4,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [5] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TopExtended[2] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TopExtended[2] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtended_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtended_Frame0,
         .timer = UCHAR_MAX
     },
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TopRetracting[6] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TopRetracting[6] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame4,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame3,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame1,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TopExtending_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TopExtending_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [5] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TubeSpawning[39] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TubeSpawning[39] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame0,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame2,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame4,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [6] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame6,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame6,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [7] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [8] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame8,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame8,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [9] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [10] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame10,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame10,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [11] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [12] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame12,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame12,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [13] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [14] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame14,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame14,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [15] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [16] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame16,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame16,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [17] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [18] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame18,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame18,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [19] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [20] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame20,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame20,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [21] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [22] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame22,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame22,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [23] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [24] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame24,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame24,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [25] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [26] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame26,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame26,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [27] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [28] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame28,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame28,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [29] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [30] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame28,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame28,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [31] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [32] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame32,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [33] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [34] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame32,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [35] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [36] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame32,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [37] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [38] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TubeShadow[13] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TubeShadow[13] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeShadow_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeShadow_Frame0,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeShadow_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeShadow_Frame2,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeShadow_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeShadow_Frame4,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [6] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeShadow_Frame6,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeShadow_Frame6,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [7] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [8] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeShadow_Frame8,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeShadow_Frame8,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [9] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [10] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeShadow_Frame10,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeShadow_Frame10,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [11] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [12] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TubeIdle[3] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TubeIdle[3] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame32,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_Tube_Unused[5] = {
+const struct FrameData sSavePlatformChozodiaPartOam_Tube_Unused[5] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame32,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Tube_Unused_Frame1,
+        .pFrame = sSavePlatformChozodiaPartOam_Tube_Unused_Frame1,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeSpawning_Frame32,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeSpawning_Frame32,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_TubeDespawning[17] = {
+const struct FrameData sSavePlatformChozodiaPartOam_TubeDespawning[17] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame0,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame2,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame4,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [6] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame6,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame6,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [7] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [8] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame8,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame8,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [9] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [10] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame10,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame10,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [11] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [12] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame12,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame12,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [13] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [14] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_TubeDespawning_Frame14,
+        .pFrame = sSavePlatformChozodiaPartOam_TubeDespawning_Frame14,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [15] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [16] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_Ray[9] = {
+const struct FrameData sSavePlatformChozodiaPartOam_Ray[9] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Ray_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_Ray_Frame0,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Ray_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_Ray_Frame2,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Ray_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_Ray_Frame4,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [6] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Ray_Frame6,
+        .pFrame = sSavePlatformChozodiaPartOam_Ray_Frame6,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [7] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_Empty,
+        .pFrame = sSavePlatformChozodiaPartOam_Empty,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [8] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sSavePlatformChozodiaPartOAM_RefillLight[9] = {
+const struct FrameData sSavePlatformChozodiaPartOam_RefillLight[9] = {
     [0] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame0,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame0,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [1] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame1,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame1,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [2] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame2,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame2,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [3] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame3,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame3,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [4] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame4,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame4,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [5] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame5,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame5,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [6] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame6,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame6,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [7] = {
-        .pFrame = sSavePlatformChozodiaPartOAM_RefillLight_Frame7,
+        .pFrame = sSavePlatformChozodiaPartOam_RefillLight_Frame7,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [8] = FRAME_DATA_TERMINATOR
