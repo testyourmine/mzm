@@ -62,7 +62,7 @@ void SpacePirateCarryingPowerBomb(void)
             gCurrentSprite.hitboxLeft = 0;
             gCurrentSprite.hitboxRight = 0;
 
-            gCurrentSprite.pOam = sSpacePirateCarryingPowerBombOAM;
+            gCurrentSprite.pOam = sSpacePirateCarryingPowerBombOam;
             gCurrentSprite.animationDurationCounter = 0;
             gCurrentSprite.currentAnimationFrame = 0;
 

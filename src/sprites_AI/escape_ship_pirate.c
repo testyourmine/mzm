@@ -37,7 +37,7 @@ static void EscapeShipSpacePirateInit(void)
     gCurrentSprite.rotation = 0;
     gCurrentSprite.samusCollision = SSC_NONE;
 
-    gCurrentSprite.pOam = sSpacePirateOAM_Jumping;
+    gCurrentSprite.pOam = sSpacePirateOam_Jumping;
     gCurrentSprite.currentAnimationFrame = 6;
     gCurrentSprite.animationDurationCounter = 0;
 

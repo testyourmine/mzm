@@ -490,7 +490,7 @@ static void WorkerRobotWalking(void)
 }
 
 /**
- * @brief 2fbc4 | 38 | Initializes a worker robot to be going back toà sleep
+ * @brief 2fbc4 | 38 | Initializes a worker robot to be going back to sleep
  * 
  */
 static void WorkerRobotBackToSleepInit(void)
