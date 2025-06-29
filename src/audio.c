@@ -965,7 +965,7 @@ void unk_1c3c(struct TrackVariables* pVariables)
                 else if (midiKey < 0)
                     midiKey = 0;
 
-                frequency = Midikey2Freq(pVariables->pSample1, midiKey, pVariables->unk_18);
+                frequency = MidiKey2Freq(pVariables->pSample1, midiKey, pVariables->unk_18);
                 pChannel->unk_1C = frequency;
 
                 if (frequency == gMusicInfo.sampleRate)
@@ -1051,7 +1051,7 @@ void unk_1d78(struct TrackVariables* pVariables)
         else if (midiKey < 0)
             midiKey = 0;
 
-        frequency = Midikey2Freq(pChannel->pSample, midiKey, pVariables->unk_18);
+        frequency = MidiKey2Freq(pChannel->pSample, midiKey, pVariables->unk_18);
         pChannel->unk_1C = frequency;
 
         if (frequency == gMusicInfo.sampleRate)

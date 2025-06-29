@@ -268,11 +268,11 @@ static void ParasiteSamusGrabbed(struct SpriteData* pSprite)
  * 
  * @param pSprite Sprite data pointer
  */
-static void ParasiteExpulsedInit(struct SpriteData* pSprite)
+static void ParasiteExpelledInit(struct SpriteData* pSprite)
 {
     pSprite->pose = PARASITE_POSE_EXPULSED_UP;
 
-    pSprite->pOam = sParasiteOam_Expulsed;
+    pSprite->pOam = sParasiteOam_Expelled;
     pSprite->currentAnimationFrame = 0;
     pSprite->animationDurationCounter = 0;
 
@@ -285,7 +285,7 @@ static void ParasiteExpulsedInit(struct SpriteData* pSprite)
  * 
  * @param pSprite Sprite data pointer
  */
-static void ParasiteExpulsedUp(struct SpriteData* pSprite)
+static void ParasiteExpelledUp(struct SpriteData* pSprite)
 {
     u8 velocity;
     u16 yPosition;
@@ -328,7 +328,7 @@ static void ParasiteExpulsedUp(struct SpriteData* pSprite)
  * 
  * @param pSprite Sprite data pointer
  */
-static void ParasiteMultipleExpulsedUp(struct SpriteData* pSprite)
+static void ParasiteMultipleExpelledUp(struct SpriteData* pSprite)
 {
     u8 velocity;
     u16 yPosition;
@@ -371,7 +371,7 @@ static void ParasiteMultipleExpulsedUp(struct SpriteData* pSprite)
  * 
  * @param pSprite Sprite data pointer
  */
-static void ParasiteExpulsedDown(struct SpriteData* pSprite)
+static void ParasiteExpelledDown(struct SpriteData* pSprite)
 {
     u16 oldY;
     u16 yPosition;
@@ -432,7 +432,7 @@ static void ParasiteExpulsedDown(struct SpriteData* pSprite)
  * 
  * @param pSprite Sprite data pointer
  */
-static void ParasiteMultipleExpulsedDown(struct SpriteData* pSprite)
+static void ParasiteMultipleExpelledDown(struct SpriteData* pSprite)
 {
     s16 velocity;
     u32 yPosition;
@@ -1428,14 +1428,14 @@ void ParasiteMultiple(void)
             break;
 
         case PARASITE_POSE_EXPULSED_INIT:
-            ParasiteExpulsedInit(pSprite);
+            ParasiteExpelledInit(pSprite);
         
         case PARASITE_POSE_EXPULSED_UP:
-            ParasiteMultipleExpulsedUp(pSprite);
+            ParasiteMultipleExpelledUp(pSprite);
             break;
 
         case PARASITE_POSE_EXPULSED_DOWN:
-            ParasiteMultipleExpulsedDown(pSprite);
+            ParasiteMultipleExpelledDown(pSprite);
             break;
 
         case PARASITE_POSE_JUMPING_UP:
@@ -1515,14 +1515,14 @@ void Parasite(void)
             break;
 
         case PARASITE_POSE_EXPULSED_INIT:
-            ParasiteExpulsedInit(pSprite);
+            ParasiteExpelledInit(pSprite);
         
         case PARASITE_POSE_EXPULSED_UP:
-            ParasiteExpulsedUp(pSprite);
+            ParasiteExpelledUp(pSprite);
             break;
 
         case PARASITE_POSE_EXPULSED_DOWN:
-            ParasiteExpulsedDown(pSprite);
+            ParasiteExpelledDown(pSprite);
             break;
 
         case PARASITE_POSE_JUMPING_UP:

@@ -174,37 +174,37 @@ static const u16 sParasiteOam_Attached_Frame6[OAM_DATA_SIZE(1)] = {
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x22f
 };
 
-static const u16 sParasiteOam_Expulsed_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x210
 };
 
-static const u16 sParasiteOam_Expulsed_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x211
 };
 
-static const u16 sParasiteOam_Expulsed_Frame3[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame3[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x212
 };
 
-static const u16 sParasiteOam_Expulsed_Frame4[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame4[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x213
 };
 
-static const u16 sParasiteOam_Expulsed_Frame5[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame5[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x214
 };
 
-static const u16 sParasiteOam_Expulsed_Frame6[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame6[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x215
 };
 
-static const u16 sParasiteOam_Expulsed_Frame7[OAM_DATA_SIZE(1)] = {
+static const u16 sParasiteOam_Expelled_Frame7[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x216
 };
@@ -547,37 +547,37 @@ const struct FrameData sParasiteOam_Attached[9] = {
     [8] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sParasiteOam_Expulsed[9] = {
+const struct FrameData sParasiteOam_Expelled[9] = {
     [0] = {
         .pFrame = sParasiteOam_Attached_Frame0,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
-        .pFrame = sParasiteOam_Expulsed_Frame1,
+        .pFrame = sParasiteOam_Expelled_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = {
-        .pFrame = sParasiteOam_Expulsed_Frame2,
+        .pFrame = sParasiteOam_Expelled_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
-        .pFrame = sParasiteOam_Expulsed_Frame3,
+        .pFrame = sParasiteOam_Expelled_Frame3,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [4] = {
-        .pFrame = sParasiteOam_Expulsed_Frame4,
+        .pFrame = sParasiteOam_Expelled_Frame4,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [5] = {
-        .pFrame = sParasiteOam_Expulsed_Frame5,
+        .pFrame = sParasiteOam_Expelled_Frame5,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [6] = {
-        .pFrame = sParasiteOam_Expulsed_Frame6,
+        .pFrame = sParasiteOam_Expelled_Frame6,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [7] = {
-        .pFrame = sParasiteOam_Expulsed_Frame7,
+        .pFrame = sParasiteOam_Expelled_Frame7,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [8] = FRAME_DATA_TERMINATOR

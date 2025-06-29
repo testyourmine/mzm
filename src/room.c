@@ -460,7 +460,7 @@ void RoomReset(void)
     gHatchesState.hatchesLockedWithTimer = 0;
     gHatchesState.navigationDoorsUnlocking = FALSE;
     gHatchesState.hatchesLockedWithEvent = 0;
-    gHatchesState.hatchesLockedWithEventUnlockeable = 0;
+    gHatchesState.hatchesLockedWithEventUnlockable = 0;
     gDoorUnlockTimer = 0;
 
     pDoor = &sAreaDoorsPointers[gCurrentArea][0];

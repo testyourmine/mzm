@@ -123,7 +123,7 @@ static void MultiviolaMove(void)
  * @brief 1e9cc | 4 | Unused multiviola sprite function
  * 
  */
-void MultivioaUnused_Empty1(void)
+void MultiviolaUnused_Empty1(void)
 {
     return;
 }
@@ -132,7 +132,7 @@ void MultivioaUnused_Empty1(void)
  * @brief 1e9d0 | 4 | Unused multiviola sprite function
  * 
  */
-void MultivioaUnused_Empty2(void)
+void MultiviolaUnused_Empty2(void)
 {
     return;
 }

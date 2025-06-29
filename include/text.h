@@ -8,7 +8,7 @@ u32 TextGetCharacterWidth(u16 charID);
 void TextDrawCharacter(u16 charID, u32* dst, u16 indent, u8 color);
 void TextDrawMessageCharacter(u16 charID, u32* dst, u16 indent, u8 color);
 void TextDrawLocationTextCharacters(u8 param_1, const u16** ppText);
-void TextDrawlocation(u8 locationText, u8 gfxSlot);
+void TextDrawLocation(u8 locationText, u8 gfxSlot);
 u8 unk_6f0a8(u8 textID, u8 gfxSlot, u8 param_3);
 void TextStartMessage(u8 textID, u8 gfxSlot);
 u8 TextProcessItemBanner(void);

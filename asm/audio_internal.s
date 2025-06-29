@@ -689,7 +689,7 @@ lbl_08005008:
     movs r1, #0
 lbl_0800500a:
     ldrb r2, [r5, o_TrackVariables_unk_18]
-    bl Midikey2Freq
+    bl MidiKey2Freq
     ldr r1, lbl_0800502c @ =gMusicInfo
     ldrh r2, [r1, o_MusicInfo_sampleRate]
     cmp r0, r2

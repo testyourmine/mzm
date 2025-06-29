@@ -2199,7 +2199,7 @@ void OptionsSetupTiletable(void)
         {
             case OPTION_SOUND_TEST:
                 // Check beat the game in hard mode
-                if (gFileScreenOptionsUnlocked.soundTestAndOgMetroid & (1 << DIFF_HARD))
+                if (gFileScreenOptionsUnlocked.soundTestAndOrigMetroid & (1 << DIFF_HARD))
                     *pOptions++ = i;
                 break;
 
@@ -2263,7 +2263,7 @@ void OptionsSetupTiletable(void)
                 // Check has either any image beat the game in any difficulty
                 if (gFileScreenOptionsUnlocked.galleryImages)
                     *pOptions++ = i;
-                else if (gFileScreenOptionsUnlocked.soundTestAndOgMetroid)
+                else if (gFileScreenOptionsUnlocked.soundTestAndOrigMetroid)
                     *pOptions++ = i;
                 break;
         }
@@ -4575,11 +4575,11 @@ void FileSelectDisplaySaveFileTimer(u8 file)
         dst[5 + 32] = baseTile | FILE_SELECT_TILE_TWO_DOTS_LOW;
 
         // Draw seconds
-        number = gSaveFilesInfo[file].igtSconds / 10; // Tenths
+        number = gSaveFilesInfo[file].igtSeconds / 10; // Tenths
         dst[6] = baseTile | (number + FILE_SELECT_TILE_NUMBER_HIGH);
         dst[6 + 32] = baseTile | (number + FILE_SELECT_TILE_NUMBER_LOW);
         
-        number = gSaveFilesInfo[file].igtSconds % 10; // Seconds
+        number = gSaveFilesInfo[file].igtSeconds % 10; // Seconds
         dst[7] = baseTile | (number + FILE_SELECT_TILE_NUMBER_HIGH);
         dst[7 + 32] = baseTile | (number + FILE_SELECT_TILE_NUMBER_LOW);
     }

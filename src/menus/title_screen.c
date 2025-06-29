@@ -1143,7 +1143,7 @@ void TitleScreenInit(void)
     gBootDebugActive = FALSE;
     gDebugMode = FALSE;
 
-    StopAllMusicsAndSounds();
+    StopAllMusicAndSounds();
 
     DmaTransfer(3, sTitleScreenPal, PALRAM_BASE, sizeof(sTitleScreenPal), 16);
     DmaTransfer(3, sTitleScreenPal, PALRAM_OBJ, sizeof(sTitleScreenPal), 16);

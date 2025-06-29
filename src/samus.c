@@ -5651,7 +5651,7 @@ u8 SamusFacingTheForeground(struct SamusData* pData)
  * @param pData Samus data pointer
  * @return u8 New pose
  */
-u8 SamusTurningFromFacningForegroundGfx(struct SamusData* pData)
+u8 SamusTurningFromFacingForegroundGfx(struct SamusData* pData)
 {
     if (pData->animationDurationCounter >= 2)
     {
@@ -6134,7 +6134,7 @@ u8 SamusDying(struct SamusData* pData)
     if (pData->lastWallTouchedMidAir == 0)
     {
         pData->lastWallTouchedMidAir++;
-        StopAllMusicsAndSounds();
+        StopAllMusicAndSounds();
     }
     else if (pData->lastWallTouchedMidAir == 1)
     {

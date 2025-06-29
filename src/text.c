@@ -633,7 +633,7 @@ void TextDrawLocationTextCharacters(u8 param_1, const u16** ppText)
  * @param locationText 
  * @param gfxSlot 
  */
-void TextDrawlocation(u8 locationText, u8 gfxSlot)
+void TextDrawLocation(u8 locationText, u8 gfxSlot)
 {
     const u16* pText;
 

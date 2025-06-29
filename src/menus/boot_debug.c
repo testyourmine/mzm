@@ -595,7 +595,7 @@ void BootDebugSetupMenu(void)
     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
     write16(REG_DISPCNT, 0);
 
-    StopAllMusicsAndSounds();
+    StopAllMusicAndSounds();
     DoSoundAction(SOUND_ACTION_DISABLE_STEREO | SOUND_ACTION_PWM(9) | SOUND_ACTION_FREQ_INDEX(SOUND_MODE_FREQ_13379) |
         SOUND_ACTION_VOLUME(15) | SOUND_ACTION_MAX_CHANNELS(7) | SOUND_ACTION_ENABLE_REVERB);
     UpdateMusicPriority(0);
@@ -1553,7 +1553,7 @@ void BootDebugSaveSubroutine(void)
                 }
                 else if (gChangedInput & KEY_A)
                 {
-                    BOOT_DEBUG_DATA.fileScreenOptions.soundTestAndOgMetroid ^= 1 << BOOT_DEBUG_DATA.optionCursor;
+                    BOOT_DEBUG_DATA.fileScreenOptions.soundTestAndOrigMetroid ^= 1 << BOOT_DEBUG_DATA.optionCursor;
                     value = TRUE;
                 }
                 else if (gChangedInput & KEY_RIGHT)
@@ -1630,7 +1630,7 @@ void BootDebugSaveUpdateText(u8 subMenuOption, struct FileScreenOptionsUnlocked*
             offset += 12;
             for (i = 0; i < 3; i++, offset += 2)
             {
-                enabled = (pOptions->soundTestAndOgMetroid >> i) & 1;
+                enabled = (pOptions->soundTestAndOrigMetroid >> i) & 1;
                 dst[offset] = (dst[offset] & 0x3FF) | (sBootDebugTextToggleColors[enabled][0] << 12);
                 dst[offset + 0x20] = (dst[offset + 0x20] & 0x3FF) | (sBootDebugTextToggleColors[enabled][0] << 12);
             }

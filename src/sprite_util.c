@@ -2060,7 +2060,7 @@ void SpriteUtilUpdateSecondarySpriteFreezeTimerOfCurrent(u8 spriteId, u8 ramSlot
  * @brief 10198 | 5c | Updates the freeze timer of the primary sprite of the current secondary sprite
  * 
  */
-void SpriteUtillUpdatePrimarySpriteFreezeTimerOfCurrent(void)
+void SpriteUtilUpdatePrimarySpriteFreezeTimerOfCurrent(void)
 {
     u8 ramSlot;
 

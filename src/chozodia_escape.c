@@ -498,11 +498,11 @@ void ChozodiaEscapeInit(void)
     if (gFileScreenOptionsUnlocked.galleryImages == 0)
         gEndingFlags |= ENDING_FLAG_FIRST_CLEAR;
 
-    if (gDifficulty == DIFF_HARD && !(gFileScreenOptionsUnlocked.soundTestAndOgMetroid & (1 << DIFF_HARD)))
+    if (gDifficulty == DIFF_HARD && !(gFileScreenOptionsUnlocked.soundTestAndOrigMetroid & (1 << DIFF_HARD)))
         gEndingFlags |= ENDING_FLAG_FIRST_HARD_MODE_CLEAR;
 
     // Flag new difficulty clear
-    gFileScreenOptionsUnlocked.soundTestAndOgMetroid |= 1 << gDifficulty;
+    gFileScreenOptionsUnlocked.soundTestAndOrigMetroid |= 1 << gDifficulty;
     CheckUnlockTimeAttack();
 
     // Flag new gallery image based on the ending

@@ -1049,7 +1049,7 @@ void MapScreenSubroutine(void)
     // Check switch minimap
     if (gChangedInput & KEY_SELECT)
     {
-        if (PAUSE_SCREEN_DATA.areasViewablesTotal > 1 && PAUSE_SCREEN_DATA.currentArea < AREA_NORMAL_COUNT)
+        if (PAUSE_SCREEN_DATA.areasViewableTotal > 1 && PAUSE_SCREEN_DATA.currentArea < AREA_NORMAL_COUNT)
             PAUSE_SCREEN_DATA.changingMinimapStage = 1;
     }
 }
@@ -1139,7 +1139,7 @@ void MapScreenChangeMap(void)
                     i = AREA_BRINSTAR;
 
                 // Get viewables and area to test
-                viewables = PAUSE_SCREEN_DATA.areasViewables;
+                viewables = PAUSE_SCREEN_DATA.areasViewable;
                 area = sMapScreenAreasViewOrder[i];
 
                 // Check if the area can be viewed

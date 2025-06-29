@@ -79,7 +79,7 @@ struct HatchesState {
     s8 navigationDoorsUnlocking;
     u16 hatchesLockedWithTimer;
     u16 hatchesLockedWithEvent;
-    u16 hatchesLockedWithEventUnlockeable;
+    u16 hatchesLockedWithEventUnlockable;
 };
 
 struct HatchFlashingAnimation {

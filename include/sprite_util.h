@@ -45,7 +45,7 @@ void SpriteUtilUpdateFreezeTimer(void);
 void SpriteUtilUnfreezeAnimEasy(void);
 void SpriteUtilMetroidUnfreezeAnim(void);
 void SpriteUtilUpdateSecondarySpriteFreezeTimerOfCurrent(u8 spriteId, u8 ramSlot);
-void SpriteUtillUpdatePrimarySpriteFreezeTimerOfCurrent(void);
+void SpriteUtilUpdatePrimarySpriteFreezeTimerOfCurrent(void);
 void SpriteUtilUnfreezeSecondarySprites(u8 spriteId, u8 ramSlot);
 u8 SpriteUtilRefillEnergy(void);
 u8 SpriteUtilRefillMissiles(void);

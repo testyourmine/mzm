@@ -608,7 +608,7 @@ void ConnectionCheckUnlockDoors(void)
 
     // Update timer
     APPLY_DELTA_TIME_INC(gDoorUnlockTimer);
-    if (gDoorUnlockTimer == 0 && (gHatchesState.hatchesLockedWithTimer || gHatchesState.hatchesLockedWithEventUnlockeable))
+    if (gDoorUnlockTimer == 0 && (gHatchesState.hatchesLockedWithTimer || gHatchesState.hatchesLockedWithEventUnlockable))
     {
         // Timer done and has hatches to unlock
         SoundPlay(SOUND_DOORS_UNLOCKING);
@@ -657,13 +657,13 @@ void ConnectionLockHatches(u8 isEvent)
     else
     {
         gHatchesState.hatchesLockedWithEvent &= lockedHatches;
-        gHatchesState.hatchesLockedWithEventUnlockeable &= lockedHatches;
+        gHatchesState.hatchesLockedWithEventUnlockable &= lockedHatches;
     }
 
     if (!isEvent)
     {
         // Remove hatches that were locked via an event, at this point only the normal, non locked hatches will be processed
-        lockedHatches = gHatchesState.hatchesLockedWithTimer &= ~(gHatchesState.hatchesLockedWithEvent | gHatchesState.hatchesLockedWithEventUnlockeable);
+        lockedHatches = gHatchesState.hatchesLockedWithTimer &= ~(gHatchesState.hatchesLockedWithEvent | gHatchesState.hatchesLockedWithEventUnlockable);
 
         for (i = 0, hatch = 0; i < MAX_AMOUNT_OF_HATCHES; hatch++, i++)
         {
@@ -685,7 +685,7 @@ void ConnectionLockHatches(u8 isEvent)
     else
     {
         // Include both types of locked doors
-        lockedHatches = gHatchesState.hatchesLockedWithEvent | gHatchesState.hatchesLockedWithEventUnlockeable;
+        lockedHatches = gHatchesState.hatchesLockedWithEvent | gHatchesState.hatchesLockedWithEventUnlockable;
         
         for (i = 0, hatch = 0; i < MAX_AMOUNT_OF_HATCHES; hatch++, i++)
         {
@@ -693,7 +693,7 @@ void ConnectionLockHatches(u8 isEvent)
             if ((lockedHatches >> i) & 1)
             {
                 // Can be 2 different types of locked
-                if ((gHatchesState.hatchesLockedWithEventUnlockeable >> i) & 1)
+                if ((gHatchesState.hatchesLockedWithEventUnlockable >> i) & 1)
                 {
                     // Normal locked, can be opened with the door unlock timer
                     gHatchData[hatch].locked = HATCH_LOCK_STATE_LOCKED;
@@ -966,7 +966,7 @@ void ConnectionCheckHatchLockEvents(void)
 
     // Reset locked doors
     gHatchesState.hatchesLockedWithEvent = 0;
-    gHatchesState.hatchesLockedWithEventUnlockeable = 0;
+    gHatchesState.hatchesLockedWithEventUnlockable = 0;
 
     // Bounds check
     if (gCurrentArea >= MAX_AMOUNT_OF_AREAS - 1)
@@ -1019,13 +1019,13 @@ void ConnectionCheckHatchLockEvents(void)
         else if (pLock->type == HATCH_LOCK_EVENT_TYPE_BEFORE)
             gHatchesState.hatchesLockedWithEvent |= hatchesToLock;
         else if (pLock->type == HATCH_LOCK_EVENT_TYPE_AFTER_UNLOCKEABLE)
-            gHatchesState.hatchesLockedWithEventUnlockeable |= hatchesToLock;
+            gHatchesState.hatchesLockedWithEventUnlockable |= hatchesToLock;
         else if (pLock->type == HATCH_LOCK_EVENT_TYPE_BEFORE_UNLOCKEABLE)
-            gHatchesState.hatchesLockedWithEventUnlockeable |= hatchesToLock;
+            gHatchesState.hatchesLockedWithEventUnlockable |= hatchesToLock;
     }
 
     // Check actually lock doors
-    if (gHatchesState.hatchesLockedWithEvent != 0 || gHatchesState.hatchesLockedWithEventUnlockeable != 0)
+    if (gHatchesState.hatchesLockedWithEvent != 0 || gHatchesState.hatchesLockedWithEventUnlockable != 0)
         ConnectionLockHatches(TRUE);
 }
 

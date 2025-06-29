@@ -212,7 +212,7 @@ void ParticleProcessAll(void)
             }
         }
 
-        EscaepUpdateTimer();
+        EscapeUpdateTimer();
     }
 }
 
