@@ -632,7 +632,7 @@ void TitleScreenProcessOAM(void)
  * @param pOam Menu OAM pointer
  * @param cometNumber Comet number
  */
-void TitleScreenProcessComets(struct TitleScrenOamTiming* pTiming, struct MenuOamData* pOam, u8 cometNumber)
+void TitleScreenProcessComets(struct TitleScreenOamTiming* pTiming, struct MenuOamData* pOam, u8 cometNumber)
 {
     u32 movement;
     u32 xLimit;
@@ -731,7 +731,7 @@ void TitleScreenProcessComets(struct TitleScrenOamTiming* pTiming, struct MenuOa
  * @param pTiming OAM Timing pointer
  * @param pOam Menu OAM pointer
  */
-void TitleScreenProcessTopSparkle(struct TitleScrenOamTiming* pTiming, struct MenuOamData* pOam)
+void TitleScreenProcessTopSparkle(struct TitleScreenOamTiming* pTiming, struct MenuOamData* pOam)
 {
     pTiming->timer++;
 
@@ -779,7 +779,7 @@ void TitleScreenProcessTopSparkle(struct TitleScrenOamTiming* pTiming, struct Me
  * @param pOam Menu OAM pointer
  * @return u32 bool, OAM id update needed
  */
-u32 TitleScreenProcessBottomSparkle(struct TitleScrenOamTiming* pTiming, struct MenuOamData* pOam)
+u32 TitleScreenProcessBottomSparkle(struct TitleScreenOamTiming* pTiming, struct MenuOamData* pOam)
 {
     u32 idUpdate;
 
@@ -1143,7 +1143,7 @@ void TitleScreenInit(void)
     gBootDebugActive = FALSE;
     gDebugMode = FALSE;
 
-    StopAllMusicsAndSounds();
+    StopAllMusicAndSounds();
 
     DmaTransfer(3, sTitleScreenPal, PALRAM_BASE, sizeof(sTitleScreenPal), 16);
     DmaTransfer(3, sTitleScreenPal, PALRAM_OBJ, sizeof(sTitleScreenPal), 16);

@@ -91,7 +91,7 @@ struct ChozoHintTarget {
 };
 
 struct ChozoHintMapData {
-    u16 mapYPostion;
+    u16 mapYPosition;
     u16 mapXPosition;
     u16 hintTargetYPosition;
     u16 hintTargetXPosition;
@@ -264,8 +264,8 @@ struct PauseScreenData {
 
     u8 areasWithVisitedTiles;
     u8 areasWithHints;
-    u8 areasViewables;
-    u8 areasViewablesTotal;
+    u8 areasViewable;
+    u8 areasViewableTotal;
 
     struct MapScreenFading mapScreenFading;
     struct StatusScreenData statusScreenData;

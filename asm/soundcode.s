@@ -6,8 +6,8 @@
 
     .text
 
-    thumb_func_start call_soundcode_b
-call_soundcode_b: @ 0x08004310
+    thumb_func_start CallSoundCodeB
+CallSoundCodeB: @ 0x08004310
     push {r4, r5, r6, r7}
     mov r4, r8
     mov r5, sb
@@ -17,8 +17,8 @@ call_soundcode_b: @ 0x08004310
     add r4, pc, #0x0
     bx r4
 
-    arm_func_start soundcode_b
-soundcode_b: @ 0x08004320
+    arm_func_start SoundCodeB
+SoundCodeB: @ 0x08004320
     ldr r4, lbl_080043b0 @ =gMusicInfo
     ldrb ip, [r4, #0x4]
     mov lr, #0x600
@@ -61,8 +61,8 @@ lbl_080043a0:
 lbl_080043b0:
     .4byte gMusicInfo
 
-    thumb_func_start call_soundcode_c
-call_soundcode_c: @ 0x080043b4
+    thumb_func_start CallSoundCodeC
+CallSoundCodeC: @ 0x080043b4
     push {r4, r5, r6, r7}
     mov r4, r8
     mov r5, sb
@@ -72,8 +72,8 @@ call_soundcode_c: @ 0x080043b4
     add r4, pc, #0x0
     bx r4
 
-    arm_func_start soundcode_c
-soundcode_c: @ 0x080043c4
+    arm_func_start SoundCodeC
+SoundCodeC: @ 0x080043c4
     mov r3, #0x600
     add r3, r0, r3
     mov ip, #0x0
@@ -119,8 +119,8 @@ lbl_08004450:
 lbl_08004460:
     .4byte sArray_808cce2
 
-    thumb_func_start call_soundcode_a
-call_soundcode_a: @ 0x08004464
+    thumb_func_start CallSoundCodeA
+CallSoundCodeA: @ 0x08004464
     push {r4, r5, r6, r7}
     mov r3, r8
     mov r4, sb
@@ -130,8 +130,8 @@ call_soundcode_a: @ 0x08004464
     add r4, pc, #0x0
     bx r4
 
-    arm_func_start soundcode_a
-soundcode_a: @ 0x08004474
+    arm_func_start SoundCodeA
+SoundCodeA: @ 0x08004474
     ldr ip, [r0, #0x18]
     ldrb r11, [r0, #0x11]
     ldrb r10, [r0, #0x12]

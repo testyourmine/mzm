@@ -161,7 +161,7 @@ void EscapeSetTimer(void)
  * @brief 53b64 | 104 | Updates the escape timer
  * 
  */
-void EscaepUpdateTimer(void)
+void EscapeUpdateTimer(void)
 {
     u32 counter;
 

@@ -15,7 +15,7 @@ extern struct GameCompletion gGameCompletion;
 struct FileScreenOptionsUnlocked {
     u16 galleryImages;
     u16 fusionGalleryImages;
-    u8 soundTestAndOgMetroid;
+    u8 soundTestAndOrigMetroid;
     u8 unk_5;
     u8 unk_6;
     u8 unk_7;

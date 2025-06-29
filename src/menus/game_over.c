@@ -275,7 +275,7 @@ void GameOverInit(void)
     gOamXOffset_NonGameplay = gOamYOffset_NonGameplay = 0;
 
     DoSoundAction(SOUND_ACTION_ENABLE_REVERB);
-    StopAllMusicsAndSounds();
+    StopAllMusicAndSounds();
 
     DmaTransfer(3, sGameOverMenuPal, PALRAM_BASE, sizeof(sGameOverMenuPal), 16);
     SET_BACKDROP_COLOR(COLOR_BLACK);
@@ -341,7 +341,7 @@ void GameOverInit_Debug(void)
     gOamXOffset_NonGameplay = gOamYOffset_NonGameplay = 0;
 
     DoSoundAction(SOUND_ACTION_DISABLE_STEREO | SOUND_ACTION_PWM(9) | SOUND_ACTION_FREQ_INDEX(SOUND_MODE_FREQ_13379) | SOUND_ACTION_VOLUME(15) | SOUND_ACTION_MAX_CHANNELS(7) | SOUND_ACTION_ENABLE_REVERB);
-    StopAllMusicsAndSounds();
+    StopAllMusicAndSounds();
 
     SET_BACKDROP_COLOR(COLOR_WHITE);
 

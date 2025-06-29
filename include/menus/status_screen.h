@@ -42,7 +42,7 @@ void StatusScreenSetBombsVisibility(u16* pTilemap);
 void StatusScreenSetMissilesVisibility(u16* pTilemap);
 void StatusScreenUpdateRow(u8 group, u8 row, u8 isActivated, u8 drawUpdate);
 void StatusScreenEnableUnknownItem(u8 group, u8 row);
-u32 StatusScreenCheckitemToggleInput(u16 button);
+u32 StatusScreenCheckItemToggleInput(u16 button);
 void StatusScreenInitCursorAndItems(void);
 u32 StatusScreenSuitlessItems(void);
 u32 StatusScreenFindUnknownItemSlot(u8 wantUnknownItem);

@@ -91,7 +91,7 @@ u8 SamusPullingSelfIntoMorphballTunnelGfx(struct SamusData* pData);
 u8 SamusUsingAnElevator(struct SamusData* pData);
 u8 SamusUsingAnElevatorGfx(struct SamusData* pData);
 u8 SamusFacingTheForeground(struct SamusData* pData);
-u8 SamusTurningFromFacningForegroundGfx(struct SamusData* pData);
+u8 SamusTurningFromFacingForegroundGfx(struct SamusData* pData);
 u8 SamusDelayBeforeShinesparkingGfx(struct SamusData* pData);
 u8 SamusShinesparking(struct SamusData* pData);
 u8 SamusShinesparkingGfx(struct SamusData* pData);

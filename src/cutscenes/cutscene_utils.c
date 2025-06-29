@@ -58,7 +58,7 @@ u8 TourianEscapeSubroutine(void)
         {
             SET_BACKDROP_COLOR(COLOR_BLACK);
             write16(REG_DISPCNT, 0);
-            StopAllMusicsAndSounds();
+            StopAllMusicAndSounds();
             return FALSE;
         }
         #endif // DEBUG
@@ -316,7 +316,7 @@ u8 CutsceneSubroutine(void)
                     }
                     if (ended)
                     {
-                        StopAllMusicsAndSounds();
+                        StopAllMusicAndSounds();
                         gSubGameModeStage = 0;
                         SET_BACKDROP_COLOR(COLOR_BLACK);
                     }

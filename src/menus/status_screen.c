@@ -103,7 +103,7 @@ void LoadPauseScreenBgPalette(void)
 
     for (i = 0; i < MAX_AMOUNT_OF_AREAS - 1; i++)
     {
-        if ((PAUSE_SCREEN_DATA.areasViewables >> i) & 1)
+        if ((PAUSE_SCREEN_DATA.areasViewable >> i) & 1)
             continue;
 
         PAUSE_SCREEN_EWRAM.backgroundPalette[sMinimapAnimatedPaletteOffsets[i]] = 0;
@@ -2532,7 +2532,7 @@ void StatusScreenEnableUnknownItem(u8 group, u8 row)
  * @param button Input flag
  * @return u32 bool, pressed
  */
-u32 StatusScreenCheckitemToggleInput(u16 button)
+u32 StatusScreenCheckItemToggleInput(u16 button)
 {
     return (gChangedInput & button) != 0;
 }
@@ -3106,7 +3106,7 @@ void StatusScreenSubroutine(void)
         else if (PAUSE_SCREEN_DATA.statusScreenData.currentStatusSlot != STATUS_SLOT_0)
         {
             // Check toggling item
-            if (StatusScreenCheckitemToggleInput(KEY_SELECT))
+            if (StatusScreenCheckItemToggleInput(KEY_SELECT))
             {
                 // Toggle item
                 toggleResult = StatusScreenToggleItem(PAUSE_SCREEN_DATA.statusScreenData.currentStatusSlot, ITEM_TOGGLE_TOGGLING);

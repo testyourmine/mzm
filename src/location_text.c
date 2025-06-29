@@ -305,7 +305,7 @@ u8 LocationTextGetGfxSlot(void)
         gSpriteData[0].roomSlot = lt;
         gfxSlot = LocationTextLoadAreaBannerGfx();
         // Draw location text
-        TextDrawlocation(lt, gfxSlot);
+        TextDrawLocation(lt, gfxSlot);
     }
     else
     {
@@ -350,7 +350,7 @@ u8 LocationTextGetGfxSlot(void)
                 gfxSlot = LocationTextLoadAreaBannerGfx();
 
                 // Draw location text
-                TextDrawlocation(lt, gfxSlot);
+                TextDrawLocation(lt, gfxSlot);
 
                 // Load different palette for some reason
                 if (lt < LT_SAVE_ROOM)

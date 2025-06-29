@@ -41,7 +41,7 @@ struct SaveFileInfo {
     u8 suitType;
     u8 igtHours;
     u8 igtMinutes;
-    u8 igtSconds;
+    u8 igtSeconds;
     u8 hasSaved;
     s8 completedGame;
     s8 introPlayed;
@@ -118,7 +118,7 @@ struct SaveFile {
 
     u8 SamusAran_Text[SRAM_TEXT_SIZE];
 
-    u8 freespace[160];
+    u8 freeSpace[160];
 
     struct SaveWorldData worldData;
 };

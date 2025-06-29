@@ -3,9 +3,9 @@
 
 #include "structs/audio.h"
 
-extern void call_soundcode_a(void);
-extern void call_soundcode_b(void);
-extern void call_soundcode_c(void);
+extern void CallSoundCodeA(void);
+extern void CallSoundCodeB(void);
+extern void CallSoundCodeC(void);
 
 void InitializeAudio(void);
 void DoSoundAction(u32 action);
@@ -13,7 +13,7 @@ void SetupSoundTransfer(void);
 void SoundPlay(u16 sound);
 void SoundStop(u16 sound);
 void unk_2a38(struct TrackData* pTrack);
-void StopAllMusicsAndSounds(void);
+void StopAllMusicAndSounds(void);
 void unk_2a8c(void);
 void FadeAllSounds(u16 timer);
 void SoundPlayNotAlreadyPlaying(u16 sound);

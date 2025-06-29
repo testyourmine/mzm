@@ -185,7 +185,7 @@ static void MotherBrainInit(void)
  * @brief 3cb90 | 6c | Checks if the glass breaked, starts battle behaviors
  * 
  */
-static void MotherBrainCheckGlassBreaked(void)
+static void MotherBrainCheckGlassBroke(void)
 {
     u8 eyeSlot;
 
@@ -711,7 +711,7 @@ void MotherBrain(void)
             break;
 
         case MOTHER_BRAIN_POSE_WAITING_GLASS:
-            MotherBrainCheckGlassBreaked();
+            MotherBrainCheckGlassBroke();
             break;
 
         case MOTHER_BRAIN_POSE_MAIN_LOOP:

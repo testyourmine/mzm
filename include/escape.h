@@ -11,6 +11,6 @@ void EscapeUpdateOam(void);
 void EscapeCheckReloadGraphics(void);
 void EscapeStart(void);
 void EscapeSetTimer(void);
-void EscaepUpdateTimer(void);
+void EscapeUpdateTimer(void);
 
 #endif /* ESCAPE_H */

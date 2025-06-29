@@ -173,10 +173,10 @@ u32 ChozoStatueHintCalculateCoordinates(struct ChozoHintMapData* pHintMapData)
 
     if (pHintMapData->yDirection != 0)
     {
-        if (pHintMapData->mapYPostion != pHintMapData->hintTargetYPosition)
+        if (pHintMapData->mapYPosition != pHintMapData->hintTargetYPosition)
         {
             yPosition = (pHintMapData->distYToHintTarget * pHintMapData->unk_10 * pHintMapData->speedMultiplier * 256) / pHintMapData->absDistToHintTarget;
-            yPosition = pHintMapData->mapYPostion + (yPosition / 256) * pHintMapData->yDirection;
+            yPosition = pHintMapData->mapYPosition + (yPosition / 256) * pHintMapData->yDirection;
             if (pHintMapData->yDirection > 0)
             {
                 if (pHintMapData->hintTargetYPosition < yPosition)
@@ -221,11 +221,11 @@ void ChozoStatueHintMovement(void)
             PAUSE_SCREEN_DATA.chozoHintTarget.activeMovementScrollingFlag |= TARGET_MOVEMENT_FLAG;
 
             PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapXPosition = PAUSE_SCREEN_DATA.mapX * HALF_BLOCK_SIZE;
-            PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapYPostion = PAUSE_SCREEN_DATA.mapY * HALF_BLOCK_SIZE;
+            PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapYPosition = PAUSE_SCREEN_DATA.mapY * HALF_BLOCK_SIZE;
             PAUSE_SCREEN_DATA.chozoHintMapMovementData.hintTargetXPosition = PAUSE_SCREEN_DATA.hintTargetX * HALF_BLOCK_SIZE;
             PAUSE_SCREEN_DATA.chozoHintMapMovementData.hintTargetYPosition = PAUSE_SCREEN_DATA.hintTargetY * HALF_BLOCK_SIZE;
 
-            PAUSE_SCREEN_DATA.chozoHintOam[0].yPosition = PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapYPostion;
+            PAUSE_SCREEN_DATA.chozoHintOam[0].yPosition = PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapYPosition;
             PAUSE_SCREEN_DATA.chozoHintOam[0].xPosition = PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapXPosition;
             PAUSE_SCREEN_DATA.chozoHintOam[0].oamID = sChozoStatueTargets[PAUSE_SCREEN_DATA.chozoHintTarget.index].startIcon;
 
@@ -242,7 +242,7 @@ void ChozoStatueHintMovement(void)
                 PAUSE_SCREEN_DATA.chozoHintMapMovementData.distXToHintTarget *= PAUSE_SCREEN_DATA.chozoHintMapMovementData.xDirection;
             }
 
-            PAUSE_SCREEN_DATA.chozoHintMapMovementData.distYToHintTarget = PAUSE_SCREEN_DATA.chozoHintMapMovementData.hintTargetYPosition - PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapYPostion;
+            PAUSE_SCREEN_DATA.chozoHintMapMovementData.distYToHintTarget = PAUSE_SCREEN_DATA.chozoHintMapMovementData.hintTargetYPosition - PAUSE_SCREEN_DATA.chozoHintMapMovementData.mapYPosition;
 
             if (PAUSE_SCREEN_DATA.chozoHintMapMovementData.distYToHintTarget == 0)
             {
@@ -420,7 +420,7 @@ void ChozoStatueHintScrolling(void)
             PAUSE_SCREEN_DATA.chozoHintMapScrollingData.hintTargetYPosition = (0x204 - (10 - PAUSE_SCREEN_DATA.hintTargetY) * 8) * 4;
             PAUSE_SCREEN_DATA.chozoHintMapScrollingData.hintTargetXPosition = (0x204 - (15 - PAUSE_SCREEN_DATA.hintTargetX) * 8) * 4;
 
-            PAUSE_SCREEN_DATA.chozoHintMapScrollingData.mapYPostion = gBg3VOFS_NonGameplay;
+            PAUSE_SCREEN_DATA.chozoHintMapScrollingData.mapYPosition = gBg3VOFS_NonGameplay;
             PAUSE_SCREEN_DATA.chozoHintMapScrollingData.mapXPosition = gBg3HOFS_NonGameplay;
 
             PAUSE_SCREEN_DATA.chozoHintMapScrollingData.distXToHintTarget = PAUSE_SCREEN_DATA.chozoHintMapScrollingData.hintTargetXPosition - PAUSE_SCREEN_DATA.chozoHintMapScrollingData.mapXPosition;
@@ -435,7 +435,7 @@ void ChozoStatueHintScrolling(void)
                 PAUSE_SCREEN_DATA.chozoHintMapScrollingData.distXToHintTarget *= PAUSE_SCREEN_DATA.chozoHintMapScrollingData.xDirection;
             }
 
-            PAUSE_SCREEN_DATA.chozoHintMapScrollingData.distYToHintTarget = PAUSE_SCREEN_DATA.chozoHintMapScrollingData.hintTargetYPosition - PAUSE_SCREEN_DATA.chozoHintMapScrollingData.mapYPostion;
+            PAUSE_SCREEN_DATA.chozoHintMapScrollingData.distYToHintTarget = PAUSE_SCREEN_DATA.chozoHintMapScrollingData.hintTargetYPosition - PAUSE_SCREEN_DATA.chozoHintMapScrollingData.mapYPosition;
 
             if (PAUSE_SCREEN_DATA.chozoHintMapScrollingData.distYToHintTarget == 0)
             {

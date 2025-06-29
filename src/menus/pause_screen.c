@@ -846,7 +846,7 @@ void PauseScreenUpdateWorldMap(u8 onWorldMap)
         else
             pOam->oamID = sWorldMapData[i].outlinedOamId;
 
-        pOam->exists = (PAUSE_SCREEN_DATA.areasViewables >> i) & 1 ? status : FALSE;
+        pOam->exists = (PAUSE_SCREEN_DATA.areasViewable >> i) & 1 ? status : FALSE;
     }
 
     pOam = &PAUSE_SCREEN_DATA.worldMapOam[0];
@@ -2271,8 +2271,8 @@ void PauseScreenInit(void)
     {
         PAUSE_SCREEN_DATA.areasWithVisitedTiles = 0;
         PAUSE_SCREEN_DATA.areasWithHints = 0;
-        PAUSE_SCREEN_DATA.areasViewables = 0;
-        PAUSE_SCREEN_DATA.areasViewablesTotal = 0;
+        PAUSE_SCREEN_DATA.areasViewable = 0;
+        PAUSE_SCREEN_DATA.areasViewableTotal = 0;
     }
     else
     {
@@ -2450,20 +2450,20 @@ void PauseScreenDetermineMapsViewable(void)
 {
     s32 i;
 
-    PAUSE_SCREEN_DATA.areasViewables = gEquipment.downloadedMapStatus;
-    PAUSE_SCREEN_DATA.areasViewables |= PAUSE_SCREEN_DATA.areasWithVisitedTiles;
-    PAUSE_SCREEN_DATA.areasViewables |= PAUSE_SCREEN_DATA.areasWithHints;
+    PAUSE_SCREEN_DATA.areasViewable = gEquipment.downloadedMapStatus;
+    PAUSE_SCREEN_DATA.areasViewable |= PAUSE_SCREEN_DATA.areasWithVisitedTiles;
+    PAUSE_SCREEN_DATA.areasViewable |= PAUSE_SCREEN_DATA.areasWithHints;
 
     // Seriously?
-    PAUSE_SCREEN_DATA.areasViewablesTotal = (PAUSE_SCREEN_DATA.areasViewables >> AREA_BRINSTAR) & 1;
-    PAUSE_SCREEN_DATA.areasViewablesTotal += (PAUSE_SCREEN_DATA.areasViewables >> AREA_KRAID) & 1;
-    PAUSE_SCREEN_DATA.areasViewablesTotal += (PAUSE_SCREEN_DATA.areasViewables >> AREA_NORFAIR) & 1;
-    PAUSE_SCREEN_DATA.areasViewablesTotal += (PAUSE_SCREEN_DATA.areasViewables >> AREA_RIDLEY) & 1;
-    PAUSE_SCREEN_DATA.areasViewablesTotal += (PAUSE_SCREEN_DATA.areasViewables >> AREA_TOURIAN) & 1;
-    PAUSE_SCREEN_DATA.areasViewablesTotal += (PAUSE_SCREEN_DATA.areasViewables >> AREA_CRATERIA) & 1;
-    PAUSE_SCREEN_DATA.areasViewablesTotal += (PAUSE_SCREEN_DATA.areasViewables >> AREA_CHOZODIA) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal = (PAUSE_SCREEN_DATA.areasViewable >> AREA_BRINSTAR) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal += (PAUSE_SCREEN_DATA.areasViewable >> AREA_KRAID) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal += (PAUSE_SCREEN_DATA.areasViewable >> AREA_NORFAIR) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal += (PAUSE_SCREEN_DATA.areasViewable >> AREA_RIDLEY) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal += (PAUSE_SCREEN_DATA.areasViewable >> AREA_TOURIAN) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal += (PAUSE_SCREEN_DATA.areasViewable >> AREA_CRATERIA) & 1;
+    PAUSE_SCREEN_DATA.areasViewableTotal += (PAUSE_SCREEN_DATA.areasViewable >> AREA_CHOZODIA) & 1;
 
-    if (PAUSE_SCREEN_DATA.areasViewablesTotal <= 1)
+    if (PAUSE_SCREEN_DATA.areasViewableTotal <= 1)
     {
         // Remove "press select" text from the tilemap
         for (i = 0x24C; i < 0x252; i++)
@@ -2504,7 +2504,7 @@ void PauseScreenUpdateBottomVisorOverlay(u8 param_1, u8 param_2)
     if (param_2)
     {
         var_1 = 0;
-        if (param_2 == 1 && PAUSE_SCREEN_DATA.areasViewablesTotal > 1)
+        if (param_2 == 1 && PAUSE_SCREEN_DATA.areasViewableTotal > 1)
             var_1 = 0x2D;
     }
 

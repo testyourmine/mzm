@@ -368,7 +368,7 @@ static u8 RuinsTestCheckHitByChargedPistol(void)
  * 
  * @return u8 bool, is last symbol
  */
-static u8 RuinsTestCheckSymbolShooted(void)
+static u8 RuinsTestCheckSymbolShot(void)
 {
     if (gCurrentSprite.invincibilityStunFlashTimer != 0 && gCurrentSprite.health != 100)
     {
@@ -707,7 +707,7 @@ static void RuinsTestMotionless(void)
 {
     if (!RuinsTestCheckSamusHurting())
     {
-        RuinsTestCheckSymbolShooted();
+        RuinsTestCheckSymbolShot();
 
         if (RuinsTestUpdateSymbol() || gSubSpriteData1.health != 0)
         {
@@ -769,7 +769,7 @@ static void RuinsTestMoveCirclePattern(void)
     if (RuinsTestCheckSamusHurting())
         return;
 
-    RuinsTestCheckSymbolShooted();
+    RuinsTestCheckSymbolShot();
 
     // Get speed
     if (gBossWork.work3 < CONVERT_SECONDS(20.f) / 2)
@@ -853,7 +853,7 @@ static void RuinsTestMoveAtomPattern(void)
     if (RuinsTestCheckSamusHurting())
         return;
         
-    if (RuinsTestCheckSymbolShooted())
+    if (RuinsTestCheckSymbolShot())
         return;
 
     // Get speed

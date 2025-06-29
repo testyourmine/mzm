@@ -29,7 +29,7 @@ extern const struct FrameData sParasiteOam_Attached_Unused[9];
 
 extern const struct FrameData sParasiteOam_Attached[9];
 
-extern const struct FrameData sParasiteOam_Expulsed[9];
+extern const struct FrameData sParasiteOam_Expelled[9];
 
 extern const struct FrameData sParasiteOam_Dying_Unused[5];
 

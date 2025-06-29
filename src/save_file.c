@@ -84,7 +84,7 @@ void SramWrite_FileScreenOptionsUnlocked(void)
     pOptions->unk_9 = 0x31;
     pOptions->counter++;
     pOptions->galleryImages = gFileScreenOptionsUnlocked.galleryImages;
-    pOptions->soundTestAndOriginalMetroid = gFileScreenOptionsUnlocked.soundTestAndOgMetroid;
+    pOptions->soundTestAndOriginalMetroid = gFileScreenOptionsUnlocked.soundTestAndOrigMetroid;
     pOptions->language = LANGUAGE_DEFAULT;
     pOptions->unk_10 = 0x34;
     pOptions->unk_11 = gFileScreenOptionsUnlocked.unk_5;
@@ -260,7 +260,7 @@ void SramCopy_FileScreenOptionsUnlocked(void)
     pOptions = &sSramEwramPointer->fileScreenOptions_fileA;
 
     gFileScreenOptionsUnlocked.galleryImages = pOptions->galleryImages;
-    gFileScreenOptionsUnlocked.soundTestAndOgMetroid = pOptions->soundTestAndOriginalMetroid;
+    gFileScreenOptionsUnlocked.soundTestAndOrigMetroid = pOptions->soundTestAndOriginalMetroid;
     gFileScreenOptionsUnlocked.unk_5 = pOptions->unk_11;
     gFileScreenOptionsUnlocked.unk_6 = pOptions->unk_12;
     gFileScreenOptionsUnlocked.unk_7 = pOptions->unk_13;
@@ -1942,7 +1942,7 @@ void SramWrite_FileInfo(void)
             gSaveFilesInfo[i].suitType = pFile->equipment.suitType;
             gSaveFilesInfo[i].igtHours = pFile->inGameTimer.hours;
             gSaveFilesInfo[i].igtMinutes = pFile->inGameTimer.minutes;
-            gSaveFilesInfo[i].igtSconds = pFile->inGameTimer.seconds;
+            gSaveFilesInfo[i].igtSeconds = pFile->inGameTimer.seconds;
             gSaveFilesInfo[i].hasSaved = pFile->hasSaved;
             gSaveFilesInfo[i].completedGame = pFile->gameCompletion.completedGame;
             gSaveFilesInfo[i].introPlayed = pFile->gameCompletion.introPlayed;
@@ -1967,7 +1967,7 @@ void SramWrite_FileInfo(void)
         gSaveFilesInfo[i].suitType = SUIT_NORMAL;
         gSaveFilesInfo[i].igtHours = 0;
         gSaveFilesInfo[i].igtMinutes = 0;
-        gSaveFilesInfo[i].igtSconds = 0;
+        gSaveFilesInfo[i].igtSeconds = 0;
         gSaveFilesInfo[i].language = gLanguage;
 
         if (!gSaveFilesInfo[i].introPlayed)

@@ -35,13 +35,13 @@ void InitializeAudio(void)
     write8(REG_SOUNDCNT_L, 0x77); // Sound 1-4 master volume left/right 100%
 
     gSoundCodeAPointer = (SoundCodeAFunc_T)(gSoundCodeA + 1);
-    DMA_SET(3, call_soundcode_a, gSoundCodeA, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeA) / 2));
+    DMA_SET(3, CallSoundCodeA, gSoundCodeA, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeA) / 2));
 
     gSoundCodeBPointer = (SoundCodeBFunc_T)(gSoundCodeB + 1);
-    DMA_SET(3, call_soundcode_b, gSoundCodeB, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeB) / 2));
+    DMA_SET(3, CallSoundCodeB, gSoundCodeB, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeB) / 2));
 
     gSoundCodeCPointer = (SoundCodeCFunc_T)(gSoundCodeC + 1);
-    DMA_SET(3, call_soundcode_c, gSoundCodeC, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeC) / 2));
+    DMA_SET(3, CallSoundCodeC, gSoundCodeC, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeC) / 2));
 
     zero = 0;
     DMA_SET(3, &zero, &gMusicInfo, C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), 0xE));
@@ -244,7 +244,7 @@ void unk_2a38(struct TrackData* pTrack)
  * @brief 2a58 | 34 | Stops every music/sound currently playing
  * 
  */
-void StopAllMusicsAndSounds(void)
+void StopAllMusicAndSounds(void)
 {
     s32 i;
     
