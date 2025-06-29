@@ -165,7 +165,7 @@ u8 BeforeCharlieWallAndGreyVoice(void)
             CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[3].bg, NON_GAMEPLAY_START_BG_POS);
 
             CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[4].graphicsPage));
-            CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceCloseuUpTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[4].tiletablePage));
+            CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceCloseUpTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[4].tiletablePage));
 
             CutsceneSetBgcntPageData(sBeforeCharliePageData[4]);
             CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sBeforeCharliePageData[4].bg, NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 5);

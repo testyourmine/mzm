@@ -50,7 +50,7 @@ void ParticleSpriteExplosionBig(struct ParticleEffect* pParticle);
 void ParticleSpriteExplosionSingleThenBig(struct ParticleEffect* pParticle);
 void ParticleScrewAttackDestroyed(struct ParticleEffect* pParticle);
 void ParticleShinesparkDestroyed(struct ParticleEffect* pParticle);
-void ParticleSudoScrewDestroyed(struct ParticleEffect* pParticle);
+void ParticlePseudoScrewDestroyed(struct ParticleEffect* pParticle);
 void ParticleSpeedboosterDestroyed(struct ParticleEffect* pParticle);
 void ParticleMainBossDeath(struct ParticleEffect* pParticle);
 void ParticleFreezingSpriteWithIce(struct ParticleEffect* pParticle);

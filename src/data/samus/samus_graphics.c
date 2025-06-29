@@ -8422,7 +8422,7 @@ const struct SamusAnimationData sSamusAnim_PowerSuit_Right_Down_TurningOnZipline
 	[2] = SAMUS_ANIM_TERMINATOR
 };
 
-const struct SamusAnimationData sSamusAnim_PowerSuit_MorphballMotioness[7] = {
+const struct SamusAnimationData sSamusAnim_PowerSuit_MorphballMotionless[7] = {
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_PowerSuit_MorphballMotionless_Frame0,
 		.pBottomGfx = sSamusGfx_Empty,
@@ -20487,7 +20487,7 @@ const struct SamusAnimationData sSamusAnim_FullSuit_Right_Down_TurningOnZipline[
 	[2] = SAMUS_ANIM_TERMINATOR
 };
 
-const struct SamusAnimationData sSamusAnim_FullSuit_MorphballMotioness[7] = {
+const struct SamusAnimationData sSamusAnim_FullSuit_MorphballMotionless[7] = {
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_FullSuit_MorphballMotionless_Frame0,
 		.pBottomGfx = sSamusGfx_Empty,
@@ -32008,35 +32008,35 @@ const u16 sSamusOam_Suitless_Up_TurningAround_Frame1[OAM_DATA_SIZE(4)] = {
 };
 
 
-const u16 sSamusOam_Suitless_TurningAroundAndCrouhing_Frame0[OAM_DATA_SIZE(3)] = {
+const u16 sSamusOam_Suitless_TurningAroundAndCrouching_Frame0[OAM_DATA_SIZE(3)] = {
 	0x3,
 	OBJ_SHAPE_HORIZONTAL | 0xe6, OBJ_SIZE_32x16 | 0x1ed, 0x0,
 	0xf0, OBJ_SIZE_16x16 | 0x1f4, 0x14,
 	OBJ_SHAPE_VERTICAL | 0xf0, 0x4, 0x16
 };
 
-const u16 sSamusOam_Suitless_TurningAroundAndCrouhing_Frame1[OAM_DATA_SIZE(3)] = {
+const u16 sSamusOam_Suitless_TurningAroundAndCrouching_Frame1[OAM_DATA_SIZE(3)] = {
 	0x3,
 	OBJ_SHAPE_HORIZONTAL | 0xe6, OBJ_SIZE_32x16 | 0x1f3, 0x0,
 	0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1fc, 0x14,
 	OBJ_SHAPE_VERTICAL | 0xf0, OBJ_X_FLIP | 0x1f4, 0x16
 };
 
-const u16 sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouhing_Frame0[OAM_DATA_SIZE(3)] = {
+const u16 sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouching_Frame0[OAM_DATA_SIZE(3)] = {
 	0x3,
 	OBJ_SHAPE_HORIZONTAL | 0xe2, OBJ_SIZE_32x16 | 0x1ef, 0x0,
 	0xf0, OBJ_SIZE_16x16 | 0x1f4, 0x14,
 	OBJ_SHAPE_VERTICAL | 0xf0, 0x4, 0x16
 };
 
-const u16 sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouhing_Frame1[OAM_DATA_SIZE(3)] = {
+const u16 sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouching_Frame1[OAM_DATA_SIZE(3)] = {
 	0x3,
 	OBJ_SHAPE_HORIZONTAL | 0xe2, OBJ_SIZE_32x16 | 0x1f1, 0x0,
 	0xf0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1fc, 0x14,
 	OBJ_SHAPE_VERTICAL | 0xf0, OBJ_X_FLIP | 0x1f4, 0x16
 };
 
-const u16 sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame0[OAM_DATA_SIZE(4)] = {
+const u16 sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouching_Frame0[OAM_DATA_SIZE(4)] = {
 	0x4,
 	OBJ_SHAPE_HORIZONTAL | 0xe6, OBJ_SIZE_32x16 | 0x1f1, 0x0,
 	OBJ_SHAPE_HORIZONTAL | 0xf6, 0x1f1, 0x4,
@@ -32044,7 +32044,7 @@ const u16 sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame0[OAM_DA
 	OBJ_SHAPE_VERTICAL | 0xf0, 0x4, 0x16
 };
 
-const u16 sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame1[OAM_DATA_SIZE(4)] = {
+const u16 sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouching_Frame1[OAM_DATA_SIZE(4)] = {
 	0x4,
 	OBJ_SHAPE_HORIZONTAL | 0xe6, OBJ_SIZE_32x16 | 0x1ef, 0x0,
 	OBJ_SHAPE_HORIZONTAL | 0xf6, 0x1ff, 0x4,
@@ -32698,13 +32698,13 @@ const struct SamusAnimationData sSamusAnim_Suitless_Left_TurningAroundAndCrouchi
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_TurningAroundAndCrouching_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_TurningAroundAndCrouhing_Frame0,
+		.pOam = sSamusOam_Suitless_TurningAroundAndCrouching_Frame0,
 		.timer = 2,
 	},
 	[1] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_TurningAroundMidAir_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_TurningAroundAndCrouhing_Frame1,
+		.pOam = sSamusOam_Suitless_TurningAroundAndCrouching_Frame1,
 		.timer = 2,
 	},
 	[2] = SAMUS_ANIM_TERMINATOR
@@ -32714,13 +32714,13 @@ const struct SamusAnimationData sSamusAnim_Suitless_Left_DiagonalUp_TurningAroun
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalUp_TurningAround_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouhing_Frame0,
+		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouching_Frame0,
 		.timer = 2,
 	},
 	[1] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalUp_TurningAround_Frame1,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouhing_Frame1,
+		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouching_Frame1,
 		.timer = 2,
 	},
 	[2] = SAMUS_ANIM_TERMINATOR
@@ -32730,13 +32730,13 @@ const struct SamusAnimationData sSamusAnim_Suitless_Left_DiagonalDown_TurningAro
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalDown_TurningAround_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame0,
+		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouching_Frame0,
 		.timer = 2,
 	},
 	[1] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalDown_TurningAround_Frame1,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame1,
+		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouching_Frame1,
 		.timer = 2,
 	},
 	[2] = SAMUS_ANIM_TERMINATOR
@@ -32762,13 +32762,13 @@ const struct SamusAnimationData sSamusAnim_Suitless_Right_TurningAroundAndCrouch
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_TurningAroundMidAir_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_TurningAroundAndCrouhing_Frame1,
+		.pOam = sSamusOam_Suitless_TurningAroundAndCrouching_Frame1,
 		.timer = 2,
 	},
 	[1] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_TurningAroundAndCrouching_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_TurningAroundAndCrouhing_Frame0,
+		.pOam = sSamusOam_Suitless_TurningAroundAndCrouching_Frame0,
 		.timer = 2,
 	},
 	[2] = SAMUS_ANIM_TERMINATOR
@@ -32778,13 +32778,13 @@ const struct SamusAnimationData sSamusAnim_Suitless_Right_DiagonalUp_TurningArou
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalUp_TurningAround_Frame1,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouhing_Frame1,
+		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouching_Frame1,
 		.timer = 2,
 	},
 	[1] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalUp_TurningAround_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouhing_Frame0,
+		.pOam = sSamusOam_Suitless_DiagonalUp_TurningAroundAndCrouching_Frame0,
 		.timer = 2,
 	},
 	[2] = SAMUS_ANIM_TERMINATOR
@@ -32794,13 +32794,13 @@ const struct SamusAnimationData sSamusAnim_Suitless_Right_DiagonalDown_TurningAr
 	[0] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalDown_TurningAround_Frame1,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame1,
+		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouching_Frame1,
 		.timer = 2,
 	},
 	[1] = {
 		.pTopGfx = sSamusGfx_Top_Suitless_DiagonalDown_TurningAround_Frame0,
 		.pBottomGfx = sSamusGfx_Bottom_Suitless_TurningAroundAndCrouching_Frame1,
-		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouhing_Frame0,
+		.pOam = sSamusOam_Suitless_DiagonalDown_TurningAroundAndCrouching_Frame0,
 		.timer = 2,
 	},
 	[2] = SAMUS_ANIM_TERMINATOR

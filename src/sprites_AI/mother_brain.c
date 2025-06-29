@@ -66,9 +66,9 @@ static void MotherBrainSyncSubSpritesPosition(void)
     pData = gSubSpriteData1.pMultiOam[gSubSpriteData1.currentAnimationFrame].pData;
     oamIdx = pData[gCurrentSprite.roomSlot][MULTI_SPRITE_DATA_ELEMENT_OAM_INDEX];
 
-    if (gCurrentSprite.pOam != sMotheBrainFrameDataPointers[oamIdx])
+    if (gCurrentSprite.pOam != sMotherBrainFrameDataPointers[oamIdx])
     {
-        gCurrentSprite.pOam = sMotheBrainFrameDataPointers[oamIdx];
+        gCurrentSprite.pOam = sMotherBrainFrameDataPointers[oamIdx];
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }

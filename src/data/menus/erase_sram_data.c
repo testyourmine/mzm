@@ -332,7 +332,7 @@ static const struct FrameData sEraseSramOam_ConfirmWindowYesSelected[2] = {
 const u32 sEraseSramMenuObjectsGfx[477] = INCBIN_U32("data/menus/EraseSram/Objects.gfx.lz");
 const u32 sEraseSramMenuFirstBoxGfx[118] = INCBIN_U32("data/menus/EraseSram/FirstBox.gfx.lz");
 
-const u32 sEraseSramMenuConfirmJapanseGfx[245] = INCBIN_U32("data/menus/EraseSram/ConfirmJapanse.gfx.lz");
+const u32 sEraseSramMenuConfirmJapaneseGfx[245] = INCBIN_U32("data/menus/EraseSram/ConfirmJapanese.gfx.lz");
 const u32 sEraseSramMenuConfirmEnglishGfx[191] = INCBIN_U32("data/menus/EraseSram/ConfirmEnglish.gfx.lz");
 const u32 sEraseSramMenuConfirmFrenchGfx[209] = INCBIN_U32("data/menus/EraseSram/ConfirmFrench.gfx.lz");
 const u32 sEraseSramMenuConfirmGermanGfx[222] = INCBIN_U32("data/menus/EraseSram/ConfirmGerman.gfx.lz");

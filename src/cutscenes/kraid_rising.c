@@ -70,7 +70,7 @@ u8 KraidRisingRising(void)
 
         case 1:
             // Load cave background graphics
-            CallLZ77UncompVram(sKraidRisingCaveBackroundGfx, BGCNT_TO_VRAM_CHAR_BASE(sKraidRisingPagesData[3].graphicsPage));
+            CallLZ77UncompVram(sKraidRisingCaveBackgroundGfx, BGCNT_TO_VRAM_CHAR_BASE(sKraidRisingPagesData[3].graphicsPage));
 
             // Load cave background tile table
             DmaTransfer(3, KRAID_RISING_EWRAM.caveBackgroundTileTable, BGCNT_TO_VRAM_TILE_BASE(sKraidRisingPagesData[3].tiletablePage),
