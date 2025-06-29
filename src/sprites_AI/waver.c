@@ -12,11 +12,13 @@
 
 #include "structs/sprite.h"
 
+#define WAVER_POSE_MOVING 0x9
+
 /**
  * @brief 2483c | 68 | Initializes a waver sprite
  * 
  */
-void WaverInit(void)
+static void WaverInit(void)
 {
     gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
@@ -43,7 +45,7 @@ void WaverInit(void)
  * @brief 248a4 | e0 | Handles a waver moving
  * 
  */
-void WaverMove(void)
+static void WaverMove(void)
 {
     u16 ySpeed;
     u16 xSpeed;

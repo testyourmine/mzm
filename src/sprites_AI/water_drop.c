@@ -10,11 +10,17 @@
 #include "structs/clipdata.h"
 #include "structs/sprite.h"
 
+#define WATER_DROP_POSE_CHECK_SPAWNING_ENDED 0x9
+#define WATER_DROP_POSE_SPLASHING_INIT 0xE
+#define WATER_DROP_POSE_SPLASHING 0xF
+#define WATER_DROP_POSE_SPAWNING 0x11
+#define WATER_DROP_POSE_FALLING 0x1F
+
 /**
  * @brief 12780 | 2c | Initializes a water drop sprite
  * 
  */
-void WaterDropInit(void)
+static void WaterDropInit(void)
 {
     gCurrentSprite.hitboxTop = -PIXEL_SIZE;
     gCurrentSprite.hitboxBottom = PIXEL_SIZE;
@@ -133,7 +139,7 @@ void WaterDrop(void)
             {
                 gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN;
                 gCurrentSprite.pose = WATER_DROP_POSE_SPAWNING;
-                gCurrentSprite.work0 = CONVERT_SECONDS(1.f) + TWO_THIRD_SECOND + gSpriteRng * 8;
+                gCurrentSprite.work0 = CONVERT_SECONDS(1.f) + TWO_THIRD_SECOND + gSpriteRng * CONVERT_SECONDS(2.f / 15);
             }
             break;
 
