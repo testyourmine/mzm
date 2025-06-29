@@ -1029,7 +1029,7 @@ void MinimapLoadTilesWithObtainedItems(void)
     u32 yOffset;
 
     // FIXME use symbol
-    BitFill(3, 0, 0x2033800, sizeof(gMinimapTilesWithObtainedItems), 16);
+    BitFill(3, 0, (void*)0x2033800, sizeof(gMinimapTilesWithObtainedItems), 16);
 
     for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
     {

@@ -205,14 +205,11 @@ $(LD_SCRIPT): linker.ld
 	$(MSG) CC $@
 	$Q$(PREPROC) $< $(PREPROCFLAGS) | $(CPP) $(CPPFLAGS) | $(CC) -o $@ $(CFLAGS) && printf '\t.align 2, 0 @ dont insert nops\n' >> $@
 
-src/dma.s: CFLAGS = -O1 -mthumb-interwork -fhex-asm
+src/dma.s: CFLAGS = -Werror -O1 -mthumb-interwork -fhex-asm -f2003-patch
 src/dma.s: src/dma.c
 
-src/sram/%.s: CFLAGS = -O1 -mthumb-interwork -fhex-asm
+src/sram/%.s: CFLAGS = -Werror -O1 -mthumb-interwork -fhex-asm -f2003-patch
 src/sram/%.s: src/sram/%.c
-
-src/sprites_AI/%.s: CFLAGS = -O2 -mthumb-interwork -fhex-asm
-src/sprites_AI/%.s: src/sram/%.c
 
 tools/%: tools/%.c
 	$(MSG) HOSTCC $@

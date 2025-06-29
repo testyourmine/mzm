@@ -177,7 +177,7 @@ void SetupSoundTransfer(void)
 
     gMusicInfo.sampleRate = sNativeSampleRate[gMusicInfo.freqIndex];
     gMusicInfo.pitch = sMusicPitchData[gMusicInfo.freqIndex];
-    samplesPerFrame = gPcmSamplesPerVBlankTable[gMusicInfo.freqIndex];
+    samplesPerFrame = sPcmSamplesPerVBlankTable[gMusicInfo.freqIndex];
     gMusicInfo.unk_14 = samplesPerFrame;
 
     unk_1 = samplesPerFrame / 16;

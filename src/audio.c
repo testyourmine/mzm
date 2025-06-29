@@ -571,7 +571,7 @@ void UpdatePsgSounds(void)
 
                         if (i == 2)
                         {
-                            pSound->unk_12 = gCgb3Vol[pSound->unk_19];
+                            pSound->unk_12 = sCgb3Vol[pSound->unk_19];
                         }
                         else
                         {
@@ -625,7 +625,7 @@ void UpdatePsgSounds(void)
             control = (u8)pSound->unk_19;
 
             if (i == 2)
-                pSound->unk_12 = gCgb3Vol[control];
+                pSound->unk_12 = sCgb3Vol[control];
             else
                 pSound->unk_12 |= control << 4;
 
@@ -743,7 +743,7 @@ void UpdateTrack(struct TrackData* pTrack)
                         if (var_0 > 0xCE)
                         {
                             pVariables->unk_0 |= 0x2;
-                            pVariables->unk_E = gClockTable[var_0 - 0xCF];
+                            pVariables->unk_E = sClockTable[var_0 - 0xCF];
 
                             var_0 = *pVariables->pRawData;
 
@@ -819,7 +819,7 @@ void UpdateTrack(struct TrackData* pTrack)
                         }
                         else
                         {
-                            pVariables->delay = gClockTable[var_0 - 0x80];
+                            pVariables->delay = sClockTable[var_0 - 0x80];
                             pVariables->pRawData++;
                             break;
                         }
@@ -1343,7 +1343,7 @@ u16 GetNoteDelay(struct TrackVariables* pVariables, u8 param_2, u8 param_3)
     }
     else
     {
-        delay = gNoiseTable[param_2 - 0x15] | (u8)(u32)pVariables->pSample1;
+        delay = sNoiseTable[param_2 - 0x15] | (u8)(u32)pVariables->pSample1;
     }
     
     return delay;
