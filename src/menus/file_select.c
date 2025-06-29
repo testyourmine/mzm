@@ -3796,7 +3796,7 @@ u8 OptionsMetroidFusionLinkSubroutine(void)
 
         case 7:
             if (gChangedInput & KEY_START)
-                gMainGameMode = GM_START_SOFTRESET;
+                gMainGameMode = GM_START_SOFT_RESET;
             break;
 
         case 8:

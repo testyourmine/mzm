@@ -1774,7 +1774,7 @@ u32 CreditsSubroutine(void)
                 }
                 else
                 {
-                    gDisableSoftreset = FALSE;
+                    gDisableSoftReset = FALSE;
                     ended++;
                 }
             }
@@ -1795,7 +1795,7 @@ u32 CreditsSubroutine(void)
                 break;
             }
 
-            gDisableSoftreset = FALSE;
+            gDisableSoftReset = FALSE;
             ended++;
             break;
 

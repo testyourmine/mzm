@@ -249,7 +249,7 @@ void StartEffectForCutscene(u8 request)
     switch (request)
     {
         case EFFECT_CUTSCENE_ESCAPING_CHOZODIA:
-            gDisableSoftreset = TRUE;
+            gDisableSoftReset = TRUE;
             gSramOperationStage = 0;
             unk_5b340();
             ColorFadingStart(COLOR_FADING_CHOZODIA_ESCAPE);
@@ -751,7 +751,7 @@ u8 ColorFadingProcess_ChozodiaEscape(void)
             #ifdef DEBUG
             if (gDebugMode)
             {
-                gDisableSoftreset = FALSE;
+                gDisableSoftReset = FALSE;
                 gCompletedGameFlagCopy = 0x80;
             }
             #endif // DEBUG
