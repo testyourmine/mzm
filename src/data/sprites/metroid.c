@@ -306,7 +306,7 @@ const struct FrameData sMetroidOam_SamusGrabbed[15] = {
     [14] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sMetroidOam_Spanwing[3] = {
+const struct FrameData sMetroidOam_Spawning[3] = {
     [0] = {
         .pFrame = sMetroidOam_Spawning_Frame0,
         .timer = CONVERT_SECONDS(1.f / 60)

@@ -2398,7 +2398,7 @@ u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struc
 
     if (dct >= DCT_SUDO_SCREW)
     {
-        // Sudo screw, check is weak
+        // Pseudo screw, check is weak
         if (weakness & (WEAKNESS_CHARGE_BEAM_PISTOL | WEAKNESS_BEAM_BOMBS))
         {
             // Destroy charge

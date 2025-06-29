@@ -794,7 +794,7 @@
     "size": 4
   },
   {
-    "path": "cutscenes/KraidRising/CaveBackround.gfx.lz",
+    "path": "cutscenes/KraidRising/CaveBackground.gfx.lz",
     "count": 1327,
     "addr": {
       "us": 3610364,
@@ -4044,7 +4044,7 @@
     "size": 4
   },
   {
-    "path": "menus/EraseSram/ConfirmJapanse.gfx.lz",
+    "path": "menus/EraseSram/ConfirmJapanese.gfx.lz",
     "count": 245,
     "addr": {
       "us": 4269232,

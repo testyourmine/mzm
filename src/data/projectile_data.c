@@ -2989,12 +2989,12 @@ static const u16 sPistolOam_Diagonal_Frame1[OAM_DATA_SIZE(1)] = {
     0xf9, OBJ_SIZE_16x16 | 0x1f9, 0x2084
 };
 
-static const u16 sPitsolOam_Vertical_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sPistolOam_Vertical_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_VERTICAL | 0xfa, 0x1fc, 0x2086
 };
 
-static const u16 sPitsolOam_Vertical_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sPistolOam_Vertical_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_VERTICAL | 0xfa, 0x1fc, 0x2087
 };
@@ -3084,11 +3084,11 @@ const struct FrameData sPistolOam_Diagonal[3] = {
 
 const struct FrameData sPistolOam_Vertical[3] = {
     [0] = {
-        .pFrame = sPitsolOam_Vertical_Frame0,
+        .pFrame = sPistolOam_Vertical_Frame0,
         .timer = CONVERT_SECONDS(.05f)
     },
     [1] = {
-        .pFrame = sPitsolOam_Vertical_Frame1,
+        .pFrame = sPistolOam_Vertical_Frame1,
         .timer = CONVERT_SECONDS(.05f)
     },
     [2] = FRAME_DATA_TERMINATOR

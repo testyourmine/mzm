@@ -26,7 +26,7 @@ extern const struct FrameData* const sRidleyFrameDataPointers[RIDLEY_OAM_END];
 
 extern const u8 sAtomicDynamicPaletteData[33][2];
 
-extern const struct FrameData* const sMotheBrainFrameDataPointers[MOTHER_BRAIN_OAM_END];
+extern const struct FrameData* const sMotherBrainFrameDataPointers[MOTHER_BRAIN_OAM_END];
 
 extern const struct FrameData* const sTangleVineFrameDataPointers[TANGLE_VINE_OAM_END] ;
 

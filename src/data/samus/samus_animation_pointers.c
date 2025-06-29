@@ -149,8 +149,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_PowerSuit[SPOSE_END][2
         sSamusAnim_PowerSuit_Left_TurningFromFacingTheForeground
     },
     [SPOSE_GRABBED_BY_CHOZO_STATUE] = {
-        sSamusAnim_PowerSuit_MorphballMotioness,
-        sSamusAnim_PowerSuit_MorphballMotioness
+        sSamusAnim_PowerSuit_MorphballMotionless,
+        sSamusAnim_PowerSuit_MorphballMotionless
     },
     [SPOSE_DELAY_BEFORE_SHINESPARKING] = {
         sSamusAnim_PowerSuit_Right_DelayBeforeShinesparking,
@@ -169,8 +169,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_PowerSuit[SPOSE_END][2
         sSamusAnim_PowerSuit_Left_DelayAfterShinesparking
     },
     [SPOSE_DELAY_BEFORE_BALLSPARKING] = {
-        sSamusAnim_PowerSuit_MorphballMotioness,
-        sSamusAnim_PowerSuit_MorphballMotioness
+        sSamusAnim_PowerSuit_MorphballMotionless,
+        sSamusAnim_PowerSuit_MorphballMotionless
     },
     [SPOSE_BALLSPARKING] = {
         sSamusAnim_PowerSuit_Right_Ballsparking,
@@ -193,8 +193,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_PowerSuit[SPOSE_END][2
         sSamusAnim_PowerSuit_Left_TurningOnZipline
     },
     [SPOSE_MORPH_BALL_ON_ZIPLINE] = {
-        sSamusAnim_PowerSuit_MorphballMotioness,
-        sSamusAnim_PowerSuit_MorphballMotioness
+        sSamusAnim_PowerSuit_MorphballMotionless,
+        sSamusAnim_PowerSuit_MorphballMotionless
     },
     [SPOSE_SAVING_LOADING_GAME] = {
         sSamusAnim_PowerSuit_SavingLoadingGame,
@@ -277,8 +277,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_PowerSuit[SPOSE_END][2
         sSamusAnim_Suitless_Left_TurningFromFacingTheBackground
     },
     [SPOSE_ACTIVATING_ZIPLINES] = {
-        sSamusAnim_PowerSuit_MorphballMotioness,
-        sSamusAnim_PowerSuit_MorphballMotioness
+        sSamusAnim_PowerSuit_MorphballMotionless,
+        sSamusAnim_PowerSuit_MorphballMotionless
     },
     [SPOSE_IN_ESCAPE_SHIP] = {
         sSamusAnim_PowerSuit_Right_Crouching,
@@ -1627,8 +1627,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_FullSuit[SPOSE_END][2]
         sSamusAnim_FullSuit_Left_TurningFromFacingTheForeground
     },
     [SPOSE_GRABBED_BY_CHOZO_STATUE] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_DELAY_BEFORE_SHINESPARKING] = {
         sSamusAnim_FullSuit_Right_DelayBeforeShinesparking,
@@ -1647,8 +1647,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_FullSuit[SPOSE_END][2]
         sSamusAnim_FullSuit_Left_DelayAfterShinesparking
     },
     [SPOSE_DELAY_BEFORE_BALLSPARKING] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_BALLSPARKING] = {
         sSamusAnim_FullSuit_Right_Ballsparking,
@@ -1671,8 +1671,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_FullSuit[SPOSE_END][2]
         sSamusAnim_FullSuit_Left_TurningOnZipline
     },
     [SPOSE_MORPH_BALL_ON_ZIPLINE] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_SAVING_LOADING_GAME] = {
         sSamusAnim_FullSuit_SavingLoadingGame,
@@ -1755,8 +1755,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_FullSuit[SPOSE_END][2]
         sSamusAnim_Suitless_Left_TurningFromFacingTheBackground
     },
     [SPOSE_ACTIVATING_ZIPLINES] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_IN_ESCAPE_SHIP] = {
         sSamusAnim_FullSuit_Right_Crouching,
@@ -2273,8 +2273,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_Suitless[SPOSE_END][2]
         sSamusAnim_Suitless_Left_TurningFromFacingTheForeground
     },
     [SPOSE_GRABBED_BY_CHOZO_STATUE] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_DELAY_BEFORE_SHINESPARKING] = {
         sSamusAnim_FullSuit_Right_DelayBeforeShinesparking,
@@ -2293,8 +2293,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_Suitless[SPOSE_END][2]
         sSamusAnim_FullSuit_Left_DelayAfterShinesparking
     },
     [SPOSE_DELAY_BEFORE_BALLSPARKING] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_BALLSPARKING] = {
         sSamusAnim_FullSuit_Right_Ballsparking,
@@ -2317,8 +2317,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_Suitless[SPOSE_END][2]
         sSamusAnim_FullSuit_Left_TurningOnZipline
     },
     [SPOSE_MORPH_BALL_ON_ZIPLINE] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_SAVING_LOADING_GAME] = {
         sSamusAnim_Suitless_SavingLoadingGame,
@@ -2401,8 +2401,8 @@ const struct SamusAnimationData* const sSamusAnimPointers_Suitless[SPOSE_END][2]
         sSamusAnim_Suitless_Left_TurningFromFacingTheBackground
     },
     [SPOSE_ACTIVATING_ZIPLINES] = {
-        sSamusAnim_FullSuit_MorphballMotioness,
-        sSamusAnim_FullSuit_MorphballMotioness
+        sSamusAnim_FullSuit_MorphballMotionless,
+        sSamusAnim_FullSuit_MorphballMotionless
     },
     [SPOSE_IN_ESCAPE_SHIP] = {
         sSamusAnim_FullSuit_Right_Crouching,

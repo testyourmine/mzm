@@ -204,7 +204,7 @@ const u8 sAtomicDynamicPaletteData[33][2] = {
     { 0, 0 }
 };
 
-const struct FrameData* const sMotheBrainFrameDataPointers[MOTHER_BRAIN_OAM_END] = {
+const struct FrameData* const sMotherBrainFrameDataPointers[MOTHER_BRAIN_OAM_END] = {
     [MOTHER_BRAIN_OAM_IDLE] = sMotherBrainOam_Idle,
     [MOTHER_BRAIN_OAM_CHARGING_BEAM] = sMotherBrainOam_ChargingBeam,
     [MOTHER_BRAIN_OAM_EYE_CLOSED] = sMotherBrainPartOam_EyeClosed,

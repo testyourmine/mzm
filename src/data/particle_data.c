@@ -1397,13 +1397,13 @@ const u16 sParticleShinesparkDestroyedOam_Frame9[OAM_DATA_SIZE(3)] = {
     0x1d, OBJ_SIZE_16x16 | 0x1e1, 0x418e
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame0[OAM_DATA_SIZE(2)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     0xf8, OBJ_SIZE_16x16 | 0x1f3, 0x3188,
     0xf8, OBJ_SIZE_16x16 | 0x1fd, 0x3188
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame1[OAM_DATA_SIZE(7)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame1[OAM_DATA_SIZE(7)] = {
     0x7,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1eb, 0x3188,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x5, 0x3188,
@@ -1414,7 +1414,7 @@ const u16 sParticleSudoScrewDestroyedOam_Frame1[OAM_DATA_SIZE(7)] = {
     OBJ_SHAPE_HORIZONTAL | 0x3, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1fc, 0x3155
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame2[OAM_DATA_SIZE(9)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame2[OAM_DATA_SIZE(9)] = {
     0x9,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1df, 0x3188,
     0xf8, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x11, 0x3188,
@@ -1427,7 +1427,7 @@ const u16 sParticleSudoScrewDestroyedOam_Frame2[OAM_DATA_SIZE(9)] = {
     0xfe, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1fd, 0x3155
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame3[OAM_DATA_SIZE(8)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame3[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1da, 0x318a,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x14, 0x318a,
@@ -1439,7 +1439,7 @@ const u16 sParticleSudoScrewDestroyedOam_Frame3[OAM_DATA_SIZE(8)] = {
     0x0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1ff, 0x3155
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame4[OAM_DATA_SIZE(8)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame4[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf8, OBJ_SIZE_16x16 | 0x1d8, 0x3196,
     0xf8, OBJ_SIZE_16x16 | 0x18, 0x3196,
@@ -1451,21 +1451,21 @@ const u16 sParticleSudoScrewDestroyedOam_Frame4[OAM_DATA_SIZE(8)] = {
     0xf8, OBJ_SIZE_16x16 | 0x8, 0x418e
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame5[OAM_DATA_SIZE(3)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame5[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, OBJ_SIZE_16x16 | 0x1d6, 0x418a,
     0xf8, OBJ_SIZE_16x16 | 0x1a, 0x418a,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, 0x3196
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame6[OAM_DATA_SIZE(3)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame6[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf8, OBJ_SIZE_16x16 | 0x1d4, 0x418c,
     0xf8, OBJ_SIZE_16x16 | 0x1c, 0x418c,
     0xf8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1f8, 0x3198
 };
 
-const u16 sParticleSudoScrewDestroyedOam_Frame7[OAM_DATA_SIZE(5)] = {
+const u16 sParticlePseudoScrewDestroyedOam_Frame7[OAM_DATA_SIZE(5)] = {
     0x5,
     0xf8, OBJ_SIZE_16x16 | 0x1d2, 0x418e,
     0xf8, OBJ_SIZE_16x16 | 0x1e, 0x418e,
@@ -1668,7 +1668,7 @@ const u16 sParticleFreezingSpriteWithIceOam_Frame15[OAM_DATA_SIZE(1)] = {
     OBJ_SHAPE_VERTICAL | 0xea, OBJ_X_FLIP | 0x1f6, 0x7187
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame0[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf5, OBJ_SIZE_16x16 | 0x1f4, 0x7155,
     OBJ_SHAPE_VERTICAL | 0xf4, OBJ_X_FLIP | 0x3, 0x7155,
@@ -1676,7 +1676,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame0[OAM_DATA_SIZE(4)] 
     OBJ_SHAPE_HORIZONTAL | 0x3, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1fc, 0x7155
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame1[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame1[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf2, OBJ_SIZE_16x16 | 0x1f3, 0x7155,
     0xf3, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1fe, 0x7155,
@@ -1684,7 +1684,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame1[OAM_DATA_SIZE(4)] 
     0xfe, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1fd, 0x7155
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame2[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf0, OBJ_SIZE_16x16 | 0x1f1, 0x7155,
     0xf1, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x0, 0x7155,
@@ -1692,7 +1692,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame2[OAM_DATA_SIZE(4)] 
     0x0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1ff, 0x7155
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame3[OAM_DATA_SIZE(9)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame3[OAM_DATA_SIZE(9)] = {
     0x9,
     0xeb, OBJ_SIZE_16x16 | 0x1eb, 0x7155,
     0xeb, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x4, 0x7155,
@@ -1705,7 +1705,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame3[OAM_DATA_SIZE(9)] 
     0xf7, OBJ_SIZE_16x16 | 0x1f7, 0x7188
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame4[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame4[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf0, OBJ_SIZE_16x16 | 0x1f1, 0x7155,
     0xf1, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x0, 0x7155,
@@ -1713,7 +1713,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame4[OAM_DATA_SIZE(4)] 
     0x0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1ff, 0x7155
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame5[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame5[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf0, OBJ_SIZE_16x16 | 0x1f6, 0x71d4,
     0xf5, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x3, 0x718a,
@@ -1721,7 +1721,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame5[OAM_DATA_SIZE(4)] 
     0x0, OBJ_SIZE_16x16 | 0x1f9, 0x7188
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame6[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame6[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f6, 0x71d4,
     0xf4, OBJ_SIZE_16x16 | 0x3, 0x718c,
@@ -1729,7 +1729,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame6[OAM_DATA_SIZE(4)] 
     0x0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f9, 0x7188
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame7[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame7[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xec, 0x1fa, 0x7187,
     0xf2, OBJ_SIZE_16x16 | 0x3, 0x718e,
@@ -1737,7 +1737,7 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame7[OAM_DATA_SIZE(4)] 
     0xfe, OBJ_SIZE_16x16 | 0x1f9, 0x718a
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame8[OAM_DATA_SIZE(4)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame8[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_VERTICAL | 0xea, OBJ_X_FLIP | 0x1fa, 0x7187,
     0xf0, OBJ_SIZE_16x16 | 0x3, 0x71d4,
@@ -1745,38 +1745,38 @@ const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame8[OAM_DATA_SIZE(4)] 
     0xfd, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f9, 0x718a
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame9[OAM_DATA_SIZE(3)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame9[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x3, 0x71d4,
     0xf4, OBJ_SIZE_16x16 | 0x1f0, 0x718c,
     0xfc, OBJ_SIZE_16x16 | 0x1f9, 0x718c
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame10[OAM_DATA_SIZE(3)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame10[OAM_DATA_SIZE(3)] = {
     0x3,
     OBJ_SHAPE_VERTICAL | 0xec, 0x7, 0x7187,
     0xf2, OBJ_SIZE_16x16 | 0x1f0, 0x718e,
     0xfa, OBJ_SIZE_16x16 | 0x1f9, 0x718e
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame11[OAM_DATA_SIZE(2)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame11[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xea, OBJ_X_FLIP | 0x7, 0x7187,
     0xf0, OBJ_SIZE_16x16 | 0x1f0, 0x71d4
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame12[OAM_DATA_SIZE(1)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame12[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1f0, 0x71d4
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame13[OAM_DATA_SIZE(2)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame13[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_VERTICAL | 0xec, 0x1f4, 0x7187,
     OBJ_SHAPE_VERTICAL | 0xf4, OBJ_X_FLIP | 0x1fd, 0x7187
 };
 
-const u16 sParticleFreezingSpritewithChargedIceBeamOam_Frame14[OAM_DATA_SIZE(1)] = {
+const u16 sParticleFreezingSpriteWithChargedIceBeamOam_Frame14[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_VERTICAL | 0xea, OBJ_X_FLIP | 0x1f4, 0x7187
 };
@@ -2861,37 +2861,37 @@ const struct FrameData sParticleShinesparkDestroyedOam[11] = {
     [10] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sParticleSudoScrewDestroyedOam[9] = {
+const struct FrameData sParticlePseudoScrewDestroyedOam[9] = {
     [0] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame0,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame0,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame1,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame2,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame3,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame3,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [4] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame4,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame4,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [5] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame5,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame5,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [6] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame6,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame6,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [7] = {
-        .pFrame = sParticleSudoScrewDestroyedOam_Frame7,
+        .pFrame = sParticlePseudoScrewDestroyedOam_Frame7,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [8] = FRAME_DATA_TERMINATOR
@@ -3001,65 +3001,65 @@ const struct FrameData sParticleFreezingSpriteWithIceOam[17] = {
     [16] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sParticleFreezingSpritewithChargedIceBeamOam[16] = {
+const struct FrameData sParticleFreezingSpriteWithChargedIceBeamOam[16] = {
     [0] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame0,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame0,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [1] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame1,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame1,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [2] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame2,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame2,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame3,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame3,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [4] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame4,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame4,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [5] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame5,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame5,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [6] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame6,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame6,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [7] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame7,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame7,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [8] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame8,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame8,
         .timer = CONVERT_SECONDS(1.f / 60)
     },
     [9] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame9,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame9,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [10] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame10,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame10,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [11] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame11,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame11,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [12] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame12,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame12,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [13] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame13,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame13,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [14] = {
-        .pFrame = sParticleFreezingSpritewithChargedIceBeamOam_Frame14,
+        .pFrame = sParticleFreezingSpriteWithChargedIceBeamOam_Frame14,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [15] = FRAME_DATA_TERMINATOR

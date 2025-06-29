@@ -5717,37 +5717,37 @@ static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_HangingOnLe
     .x = C_S9_2_S16(-1)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromhanging_Frame0 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromHanging_Frame0 = {
     .y = C_S8_2_S16(-15),
     .x = C_S9_2_S16(8)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromhanging_Frame1 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromHanging_Frame1 = {
     .y = C_S8_2_S16(-8),
     .x = C_S9_2_S16(10)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromhanging_Frame2 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromHanging_Frame2 = {
     .y = C_S8_2_S16(-10),
     .x = C_S9_2_S16(11)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame0 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame0 = {
     .y = C_S8_2_S16(-1),
     .x = C_S9_2_S16(8)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame1 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame1 = {
     .y = C_S8_2_S16(-10),
     .x = C_S9_2_S16(15)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame2 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame2 = {
     .y = C_S8_2_S16(-19),
     .x = C_S9_2_S16(20)
 };
 
-static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame3 = {
+static const struct ArmCannonOffset sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame3 = {
     .y = C_S8_2_S16(-24),
     .x = C_S9_2_S16(19)
 };
@@ -6176,34 +6176,34 @@ const struct ArmCannonAnimationData sArmCannonAnim_Suit_Right_HangingOnLedge[4] 
 
 const struct ArmCannonAnimationData sArmCannonAnim_Suit_Right_PullingYourselfUpFromHanging[3] = {
     [0] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromhanging_Frame0,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromHanging_Frame0,
         .pOam = sArmCannonOam_Empty
     },
     [1] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromhanging_Frame1,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromHanging_Frame1,
         .pOam = sArmCannonOam_Empty
     },
     [2] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromhanging_Frame2,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfUpFromHanging_Frame2,
         .pOam = sArmCannonOam_Empty
     }
 };
 
 const struct ArmCannonAnimationData sArmCannonAnim_Suit_Right_PullingYourselfForwardFromHanging[4] = {
     [0] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame0,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame0,
         .pOam = sArmCannonOam_Empty
     },
     [1] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame1,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame1,
         .pOam = sArmCannonOam_Empty
     },
     [2] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame2,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame2,
         .pOam = sArmCannonOam_Empty
     },
     [3] = {
-        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromhanging_Frame3,
+        .pOffset = &sSamusArmCannonOffset_Suit_Right_PullingYourselfForwardFromHanging_Frame3,
         .pOam = sArmCannonOam_Empty
     }
 };

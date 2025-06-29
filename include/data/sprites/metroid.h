@@ -18,6 +18,6 @@ extern const u16 sMetroidOam_Moving_Frame10[OAM_DATA_SIZE(6)];
 extern const struct FrameData sMetroidShellOam_Idle[3];
 extern const struct FrameData sMetroidOam_Moving[17];
 extern const struct FrameData sMetroidOam_SamusGrabbed[15];
-extern const struct FrameData sMetroidOam_Spanwing[3];
+extern const struct FrameData sMetroidOam_Spawning[3];
 
 #endif /* METROID_DATA_H */

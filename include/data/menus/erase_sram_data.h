@@ -13,7 +13,7 @@ extern const u16 sEraseSramMenuBackgroundPal[15 * 16 - 1];
 extern const u32 sEraseSramMenuObjectsGfx[477];
 extern const u32 sEraseSramMenuFirstBoxGfx[118];
 
-extern const u32 sEraseSramMenuConfirmJapanseGfx[245];
+extern const u32 sEraseSramMenuConfirmJapaneseGfx[245];
 extern const u32 sEraseSramMenuConfirmEnglishGfx[191];
 extern const u32 sEraseSramMenuConfirmFrenchGfx[209];
 extern const u32 sEraseSramMenuConfirmGermanGfx[222];

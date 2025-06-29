@@ -965,7 +965,7 @@ cutscenes/KraidRising/Rising.pal;112;0x36c0f8;2
 cutscenes/KraidRising/CloseUp.gfx.lz;3087;0x36c1d8;4
 cutscenes/KraidRising/OAM.gfx.lz;753;0x36f214;4
 cutscenes/KraidRising/KraidRising.gfx.lz;1609;0x36fdd8;4
-cutscenes/KraidRising/CaveBackround.gfx.lz;1327;0x3716fc;4
+cutscenes/KraidRising/CaveBackground.gfx.lz;1327;0x3716fc;4
 
 cutscenes/KraidRising/KraidCloseUpEyesClosed.tt;368;0x372bb8;4
 cutscenes/KraidRising/KraidCloseUpEyesBarelyOpened.tt;368;0x373178;4
@@ -1193,7 +1193,7 @@ menus/EraseSram/Background.pal;239;0x411608;2
 
 menus/EraseSram/Objects.gfx.lz;477;0x411b64;4
 menus/EraseSram/FirstBox.gfx.lz;118;0x4122d8;4
-menus/EraseSram/ConfirmJapanse.gfx.lz;245;0x4124b0;4
+menus/EraseSram/ConfirmJapanese.gfx.lz;245;0x4124b0;4
 menus/EraseSram/ConfirmEnglish.gfx.lz;1027;0x412884;4
 menus/EraseSram/QuestionJapanese.gfx.lz;245;0x413890;4
 menus/EraseSram/QuestionEnglish.gfx.lz;1006;0x413c64;4

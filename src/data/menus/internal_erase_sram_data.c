@@ -5,11 +5,11 @@
 const u32* const sEraseSramTextGfxPointers[LANGUAGE_END][2] = {
     [LANGUAGE_JAPANESE] = {
         sEraseSramMenuQuestionJapaneseGfx,
-        sEraseSramMenuConfirmJapanseGfx
+        sEraseSramMenuConfirmJapaneseGfx
     },
     [LANGUAGE_HIRAGANA] = {
         sEraseSramMenuQuestionJapaneseGfx,
-        sEraseSramMenuConfirmJapanseGfx
+        sEraseSramMenuConfirmJapaneseGfx
     },
     [LANGUAGE_ENGLISH] = {
         sEraseSramMenuQuestionEnglishGfx,

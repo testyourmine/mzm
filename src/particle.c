@@ -1179,11 +1179,11 @@ void ParticleShinesparkDestroyed(struct ParticleEffect* pParticle)
  * 
  * @param pParticle Particle effect pointer
  */
-void ParticleSudoScrewDestroyed(struct ParticleEffect* pParticle)
+void ParticlePseudoScrewDestroyed(struct ParticleEffect* pParticle)
 {
     APPLY_DELTA_TIME_INC(pParticle->frameCounter);
 
-    if (ParticleUpdateAnimation(pParticle, sParticleSudoScrewDestroyedOam))
+    if (ParticleUpdateAnimation(pParticle, sParticlePseudoScrewDestroyedOam))
     {
         pParticle->status = 0;
         return;
@@ -1273,7 +1273,7 @@ void ParticleFreezingSpriteWithChargedIce(struct ParticleEffect* pParticle)
     pParticle->status ^= PARTICLE_STATUS_NOT_DRAWN;
     APPLY_DELTA_TIME_INC(pParticle->frameCounter);
 
-    if (ParticleUpdateAnimation(pParticle, sParticleFreezingSpritewithChargedIceBeamOam))
+    if (ParticleUpdateAnimation(pParticle, sParticleFreezingSpriteWithChargedIceBeamOam))
     {
         pParticle->status = 0;
         return;

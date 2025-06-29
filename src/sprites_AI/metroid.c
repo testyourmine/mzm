@@ -608,7 +608,7 @@ static void MetroidInit(void)
     gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
     gCurrentSprite.hitboxRight = (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
 
-    gCurrentSprite.pOam = sMetroidOam_Spanwing;
+    gCurrentSprite.pOam = sMetroidOam_Spawning;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 

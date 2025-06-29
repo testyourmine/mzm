@@ -21,7 +21,7 @@ extern const u32 sBeforeCharlieLeftSideOfChozoWallTileTable[368];
 extern const u32 sBeforeCharlieRightSideOfChozoWallTileTable[369];
 extern const u32 sBeforeCharlieChozoWallBackgroundTileTable[551];
 extern const u32 sBeforeCharlieYoungSamusAndGreyVoiceTileTable[185];
-extern const u32 sBeforeCharlieYoungSamusAndGreyVoiceCloseuUpTileTable[452];
+extern const u32 sBeforeCharlieYoungSamusAndGreyVoiceCloseUpTileTable[452];
 extern const u32 sBeforeCharlieYoungSamusCloseUpTileTable[368];
 extern const u32 sBeforeCharlieSamusCloseUpEyesClosedTileTable[251];
 extern const u32 sBeforeCharlieSamusCloseUpEyesOpenedTileTable[232];
