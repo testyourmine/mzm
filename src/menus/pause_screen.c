@@ -3564,7 +3564,7 @@ s32 PauseScreenEasySleepInit(void)
             PAUSE_SCREEN_DATA.miscOam[1].yPosition = BLOCK_SIZE * 4 + QUARTER_BLOCK_SIZE;
             PAUSE_SCREEN_DATA.miscOam[1].objMode = 1;
 
-            gDisableSoftreset = TRUE;
+            gDisableSoftReset = TRUE;
 
             PAUSE_SCREEN_DATA.subroutineInfo.stage = 0;
             PAUSE_SCREEN_DATA.subroutineInfo.timer = 0;
@@ -3585,7 +3585,7 @@ s32 PauseScreenQuitEasySleep(void)
     switch (PAUSE_SCREEN_DATA.subroutineInfo.stage)
     {
         case 0:
-            gDisableSoftreset = FALSE;
+            gDisableSoftReset = FALSE;
             PauseScreenUpdateTopVisorOverlay(0);
             PAUSE_SCREEN_DATA.subroutineInfo.stage++;
 

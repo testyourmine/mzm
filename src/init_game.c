@@ -4,7 +4,7 @@
 
 #include "gba.h"
 #include "io.h"
-#include "softreset_input.h"
+#include "soft_reset_input.h"
 #include "types.h"
 #include "menus/boot_debug.h"
 
@@ -23,7 +23,7 @@ void InitializeGame(void)
 
     ClearGfxRam();
     LoadInterruptCode();
-    CallbackSetVBlank(SoftresetVBlankCallback);
+    CallbackSetVBlank(SoftResetVBlankCallback);
     SramRead_All();
     InitializeAudio();
 
@@ -53,9 +53,9 @@ void InitializeGame(void)
     {
         #ifdef DEBUG
         BootDebugReadSram();
-        gMainGameMode = gDebugMode ? GM_DEBUG_MENU : GM_SOFTRESET;
+        gMainGameMode = gDebugMode ? GM_DEBUG_MENU : GM_SOFT_RESET;
         #else // !DEBUG
-        gMainGameMode = GM_SOFTRESET;
+        gMainGameMode = GM_SOFT_RESET;
         #endif // DEBUG
     }
 
@@ -63,7 +63,7 @@ void InitializeGame(void)
     gPreviousButtonInput = 0;
     gChangedInput = 0;
 
-    gDisableSoftreset = FALSE;
+    gDisableSoftReset = FALSE;
     gStereoFlag = FALSE;
 
     write16(REG_IF, USHORT_MAX);

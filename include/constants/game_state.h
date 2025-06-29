@@ -2,7 +2,7 @@
 #define GAME_STATE_CONSTANTS_H
 
 enum GameMode {
-    GM_SOFTRESET,
+    GM_SOFT_RESET,
     GM_INTRO,
     GM_TITLE,
     GM_FILE_SELECT,
@@ -16,7 +16,7 @@ enum GameMode {
     GM_DEMO,
     GM_GALLERY,
     GM_FUSION_GALLERY,
-    GM_START_SOFTRESET,
+    GM_START_SOFT_RESET,
     GM_ERASE_SRAM,
     GM_DEBUG_MENU
 };

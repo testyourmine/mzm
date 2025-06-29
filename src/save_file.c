@@ -275,11 +275,11 @@ void SramCopy_FileScreenOptionsUnlocked(void)
  */
 u32 SramProcessIntroSave(void)
 {
-    if (!gDisableSoftreset)
+    if (!gDisableSoftReset)
     {
         // Start, disable soft reset
         gSramOperationStage = 0;
-        gDisableSoftreset = TRUE;
+        gDisableSoftReset = TRUE;
     }
 
     switch (gSramOperationStage)
@@ -318,12 +318,12 @@ u32 SramProcessIntroSave(void)
         case 4:
         default:
             // End, re-enable soft reset
-            gDisableSoftreset = FALSE;
+            gDisableSoftReset = FALSE;
             gSramOperationStage = 0;
     }
 
     // If soft reset is enabled, then the save is complete
-    return gDisableSoftreset ^ TRUE;
+    return gDisableSoftReset ^ TRUE;
 }
 
 /**
@@ -610,10 +610,10 @@ u32 SramProcessEndingSave_Debug(void)
  */
 u32 SramSaveFile(void)
 {
-    if (!gDisableSoftreset)
+    if (!gDisableSoftReset)
     {
         // Start, disable soft reset
-        gDisableSoftreset = TRUE;
+        gDisableSoftReset = TRUE;
         gHasSaved = TRUE;
         gSramOperationStage = 0;
         gUnk_3000c20 = 0;
@@ -659,11 +659,11 @@ u32 SramSaveFile(void)
         case 5:
         default:
             // End, re-enable soft reset
-            gDisableSoftreset = FALSE;
+            gDisableSoftReset = FALSE;
     }
 
     // If soft reset is enabled, then the save is complete
-    return gDisableSoftreset ^ TRUE;
+    return gDisableSoftReset ^ TRUE;
 }
 
 /**
@@ -1810,9 +1810,9 @@ u32 SramDeleteFile(u8 file)
 
     pSram = &gSram;
 
-    if (!gDisableSoftreset)
+    if (!gDisableSoftReset)
     {
-        gDisableSoftreset = TRUE;
+        gDisableSoftReset = TRUE;
         gSramOperationStage = 0;
     }
 
@@ -1845,12 +1845,12 @@ u32 SramDeleteFile(u8 file)
 
         case 4:
         default:
-            gDisableSoftreset = FALSE;
+            gDisableSoftReset = FALSE;
             gSramOperationStage = 0;
             break;
     }
 
-    return gDisableSoftreset ^ TRUE;
+    return gDisableSoftReset ^ TRUE;
 }
 
 /**
@@ -1866,9 +1866,9 @@ u32 SramCopyFile(u8 src, u8 dst)
 
     pSram = &gSram;
 
-    if (!gDisableSoftreset)
+    if (!gDisableSoftReset)
     {
-        gDisableSoftreset = TRUE;
+        gDisableSoftReset = TRUE;
         gSramOperationStage = 0;
     }
 
@@ -1906,13 +1906,13 @@ u32 SramCopyFile(u8 src, u8 dst)
         case 4:
         default:
             // End, re-enable soft reset
-            gDisableSoftreset = FALSE;
+            gDisableSoftReset = FALSE;
             gSramOperationStage = 0;
             break;
     }
 
     // If soft reset is enabled, then the process is complete
-    return gDisableSoftreset ^ TRUE;
+    return gDisableSoftReset ^ TRUE;
 }
 
 /**
@@ -2103,7 +2103,7 @@ void unk_7584c(u8 param_1)
 
     gGameModeSub3 = 0;
     gMonochromeBgFading = 0;
-    gDisableSoftreset = FALSE;
+    gDisableSoftReset = FALSE;
     gSubGameModeStage = 0;
     gPauseScreenFlag = PAUSE_SCREEN_NONE;
     gDisablePause = FALSE;

@@ -73,7 +73,7 @@ SECTIONS {
         . = 0x00000040; gDisableMusic = .;
         . = 0x00000041; gDisableCutscenes_Unused = .;
         . = 0x00000042; gSkipDoorTransition = .;
-        . = 0x00000043; gDisableSoftreset = .;
+        . = 0x00000043; gDisableSoftReset = .;
         . = 0x00000044; gCollectingTank = .;
         . = 0x00000045; gDisableAnimatedGraphicsTimer = .;
         . = 0x00000046; gAnimatedGraphicsToUpdate = .;
@@ -404,7 +404,7 @@ SECTIONS {
         asm/intr_main.o(.text);
         src/agbmain.o(.text);
         src/init_game.o(.text);
-        src/softreset_input.o(.text);
+        src/soft_reset_input.o(.text);
         src/syscall_wrappers.o(.text);
         src/update_input.o(.text);
         src/init_helpers.o(.text);
@@ -581,7 +581,7 @@ SECTIONS {
         src/menus/game_over.o(.text);
         src/menus/file_select.o(.text);
 
-        src/softreset.o(.text);
+        src/soft_reset.o(.text);
         src/time_attack.o(.text);
         src/complex_oam.o(.text);
         src/intro.o(.text);

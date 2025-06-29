@@ -23,15 +23,15 @@ void agbmain(void)
             break;
 
         UpdateInput();
-        SoftresetCheck();
+        SoftResetCheck();
 
         APPLY_DELTA_TIME_INC(gFrameCounter8Bit);
         APPLY_DELTA_TIME_INC(gFrameCounter16Bit);
 
         switch (gMainGameMode)
         {
-            case GM_SOFTRESET:
-                if (SoftresetSubroutine())
+            case GM_SOFT_RESET:
+                if (SoftResetSubroutine())
                 {
                     gMainGameMode = GM_INTRO;
                     gGameModeSub1 = 0;
@@ -273,8 +273,8 @@ void agbmain(void)
                 }
                 break;
 
-            case GM_START_SOFTRESET:
-                Softreset();
+            case GM_START_SOFT_RESET:
+                SoftReset();
                 break;
 
             case GM_ERASE_SRAM:
@@ -286,7 +286,7 @@ void agbmain(void)
                     }
                     else
                     {
-                        gMainGameMode = GM_SOFTRESET;
+                        gMainGameMode = GM_SOFT_RESET;
                         #ifdef DEBUG
                         if (gDebugMode)
                             gMainGameMode = GM_DEBUG_MENU;

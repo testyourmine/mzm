@@ -520,9 +520,9 @@ void ChozodiaEscapeInit(void)
 
     // Disable soft reset if first time beating the game
     if (gCompletedGameFlagCopy)
-        gDisableSoftreset = FALSE;
+        gDisableSoftReset = FALSE;
     else
-        gDisableSoftreset = TRUE;
+        gDisableSoftReset = TRUE;
 
     CHOZODIA_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ;
 
