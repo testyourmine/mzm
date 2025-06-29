@@ -249,7 +249,7 @@ static void AcidWormChangeBigBlockTopCcaa(u8 caa)
         return;
 
     // If acid worm dying, play effects
-    ParticleSet(yPosition - BLOCK_SIZE, xPosition - (PIXEL_SIZE * 2), PE_SPRITE_EXPLOSION_SINGLE_THEN_BIG);
+    ParticleSet(yPosition - BLOCK_SIZE, xPosition - (EIGHTH_BLOCK_SIZE), PE_SPRITE_EXPLOSION_SINGLE_THEN_BIG);
 
     yPosition -= BLOCK_SIZE * 2;
 
@@ -262,7 +262,7 @@ static void AcidWormChangeBigBlockTopCcaa(u8 caa)
     SpriteDebrisInit(0, 0x11, yPosition - (HALF_BLOCK_SIZE + PIXEL_SIZE), xPosition + (BLOCK_SIZE + QUARTER_BLOCK_SIZE + ONE_SUB_PIXEL * 2));
     SpriteDebrisInit(0, 0x12, yPosition - (BLOCK_SIZE + QUARTER_BLOCK_SIZE - PIXEL_SIZE), xPosition + HALF_BLOCK_SIZE);
 
-    SpriteDebrisInit(0, 0x13, yPosition, xPosition + (BLOCK_SIZE + PIXEL_SIZE * 2));
+    SpriteDebrisInit(0, 0x13, yPosition, xPosition + (BLOCK_SIZE + EIGHTH_BLOCK_SIZE));
     SpriteDebrisInit(0, 4, yPosition - (BLOCK_SIZE + THREE_QUARTER_BLOCK_SIZE - PIXEL_SIZE), xPosition + (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE));
 }
 
@@ -320,13 +320,13 @@ static void AcidWormInit(void)
     u8 ramSlot;
 
     gCurrentSprite.hitboxTop = -THREE_QUARTER_BLOCK_SIZE;
-    gCurrentSprite.hitboxBottom = (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2);
-    gCurrentSprite.hitboxLeft = -(THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2);
-    gCurrentSprite.hitboxRight = (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2);
+    gCurrentSprite.hitboxBottom = (THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
+    gCurrentSprite.hitboxLeft = -(THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
+    gCurrentSprite.hitboxRight = (THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
 
-    gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE + PIXEL_SIZE * 2);
+    gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
     gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
-    gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE + PIXEL_SIZE * 2);
+    gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
 
     gCurrentSprite.pOam = sAcidWormOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;

@@ -250,8 +250,8 @@ static void RidleyElevatorStatueChangeCcaa(u8 caa)
  */
 static void RidleyElevatorStatueFallenInit(void)
 {
-    gCurrentSprite.drawDistanceTop = HALF_BLOCK_SIZE + PIXEL_SIZE * 2;
-    gCurrentSprite.drawDistanceBottom = QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2;
+    gCurrentSprite.drawDistanceTop = HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
+    gCurrentSprite.drawDistanceBottom = QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
 
     gCurrentSprite.hitboxTop = -(THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3); // Hitbox even though there's no samus collision?
     gCurrentSprite.hitboxBottom = 0;

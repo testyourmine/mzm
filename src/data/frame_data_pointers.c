@@ -130,10 +130,10 @@ const struct FrameData* const sImagoCocoonFrameDataPointers[IMAGO_COCOON_OAM_END
 };
 
 const struct FrameData* const sRidleyFrameDataPointers[RIDLEY_OAM_END] = {
-    [RIDLEY_OAM_IDLE] = sRidleyOAM_Idle,
-    [RIDLEY_OAM_SPITTING_FIREBALLS] = sRidleyOAM_SpittingFireballs,
-    [RIDLEY_OAM_TURNING_AROUND_FIRST_PART] = sRidleyOAM_TurningAroundFirstPart,
-    [RIDLEY_OAM_TURNING_AROUND_SECOND_PART] = sRidleyOAM_TurningAroundSecondPart,
+    [RIDLEY_OAM_IDLE] = sRidleyOam_Idle,
+    [RIDLEY_OAM_SPITTING_FIREBALLS] = sRidleyOam_SpittingFireballs,
+    [RIDLEY_OAM_TURNING_AROUND_FIRST_PART] = sRidleyOam_TurningAroundFirstPart,
+    [RIDLEY_OAM_TURNING_AROUND_SECOND_PART] = sRidleyOam_TurningAroundSecondPart,
     [RIDLEY_OAM_HEAD_IDLE] = sRidleyPartOam_HeadIdle,
     [RIDLEY_OAM_OPENING_MOUTH] = sRidleyPartOam_OpeningMouth,
     [RIDLEY_OAM_MOUTH_OPENED] = sRidleyPartOam_MouthOpened,
@@ -153,14 +153,14 @@ const struct FrameData* const sRidleyFrameDataPointers[RIDLEY_OAM_END] = {
     [RIDLEY_OAM_RIGHT_WING_UNUSED] = sRidleyPartOam_RightWing_Unused,
     [RIDLEY_OAM_LEFT_WING_SPITTING_FIREBALLS] = sRidleyPartOam_LeftWingSpittingFireballs,
     [RIDLEY_OAM_RIGHT_WING_SPITTING_FIREBALLS] = sRidleyPartOam_RightWingSpittingFireballs,
-    [RIDLEY_OAM_TAIL_PART] = sRidleyTailOAM_Part,
-    [RIDLEY_OAM_TAIL_TIP_POINTING_DOWN] = sRidleyTailOAM_TipPointingDown,
-    [RIDLEY_OAM_TAIL_TIP_POINTING_UP] = sRidleyTailOAM_TipPointingUp,
-    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_DOWN_RIGHT] = sRidleyTailOAM_TipPointingDiagonallyDownRight,
-    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_UP_RIGHT] = sRidleyTailOAM_TipPointingDiagonallyUpRight,
-    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_DOWN_LEFT] = sRidleyTailOAM_TipPointingDiagonallyDownLeft,
-    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_UP_LEFT] = sRidleyTailOAM_TipPointingDiagonallyUpLeft,
-    [RIDLEY_OAM_SQUARE] = sRidleyOAM_Square,
+    [RIDLEY_OAM_TAIL_PART] = sRidleyTailOam_Part,
+    [RIDLEY_OAM_TAIL_TIP_POINTING_DOWN] = sRidleyTailOam_TipPointingDown,
+    [RIDLEY_OAM_TAIL_TIP_POINTING_UP] = sRidleyTailOam_TipPointingUp,
+    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_DOWN_RIGHT] = sRidleyTailOam_TipPointingDiagonallyDownRight,
+    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_UP_RIGHT] = sRidleyTailOam_TipPointingDiagonallyUpRight,
+    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_DOWN_LEFT] = sRidleyTailOam_TipPointingDiagonallyDownLeft,
+    [RIDLEY_OAM_TAIL_TIP_POINTING_DIAGONALLY_UP_LEFT] = sRidleyTailOam_TipPointingDiagonallyUpLeft,
+    [RIDLEY_OAM_SQUARE] = sRidleyOam_Square,
     [RIDLEY_OAM_FIREBALL_SMALL] = sRidleyFireballOam_Small,
     [RIDLEY_OAM_FIREBALL_BIG] = sRidleyFireballOam_Big
 };

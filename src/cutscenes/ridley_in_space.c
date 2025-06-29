@@ -186,7 +186,7 @@ void RidleyInSpaceUpdateShipLeaving(struct CutsceneOamData* pOam)
         if (pOam->actions & MOTHER_SHIP_ACTION_MOVE_HORIZONTALLY)
         {
             // Move horizontally
-            pOam->xPosition += PIXEL_SIZE * 2;
+            pOam->xPosition += EIGHTH_BLOCK_SIZE;
 
             // Check reached X destination
             if (pOam->xPosition > SCREEN_SIZE_X_SUB_PIXEL + BLOCK_SIZE * 4 + HALF_BLOCK_SIZE)

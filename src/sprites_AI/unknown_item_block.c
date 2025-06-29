@@ -18,7 +18,7 @@
  * 
  * @param caa Clipdata affecting action
  */
-void UnknownItemBlockChangeClipdata(u8 caa)
+static void UnknownItemBlockChangeClipdata(u8 caa)
 {
     u16 yPosition;
     u16 xPosition;

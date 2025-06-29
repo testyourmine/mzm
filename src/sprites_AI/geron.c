@@ -124,7 +124,7 @@ void Geron(void)
 
         case GERON_POSE_IDLE:
             spriteTop = gCurrentSprite.yPosition + gCurrentSprite.hitboxTop;
-            spriteBottom = gCurrentSprite.yPosition + PIXEL_SIZE * 2;
+            spriteBottom = gCurrentSprite.yPosition + EIGHTH_BLOCK_SIZE;
             spriteLeft = gCurrentSprite.xPosition + gCurrentSprite.hitboxLeft;
             spriteRight = gCurrentSprite.xPosition + gCurrentSprite.hitboxRight;
 

@@ -317,7 +317,7 @@ static void GadoraDeath(void)
 
         rng = gSpriteRng;
         xPosition += QUARTER_BLOCK_SIZE;
-        yOffset = rng - (BLOCK_SIZE + PIXEL_SIZE * 2);
+        yOffset = rng - (BLOCK_SIZE + EIGHTH_BLOCK_SIZE);
 
         // Kill sprite
         SpriteUtilSpriteDeath(DEATH_NORMAL, yPosition - yOffset, xPosition - rng, TRUE, PE_SPRITE_EXPLOSION_SINGLE_THEN_BIG);
@@ -506,7 +506,7 @@ void GadoraBeam(void)
 
             gCurrentSprite.GADORA_BEAM_MOVEMENT_DELAY_TIMER = CONVERT_SECONDS(.25f) + 1 * DELTA_TIME; // Delay before it starts actually moving
             gCurrentSprite.hitboxLeft = -PIXEL_SIZE;
-            gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2;
+            gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
 
         case GADORA_BEAM_POSE_MOVING:
             if (gCurrentSprite.GADORA_BEAM_MOVEMENT_DELAY_TIMER != 0)

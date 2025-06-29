@@ -41,7 +41,7 @@ static void RipperInit(void)
 
     gCurrentSprite.samusCollision = SSC_HURTS_SAMUS;
     gCurrentSprite.health = GET_PSPRITE_HEALTH(gCurrentSprite.spriteId);
-    gCurrentSprite.yPosition -= PIXEL_SIZE * 2;
+    gCurrentSprite.yPosition -= EIGHTH_BLOCK_SIZE;
 
     SpriteUtilChooseRandomXFlip();
     gCurrentSprite.pose = RIPPER_POSE_MOVING_INIT;
@@ -184,7 +184,7 @@ void Ripper(void)
             break;
             
         default:
-            SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition - (QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2),
+            SpriteUtilSpriteDeath(DEATH_NORMAL, gCurrentSprite.yPosition - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE),
                 gCurrentSprite.xPosition, TRUE, PE_SPRITE_EXPLOSION_MEDIUM);
     }
 }

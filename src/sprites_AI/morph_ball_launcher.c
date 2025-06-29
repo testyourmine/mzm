@@ -123,7 +123,7 @@ static void MorphBallLauncherDetectBomb(void)
             projY = pProj->yPosition;
             projX = pProj->xPosition;
 
-            if (projY < spriteY && projY > spriteY - PIXEL_SIZE * 2 && projX < spriteX + PIXEL_SIZE * 2 && projX > spriteX - PIXEL_SIZE * 2)
+            if (projY < spriteY && projY > spriteY - EIGHTH_BLOCK_SIZE && projX < spriteX + EIGHTH_BLOCK_SIZE && projX > spriteX - EIGHTH_BLOCK_SIZE)
             {
                 pProj->movementStage = BOMB_STAGE_PLACED_ON_LAUNCHER;
                 hasBomb++;
@@ -238,7 +238,7 @@ void MorphBallLauncherPart(void)
             if (gCurrentSprite.roomSlot == MORPH_BALL_LAUNCHER_PART_BACK)
             {
                 gCurrentSprite.pOam = sMorphBallLauncherPartOam_Back;
-                gCurrentSprite.drawDistanceTop = PIXEL_SIZE * 2;
+                gCurrentSprite.drawDistanceTop = EIGHTH_BLOCK_SIZE;
                 gCurrentSprite.drawDistanceBottom = 0;
                 gCurrentSprite.drawDistanceHorizontal = QUARTER_BLOCK_SIZE;
 
