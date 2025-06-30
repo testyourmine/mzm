@@ -154,7 +154,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4ba9c | 68 | Sync the sub sprites of Mecha ridley
  * 
  */
-/*static*/ void MechaRidleySyncSubSprites(void)
+static void MechaRidleySyncSubSprites(void)
 {
     MultiSpriteDataInfo_T pData;
     u16 oamIdx;
@@ -177,7 +177,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4bb04 | 84 | Handles the green palette cycle
  * 
  */
-/*static*/ void MechaRidleyPartGreenGlow(void)
+static void MechaRidleyPartGreenGlow(void)
 {
     u8 palRow;
     u8 stage;
@@ -209,7 +209,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4bb88 | a4 | Loads the fireball graphics
  * 
  */
-/*static*/ void MechaRidleyLoadFireballsGfx(void)
+static void MechaRidleyLoadFireballsGfx(void)
 {
     u8 stage;
 
@@ -236,7 +236,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4bc2c | a4 | Loads the missile graphics
  * 
  */
-/*static*/ void MechaRidleyLoadMissilesGfx(void)
+static void MechaRidleyLoadMissilesGfx(void)
 {
     u8 stage;
 
@@ -264,7 +264,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * 
  * @return u8 bool, changing height
  */
-/*static*/ u8 MechaRidleyUpdateHeight(void)
+static u8 MechaRidleyUpdateHeight(void)
 {
     u8 changing;
 
@@ -366,7 +366,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * 
  * @param leftArmSlot Left arm ram slot
  */
-/*static*/ void MechaRidleyCrawlingBackwardsInit(u8 leftArmSlot)
+static void MechaRidleyCrawlingBackwardsInit(u8 leftArmSlot)
 {
     u8 rightArmSlot;
 
@@ -410,7 +410,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * 
  * @param leftArmSlot Left arm ram slot
  */
-/*static*/ void MechaRidleyClawAttackInit(u8 leftArmSlot)
+static void MechaRidleyClawAttackInit(u8 leftArmSlot)
 {
     // Check set height change animation
     if (gSubSpriteData1.pMultiOam == sMechaRidleyMultiSpriteData_StandingMiddle)
@@ -448,7 +448,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4bf68 | 230 | Initializes Mecha ridley
  * 
  */
-/*static*/ void MechaRidleyInit(void)
+static void MechaRidleyInit(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -571,7 +571,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c198 | 48 | Initializes Mecha ridley to be walking at the beginning of the fight
  * 
  */
-/*static*/ void MechaRidleyStartWalking(void)
+static void MechaRidleyStartWalking(void)
 {
     gCurrentSprite.pose = MECHA_RIDLEY_POSE_DELAY_BEFORE_CRAWLING;
     SoundPlay(SOUND_MECHA_RIDLEY_ENTRANCE_CRAWL);
@@ -588,7 +588,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c1e0 | 20 | Delay before mecha starts crawling
  * 
  */
-/*static*/ void MechaRidleyDelayBeforeCrawling(void)
+static void MechaRidleyDelayBeforeCrawling(void)
 {
     APPLY_DELTA_TIME_DEC(gCurrentSprite.yPositionSpawn);
     if (gCurrentSprite.yPositionSpawn == 0)
@@ -599,7 +599,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c200 | a4 | Handles mecha ridley crawling at the beginning of the fight
  * 
  */
-/*static*/ void MechaRidleyCrawling(void)
+static void MechaRidleyCrawling(void)
 {
     u8 rightArmSlot;
     u8 leftArmSlot;
@@ -658,7 +658,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c2a4 | 98 | Handles the fading at the start of the battle
  * 
  */
-/*static*/ void MechaRidleyStartBattle(void)
+static void MechaRidleyStartBattle(void)
 {
     u8 palRow;
 
@@ -697,7 +697,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @param ramSlot Left arm ram slot
  * @return u8 bool, starting
  */
-/*static*/ u8 MechaRidleyCheckStartFireballAttack(u8 ramSlot)
+static u8 MechaRidleyCheckStartFireballAttack(u8 ramSlot)
 {
     if ((gCurrentSprite.work3 & 0x3F))
         return FALSE;
@@ -731,7 +731,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c3c8 | 38 | Handles Mecha being idle
  * 
  */
-/*static*/ void MechaRidleyIdle(void)
+static void MechaRidleyIdle(void)
 {
     u8 leftArmSlot;
 
@@ -746,7 +746,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c400 | 12c | Handles the claw attack
  * 
  */
-/*static*/ void MechaRidleyClawAttack(void)
+static void MechaRidleyClawAttack(void)
 {
     u8 leftArmSlot;
     u16 coreSpawnHealth;
@@ -817,7 +817,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c52c | b0 | Handles mecha ridley standing up
  * 
  */
-/*static*/ void MechaRidleyStandingUp(void)
+static void MechaRidleyStandingUp(void)
 {
     u8 leftArmSlot;
 
@@ -857,7 +857,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c5dc | 54 | Handles mecha ridley being curled up
  * 
  */
-/*static*/ void MechaRidleyCurledUp(void)
+static void MechaRidleyCurledUp(void)
 {
     u8 leftArmSlot;
 
@@ -886,7 +886,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c630 | 78 | Handles mecha ridley retracting
  * 
  */
-/*static*/ void MechaRidleyRetracting(void)
+static void MechaRidleyRetracting(void)
 {
     u8 rightArmSlot;
     u8 leftArmSlot;
@@ -918,7 +918,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c6a8 | 90 | Handles mecha ridley crawling backwards
  * 
  */
-/*static*/ void MechaRidleyCrawlingBack(void)
+static void MechaRidleyCrawlingBack(void)
 {
     u8 rightArmSlot;
     u8 leftArmSlot;
@@ -960,7 +960,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c738 | 4c | Initializes mecha ridley standing up for the fireballs attack
  * 
  */
-/*static*/ void MechaRidleyStandingForFireballsInit(void)
+static void MechaRidleyStandingForFireballsInit(void)
 {
     // Check set height change animation to be high
     if (gSubSpriteData1.pMultiOam == sMechaRidleyMultiSpriteData_StandingMiddle)
@@ -984,7 +984,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c784 | 38 | Handles mecha ridley standing up for the fireballs attack
  * 
  */
-/*static*/ void MechaRidleyStandingForFireballs(void)
+static void MechaRidleyStandingForFireballs(void)
 {
     if (SpriteUtilCheckEndSubSprite1Anim())
     {
@@ -1002,7 +1002,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c7bc | 38 | Handles mecha ridley opening its mouth for the fireballs attack
  * 
  */
-/*static*/ void MechaRidleyCheckOpeningMouthAnimEnded(void)
+static void MechaRidleyCheckOpeningMouthAnimEnded(void)
 {
     if (SpriteUtilCheckEndSubSprite1Anim())
     {
@@ -1021,7 +1021,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c7f4 | bc | Handles mecha ridley spitting fireballs
  * 
  */
-/*static*/ void MechaRidleyFireballsAttack(void)
+static void MechaRidleyFireballsAttack(void)
 {
     // Spawn fireball every 15 frames
     if (!(gCurrentSprite.work0 & 15))
@@ -1059,7 +1059,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c8b0 | 30 | Handles mecha ridley closing its mouth after the fireballs attack
  * 
  */
-/*static*/ void MechaRidleyCheckClosingMouthAnimEnded(void)
+static void MechaRidleyCheckClosingMouthAnimEnded(void)
 {
     if (SpriteUtilCheckEndSubSprite1Anim())
     {
@@ -1076,7 +1076,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c8e0 | 4c | Handles mecha ridley retracting after the fireballs attack 
  * 
  */
-/*static*/ void MechaRidleyRetractingAfterFireballAttack(void)
+static void MechaRidleyRetractingAfterFireballAttack(void)
 {
     if (SpriteUtilCheckEndSubSprite1Anim())
     {
@@ -1096,7 +1096,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c92c | 68 | Initializes mecha ridley to be dying
  * 
  */
-/*static*/ void MechaRidleyDyingInit(void)
+static void MechaRidleyDyingInit(void)
 {
     // Set dying standing low
     gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_DyingStandingLow;
@@ -1120,7 +1120,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4c994 | 9c | Handles mecha ridley dying
  * 
  */
-/*static*/ void MechaRidleyDying(void)
+static void MechaRidleyDying(void)
 {
     u8 rng;
     u32 offset;
@@ -1167,7 +1167,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4ca30 | 1a8 | Handles mecha ridley fading when dying
  * 
  */
-/*static*/ void MechaRidleyGlowFading(void)
+static void MechaRidleyGlowFading(void)
 {
     // Set destroyed graphics
     // APPLY_DELTA_TIME_INC(gCurrentSprite.work0);
@@ -1223,7 +1223,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4cbd8 | 244 | Handles the spawn of the energy drops
  * 
  */
-/*static*/ void MechaRidleySpawnDrops(void)
+static void MechaRidleySpawnDrops(void)
 {
     u16 yPosition;
     u16 xPosition;
@@ -1311,7 +1311,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4ce1c | a4 | Handles the first eye glow after the fight
  * 
  */
-/*static*/ void MechaRidleyFirstEyeGlow(void)
+static void MechaRidleyFirstEyeGlow(void)
 {
     if (APPLY_DELTA_TIME_DEC(gCurrentSprite.work2) == 0)
     {
@@ -1346,7 +1346,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4cec0 | c8 | Handles the second eye glow after the fight
  * 
  */
-/*static*/ void MechaRidleySecondEyeGlow(void)
+static void MechaRidleySecondEyeGlow(void)
 {
     if (APPLY_DELTA_TIME_DEC(gCurrentSprite.work2) == 0)
     {
@@ -1394,7 +1394,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4cf88 | 358 | Initializes a mecha ridley part sprite
  * 
  */
-/*static*/ void MechaRidleyPartInit(void)
+static void MechaRidleyPartInit(void)
 {
     gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
     gCurrentSprite.health = 1;
@@ -1583,7 +1583,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d2e0 | 10 | Handles the head part being idle
  * 
  */
-/*static*/ void MechaRidleyPartHeadIdle(void)
+static void MechaRidleyPartHeadIdle(void)
 {
     MechaRidleyLoadFireballsGfx();
     MechaRidleyPartGreenGlow();
@@ -1593,7 +1593,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d2f0 | 48 | Handles the core part being idle
  * 
  */
-/*static*/ void MechaRidleyPartCoverIdle(void)
+static void MechaRidleyPartCoverIdle(void)
 {
     u16 maxHealth;
 
@@ -1612,7 +1612,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d338 | 6c | Handles the cover part exploding
  * 
  */
-/*static*/ void MechaRidleyPartCoreCoverExplosion(void)
+static void MechaRidleyPartCoreCoverExplosion(void)
 {
     u8 ramSlot;
 
@@ -1640,7 +1640,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d3a4 | 190 | Handles the missile launcher part being idle
  * 
  */
-/*static*/ void MechaRidleyPartMissileLauncherIdle(void)
+static void MechaRidleyPartMissileLauncherIdle(void)
 {
     MechaRidleyLoadMissilesGfx();
 
@@ -1739,7 +1739,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d534 | 1f4 | Handles the eye part being idle
  * 
  */
-/*static*/ void MechaRidleyPartEyeIdle(void)
+static void MechaRidleyPartEyeIdle(void)
 {
     u8 rng;
     u8 direction;
@@ -1862,7 +1862,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d728 | 200 | Handles the right arm part being idle
  * 
  */
-/*static*/ void MechaRidleyPartRightArmIdle(void)
+static void MechaRidleyPartRightArmIdle(void)
 {
     u8 ramSlot;
     s32 topHitbox;
@@ -2036,7 +2036,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4d928 | 238 | Handles the left arm part being idle
  * 
  */
-/*static*/ void MechaRidleyPartLeftArmIdle(void)
+static void MechaRidleyPartLeftArmIdle(void)
 {
     s32 topHitbox;
     s32 bottomHitbox;
@@ -2242,7 +2242,7 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * @brief 4db60 | 1f8 | Handles the neck part being idle
  * 
  */
-/*static*/ void MechaRidleyPartNeckIdle(void)
+static void MechaRidleyPartNeckIdle(void)
 {
     s32 topHitbox;
     s32 bottomHitbox;
