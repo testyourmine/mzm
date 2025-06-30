@@ -3,6 +3,7 @@
 #include "fixed_point.h"
 #include "complex_oam.h"
 #include "callbacks.h"
+#include "dma.h"
 
 #include "data/generic_data.h"
 #include "data/intro_data.h"

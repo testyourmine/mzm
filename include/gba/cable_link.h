@@ -1,8 +1,7 @@
 #ifndef GBA_CABLE_LINK_H
 #define GBA_CABLE_LINK_H
 
-#include "memory.h"
-#include "types.h"
+#include "gba/memory.h"
 
 #define REG_TM0CNT_L (REG_BASE + 0x100)
 #define REG_TM0CNT_H (REG_BASE + 0x102)

@@ -816,7 +816,7 @@ u32 TitleScreenProcessBottomSparkle(struct TitleScreenOamTiming* pTiming, struct
 
         case 3:
             // Move down
-            pOam->yPosition += PIXEL_SIZE * 2;
+            pOam->yPosition += EIGHTH_BLOCK_SIZE;
             if (pOam->yPosition >= BLOCK_SIZE * 5 + THREE_QUARTER_BLOCK_SIZE)
             {
                 pTiming->stage++;

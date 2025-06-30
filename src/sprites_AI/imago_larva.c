@@ -42,10 +42,10 @@
 #define IMAGO_LARVA_PART_POSE_CLAWS_IDLE 0x60
 #define IMAGO_LARVA_PART_POSE_DEAD 0x67
 
-#define IMAGO_LARVA_TAIL_HITBOX (BLOCK_SIZE * 2 - PIXEL_SIZE * 2)
-#define IMAGO_LARVA_HEAD_HITBOX (BLOCK_SIZE + HALF_BLOCK_SIZE - PIXEL_SIZE * 2)
-#define IMAGO_LARVA_SHELL_TAIL_HITBOX (BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + PIXEL_SIZE * 2)
-#define IMAGO_LARVA_SHELL_HEAD_HITBOX (BLOCK_SIZE * 2 + QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2)
+#define IMAGO_LARVA_TAIL_HITBOX (BLOCK_SIZE * 2 - EIGHTH_BLOCK_SIZE)
+#define IMAGO_LARVA_HEAD_HITBOX (BLOCK_SIZE + HALF_BLOCK_SIZE - EIGHTH_BLOCK_SIZE)
+#define IMAGO_LARVA_SHELL_TAIL_HITBOX (BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE)
+#define IMAGO_LARVA_SHELL_HEAD_HITBOX (BLOCK_SIZE * 2 + QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE)
 
 /**
  * @brief 259a0 | 84 | Synchronize the sub sprites of an Imago larva
@@ -127,7 +127,7 @@ static void ImagoLarvaInit(struct SubSpriteData* pSub)
         return;
     }
 
-    gCurrentSprite.yPosition += PIXEL_SIZE * 2;
+    gCurrentSprite.yPosition += EIGHTH_BLOCK_SIZE;
 
     pSub->yPosition = gCurrentSprite.yPosition;
     pSub->xPosition = gCurrentSprite.xPosition;
@@ -377,7 +377,7 @@ static void ImagoLarvaAttacking(struct SubSpriteData* pSub)
 
     if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
     {
-        pSub->xPosition += PIXEL_SIZE * 2;
+        pSub->xPosition += EIGHTH_BLOCK_SIZE;
         if (pSub->xPosition >= gCurrentSprite.xPositionSpawn)
         {
             // Reached spawn position, set idle
@@ -388,7 +388,7 @@ static void ImagoLarvaAttacking(struct SubSpriteData* pSub)
     }
     else
     {
-        pSub->xPosition -= PIXEL_SIZE * 2;
+        pSub->xPosition -= EIGHTH_BLOCK_SIZE;
         if (pSub->xPosition <= gCurrentSprite.xPositionSpawn)
         {
             // Reached spawn position, set idle
@@ -854,9 +854,9 @@ static void ImagoLarvaPartDead(struct SubSpriteData* pSub)
             yPosition += QUARTER_BLOCK_SIZE;
 
             if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
-                xPosition -= BLOCK_SIZE + PIXEL_SIZE * 2;
+                xPosition -= BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
             else
-                xPosition += BLOCK_SIZE + PIXEL_SIZE * 2;
+                xPosition += BLOCK_SIZE + EIGHTH_BLOCK_SIZE;
             break;
 
         case IMAGO_LARVA_PART_MIDDLE_DOT:
@@ -871,9 +871,9 @@ static void ImagoLarvaPartDead(struct SubSpriteData* pSub)
             yPosition -= BLOCK_SIZE;
 
             if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
-                xPosition -= BLOCK_SIZE * 2 - PIXEL_SIZE * 2;
+                xPosition -= BLOCK_SIZE * 2 - EIGHTH_BLOCK_SIZE;
             else
-                xPosition += BLOCK_SIZE * 2 - PIXEL_SIZE * 2;
+                xPosition += BLOCK_SIZE * 2 - EIGHTH_BLOCK_SIZE;
             break;
 
         case IMAGO_LARVA_PART_CLAWS:

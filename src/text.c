@@ -312,7 +312,7 @@ void TextDrawMessageCharacter(u16 charID, u32* dst, u16 indent, u8 color)
     s32 i;
 
     // FIXME use symbol
-    BitFill(3, 0, 0x2027700, sizeof(gCurrentCharacterGfx), 16); // gCurrentCharacterGfx
+    BitFill(3, 0, (void*)0x2027700, sizeof(gCurrentCharacterGfx), 16); // gCurrentCharacterGfx
     width = TextGetCharacterWidth(charID);
 
     for (pass = 0; pass < 2; pass++)

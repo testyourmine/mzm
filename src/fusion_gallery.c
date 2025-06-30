@@ -1,4 +1,5 @@
 #include "fusion_gallery.h"
+#include "dma.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/fusion_gallery_data.h"

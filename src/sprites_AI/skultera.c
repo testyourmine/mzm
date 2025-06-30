@@ -21,8 +21,8 @@
 #define SKULTERA_POSE_CHASING_SAMUS_INIT 0x34
 #define SKULTERA_POSE_CHASING_SAMUS 0x35
 
-#define SKULTERA_HEAD_HITBOX (HALF_BLOCK_SIZE + PIXEL_SIZE * 2)
-#define SKULTERA_TAIL_HITBOX (QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2)
+#define SKULTERA_HEAD_HITBOX (HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE)
+#define SKULTERA_TAIL_HITBOX (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE)
 
 #define SKULTERA_TERRITORY_RANGE (BLOCK_SIZE * 8)
 #define SKULTERA_Y_MOVEMENT_SPEED (PIXEL_SIZE / 2)
@@ -60,7 +60,7 @@ static u8 SkulteraXMovement(u16 movement)
     if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
     {
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-            gCurrentSprite.xPosition + (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2));
+            gCurrentSprite.xPosition + (THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE));
 
         if (gPreviousCollisionCheck != COLLISION_SOLID)
         {
@@ -73,7 +73,7 @@ static u8 SkulteraXMovement(u16 movement)
     else
     {
         SpriteUtilCheckCollisionAtPosition(gCurrentSprite.yPosition - HALF_BLOCK_SIZE,
-            gCurrentSprite.xPosition - (THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2));
+            gCurrentSprite.xPosition - (THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE));
 
         if (gPreviousCollisionCheck != COLLISION_SOLID)
         {

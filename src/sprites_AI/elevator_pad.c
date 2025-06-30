@@ -21,7 +21,7 @@ void ElevatorPad(void)
 
     if (gCurrentSprite.pose == SPRITE_POSE_UNINITIALIZED)
     {
-        gCurrentSprite.yPosition -= PIXEL_SIZE * 2;
+        gCurrentSprite.yPosition -= EIGHTH_BLOCK_SIZE;
         gCurrentSprite.properties |= SP_ALWAYS_ACTIVE;
         gCurrentSprite.samusCollision = SSC_NONE;
         gCurrentSprite.pose = ELEVATOR_PAD_POSE_IDLE;

@@ -1,7 +1,6 @@
 #include "sram_misc.h"
 #include "gba.h"
-#include "globals.h"
-#include "memory.h"
+#include "dma.h"
 #include "sram/sram.h"
 #include "types.h"
 #include "structs/save_file.h"

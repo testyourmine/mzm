@@ -1386,7 +1386,7 @@ void SamusUpdateEnvironmentalEffect(struct SamusData* pData)
 
         // Get liquid at the current position and above samus
         affecting = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(yPosition, pData->xPosition));
-        affectingTop = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(yPosition + pPhysics->drawDistanceTop - PIXEL_SIZE * 2,
+        affectingTop = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(yPosition + pPhysics->drawDistanceTop - EIGHTH_BLOCK_SIZE,
             pData->xPosition));
 
         if (pPhysics->drawDistanceTop > -BLOCK_SIZE)
@@ -1979,7 +1979,7 @@ void SamusChangeToHurtPose(struct SamusData* pData, struct SamusData* pCopy, str
         // Set upwards velocity
         pData->yVelocity = SUB_PIXEL_TO_VELOCITY(QUARTER_BLOCK_SIZE - PIXEL_SIZE / 2);
         if (pCopy->standingStatus == STANDING_MIDAIR)
-            pData->yVelocity = SUB_PIXEL_TO_VELOCITY(PIXEL_SIZE * 2 - ONE_SUB_PIXEL);
+            pData->yVelocity = SUB_PIXEL_TO_VELOCITY(EIGHTH_BLOCK_SIZE - ONE_SUB_PIXEL);
 
         pData->armCannonDirection = pCopy->armCannonDirection;
         SoundPlay(SOUND_HURT);
@@ -2064,7 +2064,7 @@ void SamusChangeToKnockbackPose(struct SamusData* pData, struct SamusData* pCopy
     // Set upwards velocity
     pData->yVelocity = SUB_PIXEL_TO_VELOCITY(QUARTER_BLOCK_SIZE - PIXEL_SIZE / 2);
     if (pCopy->standingStatus == STANDING_MIDAIR)
-        pData->yVelocity = SUB_PIXEL_TO_VELOCITY(PIXEL_SIZE * 2 - ONE_SUB_PIXEL);
+        pData->yVelocity = SUB_PIXEL_TO_VELOCITY(EIGHTH_BLOCK_SIZE - ONE_SUB_PIXEL);
 
     pData->armCannonDirection = pCopy->armCannonDirection;
     pData->shinesparkTimer = 0;
@@ -7944,7 +7944,7 @@ void SamusDraw(void)
         // Get position
         xPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusEnvironmentalEffects[j].xPosition) - SUB_PIXEL_TO_PIXEL(gBg1XPosition));
         yPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusEnvironmentalEffects[j].yPosition) -
-            SUB_PIXEL_TO_PIXEL(gBg1YPosition) + SUB_PIXEL_TO_PIXEL(PIXEL_SIZE * 2));
+            SUB_PIXEL_TO_PIXEL(gBg1YPosition) + SUB_PIXEL_TO_PIXEL(EIGHTH_BLOCK_SIZE));
 
         // Write data
         for (; currSlot < nextSlot; currSlot++)
@@ -7969,7 +7969,7 @@ void SamusDraw(void)
 
     // Get position
     xPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusData.xPosition) - SUB_PIXEL_TO_PIXEL(gBg1XPosition));
-    yPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusData.yPosition) - SUB_PIXEL_TO_PIXEL(gBg1YPosition) + SUB_PIXEL_TO_PIXEL(PIXEL_SIZE * 2));
+    yPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusData.yPosition) - SUB_PIXEL_TO_PIXEL(gBg1YPosition) + SUB_PIXEL_TO_PIXEL(EIGHTH_BLOCK_SIZE));
 
     if (gSamusPhysics.unk_36 & 0x20)
     {
@@ -8135,7 +8135,7 @@ void SamusDraw(void)
         
         xPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusEcho.previous64XPositions[ppc]) - SUB_PIXEL_TO_PIXEL(gBg1XPosition));
         yPosition = (s16)(SUB_PIXEL_TO_PIXEL(gSamusEcho.previous64YPositions[ppc]) -
-            SUB_PIXEL_TO_PIXEL(gBg1YPosition) + SUB_PIXEL_TO_PIXEL(PIXEL_SIZE * 2));
+            SUB_PIXEL_TO_PIXEL(gBg1YPosition) + SUB_PIXEL_TO_PIXEL(EIGHTH_BLOCK_SIZE));
 
         for (; currSlot < nextSlot; currSlot++)
         {

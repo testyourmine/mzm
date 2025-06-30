@@ -1,5 +1,6 @@
 #include "ending_and_gallery.h"
 #include "callbacks.h"
+#include "dma.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/ending_and_gallery_data.h"

@@ -3,7 +3,8 @@
 #include "gba.h"
 #include "globals.h"
 #include "interrupts.h"
-#include "memory.h"
+#include "dma.h"
+#include "oam.h"
 #include "types.h"
 
 /**

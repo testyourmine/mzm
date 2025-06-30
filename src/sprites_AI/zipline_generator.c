@@ -156,7 +156,7 @@ static void ZiplineGeneratorDetectSamus(void)
         // Spawn morph symbol
         newRamSlot = SpriteSpawnSecondary(SSPRITE_ZIPLINE_GENERATOR_PART, ZIPLINE_GENERATOR_PART_MORPH_SYMBOL,
             gCurrentSprite.spritesetGfxSlot, gCurrentSprite.primarySpriteRamSlot,
-            gSamusData.yPosition - (QUARTER_BLOCK_SIZE + PIXEL_SIZE * 2), gSamusData.xPosition, 0);
+            gSamusData.yPosition - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE), gSamusData.xPosition, 0);
 
         if (newRamSlot < MAX_AMOUNT_OF_SPRITES)
             gCurrentSprite.work2 = newRamSlot;
