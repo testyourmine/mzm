@@ -282,7 +282,7 @@ u32 ChozodiaEscapeGetItemCountAndEndingNumber(void)
 }
 
 /**
- * @brief 87c08 | f4 | Processe the OAM for the chozodia escape, to document
+ * @brief 87c08 | f4 | Processes the OAM for the chozodia escape, to document
  * 
  */
 void ChozodiaEscapeProcessOam_1(void)
@@ -338,7 +338,7 @@ void ChozodiaEscapeProcessOam_1(void)
 }
 
 /**
- * @brief 87cfc | 150 | Processe the OAM for the chozodia escape, to document
+ * @brief 87cfc | 150 | Processes the OAM for the chozodia escape, to document
  * 
  */
 void ChozodiaEscapeProcessOam_2(void)

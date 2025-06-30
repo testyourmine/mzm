@@ -236,7 +236,7 @@ void HazeResetLoops(void)
 }
 
 /**
- * @brief 5d414 | 1a8 | Calcules the gradiant
+ * @brief 5d414 | 1a8 | Calculates the gradient
  * 
  */
 void HazeCalculateGradient(void)

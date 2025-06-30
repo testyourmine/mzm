@@ -529,7 +529,7 @@ void CutsceneSetBgcnt(u16 value, u16 bg)
 /**
  * @brief 614d4 | a4 | Sets the position of a background
  * 
- * @param type Type (HOVS | VOFS)
+ * @param type Type (HOFS | VOFS)
  * @param bg Background (DISPCNT flags)
  * @param value Value
  */
@@ -1113,8 +1113,8 @@ void CutsceneStartSpriteEffect(u16 bldcnt, u8 bldy, u32 interval, u8 intensity)
  * @brief 61dc8 | 70 | Starts a cutscene background effect
  * 
  * @param bldcnt Bldcnt
- * @param bldalphaL Bldqlphq L target
- * @param bldalphaH Bldqlphq H target
+ * @param bldalphaL Bldalpha L target
+ * @param bldalphaH Bldalpha H target
  * @param interval Interval between value changes
  * @param intensity Value change intensity
  */

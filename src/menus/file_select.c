@@ -345,7 +345,7 @@ void FileSelectUpdateCopyCursor(u8 cursorPose, u8 fileNumber)
 }
 
 /**
- * @brief 788d4 | 140 | Updates the copy arraow and file marker OAM
+ * @brief 788d4 | 140 | Updates the copy arrow and file marker OAM
  * 
  * @param arrowPose Arrow pose
  * @param dstFileNumber Destination file number

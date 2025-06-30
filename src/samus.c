@@ -2697,7 +2697,7 @@ void SamusUpdateHitboxMovingDirection(void)
 }
 
 /**
- * 78e0 | 3c | Calls functions related to updating samus' graphics
+ * 78e0 | 3c | Calls functions related to updating Samus's graphics
  * 
  */
 void SamusCallGfxFunctions(void)
@@ -5024,7 +5024,7 @@ u8 SamusMorphballMidAir(struct SamusData* pData)
     // Check unmorph, pressing up
     if (gChangedInput & KEY_UP)
     {
-        // Check no block on where samus' head should be
+        // Check no block on where Samus's head should be
         if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
         {
             if (gSamusPhysics.slowedByLiquid == TRUE)

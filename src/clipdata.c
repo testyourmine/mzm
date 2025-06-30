@@ -76,8 +76,8 @@ u32 ClipdataProcessForSamus(u16 yPosition, u16 xPosition)
 /**
  * @brief 57e7c | 100 | Processes the clipdata at the position (hazard, movement, destruction, modification...) and gets the type of said clipdata
  * 
- * @param yPosition Y Position (subpixels)
- * @param xPosition X Position (subpixels)
+ * @param yPosition Y Position (sub-pixels)
+ * @param xPosition X Position (sub-pixels)
  * @return u32 Clipdata type (including solid flag)
  */
 u32 ClipdataProcess(u16 yPosition, u16 xPosition)
@@ -157,7 +157,7 @@ u32 ClipdataConvertToCollision(struct CollisionData* pCollision)
         case CLIPDATA_TYPE_LEFT_STEEP_FLOOR_SLOPE:
             // Checking if in the solid or air part of the slope
             // The slope forms a rectangle triangle with the right angle being in the bottom left
-            // For the subpixels coordinates, 0,0 is the top left, and 3F,3F the bottom right
+            // For the sub-pixels coordinates, 0,0 is the top left, and 3F,3F the bottom right
             // So in order to determine whether it's colliding with the solid part or not, we simply check if Y > X
             if (pCollision->subPixelY >= pCollision->subPixelX)
                 result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
@@ -277,8 +277,8 @@ u32 ClipdataConvertToCollision(struct CollisionData* pCollision)
 /**
  * @brief 58080 | 40 | Checks for the current affecting clipdata (movement and hazard) at the position
  * 
- * @param yPosition Y Position (subpixels)
- * @param xPosition X Position (subpixels)
+ * @param yPosition Y Position (sub-pixels)
+ * @param xPosition X Position (sub-pixels)
  * @return u32 Affecting clipdata (movement << 16 | hazard)
  */
 s32 ClipdataCheckCurrentAffectingAtPosition(u16 yPosition, u16 xPosition)
@@ -432,8 +432,8 @@ u32 ClipdataCheckCantUseElevator(u32 movementClip)
 /**
  * @brief 58260 | 64 | Gets the ground effect clipdata at the position
  * 
- * @param yPosition Y Position (subpixels)
- * @param xPosition X Position (subpixels)
+ * @param yPosition Y Position (sub-pixels)
+ * @param xPosition X Position (sub-pixels)
  * @return s32 Ground Effect Clipdata
  */
 u32 ClipdataCheckGroundEffect(u16 yPosition, u16 xPosition)

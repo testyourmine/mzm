@@ -182,7 +182,7 @@ static void MotherBrainInit(void)
 }
 
 /**
- * @brief 3cb90 | 6c | Checks if the glass breaked, starts battle behaviors
+ * @brief 3cb90 | 6c | Checks if the glass broke, starts battle behaviors
  * 
  */
 static void MotherBrainCheckGlassBroke(void)
@@ -543,7 +543,7 @@ static void MotherBrainPartInit(void)
 }
 
 /**
- * @brief 3d288 | a4 | Upates the hitbox of the mother brain eye
+ * @brief 3d288 | a4 | Updates the hitbox of the mother brain eye
  * 
  */
 static void MotherBrainPartHitboxInit(void)
@@ -669,7 +669,7 @@ static void MotherBrainPartGlassStage3(void)
 }
 
 /**
- * @brief 3d45c | 10 | Sets the invicibility stun flash timer to 0
+ * @brief 3d45c | 10 | Sets the invincibility stun flash timer to 0
  * 
  */
 static void MotherBrainPartGlassBroken(void)

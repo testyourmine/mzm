@@ -673,7 +673,7 @@ void BlockRemoveNeverReformSingleBlock(u8 xPosition, u8 yPosition)
 }
 
 /**
- * @brief 595e4 | 18c | Shifts and re-organizes the never reform blocks when transitionning
+ * @brief 595e4 | 18c | Shifts and reorganizes the never reform blocks when transitioning
  * 
  */
 void BlockShiftNeverReformBlocks(void)

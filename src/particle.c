@@ -1175,7 +1175,7 @@ void ParticleShinesparkDestroyed(struct ParticleEffect* pParticle)
 }
 
 /**
- * 54a88 | 38 | Subroutine for the sudo attack destroyed particle effect
+ * 54a88 | 38 | Subroutine for the pseudo attack destroyed particle effect
  * 
  * @param pParticle Particle effect pointer
  */

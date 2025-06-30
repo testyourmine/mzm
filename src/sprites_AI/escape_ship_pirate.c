@@ -94,7 +94,7 @@ static void EscapeShipSpacePirateDelayBeforeJumping(void)
 }
 
 /**
- * @brief 2dd98 | 458 | Escape ship space priate AI
+ * @brief 2dd98 | 458 | Escape ship space pirate AI
  * 
  */
 void EscapeShipSpacePirate(void)

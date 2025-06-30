@@ -252,7 +252,7 @@ static u16 TransferHandleTransfer(u32 transferMode, u32 size, const u32* pData, 
 }
 
 /**
- * @brief 89b3c | 34 | Determine if all GBA's are ready and the GBA is the parent or child
+ * @brief 89b3c | 34 | Determine if all GBAs are ready and the GBA is the parent or child
  * 
  * @param transferMode Transfer mode, 0 is receiving, 1 is sending
  * @return u16 bool Is GBA parent
@@ -260,7 +260,7 @@ static u16 TransferHandleTransfer(u32 transferMode, u32 size, const u32* pData, 
 static u16 TransferDetermineSendRecvState(u8 transferMode)
 {
     u16 isParent;
-    // If all GBA's are ready and is currently the parent GBA
+    // If all GBAs are ready and is currently the parent GBA
     if ((read32(REG_SIO) & (SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID)) == (SIO_MULTI_CONNECTION_READY | SIO_MULTI_PARENT) && transferMode  != 0)
     {
         isParent = gTransferManager.status.isParent = TRUE;
@@ -356,10 +356,10 @@ void TransferExchangeData(void)
             gTransferGbaDetectedCount = numGbaDetected;
             gTransferGbaId = (control << 26) >> 30; // SIO_MULTI_CONNECTION_ID_FLAG
 
-            // If 0-2 GBA's detected
+            // If 0-2 GBAs detected
             if (numGbaDetected <= 2)
             {
-                // If 2 GBA's detected and not sending anymore data
+                // If 2 GBAs detected and not sending anymore data
                 if (numGbaDetected >= 2 && numGbaSendingData == 0)
                     gTransferManager.status.stage = TRANSFER_STAGE_SETUP_DATA;
             }
@@ -422,7 +422,7 @@ void TransferExchangeData(void)
                     break;
                 }
 
-                // Check if correct number of GBA's sent correct data
+                // Check if correct number of GBAs sent correct data
                 if (numGbaDetected == gTransferGbaDetectedCount)
                 {
                     gTransferManager.status.verifyTransferResult = TRANSFER_VERIFY_SUCCESS;

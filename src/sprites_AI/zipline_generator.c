@@ -105,7 +105,7 @@ static void ZiplineGeneratorInit(void)
     }
     else
     {
-        // Set de-activated
+        // Set deactivated
         gCurrentSprite.pOam = sZiplineGeneratorOam_Deactivated;
         gCurrentSprite.pose = ZIPLINE_GENERATOR_POSE_DETECT_SAMUS;
         gSpriteData[ramSlot].pOam = sZiplineGeneratorPartOam_ConductorDeactivated;

@@ -132,7 +132,7 @@ void EndingImageLoadTextOAM(u32 set)
 }
 
 /**
- * @brief 84ee8 | c8 | Display a line of text of an ending image permanetly
+ * @brief 84ee8 | c8 | Display a line of text of an ending image permanently
  * 
  * @param line Line
  */
@@ -1240,7 +1240,7 @@ u8 EndScreenSamusPosing(void)
 }
 
 /**
- * @brief 867b4 | 29c | Initiliazes the ending image sequence
+ * @brief 867b4 | 29c | Initializes the ending image sequence
  * 
  */
 void EndingImageInit(void)
@@ -1588,7 +1588,7 @@ void UnlockedOptionsInit(void)
 }
 
 /**
- * @brief 86fd0 | 20c | Handlkes the pop up displaying what's been unlocked
+ * @brief 86fd0 | 20c | Handles the pop up displaying what's been unlocked
  * 
  * @return u8 0, 1 pop up ended, 2 ended
  */

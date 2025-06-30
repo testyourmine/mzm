@@ -630,8 +630,8 @@ void TextDrawLocationTextCharacters(u8 param_1, const u16** ppText)
 /**
  * @brief 6f018 | 90 | Draws a location text
  * 
- * @param locationText 
- * @param gfxSlot 
+ * @param locationText Location text
+ * @param gfxSlot Graphics slot
  */
 void TextDrawLocation(u8 locationText, u8 gfxSlot)
 {

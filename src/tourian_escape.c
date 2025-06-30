@@ -190,7 +190,7 @@ void TourianEscapeProcessOam(void)
 }
 
 /**
- * @brief 81684 | 104 | Calcultes the BG2 position and matrix parameters
+ * @brief 81684 | 104 | Calculates the BG2 position and matrix parameters
  * 
  */
 void TourianEscapeCalculateBg2(void)
