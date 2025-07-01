@@ -7,7 +7,6 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/menus/title_screen_data.h"
-#include "data/menus/internal_title_screen_data.h"
 #include "data/menus/pause_screen_data.h"
 #include "data/text_data.h"
 #include "data/menus/game_over_data.h"
@@ -21,6 +20,61 @@
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/samus.h"
+
+static struct TitleScreenAnimatedPalette sTitleScreenAnimatedPaletteTemplates[4] = {
+    [0] = {
+        .paletteRow = 0,
+        .maxTimer = 17,
+        .timer = 17,
+        .unk_4 = 0
+    },
+    [1] = {
+        .paletteRow = 0,
+        .maxTimer = 3,
+        .timer = 3,
+        .unk_4 = 2
+    },
+    [2] = {
+        .paletteRow = 0,
+        .maxTimer = 9,
+        .timer = 9,
+        .unk_4 = 0
+    },
+    [3] = {
+        .paletteRow = 0,
+        .maxTimer = 4,
+        .timer = 4,
+        .unk_4 = 1
+    },
+};
+
+static u8* sRomInfoStringPointers[4] = {
+    (u8*)sTitleScreenRomInfoTime,
+    (u8*)sTitleScreenRomInfoRegionJPN,
+    (u8*)sTitleScreenRomInfoRegionEUR,
+    (u8*)sTitleScreenRomInfoRegionUSA,
+};
+
+static u8 sTitleScreenCometsFlags[2][2] = {
+    [0] = {
+        TITLE_SCREEN_TYPE_FIRST_COMET_ACTIVE, TITLE_SCREEN_TYPE_FIRST_COMET_ENDED
+    },
+    [1] = {
+        TITLE_SCREEN_TYPE_SECOND_COMET_ACTIVE, TITLE_SCREEN_TYPE_SECOND_COMET_ENDED
+    }
+};
+
+static u8 sTitleScreenSkyDecorationsPaletteRows[6] = {
+    8, 9, 10, 11, 10, 9
+};
+
+static u8 sTitleScreenTitlePaletteRows[14] = {
+    0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1
+};
+
+static u8 sTitleScreenPromptPaletteRows[7] = {
+    0, 1, 2, 3, 2, 1, 0
+};
 
 /**
  * @brief 76390 | 60 | Forward the page data to the correct BGCNT register

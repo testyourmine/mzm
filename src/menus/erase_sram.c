@@ -4,7 +4,6 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/menus/erase_sram_data.h"
-#include "data/menus/internal_erase_sram_data.h"
 #include "data/menus/title_screen_data.h"
 #include "data/menus/pause_screen_data.h"
 
@@ -15,6 +14,56 @@
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/menus/erase_sram.h"
+
+static const u32* sEraseSramTextGfxPointers[LANGUAGE_END][2] = {
+    [LANGUAGE_JAPANESE] = {
+        sEraseSramMenuQuestionJapaneseGfx,
+        sEraseSramMenuConfirmJapaneseGfx
+    },
+    [LANGUAGE_HIRAGANA] = {
+        sEraseSramMenuQuestionJapaneseGfx,
+        sEraseSramMenuConfirmJapaneseGfx
+    },
+    [LANGUAGE_ENGLISH] = {
+        sEraseSramMenuQuestionEnglishGfx,
+        sEraseSramMenuConfirmEnglishGfx
+    },
+    #ifdef REGION_US_BETA
+    [LANGUAGE_GERMAN] = {
+        sEraseSramMenuQuestionGermanGfx,
+        sEraseSramMenuConfirmGermanGfx
+    },
+    [LANGUAGE_FRENCH] = {
+        sEraseSramMenuQuestionFrenchGfx,
+        sEraseSramMenuConfirmFrenchGfx
+    },
+    [LANGUAGE_ITALIAN] = {
+        sEraseSramMenuQuestionItalianGfx,
+        sEraseSramMenuConfirmItalianGfx
+    },
+    [LANGUAGE_SPANISH] = {
+        sEraseSramMenuQuestionSpanishGfx,
+        sEraseSramMenuConfirmSpanishGfx
+    }
+    #else // !REGION_US_BETA
+    [LANGUAGE_GERMAN] = {
+        sEraseSramMenuQuestionEnglishGfx,
+        sEraseSramMenuConfirmEnglishGfx
+    },
+    [LANGUAGE_FRENCH] = {
+        sEraseSramMenuQuestionEnglishGfx,
+        sEraseSramMenuConfirmEnglishGfx
+    },
+    [LANGUAGE_ITALIAN] = {
+        sEraseSramMenuQuestionEnglishGfx,
+        sEraseSramMenuConfirmEnglishGfx
+    },
+    [LANGUAGE_SPANISH] = {
+        sEraseSramMenuQuestionEnglishGfx,
+        sEraseSramMenuConfirmEnglishGfx
+    }
+    #endif // REGION_US_BETA
+};
 
 /**
  * @brief 75c30 | 14c | Subroutine for the erase sram menu

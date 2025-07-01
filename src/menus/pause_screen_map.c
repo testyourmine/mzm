@@ -7,7 +7,6 @@
 #include "data/block_data.h"
 #include "data/menus/pause_screen_data.h"
 #include "data/menus/pause_screen_map_data.h"
-#include "data/menus/internal_pause_screen_data.h"
 
 #include "constants/audio.h"
 #include "constants/block.h"
@@ -18,6 +17,24 @@
 #include "structs/bg_clip.h"
 #include "structs/minimap.h"
 #include "structs/menus/pause_screen.h"
+
+static u32* sPauseScreen_7602a8 = VRAM_BASE + 0xBC00;
+
+static u8 sMapDownloadLineTrailOamOffsets[4] = {
+    3, 4, 5, 6
+};
+
+static u32 sPauseScreen_7602b0[9] = {
+    0xFFFFFFFF,
+    0xFFFFFFFF ^ 0xF,
+    0xFFFFFFFF ^ 0xFF,
+    0xFFFFFFFF ^ 0xFFF,
+    0xFFFFFFFF ^ 0xFFFF,
+    0xFFFFFFFF ^ 0xFFFFF,
+    0xFFFFFFFF ^ 0xFFFFFF,
+    0xFFFFFFFF ^ 0xFFFFFFF,
+    0xFFFFFFFF ^ 0xFFFFFFFF,
+};
 
 /**
  * @brief 6cef8 | 168 | Counts the number of tanks in the current area

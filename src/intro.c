@@ -5,7 +5,6 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/intro_data.h"
-#include "data/internal_intro_data.h"
 
 #include "constants/audio.h"
 #include "constants/game_state.h"
@@ -16,6 +15,17 @@
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/intro.h"
+
+static IntroFunc_T sIntroSubroutinesFunctionsPointer[8] = {
+    [0] = IntroEmergencyOrder,
+    [1] = IntroShipFlyingTowardsCamera,
+    [2] = IntroSamusInHerShip,
+    [3] = IntroExterminate,
+    [4] = IntroViewOfZebes,
+    [5] = IntroDefeat,
+    [6] = IntroMotherBrain,
+    [7] = IntroFuzz
+};
 
 /**
  * @brief 800f4 | 90 | V-blank code for the intro

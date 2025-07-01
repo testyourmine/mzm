@@ -6,7 +6,6 @@
 #include "temp_globals.h"
 
 #include "data/menus/game_over_data.h"
-#include "data/menus/internal_game_over_data.h"
 #include "data/menus/file_select_data.h"
 #include "data/shortcut_pointers.h"
 #include "data/menus/pause_screen_data.h"
@@ -21,6 +20,31 @@
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/samus.h"
+
+static u32* sGameOverTextPromptGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = (u32*)sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_HIRAGANA] = (u32*)sGameOverTextPromptHiraganaGfx,
+    [LANGUAGE_ENGLISH] = (u32*)sGameOverTextPromptEnglishGfx,
+    #ifdef REGION_US_BETA
+    [LANGUAGE_GERMAN] = (u32*)sGameOverTextPromptGermanGfx,
+    [LANGUAGE_FRENCH] = (u32*)sGameOverTextPromptFrenchGfx,
+    [LANGUAGE_ITALIAN] = (u32*)sGameOverTextPromptItalianGfx,
+    [LANGUAGE_SPANISH] = (u32*)sGameOverTextPromptSpanishGfx
+    #else // !REGION_US_BETA
+    [LANGUAGE_GERMAN] = (u32*)sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_FRENCH] = (u32*)sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_ITALIAN] = (u32*)sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_SPANISH] = (u32*)sGameOverTextPromptEnglishGfx
+    #endif // REGION_US_BETA
+};
+
+static u8 sGameOverTextPaletteMaxTimers[3] = {
+    ONE_THIRD_SECOND, ONE_THIRD_SECOND, ONE_THIRD_SECOND
+};
+
+static s8 sGameOverTextGradientPaletteOffset[9] = {
+    0, 1, 2, 3, 2, 1, 0, 0, 0
+};
 
 /**
  * @brief 778c4 | 214 | Subroutine for the game over

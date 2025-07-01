@@ -1454,26 +1454,28 @@ SECTIONS {
         src/data/cutscenes/internal_statue_opening_data.o(.rodata);
         src/data/cutscenes/internal_enter_tourian_data.o(.rodata);
         src/data/cutscenes/internal_samus_in_blue_ship_data.o(.rodata);
-        src/data/menus/internal_pause_screen_data.o(.rodata);
-        src/data/internal_text_data.o(.rodata);
-        src/data/menus/internal_status_screen_data.o(.rodata);
-        src/data/menus/internal_pause_screen_sub_menus_data.o(.rodata);
-        src/data/internal_save_file_data.o(.rodata);
-
-#ifdef DEBUG
-        src/data/menus/internal_boot_debug_data.o(.rodata);
-#endif
-
-        src/data/menus/internal_erase_sram_data.o(.rodata)
-        src/data/text_pointers.o(.rodata);
-        src/data/menus/internal_title_screen_data.o(.rodata)
-        src/data/menus/internal_game_over_data.o(.rodata)
-        src/data/menus/internal_file_select_data.o(.rodata);
-        src/data/time_attack_data.o(.rodata);
-        src/data/internal_intro_data.o(.rodata);
     } >rom
 
     .data : ALIGN(2) {
+        src/menus/pause_screen.o(.data);
+        src/minimap.o(.data);
+        src/menus/pause_screen_map.o(.data);
+        src/text.o(.data);
+        src/menus/status_screen.o(.data);
+        src/menus/pause_screen_sub_menus.o(.data);
+        src/save_file.o(.data);
+
+#ifdef DEBUG
+        src/menus/boot_debug.o(.data);
+#endif
+
+        src/menus/erase_sram.o(.data);
+        src/data/text_data.o(.data);
+        src/menus/title_screen.o(.data);
+        src/menus/game_over.o(.data);
+        src/menus/file_select.o(.data);
+        src/time_attack.o(.data);
+        src/intro.o(.data);
         src/tourian_escape.o(.data);
         src/ending_and_gallery.o(.data);
         src/chozodia_escape.o(.data);

@@ -2,13 +2,31 @@
 #include "macros.h"
 
 #include "data/intro_data.h"
-#include "data/time_attack_data.h"
 
 #include "constants/ending_and_gallery.h"
 #include "constants/game_state.h"
 
 #include "structs/in_game_timer.h"
 #include "structs/game_state.h"
+
+static TimeAttackFunc_T sTimeAttackSeedShuffleFunctionPointers[16] = {
+    [0]  = TimeAttackSeedShuffleFunc1,
+    [1]  = TimeAttackSeedShuffleFunc2,
+    [2]  = TimeAttackSeedShuffleFunc3,
+    [3]  = TimeAttackSeedShuffleFunc4,
+    [4]  = TimeAttackSeedShuffleFunc5,
+    [5]  = TimeAttackSeedShuffleFunc6,
+    [6]  = TimeAttackSeedShuffleFunc7,
+    [7]  = TimeAttackSeedShuffleFunc8,
+    [8]  = TimeAttackSeedShuffleFunc1,
+    [9]  = TimeAttackSeedShuffleFunc2,
+    [10] = TimeAttackSeedShuffleFunc3,
+    [11] = TimeAttackSeedShuffleFunc4,
+    [12] = TimeAttackSeedShuffleFunc5,
+    [13] = TimeAttackSeedShuffleFunc6,
+    [14] = TimeAttackSeedShuffleFunc7,
+    [15] = TimeAttackSeedShuffleFunc8
+};
 
 /**
  * @brief 7f120 | 28 | Performs an exclusive or on all the values of the seed with the value param

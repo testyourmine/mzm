@@ -16,7 +16,6 @@
 #include "data/shortcut_pointers.h"
 #include "data/menus/pause_screen_data.h"
 #include "data/menus/status_screen_data.h"
-#include "data/menus/internal_pause_screen_data.h"
 #include "data/menus/pause_screen_map_data.h"
 
 #include "constants/audio.h"
@@ -34,6 +33,141 @@
 #include "structs/minimap.h"
 #include "structs/game_state.h"
 #include "structs/text.h"
+
+static struct PauseScreenSubroutineData sMapScreenSubroutineInfo_Empty = {
+    .currentSubroutine = PAUSE_SCREEN_SUBROUTINE_MAP_SCREEN,
+    .padding_1 = { 0, 0, 0 },
+    .stage = 0,
+    .timer = 0,
+    .fadeWireframeStage = 0,
+    .fadeWireframeTimer = 0
+};
+
+static const u32* sMapScreenAreaNamesGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sMapScreenAreaNamesEnglishGfx,
+    [LANGUAGE_HIRAGANA] = sMapScreenAreaNamesHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sMapScreenAreaNamesEnglishGfx,
+    [LANGUAGE_GERMAN] = sMapScreenAreaNamesEnglishGfx,
+    [LANGUAGE_FRENCH] = sMapScreenAreaNamesEnglishGfx,
+    [LANGUAGE_ITALIAN] = sMapScreenAreaNamesEnglishGfx,
+    [LANGUAGE_SPANISH] = sMapScreenAreaNamesEnglishGfx
+};
+
+static const u32* sMapScreenChozoStatueAreaNamesGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sMapScreenChozoStatueAreaNamesEnglishGfx,
+    [LANGUAGE_HIRAGANA] = sMapScreenChozoStatueAreaNamesHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sMapScreenChozoStatueAreaNamesEnglishGfx,
+    [LANGUAGE_GERMAN] = sMapScreenChozoStatueAreaNamesEnglishGfx,
+    [LANGUAGE_FRENCH] = sMapScreenChozoStatueAreaNamesEnglishGfx,
+    [LANGUAGE_ITALIAN] = sMapScreenChozoStatueAreaNamesEnglishGfx,
+    [LANGUAGE_SPANISH] = sMapScreenChozoStatueAreaNamesEnglishGfx
+};
+
+static const u32* sMapScreenUnknownItemsNamesGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sMapScreenUnknownItemsNamesJapaneseGfx,
+    [LANGUAGE_HIRAGANA] = sMapScreenUnknownItemsNamesHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sMapScreenUnknownItemsNamesEnglishGfx,
+    #ifdef REGION_US_BETA
+    [LANGUAGE_GERMAN] = sMapScreenUnknownItemsNamesGermanGfx,
+    [LANGUAGE_FRENCH] = sMapScreenUnknownItemsNamesFrenchGfx,
+    [LANGUAGE_ITALIAN] = sMapScreenUnknownItemsNamesItalianGfx,
+    [LANGUAGE_SPANISH] = sMapScreenUnknownItemsNamesSpanishGfx
+    #else // !REGION_US_BETA
+    [LANGUAGE_GERMAN] = sMapScreenUnknownItemsNamesEnglishGfx,
+    [LANGUAGE_FRENCH] = sMapScreenUnknownItemsNamesEnglishGfx,
+    [LANGUAGE_ITALIAN] = sMapScreenUnknownItemsNamesEnglishGfx,
+    [LANGUAGE_SPANISH] = sMapScreenUnknownItemsNamesEnglishGfx
+    #endif // REGION_US_BETA
+};
+
+static const u32* sMapScreenEquipmentNamesGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sEquipmentNamesJapaneseGfx,
+    [LANGUAGE_HIRAGANA] = sEquipmentNamesHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sEquipmentNamesEnglishGfx,
+    #ifdef REGION_US_BETA
+    [LANGUAGE_GERMAN] = sEquipmentNamesGermanGfx,
+    [LANGUAGE_FRENCH] = sEquipmentNamesFrenchGfx,
+    [LANGUAGE_ITALIAN] = sEquipmentNamesItalianGfx,
+    [LANGUAGE_SPANISH] = sEquipmentNamesSpanishGfx
+    #else // !REGION_US_BETA
+    [LANGUAGE_GERMAN] = sEquipmentNamesEnglishGfx,
+    [LANGUAGE_FRENCH] = sEquipmentNamesEnglishGfx,
+    [LANGUAGE_ITALIAN] = sEquipmentNamesEnglishGfx,
+    [LANGUAGE_SPANISH] = sEquipmentNamesEnglishGfx
+    #endif // REGION_US_BETA
+};
+
+static const u32* sMapScreenMenuNamesGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sMenuNamesJapaneseGfx,
+    [LANGUAGE_HIRAGANA] = sMenuNamesHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sMenuNamesEnglishGfx,
+    #ifdef REGION_US_BETA
+    [LANGUAGE_GERMAN] = sMenuNamesGermanGfx,
+    [LANGUAGE_FRENCH] = sMenuNamesFrenchGfx,
+    [LANGUAGE_ITALIAN] = sMenuNamesItalianGfx,
+    [LANGUAGE_SPANISH] = sMenuNamesSpanishGfx
+    #else // !REGION_US_BETA
+    [LANGUAGE_GERMAN] = sMenuNamesEnglishGfx,
+    [LANGUAGE_FRENCH] = sMenuNamesEnglishGfx,
+    [LANGUAGE_ITALIAN] = sMenuNamesEnglishGfx,
+    [LANGUAGE_SPANISH] = sMenuNamesEnglishGfx
+    #endif // REGION_US_BETA
+};
+
+static u16 sPauseScreenCompletionInfoOamData[6][5] = {
+    {
+        10, MISC_OAM_ID_IN_GAME_TIMER, HALF_BLOCK_SIZE, BLOCK_SIZE * 8 + HALF_BLOCK_SIZE,
+        0
+    },
+    {
+        11, MISC_OAM_ID_ENERGY_TANKS, HALF_BLOCK_SIZE, BLOCK_SIZE + HALF_BLOCK_SIZE,
+        0
+    },
+    {
+        12, MISC_OAM_ID_MISSILE_TANKS, HALF_BLOCK_SIZE, BLOCK_SIZE * 2,
+        0
+    },
+    {
+        13, MISC_OAM_ID_SUPER_MISSILE_TANKS, HALF_BLOCK_SIZE, BLOCK_SIZE * 2 + HALF_BLOCK_SIZE,
+        0
+    },
+    {
+        14, MISC_OAM_ID_POWER_BOMB_TANKS, HALF_BLOCK_SIZE, BLOCK_SIZE * 3,
+        0
+    },
+    {
+        15, 0x13,  BLOCK_SIZE * 3 + 8, BLOCK_SIZE - QUARTER_BLOCK_SIZE + 4,
+        0x10
+    }
+};
+
+static u8 sUnused_7601cc[16] = {
+    0x14, 0x0, 0x20, 0x1,
+    0x34, 0x0, 0x12, 0x0,
+    0x16, 0x0, 0x78, 0x1,
+    0x34, 0x0, 0x0, 0x0 
+};
+
+const u8* sStatusScreenFlagsOrderPointers[4] = {
+    [ABILITY_GROUP_BEAMS] = sStatusScreenBeamFlagsOrder,
+    [ABILITY_GROUP_BOMBS] = sStatusScreenBombFlagsOrder,
+    [ABILITY_GROUP_SUITS] = sStatusScreenSuitFlagsOrder,
+    [ABILITY_GROUP_MISC] = sStatusScreenMiscFlagsOrder,
+};
+
+const u32* sMinimapDataPointers[AREA_COUNT] = {
+    [AREA_BRINSTAR] = sBrinstarMinimap,
+    [AREA_KRAID] = sKraidMinimap,
+    [AREA_NORFAIR] = sNorfairMinimap,
+    [AREA_RIDLEY] = sRidleyMinimap,
+    [AREA_TOURIAN] = sTourianMinimap,
+    [AREA_CRATERIA] = sCrateriaMinimap,
+    [AREA_CHOZODIA] = sChozodiaMinimap,
+    [AREA_TEST] = sBrinstarMinimap,
+    [AREA_TEST_1] = sTestMinimap,
+    [AREA_TEST_2] = sTestMinimap,
+    [AREA_TEST_3] = sTestMinimap
+};
 
 /**
  * @brief 68168 | 60 | Initialize the pause screen for fading
