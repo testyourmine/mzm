@@ -3576,7 +3576,7 @@ s32 PauseScreenEasySleepInit(void)
 }
 
 /**
- * @brief 6bf08 | 1d8 | Uninitializes the status screen
+ * @brief 6bf08 | 1d8 | Uninitializes the easy sleep screen
  * 
  * @return s32 bool, ended
  */
