@@ -4,12 +4,12 @@
 #include "macros.h"
 #include "event.h"
 
+#include "data/demo_data.h"
 #include "data/shortcut_pointers.h"
 #include "data/save_file_data.h"
 #include "data/internal_save_file_data.h"
 #include "data/block_data.h"
 #include "data/in_game_cutscene_data.h"
-#include "data/engine_pointers.h"
 
 #include "constants/color_fading.h"
 #include "constants/connection.h"
@@ -27,6 +27,25 @@
 #include "structs/sprite.h"
 #include "structs/save_file.h"
 #include "structs/visual_effects.h"
+
+static const struct SaveDemo* const sDemoRamDataPointers[MAX_AMOUNT_OF_DEMOS] = {
+    [0] = &sDemo0_Ram,
+    [1] = &sDemo1_Ram,
+    [2] = &sDemo2_Ram,
+    [3] = &sDemo3_Ram,
+    [4] = &sDemo4_Ram,
+    [5] = &sDemo5_Ram,
+    [6] = &sDemo6_Ram,
+    [7] = &sDemo7_Ram,
+    [8] = &sDemo8_Ram,
+    [9] = &sDemo9_Ram,
+    [10] = &sDemo10_Ram,
+    [11] = &sDemo11_Ram,
+    [12] = &sDemo12_Ram,
+    [13] = &sDemo13_Ram,
+    [14] = &sDemo14_Ram,
+    [15] = &sDemo15_Ram,
+};
 
 /**
  * @brief 7329c | 64 | Fully reads the flash save into Ewram

@@ -4,7 +4,6 @@
 #include "macros.h"
 
 #include "data/shortcut_pointers.h"
-#include "data/engine_pointers.h"
 #include "data/menus/pause_screen_data.h"
 #include "data/menus/pause_screen_map_data.h"
 #include "data/menus/internal_pause_screen_data.h"
@@ -18,6 +17,8 @@
 #include "structs/minimap.h"
 #include "structs/samus.h"
 #include "structs/room.h"
+
+extern const struct RoomEntryROM* const sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 #ifdef DEBUG
 

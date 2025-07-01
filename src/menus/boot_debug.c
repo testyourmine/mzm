@@ -8,7 +8,6 @@
 #include "data/menus/pause_screen_map_data.h"
 #include "data/menus/internal_pause_screen_data.h"
 #include "data/menus/status_screen_data.h"
-#include "data/engine_pointers.h"
 #include "data/io_transfer_data.h"
 #include "data/clipdata_data.h"
 
@@ -22,6 +21,9 @@
 #include "structs/audio.h"
 
 #ifdef DEBUG
+
+extern const struct Door* const sAreaDoorsPointers[AREA_ENTRY_COUNT];
+extern const struct RoomEntryROM* const sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 /**
  * @brief Updates all of the boot debug menu's OAM
