@@ -3,11 +3,11 @@
 #include "gba.h"
 #include "oam.h"
 #include "color_effects.h"
+#include "tourian_escape.h"
 
 #include "data/cutscenes/cutscenes_data.h"
 #include "data/menus/pause_screen_data.h"
 #include "data/shortcut_pointers.h"
-#include "data/engine_pointers.h"
 #include "data/block_data.h"
 
 #include "constants/audio.h"
@@ -25,6 +25,31 @@
 
 #define PAL_TO_FADE ((void*)(sEwramPointer))
 #define PAL_WITH_FADE ((void*)sEwramPointer + PALRAM_SIZE)
+
+typedef u8 (*TourianEscapeFunc_T)(void);
+
+static const TourianEscapeFunc_T sTourianEscapeFunctionPointers[2] = {
+    CutsceneDefaultRoutine,
+    TourianEscapeCallSubroutines,
+};
+
+static const s8 sCutsceneScreenShakeOffsets_Set0[2] = {
+    -1, 1
+};
+
+static const s8* const sCutsceneScreenShakeOffsetSetPointers[4] = {
+    sCutsceneScreenShakeOffsets_Set0,
+    sCutsceneScreenShakeOffsets_Set0,
+    sCutsceneScreenShakeOffsets_Set0,
+    sCutsceneScreenShakeOffsets_Set0
+};
+
+static const u8 sCutsceneScreenShakeOffsetSetSizes[4] = {
+    ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0),
+    ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0),
+    ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0),
+    ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0)
+};
 
 /**
  * @brief 60e28 | 4 | Default subroutine for cutscenes that don't have any

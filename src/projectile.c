@@ -3,7 +3,6 @@
 
 #include "data/projectile_data.h"
 #include "data/sprite_data.h"
-#include "data/engine_pointers.h"
 
 #include "constants/audio.h"
 #include "constants/clipdata.h"

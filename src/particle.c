@@ -2,7 +2,6 @@
 #include "sprites_AI/ruins_test.h"
 #include "escape.h" // Required
 
-#include "data/engine_pointers.h"
 #include "data/projectile_data.h"
 #include "data/sprite_data.h"
 #include "data/particle_data.h"
@@ -20,8 +19,73 @@
 #include "structs/clipdata.h"
 #include "structs/escape.h"
 #include "structs/game_state.h"
+#include "structs/projectile.h"
 #include "structs/samus.h"
 #include "structs/sprite.h"
+
+static const ParticleFunc_T sProcessParticleFunctionPointers[PE_END] = {
+    [PE_SPRITE_SPLASH_WATER_SMALL] = ParticleSpriteSplashWaterSmall,
+    [PE_SPRITE_SPLASH_WATER_BIG] = ParticleSpriteSplashWaterBig,
+    [PE_SPRITE_SPLASH_WATER_HUGE] = ParticleSpriteSplashWaterHuge,
+    [PE_SPRITE_SPLASH_LAVA_SMALL] = ParticleSpriteSplashLavaSmall,
+    [PE_SPRITE_SPLASH_LAVA_BIG] = ParticleSpriteSplashLavaBig,
+    [PE_SPRITE_SPLASH_LAVA_HUGE] = ParticleSpriteSplashLavaHuge,
+    [PE_SPRITE_SPLASH_ACID_SMALL] = ParticleSpriteSplashAcidSmall,
+    [PE_SPRITE_SPLASH_ACID_BIG] = ParticleSpriteSplashAcidBig,
+    [PE_SPRITE_SPLASH_ACID_HUGE] = ParticleSpriteSplashAcidHuge,
+    [PE_SHOOTING_BEAM_LEFT] = ParticleShootingBeamLeft,
+    [PE_SHOOTING_BEAM_DIAG_UP_LEFT] = ParticleShootingBeamDiagUpLeft,
+    [PE_SHOOTING_BEAM_DIAG_DOWN_LEFT] = ParticleShootingBeamDiagDownLeft,
+    [PE_SHOOTING_BEAM_UP_LEFT] = ParticleShootingBeamUpLeft,
+    [PE_SHOOTING_BEAM_DOWN_LEFT] = ParticleShootingBeamDownLeft,
+    [PE_SHOOTING_BEAM_RIGHT] = ParticleShootingBeamRight,
+    [PE_SHOOTING_BEAM_DIAG_UP_RIGHT] = ParticleShootingBeamDiagUpRight,
+    [PE_SHOOTING_BEAM_DIAG_DOWN_RIGHT] = ParticleShootingBeamDiagDownRight,
+    [PE_SHOOTING_BEAM_UP_RIGHT] = ParticleShootingBeamUpRight,
+    [PE_SHOOTING_BEAM_DOWN_RIGHT] = ParticleShootingBeamDownRight,
+    [PE_BOMB] = ParticleBomb,
+    [PE_MISSILE_TRAIL] = ParticleMissileTrail,
+    [PE_SUPER_MISSILE_TRAIL] = ParticleSuperMissileTrail,
+    [PE_BEAM_TRAILING_RIGHT] = ParticleBeamTrailingRight,
+    [PE_BEAM_TRAILING_LEFT] = ParticleBeamTrailingLeft,
+    [PE_CHARGED_LONG_BEAM_TRAIL] = ParticleChargedLongBeamTrail,
+    [PE_CHARGED_ICE_BEAM_TRAIL] = ParticleChargedIceBeamTrail,
+    [PE_CHARGED_WAVE_BEAM_TRAIL] = ParticleChargedWaveBeamTrail,
+    [PE_CHARGED_PLASMA_BEAM_TRAIL] = ParticleChargedPlasmaBeamTrail,
+    [PE_CHARGED_FULL_BEAM_TRAIL] = ParticleChargedFullBeamTrail,
+    [PE_CHARGED_PISTOL_TRAIL] = ParticleChargedPistolTrail,
+    [PE_SPRITE_EXPLOSION_HUGE] = ParticleSpriteExplosionHuge,
+    [PE_SPRITE_EXPLOSION_SMALL] = ParticleSpriteExplosionSmall,
+    [PE_SPRITE_EXPLOSION_MEDIUM] = ParticleSpriteExplosionMedium,
+    [PE_SPRITE_EXPLOSION_BIG] = ParticleSpriteExplosionBig,
+    [PE_SPRITE_EXPLOSION_SINGLE_THEN_BIG] = ParticleSpriteExplosionSingleThenBig,
+    [PE_SCREW_ATTACK_DESTROYED] = ParticleScrewAttackDestroyed,
+    [PE_SHINESPARK_DESTROYED] = ParticleShinesparkDestroyed,
+    [PE_SUDO_SCREW_DESTROYED] = ParticlePseudoScrewDestroyed,
+    [PE_SPEEDBOOSTER_DESTROYED] = ParticleSpeedboosterDestroyed,
+    [PE_MAIN_BOSS_DEATH] = ParticleMainBossDeath,
+    [PE_FREEZING_SPRITE_WITH_ICE] = ParticleFreezingSpriteWithIce,
+    [PE_FREEZING_SPRITE_WITH_CHARGED_ICE] = ParticleFreezingSpriteWithChargedIce,
+    [PE_HITTING_SOMETHING_WITH_NORMAL_BEAM] = ParticleHittingSomethingWithNormalBeam,
+    [PE_HITTING_SOMETHING_WITH_LONG_BEAM] = ParticleHittingSomethingWithLongBeam,
+    [PE_HITTING_SOMETHING_WITH_ICE_BEAM] = ParticleHittingSomethingWithIceBeam,
+    [PE_HITTING_SOMETHING_WITH_WAVE_BEAM] = ParticleHittingSomethingWithWaveBeam,
+    [PE_HITTING_SOMETHING_WITH_PLASMA_BEAM] = ParticleHittingSomethingWithPlasmaBeam,
+    [PE_HITTING_SOMETHING_INVINCIBLE] = ParticleHittingSomethingInvincible,
+    [PE_HITTING_SOMETHING_WITH_MISSILE] = ParticleHittingSomethingWithMissile,
+    [PE_HITTING_SOMETHING_WITH_SUPER_MISSILE] = ParticleHittingSomethingWithSuperMissile,
+    [PE_HITTING_SOMETHING_WITH_FULL_BEAM_NO_PLASMA] = ParticleHittingSomethingWithFullBeamNoPlasma,
+    [PE_HITTING_SOMETHING_WITH_FULL_BEAM] = ParticleHittingSomethingWithFullBeam,
+    [PE_SMALL_DUST] = ParticleSmallDust,
+    [PE_MEDIUM_DUST] = ParticleMediumDust,
+    [PE_TWO_MEDIUM_DUST] = ParticleTwoMediumDust,
+    [PE_SECOND_SMALL_DUST] = ParticleSecondSmallDust,
+    [PE_SECOND_MEDIUM_DUST] = ParticleSecondMediumDust,
+    [PE_SECOND_TWO_MEDIUM_DUST] = ParticleSecondTwoMediumDust,
+    [PE_SAMUS_REFLECTION] = ParticleSamusReflection,
+    [PE_CHARGING_BEAM] = ParticleChargingBeam,
+    [PE_ESCAPE] = ParticleEscape,
+};
 
 /**
  * 53dd0 | 98 | Checks if a particle effect is on screen

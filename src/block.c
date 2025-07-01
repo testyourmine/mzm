@@ -4,7 +4,6 @@
 #include "gba.h"
 
 #include "data/block_data.h"
-#include "data/engine_pointers.h"
 
 #include "constants/audio.h"
 #include "constants/block.h"
@@ -16,6 +15,14 @@
 #include "structs/game_state.h"
 #include "structs/samus.h"
 #include "structs/power_bomb_explosion.h"
+
+static const BlockFunc_T sNonReformDestroyFunctionPointers[5] = {
+    BlockDestroySingleBreakableBlock,
+    BlockDestroySquareBlock,
+    BlockDestroySingleBreakableBlock,
+    BlockDestroySquareBlock,
+    BlockDestroyBombChainBlock
+};
 
 /**
  * @brief 590b0 | 214 | Checks if soemthing should happen to a block depending on the Ccaa

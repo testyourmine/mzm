@@ -1,6 +1,5 @@
 #include "room_music.h"
 
-#include "data/engine_pointers.h"
 #include "data/cutscenes/cutscenes_data.h"
 
 #include "constants/audio.h"
@@ -10,11 +9,14 @@
 #include "constants/samus.h"
 
 #include "structs/audio.h"
+#include "structs/connection.h"
 #include "structs/demo.h"
 #include "structs/game_state.h"
 #include "structs/room.h"
 #include "structs/samus.h"
 #include "structs/sprite.h"
+
+extern const struct RoomEntryROM* const sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 /**
  * @brief 60928 | bc | Checks if the current room music track should play

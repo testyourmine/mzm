@@ -5,7 +5,6 @@
 #include "sprite.h"
 #include "color_effects.h"
 
-#include "data/engine_pointers.h"
 #include "data/shortcut_pointers.h"
 #include "data/animated_graphics_data.h"
 #include "data/animated_tiles_data.h"
@@ -22,6 +21,18 @@
 #include "structs/color_effects.h"
 #include "structs/power_bomb_explosion.h"
 #include "structs/room.h"
+
+static const BackgroundEffectBehaviorEntry_T* const sBackgroundEffectBehaviorPointers[BACKGROUND_EFFECT_END] = {
+    [BACKGROUND_EFFECT_NONE] = sBackgroundEffectBehavior_Lightning,
+    [BACKGROUND_EFFECT_LIGHTNING] = sBackgroundEffectBehavior_Lightning,
+    [BACKGROUND_EFFECT_SLIGHT_YELLOW] = sBackgroundEffectBehavior_SlightYellow,
+    [BACKGROUND_EFFECT_HEAVY_YELLOW] = sBackgroundEffectBehavior_HeavyYellow,
+    [BACKGROUND_EFFECT_EXIT_ZEBES_FADE] = sBackgroundEffectBehavior_ExitZebes,
+    [BACKGROUND_EFFECT_INTRO_TEXT_FADE] = sBackgroundEffectBehavior_IntroText,
+    [BACKGROUND_EFFECT_QUICK_FLASH] = sBackgroundEffectBehavior_QuickFlash,
+    [BACKGROUND_EFFECT_ALL_BLACK] = sBackgroundEffectBehavior_AllBlackWhite,
+    [BACKGROUND_EFFECT_ALL_WHITE] = sBackgroundEffectBehavior_AllBlackWhite,
+};
 
 /**
  * @brief 5dd5c | 270 | Transfers the animated graphics to VRAM

@@ -9,7 +9,6 @@
 #include "data/shortcut_pointers.h"
 #include "data/tourian_escape_data.h"
 #include "data/chozodia_escape_data.h"
-#include "data/internal_chozodia_escape_data.h"
 #include "data/cutscenes/ridley_landing_data.h"
 
 #include "constants/audio.h"
@@ -19,6 +18,16 @@
 #include "structs/bg_clip.h"
 #include "structs/chozodia_escape.h"
 #include "structs/display.h"
+
+typedef u8 (*ChozodiaEscapeFunc_T)(void);
+
+static ChozodiaEscapeFunc_T sChozodiaEscapeFunctionPointers[5] = {
+    [0] = ChozodiaEscapeShipLeaving,
+    [1] = ChozodiaEscapeShipHeatingUp,
+    [2] = ChozodiaEscapeShipBlowingUp,
+    [3] = ChozodiaEscapeShipLeavingPlanet,
+    [4] = ChozodiaEscapeMissionAccomplished,
+};
 
 /**
  * @brief 8784c | ec | V-blank code for the chozodia escape

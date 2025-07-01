@@ -4,7 +4,6 @@
 #include "color_effects.h"
 #include "sprites_AI/ruins_test.h"
 
-#include "data/engine_pointers.h"
 #include "data/color_fading_data.h"
 #include "data/common_pals.h"
 
@@ -31,6 +30,62 @@
 #include "structs/sprite.h"
 #include "structs/visual_effects.h"
 #include "structs/room.h"
+
+static const ColorFadingFunc_T sColorFadingSubroutinePointers[COLOR_FADING_SUBROUTINE_END] = {
+    [COLOR_FADING_SUBROUTINE_EMPTY] = ColorFadingSubroutine_Empty,
+    [COLOR_FADING_SUBROUTINE_1] = unk_5bd58,
+    [COLOR_FADING_SUBROUTINE_2] = unk_5bdc8,
+    [COLOR_FADING_SUBROUTINE_3] = unk_5be7c
+};
+
+/**
+ * @brief Haze data for each room effect
+ * 0 : Haze value
+ * 1 : Damage effect
+ * 2 : BG0 water moving flag
+ * 3 : Power bomb related
+ */
+const u8 sHazeData[EFFECT_HAZE_END][4] = {
+    [EFFECT_NONE] = {
+        HAZE_VALUE_NONE, EFFECT_NONE, FALSE, 0
+    },
+    [EFFECT_WATER] = {
+        HAZE_VALUE_BG3, EFFECT_WATER, TRUE, 1
+    },
+    [EFFECT_STRONG_LAVA] = {
+        HAZE_VALUE_BG3, EFFECT_STRONG_LAVA, FALSE, 1
+    },
+    [EFFECT_WEAK_LAVA] = {
+        HAZE_VALUE_BG3, EFFECT_WEAK_LAVA, FALSE, 1
+    },
+    [EFFECT_STRONG_LAVA_HEAT_HAZE] = {
+        HAZE_VALUE_BG3_STRONG_WEAK, EFFECT_STRONG_LAVA_HEAT_HAZE, FALSE, 1
+    },
+    [EFFECT_ACID] = {
+        HAZE_VALUE_BG3, EFFECT_ACID, FALSE, 1
+    },
+    [EFFECT_SNOWFLAKES_COLD_KNOCKBACK] = {
+        HAZE_VALUE_COLD, EFFECT_SNOWFLAKES_COLD_KNOCKBACK, FALSE, 1
+    },
+    [EFFECT_SNOWFLAKES_COLD] = {
+        HAZE_VALUE_COLD, EFFECT_SNOWFLAKES_COLD, FALSE, 1
+    },
+    [EFFECT_HEAT_BG3_HAZE] = {
+        HAZE_VALUE_BG3_NONE_WEAK, EFFECT_NONE, FALSE, 0
+    },
+    [EFFECT_HEAT_BG2_BG3_HAZE] = {
+        HAZE_VALUE_BG3_BG2_STRONG_WEAK_MEDIUM, EFFECT_NONE, FALSE, 0
+    },
+    [EFFECT_BG3_GRADIENT] = {
+        HAZE_VALUE_GRADIENT, EFFECT_NONE, FALSE, 2
+    },
+    [EFFECT_BG2_GRADIENT] = {
+        HAZE_VALUE_GRADIENT, EFFECT_NONE, FALSE, 2
+    },
+    [EFFECT_HAZE_BG1_BG2_BG3] = {
+        HAZE_VALUE_BG3_BG2_BG1, EFFECT_NONE, FALSE, 0
+    }
+};
 
 /**
  * @brief 5bcb0 | a8 | Processes the current color fading effect, visually

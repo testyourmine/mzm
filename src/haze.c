@@ -4,7 +4,6 @@
 #include "macros.h"
 #include "temp_globals.h"
 
-#include "data/engine_pointers.h"
 #include "data/haze_data.h"
 
 #include "constants/color_fading.h"
@@ -15,6 +14,7 @@
 
 #include "structs/bg_clip.h"
 #include "structs/clipdata.h"
+#include "structs/color_effects.h"
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/haze.h"
@@ -25,6 +25,9 @@
 do {                        \
 gHazeInfo.active = FALSE;   \
 } while(0);
+
+// Despite being const, declaring it here as such fails to match
+extern u8 sHazeData[EFFECT_HAZE_END][4];
 
 /**
  * @brief 5cfe0 | 54 | Sets the background haze effect based on the visual effect of the room entry

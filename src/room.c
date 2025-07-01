@@ -2,7 +2,6 @@
 #include "dma.h"
 #include "gba.h"
 
-#include "data/engine_pointers.h"
 #include "data/empty_datatypes.h"
 #include "data/common_pals.h"
 #include "data/clipdata_types.h"
@@ -35,9 +34,42 @@
 #include "structs/scroll.h"
 #include "structs/room.h"
 #include "structs/samus.h"
+#include "structs/save_file.h"
 #include "structs/text.h"
 #include "structs/screen_shake.h"
 #include "structs/visual_effects.h"
+
+const struct Door* const sAreaDoorsPointers[AREA_ENTRY_COUNT] = {
+    [AREA_BRINSTAR] = sBrinstarDoors,
+    [AREA_KRAID] = sKraidDoors,
+    [AREA_NORFAIR] = sNorfairDoors,
+    [AREA_RIDLEY] = sRidleyDoors,
+    [AREA_TOURIAN] = sTourianDoors,
+    [AREA_CRATERIA] = sCrateriaDoors,
+    [AREA_CHOZODIA] = sChozodiaDoors,
+    #ifdef DEBUG
+    [AREA_TEST] = sTestDoors,
+    [AREA_TEST_1] = sTest123Doors,
+    [AREA_TEST_2] = sTest123Doors,
+    [AREA_TEST_3] = sTest123Doors
+    #endif // DEBUG
+};
+
+const struct RoomEntryROM* const sAreaRoomEntryPointers[AREA_ENTRY_COUNT] = {
+    [AREA_BRINSTAR] = sBrinstarRoomEntries,
+    [AREA_KRAID] = sKraidRoomEntries,
+    [AREA_NORFAIR] = sNorfairRoomEntries,
+    [AREA_RIDLEY] = sRidleyRoomEntries,
+    [AREA_TOURIAN] = sTourianRoomEntries,
+    [AREA_CRATERIA] = sCrateriaRoomEntries,
+    [AREA_CHOZODIA] = sChozodiaRoomEntries,
+    #ifdef DEBUG
+    [AREA_TEST] = sTestRoomEntries,
+    [AREA_TEST_1] = sTest1RoomEntries,
+    [AREA_TEST_2] = sTest2RoomEntries,
+    [AREA_TEST_3] = sTest3RoomEntries
+    #endif // DEBUG
+};
 
 /**
  * @brief 55f7c | 26c | Loads the current room

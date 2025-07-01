@@ -1,7 +1,7 @@
 MEMORY {
-    ewram : ORIGIN = 0x02000000 LENGTH = 256K
-    iwram : ORIGIN = 0x03000000 LENGTH = 32K
-    rom : ORIGIN = 0x08000000 LENGTH = 32M
+    ewram (rwx): ORIGIN = 0x02000000 LENGTH = 256K
+    iwram (rwx): ORIGIN = 0x03000000 LENGTH = 32K
+    rom    (rx): ORIGIN = 0x08000000 LENGTH = 32M
 }
 
 gNumMusicPlayers = 9;
@@ -1431,7 +1431,16 @@ SECTIONS {
         sTransferRom_After = .;
         src/data/samus_sprites_pointers.o(.rodata);
         src/data/frame_data_pointers.o(.rodata);
-        src/data/engine_pointers.o(.rodata);
+        src/projectile_util.o(.rodata);
+        src/particle.o(.rodata);
+        src/room.o(.rodata);
+        src/scroll.o(.rodata);
+        src/block.o(.rodata);
+        src/color_fading.o(.rodata);
+        src/animated_graphics.o(.rodata);
+        src/connection.o(.rodata);
+        src/save_file.o(.rodata);
+        src/cutscenes/cutscene_utils.o(.rodata);
 
         src/data/cutscenes/internal_kraid_rising_data.o(.rodata);
         src/data/cutscenes/internal_story_text_cutscene_data.o(.rodata);
@@ -1462,10 +1471,13 @@ SECTIONS {
         src/data/menus/internal_file_select_data.o(.rodata);
         src/data/time_attack_data.o(.rodata);
         src/data/internal_intro_data.o(.rodata);
-        src/data/internal_tourian_escape_data.o(.rodata);
-        src/data/internal_ending_and_gallery_data.o(.rodata);
-        src/data/internal_chozodia_escape_data.o(.rodata);
-        src/data/internal_io_transfer_data.o(.rodata);
+    } >rom
+
+    .data : ALIGN(2) {
+        src/tourian_escape.o(.data);
+        src/ending_and_gallery.o(.data);
+        src/chozodia_escape.o(.data);
+        src/cable_link.o(.data);
     } >rom
 
     nes_metroid_data __nes_metroid_load_address : ALIGN(2) {

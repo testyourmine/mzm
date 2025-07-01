@@ -2,7 +2,13 @@
 #include "gba.h"
 
 #include "data/clipdata_data.h"
-#include "data/engine_pointers.h"
+#include "data/rooms/brinstar_rooms_data.h"
+#include "data/rooms/kraid_rooms_data.h"
+#include "data/rooms/norfair_rooms_data.h"
+#include "data/rooms/ridley_rooms_data.h"
+#include "data/rooms/tourian_rooms_data.h"
+#include "data/rooms/crateria_rooms_data.h"
+#include "data/rooms/chozodia_rooms_data.h"
 
 #include "constants/game_state.h"
 #include "constants/samus.h"
@@ -14,6 +20,217 @@
 #include "structs/color_effects.h"
 #include "structs/samus.h"
 #include "structs/room.h"
+
+static const u8* const sScrollPointer_Empty[] = {
+    sScroll_Empty
+};
+
+static const u8* const sBrinstarScrolls[] = {
+    sBrinstar_0_Scrolls,
+    sBrinstar_1_Scrolls,
+    sBrinstar_2_Scrolls,
+    sBrinstar_3_Scrolls,
+    sBrinstar_4_Scrolls,
+    sBrinstar_5_Scrolls,
+    sBrinstar_6_Scrolls,
+    sBrinstar_7_Scrolls,
+    sBrinstar_8_Scrolls,
+    sBrinstar_9_Scrolls,
+    sBrinstar_10_Scrolls,
+    sBrinstar_11_Scrolls,
+    sBrinstar_12_Scrolls,
+    sBrinstar_13_Scrolls,
+    sBrinstar_14_Scrolls,
+    sBrinstar_15_Scrolls,
+    sBrinstar_16_Scrolls,
+    sBrinstar_17_Scrolls,
+    sBrinstar_18_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const sKraidScrolls[] = {
+    sKraid_0_Scrolls,
+    sKraid_1_Scrolls,
+    sKraid_2_Scrolls,
+    sKraid_3_Scrolls,
+    sKraid_4_Scrolls,
+    sKraid_5_Scrolls,
+    sKraid_6_Scrolls,
+    sKraid_7_Scrolls,
+    sKraid_8_Scrolls,
+    sKraid_9_Scrolls,
+    sKraid_10_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const sNorfairScrolls[] = {
+    sNorfair_0_Scrolls,
+    sNorfair_1_Scrolls,
+    sNorfair_2_Scrolls,
+    sNorfair_3_Scrolls,
+    sNorfair_4_Scrolls,
+    sNorfair_5_Scrolls,
+    sNorfair_6_Scrolls,
+    sNorfair_7_Scrolls,
+    sNorfair_8_Scrolls,
+    sNorfair_9_Scrolls,
+    sNorfair_10_Scrolls,
+    sNorfair_11_Scrolls,
+    sNorfair_12_Scrolls,
+    sNorfair_13_Scrolls,
+    sNorfair_14_Scrolls,
+    sNorfair_15_Scrolls,
+    sNorfair_16_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const sRidleyScrolls[] = {
+    sRidley_0_Scrolls,
+    sRidley_1_Scrolls,
+    sRidley_2_Scrolls,
+    sRidley_3_Scrolls,
+    sRidley_4_Scrolls,
+    sRidley_5_Scrolls,
+    sRidley_6_Scrolls,
+    sRidley_7_Scrolls,
+    sRidley_8_Scrolls,
+    sRidley_9_Scrolls,
+    sRidley_10_Scrolls,
+    sRidley_11_Scrolls,
+    sRidley_12_Scrolls,
+    sRidley_13_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const sTourianScrolls[] = {
+    sTourian_0_Scrolls,
+    sTourian_1_Scrolls,
+    sTourian_2_Scrolls,
+    sTourian_3_Scrolls,
+    sTourian_4_Scrolls,
+    sTourian_5_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const sCrateriaScrolls[] = {
+    sCrateria_0_Scrolls,
+    sCrateria_1_Scrolls,
+    sCrateria_2_Scrolls,
+    sCrateria_3_Scrolls,
+    sCrateria_4_Scrolls,
+    sCrateria_5_Scrolls,
+    sCrateria_6_Scrolls,
+    sCrateria_7_Scrolls,
+    sCrateria_8_Scrolls,
+    sCrateria_9_Scrolls,
+    sCrateria_10_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const sChozodiaScrolls[] = {
+    sChozodia_0_Scrolls,
+    sChozodia_1_Scrolls,
+    sChozodia_2_Scrolls,
+    sChozodia_3_Scrolls,
+    sChozodia_4_Scrolls,
+    sChozodia_5_Scrolls,
+    sChozodia_6_Scrolls,
+    sChozodia_7_Scrolls,
+    sChozodia_8_Scrolls,
+    sChozodia_9_Scrolls,
+    sChozodia_10_Scrolls,
+    sChozodia_11_Scrolls,
+    sChozodia_12_Scrolls,
+    sChozodia_13_Scrolls,
+    sChozodia_14_Scrolls,
+    sChozodia_15_Scrolls,
+    sChozodia_16_Scrolls,
+    sChozodia_17_Scrolls,
+    sChozodia_18_Scrolls,
+    sChozodia_19_Scrolls,
+    sChozodia_20_Scrolls,
+    sChozodia_21_Scrolls,
+    sChozodia_22_Scrolls,
+    sChozodia_23_Scrolls,
+    sChozodia_24_Scrolls,
+    sChozodia_25_Scrolls,
+    sChozodia_26_Scrolls,
+    sChozodia_27_Scrolls,
+    sChozodia_28_Scrolls,
+    sChozodia_29_Scrolls,
+    sChozodia_30_Scrolls,
+    sChozodia_31_Scrolls,
+    sChozodia_32_Scrolls,
+    sChozodia_33_Scrolls,
+    sChozodia_34_Scrolls,
+    sChozodia_35_Scrolls,
+    sChozodia_36_Scrolls,
+    sChozodia_37_Scrolls,
+    sChozodia_38_Scrolls,
+    sChozodia_39_Scrolls,
+    sChozodia_40_Scrolls,
+    sChozodia_41_Scrolls,
+    sChozodia_42_Scrolls,
+    sChozodia_43_Scrolls,
+    sChozodia_44_Scrolls,
+    sChozodia_45_Scrolls,
+    sChozodia_46_Scrolls,
+    sChozodia_47_Scrolls,
+    sChozodia_48_Scrolls,
+    sChozodia_49_Scrolls,
+    sChozodia_50_Scrolls,
+    sChozodia_51_Scrolls,
+    sChozodia_52_Scrolls,
+    sChozodia_53_Scrolls,
+    sChozodia_54_Scrolls,
+    sChozodia_55_Scrolls,
+    sChozodia_56_Scrolls,
+    sChozodia_57_Scrolls,
+    sChozodia_58_Scrolls,
+    sChozodia_59_Scrolls,
+    sScroll_Empty
+};
+
+static const u8* const * const sAreaScrollPointers[AREA_COUNT] = {
+    [AREA_BRINSTAR] = sBrinstarScrolls,
+    [AREA_KRAID] = sKraidScrolls,
+    [AREA_NORFAIR] = sNorfairScrolls,
+    [AREA_RIDLEY] = sRidleyScrolls,
+    [AREA_TOURIAN] = sTourianScrolls,
+    [AREA_CRATERIA] = sCrateriaScrolls,
+    [AREA_CHOZODIA] = sChozodiaScrolls,
+    [AREA_TEST] = sScrollPointer_Empty,
+    [AREA_TEST_1] = sScrollPointer_Empty,
+    [AREA_TEST_2] = sScrollPointer_Empty,
+    [AREA_TEST_3] = sScrollPointer_Empty
+};
+
+static const s8 sWaterLoopCounterArray[8][2] = {
+    [0] = {
+        0, 9
+    },
+    [1] = {
+        1, 9
+    },
+    [2] = {
+        2, 21
+    },
+    [3] = {
+        1, 9
+    },
+    [4] = {
+        0, 9
+    },
+    [5] = {
+        -1, 12
+    },
+    [6] = {
+        -2, 99
+    },
+    [7] = {
+        -1, 12
+    }
+};
 
 /**
  * @brief 582c4 | 64 | Processes the current scrolls

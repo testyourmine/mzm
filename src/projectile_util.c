@@ -1,10 +1,10 @@
 #include "gba.h"
 #include "projectile_util.h"
+#include "projectile.h"
 #include "clipdata.h"
 
 #include "data/projectile_data.h"
 #include "data/sprite_data.h"
-#include "data/engine_pointers.h"
 
 #include "constants/audio.h"
 #include "constants/clipdata.h"
@@ -21,8 +21,27 @@
 #include "structs/game_state.h"
 #include "structs/samus.h"
 #include "structs/sprite.h"
+#include "structs/particle.h"
 #include "structs/power_bomb_explosion.h"
 
+static const ProjFunc_T sProcessProjectileFunctionPointers[PROJ_TYPE_END] = {
+    [PROJ_TYPE_BEAM] = ProjectileProcessNormalBeam,
+    [PROJ_TYPE_LONG_BEAM] = ProjectileProcessLongBeam,
+    [PROJ_TYPE_ICE_BEAM] = ProjectileProcessIceBeam,
+    [PROJ_TYPE_WAVE_BEAM] = ProjectileProcessWaveBeam,
+    [PROJ_TYPE_PLASMA_BEAM] = ProjectileProcessPlasmaBeam,
+    [PROJ_TYPE_PISTOL] = ProjectileProcessPistol,
+    [PROJ_TYPE_CHARGED_BEAM] = ProjectileProcessChargedNormalBeam,
+    [PROJ_TYPE_CHARGED_LONG_BEAM] = ProjectileProcessChargedLongBeam,
+    [PROJ_TYPE_CHARGED_ICE_BEAM] = ProjectileProcessChargedIceBeam,
+    [PROJ_TYPE_CHARGED_WAVE_BEAM] = ProjectileProcessChargedWaveBeam,
+    [PROJ_TYPE_CHARGED_PLASMA_BEAM] = ProjectileProcessChargedPlasmaBeam,
+    [PROJ_TYPE_CHARGED_PISTOL] = ProjectileProcessChargedPistol,
+    [PROJ_TYPE_MISSILE] = ProjectileProcessMissile,
+    [PROJ_TYPE_SUPER_MISSILE] = ProjectileProcessSuperMissile,
+    [PROJ_TYPE_BOMB] = ProjectileProcessBomb,
+    [PROJ_TYPE_POWER_BOMB] = ProjectileProcessPowerBomb
+};
 
 /**
  * @brief 4ed08 | 8c | Sets a particle effect when shooting
