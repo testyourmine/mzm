@@ -34,6 +34,7 @@
 #include "structs/scroll.h"
 #include "structs/room.h"
 #include "structs/samus.h"
+#include "structs/save_file.h"
 #include "structs/text.h"
 #include "structs/screen_shake.h"
 #include "structs/visual_effects.h"
