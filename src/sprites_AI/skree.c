@@ -307,12 +307,12 @@ static void SkreeExplosionMove(void)
     if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
     {
         gCurrentSprite.xPosition += EIGHTH_BLOCK_SIZE;
-        gCurrentSprite.rotation += PI / 4;
+        gCurrentSprite.rotation += PI_4;
     }
     else
     {
         gCurrentSprite.xPosition -= EIGHTH_BLOCK_SIZE;
-        gCurrentSprite.rotation -= PI / 4;
+        gCurrentSprite.rotation -= PI_4;
     }
 
     if (gCurrentSprite.roomSlot != SKREE_EXPLOSION_PART_GOING_UP)

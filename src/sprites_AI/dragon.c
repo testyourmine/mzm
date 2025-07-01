@@ -327,7 +327,7 @@ static void DragonFireballInit(void)
     if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
     {
         gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT;
-        gCurrentSprite.rotation = PI / 2;
+        gCurrentSprite.rotation = PI_2;
         gCurrentSprite.status &= ~SPRITE_STATUS_X_FLIP;
     }
     else
@@ -377,7 +377,7 @@ static void DragonFireballMove(void)
     if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
     {
         gCurrentSprite.xPosition += xMovement;
-        gCurrentSprite.rotation = rotation + PI / 2;
+        gCurrentSprite.rotation = rotation + PI_2;
     }
     else
     {

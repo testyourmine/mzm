@@ -265,19 +265,19 @@ static const u16 sDeoremOam_Warning_Frame0[OAM_DATA_SIZE(7)] = {
 const struct FrameData sDeoremSegmentOam_Middle[5] = {
     [0] = {
         .pFrame = sDeoremSegmentOam_Middle_Frame0,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [1] = {
         .pFrame = sDeoremSegmentOam_Middle_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [2] = {
         .pFrame = sDeoremSegmentOam_Middle_Frame2,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [3] = {
         .pFrame = sDeoremSegmentOam_Middle_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -285,19 +285,19 @@ const struct FrameData sDeoremSegmentOam_Middle[5] = {
 const struct FrameData sDeoremSegmentOam_Junction[5] = {
     [0] = {
         .pFrame = sDeoremSegmentOam_Junction_Frame0,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [1] = {
         .pFrame = sDeoremSegmentOam_Junction_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [2] = {
         .pFrame = sDeoremSegmentOam_Junction_Frame2,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [3] = {
         .pFrame = sDeoremSegmentOam_Junction_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -305,19 +305,19 @@ const struct FrameData sDeoremSegmentOam_Junction[5] = {
 const struct FrameData sDeoremSegmentOam_Tail[5] = {
     [0] = {
         .pFrame = sDeoremSegmentOam_Tail_Frame0,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [1] = {
         .pFrame = sDeoremSegmentOam_Tail_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [2] = {
         .pFrame = sDeoremSegmentOam_Tail_Frame2,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [3] = {
         .pFrame = sDeoremSegmentOam_Tail_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -341,23 +341,23 @@ const struct FrameData sDeoremEyeOam_Idle[2] = {
 const struct FrameData sDeoremEyeOam_Pulsing[6] = {
     [0] = {
         .pFrame = sDeoremEyeOam_Pulsing_Frame0,
-        .timer = 4
+        .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
         .pFrame = sDeoremEyeOam_Pulsing_Frame1,
-        .timer = 4
+        .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
         .pFrame = sDeoremEyeOam_Pulsing_Frame2,
-        .timer = 10
+        .timer = CONVERT_SECONDS(1.f / 6)
     },
     [3] = {
         .pFrame = sDeoremEyeOam_Pulsing_Frame1,
-        .timer = 6
+        .timer = CONVERT_SECONDS(.1f)
     },
     [4] = {
         .pFrame = sDeoremEyeOam_Pulsing_Frame0,
-        .timer = 6
+        .timer = CONVERT_SECONDS(.1f)
     },
     [5] = FRAME_DATA_TERMINATOR
 };
@@ -365,19 +365,19 @@ const struct FrameData sDeoremEyeOam_Pulsing[6] = {
 const struct FrameData sDeoremOam_ClosedSlow[5] = {
     [0] = {
         .pFrame = sDeoremOam_Closed_Frame0,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [1] = {
         .pFrame = sDeoremOam_Closed_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [2] = {
         .pFrame = sDeoremOam_Closed_Frame2,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [3] = {
         .pFrame = sDeoremOam_Closed_Frame1,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -385,19 +385,19 @@ const struct FrameData sDeoremOam_ClosedSlow[5] = {
 const struct FrameData sDeoremOam_Opening[5] = {
     [0] = {
         .pFrame = sDeoremOam_Opening_Frame0,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
         .pFrame = sDeoremOam_Opening_Frame1,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = {
         .pFrame = sDeoremOam_Opening_Frame2,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
         .pFrame = sDeoremOam_Opening_Frame3,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -405,19 +405,19 @@ const struct FrameData sDeoremOam_Opening[5] = {
 const struct FrameData sDeoremOam_OpenedSlow[5] = {
     [0] = {
         .pFrame = sDeoremOam_Opened_Frame0,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [1] = {
         .pFrame = sDeoremOam_Opening_Frame3,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [2] = {
         .pFrame = sDeoremOam_Opened_Frame2,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [3] = {
         .pFrame = sDeoremOam_Opening_Frame3,
-        .timer = 12
+        .timer = CONVERT_SECONDS(.2f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -425,19 +425,19 @@ const struct FrameData sDeoremOam_OpenedSlow[5] = {
 const struct FrameData sDeoremOam_Closing[5] = {
     [0] = {
         .pFrame = sDeoremOam_Opening_Frame2,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
         .pFrame = sDeoremOam_Opening_Frame1,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = {
         .pFrame = sDeoremOam_Opening_Frame0,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [3] = {
         .pFrame = sDeoremOam_Closing_Frame3,
-        .timer = 2
+        .timer = CONVERT_SECONDS(1.f / 30)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -445,35 +445,35 @@ const struct FrameData sDeoremOam_Closing[5] = {
 const struct FrameData sDeoremOam_Warning[9] = {
     [0] = {
         .pFrame = sDeoremOam_Warning_Frame0,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [1] = {
         .pFrame = sDeoremOam_Warning_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [2] = {
         .pFrame = sDeoremOam_Warning_Frame2,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [3] = {
         .pFrame = sDeoremOam_Warning_Frame3,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [4] = {
         .pFrame = sDeoremOam_Warning_Frame4,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [5] = {
         .pFrame = sDeoremOam_Warning_Frame3,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [6] = {
         .pFrame = sDeoremOam_Warning_Frame2,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [7] = {
         .pFrame = sDeoremOam_Warning_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [8] = FRAME_DATA_TERMINATOR
 };
@@ -481,11 +481,11 @@ const struct FrameData sDeoremOam_Warning[9] = {
 const struct FrameData sDeoremOam_GoingDown[3] = {
     [0] = {
         .pFrame = sDeoremOam_Warning_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [1] = {
         .pFrame = sDeoremOam_Warning_Frame0,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [2] = FRAME_DATA_TERMINATOR
 };
@@ -493,19 +493,19 @@ const struct FrameData sDeoremOam_GoingDown[3] = {
 const struct FrameData sDeoremOam_OpenedFast[5] = {
     [0] = {
         .pFrame = sDeoremOam_Opened_Frame0,
-        .timer = 4
+        .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
         .pFrame = sDeoremOam_Opening_Frame3,
-        .timer = 4
+        .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
         .pFrame = sDeoremOam_Opened_Frame2,
-        .timer = 4
+        .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
         .pFrame = sDeoremOam_Opening_Frame3,
-        .timer = 4
+        .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -513,19 +513,19 @@ const struct FrameData sDeoremOam_OpenedFast[5] = {
 const struct FrameData sDeoremOam_ClosedFast[5] = {
     [0] = {
         .pFrame = sDeoremOam_Closed_Frame0,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [1] = {
         .pFrame = sDeoremOam_Closed_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [2] = {
         .pFrame = sDeoremOam_Closed_Frame2,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [3] = {
         .pFrame = sDeoremOam_Closed_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
@@ -533,19 +533,19 @@ const struct FrameData sDeoremOam_ClosedFast[5] = {
 const struct FrameData sDeoremOam_Dying[5] = {
     [0] = {
         .pFrame = sDeoremOam_Opening_Frame0,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [1] = {
         .pFrame = sDeoremOam_Opening_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [2] = {
         .pFrame = sDeoremOam_Opening_Frame2,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [3] = {
         .pFrame = sDeoremOam_Opening_Frame1,
-        .timer = 3
+        .timer = CONVERT_SECONDS(.05f)
     },
     [4] = FRAME_DATA_TERMINATOR
 };

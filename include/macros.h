@@ -179,8 +179,15 @@
 
 // PI is half a rotation on the unit circle, a full rotation is Q_8_8(1.f)
 #define PI Q_8_8(.5f)
+// Shorthand for PI / 2
+#define PI_2 (PI / 2)
+// Shorthand for PI / 4
+#define PI_4 (PI / 4)
+// Shorthand for PI * 3 / 4
+#define PI_3_4 (PI * 3 / 4)
+
 #define sin(a) (sSineTable[(a)])
-#define cos(a) (sSineTable[(a) + PI / 2])
+#define cos(a) (sSineTable[(a) + PI_2])
 
 #define GET_PSPRITE_HEALTH(id) sPrimarySpriteStats[(id)][0]
 #define GET_SSPRITE_HEALTH(id) sSecondarySpriteStats[(id)][0]

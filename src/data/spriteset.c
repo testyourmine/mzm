@@ -234,7 +234,7 @@ const u8 sSpriteset31[4] = {
 
 const u8 sSpriteset32[6] = {
 	PSPRITE_ZEB, 0,
-	PSPRITE_DEOREM, 1,
+	PSPRITE_DEOREM_FIRST_LOCATION, 1,
 	SPRITESET_EMPTY
 };
 

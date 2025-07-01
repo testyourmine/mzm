@@ -699,7 +699,7 @@ static void AcidWormExtend(void)
     checks = 0;
     if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
     {
-        if (gCurrentSprite.rotation >= PI / 2 - 1)
+        if (gCurrentSprite.rotation >= PI_2 - 1)
             checks++; // Fully rotated
         else
             gCurrentSprite.rotation += speed;
@@ -711,7 +711,7 @@ static void AcidWormExtend(void)
     }
     else
     {
-        if ((u8)(gCurrentSprite.rotation - 1) <= PI + PI / 2 - 1)
+        if ((u8)(gCurrentSprite.rotation - 1) <= PI + PI_2 - 1)
             checks++; // Fully rotated
         else
             gCurrentSprite.rotation -= speed;

@@ -1388,20 +1388,20 @@ u8 SpriteUtilMakeSpriteFaceSamusRotation(s32 rotation, s32 targetY, s32 targetX,
     y = (s16)spriteY;
     x = (s16)spriteX;
 
-    intensity = Q_8_8(.01f);
+    intensity = PI / 64;
 
     if (dstY < y)
     {
         if (x - BLOCK_SIZE < dstX && x + BLOCK_SIZE > dstX)
         {
-            targetRotation = PI + PI / 2;
+            targetRotation = PI + PI_2;
         }
         else if (dstX > x)
         {
             if (y - dstY < BLOCK_SIZE)
                 targetRotation = 0;
             else
-                targetRotation = PI + 3 * PI / 4;
+                targetRotation = PI + PI_3_4;
         }
         else if (y - dstY < BLOCK_SIZE)
         {
@@ -1409,21 +1409,21 @@ u8 SpriteUtilMakeSpriteFaceSamusRotation(s32 rotation, s32 targetY, s32 targetX,
         }
         else
         {
-            targetRotation = PI + PI / 4;
+            targetRotation = PI + PI_4;
         }
     }
     else
     {
         if (x - BLOCK_SIZE < dstX && x + BLOCK_SIZE > dstX)
         {
-            targetRotation = PI / 2;
+            targetRotation = PI_2;
         }
         else if (dstX > x)
         {
             if (dstY - y < BLOCK_SIZE)
                 targetRotation = 0;
             else
-                targetRotation = PI / 4;
+                targetRotation = PI_4;
         }
         else if (dstY - y < BLOCK_SIZE)
         {
@@ -1431,7 +1431,7 @@ u8 SpriteUtilMakeSpriteFaceSamusRotation(s32 rotation, s32 targetY, s32 targetX,
         }
         else
         {
-            targetRotation = 3 * PI / 4;
+            targetRotation = PI_3_4;
         }
     }
 
@@ -1442,25 +1442,25 @@ u8 SpriteUtilMakeSpriteFaceSamusRotation(s32 rotation, s32 targetY, s32 targetX,
         else if (_rotation >= PI)
             _rotation = (s16)(_rotation + intensity);
     }
-    else if (targetRotation == PI / 4)
+    else if (targetRotation == PI_4)
     {
-        if ((u16)(_rotation - PI / 4 - 1) < PI - 1)
+        if ((u16)(_rotation - PI_4 - 1) < PI - 1)
             _rotation = (s16)(_rotation - intensity);
-        else if ((u16)(_rotation - PI / 4) >= PI)
+        else if ((u16)(_rotation - PI_4) >= PI)
             _rotation = (s16)(_rotation + intensity);
     }
-    else if (targetRotation == PI / 2)
+    else if (targetRotation == PI_2)
     {
-        if ((u16)(_rotation - PI / 2 - 1) < PI - 1)
+        if ((u16)(_rotation - PI_2 - 1) < PI - 1)
             _rotation = (s16)(_rotation - intensity);
-        else if ((u16)(_rotation - PI / 2) >= PI)
+        else if ((u16)(_rotation - PI_2) >= PI)
             _rotation = (s16)(_rotation + intensity);
     }
-    else if (targetRotation == 3 * PI / 4)
+    else if (targetRotation == PI_3_4)
     {
-        if ((u16)(_rotation - 3 * PI / 4 - 1) < PI - 1)
+        if ((u16)(_rotation - PI_3_4 - 1) < PI - 1)
             _rotation = (s16)(_rotation - intensity);
-        else if ((u16)(_rotation - 3 * PI / 4) >= PI)
+        else if ((u16)(_rotation - PI_3_4) >= PI)
             _rotation = (s16)(_rotation + intensity);
     }
     else if (targetRotation == PI)
@@ -1470,25 +1470,25 @@ u8 SpriteUtilMakeSpriteFaceSamusRotation(s32 rotation, s32 targetY, s32 targetX,
         else if (_rotation > PI)
             _rotation = (s16)(_rotation - intensity);
     }
-    else if (targetRotation == PI + PI / 4)
+    else if (targetRotation == PI + PI_4)
     {
-        if ((u16)(_rotation - PI / 4 - 1) < PI - 1)
+        if ((u16)(_rotation - PI_4 - 1) < PI - 1)
             _rotation = (s16)(_rotation + intensity);
-        else if ((u16)(_rotation - PI / 4 - 1) >= PI)
+        else if ((u16)(_rotation - PI_4 - 1) >= PI)
             _rotation = (s16)(_rotation - intensity);
     }
-    else if (targetRotation == PI + PI / 2)
+    else if (targetRotation == PI + PI_2)
     {
-        if ((u16)(_rotation - PI / 2 - 1) < PI - 1)
+        if ((u16)(_rotation - PI_2 - 1) < PI - 1)
             _rotation = (s16)(_rotation + intensity);
-        else if ((u16)(_rotation - PI / 2 - 1) >= PI)
+        else if ((u16)(_rotation - PI_2 - 1) >= PI)
             _rotation = (s16)(_rotation - intensity);
     }
-    else if (targetRotation == PI + 3 * PI / 4)
+    else if (targetRotation == PI + PI_3_4)
     {
-        if ((u16)(_rotation - 3 * PI / 4 - 1) < PI - 1)
+        if ((u16)(_rotation - PI_3_4 - 1) < PI - 1)
             _rotation = (s16)(_rotation + intensity);
-        else if ((u16)(_rotation - 3 * PI / 4 - 1) >= PI)
+        else if ((u16)(_rotation - PI_3_4 - 1) >= PI)
             _rotation = (s16)(_rotation - intensity);
     }
 

@@ -1,4 +1,6 @@
 #include "data/sprite_data.h"
+#include "sprites_AI/deorem.h"
+
 #include "constants/sprite.h"
 
 const u8 sOamXFlipOffsets[3][4] = {
@@ -789,7 +791,7 @@ const u16 sPrimarySpriteStats[PSPRITE_END][9] = {
         0,
         0
     },
-    [PSPRITE_DEOREM] = {
+    [PSPRITE_DEOREM_FIRST_LOCATION] = {
         1,
         12,
         WEAKNESS_NONE,
@@ -2467,7 +2469,7 @@ const u16 sSecondarySpriteStats[SSPRITE_END][9] = {
         0
     },
     [SSPRITE_DEOREM_EYE] = {
-        60,
+        DEOREM_MAX_HEALTH,
         0,
         WEAKNESS_MISSILES,
         24,

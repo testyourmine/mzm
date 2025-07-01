@@ -751,7 +751,7 @@ static void RuinsTestSpawnGhost(void)
  */
 static void RuinsTestMovingInit(void)
 {
-    gCurrentSprite.work1 = PI / 2;
+    gCurrentSprite.work1 = PI_2;
     gCurrentSprite.scaling = 0;
     gCurrentSprite.pose = RUINS_TEST_POSE_MOVING_CIRCLE_PATTERN;
     gCurrentSprite.status |= SPRITE_STATUS_SAMUS_COLLIDING;
@@ -785,14 +785,14 @@ static void RuinsTestMoveCirclePattern(void)
     }
 
     // Update radius
-    if (gCurrentSprite.scaling < PI + PI / 2)
+    if (gCurrentSprite.scaling < PI + PI_2)
     {
         gCurrentSprite.scaling += (s32)(PI * .0234375f);
         gBossWork.work6 = 0;
     }
     else
     {
-        gCurrentSprite.scaling = PI + PI / 2;
+        gCurrentSprite.scaling = PI + PI_2;
     }
 
     // Move 
@@ -808,8 +808,8 @@ static void RuinsTestMoveCirclePattern(void)
     {
         // Try move to atom pattern
         gCurrentSprite.status &= ~SPRITE_STATUS_SAMUS_COLLIDING;
-        radius = gCurrentSprite.work1 + PI / 2 + 1;
-        if (radius <= (s32)(PI * .015625f) && gCurrentSprite.scaling == PI + PI / 2)
+        radius = gCurrentSprite.work1 + PI_2 + 1;
+        if (radius <= (s32)(PI * .015625f) && gCurrentSprite.scaling == PI + PI_2)
         {
             // In a "corner", set atom pattern
             gCurrentSprite.pose = RUINS_TEST_POSE_MOVING_ATOM_PATTERN;
@@ -891,7 +891,7 @@ static void RuinsTestMoveAtomPattern(void)
         {
             if (angle == PI)
             {
-                gCurrentSprite.work1 = PI + PI / 2;
+                gCurrentSprite.work1 = PI + PI_2;
                 gCurrentSprite.yPositionSpawn += BLOCK_SIZE * 3;
                 gCurrentSprite.xPositionSpawn -= BLOCK_SIZE * 3;
                 bouncing++;
@@ -901,7 +901,7 @@ static void RuinsTestMoveAtomPattern(void)
         {
             if (angle == 0)
             {
-                gCurrentSprite.work1 = PI + PI / 2;
+                gCurrentSprite.work1 = PI + PI_2;
                 gCurrentSprite.yPositionSpawn += BLOCK_SIZE * 3;
                 gCurrentSprite.xPositionSpawn += BLOCK_SIZE * 3;
                 bouncing++;
@@ -912,7 +912,7 @@ static void RuinsTestMoveAtomPattern(void)
     {
         if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
         {
-            if (angle == PI / 2)
+            if (angle == PI_2)
             {
                 gCurrentSprite.work1 = PI;
                 gCurrentSprite.yPositionSpawn += BLOCK_SIZE * 3;
@@ -922,7 +922,7 @@ static void RuinsTestMoveAtomPattern(void)
         }
         else
         {
-            if (angle == PI / 2)
+            if (angle == PI_2)
             {
                 gCurrentSprite.work1 = 0;
                 gCurrentSprite.yPositionSpawn += BLOCK_SIZE * 3;
@@ -958,7 +958,7 @@ static void RuinsTestMoveAtomPattern(void)
         {
             if (angle == 0)
             {
-                gCurrentSprite.work1 = PI / 2;
+                gCurrentSprite.work1 = PI_2;
                 gCurrentSprite.yPositionSpawn -= BLOCK_SIZE * 3;
                 gCurrentSprite.xPositionSpawn += BLOCK_SIZE * 3;
                 bouncing++;
@@ -968,7 +968,7 @@ static void RuinsTestMoveAtomPattern(void)
         {
             if (angle == PI)
             {
-                gCurrentSprite.work1 = PI / 2;
+                gCurrentSprite.work1 = PI_2;
                 gCurrentSprite.yPositionSpawn -= BLOCK_SIZE * 3;
                 gCurrentSprite.xPositionSpawn -= BLOCK_SIZE * 3;
                 bouncing++;
@@ -979,7 +979,7 @@ static void RuinsTestMoveAtomPattern(void)
     {
         if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
         {
-            if (angle == PI + PI / 2)
+            if (angle == PI + PI_2)
             {
                 gCurrentSprite.work1 = 0;
                 gCurrentSprite.yPositionSpawn -= BLOCK_SIZE * 3;
@@ -989,7 +989,7 @@ static void RuinsTestMoveAtomPattern(void)
         }
         else
         {
-            if (angle == PI + PI / 2)
+            if (angle == PI + PI_2)
             {
                 gCurrentSprite.work1 = PI;
                 gCurrentSprite.yPositionSpawn -= BLOCK_SIZE * 3;
