@@ -1471,10 +1471,13 @@ SECTIONS {
         src/data/menus/internal_file_select_data.o(.rodata);
         src/data/time_attack_data.o(.rodata);
         src/data/internal_intro_data.o(.rodata);
-        src/data/internal_tourian_escape_data.o(.rodata);
-        src/data/internal_ending_and_gallery_data.o(.rodata);
-        src/data/internal_chozodia_escape_data.o(.rodata);
-        src/data/internal_io_transfer_data.o(.rodata);
+    } >rom
+
+    .data : ALIGN(2) {
+        src/tourian_escape.o(.data);
+        src/ending_and_gallery.o(.data);
+        src/chozodia_escape.o(.data);
+        src/cable_link.o(.data);
     } >rom
 
     nes_metroid_data __nes_metroid_load_address : ALIGN(2) {

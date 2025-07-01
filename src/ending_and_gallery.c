@@ -4,7 +4,6 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/ending_and_gallery_data.h"
-#include "data/internal_ending_and_gallery_data.h"
 
 #include "constants/audio.h"
 #include "constants/ending_and_gallery.h"
@@ -15,6 +14,27 @@
 #include "structs/display.h"
 #include "structs/ending_and_gallery.h"
 #include "structs/game_state.h"
+
+typedef u8 (*CreditsFunc_T)(void);
+
+static CreditsFunc_T sCreditsFunctionPointers[3] = {
+    [0] = CreditsDisplay,
+    [1] = CreditsChozoWallMovement,
+    [2] = CreditsChozoWallZoom
+};
+
+static CreditsFunc_T sEndScreenFunctionPointers[1] = {
+    [0] = EndScreenSamusPosing
+};
+
+static CreditsFunc_T sEndingImageFunctionPointers[1] = {
+    [0] = EndingImageDisplay
+};
+
+static CreditsFunc_T sUnlockedOptionsFunctionPointers[2] = {
+    [0] = UnlockedOptionsPopUp,
+    [1] = UnlockedOptionsPopUp
+};
 
 /**
  * @brief 84c34 | 48 | Checks if an ending letter should display

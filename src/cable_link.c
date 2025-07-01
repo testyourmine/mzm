@@ -9,13 +9,19 @@
 
 #include "data/cable_link_data.h"
 #include "data/io_transfer_data.h"
-#include "data/internal_io_transfer_data.h"
 
 #include "constants/cable_link.h"
 
 #include "structs/cable_link.h"
 #include "structs/game_state.h"
 #include "structs/multiboot.h"
+
+static u8* sPlayerNumbersStringPointers[4] = {
+    [0] = (u8*)sPlayer1String,
+    [1] = (u8*)sPlayer2String,
+    [2] = (u8*)sPlayer3String,
+    [3] = (u8*)sPlayer4String,
+};
 
 /**
  * @brief 88ea0 | 270 | Handles sending multiboot and fusion gallery transfer roms

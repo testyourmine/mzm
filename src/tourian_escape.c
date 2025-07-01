@@ -10,7 +10,6 @@
 #include "data/shortcut_pointers.h"
 #include "data/tourian_escape_data.h"
 #include "data/cutscenes/story_text_cutscene_data.h"
-#include "data/internal_tourian_escape_data.h"
 
 #include "constants/audio.h"
 #include "constants/connection.h"
@@ -20,6 +19,23 @@
 #include "structs/bg_clip.h"
 #include "structs/display.h"
 #include "structs/tourian_escape.h"
+
+typedef u8 (*TourianEscapeFunc_T)(void);
+
+static TourianEscapeFunc_T sTourianEscapeSubroutinePointers[12] = {
+    [0]  = TourianEscapeZebesExploding,
+    [1]  = TourianEscapeSamusInHerShip,
+    [2]  = TourianEscapeSamusLookingAround,
+    [3]  = TourianEscapeSamusSurrounded,
+    [4]  = TourianEscapeSamusFlyingIn,
+    [5]  = TourianEscapeSamusChasedByPirates,
+    [6]  = TourianEscapeSamusChasedByPiratesFiring,
+    [7]  = TourianEscapeSamusGettingShot,
+    [8]  = TourianEscapeSamusGoingToCrash,
+    [9]  = TourianEscapeSamusCrashing,
+    [10] = TourianEscapeSamusLookingAtSky,
+    [11] = TourianEscapeSamusLookingAtMotherShip
+};
 
 /**
  * @brief 81248 | d8 | V-blank for the tourian escape
