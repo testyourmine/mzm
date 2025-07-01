@@ -13,16 +13,6 @@ Derived from this there is the following requirement for contributors:
 - Contributors *MUST NOT* study or refer to any code owned by Nintendo or other
   third parties.
 
-# Decompiling
-
-Before starting any decompilation, make sure the project builds correctly:
-
-```
-$ make check
-```
-
-Then these are the rough steps to decompile a function:
-
 # Submitting a Change
 1. Clone this repository and follow the setup instructions if you haven't already
 2. For any set of changes you want to submit, create a branch off of `master` (make sure you're on the latest commit)
