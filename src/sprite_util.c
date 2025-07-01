@@ -578,7 +578,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                     break;
 
                 case SSC_HURTS_SAMUS_IGNORE_INVINCIBILITY:
-                    // Hurts samus, ignore Samus' invincibility timer
+                    // Hurts samus, ignore Samus's invincibility timer
                     if (SpriteUtilSpriteTakeDamageFromSamusContact(pSprite, pData) == DCT_NONE)
                     {
                         if (SpriteUtilTakeDamageFromSprite(TRUE, pSprite, 1))
@@ -1362,7 +1362,7 @@ void unk_f9e4(s16 movement)
 }
 
 /**
- * @brief fa78 | 150 | Calcultes the new oam rotation to rotate a sprite towards a target
+ * @brief fa78 | 150 | Calculates the new oam rotation to rotate a sprite towards a target
  * 
  * @param rotation Current rotation
  * @param targetY Target Y
@@ -2102,7 +2102,7 @@ void SpriteUtilUnfreezeSecondarySprites(u8 spriteId, u8 ramSlot)
 }
 
 /**
- * @brief 1025c | 44 | Gradual refill of samus' energy
+ * @brief 1025c | 44 | Gradual refill of Samus's energy
  * 
  * @return u8 bool, ongoing
  */
@@ -2134,7 +2134,7 @@ u8 SpriteUtilRefillEnergy(void)
 }
 
 /**
- * @brief 102a0 | 44 | Gradual refill of samus' missiles
+ * @brief 102a0 | 44 | Gradual refill of Samus's missiles
  * 
  * @return u8 bool, ongoing
  */
@@ -2166,7 +2166,7 @@ u8 SpriteUtilRefillMissiles(void)
 }
 
 /**
- * @brief 102ea | 44 | Gradual refill of samus' super missiles
+ * @brief 102ea | 44 | Gradual refill of Samus's super missiles
  * 
  * @return u8 bool, ongoing
  */
@@ -2197,7 +2197,7 @@ u8 SpriteUtilRefillSuperMissiles(void)
 }
 
 /**
- * @brief 10328 | 44 | Gradual refill of samus' power bombs
+ * @brief 10328 | 44 | Gradual refill of Samus's power bombs
  * 
  * @return u8 bool, ongoing
  */
@@ -2431,7 +2431,7 @@ u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struc
                 return dct;
             }
 
-            // Reset collision timer, if the enemy wasn't killed by the sudo screw then samus will immediately take damage
+            // Reset collision timer, if the enemy wasn't killed by the pseudo screw then samus will immediately take damage
             pSprite->ignoreSamusCollisionTimer = 0;
         }
 
@@ -3509,7 +3509,7 @@ void SpriteUtilSyncCurrentSpritePositionWithSubSpriteData1PositionAndOam(void)
 }
 
 /**
- * @brief 113b0 | 60 | Syncronises the current sprite position with the sub sprite 1 (X/Y coords and X/Y OAM offsets)
+ * @brief 113b0 | 60 | Synchronizes the current sprite position with the sub sprite 1 (X/Y coords and X/Y OAM offsets)
  * 
  */
 void SpriteUtilUpdateSubSprite2Anim(void)
@@ -3527,7 +3527,7 @@ void SpriteUtilUpdateSubSprite2Anim(void)
 }
 
 /**
- * @brief 1144c | 60 | Syncronises the current sprite position with the sub sprite 2 (X/Y coords and X/Y OAM offsets)
+ * @brief 1144c | 60 | Synchronizes the current sprite position with the sub sprite 2 (X/Y coords and X/Y OAM offsets)
  * 
  */
 void SpriteUtilSyncCurrentSpritePositionWithSubSpriteData2PositionAndOAM(void)
@@ -3579,7 +3579,7 @@ void SpriteUtilSyncCurrentSpritePositionWithSubSpritePosition(struct SubSpriteDa
 }
 
 /**
- * @brief 11520 | 5c | Syncronises the current sprite position with the sub sprite in parameter (X/Y coords and X/Y OAM offsets)
+ * @brief 11520 | 5c | Synchronizes the current sprite position with the sub sprite in parameter (X/Y coords and X/Y OAM offsets)
  * 
  * @param pSub Sub Sprite Data Pointer
  */

@@ -1655,7 +1655,7 @@ void UpdateSuitType(u8 newSuit)
 /**
  * @brief 6ff4c | d4 | Draws the status screen row provided
  * 
- * @param u8 row Row to draw
+ * @param row Row to draw
  * @return u32 bool, done drawing
  */
 u32 StatusScreenDrawItems(u8 row)

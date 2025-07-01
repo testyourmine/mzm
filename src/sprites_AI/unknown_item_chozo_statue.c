@@ -602,7 +602,7 @@ static void UnknownItemChozoStatuePartArmCheckGrabSamusHint(void)
 }
 
 /**
- * @brief 158b4 | 30 | Synchronizes Samus' position with the hand position
+ * @brief 158b4 | 30 | Synchronizes Samus's position with the hand position
  * 
  */
 static void UnknownItemChozoStatuePartSyncSamusPosition(void)
@@ -1133,7 +1133,7 @@ void UnknownItemChozoStatueRefill(void)
  * @brief 16128 | 104 | Updates the clipdata for a standing chozo statue
  * 
  * @param bodyCaa Clipdata affecting action (for the body)
- * @param handCaa Clidpata Affecting Action (for the hand)
+ * @param handCaa Clipdata affecting action (for the hand)
  */
 void ChozoStatueStandingChangeClipdata(u8 bodyCaa, u8 handCaa)
 {

@@ -646,9 +646,9 @@ void unk_3bd0(u16 musicTrack, u16 timer)
 /**
  * @brief 3c20 | 80 | Plays a fading music
  * 
- * @param musicTrack 
- * @param timer 
- * @param priority 
+ * @param musicTrack Music track
+ * @param timer Timer
+ * @param priority Priority
  */
 void CheckPlayFadingMusic(u16 musicTrack, u16 timer, u8 priority)
 {
@@ -727,7 +727,7 @@ void InsertMusicAndQueueCurrent(u16 musicTrack, u8 isNotInterrupting)
 }
 
 /**
- * @brief 3d4c | d8 | Replays the current music that was queue'd
+ * @brief 3d4c | d8 | Replays the current music that was queued
  * 
  * @param queueFlags Queue flags
  */

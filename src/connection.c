@@ -331,7 +331,7 @@ u32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
 
             // Compute the vertical offset of Samus within the door
             // Start from the bottom of the door (+ 1 to align to the bottom of the door)
-            // Then remove samus' position
+            // Then remove Samus's position
             gSamusDoorPositionOffset = BLOCK_TO_SUB_PIXEL(pDoor->yEnd + 1) - gSamusData.yPosition - 1;
             ConnectionProcessDoorType(pDoor->type);
 

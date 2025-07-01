@@ -111,7 +111,7 @@ u8 ProjectileCheckNumberOfProjectiles(u8 type, u8 limit)
 /**
  * @brief 4ede4 | a4 | Tries to initialize a projectile with the given parameters
  * 
- * @param type Proectile Type
+ * @param type Projectile Type
  * @param yPosition Y Position
  * @param xPosition X Position
  * @return u8 1 if could init, 0 otherwise
@@ -867,7 +867,7 @@ void ProjectileMove(struct ProjectileData* pProj, u8 distance)
                 pProj->xPosition -= distance;
     }
 
-    // Check add samus' velocity if moving in the same direction
+    // Check add Samus's velocity if moving in the same direction
     samusVelocity = gSamusData.xVelocity;
     leftVelocity = VELOCITY_TO_SUB_PIXEL(gSamusData.xVelocity);
     rightVelocity = leftVelocity;

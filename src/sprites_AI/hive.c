@@ -301,7 +301,7 @@ static void HiveRootsInit(void)
 }
 
 /**
- * @brief 24e54 | 24 | Syncronises the position of the roots with the hive
+ * @brief 24e54 | 24 | Synchronizes the position of the roots with the hive
  * 
  */
 static void HiveRootsIdle(void)

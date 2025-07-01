@@ -138,7 +138,7 @@ u32 PauseScreenEasySleepSubroutine(void)
 }
 
 /**
- * @brief 72144 | c0 | Calculates the X and Y coordiantes of the Chozo statue hint
+ * @brief 72144 | c0 | Calculates the X and Y coordinates of the Chozo statue hint
  * 
  * @param pHintMapData Chozo statue hint map data pointer
  * @return u32 New position (YYXX, in bytes)
@@ -911,7 +911,7 @@ void ChozoStatueHintDeterminePath(u8 param_1)
  * @brief 73050 | 7c | Checks if a target is enabled
  * 
  * @param target Target
- * @return s32 -1 = not activated, 0 = activated, 1 = de-activated
+ * @return s32 -1 = not activated, 0 = activated, 1 = deactivated
  */
 s32 ChozoStatueHintCheckTargetIsActivated(u8 target)
 {
@@ -997,7 +997,7 @@ void PauseScreenCheckAreasWithTargets(void)
 }
 
 /**
- * @brief 73150 | f8 | Setups the boss flame data
+ * @brief 73150 | f8 | Sets up the boss flame data
  * 
  */
 void PauseScreenDrawBossFlames(void)

@@ -834,7 +834,7 @@ static void ChozoStatuePartArmCheckGrabSamusHint(void)
 }
 
 /**
- * @brief 14834 | 30 | Synchronizes Samus' position with the hand position
+ * @brief 14834 | 30 | Synchronizes Samus's position with the hand position
  * 
  */
 static void ChozoStatuePartSyncSamusPosition(void)

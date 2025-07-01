@@ -21,7 +21,7 @@
 #include "structs/sprite.h"
 
 /**
- * @brief 20c7c | 84 | Changes the current clipdata affecting action and calls ProcessClipdata
+ * @brief 20c7c | 84 | Changes the current clipdata affecting action and calls ClipdataProcess
  * Used to place solid clipdata on the left part of Deorem to prevent damage boosting
  * and to remove this solid clipdata when it dies
  * 
@@ -58,7 +58,7 @@ void DeoremChangeLeftCcaa(u8 caa)
 }
 
 /**
- * @brief 20d00 | 90 | Changes the current clipdata affecting action and calls ProcessClipdata
+ * @brief 20d00 | 90 | Changes the current clipdata affecting action and calls ClipdataProcess
  * Used to place solid clipdata on the right part of Deorem to prevent damage boosting
  * and to remove this solid clipdata when it dies
  * 
@@ -919,7 +919,7 @@ void DeoremRetracting(void)
 }
 
 /**
- * @brief 21c70 | f4 | Handles Deorem throwing thorns (doesn't handle the thorn throwing, juste the idle state)
+ * @brief 21c70 | f4 | Handles Deorem throwing thorns (doesn't handle the thorn throwing, just the idle state)
  * 
  */
 void DeoremThrowingThorns(void)

@@ -41,7 +41,7 @@
  * @param targetBldAlpha The target alpha blend level
  * @param bldAlphaStepLevel The amount to change alpha blend by
  * @param bldAlphaStepDelayThreshold Amount of time between each fade step
- * @return u32 bool, suceeded
+ * @return u32 bool, succeeded
  */
 u32 PauseScreenInitFading(u16 targetBldAlpha, u8 bldAlphaStepLevel, s8 bldAlphaStepDelayThreshold)
 {
@@ -2443,7 +2443,7 @@ void PauseScreenInit(void)
 }
 
 /**
- * @brief 6aed4 | 138 | Determines which maps are viewables
+ * @brief 6aed4 | 138 | Determines which maps are viewable
  * 
  */
 void PauseScreenDetermineMapsViewable(void)
@@ -2943,7 +2943,7 @@ u32 PauseScreenCallCurrentSubroutine(void)
 }
 
 /**
- * @brief 6b504 | 168 | Movement hanhdler for the debug cursor
+ * @brief 6b504 | 168 | Movement handler for the debug cursor
  * 
  * @param allowOverflow Allow screen overflow
  */
@@ -3350,7 +3350,7 @@ s32 PauseScreenStatusScreenInit(void)
 }
 
 /**
- * @brief 6ba34 | 200 | Un-initializes the status screen
+ * @brief 6ba34 | 200 | Uninitializes the status screen
  * 
  * @return s32 bool, ended (-1 and 0)
  */
@@ -3576,7 +3576,7 @@ s32 PauseScreenEasySleepInit(void)
 }
 
 /**
- * @brief 6bf08 | 1d8 | Un-initializes the status screen
+ * @brief 6bf08 | 1d8 | Uninitializes the easy sleep screen
  * 
  * @return s32 bool, ended
  */

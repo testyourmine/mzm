@@ -768,7 +768,7 @@ u8 BgClipCheckOpeningHatch(u16 xPosition, u16 yPosition)
 }
 
 /**
- * @brief 5b0a0 | 74 | Regsiters a collected item in the save
+ * @brief 5b0a0 | 74 | Registers a collected item in the save
  * 
  * @param xPosition X position
  * @param yPosition Y position

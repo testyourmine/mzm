@@ -457,7 +457,7 @@ static void LinkCheckParentOrChild(void)
 }
 
 /**
- * @brief 8a4f8 | 50 | Load timer 3 if all GBA's are ready
+ * @brief 8a4f8 | 50 | Load timer 3 if all GBAs are ready
  * 
  */
 static void LinkInitTimer(void)
@@ -520,7 +520,7 @@ static void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
 }
 
 /**
- * @brief 8a628 | 108 | Get commands from recieve queue
+ * @brief 8a628 | 108 | Get commands from receive queue
  * 
  * @param recvCmds A queue of received commands
  */

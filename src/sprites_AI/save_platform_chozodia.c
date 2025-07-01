@@ -534,7 +534,7 @@ static void SavePlatformChozodiaCheckMessageBannerOut(void)
 }
 
 /**
- * @brief 46e60 | 24 | andles the delay before a save platform (Chozodia) releases Samus
+ * @brief 46e60 | 24 | Handles the delay before a save platform (Chozodia) releases Samus
  * 
  */
 static void SavePlatformChozodiaDelayBeforeReleasingSamus(void)

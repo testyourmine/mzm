@@ -260,7 +260,7 @@ static void MechaRidleyLoadMissilesGfx(void)
 }
 
 /**
- * @brief 4bcd0 | 128 | Update the height of mecha ridley based on samus' relative position
+ * @brief 4bcd0 | 128 | Update the height of mecha ridley based on Samus's relative position
  * 
  * @return u8 bool, changing height
  */

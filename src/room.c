@@ -581,7 +581,7 @@ void RoomSetBackgroundScrolling(void)
 }
 
 /**
- * @brief 56b28 | 1f0 | Setups the initial tilemapfor the BG specified
+ * @brief 56b28 | 1f0 | Sets up the initial tilemap for the BG specified
  * 
  * @param bgNumber Background number
  */
