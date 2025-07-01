@@ -997,7 +997,7 @@ void PauseScreenCheckAreasWithTargets(void)
 }
 
 /**
- * @brief 73150 | f8 | Setups the boss flame data
+ * @brief 73150 | f8 | Sets up the boss flame data
  * 
  */
 void PauseScreenDrawBossFlames(void)
