@@ -1429,10 +1429,12 @@ SECTIONS {
         src/data/shortcut_pointers.o(.rodata);
         src/data/cable_link_data.o(.rodata);
         sTransferRom_After = .;
-        src/data/samus_sprites_pointers.o(.rodata);
     } >rom
 
     .data : ALIGN(2) {
+        src/samus.o(.data);
+        src/sprite.o(.data);
+
         src/sprites_AI/chozo_statue.o(.data);
         src/sprites_AI/unknown_item_chozo_statue.o(.data);
         src/sprites_AI/kraid.o(.data);
