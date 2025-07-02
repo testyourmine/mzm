@@ -5,7 +5,6 @@
 
 #include "data/sprites/mecha_ridley.h"
 #include "data/sprite_data.h"
-#include "data/frame_data_pointers.h"
 
 #include "constants/audio.h"
 #include "constants/clipdata.h"
@@ -149,6 +148,72 @@ if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
  * 5 : Left arm ram slot
  */
 
+
+static const struct FrameData* sMechaRidleyFrameDataPointers[MECHA_RIDLEY_OAM_END] = {
+    [MECHA_RIDLEY_OAM_TAIL] = sMechaRidleyPartOam_Tail,
+    [MECHA_RIDLEY_OAM_RING] = sMechaRidleyPartOam_Ring,
+    [MECHA_RIDLEY_OAM_COVER] = sMechaRidleyPartOam_Cover,
+    [MECHA_RIDLEY_OAM_TORSO] = sMechaRidleyPartOam_Torso,
+    [MECHA_RIDLEY_OAM_CORE_IDLE] = sMechaRidleyOam_Idle,
+    [MECHA_RIDLEY_OAM_HEAD_IDLE] = sMechaRidleyPartOam_HeadIdle,
+    [MECHA_RIDLEY_OAM_HEAD_OPENING_MOUTH] = sMechaRidleyPartOam_HeadOpeningMouth,
+    [MECHA_RIDLEY_OAM_HEAD_SPITTING_FIREBALLS] = sMechaRidleyPartOam_HeadSpittingFireballs,
+    [MECHA_RIDLEY_OAM_HEAD_CLOSING_MOUTH] = sMechaRidleyPartOam_HeadClosingMouth,
+    [MECHA_RIDLEY_OAM_EYE_IDLE] = sMechaRidleyPartOam_EyeIdle,
+    [MECHA_RIDLEY_OAM_EYE_GLOWING] = sMechaRidleyPartOam_EyeGlowing,
+    [MECHA_RIDLEY_OAM_EYE_SHOOTING_LASER_FORWARD] = sMechaRidleyPartOam_EyeShootingLaserForward,
+    [MECHA_RIDLEY_OAM_EYE_SHOOTING_LASER_SLIGHTLY_DOWN] = sMechaRidleyPartOam_EyeShootingLaserSlightlyDown,
+    [MECHA_RIDLEY_OAM_EYE_SHOOTING_LASER_DOWN] = sMechaRidleyPartOam_EyeShootingLaserDown,
+    [MECHA_RIDLEY_OAM_EYE_SHOOTING_LASER_SLIGHTLY_UP] = sMechaRidleyPartOam_EyeShootingLaserSlightlyUp,
+    [MECHA_RIDLEY_OAM_EYE_SHOOTING_LASER_UP] = sMechaRidleyPartOam_EyeShootingLaserUp,
+    [MECHA_RIDLEY_OAM_EYE_INACTIVE] = sMechaRidleyPartOam_EyeInactive,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_CRAWLING_FORWARD] = sMechaRidleyPartOam_LeftArmCrawlingForward,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_CRAWLING_FORWARD] = sMechaRidleyPartOam_RightArmCrawlingForward,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_HOLDING_UP] = sMechaRidleyPartOam_LeftArmHoldingUp,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_HOLDING_UP] = sMechaRidleyPartOam_RightArmHoldingUp,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_HELD_UP] = sMechaRidleyPartOam_LeftArmHeldUp,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_HELD_UP] = sMechaRidleyPartOam_RightArmHeldUp,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_LAYING_DOWN] = sMechaRidleyPartOam_LeftArmLayingDown,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_LAYING_DOWN] = sMechaRidleyPartOam_RightArmLayingDown,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_TREMBLING] = sMechaRidleyPartOam_LeftArmTrembling,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_TREMBLING] = sMechaRidleyPartOam_RightArmTrembling,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_IDLE] = sMechaRidleyPartOam_LeftArmIdle,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_IDLE] = sMechaRidleyPartOam_RightArmIdle,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_SWINGING] = sMechaRidleyPartOam_LeftArmSwinging,
+    [MECHA_RIDLEY_OAM_NECK_LOW] = sMechaRidleyPartOam_NeckLow,
+    [MECHA_RIDLEY_OAM_NECK_MIDDLE] = sMechaRidleyPartOam_NeckMiddle,
+    [MECHA_RIDLEY_OAM_NECK_HIGH] = sMechaRidleyPartOam_NeckHigh,
+    [MECHA_RIDLEY_OAM_NECK_ROTATE_LOW] = sMechaRidleyPartOam_NeckRotateLow,
+    [MECHA_RIDLEY_OAM_NECK_ROTATE_MIDDLE] = sMechaRidleyPartOam_NeckRotateMiddle,
+    [MECHA_RIDLEY_OAM_NECK_ROTATE_HIGH] = sMechaRidleyPartOam_NeckRotateHigh,
+    [MECHA_RIDLEY_OAM_NECK_LOW_TO_MIDDLE] = sMechaRidleyPartOam_NeckLowToMiddle,
+    [MECHA_RIDLEY_OAM_NECK_MIDDLE_TO_HIGH] = sMechaRidleyPartOam_NeckMiddleToHigh,
+    [MECHA_RIDLEY_OAM_NECK_HIGH_TO_MIDDLE] = sMechaRidleyPartOam_NeckHighToMiddle,
+    [MECHA_RIDLEY_OAM_NECK_MIDDLE_TO_LOW] = sMechaRidleyPartOam_NeckMiddleToLow,
+    [MECHA_RIDLEY_OAM_NECK_LOW_TO_HIGH] = sMechaRidleyPartOam_NeckLowToHigh,
+    [MECHA_RIDLEY_OAM_NECK_HIGH_TO_LOW] = sMechaRidleyPartOam_NeckHighToLow,
+    [MECHA_RIDLEY_OAM_NECK_LOW_2] = sMechaRidleyPartOam_NeckLow_2,
+    [MECHA_RIDLEY_OAM_NECK_MIDDLE_2] = sMechaRidleyPartOam_NeckMiddle_2,
+    [MECHA_RIDLEY_OAM_NECK_HIGH_2] = sMechaRidleyPartOam_NeckHigh_2,
+    [MECHA_RIDLEY_OAM_MISSILE_LAUNCHER_CLOSED] = sMechaRidleyPartOam_MissileLauncherClosed,
+    [MECHA_RIDLEY_OAM_MISSILE_LAUNCHER_OPENING] = sMechaRidleyPartOam_MissileLauncherOpening,
+    [MECHA_RIDLEY_OAM_MISSILE_LAUNCHER_OPENED] = sMechaRidleyPartOam_MissileLauncherOpened,
+    [MECHA_RIDLEY_OAM_MISSILE_LAUNCHER_CLOSING] = sMechaRidleyPartOam_MissileLauncherClosing,
+    [MECHA_RIDLEY_OAM_MISSILE] = sMechaRidleyMissileOam,
+    [MECHA_RIDLEY_OAM_FIREBALL] = sMechaRidleyFireballOam,
+    [MECHA_RIDLEY_OAM_LASER_FORWARD] = sMechaRidleyLaserOam_Forward,
+    [MECHA_RIDLEY_OAM_LASER_SLIGHTLY_DOWN] = sMechaRidleyLaserOam_SlightlyDown,
+    [MECHA_RIDLEY_OAM_LASER_DOWN] = sMechaRidleyLaserOam_Down,
+    [MECHA_RIDLEY_OAM_LASER_SLIGHTLY_UP] = sMechaRidleyLaserOam_SlightlyUp,
+    [MECHA_RIDLEY_OAM_LASER_UP] = sMechaRidleyLaserOam_Up,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_DYING] = sMechaRidleyPartOam_LeftArmDying,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_DYING] = sMechaRidleyPartOam_RightArmDying,
+    [MECHA_RIDLEY_OAM_NECK_DYING] = sMechaRidleyPartOam_NeckDying,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_CRAWLING_BACKWARDS] = sMechaRidleyPartOam_LeftArmCrawlingBackwards,
+    [MECHA_RIDLEY_OAM_RIGHT_ARM_CRAWLING_BACKWARDS] = sMechaRidleyPartOam_RightArmCrawlingBackwards,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_SWINGING_AT_GROUND] = sMechaRidleyPartOam_LeftArmSwingingAtGround,
+    [MECHA_RIDLEY_OAM_LEFT_ARM_SWINGING_AT_CLOSE_GROUND] = sMechaRidleyPartOam_LeftArmSwingingAtCloseGround
+};
 
 /**
  * @brief 4ba9c | 68 | Sync the sub sprites of Mecha ridley

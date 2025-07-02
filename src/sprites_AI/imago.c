@@ -1,7 +1,6 @@
 #include "sprites_AI/imago.h"
 #include "macros.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/imago.h"
 #include "data/sprite_data.h"
 
@@ -76,6 +75,26 @@ enum ImagoMovementStage {
 
 #define IMAGO_EGG_PART_NORMAL 0x0
 #define IMAGO_EGG_PART_LAST 0x80
+
+static const struct FrameData* sImagoFrameDataPointers[IMAGO_OAM_END] = {
+    [IMAGO_OAM_BODY_IDLE] = sImagoPartOam_BodyIdle,
+    [IMAGO_OAM_BODY_GROWLING] = sImagoPartOam_BodyGrowling,
+    [IMAGO_OAM_BROKEN_STINGER] = sImagoOam_BrokenStinger,
+    [IMAGO_OAM_LEFT_WING_IDLE] = sImagoPartOam_LeftWingIdle,
+    [IMAGO_OAM_LEFT_WING_SHOOTING_NEEDLES] = sImagoPartOam_LeftWingShootingNeedles,
+    [IMAGO_OAM_LEFT_WING_DYING] = sImagoPartOam_LeftWingDying,
+    [IMAGO_OAM_RIGHT_WING_IDLE] = sImagoPartOam_RightWingIdle,
+    [IMAGO_OAM_RIGHT_WING_SHOOTING_NEEDLES] = sImagoPartOam_RightWingShootingNeedles,
+    [IMAGO_OAM_RIGHT_WING_DYING] = sImagoPartOam_RightWingDying,
+    [IMAGO_OAM_CORE] = sImagoPartOam_Core,
+    [IMAGO_OAM_FLYING] = sImagoOam_Flying,
+    [IMAGO_OAM_SHOOTING_NEEDLES] = sImagoOam_ShootingNeedles,
+    [IMAGO_OAM_RECHARGING_NEEDLES] = sImagoOam_RechargingNeedles,
+    [IMAGO_OAM_DAMAGED_STINGER] = sImagoDamagedStingerOam,
+    [IMAGO_OAM_NEEDLE] = sImagoNeedleOam,
+    [IMAGO_OAM_DAMAGED_STINGER_UNUSED] = sImagoDamagedStingerOam_Unused,
+    [IMAGO_OAM_EGG_BREAKING] = sImagoEggOam_Breaking
+};
 
 /**
  * @brief 41e4c | 88 | Sync the sub sprites of Imago

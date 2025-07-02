@@ -1,7 +1,6 @@
 #include "sprites_AI/chozo_statue.h"
 #include "sprites_AI/unknown_item_chozo_statue.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/chozo_statue.h"
 
 #include "constants/audio.h"
@@ -29,6 +28,25 @@
 #define CHOZO_BALL_OFFSET_X (BLOCK_SIZE - EIGHTH_BLOCK_SIZE)
 
 #define DELAY_BEFORE_HINT (CONVERT_SECONDS(2.f))
+
+static const struct FrameData* sChozoStatueFrameDataPointers[CHOZO_STATUE_OAM_END] = {
+    [CHOZO_STATUE_OAM_LEG_STANDING] = sChozoStatuePartOam_LegStanding,
+    [CHOZO_STATUE_OAM_LEG_SITTING] = sChozoStatuePartOam_LegSitting,
+    [CHOZO_STATUE_OAM_LEG_SEATED] = sChozoStatuePartOam_LegSeated,
+    [CHOZO_STATUE_OAM_IDLE] = sChozoStatueOam_Idle,
+    [CHOZO_STATUE_OAM_EYE_OPENED] = sChozoStatuePartOam_EyeOpened,
+    [CHOZO_STATUE_OAM_EYE_CLOSING] = sChozoStatuePartOam_EyeClosing,
+    [CHOZO_STATUE_OAM_EYE_OPENING] = sChozoStatuePartOam_EyeOpening,
+    [CHOZO_STATUE_OAM_EYE_CLOSED] = sChozoStatuePartOam_EyeClosed,
+    [CHOZO_STATUE_OAM_ARM_IDLE] = sChozoStatuePartOam_ArmIdle,
+    [CHOZO_STATUE_OAM_ARM_GLOW] = sChozoStatuePartOam_ArmGlow,
+    [CHOZO_STATUE_OAM_ARM_SAMUS_GRABBED] = sChozoStatuePartOam_ArmSamusGrabbed,
+    [CHOZO_STATUE_OAM_BALL_NORMAL_CLOSED] = sChozoBallOam_NormalClosed,
+    [CHOZO_STATUE_OAM_BALL_NORMAL_REVEALING] = sChozoBallOam_NormalRevealing,
+    [CHOZO_STATUE_OAM_BALL_NORMAL_REVEALED] = sChozoBallOam_NormalRevealed,
+    [CHOZO_STATUE_OAM_REFILL] = sChozoStatueRefillOam,
+    [CHOZO_STATUE_OAM_REFILL_GLOW_IDLE] = sChozoStatuePartOam_GlowIdle,
+};
 
 /**
  * @brief 13850 | 88 | Synchronize the sub sprites of a chozo statue

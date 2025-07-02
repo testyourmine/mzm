@@ -1,7 +1,6 @@
 #include "sprites_AI/crocomire.h"
 #include "macros.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/crocomire.h"
 #include "data/sprite_data.h"
 
@@ -16,6 +15,34 @@
 
 #define CROCOMIRE_PART_POSE_IDLE 0x9
 #define CROCOMIRE_PART_POSE_DYING 0x67
+
+static const struct FrameData* sCrocomireFrameDataPointers[CROCOMIRE_OAM_END] = {
+    [CROCOMIRE_OAM_PART_BODY_IDLE] = sCrocomirePartOam_BodyIdle,
+    [CROCOMIRE_OAM_PART_BODY_ANGRY] = sCrocomirePartOam_BodyAngry,
+    [CROCOMIRE_OAM_IDLE] = sCrocomireOam_Idle,
+    [CROCOMIRE_OAM_SCREAMING] = sCrocomireOam_Screaming,
+    [CROCOMIRE_OAM_DYING] = sCrocomireOam_Dying,
+    [CROCOMIRE_OAM_PART_RIGHT_ARM_IDLE] = sCrocomirePartOam_RightArmIdle,
+    [CROCOMIRE_OAM_PART_LEFT_ARM_IDLE] = sCrocomirePartOam_LeftArmIdle,
+    [CROCOMIRE_OAM_PART_LEFT_ARM_SCREAMING] = sCrocomirePartOam_LeftArmScreaming,
+    [CROCOMIRE_OAM_PART_RIGHT_ARM_WALKING_FORWARD] = sCrocomirePartOam_RightArmWalkingForward,
+    [CROCOMIRE_OAM_PART_LEFT_ARM_WALKING_FORWARD] = sCrocomirePartOam_LeftArmWalkingForward,
+    [CROCOMIRE_OAM_PART_RIGHT_ARM_WALKING_BACKWARDS] = sCrocomirePartOam_RightArmWalkingBackwards,
+    [CROCOMIRE_OAM_PART_LEFT_ARM_WALKING_BACKWARDS] = sCrocomirePartOam_LeftArmWalkingBackwards,
+    [CROCOMIRE_OAM_PART_RIGHT_ARM_DYING] = sCrocomirePartOam_RightArmDying,
+    [CROCOMIRE_OAM_PART_LEFT_ARM_DYING] = sCrocomirePartOam_LeftArmDying,
+    [CROCOMIRE_OAM_PART_LEGS_IDLE] = sCrocomirePartOam_LegsIdle,
+    [CROCOMIRE_OAM_PART_LEGS_WALKING_FORWARD] = sCrocomirePartOam_LegsWalkingForward,
+    [CROCOMIRE_OAM_PART_LEGS_WALKING_BACKWARDS] = sCrocomirePartOam_LegsWalkingBackwards,
+    [CROCOMIRE_OAM_PART_LEGS_DYING] = sCrocomirePartOam_LegsDying,
+    [CROCOMIRE_OAM_PART_TONGUE] = sCrocomirePartOam_Tongue,
+    [CROCOMIRE_OAM_PART_TONGUE_DYING] = sCrocomirePartOam_TongueDying,
+    [CROCOMIRE_OAM_PROJECTILE] = sCrocomireProjectileOAM,
+    [CROCOMIRE_OAM_PART_307028] = sCrocomirePartOam_307028,
+    [CROCOMIRE_OAM_PART_307058] = sCrocomirePartOam_307058,
+    [CROCOMIRE_OAM_PART_307088] = sCrocomirePartOam_307088,
+    [CROCOMIRE_OAM_PART_3070b8] = sCrocomirePartOam_3070b8,
+};
 
 /**
  * @brief 43d88 | 68 | Synchronize the sub sprites of Crocomire

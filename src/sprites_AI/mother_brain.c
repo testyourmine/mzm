@@ -2,7 +2,6 @@
 #include "macros.h"
 #include "gba/display.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/mother_brain.h"
 #include "data/sprites/zebetite_and_cannon.h"
 #include "data/sprite_data.h"
@@ -53,6 +52,19 @@ enum MotherBrainFightStage {
 
 // Damage threshold at which mother closes her eye
 #define MOTHER_BRAIN_DAMAGE_THRESHOLD (SUPER_MISSILE_DAMAGE)
+
+static const struct FrameData* sMotherBrainFrameDataPointers[MOTHER_BRAIN_OAM_END] = {
+    [MOTHER_BRAIN_OAM_IDLE] = sMotherBrainOam_Idle,
+    [MOTHER_BRAIN_OAM_CHARGING_BEAM] = sMotherBrainOam_ChargingBeam,
+    [MOTHER_BRAIN_OAM_EYE_CLOSED] = sMotherBrainPartOam_EyeClosed,
+    [MOTHER_BRAIN_OAM_2fa934] = sMotherBrainPartOam_2fa934,
+    [MOTHER_BRAIN_OAM_EYE_OPENING] = sMotherBrainPartOam_EyeOpening,
+    [MOTHER_BRAIN_OAM_2fa984] = sMotherBrainPartOam_2fa984,
+    [MOTHER_BRAIN_OAM_EYE_DYING] = sMotherBrainPartOam_EyeDying,
+    [MOTHER_BRAIN_OAM_BOTTOM] = sMotherBrainPartOam_Bottom,
+    [MOTHER_BRAIN_OAM_BEAM_SPAWNING] = sMotherBrainPartOam_BeamSpawning,
+    [MOTHER_BRAIN_OAM_BEAM_MOVING] = sMotherBrainBeamOam_Moving
+};
 
 /**
  * @brief 3c964 | 68 | Synchronize the sub sprites of Mother Brain

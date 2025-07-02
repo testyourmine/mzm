@@ -1,7 +1,6 @@
 #include "sprites_AI/imago_larva.h"
 #include "macros.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/imago_larva.h"
 #include "data/sprite_data.h"
 
@@ -46,6 +45,32 @@
 #define IMAGO_LARVA_HEAD_HITBOX (BLOCK_SIZE + HALF_BLOCK_SIZE - EIGHTH_BLOCK_SIZE)
 #define IMAGO_LARVA_SHELL_TAIL_HITBOX (BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE)
 #define IMAGO_LARVA_SHELL_HEAD_HITBOX (BLOCK_SIZE * 2 + QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE)
+
+static const struct FrameData* sImagoLarvaFrameDataPointers[IMAGO_LARVA_OAM_END] = {
+    [IMAGO_LARVA_OAM_SHELL_ATTACKING] = sImagoLarvaPartOam_ShellAttacking,
+    [IMAGO_LARVA_OAM_SHELL_IDLE] = sImagoLarvaPartOam_ShellIdle,
+    [IMAGO_LARVA_OAM_SHELL_RETREATING] = sImagoLarvaPartOam_ShellRetreating,
+    [IMAGO_LARVA_OAM_SHELL_DYING] = sImagoLarvaPartOam_ShellDying,
+    [IMAGO_LARVA_OAM_CLAWS_ATTACKING] = sImagoLarvaPartOam_ClawsAttacking,
+    [IMAGO_LARVA_OAM_CLAWS_IDLE] = sImagoLarvaPartOam_ClawsIdle,
+    [IMAGO_LARVA_OAM_CLAWS_RETREATING] = sImagoLarvaPartOam_ClawsRetreating,
+    [IMAGO_LARVA_OAM_CLAWS_TAKING_DAMAGE] = sImagoLarvaPartOam_ClawsTakingDamage,
+    [IMAGO_LARVA_OAM_LEFT_DOT_APPEARING] = sImagoLarvaPartOam_LeftDotAppearing,
+    [IMAGO_LARVA_OAM_MIDDLE_DOT_APPEARING] = sImagoLarvaPartOam_MiddleDotAppearing,
+    [IMAGO_LARVA_OAM_RIGHT_DOT_APPEARING] = sImagoLarvaPartOam_RightDotAppearing,
+    [IMAGO_LARVA_OAM_LEFT_DOT_VISIBLE] = sImagoLarvaPartOam_LeftDotVisible,
+    [IMAGO_LARVA_OAM_MIDDLE_DOT_VISIBLE] = sImagoLarvaPartOam_MiddleDotVisible,
+    [IMAGO_LARVA_OAM_RIGHT_DOT_VISIBLE] = sImagoLarvaPartOam_RightDotVisible,
+    [IMAGO_LARVA_OAM_LEFT_DOT_DISAPPEARING] = sImagoLarvaPartOam_LeftDotDisappearing,
+    [IMAGO_LARVA_OAM_MIDDLE_DOT_DISAPPEARING] = sImagoLarvaPartOam_MiddleDotDisappearing,
+    [IMAGO_LARVA_OAM_RIGHT_DOT_DISAPPEARING] = sImagoLarvaPartOam_RightDotDisappearing,
+    [IMAGO_LARVA_OAM_SHELL_WARNING] = sImagoLarvaPartOam_ShellWarning,
+    [IMAGO_LARVA_OAM_IDLE] = sImagoLarvaOam_Idle,
+    [IMAGO_LARVA_OAM_CLAWS_WARNING_FIRST_PART] = sImagoLarvaPartOam_ClawsWarningFirstPart,
+    [IMAGO_LARVA_OAM_CLAWS_WARNING_SECOND_PART] = sImagoLarvaPartOam_ClawsWarningSecondPart,
+    [IMAGO_LARVA_OAM_WARNING] = sImagoLarvaOam_Warning,
+    [IMAGO_LARVA_OAM_SHELL_TAKING_DAMAGE] = sImagoLarvaPartOam_ShellTakingDamage
+};
 
 /**
  * @brief 259a0 | 84 | Synchronize the sub sprites of an Imago larva

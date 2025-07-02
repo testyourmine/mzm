@@ -1,7 +1,6 @@
 #include "sprites_AI/imago_cocoon.h"
 #include "macros.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/imago_cocoon.h"
 #include "data/sprites/enemy_drop.h"
 #include "data/sprite_data.h"
@@ -73,6 +72,30 @@
 #define IMAGO_COCOON_CEILING_VINE_POSE_IDLE 0x9
 #define EVENT_TRIGGER_DISCOVERED_IMAGO_PASSAGE_POSE_IDLE 0x8
 #define IMAGO_COCOON_AFTER_FIGHT_POSE_IDLE 0x9
+
+static const struct FrameData* sImagoCocoonFrameDataPointers[IMAGO_COCOON_OAM_END] = {
+    [IMAGO_COCOON_OAM_CEILING_VINE_MOTIONLESS] = sImagoCocoonOam_CeilingVineMotionless,
+    [IMAGO_COCOON_OAM_CEILING_VINE_MOVING] = sImagoCocoonOam_CeilingVineMoving,
+    [IMAGO_COCOON_OAM_CEILING_VINE_BROKEN] = sImagoCocoonOam_CeilingVineBroken,
+    [IMAGO_COCOON_OAM_DECORATIVE_VINE_LEFT] = sImagoCocoonOam_DecorativeVinesLeft,
+    [IMAGO_COCOON_OAM_DECORATIVE_VINE_RIGHT] = sImagoCocoonOam_DecorativeVinesRight,
+    [IMAGO_COCOON_OAM_VINE_LEFT_MIDDLE] = sImagoCocoonVineOam_LeftMiddle,
+    [IMAGO_COCOON_OAM_VINE_RIGHT_MIDDLE] = sImagoCocoonVineOam_RightMiddle,
+    [IMAGO_COCOON_OAM_VINE_LEFT_RIGHT] = sImagoCocoonVineOam_LeftRight,
+    [IMAGO_COCOON_OAM_VINE_RIGT_RIGHT] = sImagoCocoonVineOam_RightRight,
+    [IMAGO_COCOON_OAM_VINE_LEFT_LEFT] = sImagoCocoonVineOam_LeftLeft,
+    [IMAGO_COCOON_OAM_VINE_RIGHT_LEFT] = sImagoCocoonVineOam_RightLeft,
+    [IMAGO_COCOON_OAM_IDLE] = sImagoCocoonOam_Idle,
+    [IMAGO_COCOON_OAM_2e0bb0] = sImagoCocoonOam_2e0bb0,
+    [IMAGO_COCOON_OAM_STATIC] = sImagoCocoonOam_Static,
+    [IMAGO_COCOON_OAM_SPORE_SPAWNING] = sImagoCocoonSporeOam_Spawning,
+    [IMAGO_COCOON_OAM_SPORE_NEST] = sImagoCocoonSporeOam_Nest,
+    [IMAGO_COCOON_OAM_SPORE_MOVING] = sImagoCocoonSporeOam_Moving,
+    [IMAGO_COCOON_OAM_SPORE_EXPLODING] = sImagoCocoonSporeOam_Exploding,
+    [IMAGO_COCOON_OAM_WINGED_RIPPER_MOVING] = sWingedRipperOam_Moving,
+    [IMAGO_COCOON_OAM_WINGED_RIPPER_TURNING_AROUND] = sWingedRipperOam_TurningAround,
+    [IMAGO_COCOON_OAM_DEFEATED_COCOON] = sDefeatedImagoCocoonOam
+};
 
 /**
  * @brief 26c38 | 68 | Sync the sub sprites of Imago cocoon

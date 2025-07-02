@@ -1,6 +1,5 @@
 #include "sprites_AI/atomic.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/atomic.h"
 #include "data/sprite_data.h"
 
@@ -55,6 +54,45 @@ enum AtomicElectricityDirection {
 #define ATOMIC_CHARGE_PALETTE_TIMER rotation
 
 #define ATOMIC_CHARGE_DELAY (CONVERT_SECONDS(3.f) + ONE_THIRD_SECOND)
+
+// palette, palette timer
+static u8 sAtomicDynamicPaletteData[33][2] = {
+    // mild flashing
+    { 0, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 0, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 0, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 0, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 3, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 3, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 3, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    { 3, CONVERT_SECONDS(1.f / 15) },
+    { 2, CONVERT_SECONDS(1.f / 15) },
+    // offset == 16, intense flashing
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 3, CONVERT_SECONDS(1.f / 30) },
+    { 2, CONVERT_SECONDS(1.f / 30) },
+    { 0, 0 }
+};
 
 /**
  * @brief 3b944 | 254 | Handles the atomic smooth movement

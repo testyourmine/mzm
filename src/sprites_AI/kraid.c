@@ -2,7 +2,6 @@
 #include "gba.h"
 #include "macros.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/kraid.h"
 #include "data/sprite_data.h"
 
@@ -71,6 +70,47 @@ enum KraidNailType {
 };
 
 #define KRAID_NAIL_POSE_MOVING 0x9
+
+static const struct FrameData* sKraidFrameDataPointers[KRAID_OAM_END] = {
+    [KRAID_OAM_MOUTH_CLOSED] = sKraidOam_MouthClosed,
+    [KRAID_OAM_MOUTH_CLOSED_BLINK] = sKraidOam_MouthClosedBlink,
+    [KRAID_OAM_OPENING_MOUTH] = sKraidOam_OpeningMouth,
+    [KRAID_OAM_MOUTH_OPENED] = sKraidOam_MouthOpened,
+    [KRAID_OAM_RISING] = sKraidOam_Rising,
+    [KRAID_OAM_CLOSING_MOUTH] = sKraidOam_ClosingMouth,
+    [KRAID_OAM_2cac5c] = sKraidPartOam_2cac5c,
+    [KRAID_OAM_LEFT_ARM_IDLE] = sKraidPartOam_LeftArmIdle,
+    [KRAID_OAM_LEFT_ARM_DYING] = sKraidPartOam_LeftArmDying,
+    [KRAID_OAM_LEFT_ARM_THROWING_NAILS] = sKraidPartOam_LeftArmThrowingNails,
+    [KRAID_OAM_2cadc4] = sKraidPartOam_2cadc4,
+    [KRAID_OAM_RIGHT_ARM_IDLE] = sKraidPartOam_RightArmIdle,
+    [KRAID_OAM_RIGHT_ARM_Attacking] = sKraidPartOam_RightArmAttacking,
+    [KRAID_OAM_RIGHT_ARM_DYING] = sKraidPartOam_RightArmDying,
+    [KRAID_OAM_LEFT_FEET_RISING] = sKraidPartOam_LeftFeetRising,
+    [KRAID_OAM_LEFT_FEET_IDLE_1] = sKraidPartOam_LeftFeetIdle1,
+    [KRAID_OAM_LEFT_FEET_MOVING_RIGHT] = sKraidPartOam_LeftFeetMovingRight,
+    [KRAID_OAM_LEFT_FEET_IDLE_2] = sKraidPartOam_LeftFeetIdle2,
+    [KRAID_OAM_LEFT_FEET_MOVED_RIGHT] = sKraidPartOam_LeftFeetMovedRight,
+    [KRAID_OAM_LEFT_FEET_MOVING_LEFT] = sKraidPartOam_LeftFeetMovingLeft,
+    [KRAID_OAM_LEFT_FEET_MOVED_LEFT] = sKraidPartOam_LeftFeetMovedLeft,
+    [KRAID_OAM_RIGHT_FEET_RISING] = sKraidPartOam_RightFeetRising,
+    [KRAID_OAM_RIGHT_FEET_IDLE_1] = sKraidPartOam_RightFeetIdle1,
+    [KRAID_OAM_RIGHT_FEET_MOVED_RIGHT] = sKraidPartOam_RightFeetMovedRight,
+    [KRAID_OAM_RIGHT_FEET_IDLE_2] = sKraidPartOam_RightFeetIdle2,
+    [KRAID_OAM_RIGHT_FEET_MOVING_RIGHT] = sKraidPartOam_RightFeetMovingRight,
+    [KRAID_OAM_RIGHT_FEET_MOVED_LEFT] = sKraidPartOam_RightFeetMovedLeft,
+    [KRAID_OAM_RIGHT_FEET_MOVING_LEFT] = sKraidPartOam_RightFeetMovingLeft,
+    [KRAID_OAM_TOP_HOLE_LEFT] = sKraidPartOam_TopHoleLeft,
+    [KRAID_OAM_TOP_HOLE_RIGHT] = sKraidPartOam_TopHoleRight,
+    [KRAID_OAM_MIDDLE_HOLE_LEFT] = sKraidPartOam_MiddleHoleLeft,
+    [KRAID_OAM_MIDDLE_HOLE_RIGHT] = sKraidPartOam_MiddleHoleRight,
+    [KRAID_OAM_BOTTOM_HOLE_LEFT] = sKraidPartOam_BottomHoleLeft,
+    [KRAID_OAM_BOTTOM_HOLE_RIGHT] = sKraidPartOam_BottomHoleRight,
+    [KRAID_OAM_NAIL] = sKraidNailOam,
+    [KRAID_OAM_2cb29c] = sKraidOam_2cb29c,
+    [KRAID_OAM_2cb2ac] = sKraidOam_2cb2ac,
+    [KRAID_OAM_SPIKE] = sKraidSpikeOam
+};
 
 /**
  * @brief 183d8 | 68 | Synchronize the sub sprites of Kraid

@@ -2,7 +2,6 @@
 #define CHOZO_STATUE_IGNORE_FUNCTIONS
 #include "sprites_AI/chozo_statue.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/unknown_item_chozo_statue.h"
 
 #include "constants/audio.h"
@@ -58,6 +57,25 @@
 // Chozo status refill
 
 #define UNKNOWN_ITEM_CHOZO_STATUE_REFILL_POSE_IDLE 0x9
+
+static const struct FrameData* sUnknownItemChozoStatueFrameDataPointers[UNKNOWN_ITEM_CHOZO_STATUE_OAM_END] = {
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_LEG_STANDING] = sUnknownItemChozoStatuePartOam_LegStanding,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_LEG_SITTING] = sUnknownItemChozoStatuePartOam_LegSitting,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_LEG_SEATED] = sUnknownItemChozoStatuePartOam_LegSeated,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_IDLE] = sUnknownItemChozoStatueOam_Idle,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_EYE_OPENED] = sUnknownItemChozoStatuePartOam_EyeOpened,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_EYE_CLOSING] = sUnknownItemChozoStatuePartOam_EyeClosing,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_EYE_OPENING] = sUnknownItemChozoStatuePartOam_EyeOpening,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_EYE_CLOSED] = sUnknownItemChozoStatuePartOam_EyeClosed,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_ARM_IDLE] = sUnknownItemChozoStatuePartOam_ArmIdle,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_ARM_GLOW] = sUnknownItemChozoStatuePartOam_ArmGlow,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_ARM_SAMUS_GRABBED] = sUnknownItemChozoStatuePartOam_ArmSamusGrabbed,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_BALL_NORMAL_CLOSED] = sChozoBallOam_UnknownClosed,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_BALL_NORMAL_REVEALING] = sChozoBallOam_UnknownRevealing,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_BALL_NORMAL_REVEALED] = sChozoBallOam_UnknownRevealed,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_REFILL] = sUnknownItemChozoStatueRefillOam,
+    [UNKNOWN_ITEM_CHOZO_STATUE_OAM_REFILL_GLOW_IDLE] = sUnknownItemChozoStatuePartOam_GlowIdle
+};
 
 /**
  * @brief 150a8 | 88 | Synchronize the sub sprites of an unknown item chozo statue

@@ -1430,10 +1430,22 @@ SECTIONS {
         src/data/cable_link_data.o(.rodata);
         sTransferRom_After = .;
         src/data/samus_sprites_pointers.o(.rodata);
-        src/data/frame_data_pointers.o(.rodata);
     } >rom
 
     .data : ALIGN(2) {
+        src/sprites_AI/chozo_statue.o(.data);
+        src/sprites_AI/unknown_item_chozo_statue.o(.data);
+        src/sprites_AI/kraid.o(.data);
+        src/sprites_AI/imago_larva.o(.data);
+        src/sprites_AI/imago_cocoon.o(.data);
+        src/sprites_AI/ridley.o(.data);
+        src/sprites_AI/atomic.o(.data);
+        src/sprites_AI/mother_brain.o(.data);
+        src/sprites_AI/tangle_vine.o(.data);
+        src/sprites_AI/imago.o(.data);
+        src/sprites_AI/crocomire.o(.data);
+        src/sprites_AI/mecha_ridley.o(.data);
+
         src/projectile_util.o(.data);
         src/particle.o(.data);
         src/room.o(.data);

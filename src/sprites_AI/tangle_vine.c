@@ -1,7 +1,6 @@
 #include "sprites_AI/tangle_vine.h"
 #include "macros.h"
 
-#include "data/frame_data_pointers.h"
 #include "data/sprites/tangle_vine.h"
 #include "data/sprite_data.h"
 
@@ -25,6 +24,22 @@ enum TangleVineGerutaStatus {
 #define TANGLE_VINE_GERUTA_PART_IDLE 0xF
 
 #define TANGLE_VINE_POSE_IDLE 0x9
+
+static const struct FrameData* sTangleVineFrameDataPointers[TANGLE_VINE_OAM_END] = {
+    [TANGLE_VINE_OAM_TALL_ON_GROUND] = sTangleVineTallOam_OnGround,
+    [TANGLE_VINE_OAM_MEDIUM_ON_GROUND] = sTangleVineMediumOam_OnGround,
+    [TANGLE_VINE_OAM_SHORT_ON_GROUND] = sTangleVineShortOam_OnGround,
+    [TANGLE_VINE_OAM_CURVED_ON_GROUND] = sTangleVineCurvedOam_OnGround,
+    [TANGLE_VINE_OAM_TALL_ON_CEILING] = sTangleVineTallOam_OnCeiling,
+    [TANGLE_VINE_OAM_MEDIUM_ON_CEILING] = sTangleVineMediumOam_OnCeiling,
+    [TANGLE_VINE_OAM_SHORT_ON_CEILING] = sTangleVineShortOam_OnCeiling,
+    [TANGLE_VINE_OAM_CURVED_ON_CEILING] = sTangleVineCurvedOam_OnCeiling,
+    [TANGLE_VINE_OAM_GERUTA_GRIP] = sTangleVineGerutaPartOam_Grip,
+    [TANGLE_VINE_OAM_GERUTA_ROOT] = sTangleVineGerutaOam_Root,
+    [TANGLE_VINE_OAM_GERUTA_FULL] = sTangleVineGerutaOam_Full,
+    [TANGLE_VINE_OAM_RED_GERUTA_OAM] = sTangleVineRedGerutaOam,
+    [TANGLE_VINE_OAM_GERUTA] = sTangleVineGerutaPartOam_Geruta
+};
 
 /**
  * @brief 413c4 | 88 | Synchronize the sub sprites of a tangle vine
