@@ -5,7 +5,6 @@
 
 #include "data/cutscenes/cutscenes_data.h"
 #include "data/cutscenes/ridley_landing_data.h"
-#include "data/cutscenes/internal_ridley_landing_data.h"
 #include "data/shortcut_pointers.h"
 
 #include "constants/audio.h"
@@ -13,6 +12,29 @@
 
 #include "structs/display.h"
 #include "structs/game_state.h"
+
+static struct CutsceneSubroutineData sRidleyLandingSubroutineData[5] = {
+    {
+        .pFunction = RidleyLandingInit,
+        .oamLength = 1
+    },
+    {
+        .pFunction = RidleyLandingShipInSpace,
+        .oamLength = 1
+    },
+    {
+        .pFunction = RidleyLandingShipLanding,
+        .oamLength = 9
+    },
+    {
+        .pFunction = RidleyLandingRidleyFlying,
+        .oamLength = 2
+    },
+    {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 2
+    }
+};
 
 /**
  * @brief 647d0 | 178 | Handles the ridley flying part

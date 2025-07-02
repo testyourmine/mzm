@@ -6,13 +6,14 @@
 #include "data/text_data.h"
 #include "data/shortcut_pointers.h"
 #include "data/menus/pause_screen_data.h"
-#include "data/cutscenes/internal_story_text_cutscene_data.h"
 
 #include "constants/text.h"
 #include "constants/menus/pause_screen.h"
 
 #include "structs/game_state.h"
 #include "structs/menus/pause_screen.h"
+
+extern u16** sStoryTextPointers[7];
 
 static u16** sDescriptionTextPointers[LANGUAGE_END] = {
     [LANGUAGE_JAPANESE] = sJapaneseTextPointers_Description,

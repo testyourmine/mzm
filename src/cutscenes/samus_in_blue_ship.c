@@ -4,12 +4,30 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/samus_in_blue_ship_data.h"
-#include "data/cutscenes/internal_samus_in_blue_ship_data.h"
 
 #include "constants/audio.h"
 #include "constants/cutscene.h"
 
 #include "structs/display.h"
+
+static u8 sSamusInBlueShipPanelTransparency[4] = {
+    16, 15, 14, 15
+};
+
+static struct CutsceneSubroutineData sSamusInBlueShipSubroutineData[3] = {
+    [0] = {
+        .pFunction = SamusInBlueShipInit,
+        .oamLength = 1
+    },
+    [1] = {
+        .pFunction = SamusInBlueShipPoweringUp,
+        .oamLength = 1
+    },
+    [2] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 1
+    }
+};
 
 /**
  * @brief 67d8c | f8 | Handles the sip powering up part (entire cutscene)

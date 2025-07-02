@@ -4,7 +4,6 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/statue_opening_data.h"
-#include "data/cutscenes/internal_statue_opening_data.h"
 #include "data/sprites/boss_statues.h"
 #include "data/tilesets/tilesets_set1.h"
 #include "data/rooms/brinstar_rooms_data.h"
@@ -16,6 +15,21 @@
 
 #include "structs/connection.h"
 #include "structs/display.h"
+
+static struct CutsceneSubroutineData sStatueOpeningSubroutineData[3] = {
+    [0] = {
+        .pFunction = StatueOpeningInit,
+        .oamLength = 2
+    },
+    [1] = {
+        .pFunction = StatueOpeningOpening,
+        .oamLength = 2
+    },
+    [2] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 2
+    }
+};
 
 /**
  * @brief 66c00 | 164 | Handles the statue opening animation

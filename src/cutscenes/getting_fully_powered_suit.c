@@ -6,7 +6,6 @@
 #include "data/shortcut_pointers.h"
 #include "data/generic_data.h"
 #include "data/cutscenes/getting_fully_powered_suit_data.h"
-#include "data/cutscenes/internal_getting_fully_powered_suit_data.h"
 
 #include "constants/audio.h"
 #include "constants/cutscene.h"
@@ -31,6 +30,21 @@
 #define RING_ACTION_SCALING_VELOCITY 4
 
 #define RING_MOVEMENT_SPEED PIXEL_SIZE
+
+static struct CutsceneSubroutineData sGettingFullyPoweredSuitSubroutineData[3] = {
+    [0] = {
+        .pFunction = GettingFullyPoweredSuitInit,
+        .oamLength = 14
+    },
+    [1] = {
+        .pFunction = GettingFullyPoweredSuitAnimation,
+        .oamLength = 14
+    },
+    [2] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 0
+    }
+};
 
 /**
  * @brief 65bd8 | 204 | Handles the animation part (entire cutscene)

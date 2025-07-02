@@ -7,7 +7,6 @@
 #include "data/shortcut_pointers.h"
 #include "data/generic_data.h"
 #include "data/cutscenes/enter_tourian_data.h"
-#include "data/cutscenes/internal_enter_tourian_data.h"
 #include "data/sprites/metroid.h"
 
 #include "constants/audio.h"
@@ -16,6 +15,81 @@
 
 #include "structs/game_state.h"
 #include "structs/display.h"
+
+// (x, y) coordinates
+static u16 sEnterTourian_760090[MAX_METROID_IDS * 2 + 1][2] = {
+    [0] = {
+        BLOCK_SIZE * 38 + QUARTER_BLOCK_SIZE,
+        BLOCK_SIZE * 39 - QUARTER_BLOCK_SIZE
+    },
+    [1] = {
+        BLOCK_SIZE * 37 + QUARTER_BLOCK_SIZE,
+        BLOCK_SIZE * 38 + QUARTER_BLOCK_SIZE + 8
+    },
+    [2] = {
+        BLOCK_SIZE * 39 - QUARTER_BLOCK_SIZE,
+        BLOCK_SIZE * 38 + HALF_BLOCK_SIZE
+    },
+    [3] = {
+        BLOCK_SIZE * 38,
+        BLOCK_SIZE * 38
+    },
+    [4] = {
+        BLOCK_SIZE * 38 + 8,
+        BLOCK_SIZE * 39 + 8
+    },
+    [5] = {
+        0,
+        0
+    },
+    [6] = {
+        0,
+        0
+    },
+    [7] = {
+        0,
+        0
+    },
+    [8] = {
+        0,
+        0
+    }
+};
+
+// (x, y) coordinates
+static s16 sEnterTourian_7600b4[MAX_METROID_IDS][2] = {
+    [0] = {
+        BLOCK_SIZE * 38 + 12,
+        BLOCK_SIZE * 34 + HALF_BLOCK_SIZE
+    },
+    [1] = {
+        BLOCK_SIZE * 37 - QUARTER_BLOCK_SIZE,
+        BLOCK_SIZE * 37
+    },
+    [2] = {
+        BLOCK_SIZE * 42 - QUARTER_BLOCK_SIZE,
+        BLOCK_SIZE * 37 + QUARTER_BLOCK_SIZE
+    },
+    [3] = {
+        BLOCK_SIZE * 40,
+        BLOCK_SIZE * 36 + HALF_BLOCK_SIZE + 8
+    }
+};
+
+static struct CutsceneSubroutineData sEnterTourianSubroutineData[3] = {
+    [0] = {
+        .pFunction = EnterTourianInit,
+        .oamLength = 9
+    },
+    [1] = {
+        .pFunction = EnterTourianAnimation,
+        .oamLength = 9
+    },
+    [2] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 9
+    }
+};
 
 /**
  * @brief 67080 | 310 | Handles the entire cutscene

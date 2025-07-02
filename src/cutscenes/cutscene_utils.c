@@ -28,23 +28,23 @@
 
 typedef u8 (*TourianEscapeFunc_T)(void);
 
-static const TourianEscapeFunc_T sTourianEscapeFunctionPointers[2] = {
+static TourianEscapeFunc_T sTourianEscapeFunctionPointers[2] = {
     CutsceneDefaultRoutine,
     TourianEscapeCallSubroutines,
 };
 
-static const s8 sCutsceneScreenShakeOffsets_Set0[2] = {
+static s8 sCutsceneScreenShakeOffsets_Set0[2] = {
     -1, 1
 };
 
-static const s8* const sCutsceneScreenShakeOffsetSetPointers[4] = {
+static s8* sCutsceneScreenShakeOffsetSetPointers[4] = {
     sCutsceneScreenShakeOffsets_Set0,
     sCutsceneScreenShakeOffsets_Set0,
     sCutsceneScreenShakeOffsets_Set0,
     sCutsceneScreenShakeOffsets_Set0
 };
 
-static const u8 sCutsceneScreenShakeOffsetSetSizes[4] = {
+static u8 sCutsceneScreenShakeOffsetSetSizes[4] = {
     ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0),
     ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0),
     ARRAY_SIZE(sCutsceneScreenShakeOffsets_Set0),

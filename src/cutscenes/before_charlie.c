@@ -6,12 +6,42 @@
 
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/before_charlie_data.h"
-#include "data/cutscenes/internal_before_charlie_data.h"
 
 #include "constants/cutscene.h"
 #include "constants/audio.h"
 
 #include "structs/display.h"
+
+static struct CutsceneGraphicsData sBeforeCharlieCutsceneGraphicsData = {
+    .active = FALSE,
+    .paletteStage = 0,
+    .maxTimer = 4,
+    .maxPaletteStage = 0,
+    .timer = 0,
+};
+
+static struct CutsceneSubroutineData sBeforeCharlieSubroutineData[5] = {
+    [0] = {
+        .pFunction = BeforeCharlieInit,
+        .oamLength = 0
+    },
+    [1] = {
+        .pFunction = BeforeCharlieChozoWallSides,
+        .oamLength = 0
+    },
+    [2] = {
+        .pFunction = BeforeCharlieWallAndGreyVoice,
+        .oamLength = 0
+    },
+    [3] = {
+        .pFunction = BeforeCharlieSamusCloseUp,
+        .oamLength = 0
+    },
+    [4] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 0
+    },
+};
 
 /**
  * @brief 663c8 | 270 | Handles the close up part

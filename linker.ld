@@ -1440,23 +1440,22 @@ SECTIONS {
         src/animated_graphics.o(.rodata);
         src/connection.o(.rodata);
         src/save_file.o(.rodata);
-        src/cutscenes/cutscene_utils.o(.rodata);
-
-        src/data/cutscenes/internal_kraid_rising_data.o(.rodata);
-        src/data/cutscenes/internal_story_text_cutscene_data.o(.rodata);
-        src/data/cutscenes/internal_mother_brain_close_up_data.o(.rodata);
-        src/data/cutscenes/internal_ridley_in_space_data.o(.rodata);
-        src/data/cutscenes/internal_ridley_landing_data.o(.rodata);
-        src/data/cutscenes/internal_ridley_spawn_data.o(.rodata);
-        src/data/cutscenes/internal_mecha_sees_samus_data.o(.rodata);
-        src/data/cutscenes/internal_getting_fully_powered_suit_data.o(.rodata);
-        src/data/cutscenes/internal_before_charlie_data.o(.rodata);
-        src/data/cutscenes/internal_statue_opening_data.o(.rodata);
-        src/data/cutscenes/internal_enter_tourian_data.o(.rodata);
-        src/data/cutscenes/internal_samus_in_blue_ship_data.o(.rodata);
     } >rom
 
     .data : ALIGN(2) {
+        src/cutscenes/cutscene_utils.o(.data);
+        src/cutscenes/kraid_rising.o(.data);
+        src/cutscenes/story_text_cutscene.o(.data);
+        src/cutscenes/mother_brain_close_up.o(.data);
+        src/cutscenes/ridley_in_space.o(.data);
+        src/cutscenes/ridley_landing.o(.data);
+        src/cutscenes/ridley_spawn.o(.data);
+        src/cutscenes/mecha_sees_samus.o(.data);
+        src/cutscenes/getting_fully_powered_suit.o(.data);
+        src/cutscenes/before_charlie.o(.data);
+        src/cutscenes/statue_opening.o(.data);
+        src/cutscenes/enter_tourian.o(.data);
+        src/cutscenes/samus_in_blue_ship.o(.data);
         src/menus/pause_screen.o(.data);
         src/minimap.o(.data);
         src/menus/pause_screen_map.o(.data);

@@ -4,12 +4,26 @@
 #include "syscall_wrappers.h"
 
 #include "data/cutscenes/cutscenes_data.h"
-#include "data/cutscenes/internal_mecha_sees_samus_data.h"
 #include "data/cutscenes/mecha_sees_samus_data.h"
 #include "data/shortcut_pointers.h"
 
 #include "constants/audio.h"
 #include "constants/cutscene.h"
+
+static struct CutsceneSubroutineData sMechaSeesSamusSubroutineData[3] = {
+    {
+        .pFunction = MechaRidleySeesSamusInit,
+        .oamLength = 2
+    },
+    {
+        .pFunction = MechaRidleySeesSamusEyeOpen,
+        .oamLength = 2
+    },
+    {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 2
+    }
+};
 
 /**
  * @brief 65924 | 100 | Handles the eye part of the mecha sees samus cutscene
