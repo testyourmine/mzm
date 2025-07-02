@@ -417,7 +417,6 @@ SECTIONS {
         src/audio.o(.text);
         src/audio_wrappers.o(.text);
         src/dma.o(.text);
-        asm/disasm_0x080031e4.o(.text);
         src/music_wrappers.o(.text);
 
         asm/soundcode.o(.text);
