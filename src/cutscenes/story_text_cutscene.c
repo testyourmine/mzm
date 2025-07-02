@@ -17,7 +17,7 @@
 #include "structs/game_state.h"
 #include "structs/text.h"
 
-u16** sStoryTextPointers[7] = {
+const u16** sStoryTextPointers[7] = {
     [LANGUAGE_JAPANESE] = sJapaneseTextPointers_Story,
     [LANGUAGE_HIRAGANA] = sHiraganaTextPointers_Story,
     [LANGUAGE_ENGLISH] = sEnglishTextPointers_Story,

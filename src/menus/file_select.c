@@ -43,18 +43,18 @@ static s8 sSaveFileAreasId[12] = {
     [11] = AREA_BRINSTAR,
 };
 
-static u32* sFileSelectTextGfxPointers[LANGUAGE_END - 2] = {
-    [LANGUAGE_ENGLISH - 2] = (u32*)sFileSelectTextEnglishGfx,
+static const u32* sFileSelectTextGfxPointers[LANGUAGE_END - 2] = {
+    [LANGUAGE_ENGLISH - 2] = sFileSelectTextEnglishGfx,
     #ifdef REGION_US_BETA
-    [LANGUAGE_GERMAN - 2] = (u32*)sFileSelectTextGermanGfx,
-    [LANGUAGE_FRENCH - 2] = (u32*)sFileSelectTextFrenchGfx,
-    [LANGUAGE_ITALIAN - 2] = (u32*)sFileSelectTextItalianGfx,
-    [LANGUAGE_SPANISH - 2] = (u32*)sFileSelectTextSpanishGfx
+    [LANGUAGE_GERMAN - 2] = sFileSelectTextGermanGfx,
+    [LANGUAGE_FRENCH - 2] = sFileSelectTextFrenchGfx,
+    [LANGUAGE_ITALIAN - 2] = sFileSelectTextItalianGfx,
+    [LANGUAGE_SPANISH - 2] = sFileSelectTextSpanishGfx
     #else // !REGION_US_BETA
-    [LANGUAGE_GERMAN - 2] = (u32*)sFileSelectTextEnglishGfx,
-    [LANGUAGE_FRENCH - 2] = (u32*)sFileSelectTextEnglishGfx,
-    [LANGUAGE_ITALIAN - 2] = (u32*)sFileSelectTextEnglishGfx,
-    [LANGUAGE_SPANISH - 2] = (u32*)sFileSelectTextEnglishGfx
+    [LANGUAGE_GERMAN - 2] = sFileSelectTextEnglishGfx,
+    [LANGUAGE_FRENCH - 2] = sFileSelectTextEnglishGfx,
+    [LANGUAGE_ITALIAN - 2] = sFileSelectTextEnglishGfx,
+    [LANGUAGE_SPANISH - 2] = sFileSelectTextEnglishGfx
     #endif // REGION_US_BETA
 };
 

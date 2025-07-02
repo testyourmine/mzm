@@ -48,11 +48,11 @@ static struct TitleScreenAnimatedPalette sTitleScreenAnimatedPaletteTemplates[4]
     },
 };
 
-static u8* sRomInfoStringPointers[4] = {
-    (u8*)sTitleScreenRomInfoTime,
-    (u8*)sTitleScreenRomInfoRegionJPN,
-    (u8*)sTitleScreenRomInfoRegionEUR,
-    (u8*)sTitleScreenRomInfoRegionUSA,
+static const u8* sRomInfoStringPointers[4] = {
+    sTitleScreenRomInfoTime,
+    sTitleScreenRomInfoRegionJPN,
+    sTitleScreenRomInfoRegionEUR,
+    sTitleScreenRomInfoRegionUSA,
 };
 
 static u8 sTitleScreenCometsFlags[2][2] = {

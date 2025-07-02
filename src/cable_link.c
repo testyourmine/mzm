@@ -16,11 +16,11 @@
 #include "structs/game_state.h"
 #include "structs/multiboot.h"
 
-static u8* sPlayerNumbersStringPointers[4] = {
-    [0] = (u8*)sPlayer1String,
-    [1] = (u8*)sPlayer2String,
-    [2] = (u8*)sPlayer3String,
-    [3] = (u8*)sPlayer4String,
+static const u8* sPlayerNumbersStringPointers[4] = {
+    [0] = sPlayer1String,
+    [1] = sPlayer2String,
+    [2] = sPlayer3String,
+    [3] = sPlayer4String,
 };
 
 /**

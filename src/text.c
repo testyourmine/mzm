@@ -15,7 +15,7 @@
 
 extern u16** sStoryTextPointers[7];
 
-static u16** sDescriptionTextPointers[LANGUAGE_END] = {
+static const u16** sDescriptionTextPointers[LANGUAGE_END] = {
     [LANGUAGE_JAPANESE] = sJapaneseTextPointers_Description,
     [LANGUAGE_HIRAGANA] = sHiraganaTextPointers_Description,
     [LANGUAGE_ENGLISH] = sEnglishTextPointers_Description,
@@ -1068,7 +1068,7 @@ u8 TextProcessFileScreenPopUp(void)
     s32 flag;
     s32 result;
     struct Message *currentMessage;
-    u16* * *fileScreenTextPointers;
+    const u16*** fileScreenTextPointers;
     s32 tmp;
 
     switch (gCurrentMessage.stage)

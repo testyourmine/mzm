@@ -21,20 +21,20 @@
 #include "structs/game_state.h"
 #include "structs/samus.h"
 
-static u32* sGameOverTextPromptGfxPointers[LANGUAGE_END] = {
-    [LANGUAGE_JAPANESE] = (u32*)sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_HIRAGANA] = (u32*)sGameOverTextPromptHiraganaGfx,
-    [LANGUAGE_ENGLISH] = (u32*)sGameOverTextPromptEnglishGfx,
+static const u32* sGameOverTextPromptGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_HIRAGANA] = sGameOverTextPromptHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sGameOverTextPromptEnglishGfx,
     #ifdef REGION_US_BETA
-    [LANGUAGE_GERMAN] = (u32*)sGameOverTextPromptGermanGfx,
-    [LANGUAGE_FRENCH] = (u32*)sGameOverTextPromptFrenchGfx,
-    [LANGUAGE_ITALIAN] = (u32*)sGameOverTextPromptItalianGfx,
-    [LANGUAGE_SPANISH] = (u32*)sGameOverTextPromptSpanishGfx
+    [LANGUAGE_GERMAN] = sGameOverTextPromptGermanGfx,
+    [LANGUAGE_FRENCH] = sGameOverTextPromptFrenchGfx,
+    [LANGUAGE_ITALIAN] = sGameOverTextPromptItalianGfx,
+    [LANGUAGE_SPANISH] = sGameOverTextPromptSpanishGfx
     #else // !REGION_US_BETA
-    [LANGUAGE_GERMAN] = (u32*)sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_FRENCH] = (u32*)sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_ITALIAN] = (u32*)sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_SPANISH] = (u32*)sGameOverTextPromptEnglishGfx
+    [LANGUAGE_GERMAN] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_FRENCH] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_ITALIAN] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_SPANISH] = sGameOverTextPromptEnglishGfx
     #endif // REGION_US_BETA
 };
 

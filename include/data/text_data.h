@@ -515,35 +515,35 @@ extern const u16 sSpanishText_Story_Defeat[];
 
 #endif // REGION_US_BETA
 
-extern u16* * sLocationTextPointers[LANGUAGE_END];
-extern u16* * sMessageTextPointers[LANGUAGE_END];
-extern u16* * sFileScreenTextPointers[LANGUAGE_END];
+extern const u16** sLocationTextPointers[LANGUAGE_END];
+extern const u16** sMessageTextPointers[LANGUAGE_END];
+extern const u16** sFileScreenTextPointers[LANGUAGE_END];
 
-extern u16* sJapaneseTextPointers_Description[DESCRIPTION_TEXT_END];
-extern u16* sJapaneseTextPointers_Story[STORY_TEXT_END];
-extern u16* sJapaneseTextPointers_FileScreen[FILE_SCREEN_TEXT_END];
+extern const u16* sJapaneseTextPointers_Description[DESCRIPTION_TEXT_END];
+extern const u16* sJapaneseTextPointers_Story[STORY_TEXT_END];
+extern const u16* sJapaneseTextPointers_FileScreen[FILE_SCREEN_TEXT_END];
 
-extern u16* sHiraganaTextPointers_Description[DESCRIPTION_TEXT_END];
-extern u16* sHiraganaTextPointers_Story[STORY_TEXT_END];
-extern u16* sHiraganaTextPointers_FileScreen[FILE_SCREEN_TEXT_END];
+extern const u16* sHiraganaTextPointers_Description[DESCRIPTION_TEXT_END];
+extern const u16* sHiraganaTextPointers_Story[STORY_TEXT_END];
+extern const u16* sHiraganaTextPointers_FileScreen[FILE_SCREEN_TEXT_END];
 
-extern u16* sEnglishTextPointers_Description[DESCRIPTION_TEXT_END];
-extern u16* sEnglishTextPointers_Story[STORY_TEXT_END];
-extern u16* sEnglishTextPointers_FileScreen[FILE_SCREEN_TEXT_END];
+extern const u16* sEnglishTextPointers_Description[DESCRIPTION_TEXT_END];
+extern const u16* sEnglishTextPointers_Story[STORY_TEXT_END];
+extern const u16* sEnglishTextPointers_FileScreen[FILE_SCREEN_TEXT_END];
 
 #ifdef REGION_US_BETA
 
-extern u16* sGermanTextPointers_Description[DESCRIPTION_TEXT_END - 1];
-extern u16* sGermanTextPointers_Story[3];
+extern const u16* sGermanTextPointers_Description[DESCRIPTION_TEXT_END - 1];
+extern const u16* sGermanTextPointers_Story[3];
 
-extern u16* sFrenchTextPointers_Description[DESCRIPTION_TEXT_END - 1];
-extern u16* sFrenchTextPointers_Story[3];
+extern const u16* sFrenchTextPointers_Description[DESCRIPTION_TEXT_END - 1];
+extern const u16* sFrenchTextPointers_Story[3];
 
-extern u16* sItalianTextPointers_Description[DESCRIPTION_TEXT_END - 1];
-extern u16* sItalianTextPointers_Story[3];
+extern const u16* sItalianTextPointers_Description[DESCRIPTION_TEXT_END - 1];
+extern const u16* sItalianTextPointers_Story[3];
 
-extern u16* sSpanishTextPointers_Description[DESCRIPTION_TEXT_END - 1];
-extern u16* sSpanishTextPointers_Story[3];
+extern const u16* sSpanishTextPointers_Description[DESCRIPTION_TEXT_END - 1];
+extern const u16* sSpanishTextPointers_Story[3];
 
 #endif // REGION_US_BETA
 
