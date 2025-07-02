@@ -23,7 +23,7 @@
 #include "structs/samus.h"
 #include "structs/sprite.h"
 
-static const ParticleFunc_T sProcessParticleFunctionPointers[PE_END] = {
+static ParticleFunc_T sProcessParticleFunctionPointers[PE_END] = {
     [PE_SPRITE_SPLASH_WATER_SMALL] = ParticleSpriteSplashWaterSmall,
     [PE_SPRITE_SPLASH_WATER_BIG] = ParticleSpriteSplashWaterBig,
     [PE_SPRITE_SPLASH_WATER_HUGE] = ParticleSpriteSplashWaterHuge,

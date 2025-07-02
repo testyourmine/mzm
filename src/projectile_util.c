@@ -24,7 +24,7 @@
 #include "structs/particle.h"
 #include "structs/power_bomb_explosion.h"
 
-static const ProjFunc_T sProcessProjectileFunctionPointers[PROJ_TYPE_END] = {
+static ProjFunc_T sProcessProjectileFunctionPointers[PROJ_TYPE_END] = {
     [PROJ_TYPE_BEAM] = ProjectileProcessNormalBeam,
     [PROJ_TYPE_LONG_BEAM] = ProjectileProcessLongBeam,
     [PROJ_TYPE_ICE_BEAM] = ProjectileProcessIceBeam,

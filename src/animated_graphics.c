@@ -22,7 +22,7 @@
 #include "structs/power_bomb_explosion.h"
 #include "structs/room.h"
 
-static const BackgroundEffectBehaviorEntry_T* const sBackgroundEffectBehaviorPointers[BACKGROUND_EFFECT_END] = {
+static const BackgroundEffectBehaviorEntry_T* sBackgroundEffectBehaviorPointers[BACKGROUND_EFFECT_END] = {
     [BACKGROUND_EFFECT_NONE] = sBackgroundEffectBehavior_Lightning,
     [BACKGROUND_EFFECT_LIGHTNING] = sBackgroundEffectBehavior_Lightning,
     [BACKGROUND_EFFECT_SLIGHT_YELLOW] = sBackgroundEffectBehavior_SlightYellow,

@@ -23,14 +23,14 @@
 #include "structs/room.h"
 #include "structs/samus.h"
 
-extern const struct Door* const sAreaDoorsPointers[AREA_ENTRY_COUNT];
+extern const struct Door* sAreaDoorsPointers[AREA_ENTRY_COUNT];
 
 // FIXME, find a better solution
 void BgClipSetClipdataBlockValue(u16, u16, u16); // From bg_clip.h
 // bg_clip.h must not be included, as declaring the correct signature for some
 // of its functions produces non-matching code here.
 
-static const struct HatchLockEvent* const sHatchLockEventsPointers[AREA_NORMAL_COUNT] = {
+static const struct HatchLockEvent* sHatchLockEventsPointers[AREA_NORMAL_COUNT] = {
     [AREA_BRINSTAR] = sHatchLockEventsBrinstar,
     [AREA_KRAID] = sHatchLockEventsKraid,
     [AREA_NORFAIR] = sHatchLockEventsCrateria,

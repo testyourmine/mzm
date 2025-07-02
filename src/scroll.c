@@ -21,11 +21,11 @@
 #include "structs/samus.h"
 #include "structs/room.h"
 
-static const u8* const sScrollPointer_Empty[] = {
+static const u8* sScrollPointer_Empty[] = {
     sScroll_Empty
 };
 
-static const u8* const sBrinstarScrolls[] = {
+static const u8* sBrinstarScrolls[] = {
     sBrinstar_0_Scrolls,
     sBrinstar_1_Scrolls,
     sBrinstar_2_Scrolls,
@@ -48,7 +48,7 @@ static const u8* const sBrinstarScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const sKraidScrolls[] = {
+static const u8* sKraidScrolls[] = {
     sKraid_0_Scrolls,
     sKraid_1_Scrolls,
     sKraid_2_Scrolls,
@@ -63,7 +63,7 @@ static const u8* const sKraidScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const sNorfairScrolls[] = {
+static const u8* sNorfairScrolls[] = {
     sNorfair_0_Scrolls,
     sNorfair_1_Scrolls,
     sNorfair_2_Scrolls,
@@ -84,7 +84,7 @@ static const u8* const sNorfairScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const sRidleyScrolls[] = {
+static const u8* sRidleyScrolls[] = {
     sRidley_0_Scrolls,
     sRidley_1_Scrolls,
     sRidley_2_Scrolls,
@@ -102,7 +102,7 @@ static const u8* const sRidleyScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const sTourianScrolls[] = {
+static const u8* sTourianScrolls[] = {
     sTourian_0_Scrolls,
     sTourian_1_Scrolls,
     sTourian_2_Scrolls,
@@ -112,7 +112,7 @@ static const u8* const sTourianScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const sCrateriaScrolls[] = {
+static const u8* sCrateriaScrolls[] = {
     sCrateria_0_Scrolls,
     sCrateria_1_Scrolls,
     sCrateria_2_Scrolls,
@@ -127,7 +127,7 @@ static const u8* const sCrateriaScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const sChozodiaScrolls[] = {
+static const u8* sChozodiaScrolls[] = {
     sChozodia_0_Scrolls,
     sChozodia_1_Scrolls,
     sChozodia_2_Scrolls,
@@ -191,7 +191,7 @@ static const u8* const sChozodiaScrolls[] = {
     sScroll_Empty
 };
 
-static const u8* const * const sAreaScrollPointers[AREA_COUNT] = {
+static const u8** sAreaScrollPointers[AREA_COUNT] = {
     [AREA_BRINSTAR] = sBrinstarScrolls,
     [AREA_KRAID] = sKraidScrolls,
     [AREA_NORFAIR] = sNorfairScrolls,
@@ -205,7 +205,7 @@ static const u8* const * const sAreaScrollPointers[AREA_COUNT] = {
     [AREA_TEST_3] = sScrollPointer_Empty
 };
 
-static const s8 sWaterLoopCounterArray[8][2] = {
+static s8 sWaterLoopCounterArray[8][2] = {
     [0] = {
         0, 9
     },
@@ -414,7 +414,7 @@ s32 ScrollProcessY(struct Scroll* pScroll, struct Coordinates* pCoords)
  */
 void ScrollLoad(void)
 {
-    const u8* const * ppSrc;
+    const u8** ppSrc;
 
     ppSrc = sAreaScrollPointers[gCurrentArea];
 

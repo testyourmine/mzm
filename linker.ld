@@ -1431,18 +1431,20 @@ SECTIONS {
         sTransferRom_After = .;
         src/data/samus_sprites_pointers.o(.rodata);
         src/data/frame_data_pointers.o(.rodata);
-        src/projectile_util.o(.rodata);
-        src/particle.o(.rodata);
-        src/room.o(.rodata);
-        src/scroll.o(.rodata);
-        src/block.o(.rodata);
-        src/color_fading.o(.rodata);
-        src/animated_graphics.o(.rodata);
-        src/connection.o(.rodata);
-        src/save_file.o(.rodata);
     } >rom
 
     .data : ALIGN(2) {
+        src/projectile_util.o(.data);
+        src/particle.o(.data);
+        src/room.o(.data);
+        src/scroll.o(.data);
+        src/block.o(.data);
+        src/color_fading.o(.data);
+        src/haze.o(.data);
+        src/animated_graphics.o(.data);
+        src/connection.o(.data);
+        src/demo.o(.data);
+
         src/cutscenes/cutscene_utils.o(.data);
         src/cutscenes/kraid_rising.o(.data);
         src/cutscenes/story_text_cutscene.o(.data);
@@ -1456,6 +1458,7 @@ SECTIONS {
         src/cutscenes/statue_opening.o(.data);
         src/cutscenes/enter_tourian.o(.data);
         src/cutscenes/samus_in_blue_ship.o(.data);
+
         src/menus/pause_screen.o(.data);
         src/minimap.o(.data);
         src/menus/pause_screen_map.o(.data);
@@ -1473,6 +1476,7 @@ SECTIONS {
         src/menus/title_screen.o(.data);
         src/menus/game_over.o(.data);
         src/menus/file_select.o(.data);
+
         src/time_attack.o(.data);
         src/intro.o(.data);
         src/tourian_escape.o(.data);

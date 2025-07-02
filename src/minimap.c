@@ -17,7 +17,7 @@
 #include "structs/samus.h"
 #include "structs/room.h"
 
-extern const struct RoomEntryROM* const sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
+extern const struct RoomEntryROM* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 static u32 sExploredMinimapBitFlags[32] = {
     1 << 0,  1 << 1,  1 << 2,  1 << 3,  1 << 4,

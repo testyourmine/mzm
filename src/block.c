@@ -16,7 +16,7 @@
 #include "structs/samus.h"
 #include "structs/power_bomb_explosion.h"
 
-static const BlockFunc_T sNonReformDestroyFunctionPointers[5] = {
+static BlockFunc_T sNonReformDestroyFunctionPointers[5] = {
     BlockDestroySingleBreakableBlock,
     BlockDestroySquareBlock,
     BlockDestroySingleBreakableBlock,

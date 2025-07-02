@@ -22,8 +22,8 @@
 
 #ifdef DEBUG
 
-extern const struct Door* const sAreaDoorsPointers[AREA_ENTRY_COUNT];
-extern const struct RoomEntryROM* const sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
+extern const struct Door* sAreaDoorsPointers[AREA_ENTRY_COUNT];
+extern const struct RoomEntryROM* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 extern const u32* sMinimapDataPointers[AREA_COUNT];
 

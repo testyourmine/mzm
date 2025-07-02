@@ -13,6 +13,25 @@
 #include "structs/minimap.h"
 #include "structs/save_file.h"
 
+const struct SaveDemo* sDemoRamDataPointers[MAX_AMOUNT_OF_DEMOS] = {
+    [0] = &sDemo0_Ram,
+    [1] = &sDemo1_Ram,
+    [2] = &sDemo2_Ram,
+    [3] = &sDemo3_Ram,
+    [4] = &sDemo4_Ram,
+    [5] = &sDemo5_Ram,
+    [6] = &sDemo6_Ram,
+    [7] = &sDemo7_Ram,
+    [8] = &sDemo8_Ram,
+    [9] = &sDemo9_Ram,
+    [10] = &sDemo10_Ram,
+    [11] = &sDemo11_Ram,
+    [12] = &sDemo12_Ram,
+    [13] = &sDemo13_Ram,
+    [14] = &sDemo14_Ram,
+    [15] = &sDemo15_Ram,
+};
+
 /**
  * @brief 60b14 | c | Demo v-blank, empty
  * 

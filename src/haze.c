@@ -26,8 +26,54 @@ do {                        \
 gHazeInfo.active = FALSE;   \
 } while(0);
 
-// Despite being const, declaring it here as such fails to match
-extern u8 sHazeData[EFFECT_HAZE_END][4];
+/**
+ * @brief Haze data for each room effect
+ * 0 : Haze value
+ * 1 : Damage effect
+ * 2 : BG0 water moving flag
+ * 3 : Power bomb related
+ */
+u8 sHazeData[EFFECT_HAZE_END][4] = {
+    [EFFECT_NONE] = {
+        HAZE_VALUE_NONE, EFFECT_NONE, FALSE, 0
+    },
+    [EFFECT_WATER] = {
+        HAZE_VALUE_BG3, EFFECT_WATER, TRUE, 1
+    },
+    [EFFECT_STRONG_LAVA] = {
+        HAZE_VALUE_BG3, EFFECT_STRONG_LAVA, FALSE, 1
+    },
+    [EFFECT_WEAK_LAVA] = {
+        HAZE_VALUE_BG3, EFFECT_WEAK_LAVA, FALSE, 1
+    },
+    [EFFECT_STRONG_LAVA_HEAT_HAZE] = {
+        HAZE_VALUE_BG3_STRONG_WEAK, EFFECT_STRONG_LAVA_HEAT_HAZE, FALSE, 1
+    },
+    [EFFECT_ACID] = {
+        HAZE_VALUE_BG3, EFFECT_ACID, FALSE, 1
+    },
+    [EFFECT_SNOWFLAKES_COLD_KNOCKBACK] = {
+        HAZE_VALUE_COLD, EFFECT_SNOWFLAKES_COLD_KNOCKBACK, FALSE, 1
+    },
+    [EFFECT_SNOWFLAKES_COLD] = {
+        HAZE_VALUE_COLD, EFFECT_SNOWFLAKES_COLD, FALSE, 1
+    },
+    [EFFECT_HEAT_BG3_HAZE] = {
+        HAZE_VALUE_BG3_NONE_WEAK, EFFECT_NONE, FALSE, 0
+    },
+    [EFFECT_HEAT_BG2_BG3_HAZE] = {
+        HAZE_VALUE_BG3_BG2_STRONG_WEAK_MEDIUM, EFFECT_NONE, FALSE, 0
+    },
+    [EFFECT_BG3_GRADIENT] = {
+        HAZE_VALUE_GRADIENT, EFFECT_NONE, FALSE, 2
+    },
+    [EFFECT_BG2_GRADIENT] = {
+        HAZE_VALUE_GRADIENT, EFFECT_NONE, FALSE, 2
+    },
+    [EFFECT_HAZE_BG1_BG2_BG3] = {
+        HAZE_VALUE_BG3_BG2_BG1, EFFECT_NONE, FALSE, 0
+    }
+};
 
 /**
  * @brief 5cfe0 | 54 | Sets the background haze effect based on the visual effect of the room entry
