@@ -313,11 +313,11 @@ void CheckUnlockTimeAttack(void)
     u32 abilityCount;
     u8 region;
 
+    region = GAME_REGION;
+
     // Already unlocked or save file invalid
     if (gFileScreenOptionsUnlocked.timeAttack & 1 || !TimeAttackCheckSaveFileValidity())
         return;
-
-    region = GAME_REGION;
 
     // Get each item count
     value = ChozodiaEscapeGetItemCountAndEndingNumber();
