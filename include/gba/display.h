@@ -27,8 +27,10 @@
 #define REG_BG2PC (REG_BASE + 0x024)
 #define REG_BG2PD (REG_BASE + 0x026)
 
-#define REG_BG2X (REG_BASE + 0x028)
-#define REG_BG2Y (REG_BASE + 0x02C)
+#define REG_BG2X_L (REG_BASE + 0x028)
+#define REG_BG2X_H (REG_BASE + 0x02A)
+#define REG_BG2Y_L (REG_BASE + 0x02C)
+#define REG_BG2Y_H (REG_BASE + 0x02E)
 
 #define REG_DISPSTAT (REG_BASE + 0x004)
 #define REG_WIN0H    (REG_BASE + 0x040)

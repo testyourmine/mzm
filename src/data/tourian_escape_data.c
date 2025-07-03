@@ -2815,6 +2815,7 @@ static const u16 sTourianEscape_47cdf8[OAM_DATA_SIZE(1)] = {
     0xf8, 0x1f8, 0x1183
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47ce00[4] = {
     [0] = sTourianEscape_47a682,
     [1] = sTourianEscape_47a68a,
@@ -2822,6 +2823,7 @@ const u16* const sTourianEscape_47ce00[4] = {
     [3] = sTourianEscape_47a69a
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47ce10[4] = {
     [0] = sTourianEscape_47a6a2,
     [1] = sTourianEscape_47a6aa,
@@ -2829,6 +2831,7 @@ const u16* const sTourianEscape_47ce10[4] = {
     [3] = sTourianEscape_47a6ba,
 };
 
+// (x, y) and speed?
 const u16 sTourianEscape_47ce20[TOURIAN_ESCAPE_MAX_OBJECTS][3] = {
     [0] = {
         [0] = QUARTER_BLOCK_SIZE,
@@ -2882,6 +2885,7 @@ const u16 sTourianEscape_47ce20[TOURIAN_ESCAPE_MAX_OBJECTS][3] = {
     }
 };
 
+// unused, (x, y) and speed?
 static const u16 sTourianEscape_47ce5c[6][3] = {
     [0] = {
         [0] = BLOCK_SIZE + HALF_BLOCK_SIZE,
@@ -2915,6 +2919,7 @@ static const u16 sTourianEscape_47ce5c[6][3] = {
     }
 };
 
+// OAM X Positions
 const u16 sTourianEscape_47ce80[8] = {
     [0] = 2,
     [1] = 3,
@@ -2926,6 +2931,7 @@ const u16 sTourianEscape_47ce80[8] = {
     [7] = 9
 };
 
+// OAM Y Positions
 const u16 sTourianEscape_47ce90[8] = {
     [0] = 2,
     [1] = 2,
@@ -2937,6 +2943,7 @@ const u16 sTourianEscape_47ce90[8] = {
     [7] = 0
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47cea0[8] = {
     [0] = sTourianEscape_47a998,
     [1] = sTourianEscape_47a998,
@@ -2948,6 +2955,7 @@ const u16* const sTourianEscape_47cea0[8] = {
     [7] = sTourianEscape_47a9a8
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47cec0[4] = {
     [0] = sTourianEscape_47cde0,
     [1] = sTourianEscape_47cde8,
@@ -2955,6 +2963,7 @@ const u16* const sTourianEscape_47cec0[4] = {
     [3] = sTourianEscape_47cdf8
 };
 
+// Object 0 (x, y) OAM Positions, Zebes Exploding
 const u16 sTourianEscape_47ced0[8][2] = {
     [0] = {
         [0] = HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE,
@@ -2990,6 +2999,7 @@ const u16 sTourianEscape_47ced0[8][2] = {
     }
 };
 
+// Object 1 (x, y) OAM Positions, Zebes Exploding
 const u16 sTourianEscape_47cef0[8][2] = {
     [0] = {
         [0] = BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE,
@@ -3025,6 +3035,7 @@ const u16 sTourianEscape_47cef0[8][2] = {
     }
 };
 
+// Object 2 (x, y) OAM Positions, Zebes Exploding
 const u16 sTourianEscape_47cf10[8][2] = {
     [0] = {
         [0] = BLOCK_SIZE,
@@ -3060,6 +3071,7 @@ const u16 sTourianEscape_47cf10[8][2] = {
     }
 };
 
+// Object 3 (x, y) OAM Positions, Zebes Exploding
 const u16 sTourianEscape_47cf30[8][2] = {
     [0] = {
         [0] = BLOCK_SIZE * 2,
@@ -3095,6 +3107,7 @@ const u16 sTourianEscape_47cf30[8][2] = {
     }
 };
 
+// Objects 4-8 (x, y) OAM Positions, Zebes Exploding
 const u16 sTourianEscape_47cf50[8][2] = {
     [0] = {
         [0] = BLOCK_SIZE * 2 - EIGHTH_BLOCK_SIZE,
@@ -3130,6 +3143,7 @@ const u16 sTourianEscape_47cf50[8][2] = {
     }
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47cf70[6] = {
     [0] = sTourianEscape_47a6c2,
     [1] = sTourianEscape_47a6dc,
@@ -3139,6 +3153,7 @@ const u16* const sTourianEscape_47cf70[6] = {
     [5] = sTourianEscape_47a744
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47cf88[7] = {
     [0] = sTourianEscape_47a75e,
     [1] = sTourianEscape_47a778,
@@ -3149,26 +3164,31 @@ const u16* const sTourianEscape_47cf88[7] = {
     [6] = sTourianEscape_47a8cc
 };
 
+// Speeds?
 const u16 sTourianEscape_47cfa4[8] = {
     -0x5A, 0x78, -0x78, 0x5A,
     -0x32, 0x46, -0x32, 0x28
 };
 
+// Speeds?
 const u16 sTourianEscape_47cfb4[8] = {
     -0x1B, 0xC, 0x24, -0x1B,
     -0x19, 0x15, 0x14, -0x10
 };
 
+// Speeds?
 const u16 sTourianEscape_47cfc4[8] = {
     0xA, -0xA, 0xA, -0xA,
     0xA, -0xA, 0xA, -0xA
 };
 
+// Speeds?
 const u16 sTourianEscape_47cfd4[8] = {
     0x3, -0x1, -0x3, 0x3,
     0x5, -0x3, -0x4, 0x4
 };
 
+// OAM Frame Pointers
 const u16* const sTourianEscape_47cfe4[4] = {
     [0] = sTourianEscape_47a9b0,
     [1] = sTourianEscape_47a9dc,
@@ -3176,6 +3196,7 @@ const u16* const sTourianEscape_47cfe4[4] = {
     [3] = sTourianEscape_47aa5e
 };
 
+// OAM Timers
 const u8 sTourianEscape_47cff4[TOURIAN_ESCAPE_MAX_OBJECTS] = {
     [0] = 0,
     [1] = 8,
@@ -3189,6 +3210,7 @@ const u8 sTourianEscape_47cff4[TOURIAN_ESCAPE_MAX_OBJECTS] = {
     [9] = 22
 };
 
+// OAM X Positions
 const u16 sTourianEscape_47cffe[TOURIAN_ESCAPE_MAX_OBJECTS] = {
     [0] = QUARTER_BLOCK_SIZE,
     [1] = HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE,

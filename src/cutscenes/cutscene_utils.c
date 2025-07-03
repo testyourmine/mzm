@@ -26,8 +26,6 @@
 #define PAL_TO_FADE ((void*)(sEwramPointer))
 #define PAL_WITH_FADE ((void*)sEwramPointer + PALRAM_SIZE)
 
-typedef u8 (*TourianEscapeFunc_T)(void);
-
 static TourianEscapeFunc_T sTourianEscapeFunctionPointers[2] = {
     CutsceneDefaultRoutine,
     TourianEscapeCallSubroutines,

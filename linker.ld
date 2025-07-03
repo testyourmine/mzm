@@ -211,8 +211,8 @@ SECTIONS {
         . = 0x00001398; gWrittenToBG2Y = .;
         . = 0x0000139c; gWrittenToMOSAIC_H = .;
         . = 0x0000139e; gWrittenToMOSAIC_L = .;
-        . = 0x000013A0; gBg2Scaling = .;
-        . = 0x000013A2; gUnk_30013a2 = .;
+        . = 0x000013A0; gBg2XScaling = .;
+        . = 0x000013A2; gBg2YScaling = .;
         . = 0x000013A4; gBg2Rotation = .;
         . = 0x000013A6; gWrittenToBG2PA = .;
         . = 0x000013A8; gWrittenToBG2PB = .;
