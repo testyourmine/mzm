@@ -20,8 +20,13 @@
 #include "cutscenes/kraid_rising.h"
 #include "cutscenes/before_charlie.h"
 
+struct InGameData {
+    u8 clipdataCode[640];
+    u8 hazeCode[512];
+    u8 unused[424];
+};
 
-union NonGameplayRAM {
+union NonGameplayRam {
     struct CutsceneData cutscene;
     struct IntroData intro;
     struct GameOverData gameOver;
@@ -34,7 +39,7 @@ union NonGameplayRAM {
     struct ChozodiaEscapeData chozodiaEscape;
     struct TourianEscapeData tourianEscape;
     struct BootDebugData bootDebug;
-    u8 inGame[1576];
+    struct InGameData inGame;
 };
 
 union EwramData {
@@ -47,7 +52,7 @@ union EwramData {
 extern u16 unk_02035400;
 
 extern u8 gUnk_03004fc9;
-extern union NonGameplayRAM gNonGameplayRam;
+extern union NonGameplayRam gNonGameplayRam;
 
 extern u16 gBg0HOFS_NonGameplay;
 extern u16 gBg0VOFS_NonGameplay;

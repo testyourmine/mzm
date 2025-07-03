@@ -22,10 +22,11 @@
 void ClipdataSetupCode(void)
 {
     // Copy code to RAM
-    DMA_SET(3, ClipdataConvertToCollision + 1, gNonGameplayRam.inGame, C_32_2_16(DMA_ENABLE, 0x140));
+    DMA_SET(3, ClipdataConvertToCollision + 1, gNonGameplayRam.inGame.clipdataCode,
+        C_32_2_16(DMA_ENABLE, sizeof(gNonGameplayRam.inGame.clipdataCode) / 2));
 
     // Set pointer
-    gClipdataCodePointer = (ClipFunc_T)(gNonGameplayRam.inGame + 1);
+    gClipdataCodePointer = (ClipFunc_T)(gNonGameplayRam.inGame.clipdataCode + 1);
 }
 
 /**
@@ -311,7 +312,7 @@ s32 ClipdataCheckCurrentAffectingAtPosition(u16 yPosition, u16 xPosition)
  */
 u32 ClipdataUpdateCurrentAffecting(u16 yPosition, u16 tileY, u16 tileX, u8 dontCheckForElevator)
 {
-    u32 behavior;
+    s32 behavior;
     u32 specialClip;
 
     // Get clipdata behavior of the current tile
@@ -321,7 +322,7 @@ u32 ClipdataUpdateCurrentAffecting(u16 yPosition, u16 tileY, u16 tileX, u8 dontC
     // Check for movement clipdata
     if (behavior != CLIP_BEHAVIOR_NONE)
     {
-        if ((s32)behavior < ARRAY_SIZE(sMovementClipdataValues))
+        if (behavior < ARRAY_SIZE(sMovementClipdataValues))
             specialClip = sMovementClipdataValues[behavior];
         else
             specialClip = CLIPDATA_MOVEMENT_NONE;
@@ -350,7 +351,7 @@ u32 ClipdataUpdateCurrentAffecting(u16 yPosition, u16 tileY, u16 tileX, u8 dontC
     else
     {
         // Check for hazard behavior (effect based)
-        if (gCurrentRoomEntry.Bg0Prop != 0 && gCurrentRoomEntry.damageEffect != 0)
+        if (gCurrentRoomEntry.bg0Prop != 0 && gCurrentRoomEntry.damageEffect != 0)
         {
             if (gCurrentRoomEntry.damageEffect < ARRAY_SIZE(sHazardsDefinitions))
             {

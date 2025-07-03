@@ -402,7 +402,7 @@ void CreditsInit(void)
     write16(REG_DISPCNT, 0);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(GalleryVBlank);
+    CallbackSetVblank(GalleryVBlank);
     write16(REG_IME, TRUE);
 
     zero = 0;
@@ -900,7 +900,7 @@ void EndScreenInit(void)
     write16(REG_DISPCNT, 0);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(EndScreenVBlank);
+    CallbackSetVblank(EndScreenVBlank);
     write16(REG_IME, TRUE);
 
     LZ77UncompVRAM(sEndingSamusPosingSpaceBackgroundGfx, VRAM_BASE + 0x3000);
@@ -1282,7 +1282,7 @@ void EndingImageInit(void)
     write16(REG_DISPCNT, 0);
     write16(REG_IME, FALSE);
 
-    CallbackSetVBlank(GalleryVBlank);
+    CallbackSetVblank(GalleryVBlank);
     write16(REG_IME, TRUE);
 
     zero = 0;
@@ -1574,7 +1574,7 @@ void UnlockedOptionsInit(void)
     write16(REG_DISPCNT, 0);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(UnlockedOptionsVBlank);
+    CallbackSetVblank(UnlockedOptionsVBlank);
     write16(REG_IME, TRUE);
 
     zero = 0;
@@ -1865,7 +1865,7 @@ void GalleryInit(void)
     write16(REG_DISPCNT, 0);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(GalleryVBlank);
+    CallbackSetVblank(GalleryVBlank);
     write16(REG_IME, TRUE);
 
     if (gGameModeSub1 == 0)

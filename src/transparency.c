@@ -65,8 +65,8 @@ void TransparencySetRoomEffectsTransparency(void)
     gBLDYData1 = sBldyData_Empty;
     gBLDYData2 = sBldyData_Empty;
 
-    if (gCurrentRoomEntry.Bg0Prop & BG_PROP_LZ77_COMPRESSED)
-        bgCnt[0] = TransparencyGetBgSizeFlag(gCurrentRoomEntry.Bg0Size) | 2 << BGCNT_CHAR_BASE_BLOCK_SHIFT;
+    if (gCurrentRoomEntry.bg0Prop & BG_PROP_LZ77_COMPRESSED)
+        bgCnt[0] = TransparencyGetBgSizeFlag(gCurrentRoomEntry.bg0Size) | 2 << BGCNT_CHAR_BASE_BLOCK_SHIFT;
     else
         bgCnt[0] = CREATE_BGCNT(1, 0, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_512x256);
 
@@ -74,7 +74,7 @@ void TransparencySetRoomEffectsTransparency(void)
     bgCnt[2] = CREATE_BGCNT(1, 4, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_512x256);
     bgCnt[3] = CREATE_BGCNT(0, 6, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256);
 
-    switch (gCurrentRoomEntry.Bg3Prop)
+    switch (gCurrentRoomEntry.bg3Prop)
     {
         case 0: // The value of this case doesn't matter
             bgCnt[3] |= 2 << BGCNT_CHAR_BASE_BLOCK_SHIFT;
@@ -84,7 +84,7 @@ void TransparencySetRoomEffectsTransparency(void)
             bgCnt[3] |= 2 << BGCNT_CHAR_BASE_BLOCK_SHIFT;
     }
 
-    bgCnt[3] = TransparencyGetBgSizeFlag(gCurrentRoomEntry.Bg3Size) | bgCnt[3];
+    bgCnt[3] = TransparencyGetBgSizeFlag(gCurrentRoomEntry.bg3Size) | bgCnt[3];
 
     switch (gCurrentRoomEntry.transparency)
     {
@@ -317,7 +317,7 @@ void TransparencySetRoomEffectsTransparency(void)
     else if (gCurrentRoomEntry.visualEffect == EFFECT_BG2_GRADIENT)
         gDefaultTransparency.bldcnt |= BLDCNT_BG2_FIRST_TARGET_PIXEL;
 
-    if (gCurrentRoomEntry.Bg0Prop == BG_PROP_DISABLE_TRANSPARENCY)
+    if (gCurrentRoomEntry.bg0Prop == BG_PROP_DISABLE_TRANSPARENCY)
         gDefaultTransparency.bldcnt &= ~BLDCNT_BG0_FIRST_TARGET_PIXEL;
 
     TransparencyUpdateBldcnt(0, gDefaultTransparency.bldcnt);
@@ -363,7 +363,7 @@ u32 TransparencyCheckIsDarkRoom(void)
     u16 flag;
 
     flag = 0;
-    if (gCurrentRoomEntry.Bg0Prop == BG_PROP_DARK_ROOM)
+    if (gCurrentRoomEntry.bg0Prop == BG_PROP_DARK_ROOM)
         flag = USHORT_MAX;
 
     return flag;
@@ -531,7 +531,7 @@ void TransparencyUpdateBLDY(u8 value, s32 delay, u32 intensity)
  * @param delay Delay
  * @param intensity Intensity
  */
-void TransparencyUpdateBLDALPHA(u8 eva, u8 evb, s8 delay, u32 intensity)
+void TransparencyUpdateBldalpha(u8 eva, u8 evb, s8 delay, u32 intensity)
 {
     u32 invalid;
     s32 _delay;

@@ -75,7 +75,7 @@ void IntroInit(void)
     write16(REG_DISPCNT, 0);
     write16(REG_IME, FALSE);
 
-    CallbackSetVBlank(IntroVBlank);
+    CallbackSetVblank(IntroVBlank);
 
     write16(REG_IME, TRUE);
 
@@ -835,7 +835,7 @@ u8 IntroMotherBrain(void)
             break;
 
         case CONVERT_SECONDS(3.2f):
-            CallbackSetVBlank(IntroFuzzVBlank);
+            CallbackSetVblank(IntroFuzzVBlank);
             INTRO_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             INTRO_DATA.stage++;
             ended = TRUE;

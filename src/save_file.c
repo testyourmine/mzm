@@ -2253,7 +2253,7 @@ void Sram_VblankEmpty(void)
  */
 u32 unk_75c04(u8 param_1)
 {
-    CallbackSetVBlank(Sram_VblankEmpty);
+    CallbackSetVblank(Sram_VblankEmpty);
     unk_7584c(param_1);
     return gIsLoadingFile;
 }

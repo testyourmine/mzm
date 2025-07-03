@@ -603,7 +603,7 @@ u8 ColorFadingProcess_DoorTransition(void)
 
             gWrittenToBLDCNT = BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
-            bgProp = gCurrentRoomEntry.Bg0Prop; BG_PROP_CLOSE_UP;
+            bgProp = gCurrentRoomEntry.bg0Prop; BG_PROP_CLOSE_UP;
             if (bgProp != 0x43 && bgProp != 0x44 && bgProp != BG_PROP_DARK_ROOM)
             {
                 gWrittenToBLDALPHA_H = 16;

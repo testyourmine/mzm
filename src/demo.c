@@ -75,7 +75,7 @@ void DemoInit(void)
 {
     s32 demoNbr;
 
-    CallbackSetVBlank(DemoVBlank);
+    CallbackSetVblank(DemoVBlank);
 
     // Get demo number
     if (gCurrentDemo.noDemoShuffle)
@@ -138,7 +138,7 @@ void DemoInit(void)
     gFrameCounter8Bit = 0;
     gFrameCounter16Bit = 0;
 
-    CallbackSetVBlank(DemoVBlank);
+    CallbackSetVblank(DemoVBlank);
 }
 
 /**

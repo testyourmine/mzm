@@ -1171,7 +1171,7 @@ void TitleScreenInit(void)
 {
     u32 zero;
 
-    CallbackSetVBlank(TitleScreenVBlank_Empty);
+    CallbackSetVblank(TitleScreenVBlank_Empty);
     
     zero = 0;
     DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
@@ -1290,7 +1290,7 @@ void TitleScreenInit(void)
 
     write16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt = DCNT_OBJ | sTitleScreenPageData[0].bg | sTitleScreenPageData[1].bg);
 
-    CallbackSetVBlank(TitleScreenVBlank);
+    CallbackSetVblank(TitleScreenVBlank);
 }
 
 /**

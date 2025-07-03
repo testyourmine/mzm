@@ -51,7 +51,7 @@ u32 InGameCutsceneSamusCloseUp(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             break;
 
         case 1:
-            TransparencyUpdateBLDALPHA(16, 0, 7, 1);
+            TransparencyUpdateBldalpha(16, 0, 7, 1);
             result = 1;
             break;
 
@@ -139,7 +139,7 @@ u32 InGameCutsceneSamusCloseUp(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             break;
 
         case 10:
-            TransparencyUpdateBLDALPHA(0, 16, 0, 16);
+            TransparencyUpdateBldalpha(0, 16, 0, 16);
             result = 1;
             break;
 
@@ -627,7 +627,7 @@ void MakeBackgroundFlash(u8 type)
             break;
 
         case BG_FLASH_CHOZO_LONG_TRANSPARENCY:
-            TransparencyUpdateBLDALPHA(gDefaultTransparency.evaCoef, gDefaultTransparency.evbCoef, 2, 1);
+            TransparencyUpdateBldalpha(gDefaultTransparency.evaCoef, gDefaultTransparency.evbCoef, 2, 1);
 
             // Set cutscene flag
             InGameCutsceneCheckFlag(TRUE, IGC_LONG_BEAM_HINT);
@@ -803,8 +803,8 @@ void InGameCutsceneCheckPlayOnTransition(void)
 
             unk_5fd58();
 
-            gCurrentRoomEntry.Bg0Prop = BG_PROP_CLOSE_UP;
-            gCurrentRoomEntry.Bg0Size = BGCNT_SIZE_256x256;
+            gCurrentRoomEntry.bg0Prop = BG_PROP_CLOSE_UP;
+            gCurrentRoomEntry.bg0Size = BGCNT_SIZE_256x256;
 
             gBg0XPosition = 0;
             gBg0YPosition = 0;
@@ -814,7 +814,7 @@ void InGameCutsceneCheckPlayOnTransition(void)
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVB = gDefaultTransparency.evbCoef = 12;
 
             write16(REG_BLDALPHA, gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA);
-            TransparencyUpdateBLDALPHA(4, 12, 1, 1);
+            TransparencyUpdateBldalpha(4, 12, 1, 1);
 
             gIoRegistersBackup.Bldcnt_NonGameplay = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
                 BLDCNT_BG1_SECOND_TARGET_PIXEL | BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL |
@@ -838,7 +838,7 @@ void InGameCutsceneCheckPlayOnTransition(void)
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVB = 0;
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVA = 16;
 
-            TransparencyUpdateBLDALPHA(16, 0, 1, 1);
+            TransparencyUpdateBldalpha(16, 0, 1, 1);
             write16(REG_BLDALPHA, gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA);
             break;
     }

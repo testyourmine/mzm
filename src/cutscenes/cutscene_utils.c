@@ -264,7 +264,7 @@ u8 CutsceneSubroutine(void)
     {
         case CUTSCENE_STAGE_STARTING:
             // Set dummy empty vblank
-            CallbackSetVBlank(CutsceneLoadingVBlank);
+            CallbackSetVblank(CutsceneLoadingVBlank);
 
             // Start the pre cutscene background fading
             if (CutsceneStartBackgroundFading(sCutsceneData[gCurrentCutscene].preBgFading))
@@ -286,7 +286,7 @@ u8 CutsceneSubroutine(void)
             
         case CUTSCENE_STAGE_INIT:
             CutsceneInit();
-            CallbackSetVBlank(CutsceneVBlank);
+            CallbackSetVblank(CutsceneVBlank);
 
             gSubGameModeStage++;
             break;
@@ -446,8 +446,8 @@ void CutsceneInit(void)
     u8 temp;
     #endif // DEBUG
 
-    CallbackSetVBlank(CutsceneLoadingVBlank);
-    BitFill(3, 0, &gNonGameplayRam, sizeof(union NonGameplayRAM), 32);
+    CallbackSetVblank(CutsceneLoadingVBlank);
+    BitFill(3, 0, &gNonGameplayRam, sizeof(union NonGameplayRam), 32);
 
     gOamXOffset_NonGameplay = gOamYOffset_NonGameplay = 0;
     gNextOamSlot = 0;

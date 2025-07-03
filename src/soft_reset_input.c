@@ -57,7 +57,7 @@ void SoftReset(void)
 
     ClearGfxRam();
     LoadInterruptCode();
-    CallbackSetVBlank(SoftResetVBlankCallback);
+    CallbackSetVblank(SoftResetVBlankCallback);
     SramRead_All();
     InitializeAudio();
 

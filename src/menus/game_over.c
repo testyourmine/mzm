@@ -283,7 +283,7 @@ void GameOverInit(void)
 {
     u32 zero;
 
-    CallbackSetVBlank(GameOverVBlank_Empty);
+    CallbackSetVblank(GameOverVBlank_Empty);
     zero = 0;
     DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));
 
@@ -338,7 +338,7 @@ void GameOverInit(void)
     GAME_OVER_DATA.oam[0] = sMenuOamData_Empty;
 
     GameOverUpdateSamusHead(SAMUS_CURSOR_ACTION_LOADING);
-    CallbackSetVBlank(GameOverVBlank);
+    CallbackSetVblank(GameOverVBlank);
 }
 
 /**
@@ -349,7 +349,7 @@ void GameOverInit_Debug(void)
 {
     u32 zero;
 
-    CallbackSetVBlank(GameOverVBlank_Empty);
+    CallbackSetVblank(GameOverVBlank_Empty);
     zero = 0;
     DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));
 
@@ -390,7 +390,7 @@ void GameOverInit_Debug(void)
 
     GAME_OVER_DATA.oam[0] = sMenuOamData_Empty;
 
-    CallbackSetVBlank(GameOverVBlank);
+    CallbackSetVblank(GameOverVBlank);
 }
 
 /**

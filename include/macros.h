@@ -1,10 +1,3 @@
-#define BEHAVIOR_TO_BLOCK(behavior) (behavior - 0x10)
-#define BEHAVIOR_TO_TANK(behavior) (behavior - 0x34)
-#define BEHAVIOR_TO_HAZARD(behavior) (behavior - 0x40)
-#define BEHAVIOR_TO_BLDALPHA(behavior) (behavior - 0x44)
-#define BEHAVIOR_TO_GROUND_EFFECT(behavior) (behavior - 0x50)
-#define BEHAVIOR_TO_DOOR(behavior) (behavior - 0x7F)
-
 #define BOMB_CHAIN_TYPE_TO_FLAG(type) (1 << type)
 
 #define LOW_BYTE(value) ((value) & UCHAR_MAX)
@@ -40,7 +33,12 @@
 #define C_S8_2_S16(value) ((value) & 0x80 ? 0x100 + (value) : (value))
 #define C_S9_2_S16(value) ((value) & 0x100 ? 0x200 + (value) : (value))
 
-
+// Creates an array at the specified memory location, used to create symbols for Ewram arrays
+// e.g. :
+// `#define gSomeSymbol CAST_TO_ARRAY(u8, [8], EWRAM_BASE + 0x1000)`
+// Will create a symbol bound to address EWRAM_BASE + 0x1000 of type u8 [8]
+// In normal C code, that would be :
+// `extern u8 gSomeSymbol[8];`
 #define CAST_TO_ARRAY(type, sizes, ptr) (*((type (*)sizes)((ptr))))
 
 #define OPPOSITE_DIRECTION(dir) ((dir) ^ (KEY_RIGHT | KEY_LEFT))
@@ -198,11 +196,20 @@
 #define GET_PSPRITE_WEAKNESS(id) sPrimarySpriteStats[(id)][2]
 #define GET_SSPRITE_WEAKNESS(id) sSecondarySpriteStats[(id)][2]
 
+// Converts from sub-pixel to pixel
 #define SUB_PIXEL_TO_PIXEL(pixel) ((pixel) / SUB_PIXEL_RATIO)
+// !!NOT RECOMMENDED!! Converts from sub-pixel to pixel.
+// This version of the macro uses a shift instead of a division and should only be used for matching purposes.
 #define SUB_PIXEL_TO_PIXEL_(pixel) (DIV_SHIFT(pixel, SUB_PIXEL_RATIO))
+// Converts from pixel to sub-pixel
 #define PIXEL_TO_SUB_PIXEL(pixel) ((pixel) * SUB_PIXEL_RATIO)
+
+// Converts from sub-pixel to block
 #define SUB_PIXEL_TO_BLOCK(pixel) ((pixel) / BLOCK_SIZE)
+// !!NOT RECOMMENDED!! Converts from sub-pixel to block.
+// This version of the macro uses a shift instead of a division and should only be used for matching purposes.
 #define SUB_PIXEL_TO_BLOCK_(pixel) (DIV_SHIFT((pixel), BLOCK_SIZE))
+// Converts from block to sub-pixel
 #define BLOCK_TO_SUB_PIXEL(block) ((block) * BLOCK_SIZE)
 #define VELOCITY_TO_SUB_PIXEL(velocity) (DIV_SHIFT((velocity), 8))
 #define SUB_PIXEL_TO_VELOCITY(velocity) ((s16)((velocity) * 8))

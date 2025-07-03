@@ -172,10 +172,10 @@ void ConnectionUpdateHatchAnimation(u8 dontSetRaw, u32 hatchNbr)
     }
     else
     {
-        BgClipSetRawBG1BlockValue(tilemapValue + 16 * 0, gHatchData[hatchNbr].yPosition + 0, gHatchData[hatchNbr].xPosition);
-        BgClipSetRawBG1BlockValue(tilemapValue + 16 * 1, gHatchData[hatchNbr].yPosition + 1, gHatchData[hatchNbr].xPosition);
-        BgClipSetRawBG1BlockValue(tilemapValue + 16 * 2, gHatchData[hatchNbr].yPosition + 2, gHatchData[hatchNbr].xPosition);
-        BgClipSetRawBG1BlockValue(tilemapValue + 16 * 3, gHatchData[hatchNbr].yPosition + 3, gHatchData[hatchNbr].xPosition);
+        BgClipSetRawBg1BlockValue(tilemapValue + 16 * 0, gHatchData[hatchNbr].yPosition + 0, gHatchData[hatchNbr].xPosition);
+        BgClipSetRawBg1BlockValue(tilemapValue + 16 * 1, gHatchData[hatchNbr].yPosition + 1, gHatchData[hatchNbr].xPosition);
+        BgClipSetRawBg1BlockValue(tilemapValue + 16 * 2, gHatchData[hatchNbr].yPosition + 2, gHatchData[hatchNbr].xPosition);
+        BgClipSetRawBg1BlockValue(tilemapValue + 16 * 3, gHatchData[hatchNbr].yPosition + 3, gHatchData[hatchNbr].xPosition);
     }
 
     BgClipSetClipdataBlockValue(tilemapValue + 16 * 0, gHatchData[hatchNbr].yPosition + 0, gHatchData[hatchNbr].xPosition);
@@ -938,7 +938,7 @@ void ConnectionLoadDoors(void)
         if (bldalpha != 0)
         {
             // Update bldalpha
-            TransparencyUpdateBLDALPHA(LOW_BYTE(bldalpha), HIGH_BYTE(bldalpha), 1, 1);
+            TransparencyUpdateBldalpha(LOW_BYTE(bldalpha), HIGH_BYTE(bldalpha), 1, 1);
 
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVB = gBldalphaData1.evbCoef;
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVA = gBldalphaData1.evaCoef;

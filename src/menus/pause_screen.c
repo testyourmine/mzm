@@ -2191,7 +2191,7 @@ void PauseScreenVBlank_Empty(void)
  */
 void PauseScreenInit(void)
 {
-    CallbackSetVBlank(PauseScreenVBlank_Empty);
+    CallbackSetVblank(PauseScreenVBlank_Empty);
     
     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
     
@@ -2199,7 +2199,7 @@ void PauseScreenInit(void)
     write16(REG_DISPCNT, 0);
 
     gNextOamSlot = 0;
-    BitFill(3, 0, &gNonGameplayRam, sizeof(union NonGameplayRAM), 32);
+    BitFill(3, 0, &gNonGameplayRam, sizeof(union NonGameplayRam), 32);
     ResetFreeOam();
     
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
@@ -2572,7 +2572,7 @@ void PauseScreenInit(void)
 
     PauseScreenUpdateOrStartFading(PAUSE_SCREEN_FADING_IN_INIT);
     
-    CallbackSetVBlank(PauseScreenVBlank);
+    CallbackSetVblank(PauseScreenVBlank);
     write16(REG_DISPCNT, PAUSE_SCREEN_DATA.dispcnt);
 }
 

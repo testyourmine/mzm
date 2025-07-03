@@ -45,7 +45,7 @@ void FusionGalleryInit(void)
     write16(REG_DISPCNT, 0);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(FusionGalleryVBlank);
+    CallbackSetVblank(FusionGalleryVBlank);
     write16(REG_IME, TRUE);
 
     if (gGameModeSub1 == 0)

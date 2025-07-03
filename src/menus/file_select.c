@@ -4539,7 +4539,7 @@ void FileSelectSetLanguage(void)
  */
 void FileSelectInit(void)
 {
-    CallbackSetVBlank(FileSelectVBlank_Empty);
+    CallbackSetVblank(FileSelectVBlank_Empty);
 
     BitFill(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam), 32);
 
@@ -4682,7 +4682,7 @@ void FileSelectInit(void)
     write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = 0);
 
     FileSelectVBlank();
-    CallbackSetVBlank(FileSelectVBlank);
+    CallbackSetVblank(FileSelectVBlank);
 }
 
 /**

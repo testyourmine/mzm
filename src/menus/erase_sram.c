@@ -349,7 +349,7 @@ void EraseSramInit(void)
     write16(REG_IF, IF_HBLANK);
     write16(REG_IME, TRUE);
     
-    CallbackSetVBlank(EraseSramVBlank_Empty);
+    CallbackSetVblank(EraseSramVBlank_Empty);
 
     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
@@ -419,7 +419,7 @@ void EraseSramInit(void)
     ERASE_SRAM_DATA.dispcnt = DCNT_BG1 | DCNT_BG3 | DCNT_OBJ;
     write16(REG_DISPCNT, ERASE_SRAM_DATA.dispcnt);
 
-    CallbackSetVBlank(EraseSramVBlank);
+    CallbackSetVblank(EraseSramVBlank);
 }
 
 /**

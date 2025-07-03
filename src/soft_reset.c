@@ -51,7 +51,7 @@ void SoftResetInit(void)
 
     u32 buffer;
 
-    CallbackSetVBlank(SoftResetVBlank_Empty);
+    CallbackSetVblank(SoftResetVBlank_Empty);
     
     buffer = 0;
     DMA_SET(3, &buffer, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));    
@@ -85,7 +85,7 @@ void SoftResetInit(void)
     
     write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
 
-    CallbackSetVBlank(SoftResetVBlank);
+    CallbackSetVblank(SoftResetVBlank);
 }
 
 /**

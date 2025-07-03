@@ -34,6 +34,9 @@ static const BackgroundEffectBehaviorEntry_T* sBackgroundEffectBehaviorPointers[
     [BACKGROUND_EFFECT_ALL_WHITE] = sBackgroundEffectBehavior_AllBlackWhite,
 };
 
+static u16 BackgroundEffectProcess(void);
+
+
 /**
  * @brief 5dd5c | 270 | Transfers the animated graphics to VRAM
  * 
@@ -435,14 +438,14 @@ void AnimatedPaletteUpdate(void)
     if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
     {
         // Directly to palram if in game
-        DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * 16],
-            ANIMATED_PALETTE_PALRAM, C_32_2_16(DMA_ENABLE, 16));
+        DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * PAL_ROW],
+            ANIMATED_PALETTE_PALRAM, C_32_2_16(DMA_ENABLE, PAL_ROW));
     }
     else
     {
         // To backup if not in game
-        DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * 16],
-            ANIMATED_PALETTE_EWRAM, C_32_2_16(DMA_ENABLE, 16));    
+        DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * PAL_ROW],
+            ANIMATED_PALETTE_EWRAM, C_32_2_16(DMA_ENABLE, PAL_ROW));    
     }
 }
 
@@ -463,7 +466,8 @@ void AnimatedPaletteCheckDisableOnTransition(void)
         return;
 
     // Transfer palette
-    DMA_SET(3, sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette, ANIMATED_PALETTE_PALRAM, C_32_2_16(DMA_ENABLE, 16));
+    DMA_SET(3, sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette,
+        ANIMATED_PALETTE_PALRAM, C_32_2_16(DMA_ENABLE, PAL_ROW));
 
     // Check disable
     switch (gAnimatedGraphicsEntry.palette)
@@ -549,7 +553,7 @@ void BackgroundEffectUpdate(void)
  * 
  * @return u16 Color id to update
  */
-u16 BackgroundEffectProcess(void)
+static u16 BackgroundEffectProcess(void)
 {
     u16 colorId;
     const u16* pBehavior;

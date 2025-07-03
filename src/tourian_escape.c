@@ -516,7 +516,7 @@ void TourianEscapeInit(void)
     gWrittenToBLDY_NonGameplay = 0;
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(NULL);
+    CallbackSetVblank(NULL);
     write16(REG_IME, TRUE);
 
     zero = 0;
@@ -531,7 +531,7 @@ void TourianEscapeInit(void)
     LoadRoomCutscene(AREA_TOURIAN, 4 + 1, BLOCK_SIZE * 5, BLOCK_SIZE * 10);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(TourianEscapeVBLank);
+    CallbackSetVblank(TourianEscapeVBLank);
     write16(REG_IME, TRUE);
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -641,7 +641,7 @@ u8 TourianEscapeZebesExploding(void)
 
         case 246:
             write16(REG_IME, FALSE);
-            CallbackSetVBlank(TourianEscapeVBLankZebesExploding);
+            CallbackSetVblank(TourianEscapeVBLankZebesExploding);
             write16(REG_IME, TRUE);
 
             LZ77UncompVRAM(sTourianEscapeZebesGfx, VRAM_BASE);
@@ -1166,7 +1166,7 @@ u8 TourianEscapeSamusSurrounded(void)
 
         case 3:
             write16(REG_IME, FALSE);
-            CallbackSetVBlank(TourianEscapeVBLankSamusSurrounded);
+            CallbackSetVblank(TourianEscapeVBLankSamusSurrounded);
             write16(REG_IME, TRUE);
             break;
 
@@ -1224,7 +1224,7 @@ u8 TourianEscapeSamusFlyingIn(void)
     {
         case 0:
             write16(REG_IME, FALSE);
-            CallbackSetVBlank(TourianEscapeVBLankZebesExploding);
+            CallbackSetVblank(TourianEscapeVBLankZebesExploding);
             write16(REG_IME, TRUE);
 
             LZ77UncompVRAM(sIntroTextAndShipFlyingInGfx, VRAM_OBJ);

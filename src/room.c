@@ -257,7 +257,7 @@ void RoomLoadTileset(void)
     gCurrentRoomEntry.animatedTileset = gAnimatedGraphicsEntry.tileset = entry.animatedTileset;
     gCurrentRoomEntry.animatedPalette = gAnimatedGraphicsEntry.palette = entry.animatedPalette;
 
-    if (gCurrentRoomEntry.Bg2Prop == BG_PROP_MOVING)
+    if (gCurrentRoomEntry.bg2Prop == BG_PROP_MOVING)
         BitFill(3, 0x40, VRAM_BASE + 0x2000, 0x1000, 16);
 }
 
@@ -273,12 +273,12 @@ void RoomLoadEntry(void)
 
     gCurrentRoomEntry.tileset = entry.tileset;
 
-    gCurrentRoomEntry.Bg0Prop = entry.Bg0Prop;
-    gCurrentRoomEntry.Bg1Prop = entry.Bg1Prop;
-    gCurrentRoomEntry.Bg2Prop = entry.Bg2Prop;
-    gCurrentRoomEntry.Bg3Prop = entry.Bg3Prop;
+    gCurrentRoomEntry.bg0Prop = entry.bg0Prop;
+    gCurrentRoomEntry.bg1Prop = entry.bg1Prop;
+    gCurrentRoomEntry.bg2Prop = entry.bg2Prop;
+    gCurrentRoomEntry.bg3Prop = entry.bg3Prop;
 
-    gCurrentRoomEntry.Bg3Scrolling = entry.Bg3Scrolling;
+    gCurrentRoomEntry.bg3Scrolling = entry.bg3Scrolling;
     gCurrentRoomEntry.transparency = entry.transparency;
 
     gCurrentRoomEntry.mapX = entry.mapX;
@@ -316,20 +316,20 @@ void RoomLoadEntry(void)
 
     gCurrentRoomEntry.scrollsFlag = ROOM_SCROLLS_FLAG_NO_SCROLLS;
     gCurrentRoomEntry.damageEffect = EFFECT_NONE;
-    gCurrentRoomEntry.Bg0Size = 0;
-    gCurrentRoomEntry.Bg3Size = 0;
+    gCurrentRoomEntry.bg0Size = 0;
+    gCurrentRoomEntry.bg3Size = 0;
 
-    if (gSpritesetEntryUsed != 0 && gCurrentRoomEntry.Bg0Prop == 0x44)
+    if (gSpritesetEntryUsed != 0 && gCurrentRoomEntry.bg0Prop == 0x44)
     {
         gWaitingSpacePiratesPosition.x = 0x8000;
         gWaitingSpacePiratesPosition.y = 0x8000;
     }
 
-    gCurrentRoomEntry.BG3FromBottomFlag = FALSE;
+    gCurrentRoomEntry.bg3FromBottomFlag = FALSE;
 
-    if (gCurrentRoomEntry.Bg3Prop == BG_PROP_STARTS_FROM_BOTTOM)
+    if (gCurrentRoomEntry.bg3Prop == BG_PROP_STARTS_FROM_BOTTOM)
     {
-        gCurrentRoomEntry.BG3FromBottomFlag = TRUE;
+        gCurrentRoomEntry.bg3FromBottomFlag = TRUE;
         gBg0Movement.type = BG0_MOVEMENT_WATER_CLOUDS;
     }
 }
@@ -347,7 +347,7 @@ void RoomLoadBackgrounds(void)
     entry = sAreaRoomEntryPointers[gCurrentArea][gCurrentRoom];
 
     // Load BG3, always LZ77
-    gCurrentRoomEntry.Bg3Size = *entry.pBg3Data;
+    gCurrentRoomEntry.bg3Size = *entry.pBg3Data;
     src = entry.pBg3Data + 4;
     CallLZ77UncompWram(src, gDecompBg3Map);
 
@@ -357,7 +357,7 @@ void RoomLoadBackgrounds(void)
             BitFill(3, 0x40, VRAM_BASE + 0x3000, 0x1000, 0x10);
 
         // Load BG0, either RLE or LZ77
-        if (gCurrentRoomEntry.Bg0Prop & BG_PROP_RLE_COMPRESSED)
+        if (gCurrentRoomEntry.bg0Prop & BG_PROP_RLE_COMPRESSED)
         {
             src = entry.pBg0Data;
             gBgPointersAndDimensions.backgrounds[0].pDecomp = gDecompBg0Map;
@@ -365,10 +365,10 @@ void RoomLoadBackgrounds(void)
             gBgPointersAndDimensions.backgrounds[0].height = *src++;
             RoomRleDecompress(TRUE, src, (u8*)gDecompBg0Map);
         }
-        else if (gCurrentRoomEntry.Bg0Prop & BG_PROP_LZ77_COMPRESSED)
+        else if (gCurrentRoomEntry.bg0Prop & BG_PROP_LZ77_COMPRESSED)
         {
             src = entry.pBg0Data;
-            gCurrentRoomEntry.Bg0Size = *src;
+            gCurrentRoomEntry.bg0Size = *src;
 
             src += 4;
             CallLZ77UncompWram(src, gDecompBg0Map);
@@ -389,7 +389,7 @@ void RoomLoadBackgrounds(void)
         RoomRleDecompress(TRUE, src, (u8*)gDecompBg1Map);
 
         // Load BG2, force RLE
-        if (gCurrentRoomEntry.Bg2Prop & BG_PROP_RLE_COMPRESSED)
+        if (gCurrentRoomEntry.bg2Prop & BG_PROP_RLE_COMPRESSED)
         {
             src = entry.pBg2Data;
             gBgPointersAndDimensions.backgrounds[2].pDecomp = gDecompBg2Map;
@@ -594,7 +594,7 @@ void RoomSetBackgroundScrolling(void)
 {
     gBg3Movement = sBg3Movement_Empty;
 
-    switch (gCurrentRoomEntry.Bg3Scrolling)
+    switch (gCurrentRoomEntry.bg3Scrolling)
     {
         case 7:
         case 8:
@@ -645,7 +645,7 @@ void RoomSetInitialTilemap(u8 bgNumber)
 
     if (bgNumber == 0)
     {
-        properties = gCurrentRoomEntry.Bg0Prop;
+        properties = gCurrentRoomEntry.bg0Prop;
         do {
             yPosition = SUB_PIXEL_TO_BLOCK(gBg0YPosition);
             xPosition = SUB_PIXEL_TO_BLOCK(gBg0XPosition);
@@ -653,13 +653,13 @@ void RoomSetInitialTilemap(u8 bgNumber)
     }
     else if (bgNumber == 1)
     {
-        properties = gCurrentRoomEntry.Bg1Prop;
+        properties = gCurrentRoomEntry.bg1Prop;
         yPosition = SUB_PIXEL_TO_BLOCK(gBg1YPosition);
         xPosition = SUB_PIXEL_TO_BLOCK(gBg1XPosition);
     }
     else
     {
-        properties = gCurrentRoomEntry.Bg2Prop;
+        properties = gCurrentRoomEntry.bg2Prop;
         yPosition = SUB_PIXEL_TO_BLOCK(gBg2YPosition);
         xPosition = SUB_PIXEL_TO_BLOCK(gBg2XPosition);
     }
@@ -729,10 +729,10 @@ void RoomSetInitialTilemap(u8 bgNumber)
         if (properties & BG_PROP_LZ77_COMPRESSED && bgNumber == 0)
         {
             offset = 0x800;
-            if (gCurrentRoomEntry.Bg0Size & 1)
+            if (gCurrentRoomEntry.bg0Size & 1)
                 offset *= 2;
 
-            if (gCurrentRoomEntry.Bg0Size & 2)
+            if (gCurrentRoomEntry.bg0Size & 2)
                 offset *= 2;
 
             DmaTransfer(3, gDecompBg0Map, VRAM_BASE, offset, 16);
@@ -1134,19 +1134,19 @@ void RoomUpdateVerticalTilemap(s32 offset)
     {
         if (i == 0)
         {
-            properties = gCurrentRoomEntry.Bg0Prop;
+            properties = gCurrentRoomEntry.bg0Prop;
             yPosition = gBg0YPosition / BLOCK_SIZE;
             xPosition = gBg0XPosition / BLOCK_SIZE;
         }
         else if (i == 1)
         {
-            properties = gCurrentRoomEntry.Bg1Prop;
+            properties = gCurrentRoomEntry.bg1Prop;
             yPosition = gBg1YPosition / BLOCK_SIZE;
             xPosition = gBg1XPosition / BLOCK_SIZE;
         }
         else
         {
-            properties = gCurrentRoomEntry.Bg2Prop;
+            properties = gCurrentRoomEntry.bg2Prop;
             yPosition = gBg2YPosition / BLOCK_SIZE;
             xPosition = gBg2XPosition / BLOCK_SIZE;
         }
@@ -1215,19 +1215,19 @@ void RoomUpdateHorizontalTilemap(s32 offset)
     {
         if (i == 0)
         {
-            properties = gCurrentRoomEntry.Bg0Prop;
+            properties = gCurrentRoomEntry.bg0Prop;
             yPosition = gBg0YPosition / BLOCK_SIZE;
             xPosition = gBg0XPosition / BLOCK_SIZE;
         }
         else if (i == 1)
         {
-            properties = gCurrentRoomEntry.Bg1Prop;
+            properties = gCurrentRoomEntry.bg1Prop;
             yPosition = gBg1YPosition / BLOCK_SIZE;
             xPosition = gBg1XPosition / BLOCK_SIZE;
         }
         else
         {
-            properties = gCurrentRoomEntry.Bg2Prop;
+            properties = gCurrentRoomEntry.bg2Prop;
             yPosition = gBg2YPosition / BLOCK_SIZE;
             xPosition = gBg2XPosition / BLOCK_SIZE;
         }
@@ -1280,7 +1280,7 @@ void RoomUpdateHorizontalTilemap(s32 offset)
  * @brief 5743c | 20 | Checks if DMA 3 has ended
  * 
  */
-void RoomCheckDMA3Ended(void)
+static void RoomCheckDma3Ended(void)
 {
     vu32* pDma;
 

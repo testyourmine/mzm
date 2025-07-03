@@ -700,7 +700,7 @@ void ScrollProcessGeneral(void)
         ScrollBg2(&coords);
 
         // Check auto scroll bg0
-        if (gBg0Movement.type != 0 && gCurrentRoomEntry.Bg0Prop & BG_PROP_LZ77_COMPRESSED)
+        if (gBg0Movement.type != 0 && gCurrentRoomEntry.bg0Prop & BG_PROP_LZ77_COMPRESSED)
             ScrollAutoBg0();
 
         // Update effect and haze
@@ -868,9 +868,9 @@ void ScrollUpdateEffectAndHazePosition(struct Coordinates* pCoords)
     u16 temp;
     
     var_0 = FALSE;
-    if (gCurrentRoomEntry.Bg0Prop & BG_PROP_RLE_COMPRESSED)
+    if (gCurrentRoomEntry.bg0Prop & BG_PROP_RLE_COMPRESSED)
     {
-        if (gCurrentRoomEntry.Bg0Prop == 0x11)
+        if (gCurrentRoomEntry.bg0Prop == 0x11)
         {
             gBg0XPosition = gBg1XPosition / 2;
             gBg0YPosition = gBg1YPosition;
@@ -934,7 +934,7 @@ void ScrollUpdateEffectAndHazePosition(struct Coordinates* pCoords)
         else
         {
             var_0 = TRUE;
-            switch (gCurrentRoomEntry.Bg0Prop)
+            switch (gCurrentRoomEntry.bg0Prop)
             {
                 case BG_PROP_CLOSE_UP:
                     gBg0XPosition = 0;
@@ -1038,7 +1038,7 @@ u32 ScrollGetBG3Scroll(void)
     yScroll = BG3_SCROLLING_TYPE_NONE;
     xScroll = BG3_SCROLLING_TYPE_NONE;
 
-    switch (gCurrentRoomEntry.Bg3Scrolling)
+    switch (gCurrentRoomEntry.bg3Scrolling)
     {
         case 0:
             break;
@@ -1114,11 +1114,11 @@ void ScrollBg3(void)
             gBg3XPosition = DIV_SHIFT(gBg1XPosition - SCREEN_X_BLOCK_PADDING, 4);
     }
 
-    if (gCurrentRoomEntry.BG3FromBottomFlag)
+    if (gCurrentRoomEntry.bg3FromBottomFlag)
     {
         size = BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataHeight - (SCREEN_SIZE_Y_BLOCKS + SCREEN_Y_PADDING));
 
-        if (gCurrentRoomEntry.Bg3Size & 2)
+        if (gCurrentRoomEntry.bg3Size & 2)
             offset = 0x800;
         else
             offset = 0x400;
@@ -1198,12 +1198,12 @@ void ScrollBg2(struct Coordinates* pCoords)
     u32 temp;
     u8 temp2;
 
-    gCurrentRoomEntry.Bg2Prop = gCurrentRoomEntry.Bg2Prop;
-    if (gCurrentRoomEntry.Bg2Prop & BG_PROP_RLE_COMPRESSED)
+    gCurrentRoomEntry.bg2Prop = gCurrentRoomEntry.bg2Prop;
+    if (gCurrentRoomEntry.bg2Prop & BG_PROP_RLE_COMPRESSED)
     {
-        if (gCurrentRoomEntry.Bg2Prop & 0x20)
+        if (gCurrentRoomEntry.bg2Prop & 0x20)
         {
-            if (gCurrentRoomEntry.Bg2Prop == BG_PROP_MOVING)
+            if (gCurrentRoomEntry.bg2Prop == BG_PROP_MOVING)
             {
                 position = gBg1XPosition + gBg2Movement.xOffset;
                 if (position < 0)

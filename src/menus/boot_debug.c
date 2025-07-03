@@ -595,7 +595,7 @@ s32 BootDebugSubroutine(void)
  */
 void BootDebugSetVBlankCodePtr(void)
 {
-    CallbackSetVBlank(VBlankCodeDuringBootDebug);
+    CallbackSetVblank(VBlankCodeDuringBootDebug);
 }
 
 /**

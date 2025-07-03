@@ -80,7 +80,7 @@ void ChozodiaEscapeSetHBlank(void)
     DMA_SET(3, ChozodiaEscapeHBlank, CHOZODIA_ESCAPE_DATA.hblankCode, C_32_2_16(DMA_ENABLE, 0x20));
     
     // Set pointer
-    CallbackSetHBlank((Func_T)(CHOZODIA_ESCAPE_DATA.hblankCode + 1));
+    CallbackSetHblank((Func_T)(CHOZODIA_ESCAPE_DATA.hblankCode + 1));
 }
 
 /**
@@ -436,7 +436,7 @@ void ChozodiaEscapeInit(void)
     write16(REG_DISPCNT, 0);
 
     write16(REG_IME, FALSE);
-    CallbackSetVBlank(ChozodiaEscapeVBlank);
+    CallbackSetVblank(ChozodiaEscapeVBlank);
     write16(REG_IME, TRUE);
 
     ClearGfxRam();

@@ -215,12 +215,12 @@ void SetVBlankCodeInGame(void)
         case 0:
         case SUB_GAME_MODE_DOOR_TRANSITION:
         case SUB_GAME_MODE_LOADING_ROOM:
-            CallbackSetVBlank(VBlankCodeInGameLoad);
+            CallbackSetVblank(VBlankCodeInGameLoad);
             break;
 
         case SUB_GAME_MODE_PLAYING:
         default:
-            CallbackSetVBlank(VBlankCodeInGame);
+            CallbackSetVblank(VBlankCodeInGame);
     }
 }
 
@@ -422,7 +422,7 @@ void InitAndLoadGenerics(void)
     write16(REG_IF, IF_HBLANK);
     write16(REG_IME, TRUE);
 
-    CallbackSetVBlank(VBlankInGame_Empty);
+    CallbackSetVblank(VBlankInGame_Empty);
 
     if (gGameModeSub3 == 0 || gTourianEscapeCutsceneStage != 0)
     {
@@ -495,7 +495,7 @@ void InitAndLoadGenerics(void)
     gCurrentCutscene = 0;
     gTourianEscapeCutsceneStage = 0;
 
-    CallbackSetVBlank(VBlankCodeInGameLoad);
+    CallbackSetVblank(VBlankCodeInGameLoad);
 }
 
 void UpdateNoClip_Debug(void)

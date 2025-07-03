@@ -43,7 +43,7 @@ enum ScrollVelocityCap {
     SCROLL_VELOCITY_CAP_END
 };
 
-enum Bg3ScrollingType {
+enum bg3ScrollingType {
     BG3_SCROLLING_TYPE_NONE,
     BG3_SCROLLING_TYPE_NORMAL,
     BG3_SCROLLING_TYPE_HALVED,
