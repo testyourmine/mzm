@@ -1603,7 +1603,7 @@ static void AcidWormSpitInit(void)
     gCurrentSprite.hitboxLeft = -QUARTER_BLOCK_SIZE;
     gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE;
 
-    gCurrentSprite.pOam = sAcidWormSpitOAM_Moving;
+    gCurrentSprite.pOam = sAcidWormSpitOam_Moving;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
@@ -1683,7 +1683,7 @@ static void AcidWormSpitMove(void)
     {
         gCurrentSprite.yPosition = gEffectYPosition;
 
-        gCurrentSprite.pOam = sAcidWormSpitOAM_Exploding;
+        gCurrentSprite.pOam = sAcidWormSpitOam_Exploding;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 
@@ -1703,7 +1703,7 @@ static void AcidWormSpitMove(void)
  */
 static void AcidWormSpitExplodingInit(void)
 {
-    gCurrentSprite.pOam = sAcidWormSpitOAM_Exploding;
+    gCurrentSprite.pOam = sAcidWormSpitOam_Exploding;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 

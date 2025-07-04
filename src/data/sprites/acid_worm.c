@@ -29,7 +29,7 @@ const s16 sAcidWormHeadRandomXVelocity[45] = {
 const u32 sAcidWormGfx[1000] = INCBIN_U32("data/sprites/AcidWorm.gfx.lz");
 const u16 sAcidWormPal[64] = INCBIN_U16("data/sprites/AcidWorm.pal");
 
-const u16 sAcidWormPartOam_Unused2_Frame0[OAM_DATA_SIZE(17)] = {
+static const u16 sAcidWormPartOam_Unused2_Frame0[OAM_DATA_SIZE(17)] = {
     0x11,
     0xf7, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x206,
     0x9, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x212,
@@ -50,7 +50,7 @@ const u16 sAcidWormPartOam_Unused2_Frame0[OAM_DATA_SIZE(17)] = {
     0x39, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAcidWormPartOam_Unused2_Frame1[OAM_DATA_SIZE(17)] = {
+static const u16 sAcidWormPartOam_Unused2_Frame1[OAM_DATA_SIZE(17)] = {
     0x11,
     0xf6, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x206,
     0x8, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x212,
@@ -71,7 +71,7 @@ const u16 sAcidWormPartOam_Unused2_Frame1[OAM_DATA_SIZE(17)] = {
     0x38, OBJ_SIZE_32x32 | 0x1f2, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAcidWormPartOam_Unused2_Frame2[OAM_DATA_SIZE(17)] = {
+static const u16 sAcidWormPartOam_Unused2_Frame2[OAM_DATA_SIZE(17)] = {
     0x11,
     0xf6, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x206,
     0x7, OBJ_SIZE_32x32 | 0x1f3, OBJ_SPRITE_OAM | 0x212,
@@ -92,7 +92,7 @@ const u16 sAcidWormPartOam_Unused2_Frame2[OAM_DATA_SIZE(17)] = {
     0x37, OBJ_SIZE_32x32 | 0x1f1, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAcidWormOam_Spitting_Frame4[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Spitting_Frame4[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xec, 0xa, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xef, 0x4, OBJ_SPRITE_OAM | 0x21e,
@@ -107,7 +107,7 @@ const u16 sAcidWormOam_Spitting_Frame4[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Spitting_Frame3[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Spitting_Frame3[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xec, 0xa, OBJ_SPRITE_OAM | 0x25f,
     OBJ_SHAPE_VERTICAL | 0xef, 0x4, OBJ_SPRITE_OAM | 0x25e,
@@ -122,7 +122,7 @@ const u16 sAcidWormOam_Spitting_Frame3[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Spitting_Frame2[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Spitting_Frame2[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xeb, 0x9, OBJ_SPRITE_OAM | 0x29f,
     OBJ_SHAPE_VERTICAL | 0xef, 0x2, OBJ_SPRITE_OAM | 0x29e,
@@ -137,7 +137,7 @@ const u16 sAcidWormOam_Spitting_Frame2[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Spitting_Frame0[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Spitting_Frame0[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xec, 0x8, OBJ_SPRITE_OAM | 0x29f,
     OBJ_SHAPE_VERTICAL | 0xef, 0x1, OBJ_SPRITE_OAM | 0x29e,
@@ -152,7 +152,7 @@ const u16 sAcidWormOam_Spitting_Frame0[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_MouthClosed_Frame2[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_MouthClosed_Frame2[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xef, 0x1fc, OBJ_SPRITE_OAM | 0x2dd,
     OBJ_SHAPE_VERTICAL | 0xee, 0x1, OBJ_SPRITE_OAM | 0x2de,
@@ -167,7 +167,7 @@ const u16 sAcidWormOam_MouthClosed_Frame2[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Idle_Frame0[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Idle_Frame0[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xef, 0x2, OBJ_SPRITE_OAM | 0x219,
     0xec, OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x258,
@@ -182,7 +182,7 @@ const u16 sAcidWormOam_Idle_Frame0[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Idle_Frame1[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Idle_Frame1[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xef, 0x2, OBJ_SPRITE_OAM | 0x299,
     0xec, OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x2d8,
@@ -197,7 +197,7 @@ const u16 sAcidWormOam_Idle_Frame1[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Idle_Frame2[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Idle_Frame2[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xef, 0x1, OBJ_SPRITE_OAM | 0x299,
     0xec, OBJ_SIZE_16x16 | 0x1ff, OBJ_SPRITE_OAM | 0x2d8,
@@ -212,7 +212,7 @@ const u16 sAcidWormOam_Idle_Frame2[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Moving_Frame0[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Moving_Frame0[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xed, 0xb, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xf0, 0x4, OBJ_SPRITE_OAM | 0x21e,
@@ -227,7 +227,7 @@ const u16 sAcidWormOam_Moving_Frame0[OAM_DATA_SIZE(11)] = {
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormOam_Moving_Frame1[OAM_DATA_SIZE(11)] = {
+static const u16 sAcidWormOam_Moving_Frame1[OAM_DATA_SIZE(11)] = {
     0xb,
     OBJ_SHAPE_VERTICAL | 0xed, 0xc, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_VERTICAL | 0xf0, 0x5, OBJ_SPRITE_OAM | 0x21e,
@@ -242,57 +242,57 @@ const u16 sAcidWormOam_Moving_Frame1[OAM_DATA_SIZE(11)] = {
     0xf1, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x201
 };
 
-const u16 sAcidWormPartOam_AroundMouth_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_AroundMouth_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x281
 };
 
-const u16 sAcidWormPartOam_WeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_WeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sAcidWormPartOam_WeakPoint_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_WeakPoint_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x20a
 };
 
-const u16 sAcidWormPartOam_WeakPoint_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_WeakPoint_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x20e
 };
 
-const u16 sAcidWormPartOam_BelowWeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_BelowWeakPoint_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x212
 };
 
-const u16 sAcidWormPartOam_AboveSegments_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_AboveSegments_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x28e
 };
 
-const u16 sAcidWormPartOam_Segment_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormPartOam_Segment_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf0, OBJ_SIZE_32x32 | 0x1f0, OBJ_SPRITE_OAM | 0x292
 };
 
-const u16 sAcidWormSpitOAM_Moving_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormSpitOam_Moving_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x286
 };
 
-const u16 sAcidWormSpitOAM_Moving_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormSpitOam_Moving_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x288
 };
 
-const u16 sAcidWormSpitOAM_Moving_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sAcidWormSpitOam_Moving_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xf8, OBJ_SIZE_16x16 | 0x1f8, OBJ_SPRITE_OAM | 0x2c6
 };
 
-const u16 sAcidWormSpitOAM_Exploding_Frame1[OAM_DATA_SIZE(4)] = {
+static const u16 sAcidWormSpitOam_Exploding_Frame1[OAM_DATA_SIZE(4)] = {
     0x4,
     0xf9, 0x1f9, OBJ_SPRITE_OAM | 0x2c8,
     0x0, OBJ_X_FLIP | 0x1f8, OBJ_SPRITE_OAM | 0x2e9,
@@ -300,7 +300,7 @@ const u16 sAcidWormSpitOAM_Exploding_Frame1[OAM_DATA_SIZE(4)] = {
     0xfd, 0x1ff, OBJ_SPRITE_OAM | 0x2c8
 };
 
-const u16 sAcidWormSpitOAM_Exploding_Frame2[OAM_DATA_SIZE(5)] = {
+static const u16 sAcidWormSpitOam_Exploding_Frame2[OAM_DATA_SIZE(5)] = {
     0x5,
     0xfb, 0x1f6, OBJ_SPRITE_OAM | 0x2c8,
     0xfd, 0x3, OBJ_SPRITE_OAM | 0x2c8,
@@ -309,7 +309,7 @@ const u16 sAcidWormSpitOAM_Exploding_Frame2[OAM_DATA_SIZE(5)] = {
     0x0, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x2e8
 };
 
-const u16 sAcidWormSpitOAM_Exploding_Frame3[OAM_DATA_SIZE(8)] = {
+static const u16 sAcidWormSpitOam_Exploding_Frame3[OAM_DATA_SIZE(8)] = {
     0x8,
     0xf9, 0x1, OBJ_SPRITE_OAM | 0x2c8,
     0x2, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x2e8,
@@ -321,7 +321,7 @@ const u16 sAcidWormSpitOAM_Exploding_Frame3[OAM_DATA_SIZE(8)] = {
     0xf9, OBJ_Y_FLIP | 0x1f7, OBJ_SPRITE_OAM | 0x2e8
 };
 
-const u16 sAcidWormSpitOAM_Exploding_Frame4[OAM_DATA_SIZE(6)] = {
+static const u16 sAcidWormSpitOam_Exploding_Frame4[OAM_DATA_SIZE(6)] = {
     0x6,
     0x4, OBJ_X_FLIP | 0x1, OBJ_SPRITE_OAM | 0x2e8,
     0xf6, 0x3, OBJ_SPRITE_OAM | 0x2c8,
@@ -552,41 +552,41 @@ const struct FrameData sAcidWormPartOam_Unused2[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormSpitOAM_Moving[4] = {
+const struct FrameData sAcidWormSpitOam_Moving[4] = {
     [0] = {
-        .pFrame = sAcidWormSpitOAM_Moving_Frame0,
+        .pFrame = sAcidWormSpitOam_Moving_Frame0,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [1] = {
-        .pFrame = sAcidWormSpitOAM_Moving_Frame1,
+        .pFrame = sAcidWormSpitOam_Moving_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sAcidWormSpitOAM_Moving_Frame2,
+        .pFrame = sAcidWormSpitOam_Moving_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sAcidWormSpitOAM_Exploding[6] = {
+const struct FrameData sAcidWormSpitOam_Exploding[6] = {
     [0] = {
-        .pFrame = sAcidWormSpitOAM_Moving_Frame0,
+        .pFrame = sAcidWormSpitOam_Moving_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sAcidWormSpitOAM_Exploding_Frame1,
+        .pFrame = sAcidWormSpitOam_Exploding_Frame1,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [2] = {
-        .pFrame = sAcidWormSpitOAM_Exploding_Frame2,
+        .pFrame = sAcidWormSpitOam_Exploding_Frame2,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [3] = {
-        .pFrame = sAcidWormSpitOAM_Exploding_Frame3,
+        .pFrame = sAcidWormSpitOam_Exploding_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sAcidWormSpitOAM_Exploding_Frame4,
+        .pFrame = sAcidWormSpitOam_Exploding_Frame4,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [5] = FRAME_DATA_TERMINATOR
