@@ -18,7 +18,7 @@ enum DamageContactType {
     DCT_SHINESPARK,
     DCT_SPEEDBOOSTER,
     DCT_SCREW_ATTACK,
-    DCT_SUDO_SCREW,
+    DCT_PSEUDO_SCREW,
 
     DCT_END
 };

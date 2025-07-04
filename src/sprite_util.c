@@ -2382,7 +2382,7 @@ u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struc
             case SPOSE_SPACE_JUMPING:
                 // Check beam is charged
                 if (gSamusWeaponInfo.chargeCounter >= CHARGE_BEAM_THRESHOLD)
-                    dct = DCT_SUDO_SCREW;
+                    dct = DCT_PSEUDO_SCREW;
 
             default:
                 if (dct == DCT_NONE)
@@ -2396,7 +2396,7 @@ u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struc
     else
         weakness = GET_PSPRITE_WEAKNESS(pSprite->spriteId);
 
-    if (dct >= DCT_SUDO_SCREW)
+    if (dct >= DCT_PSEUDO_SCREW)
     {
         // Pseudo screw, check is weak
         if (weakness & (WEAKNESS_CHARGE_BEAM_PISTOL | WEAKNESS_BEAM_BOMBS))
@@ -2427,7 +2427,7 @@ u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struc
             if (isDead)
             {
                 // Set dead and abort
-                pSprite->pose = SPRITE_POSE_SUDO_SCREW_DESTROYED;
+                pSprite->pose = SPRITE_POSE_PSEUDO_SCREW_DESTROYED;
                 return dct;
             }
 
@@ -3322,10 +3322,10 @@ void SpriteUtilSpriteDeath(u8 deathType, u16 yPosition, u16 xPosition, u8 playSo
             SoundPlay(SOUND_SCREW_ATTACK_DESTROYED);
             break;
 
-        case SPRITE_POSE_SUDO_SCREW_DESTROYED:
-            ParticleSet(yPosition, xPosition, PE_SUDO_SCREW_DESTROYED);
+        case SPRITE_POSE_PSEUDO_SCREW_DESTROYED:
+            ParticleSet(yPosition, xPosition, PE_PSEUDO_SCREW_DESTROYED);
             SpriteUtilRandomSpriteDebris(0, 3, yPosition, xPosition);
-            SoundPlay(SOUND_SUDO_SCREW_DESTROYED);
+            SoundPlay(SOUND_PSEUDO_SCREW_DESTROYED);
             break;
 
         default:
