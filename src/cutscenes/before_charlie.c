@@ -202,8 +202,8 @@ u8 BeforeCharlieWallAndGreyVoice(void)
             CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[4].bg, NON_GAMEPLAY_START_BG_POS);
             CutsceneReset();
 
-            gWrittenToBLDALPHA_L = 0;
-            gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_L = 0;
+            gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE;
 
             CUTSCENE_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL;
             DmaTransfer(3, &sBeforeCharlieCutsceneGraphicsData, &CUTSCENE_DATA.graphicsData[1], sizeof(CUTSCENE_DATA.graphicsData[1]), 16);

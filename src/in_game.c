@@ -299,13 +299,13 @@ void VBlankCodeInGameLoad(void)
 
     TransferSamusGraphics(FALSE, &gSamusPhysics);
 
-    if (gWrittenToBLDCNT_Internal & BLDCNT_BRIGHTNESS_INCREASE_EFFECT)
+    if (gWrittenToBldcnt_Internal & BLDCNT_BRIGHTNESS_INCREASE_EFFECT)
     {
-        write16(REG_BLDCNT, gWrittenToBLDCNT_Internal);
-        gWrittenToBLDCNT_Internal = 0;
+        write16(REG_BLDCNT, gWrittenToBldcnt_Internal);
+        gWrittenToBldcnt_Internal = 0;
     }
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
     write16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
@@ -382,7 +382,7 @@ void VBlankCodeInGame(void)
 
     TransferSamusGraphics(TRUE, &gSamusPhysics);
 
-    write16(REG_MOSAIC, gWrittenToMOSAIC_H << 4 | gWrittenToMOSAIC_L);
+    write16(REG_MOSAIC, gWrittenToMosaic_H << 4 | gWrittenToMosaic_L);
 
     write16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
     write16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
@@ -430,9 +430,9 @@ void InitAndLoadGenerics(void)
         HudGenericLoadCommonSpriteGfx();
     }
 
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
     ColorFadingHideScreenDuringLoad(); // Undefined
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     if (gPauseScreenFlag != PAUSE_SCREEN_NONE || gCurrentCutscene != 0)
         DmaTransfer(3, EWRAM_BASE + 0x1E000, VRAM_OBJ, 0x4000, 16);
@@ -485,7 +485,7 @@ void InitAndLoadGenerics(void)
         gPreventMovementTimer = 0;
     }
 
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE - 1;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE - 1;
 
     do {
     } while ((u16)(read16(REG_VCOUNT) - 21) < 140); // read16(REG_VCOUNT) <= SCREEN_SIZE_Y

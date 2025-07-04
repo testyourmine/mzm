@@ -240,7 +240,7 @@ STATIC_ASSERT(sizeof(struct Sram) <= SRAM_SIZE, SramStructSize);
 extern u8 gSramOperationStage;
 extern u8 gSramCorruptFlag;
 
-extern u8 gUnk_3000c20;
+extern u8 gUnk_3000C20;
 extern struct SaveFileInfo gSaveFilesInfo[3];
 extern struct SectionInfo gSectionInfo;
 

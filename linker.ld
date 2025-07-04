@@ -49,13 +49,13 @@ SECTIONS {
         . = 0x00000002; gFrameCounter16Bit = .;
         . = 0x00000004; gStereoFlag = .;
         . = 0x00000005; gSubGameModeStage = .;
-        . = 0x00000006; gWrittenToBLDALPHA = .;
-        . = 0x00000008; gWrittenToBLDCNT_Internal = .;
-        . = 0x0000000a; gWrittenToDISPCNT = .;
-        . = 0x0000000e; gWrittenToWININ_H = .;
-        . = 0x0000000f; gWrittenToWINOUT_L = .;
+        . = 0x00000006; gWrittenToBldalpha = .;
+        . = 0x00000008; gWrittenToBldcnt_Internal = .;
+        . = 0x0000000a; gWrittenToDispcnt = .;
+        . = 0x0000000e; gWrittenToWinIn_H = .;
+        . = 0x0000000f; gWrittenToWinOut_L = .;
         . = 0x00000010; gBackdropColor = .;
-        . = 0x00000012; gWrittenToBLDY = .;
+        . = 0x00000012; gWrittenToBldy = .;
         . = 0x00000014; gFileScreenOptionsUnlocked = .;
         . = 0x00000020; gLanguage = .;
         . = 0x00000024; gGameCompletion = .;
@@ -101,7 +101,7 @@ SECTIONS {
         . = 0x00000071; gScreenShakeXOffset = .;
         . = 0x00000072; gScreenShakeYOffset = .;
         . = 0x00000074; gScreenShakeRelated = .;
-        . = 0x00000076; gDISPCNTBackup = .;
+        . = 0x00000076; gDispcntBackup = .;
         . = 0x00000078; gSpriteset = .;
         . = 0x00000079; gCurrentClipdataAffectingAction = .;
         . = 0x0000007A; gSpritesetEntryUsed = .;
@@ -190,7 +190,7 @@ SECTIONS {
         . = 0x00000c1d; gIsLoadingFile = .;
         . = 0x00000c1e; gMostRecentSaveFile = .;
         . = 0x00000c1f; gHasSaved = .;
-        . = 0x00000c20; gUnk_3000c20 = .;
+        . = 0x00000c20; gUnk_3000C20 = .;
         . = 0x00000c21; gSramOperationStage = .;
         . = 0x00000c24; gSaveFilesInfo = .;
         . = 0x00000c6c; gSectionInfo = .;
@@ -207,20 +207,20 @@ SECTIONS {
         . = 0x0000137e; gPreviousButtonInput = .;
         . = 0x00001380; gChangedInput = .;
         . = 0x00001382; gNextOamSlot = .;
-        . = 0x00001394; gWrittenToBG2X = .;
-        . = 0x00001398; gWrittenToBG2Y = .;
-        . = 0x0000139c; gWrittenToMOSAIC_H = .;
-        . = 0x0000139e; gWrittenToMOSAIC_L = .;
+        . = 0x00001394; gWrittenToBg2X = .;
+        . = 0x00001398; gWrittenToBg2Y = .;
+        . = 0x0000139c; gWrittenToMosaic_H = .;
+        . = 0x0000139e; gWrittenToMosaic_L = .;
         . = 0x000013A0; gBg2XScaling = .;
         . = 0x000013A2; gBg2YScaling = .;
         . = 0x000013A4; gBg2Rotation = .;
-        . = 0x000013A6; gWrittenToBG2PA = .;
-        . = 0x000013A8; gWrittenToBG2PB = .;
-        . = 0x000013Aa; gWrittenToBG2PC = .;
-        . = 0x000013Ac; gWrittenToBG2PD = .;
-        . = 0x000013AE; gWrittenToBLDY_NonGameplay = .;
-        . = 0x000013B0; gWrittenToBLDALPHA_L = .;
-        . = 0x000013B2; gWrittenToBLDALPHA_H = .;
+        . = 0x000013A6; gWrittenToBg2Pa = .;
+        . = 0x000013A8; gWrittenToBg2Pb = .;
+        . = 0x000013Aa; gWrittenToBg2Pc = .;
+        . = 0x000013Ac; gWrittenToBg2Pd = .;
+        . = 0x000013AE; gWrittenToBldy_NonGameplay = .;
+        . = 0x000013B0; gWrittenToBldalpha_L = .;
+        . = 0x000013B2; gWrittenToBldalpha_H = .;
         . = 0x000013B4; gBg0XPosition = .;
         . = 0x000013B6; gBg0YPosition = .;
         . = 0x000013B8; gBg1XPosition = .;
@@ -255,7 +255,7 @@ SECTIONS {
         . = 0x00001cfc; gTimer3Callback = .;
         . = 0x00001d00; gMusicInfo = .;
 
-        . = 0x0000376c; gUnk_300376c = .;
+        . = 0x0000376c; gUnk_300376C = .;
         . = 0x00003794; gPsgSounds = .;
         . = 0x00003834; gSoundChannelBackup = .;
         . = 0x000039bc; gSoundChannelTrack2Backup = .;
@@ -276,7 +276,7 @@ SECTIONS {
         . = 0x00004d98; gTrack7Variables = .;
         . = 0x00004de8; gTrack8Variables = .;
 
-        . = 0x00004fc9; gUnk_03004fc9 = .;
+        . = 0x00004fc9; gUnk_03004FC9 = .;
         . = 0x00004fca; gDemoInputData = .;
         . = 0x000051ca; gDemoInputDuration = .;
         . = 0x000053ca; gDemoInputNumber = .;
@@ -289,9 +289,9 @@ SECTIONS {
         . = 0x000053d8; gDebugVCount_AudioMax = .;
         . = 0x000053E0; gSamusPalette = .;
         . = 0x00005440; gSamusPaletteSize = .;
-        . = 0x00005448; gWrittenToWIN1H = .;
-        . = 0x0000544a; gWrittenToWIN1V = .;
-        . = 0x0000544c; gWrittenToBLDCNT = .;
+        . = 0x00005448; gWrittenToWin1H = .;
+        . = 0x0000544a; gWrittenToWin1V = .;
+        . = 0x0000544c; gWrittenToBldcnt = .;
         . = 0x00005450; gTilemapAndClipPointers = .;
         . = 0x0000545C; gHatchData = .;
         . = 0x000054DC; gNumberOfValidHatchesInRoom = .;
@@ -393,11 +393,11 @@ SECTIONS {
         . = 0x00005b60; gLink = .;
 
 
-        . = 0x00007e60; sp_sys = .;
-        . = 0x00007fa0; sp_irq = .;
+        . = 0x00007e60; gSpSys = .;
+        . = 0x00007fa0; gSpIrq = .;
         . = 0x00007ff8; gInterruptCheckFlag = .;
         . = 0x00007ffc; gIntrCodePointer = .;
-        . = 0x00007ffc; intr_vector = .;
+        . = 0x00007ffc; gIntrVector = .;
     } >iwram
 
     .text : ALIGN(2) {

@@ -281,8 +281,8 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
 
         case 1:
             gDefaultTransparency.unk_0 = TRUE;
-            gWrittenToBLDALPHA_H = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB;
-            gWrittenToBLDALPHA_L = gIoRegistersBackup.BLDALPHA_NonGameplay_EVA;
+            gWrittenToBldalpha_H = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB;
+            gWrittenToBldalpha_L = gIoRegistersBackup.BLDALPHA_NonGameplay_EVA;
             changeStage = TRUE;
             break;
 
@@ -291,32 +291,32 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             if (MOD_AND(gInGameCutscene.timer, 2))
                 break;
 
-            if (gWrittenToBLDALPHA_H != 16)
+            if (gWrittenToBldalpha_H != 16)
             {
-                gWrittenToBLDALPHA_H++;
-                if (gWrittenToBLDALPHA_H > 16)
-                    gWrittenToBLDALPHA_H = 16;
+                gWrittenToBldalpha_H++;
+                if (gWrittenToBldalpha_H > 16)
+                    gWrittenToBldalpha_H = 16;
             }
             else
                 changeStage++;
 
-            if (gWrittenToBLDALPHA_L != 0)
+            if (gWrittenToBldalpha_L != 0)
             {
-                if (gWrittenToBLDALPHA_L - 1 < 0)
-                    gWrittenToBLDALPHA_L = 0;
+                if (gWrittenToBldalpha_L - 1 < 0)
+                    gWrittenToBldalpha_L = 0;
                 else
-                    gWrittenToBLDALPHA_L--;
+                    gWrittenToBldalpha_L--;
             }
             else
                 changeStage++;
            
-            gWrittenToBLDALPHA = gWrittenToBLDALPHA_H << 8 | gWrittenToBLDALPHA_L;
+            gWrittenToBldalpha = gWrittenToBldalpha_H << 8 | gWrittenToBldalpha_L;
             changeStage = DIV_SHIFT(changeStage, 2);
             break;
 
         case 3:
             // Hide BG0, and backup its tilemap
-            gWrittenToDISPCNT = gIoRegistersBackup.Dispcnt_NonGameplay & ~DCNT_BG0;
+            gWrittenToDispcnt = gIoRegistersBackup.Dispcnt_NonGameplay & ~DCNT_BG0;
             DMA_SET(3, VRAM_BASE + (1 * BGCNT_VRAM_TILE_SIZE), EWRAM_BASE + 0x1E000, C_32_2_16(DMA_ENABLE, BGCNT_VRAM_TILE_SIZE / 2));
 
             changeStage = TRUE;
@@ -339,11 +339,11 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             break;
 
         case 7:
-            gWrittenToDISPCNT = gIoRegistersBackup.Dispcnt_NonGameplay;
-            gWrittenToWININ_H = HIGH_BYTE(WIN1_ALL);
-            gWrittenToWINOUT_L = (WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ);
-            gWrittenToBLDALPHA = C_16_2_8(16, 13);
-            gWrittenToBLDCNT = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
+            gWrittenToDispcnt = gIoRegistersBackup.Dispcnt_NonGameplay;
+            gWrittenToWinIn_H = HIGH_BYTE(WIN1_ALL);
+            gWrittenToWinOut_L = (WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ);
+            gWrittenToBldalpha = C_16_2_8(16, 13);
+            gWrittenToBldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
             gSuitFlashEffect.left = left;
             gSuitFlashEffect.right = right;
@@ -486,11 +486,11 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             break;
 
         case 15:
-            gWrittenToDISPCNT = gIoRegistersBackup.Dispcnt_NonGameplay & ~DCNT_BG0;
-            gWrittenToWINOUT_L = gIoRegistersBackup.WINOUT_L;
-            gWrittenToWININ_H = gIoRegistersBackup.WININ_H;
-            gWrittenToBLDALPHA = gWrittenToBLDALPHA_H << 8 | gWrittenToBLDALPHA_L;
-            gWrittenToBLDCNT = gIoRegistersBackup.Bldcnt_NonGameplay;
+            gWrittenToDispcnt = gIoRegistersBackup.Dispcnt_NonGameplay & ~DCNT_BG0;
+            gWrittenToWinOut_L = gIoRegistersBackup.WINOUT_L;
+            gWrittenToWinIn_H = gIoRegistersBackup.WININ_H;
+            gWrittenToBldalpha = gWrittenToBldalpha_H << 8 | gWrittenToBldalpha_L;
+            gWrittenToBldcnt = gIoRegistersBackup.Bldcnt_NonGameplay;
 
             gSuitFlashEffect.left = 0;
             gSuitFlashEffect.right = SCREEN_SIZE_X;
@@ -509,7 +509,7 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             break;
 
         case 17:
-            gWrittenToDISPCNT = gIoRegistersBackup.Dispcnt_NonGameplay;
+            gWrittenToDispcnt = gIoRegistersBackup.Dispcnt_NonGameplay;
             changeStage = TRUE;
             break;
 
@@ -518,27 +518,27 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
             if (MOD_AND(gInGameCutscene.timer, 2))
                 break;
 
-            if (gWrittenToBLDALPHA_H != gIoRegistersBackup.BLDALPHA_NonGameplay_EVB)
+            if (gWrittenToBldalpha_H != gIoRegistersBackup.BLDALPHA_NonGameplay_EVB)
             {
-                if (gWrittenToBLDALPHA_H > gIoRegistersBackup.BLDALPHA_NonGameplay_EVB)
-                    gWrittenToBLDALPHA_H--;
-                else if (gWrittenToBLDALPHA_H < gIoRegistersBackup.BLDALPHA_NonGameplay_EVB)
-                    gWrittenToBLDALPHA_H++;
+                if (gWrittenToBldalpha_H > gIoRegistersBackup.BLDALPHA_NonGameplay_EVB)
+                    gWrittenToBldalpha_H--;
+                else if (gWrittenToBldalpha_H < gIoRegistersBackup.BLDALPHA_NonGameplay_EVB)
+                    gWrittenToBldalpha_H++;
             }
             else
                 changeStage++;
 
-            if (gWrittenToBLDALPHA_L != gIoRegistersBackup.BLDALPHA_NonGameplay_EVA)
+            if (gWrittenToBldalpha_L != gIoRegistersBackup.BLDALPHA_NonGameplay_EVA)
             {
-                if (gWrittenToBLDALPHA_L > gIoRegistersBackup.BLDALPHA_NonGameplay_EVA)
-                    gWrittenToBLDALPHA_L--;
-                else if (gWrittenToBLDALPHA_L < gIoRegistersBackup.BLDALPHA_NonGameplay_EVA)
-                    gWrittenToBLDALPHA_L++;
+                if (gWrittenToBldalpha_L > gIoRegistersBackup.BLDALPHA_NonGameplay_EVA)
+                    gWrittenToBldalpha_L--;
+                else if (gWrittenToBldalpha_L < gIoRegistersBackup.BLDALPHA_NonGameplay_EVA)
+                    gWrittenToBldalpha_L++;
             }
             else
                 changeStage++;
 
-            gWrittenToBLDALPHA = C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L);
+            gWrittenToBldalpha = C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L);
             changeStage = DIV_SHIFT(changeStage, 2);
             break;
 
@@ -564,8 +564,8 @@ u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
     }
 
     // Update window 1
-    gWrittenToWIN1H = C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right);
-    gWrittenToWIN1V = C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom);
+    gWrittenToWin1H = C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right);
+    gWrittenToWin1V = C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom);
 
     return ended;
 }

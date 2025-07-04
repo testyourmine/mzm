@@ -91,9 +91,9 @@ u32 GameOverSubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay > 2)
+            if (gWrittenToBldy_NonGameplay > 2)
             {
-                gWrittenToBLDY_NonGameplay--;
+                gWrittenToBldy_NonGameplay--;
                 break;
             }
 
@@ -103,11 +103,11 @@ u32 GameOverSubroutine(void)
             break;
 
         case 2:
-            if (gWrittenToBLDY_NonGameplay < 6)
+            if (gWrittenToBldy_NonGameplay < 6)
             {
-                gWrittenToBLDY_NonGameplay += 2;
-                if (gWrittenToBLDY_NonGameplay > 6)
-                    gWrittenToBLDY_NonGameplay = 6;
+                gWrittenToBldy_NonGameplay += 2;
+                if (gWrittenToBldy_NonGameplay > 6)
+                    gWrittenToBldy_NonGameplay = 6;
                 break;
             }
             GAME_OVER_DATA.dynamicPalette.enableFlags = 0x80 | 1;
@@ -137,7 +137,7 @@ u32 GameOverSubroutine(void)
 
         case 5:
             GameOverUpdateLettersPalette();
-            gWrittenToBLDY_NonGameplay = 4;
+            gWrittenToBldy_NonGameplay = 4;
             GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
             GAME_OVER_DATA.dispcnt ^= DCNT_WIN1;
             FadeMusic(ONE_THIRD_SECOND);
@@ -145,8 +145,8 @@ u32 GameOverSubroutine(void)
             break;
 
         case 6:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-                gWrittenToBLDY_NonGameplay++;
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+                gWrittenToBldy_NonGameplay++;
             else
                 gGameModeSub1++;
             break;
@@ -183,8 +183,8 @@ u32 GameOverSubroutine(void)
             break;
 
         case 9:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-                gWrittenToBLDY_NonGameplay++;
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+                gWrittenToBldy_NonGameplay++;
             else
             {
                 gGameModeSub2 = 0x10;
@@ -287,7 +287,7 @@ void GameOverInit(void)
 
     write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
     write16(REG_DISPCNT, 0);
 
     gNextOamSlot = 0;
@@ -351,7 +351,7 @@ void GameOverInit_Debug(void)
 
     write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
     write16(REG_DISPCNT, GAME_OVER_DATA.dispcnt = 0);
 
     gNextOamSlot = 0;
@@ -379,7 +379,7 @@ void GameOverInit_Debug(void)
 
     GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDY_NonGameplay = 0;
+    gWrittenToBldy_NonGameplay = 0;
     GAME_OVER_DATA.optionSelected = GAME_OVER_DATA.unk_35 = 0;
 
     GameOverUpdateTextGfx();
@@ -410,9 +410,9 @@ void GameOverVBlank(void)
     write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
 
     write16(REG_DISPCNT, GAME_OVER_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
     write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt);
     write16(REG_WIN1H, GAME_OVER_DATA.win1H);

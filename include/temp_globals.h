@@ -51,7 +51,7 @@ union EwramData {
 
 extern u16 unk_02035400;
 
-extern u8 gUnk_03004fc9;
+extern u8 gUnk_03004FC9;
 extern union NonGameplayRam gNonGameplayRam;
 
 extern u16 gBg0HOFS_NonGameplay;

@@ -89,9 +89,9 @@ u8 StoryTextCutsceneInit(void)
 
     CutsceneSetBgcntPageData(sStoryTextCutscenePagesData[0]);
     
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
 
     // Check is "fullscreen" text ID
     switch (gCurrentMessage.messageID)
@@ -102,8 +102,8 @@ u8 StoryTextCutsceneInit(void)
             CUTSCENE_DATA.dispcnt = 0;
             CUTSCENE_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
-            gWrittenToBLDALPHA_L = 0;
-            gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_L = 0;
+            gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE;
 
             CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sStoryTextCutscenePagesData[0].bg, NON_GAMEPLAY_START_BG_POS);
             break;

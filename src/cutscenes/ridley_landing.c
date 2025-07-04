@@ -174,7 +174,7 @@ u8 RidleyLandingShipLanding(void)
 
             CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-            gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+            gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
             CUTSCENE_DATA.oam[6].xPosition = BLOCK_SIZE * 7 + HALF_BLOCK_SIZE;
             CUTSCENE_DATA.oam[6].yPosition = -BLOCK_SIZE * 8;
@@ -464,7 +464,7 @@ u8 RidleyLandingInit(void)
 
     CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
     CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sRidleyLandingPageData[0].bg, NON_GAMEPLAY_START_BG_POS);
 
     CUTSCENE_DATA.oam[0].xPosition = 0;

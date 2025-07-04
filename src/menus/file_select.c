@@ -2342,7 +2342,7 @@ u32 FileSelectCorruptedFileSubroutine(void)
         case 4:
             if (gChangedInput & KEY_A)
             {
-                gUnk_3000c20 = 0;
+                gUnk_3000C20 = 0;
 
                 gMostRecentSaveFile = FILE_SELECT_DATA.corruptFile;
                 FILE_SELECT_DATA.subroutineStage++;
@@ -2352,7 +2352,7 @@ u32 FileSelectCorruptedFileSubroutine(void)
         case 5:
             if (unk_fbc(0x0))
             {
-                gUnk_3000c20 = 0;
+                gUnk_3000C20 = 0;
 
                 if (gSaveFilesInfo[gMostRecentSaveFile].corruptionFlag == CORRUPTED_FILE_FLAG_CURRENT)
                 {
@@ -2367,7 +2367,7 @@ u32 FileSelectCorruptedFileSubroutine(void)
         case 6:
             if (unk_fbc(0x1))
             {
-                gUnk_3000c20 = 0;
+                gUnk_3000C20 = 0;
                 FILE_SELECT_DATA.subroutineStage++;
             }
             break;
@@ -2644,8 +2644,8 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
             if (FILE_SELECT_DATA.subroutineTimer < CONVERT_SECONDS(1.f / 6))
                 break;
             
-            gWrittenToBLDALPHA_H = 0;
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
 
             FILE_SELECT_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
@@ -2675,22 +2675,22 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
             // Update background fade
             fadeEnded = TRUE;
 
-            if (gWrittenToBLDALPHA_L != 0)
+            if (gWrittenToBldalpha_L != 0)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_L - 2 < 0)
-                    gWrittenToBLDALPHA_L = 0;
+                if (gWrittenToBldalpha_L - 2 < 0)
+                    gWrittenToBldalpha_L = 0;
                 else
-                    gWrittenToBLDALPHA_L -= 2;
+                    gWrittenToBldalpha_L -= 2;
             }
 
-            if (gWrittenToBLDALPHA_H != 16)
+            if (gWrittenToBldalpha_H != 16)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_H + 2 > 16)
-                    gWrittenToBLDALPHA_H = 16;
+                if (gWrittenToBldalpha_H + 2 > 16)
+                    gWrittenToBldalpha_H = 16;
                 else
-                    gWrittenToBLDALPHA_H += 2;
+                    gWrittenToBldalpha_H += 2;
             }
 
             if (!fadeEnded)
@@ -2734,22 +2734,22 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
             // Update background fade
             fadeEnded = TRUE;
 
-            if (gWrittenToBLDALPHA_L != 16)
+            if (gWrittenToBldalpha_L != 16)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_L + 2 > 16)
-                    gWrittenToBLDALPHA_L = 16;
+                if (gWrittenToBldalpha_L + 2 > 16)
+                    gWrittenToBldalpha_L = 16;
                 else
-                    gWrittenToBLDALPHA_L += 2;
+                    gWrittenToBldalpha_L += 2;
             }
 
-            if (gWrittenToBLDALPHA_H != 0)
+            if (gWrittenToBldalpha_H != 0)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_H - 2 < 0)
-                    gWrittenToBLDALPHA_H = 0;
+                if (gWrittenToBldalpha_H - 2 < 0)
+                    gWrittenToBldalpha_H = 0;
                 else
-                    gWrittenToBLDALPHA_H -= 2;
+                    gWrittenToBldalpha_H -= 2;
             }
 
             if (!fadeEnded)
@@ -2777,8 +2777,8 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
 
             FILE_SELECT_DATA.bldcnt = BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_OBJ_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET; 
 
-            gWrittenToBLDALPHA_H = 0;
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBldalpha_H = 0;
+            gWrittenToBldalpha_L = 16;
 
             gBg1HOFS_NonGameplay = NON_GAMEPLAY_START_BG_POS;
             gBg1VOFS_NonGameplay = NON_GAMEPLAY_START_BG_POS;
@@ -2792,22 +2792,22 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
             // Update background fade
             fadeEnded = TRUE;
 
-            if (gWrittenToBLDALPHA_L != 0)
+            if (gWrittenToBldalpha_L != 0)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_L - 2 < 0)
-                    gWrittenToBLDALPHA_L = 0;
+                if (gWrittenToBldalpha_L - 2 < 0)
+                    gWrittenToBldalpha_L = 0;
                 else
-                    gWrittenToBLDALPHA_L -= 2;
+                    gWrittenToBldalpha_L -= 2;
             }
 
-            if (gWrittenToBLDALPHA_H != 16)
+            if (gWrittenToBldalpha_H != 16)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_H + 2 > 16)
-                    gWrittenToBLDALPHA_H = 16;
+                if (gWrittenToBldalpha_H + 2 > 16)
+                    gWrittenToBldalpha_H = 16;
                 else
-                    gWrittenToBLDALPHA_H += 2;
+                    gWrittenToBldalpha_H += 2;
             }
 
             if (!fadeEnded)
@@ -2855,22 +2855,22 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
             // Update background fade
             fadeEnded = TRUE;
 
-            if (gWrittenToBLDALPHA_H != 0)
+            if (gWrittenToBldalpha_H != 0)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_H - 2 < 0)
-                    gWrittenToBLDALPHA_H = 0;
+                if (gWrittenToBldalpha_H - 2 < 0)
+                    gWrittenToBldalpha_H = 0;
                 else
-                    gWrittenToBLDALPHA_H -= 2;
+                    gWrittenToBldalpha_H -= 2;
             }
 
-            if (gWrittenToBLDALPHA_L != 16)
+            if (gWrittenToBldalpha_L != 16)
             {
                 fadeEnded = FALSE;
-                if (gWrittenToBLDALPHA_L + 2 > 16)
-                    gWrittenToBLDALPHA_L = 16;
+                if (gWrittenToBldalpha_L + 2 > 16)
+                    gWrittenToBldalpha_L = 16;
                 else
-                    gWrittenToBLDALPHA_L += 2;
+                    gWrittenToBldalpha_L += 2;
             }
 
             if (!fadeEnded)
@@ -3087,7 +3087,7 @@ u8 OptionsNesMetroidSubroutine(void)
 
             // Start screen fade
             FILE_SELECT_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
-            gWrittenToBLDY_NonGameplay = 0;
+            gWrittenToBldy_NonGameplay = 0;
 
             FILE_SELECT_DATA.subroutineStage++;
             FILE_SELECT_DATA.subroutineTimer = 0;
@@ -3095,13 +3095,13 @@ u8 OptionsNesMetroidSubroutine(void)
 
         case 3:
             // Apply fade
-            gWrittenToBLDY_NonGameplay += 2;
-            if (gWrittenToBLDY_NonGameplay >= BLDY_MAX_VALUE)
+            gWrittenToBldy_NonGameplay += 2;
+            if (gWrittenToBldy_NonGameplay >= BLDY_MAX_VALUE)
             {
                 SET_BACKDROP_COLOR(COLOR_BLACK);
 
                 FILE_SELECT_DATA.bldcnt = 0;
-                gWrittenToBLDY_NonGameplay = 0;
+                gWrittenToBldy_NonGameplay = 0;
 
                 // Black out screen
                 FILE_SELECT_DATA.dispcnt &= ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
@@ -4533,7 +4533,7 @@ void FileSelectInit(void)
     BitFill(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam), 32);
 
     write16(REG_DISPCNT, FILE_SELECT_DATA.dispcnt = 0);
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
     write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
 
     gNextOamSlot = 0;
@@ -4667,7 +4667,7 @@ void FileSelectInit(void)
     FileSelectProcessOAM();
     FileSelectInitFading(FALSE);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = 0);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = 0);
     write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = 0);
 
     FileSelectVBlank();
@@ -4695,8 +4695,8 @@ void FileSelectVBlank(void)
     write16(REG_BG3VOFS, gBg3VOFS_NonGameplay / PIXEL_SIZE);
 
     write16(REG_DISPCNT, FILE_SELECT_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
     write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt);
     write16(REG_BG0CNT, FILE_SELECT_DATA.bg0cnt);
     write16(REG_BG1CNT, FILE_SELECT_DATA.bg1cnt);
@@ -5483,8 +5483,8 @@ u8 FileSelectProcessFileSelection(void)
             write16(REG_WINOUT, C_16_2_8(0, WIN0_ALL));
             write8(REG_WININ, C_16_2_8(0, WIN0_ALL_NO_COLOR_EFFECT));
 
-            gWrittenToBLDALPHA_H = 0;
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBldalpha_H = 0;
+            gWrittenToBldalpha_L = 16;
 
             FILE_SELECT_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
@@ -5507,22 +5507,22 @@ u8 FileSelectProcessFileSelection(void)
         case 1:
             action = TRUE;
 
-            if (gWrittenToBLDALPHA_L != 0)
+            if (gWrittenToBldalpha_L != 0)
             {
                 action = FALSE;
-                if (gWrittenToBLDALPHA_L - 2 < 0)
-                    gWrittenToBLDALPHA_L = 0;
+                if (gWrittenToBldalpha_L - 2 < 0)
+                    gWrittenToBldalpha_L = 0;
                 else
-                    gWrittenToBLDALPHA_L -= 2;
+                    gWrittenToBldalpha_L -= 2;
             }
 
-            if (gWrittenToBLDALPHA_H != 16)
+            if (gWrittenToBldalpha_H != 16)
             {
                 action = FALSE;
-                if (gWrittenToBLDALPHA_H + 2 > 16)
-                    gWrittenToBLDALPHA_H = 16;
+                if (gWrittenToBldalpha_H + 2 > 16)
+                    gWrittenToBldalpha_H = 16;
                 else
-                    gWrittenToBLDALPHA_H += 2;
+                    gWrittenToBldalpha_H += 2;
             }
 
             if (!action)
@@ -6177,22 +6177,22 @@ u8 FileSelectProcessFileSelection(void)
         case 43:
             action = TRUE;
 
-            if (gWrittenToBLDALPHA_H != 0)
+            if (gWrittenToBldalpha_H != 0)
             {
                 action = FALSE;
-                if (gWrittenToBLDALPHA_H - 2 < 0)
-                    gWrittenToBLDALPHA_H = 0;
+                if (gWrittenToBldalpha_H - 2 < 0)
+                    gWrittenToBldalpha_H = 0;
                 else
-                    gWrittenToBLDALPHA_H -= 2;
+                    gWrittenToBldalpha_H -= 2;
             }
 
-            if (gWrittenToBLDALPHA_L != 16)
+            if (gWrittenToBldalpha_L != 16)
             {
                 action = FALSE;
-                if (gWrittenToBLDALPHA_L + 2 > 16)
-                    gWrittenToBLDALPHA_L = 16;
+                if (gWrittenToBldalpha_L + 2 > 16)
+                    gWrittenToBldalpha_L = 16;
                 else
-                    gWrittenToBLDALPHA_L += 2;
+                    gWrittenToBldalpha_L += 2;
             }
             if (!action)
                 break;

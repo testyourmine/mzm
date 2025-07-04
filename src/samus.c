@@ -2612,7 +2612,7 @@ void SamusUpdatePhysics(struct SamusData* pData)
     pEquipment = &gEquipment;
     pPhysics = &gSamusPhysics;
 
-    gUnk_03004fc9 = FALSE;
+    gUnk_03004FC9 = FALSE;
 
     switch (pData->pose)
     {
@@ -2812,7 +2812,7 @@ void SamusUpdateHitboxMovingDirection(void)
         pPhysics->horizontalMovingDirection = HDMOVING_LEFT;
 
     // Update vertical moving direction
-    if (gUnk_03004fc9 == 0)
+    if (gUnk_03004FC9 == 0)
     {
         if (pData->yPosition > gPreviousYPosition)
             pPhysics->verticalMovingDirection = VDMOVING_DOWN;
@@ -5902,7 +5902,7 @@ u8 SamusShinesparking(struct SamusData* pData)
                 pData->currentSlope = nextSlope;
                 pData->yPosition = nextY;
 
-                gUnk_03004fc9++;
+                gUnk_03004FC9++;
 
                 // Give control to the landing code that handles carrying a shinespark
                 return SPOSE_LANDING_REQUEST;

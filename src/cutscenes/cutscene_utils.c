@@ -417,8 +417,8 @@ void CutsceneVBlank(void)
     write16(REG_BG2CNT, CUTSCENE_DATA.bgcnt[2]);
     write16(REG_BG3CNT, CUTSCENE_DATA.bgcnt[3]);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
     write16(REG_BLDCNT, CUTSCENE_DATA.bldcnt);
     write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt);
@@ -453,7 +453,7 @@ void CutsceneInit(void)
 
     write16(REG_BLDCNT, CUTSCENE_DATA.bldcnt = 0xFF);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
 
     write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
 
@@ -1011,26 +1011,26 @@ void CutsceneUpdateSpecialEffect(void)
         CUTSCENE_DATA.specialEffect.s_Timer = CUTSCENE_DATA.specialEffect.s_Interval;
 
         // Update BLDY
-        if (gWrittenToBLDY_NonGameplay != CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
+        if (gWrittenToBldy_NonGameplay != CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
         {
-            if (gWrittenToBLDY_NonGameplay < CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
+            if (gWrittenToBldy_NonGameplay < CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
             {
-                if (gWrittenToBLDY_NonGameplay + CUTSCENE_DATA.specialEffect.s_Intensity > CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
-                    gWrittenToBLDY_NonGameplay = CUTSCENE_DATA.specialEffect.s_WrittenToBLDY;
+                if (gWrittenToBldy_NonGameplay + CUTSCENE_DATA.specialEffect.s_Intensity > CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
+                    gWrittenToBldy_NonGameplay = CUTSCENE_DATA.specialEffect.s_WrittenToBLDY;
                 else
-                    gWrittenToBLDY_NonGameplay += CUTSCENE_DATA.specialEffect.s_Intensity;
+                    gWrittenToBldy_NonGameplay += CUTSCENE_DATA.specialEffect.s_Intensity;
             }
             else
             {
-                if (gWrittenToBLDY_NonGameplay - CUTSCENE_DATA.specialEffect.s_Intensity < CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
-                    gWrittenToBLDY_NonGameplay = CUTSCENE_DATA.specialEffect.s_WrittenToBLDY;
+                if (gWrittenToBldy_NonGameplay - CUTSCENE_DATA.specialEffect.s_Intensity < CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
+                    gWrittenToBldy_NonGameplay = CUTSCENE_DATA.specialEffect.s_WrittenToBLDY;
                 else
-                    gWrittenToBLDY_NonGameplay -= CUTSCENE_DATA.specialEffect.s_Intensity;
+                    gWrittenToBldy_NonGameplay -= CUTSCENE_DATA.specialEffect.s_Intensity;
             }
         }
 
         // Check reached destination value
-        if (gWrittenToBLDY_NonGameplay != CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
+        if (gWrittenToBldy_NonGameplay != CUTSCENE_DATA.specialEffect.s_WrittenToBLDY)
             return;
 
         // Mark effect as ended
@@ -1053,48 +1053,48 @@ void CutsceneUpdateSpecialEffect(void)
         CUTSCENE_DATA.specialEffect.bg_Timer = CUTSCENE_DATA.specialEffect.bg_Interval;
 
         // Update BLDALPHA L
-        if (gWrittenToBLDALPHA_L != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
+        if (gWrittenToBldalpha_L != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
         {
-            if (gWrittenToBLDALPHA_L < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
+            if (gWrittenToBldalpha_L < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
             {
-                if (gWrittenToBLDALPHA_L + CUTSCENE_DATA.specialEffect.bg_Intensity > CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
-                    gWrittenToBLDALPHA_L = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L;
+                if (gWrittenToBldalpha_L + CUTSCENE_DATA.specialEffect.bg_Intensity > CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
+                    gWrittenToBldalpha_L = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L;
                 else
-                    gWrittenToBLDALPHA_L += CUTSCENE_DATA.specialEffect.bg_Intensity;
+                    gWrittenToBldalpha_L += CUTSCENE_DATA.specialEffect.bg_Intensity;
             }
             else
             {
-                if (gWrittenToBLDALPHA_L - CUTSCENE_DATA.specialEffect.bg_Intensity < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
-                    gWrittenToBLDALPHA_L = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L;
+                if (gWrittenToBldalpha_L - CUTSCENE_DATA.specialEffect.bg_Intensity < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
+                    gWrittenToBldalpha_L = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L;
                 else
-                    gWrittenToBLDALPHA_L -= CUTSCENE_DATA.specialEffect.bg_Intensity;
+                    gWrittenToBldalpha_L -= CUTSCENE_DATA.specialEffect.bg_Intensity;
             }
         }
 
         // Update BLDALPHA H
-        if (gWrittenToBLDALPHA_H != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
+        if (gWrittenToBldalpha_H != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
         {
-            if (gWrittenToBLDALPHA_H < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
+            if (gWrittenToBldalpha_H < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
             {
-                if (gWrittenToBLDALPHA_H + CUTSCENE_DATA.specialEffect.bg_Intensity > CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
-                    gWrittenToBLDALPHA_H = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H;
+                if (gWrittenToBldalpha_H + CUTSCENE_DATA.specialEffect.bg_Intensity > CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
+                    gWrittenToBldalpha_H = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H;
                 else
-                    gWrittenToBLDALPHA_H += CUTSCENE_DATA.specialEffect.bg_Intensity;
+                    gWrittenToBldalpha_H += CUTSCENE_DATA.specialEffect.bg_Intensity;
             }
             else
             {
-                if (gWrittenToBLDALPHA_H - CUTSCENE_DATA.specialEffect.bg_Intensity < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
-                    gWrittenToBLDALPHA_H = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H;
+                if (gWrittenToBldalpha_H - CUTSCENE_DATA.specialEffect.bg_Intensity < CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
+                    gWrittenToBldalpha_H = CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H;
                 else
-                    gWrittenToBLDALPHA_H -= CUTSCENE_DATA.specialEffect.bg_Intensity;
+                    gWrittenToBldalpha_H -= CUTSCENE_DATA.specialEffect.bg_Intensity;
             }
         }
 
         // Check reached destination values
-        if (gWrittenToBLDALPHA_L != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
+        if (gWrittenToBldalpha_L != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_L)
             return;
 
-        if (gWrittenToBLDALPHA_H != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
+        if (gWrittenToBldalpha_H != CUTSCENE_DATA.specialEffect.bg_WrittenToBldalpha_H)
             return;
 
         // Mark as ended
@@ -1174,9 +1174,9 @@ void CutsceneReset(void)
 {
     s32 i;
 
-    gWrittenToBLDY_NonGameplay = 0;
-    gWrittenToBLDALPHA_L = 16;
-    gWrittenToBLDALPHA_H = 0;
+    gWrittenToBldy_NonGameplay = 0;
+    gWrittenToBldalpha_L = 16;
+    gWrittenToBldalpha_H = 0;
 
     // Clear special effect
     CUTSCENE_DATA.specialEffect.status = 0;
@@ -1204,7 +1204,7 @@ void CutsceneReset(void)
 void CutsceneFadeScreenToBlack(void)
 {
     CUTSCENE_DATA.dispcnt = 0;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
     CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 }
 
@@ -1215,7 +1215,7 @@ void CutsceneFadeScreenToBlack(void)
 void CutsceneFadeScreenToWhite(void)
 {
     CUTSCENE_DATA.dispcnt = 0;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
     CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT;
 }
 

@@ -270,8 +270,8 @@ void TransparencySetRoomEffectsTransparency(void)
 
     write16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
 
-    gWrittenToBLDALPHA = 0;
-    gWrittenToBLDY = -1;
+    gWrittenToBldalpha = 0;
+    gWrittenToBldy = -1;
     gTransparencyRelated = sTransparencyRelated_Empty;
 
     gSuitFlashEffect.left = 0;
@@ -322,7 +322,7 @@ void TransparencySetRoomEffectsTransparency(void)
 
     TransparencyUpdateBldcnt(0, gDefaultTransparency.bldcnt);
 
-    gWrittenToBLDCNT = 0;
+    gWrittenToBldcnt = 0;
 
     dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ | DCNT_WIN1;
     coef = TransparencyCheckIsDarkRoom();
@@ -411,7 +411,7 @@ void TransparencyUpdateBldcnt(u8 action, u16 value)
     }
 
     if (gGameModeSub1 == SUB_GAME_MODE_PLAYING || effects != BLDCNT_BRIGHTNESS_INCREASE_EFFECT)
-        gWrittenToBLDCNT = gIoRegistersBackup.Bldcnt_NonGameplay;
+        gWrittenToBldcnt = gIoRegistersBackup.Bldcnt_NonGameplay;
 }
 
 /**
@@ -600,7 +600,7 @@ void TransparencyApplyNewBLDALPHA(struct BldalphaData* pBldalpha)
     s32 newValue;
 
     newValue = FALSE;
-    if (gWrittenToBLDALPHA != 0)
+    if (gWrittenToBldalpha != 0)
         newValue = TRUE;
     else if (gCurrentPowerBomb.animationState != PB_STATE_NONE)
         newValue = TRUE;
@@ -662,11 +662,11 @@ void TransparencyApplyNewBLDALPHA(struct BldalphaData* pBldalpha)
 
     if (newValue)
     {
-        gWrittenToBLDALPHA = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA;
+        gWrittenToBldalpha = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA;
         if (pBldalpha->activeFlag == TRUE)
         {
             pBldalpha->activeFlag |= 2;
-            gWrittenToBLDCNT = pBldalpha->BLDCNT;
+            gWrittenToBldcnt = pBldalpha->BLDCNT;
         }
     }
     else
@@ -683,7 +683,7 @@ void TransparencyApplyNewBLDY(struct BldyData* pBldy)
     s32 newValue;
 
     newValue = FALSE;
-    if (gWrittenToBLDY >= 0)
+    if (gWrittenToBldy >= 0)
         newValue = TRUE;
     else if (gCurrentPowerBomb.animationState != PB_STATE_NONE)
         newValue = TRUE;
@@ -725,11 +725,11 @@ void TransparencyApplyNewBLDY(struct BldyData* pBldy)
 
     if (newValue)
     {
-        gWrittenToBLDY = gIoRegistersBackup.BLDY_NonGameplay;
+        gWrittenToBldy = gIoRegistersBackup.BLDY_NonGameplay;
         if (pBldy->activeFlag == TRUE)
         {
             pBldy->activeFlag |= 2;
-            gWrittenToBLDCNT = pBldy->BLDCNT;
+            gWrittenToBldcnt = pBldy->BLDCNT;
         }
     }
     else
@@ -753,7 +753,7 @@ void unk_55e60(void)
             gTransparencyRelated.unk_1 = 2;
 
             coef = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB + 2;
-            gWrittenToBLDALPHA = C_16_2_8(coef, 16 - coef);
+            gWrittenToBldalpha = C_16_2_8(coef, 16 - coef);
             break;
 
         case PB_STATE_NONE:
@@ -794,7 +794,7 @@ void unk_55e60(void)
                 else if (eva > 16)
                     eva = 16;
 
-                gWrittenToBLDALPHA = C_16_2_8(evb, eva);
+                gWrittenToBldalpha = C_16_2_8(evb, eva);
             }
             else
             {
@@ -828,7 +828,7 @@ void unk_55e60(void)
                 else if (eva > 16)
                     eva = 16;
 
-                gWrittenToBLDALPHA = C_16_2_8(evb, eva);
+                gWrittenToBldalpha = C_16_2_8(evb, eva);
             }
             break;
     }

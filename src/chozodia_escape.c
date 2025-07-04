@@ -40,8 +40,8 @@ void ChozodiaEscapeVBlank(void)
     write16(REG_DISPCNT, CHOZODIA_ESCAPE_DATA.dispcnt);
     write16(REG_BLDCNT, CHOZODIA_ESCAPE_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
     write16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
@@ -534,9 +534,9 @@ void ChozodiaEscapeInit(void)
 
     CHOZODIA_ESCAPE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     ChozodiaEscapeVBlank();
 }
@@ -664,7 +664,7 @@ u8 ChozodiaEscapeShipHeatingUp(void)
         case CONVERT_SECONDS(2.5f + 1.f / 30):
             ChozodiaEscapeSetHBlank();
             ChozodiaEscapeSetupHBlankRegisters();
-            gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE / 2;
+            gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE / 2;
             break;
 
         case CONVERT_SECONDS(2.f) + TWO_THIRD_SECOND:
@@ -690,8 +690,8 @@ u8 ChozodiaEscapeShipHeatingUp(void)
     {
         if (CHOZODIA_ESCAPE_DATA.unk_2++ >= CONVERT_SECONDS(.1f))
         {
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-                gWrittenToBLDY_NonGameplay++;
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+                gWrittenToBldy_NonGameplay++;
 
             CHOZODIA_ESCAPE_DATA.unk_2 = 0;
         }
@@ -808,7 +808,7 @@ u8 ChozodiaEscapeShipBlowingUp(void)
 
             CHOZODIA_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_OBJ;
             CHOZODIA_ESCAPE_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG1_SECOND_TARGET_PIXEL;
-            gWrittenToBLDY_NonGameplay = 0;
+            gWrittenToBldy_NonGameplay = 0;
 
             CHOZODIA_ESCAPE_DATA.oamTypes[0]++;
             CHOZODIA_ESCAPE_DATA.oamXPositions[0] = BLOCK_SIZE * 2 - 8;
@@ -842,9 +842,9 @@ u8 ChozodiaEscapeShipBlowingUp(void)
             CHOZODIA_ESCAPE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
             CHOZODIA_ESCAPE_DATA.unk_1++;
-            gWrittenToBLDALPHA_L = 16;
-            gWrittenToBLDALPHA_H = 0;
-            gWrittenToBLDY_NonGameplay = 0;
+            gWrittenToBldalpha_L = 16;
+            gWrittenToBldalpha_H = 0;
+            gWrittenToBldy_NonGameplay = 0;
             break;
 
         case 288:
@@ -857,17 +857,17 @@ u8 ChozodiaEscapeShipBlowingUp(void)
 
     if (CHOZODIA_ESCAPE_DATA.unk_1 == 1 && CHOZODIA_ESCAPE_DATA.unk_2++ > 2)
     {
-        if (gWrittenToBLDALPHA_L != 0)
-            gWrittenToBLDALPHA_L--;
+        if (gWrittenToBldalpha_L != 0)
+            gWrittenToBldalpha_L--;
 
-        gWrittenToBLDALPHA_H = 16 - gWrittenToBLDALPHA_L;
+        gWrittenToBldalpha_H = 16 - gWrittenToBldalpha_L;
         CHOZODIA_ESCAPE_DATA.unk_2 = 0;
     }
 
     if (CHOZODIA_ESCAPE_DATA.unk_1 == 2 && CHOZODIA_ESCAPE_DATA.unk_2++ > 5)
     {
-        if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-            gWrittenToBLDY_NonGameplay++;
+        if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+            gWrittenToBldy_NonGameplay++;
 
         CHOZODIA_ESCAPE_DATA.unk_2 = 0;
     }
@@ -1036,8 +1036,8 @@ u8 ChozodiaEscapeShipLeavingPlanet(void)
     // Update color effect
     if (!CHOZODIA_ESCAPE_DATA.unk_1 && !(CHOZODIA_ESCAPE_DATA.timer & 3))
     {
-        if (gWrittenToBLDY_NonGameplay)
-            gWrittenToBLDY_NonGameplay--;
+        if (gWrittenToBldy_NonGameplay)
+            gWrittenToBldy_NonGameplay--;
         else
             CHOZODIA_ESCAPE_DATA.unk_1++;
     }
@@ -1154,7 +1154,7 @@ u8 ChozodiaEscapeMissionAccomplished(void)
         case CONVERT_SECONDS(7.8f + 1.f / 15):
             CHOZODIA_ESCAPE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-            gWrittenToBLDY_NonGameplay = 0;
+            gWrittenToBldy_NonGameplay = 0;
             ended = TRUE + 1;
             break;
     }
@@ -1205,9 +1205,9 @@ u32 ChozodiaEscapeSubroutine(void)
 
         case 1:
             // Fade
-            if (gWrittenToBLDY_NonGameplay != 0)
+            if (gWrittenToBldy_NonGameplay != 0)
             {
-                gWrittenToBLDY_NonGameplay--;
+                gWrittenToBldy_NonGameplay--;
                 break;
             }
 
@@ -1262,9 +1262,9 @@ u32 ChozodiaEscapeSubroutine(void)
 
         case 3:
             // Fade
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
             {
-                gWrittenToBLDY_NonGameplay++;
+                gWrittenToBldy_NonGameplay++;
                 break;
             }
 

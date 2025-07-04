@@ -334,7 +334,7 @@ void agbmain(void)
                             break;
                         default:
                             gMainGameMode = GM_DEBUG_MENU;
-                            gWrittenToBLDY_NonGameplay = 0;
+                            gWrittenToBldy_NonGameplay = 0;
                             break;
                     }
                 }

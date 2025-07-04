@@ -1221,7 +1221,7 @@ void unk_1f90(struct TrackData* pTrack, struct TrackVariables* pVariables)
     else
         var_0 = pTrack->unk_3 + pVariables->priority;
 
-    pSound = &gUnk_300376c[pVariables->channel & 7];
+    pSound = &gUnk_300376C[pVariables->channel & 7];
     if (pSound->unk_0 == 0 ||
         (var_0 >= pSound->unk_16 &&
         (var_0 != pSound->unk_16 ||
@@ -1247,7 +1247,7 @@ void unk_1fe0(struct TrackData* pTrack, struct TrackVariables* pVariables)
     else
         var_0 = pTrack->unk_3 + pVariables->priority;
 
-    pSound = &gUnk_300376c[pVariables->channel & 7];
+    pSound = &gUnk_300376C[pVariables->channel & 7];
     if (pSound->unk_0 == 0 ||
         (var_0 >= pSound->unk_16 &&
         (var_0 != pSound->unk_16 ||

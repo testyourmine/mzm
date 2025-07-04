@@ -25,12 +25,12 @@ u32 SoftResetSubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay - 4 < 1)
-                gWrittenToBLDY_NonGameplay = 0;
+            if (gWrittenToBldy_NonGameplay - 4 < 1)
+                gWrittenToBldy_NonGameplay = 0;
             else
-                gWrittenToBLDY_NonGameplay -= 4;
+                gWrittenToBldy_NonGameplay -= 4;
             
-            if (gWrittenToBLDY_NonGameplay == 0)
+            if (gWrittenToBldy_NonGameplay == 0)
                 gGameModeSub1++;
             break;
 
@@ -55,7 +55,7 @@ void SoftResetInit(void)
 
     write16(REG_BLDCNT, CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
     write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
 
     gNextOamSlot = 0;
@@ -91,7 +91,7 @@ void SoftResetInit(void)
  */
 void SoftResetVBlank(void)
 {
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 }
 
 /**

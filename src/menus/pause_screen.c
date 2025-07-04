@@ -220,41 +220,41 @@ u8 PauseScreenApplyFading(void)
         {
             PAUSE_SCREEN_DATA.bldAlphaStepTimer = 0;
 
-            if (gWrittenToBLDALPHA_L != PAUSE_SCREEN_DATA.targetBldAlpha_L)
+            if (gWrittenToBldalpha_L != PAUSE_SCREEN_DATA.targetBldAlpha_L)
             {
-                if (gWrittenToBLDALPHA_L > PAUSE_SCREEN_DATA.targetBldAlpha_L)
+                if (gWrittenToBldalpha_L > PAUSE_SCREEN_DATA.targetBldAlpha_L)
                 {
-                    if (gWrittenToBLDALPHA_L - PAUSE_SCREEN_DATA.targetBldAlpha_L > PAUSE_SCREEN_DATA.bldAlphaStepLevel)
-                        gWrittenToBLDALPHA_L -= PAUSE_SCREEN_DATA.bldAlphaStepLevel;
+                    if (gWrittenToBldalpha_L - PAUSE_SCREEN_DATA.targetBldAlpha_L > PAUSE_SCREEN_DATA.bldAlphaStepLevel)
+                        gWrittenToBldalpha_L -= PAUSE_SCREEN_DATA.bldAlphaStepLevel;
                     else
-                        gWrittenToBLDALPHA_L = PAUSE_SCREEN_DATA.targetBldAlpha_L;
+                        gWrittenToBldalpha_L = PAUSE_SCREEN_DATA.targetBldAlpha_L;
                 }
                 else
                 {
-                    gWrittenToBLDALPHA_L += PAUSE_SCREEN_DATA.bldAlphaStepLevel;
-                    if (gWrittenToBLDALPHA_L > PAUSE_SCREEN_DATA.targetBldAlpha_L)
-                        gWrittenToBLDALPHA_L = PAUSE_SCREEN_DATA.targetBldAlpha_L;
+                    gWrittenToBldalpha_L += PAUSE_SCREEN_DATA.bldAlphaStepLevel;
+                    if (gWrittenToBldalpha_L > PAUSE_SCREEN_DATA.targetBldAlpha_L)
+                        gWrittenToBldalpha_L = PAUSE_SCREEN_DATA.targetBldAlpha_L;
                 }
             }
 
-            if (gWrittenToBLDALPHA_H != PAUSE_SCREEN_DATA.targetBldAlpha_H)
+            if (gWrittenToBldalpha_H != PAUSE_SCREEN_DATA.targetBldAlpha_H)
             {
-                if (gWrittenToBLDALPHA_H > PAUSE_SCREEN_DATA.targetBldAlpha_H)
+                if (gWrittenToBldalpha_H > PAUSE_SCREEN_DATA.targetBldAlpha_H)
                 {
-                    if (gWrittenToBLDALPHA_H - PAUSE_SCREEN_DATA.targetBldAlpha_H > PAUSE_SCREEN_DATA.bldAlphaStepLevel)
-                        gWrittenToBLDALPHA_H -= PAUSE_SCREEN_DATA.bldAlphaStepLevel;
+                    if (gWrittenToBldalpha_H - PAUSE_SCREEN_DATA.targetBldAlpha_H > PAUSE_SCREEN_DATA.bldAlphaStepLevel)
+                        gWrittenToBldalpha_H -= PAUSE_SCREEN_DATA.bldAlphaStepLevel;
                     else
-                        gWrittenToBLDALPHA_H = PAUSE_SCREEN_DATA.targetBldAlpha_H;
+                        gWrittenToBldalpha_H = PAUSE_SCREEN_DATA.targetBldAlpha_H;
                 }
                 else
                 {
-                    gWrittenToBLDALPHA_H += PAUSE_SCREEN_DATA.bldAlphaStepLevel;
-                    if (gWrittenToBLDALPHA_H > PAUSE_SCREEN_DATA.targetBldAlpha_H)
-                        gWrittenToBLDALPHA_H = PAUSE_SCREEN_DATA.targetBldAlpha_H;
+                    gWrittenToBldalpha_H += PAUSE_SCREEN_DATA.bldAlphaStepLevel;
+                    if (gWrittenToBldalpha_H > PAUSE_SCREEN_DATA.targetBldAlpha_H)
+                        gWrittenToBldalpha_H = PAUSE_SCREEN_DATA.targetBldAlpha_H;
                 }
             }
 
-            if (gWrittenToBLDALPHA_L == PAUSE_SCREEN_DATA.targetBldAlpha_L && gWrittenToBLDALPHA_H == PAUSE_SCREEN_DATA.targetBldAlpha_H)
+            if (gWrittenToBldalpha_L == PAUSE_SCREEN_DATA.targetBldAlpha_L && gWrittenToBldalpha_H == PAUSE_SCREEN_DATA.targetBldAlpha_H)
             {
                 PAUSE_SCREEN_DATA.isFading = FALSE;
                 ended = TRUE;
@@ -838,14 +838,14 @@ void PauseScreenFadeWireframeSamus(void)
             break;
 
         case 2:
-            if (gWrittenToBLDALPHA_H < 16)
-                gWrittenToBLDALPHA_H += 2;
+            if (gWrittenToBldalpha_H < 16)
+                gWrittenToBldalpha_H += 2;
 
-            if (gWrittenToBLDALPHA_H > 16)
-                gWrittenToBLDALPHA_H = 16;
+            if (gWrittenToBldalpha_H > 16)
+                gWrittenToBldalpha_H = 16;
 
-            gWrittenToBLDALPHA_L = 16 - gWrittenToBLDALPHA_H;
-            if (gWrittenToBLDALPHA_L == 0)
+            gWrittenToBldalpha_L = 16 - gWrittenToBldalpha_H;
+            if (gWrittenToBldalpha_L == 0)
             {
                 PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeStage++;
                 PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeTimer = 0;
@@ -863,14 +863,14 @@ void PauseScreenFadeWireframeSamus(void)
             PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeTimer = 0;
 
         case 5:
-            if (gWrittenToBLDALPHA_L < 16)
-                gWrittenToBLDALPHA_L += 2;
+            if (gWrittenToBldalpha_L < 16)
+                gWrittenToBldalpha_L += 2;
 
-            if (gWrittenToBLDALPHA_L > 16)
-                gWrittenToBLDALPHA_L = 16;
+            if (gWrittenToBldalpha_L > 16)
+                gWrittenToBldalpha_L = 16;
 
-            gWrittenToBLDALPHA_H = 16 - gWrittenToBLDALPHA_L;
-            if (gWrittenToBLDALPHA_H == 0)
+            gWrittenToBldalpha_H = 16 - gWrittenToBldalpha_L;
+            if (gWrittenToBldalpha_H == 0)
             {
                 PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeStage++;
                 PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeTimer = 0;
@@ -2155,8 +2155,8 @@ void PauseScreenVBlank(void)
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
     write16(REG_DISPCNT, PAUSE_SCREEN_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
-    write16(REG_MOSAIC, gWrittenToMOSAIC_L);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    write16(REG_MOSAIC, gWrittenToMosaic_L);
 
     write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
     write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
@@ -2172,7 +2172,7 @@ void PauseScreenVBlank(void)
     write16(REG_BG2CNT, PAUSE_SCREEN_DATA.bg2cnt);
     write16(REG_BG3CNT, PAUSE_SCREEN_DATA.bg3cnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
     write16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcnt);
 }
 
@@ -2195,7 +2195,7 @@ void PauseScreenInit(void)
     
     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
     
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
     write16(REG_DISPCNT, 0);
 
     gNextOamSlot = 0;
@@ -2426,8 +2426,8 @@ void PauseScreenInit(void)
     MinimapDrawRoomInfo();
     #endif // DEBUG
 
-    gWrittenToBLDY_NonGameplay = gWrittenToBLDALPHA_H = 0;
-    gWrittenToBLDALPHA_L = 16;
+    gWrittenToBldy_NonGameplay = gWrittenToBldalpha_H = 0;
+    gWrittenToBldalpha_L = 16;
 
     if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_CHOZO_STATUE_HINT)
     {
@@ -2436,8 +2436,8 @@ void PauseScreenInit(void)
             BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
         PAUSE_SCREEN_DATA.targetBldAlpha = C_16_2_8(7, 9);
-        gWrittenToBLDALPHA_H = 7;
-        gWrittenToBLDALPHA_L = 9;
+        gWrittenToBldalpha_H = 7;
+        gWrittenToBldalpha_L = 9;
     }
     else if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_GETTING_NEW_ITEM)
     {
@@ -2446,8 +2446,8 @@ void PauseScreenInit(void)
             BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
         PAUSE_SCREEN_DATA.targetBldAlpha = C_16_2_8(0, 22);
-        gWrittenToBLDALPHA_H = 0;
-        gWrittenToBLDALPHA_L = 22;
+        gWrittenToBldalpha_H = 0;
+        gWrittenToBldalpha_L = 22;
     }
     else
     {
@@ -2455,13 +2455,13 @@ void PauseScreenInit(void)
             BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
         PAUSE_SCREEN_DATA.targetBldAlpha = C_16_2_8(6, 10);
-        gWrittenToBLDALPHA_H = 6;
-        gWrittenToBLDALPHA_L = 10; 
+        gWrittenToBldalpha_H = 6;
+        gWrittenToBldalpha_L = 10; 
     }
 
     write8(REG_WINOUT, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
     write8(REG_WINOUT + 1, WIN0_BG3 | WIN0_OBJ);
-    gWrittenToMOSAIC_L = 0;
+    gWrittenToMosaic_L = 0;
 
     write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
     write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
@@ -2474,7 +2474,7 @@ void PauseScreenInit(void)
 
     write16(REG_MOSAIC, 0);
     write16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcnt);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
     if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_CHOZO_STATUE_HINT)
     {
@@ -3474,8 +3474,8 @@ s32 PauseScreenStatusScreenInit(void)
     }
     else if (stage < 0)
     {
-        gWrittenToBLDALPHA_H = 0;
-        gWrittenToBLDALPHA_L = 16;
+        gWrittenToBldalpha_H = 0;
+        gWrittenToBldalpha_L = 16;
     }
 
     return stage;
@@ -3546,8 +3546,8 @@ s32 PauseScreenQuitStatusScreen(void)
             break;
 
         case 5:
-            gWrittenToBLDALPHA_H = 16;
-            gWrittenToBLDALPHA_L = 0;
+            gWrittenToBldalpha_H = 16;
+            gWrittenToBldalpha_L = 0;
             PAUSE_SCREEN_DATA.dispcnt |= DCNT_BG1;
             PAUSE_SCREEN_DATA.overlayOam[0].exists = TRUE;
             PAUSE_SCREEN_DATA.subroutineInfo.stage++;
@@ -3584,8 +3584,8 @@ s32 PauseScreenQuitStatusScreen(void)
     }
     else if (stage < 0)
     {
-        gWrittenToBLDALPHA_H = HIGH_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha);
-        gWrittenToBLDALPHA_L = LOW_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha);
+        gWrittenToBldalpha_H = HIGH_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha);
+        gWrittenToBldalpha_L = LOW_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha);
     }
 
     return stage;

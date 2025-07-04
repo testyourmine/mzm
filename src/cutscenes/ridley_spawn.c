@@ -174,8 +174,8 @@ u8 RidleySpawnHelmetReflection(void)
     {
         case 0:
             CutsceneReset();
-            gWrittenToBLDALPHA_L = 10;
-            gWrittenToBLDALPHA_H = 6;
+            gWrittenToBldalpha_L = 10;
+            gWrittenToBldalpha_H = 6;
 
             CUTSCENE_DATA.bldcnt = BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 

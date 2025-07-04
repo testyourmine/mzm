@@ -309,8 +309,8 @@ static void GalleryVBlank(void)
     write16(REG_DISPCNT, ENDING_DATA.dispcnt);
     write16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG0VOFS, bgPos = MOD_AND(gBg0YPosition / 16, 0x200));
     write16(REG_BG1VOFS, bgPos);
@@ -329,8 +329,8 @@ static void EndScreenVBlank(void)
     write16(REG_DISPCNT, ENDING_DATA.dispcnt);
     write16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
     write16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
@@ -348,8 +348,8 @@ static void UnlockedOptionsVBlank(void)
     write16(REG_DISPCNT, ENDING_DATA.dispcnt);
     write16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_WIN0H, C_16_2_8(ENDING_DATA.oamXPositions[0], ENDING_DATA.oamXPositions[1]));
     write16(REG_WIN0V, C_16_2_8(ENDING_DATA.oamYPositions[0], ENDING_DATA.oamYPositions[1]));
@@ -415,9 +415,9 @@ static void CreditsInit(void)
     ENDING_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3;
     ENDING_DATA.bldcnt = BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     GalleryVBlank();
     PlayMusic(MUSIC_CREDITS, 0);
@@ -629,7 +629,7 @@ static u8 CreditsDisplay(void)
 
             case CONVERT_SECONDS(8.8f):
                 ENDING_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG2_SECOND_TARGET_PIXEL;
-                gWrittenToBLDY_NonGameplay = 0;
+                gWrittenToBldy_NonGameplay = 0;
                 ENDING_DATA.unk_1++;
                 break;
 
@@ -644,18 +644,18 @@ static u8 CreditsDisplay(void)
         {
             if (MOD_AND(ENDING_DATA.endScreenTimer++, 4) == 0)
             {
-                if (gWrittenToBLDY_NonGameplay)
-                    gWrittenToBLDY_NonGameplay--;
+                if (gWrittenToBldy_NonGameplay)
+                    gWrittenToBldy_NonGameplay--;
             }
         }
         else if (ENDING_DATA.unk_1 == 3)
         {
             if (MOD_AND(ENDING_DATA.timer, 2))
             {
-                if (gWrittenToBLDALPHA_L)
+                if (gWrittenToBldalpha_L)
                 {
-                    gWrittenToBLDALPHA_L--;
-                    gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE - gWrittenToBLDALPHA_L;
+                    gWrittenToBldalpha_L--;
+                    gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE - gWrittenToBldalpha_L;
                 }
                 else
                     ENDING_DATA.unk_1++;
@@ -769,8 +769,8 @@ static u8 CreditsChozoWallZoom(void)
             LZ77UncompVRAM(sCreditsChozoWallBottomZoomedGfx, VRAM_BASE);
             DMA_SET(3, sCreditsChozoWallPal, PALRAM_BASE, DMA_ENABLE << 16 | ARRAY_SIZE(sCreditsChozoWallPal));
             gBg0YPosition = 0;
-            gWrittenToBLDALPHA_L = 0;
-            gWrittenToBLDALPHA_H = 16;
+            gWrittenToBldalpha_L = 0;
+            gWrittenToBldalpha_H = 16;
             break;
 
         case 1:
@@ -788,8 +788,8 @@ static u8 CreditsChozoWallZoom(void)
             ENDING_DATA.bldcnt = 0;
             ENDING_DATA.unk_1++;
             gBg1YPosition = 0;
-            gWrittenToBLDALPHA_L = 16;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = 16;
+            gWrittenToBldalpha_H = 0;
             break;
 
         case CONVERT_SECONDS(3.2f) + CONVERT_SECONDS(1.f / 60):
@@ -820,30 +820,30 @@ static u8 CreditsChozoWallZoom(void)
     {
         if (MOD_AND(ENDING_DATA.timer, 8) == 0)
         {
-            if (gWrittenToBLDALPHA_L < BLDALPHA_MAX_VALUE)
-                gWrittenToBLDALPHA_L++;
+            if (gWrittenToBldalpha_L < BLDALPHA_MAX_VALUE)
+                gWrittenToBldalpha_L++;
 
-            if (gWrittenToBLDALPHA_H != 0)
-                gWrittenToBLDALPHA_H--;
+            if (gWrittenToBldalpha_H != 0)
+                gWrittenToBldalpha_H--;
         }
     }
     else if (ENDING_DATA.unk_1 == 3)
     {
         if (MOD_AND(ENDING_DATA.timer, 8) == 0)
         {
-            if (gWrittenToBLDALPHA_L != 0)
-                gWrittenToBLDALPHA_L--;
+            if (gWrittenToBldalpha_L != 0)
+                gWrittenToBldalpha_L--;
 
-            if (gWrittenToBLDALPHA_H < BLDALPHA_MAX_VALUE)
-                gWrittenToBLDALPHA_H++;
+            if (gWrittenToBldalpha_H < BLDALPHA_MAX_VALUE)
+                gWrittenToBldalpha_H++;
         }
     }
     else if (ENDING_DATA.unk_1 == 4)
     {
         if (MOD_AND(ENDING_DATA.timer, 8) == 0)
         {
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-                gWrittenToBLDY_NonGameplay++;
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+                gWrittenToBldy_NonGameplay++;
         }
     }
 
@@ -915,9 +915,9 @@ static void EndScreenInit(void)
     ENDING_DATA.endingNumber = PEN_GET_ENDING(ChozodiaEscapeGetItemCountAndEndingNumber()) & 7;
     ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ;
 
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     EndScreenVBlank();
 }
@@ -1038,15 +1038,15 @@ static u8 EndScreenSamusPosing(void)
         case 1:
             if (ENDING_DATA.endScreenTimer & 1)
             {
-                if (gWrittenToBLDALPHA_L != 0)
-                    gWrittenToBLDALPHA_L--;
+                if (gWrittenToBldalpha_L != 0)
+                    gWrittenToBldalpha_L--;
                 else
                 {
                     ENDING_DATA.oamTypes[0] = 0;
                     ENDING_DATA.oamTypes[1]++;
                 }
 
-                gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE - gWrittenToBLDALPHA_L;
+                gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE - gWrittenToBldalpha_L;
             }
             break;
 
@@ -1054,8 +1054,8 @@ static u8 EndScreenSamusPosing(void)
             if (ENDING_DATA.endScreenTimer & 3)
                 break;
 
-            if (gWrittenToBLDALPHA_L < BLDALPHA_MAX_VALUE)
-                gWrittenToBLDALPHA_L++;
+            if (gWrittenToBldalpha_L < BLDALPHA_MAX_VALUE)
+                gWrittenToBldalpha_L++;
             else
             {
                 ENDING_DATA.oamTypes[0] = 0;
@@ -1080,8 +1080,8 @@ static u8 EndScreenSamusPosing(void)
             if (MOD_AND(ENDING_DATA.endScreenTimer, 2) == 0)
                 break;
 
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-                gWrittenToBLDY_NonGameplay++;
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+                gWrittenToBldy_NonGameplay++;
             else
                 ENDING_DATA.oamTypes[1]++;
             break;
@@ -1090,8 +1090,8 @@ static u8 EndScreenSamusPosing(void)
             if (MOD_AND(ENDING_DATA.endScreenTimer, 4))
                 break;
 
-            if (gWrittenToBLDY_NonGameplay)
-                gWrittenToBLDY_NonGameplay--;
+            if (gWrittenToBldy_NonGameplay)
+                gWrittenToBldy_NonGameplay--;
             else
             {
                 ENDING_DATA.oamTypes[0] = 0;
@@ -1110,8 +1110,8 @@ static u8 EndScreenSamusPosing(void)
             LZ77UncompVRAM(sEndingSamusPosingTileTable_3, VRAM_BASE + 0xD000);
 
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
             gBg1XPosition = BLOCK_SIZE * 4;
             ENDING_DATA.oamTypes[1]++;
             break;
@@ -1124,8 +1124,8 @@ static u8 EndScreenSamusPosing(void)
             LZ77UncompVRAM(sEndingSamusPosingTileTable_4, VRAM_BASE + 0xE000);
 
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
             gBg2XPosition = BLOCK_SIZE * 4;
             ENDING_DATA.oamTypes[1]++;
             break;
@@ -1138,8 +1138,8 @@ static u8 EndScreenSamusPosing(void)
             LZ77UncompVRAM(sEndingSamusPosingTileTable_5, VRAM_BASE + 0xD000);
 
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
             gBg1XPosition = BLOCK_SIZE * 4;
             ENDING_DATA.oamTypes[1]++;
             break;
@@ -1166,8 +1166,8 @@ static u8 EndScreenSamusPosing(void)
 
             ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_BG3;
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
             gBg2XPosition = 0;
 
             ENDING_DATA.oamTypes[1]++;
@@ -1178,8 +1178,8 @@ static u8 EndScreenSamusPosing(void)
             ENDING_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
                 BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL;
             
-            gWrittenToBLDALPHA_L = 0;
-            gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_L = 0;
+            gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE;
             ENDING_DATA.oamTypes[0] = 2;
             ENDING_DATA.oamTypes[1]++;
             break;
@@ -1211,8 +1211,8 @@ static u8 EndScreenSamusPosing(void)
             ENDING_DATA.dispcnt = DCNT_BG2 | DCNT_BG3;
             ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
             ended++;
             break;
     }
@@ -1309,9 +1309,9 @@ static void EndingImageInit(void)
     ENDING_DATA.dispcnt = DCNT_OBJ | DCNT_BG0 | DCNT_BG1;
     ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     GalleryVBlank();
 }
@@ -1558,10 +1558,10 @@ static void UnlockedOptionsInit(void)
     ENDING_DATA.dispcnt = 0;
     ENDING_DATA.bldcnt = 0;
 
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
 
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     UnlockedOptionsVBlank();
 }
@@ -1726,8 +1726,8 @@ u32 CreditsSubroutine(void)
 
         case 7:
         case 11:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
-                gWrittenToBLDY_NonGameplay++;
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
+                gWrittenToBldy_NonGameplay++;
             else
                 gGameModeSub1++;
             break;
@@ -1750,8 +1750,8 @@ u32 CreditsSubroutine(void)
         case 5:
         case 9:
         case 13:
-            if (gWrittenToBLDY_NonGameplay != 0)
-                gWrittenToBLDY_NonGameplay--;
+            if (gWrittenToBldy_NonGameplay != 0)
+                gWrittenToBldy_NonGameplay--;
             else
             {
                 ENDING_DATA.bldcnt = 0;
@@ -1767,7 +1767,7 @@ u32 CreditsSubroutine(void)
                 {
                     ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-                    gWrittenToBLDY_NonGameplay = 0;
+                    gWrittenToBldy_NonGameplay = 0;
                     gGameModeSub1++;
                 }
                 else
@@ -1942,7 +1942,7 @@ static u32 GalleryDisplay(void)
     {
         ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-        gWrittenToBLDY_NonGameplay = 0;
+        gWrittenToBldy_NonGameplay = 0;
         ended = TRUE;
     }
     else if (gChangedInput & (KEY_A | KEY_RIGHT))
@@ -1975,7 +1975,7 @@ static u32 GalleryDisplay(void)
 
         ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-        gWrittenToBLDY_NonGameplay = 0;
+        gWrittenToBldy_NonGameplay = 0;
         gGameModeSub1 = 5;
     }
 
@@ -2039,9 +2039,9 @@ u32 GallerySubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay != 0)
+            if (gWrittenToBldy_NonGameplay != 0)
             {
-                gWrittenToBLDY_NonGameplay--;
+                gWrittenToBldy_NonGameplay--;
                 break;
             }
 
@@ -2056,10 +2056,10 @@ u32 GallerySubroutine(void)
 
         case 3:
         case 5:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
             {
                 if (MOD_AND(ENDING_DATA.timer++, 2))
-                    gWrittenToBLDY_NonGameplay++;
+                    gWrittenToBldy_NonGameplay++;
 
                 break;
             }

@@ -100,7 +100,7 @@ u8 unk_5bd58(u8 stage, u8 color)
     {
         case COLOR_FADING_STAGE_STARTED:
             if (!gColorFading.useSecondColorSet)
-                gWrittenToBLDY_NonGameplay = 0;
+                gWrittenToBldy_NonGameplay = 0;
 
         case COLOR_FADING_STAGE_IN_PROGRESS:
             CallApplySpecialBackgroundFadingColor(color);
@@ -135,7 +135,7 @@ u8 unk_5bdc8(u8 stage, u8 color)
     {
         case COLOR_FADING_STAGE_STARTED:
             if (!gColorFading.useSecondColorSet)
-                gWrittenToBLDY_NonGameplay = 0;
+                gWrittenToBldy_NonGameplay = 0;
 
         case COLOR_FADING_STAGE_IN_PROGRESS:
             CallApplySpecialBackgroundFadingColor(color);
@@ -154,7 +154,7 @@ u8 unk_5bdc8(u8 stage, u8 color)
                     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
                 }
 
-                write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+                write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
             }
             else
             {
@@ -408,8 +408,8 @@ void unk_5c220(void)
     BlockShiftNeverReformBlocks();
     ConnectionUpdateHatches();
 
-    gWrittenToBLDALPHA_L = gIoRegistersBackup.BLDALPHA_NonGameplay_EVA;
-    gWrittenToBLDALPHA_H = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB;
+    gWrittenToBldalpha_L = gIoRegistersBackup.BLDALPHA_NonGameplay_EVA;
+    gWrittenToBldalpha_H = gIoRegistersBackup.BLDALPHA_NonGameplay_EVB;
 
     if (gMusicTrackInfo.takingNormalTransition)
     {
@@ -432,16 +432,16 @@ void ColorFadingGradients(u8 delay)
     if (gFrameCounter8Bit & delay)
         return;
 
-    bldalpha = gWrittenToBLDALPHA_H << 8 | gWrittenToBLDALPHA_L;
+    bldalpha = gWrittenToBldalpha_H << 8 | gWrittenToBldalpha_L;
     if (sHazeData[gCurrentRoomEntry.visualEffect][3] == 2 && bldalpha != 0)
     {
-        if (gWrittenToBLDALPHA_H != 0)
-            gWrittenToBLDALPHA_H--;
+        if (gWrittenToBldalpha_H != 0)
+            gWrittenToBldalpha_H--;
 
-        if (gWrittenToBLDALPHA_L != 0)
-            gWrittenToBLDALPHA_L--;
+        if (gWrittenToBldalpha_L != 0)
+            gWrittenToBldalpha_L--;
         
-        gWrittenToBLDALPHA = gWrittenToBLDALPHA_H << 8 | gWrittenToBLDALPHA_L;
+        gWrittenToBldalpha = gWrittenToBldalpha_H << 8 | gWrittenToBldalpha_L;
     }
 }
 
@@ -601,43 +601,43 @@ u8 ColorFadingProcess_DoorTransition(void)
             write16(REG_BG3HOFS, gBackgroundPositions.doorTransition.x);
             write16(REG_BG3VOFS, gBackgroundPositions.doorTransition.y);
 
-            gWrittenToBLDCNT = BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
+            gWrittenToBldcnt = BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
             bgProp = gCurrentRoomEntry.bg0Prop; BG_PROP_CLOSE_UP;
             if (bgProp != 0x43 && bgProp != 0x44 && bgProp != BG_PROP_DARK_ROOM)
             {
-                gWrittenToBLDALPHA_H = 16;
-                gWrittenToBLDALPHA_L = 0;
+                gWrittenToBldalpha_H = 16;
+                gWrittenToBldalpha_L = 0;
             }
-            gWrittenToBLDALPHA = C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L);
+            gWrittenToBldalpha = C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L);
 
             gBg3CntDuringDoorTransition = CREATE_BGCNT(1, 6, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_512x256);
             gBg1CntDuringDoorTransition = read16(REG_BG1CNT) | BGCNT_HIGH_MID_PRIORITY;
 
-            gWrittenToDISPCNT = read16(REG_DISPCNT);
-            gWrittenToDISPCNT |= DCNT_BG3;
-            gWrittenToDISPCNT &= ~DCNT_BG0;
+            gWrittenToDispcnt = read16(REG_DISPCNT);
+            gWrittenToDispcnt |= DCNT_BG3;
+            gWrittenToDispcnt &= ~DCNT_BG0;
 
             gColorFading.stage = 4;
             gColorFading.unk_3 = 0;
             break;
 
         case 4:
-            if (gWrittenToBLDALPHA_H != 0 || gWrittenToBLDALPHA_L < BLDALPHA_MAX_VALUE)
+            if (gWrittenToBldalpha_H != 0 || gWrittenToBldalpha_L < BLDALPHA_MAX_VALUE)
             {
-                bldalphaH = gWrittenToBLDALPHA_H - 2;
+                bldalphaH = gWrittenToBldalpha_H - 2;
                 if (bldalphaH < 0)
                     bldalphaH = 0;
 
-                gWrittenToBLDALPHA_H = bldalphaH;
+                gWrittenToBldalpha_H = bldalphaH;
 
-                bldalphaL = gWrittenToBLDALPHA_L + 2;
+                bldalphaL = gWrittenToBldalpha_L + 2;
                 if (bldalphaL > BLDALPHA_MAX_VALUE)
                     bldalphaL = BLDALPHA_MAX_VALUE;
 
-                gWrittenToBLDALPHA_L = bldalphaL;
+                gWrittenToBldalpha_L = bldalphaL;
 
-                gWrittenToBLDALPHA = C_16_2_8_(bldalphaH, bldalphaL);
+                gWrittenToBldalpha = C_16_2_8_(bldalphaH, bldalphaL);
             }
             else
             {
@@ -737,7 +737,7 @@ u8 ColorFadingProcess_ChozodiaEscape(void)
     {
         case 0:
             SET_BACKDROP_COLOR(COLOR_BLACK);
-            gWrittenToDISPCNT = read16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
+            gWrittenToDispcnt = read16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
             gColorFading.stage++;
             break;
 

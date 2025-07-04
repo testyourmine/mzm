@@ -110,7 +110,7 @@ void EscapeStart(void)
     // Escape timer uses absolute position, which isn't converted to pixel coordinates when drawing,
     // hence pixel coordinates are used when creating it
     ParticleSet(SUB_PIXEL_TO_PIXEL(EIGHTH_BLOCK_SIZE),
-        SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 9 - QUARTER_BLOCK_SIZE + PIXEL_SIZE), PE_ESCAPE);
+        SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 8 + THREE_QUARTER_BLOCK_SIZE + PIXEL_SIZE), PE_ESCAPE);
 }
 
 /**

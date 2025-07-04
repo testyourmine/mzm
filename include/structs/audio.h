@@ -309,7 +309,7 @@ extern u8 gSoundCodeB[164];
 extern SoundCodeCFunc_T gSoundCodeCPointer;
 extern u8 gSoundCodeC[176];
 
-extern struct PSGSoundData gUnk_300376c[];
+extern struct PSGSoundData gUnk_300376C[];
 extern struct PSGSoundData gPsgSounds[4];
 
 #endif

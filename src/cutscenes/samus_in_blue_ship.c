@@ -134,8 +134,8 @@ void SamusInBlueShipUpdateControlPanel(struct CutsceneOamData* pOam)
         case 1:
             UpdateCutsceneOamDataID(pOam, 2);
             SoundPlay(SOUND_BLUE_SHIP_TURNING_ON);
-            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_H = 0;
             pOam->actions++;
             break;
 
@@ -162,8 +162,8 @@ void SamusInBlueShipUpdateControlPanel(struct CutsceneOamData* pOam)
                 if (pOam->timer >= ARRAY_SIZE(sSamusInBlueShipPanelTransparency))
                     pOam->timer = 0;
 
-                gWrittenToBLDALPHA_L = sSamusInBlueShipPanelTransparency[pOam->timer];
-                gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE - gWrittenToBLDALPHA_L;
+                gWrittenToBldalpha_L = sSamusInBlueShipPanelTransparency[pOam->timer];
+                gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE - gWrittenToBldalpha_L;
             }
             else
                 pOam->unk_1A--;
@@ -193,8 +193,8 @@ u8 SamusInBlueShipInit(void)
 
     CUTSCENE_DATA.bldcnt = BLDCNT_OBJ_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
-    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
-    gWrittenToBLDALPHA_H = 0;
+    gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_H = 0;
 
     CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sSamusInBlueShipPageData[0].bg, NON_GAMEPLAY_START_BG_POS);
 

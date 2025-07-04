@@ -219,21 +219,21 @@ void HazeSetupCode(u8 hazeValue)
             break;
 
         case HAZE_VALUE_POWER_BOMB_EXPANDING:
-            gWrittenToWININ_H = HIGH_BYTE(WIN1_ALL_NO_COLOR_EFFECT);
-            gWrittenToWINOUT_L = WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_OBJ | WIN0_COLOR_EFFECT;
+            gWrittenToWinIn_H = HIGH_BYTE(WIN1_ALL_NO_COLOR_EFFECT);
+            gWrittenToWinOut_L = WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_OBJ | WIN0_COLOR_EFFECT;
 
-            gWrittenToBLDCNT = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
+            gWrittenToBldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
                 BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
             write16(REG_BLDY, 12);
 
-            gWrittenToWIN1V = SCREEN_SIZE_Y;
-            gWrittenToWIN1H = 0;
+            gWrittenToWin1V = SCREEN_SIZE_Y;
+            gWrittenToWin1H = 0;
 
             PowerBombYellowTint(0);
 
             if (gIoRegistersBackup.Dispcnt_NonGameplay & DCNT_BG0 && gCurrentRoomEntry.bg0Prop != BG_PROP_DISABLE_TRANSPARENCY)
-                gWrittenToDISPCNT = read16(REG_DISPCNT) ^ DCNT_BG0;
+                gWrittenToDispcnt = read16(REG_DISPCNT) ^ DCNT_BG0;
 
             gBackdropColor = COLOR_WHITE;
 
@@ -407,8 +407,8 @@ u32 HazeProcess(void)
                 }
 
                 gColorFading.status |= COLOR_FADING_STATUS_ON_BG;
-                gWrittenToWININ_H = HIGH_BYTE(WIN1_BG0 | WIN1_BG1 | WIN1_BG2 | WIN1_OBJ | WIN1_COLOR_EFFECT);
-                gWrittenToWINOUT_L = WIN0_ALL_NO_COLOR_EFFECT;
+                gWrittenToWinIn_H = HIGH_BYTE(WIN1_BG0 | WIN1_BG1 | WIN1_BG2 | WIN1_OBJ | WIN1_COLOR_EFFECT);
+                gWrittenToWinOut_L = WIN0_ALL_NO_COLOR_EFFECT;
                 gBackdropColor = COLOR_BLACK;
             }
             break;

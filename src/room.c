@@ -431,7 +431,7 @@ void RoomReset(void)
         gScreenShakeX = sScreenShake_Empty;
 
     gCurrentPowerBomb = sPowerBomb_Empty;
-    gWrittenToBLDCNT_Internal = 0;
+    gWrittenToBldcnt_Internal = 0;
     gScrollCounter = 0;
     gMusicTrackInfo.takingNormalTransition = FALSE;
 
@@ -483,7 +483,7 @@ void RoomReset(void)
     gScreenYOffset = 0;
     gScreenXOffset = 0;
 
-    gDISPCNTBackup = 0;
+    gDispcntBackup = 0;
     gInGameCutscene.cutsceneNumber = 0;
     gInGameCutscene.queuedCutscene = 0;
 

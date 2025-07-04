@@ -246,8 +246,8 @@ u8 MotherBrainCloseUpEyeOpening(void)
             CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sMotherBrainCloseUpPageData[2].bg, NON_GAMEPLAY_START_BG_POS);
 
             // Setup transparency for the flicket effect
-            gWrittenToBLDALPHA_L = 6;
-            gWrittenToBLDALPHA_H = 12;
+            gWrittenToBldalpha_L = 6;
+            gWrittenToBldalpha_H = 12;
 
             // Setup blending between background 2 (the white lines) and the rest, used for the transparency flicker
             CUTSCENE_DATA.bldcnt = BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
@@ -324,7 +324,7 @@ u8 MotherBrainCloseUpEyeOpening(void)
 
     // Flicker transparency
     if (MOD_AND(gFrameCounter8Bit, 8) == 0)
-        gWrittenToBLDALPHA_H ^= 1;
+        gWrittenToBldalpha_H ^= 1;
 
     #ifdef DEBUG
     CutsceneCheckSkipStage(1);
@@ -416,7 +416,7 @@ u8 MotherBrainCloseUpInit(void)
 
     // Setup full screen fade in
     CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sMotherBrainCloseUpPageData[0].bg, NON_GAMEPLAY_START_BG_POS);
 

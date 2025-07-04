@@ -310,7 +310,7 @@ u32 SramProcessIntroSave(void)
         case 1:
             // Write header and game info
             SramWrite_HeaderAndGameInfo();
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 
@@ -413,7 +413,7 @@ u32 SramProcessEndingSave(void)
     switch (gSramOperationStage)
     {
         case 0:
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 
@@ -433,7 +433,7 @@ u32 SramProcessEndingSave(void)
 
             SramCheckSetNewBestCompletionTime();
             SramCopy_GameCompletion();
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 
@@ -566,7 +566,7 @@ u32 SramProcessEndingSave_Debug(void)
     switch (gSramOperationStage)
     {
         case 0:
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 
@@ -585,7 +585,7 @@ u32 SramProcessEndingSave_Debug(void)
             gGameCompletion.completedGame |= bit << gDifficulty;
 
             SramCopy_GameCompletion();
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 
@@ -628,7 +628,7 @@ u32 SramSaveFile(void)
         gDisableSoftReset = TRUE;
         gHasSaved = TRUE;
         gSramOperationStage = 0;
-        gUnk_3000c20 = 0;
+        gUnk_3000C20 = 0;
     }
 
     switch (gSramOperationStage)
@@ -641,14 +641,14 @@ u32 SramSaveFile(void)
         case 1:
             // Write arrays
             SramWrite_Arrays();
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 
         case 2:
             // Write data
             SramWrite_ToEwram();
-            gUnk_3000c20 = 0;
+            gUnk_3000C20 = 0;
             gSramOperationStage++;
             break;
 

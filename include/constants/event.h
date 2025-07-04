@@ -1,6 +1,8 @@
 #ifndef EVENT_CONSTANTS_H
 #define EVENT_CONSTANTS_H
 
+#include "macros.h"
+
 enum Event {
     EVENT_NONE,
     EVENT_EASY,

@@ -27,7 +27,7 @@ static void FusionGalleryVBlank(void)
     write16(REG_DISPCNT, FUSION_GALLERY_DATA.dispcnt);
     write16(REG_BLDCNT, FUSION_GALLERY_DATA.bldcnt);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG0VOFS, MOD_AND(gBg0YPosition / 16, 0x200));
     write16(REG_BG1VOFS, MOD_AND(gBg1YPosition / 16, 0x200));
@@ -118,7 +118,7 @@ static u32 FusionGalleryDisplay(void)
     {
         FUSION_GALLERY_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-        gWrittenToBLDY_NonGameplay = 0;
+        gWrittenToBldy_NonGameplay = 0;
         ended = TRUE;
     }
     else if (gChangedInput & (KEY_A | KEY_RIGHT))
@@ -147,7 +147,7 @@ static u32 FusionGalleryDisplay(void)
 
         FUSION_GALLERY_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-        gWrittenToBLDY_NonGameplay = 0;
+        gWrittenToBldy_NonGameplay = 0;
         gGameModeSub1 = 5;
     }
 
@@ -211,9 +211,9 @@ u32 FusionGallerySubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay != 0)
+            if (gWrittenToBldy_NonGameplay != 0)
             {
-                gWrittenToBLDY_NonGameplay--;
+                gWrittenToBldy_NonGameplay--;
                 break;
             }
 
@@ -228,10 +228,10 @@ u32 FusionGallerySubroutine(void)
 
         case 3:
         case 5:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
             {
                 if (MOD_AND(FUSION_GALLERY_DATA.fadeOutTimer++, 2) != 0)
-                    gWrittenToBLDY_NonGameplay++;
+                    gWrittenToBldy_NonGameplay++;
 
                 break;
             }

@@ -335,8 +335,8 @@ u8 RidleyInSpaceRidleySuspicious(void)
             CUTSCENE_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
                 BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
-            gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE;
-            gWrittenToBLDALPHA_L = 0;
+            gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE;
+            gWrittenToBldalpha_L = 0;
 
             CUTSCENE_DATA.dispcnt = sRidleyInSpacePageData[3].bg | sRidleyInSpacePageData[4].bg | sRidleyInSpacePageData[5].bg;
             CUTSCENE_DATA.timeInfo.timer = 0;
@@ -735,7 +735,7 @@ u8 RidleyInSpaceInit(void)
 
     CutsceneReset();
 
-    gWrittenToBLDY_NonGameplay = 0;
+    gWrittenToBldy_NonGameplay = 0;
     CUTSCENE_DATA.bldcnt = 0;
 
     // Setup ships

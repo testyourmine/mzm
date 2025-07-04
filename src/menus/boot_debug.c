@@ -482,12 +482,12 @@ s32 BootDebugSubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay != 0)
+            if (gWrittenToBldy_NonGameplay != 0)
             {
-                if (gWrittenToBLDY_NonGameplay > 4)
-                    gWrittenToBLDY_NonGameplay -= 4;
+                if (gWrittenToBldy_NonGameplay > 4)
+                    gWrittenToBldy_NonGameplay -= 4;
                 else
-                    gWrittenToBLDY_NonGameplay = 0;
+                    gWrittenToBldy_NonGameplay = 0;
             }
             else
             {
@@ -553,12 +553,12 @@ s32 BootDebugSubroutine(void)
             }
             break;
         case 3:
-            if (gWrittenToBLDY_NonGameplay <= 0xF)
+            if (gWrittenToBldy_NonGameplay <= 0xF)
             {
-                if (gWrittenToBLDY_NonGameplay <= 0xB)
-                    gWrittenToBLDY_NonGameplay += 4;
+                if (gWrittenToBldy_NonGameplay <= 0xB)
+                    gWrittenToBldy_NonGameplay += 4;
                 else
-                    gWrittenToBLDY_NonGameplay = 0x10;
+                    gWrittenToBldy_NonGameplay = 0x10;
             }
             else
             {
@@ -568,12 +568,12 @@ s32 BootDebugSubroutine(void)
             }
             break;
         case 4:
-            if (gWrittenToBLDY_NonGameplay <= 0xF)
+            if (gWrittenToBldy_NonGameplay <= 0xF)
             {
-                if (gWrittenToBLDY_NonGameplay <= 0xB)
-                    gWrittenToBLDY_NonGameplay += 4;
+                if (gWrittenToBldy_NonGameplay <= 0xB)
+                    gWrittenToBldy_NonGameplay += 4;
                 else
-                    gWrittenToBLDY_NonGameplay = 0x10;
+                    gWrittenToBldy_NonGameplay = 0x10;
             }
             else
             {
@@ -610,7 +610,7 @@ void VBlankCodeDuringBootDebug(void)
 
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
     write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
@@ -633,7 +633,7 @@ void BootDebugSetupMenu(void)
     write16(REG_IF, IF_HBLANK);
     write16(REG_IME, TRUE);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
     write16(REG_DISPCNT, 0);
 
@@ -672,7 +672,7 @@ void BootDebugSetupMenu(void)
     BitFill(3, 0xE040, BGCNT_TO_VRAM_TILE_BASE(26), BGCNT_VRAM_TILE_SIZE * 2, 16);
     BitFill(3, 0x1140, BGCNT_TO_VRAM_TILE_BASE(23), BGCNT_VRAM_TILE_SIZE * 3, 16);
 
-    gWrittenToBLDY_NonGameplay = 0x10;
+    gWrittenToBldy_NonGameplay = 0x10;
     write16(REG_BG0VOFS, 0);
     write16(REG_BG0HOFS, 0);
     write16(REG_BG1VOFS, -QUARTER_BLOCK_SIZE);

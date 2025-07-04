@@ -166,7 +166,7 @@ u32 unk_fbc(u8 param_1)
     s32 var_1;
 
     size = 0x200;
-    var_0 = gUnk_3000c20 * size;
+    var_0 = gUnk_3000C20 * size;
     if (var_0 > (s32)sizeof(struct SaveFile))
         size = var_0 - sizeof(struct SaveFile);
 
@@ -195,7 +195,7 @@ u32 unk_fbc(u8 param_1)
     if ((s32)(var_0 + size) < (s32)sizeof(struct SaveFile))
         var_1 = TRUE;
 
-    gUnk_3000c20 = (gUnk_3000c20 + var_1) * var_1;
+    gUnk_3000C20 = (gUnk_3000C20 + var_1) * var_1;
 
     return var_1 ^ TRUE;
 }

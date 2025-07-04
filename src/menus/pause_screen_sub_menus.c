@@ -576,13 +576,13 @@ u32 ChozoStatueHintSubroutine(void)
             break;
 
         case CHOZO_HINT_SUBROUTINE_STAGE_UPDATE_FADE_OUT:
-            if (gWrittenToBLDALPHA_H + gWrittenToBLDALPHA_L != 0)
+            if (gWrittenToBldalpha_H + gWrittenToBldalpha_L != 0)
             {
-                if (gWrittenToBLDALPHA_H != 0)
-                    gWrittenToBLDALPHA_H--;
+                if (gWrittenToBldalpha_H != 0)
+                    gWrittenToBldalpha_H--;
 
-                if (gWrittenToBLDALPHA_L != 0)
-                    gWrittenToBLDALPHA_L--;
+                if (gWrittenToBldalpha_L != 0)
+                    gWrittenToBldalpha_L--;
             }
             else
             {
@@ -608,13 +608,13 @@ u32 ChozoStatueHintSubroutine(void)
             break;
 
         case CHOZO_HINT_SUBROUTINE_STAGE_UPDATE_FADE_IN:
-            if (PAUSE_SCREEN_DATA.targetBldAlpha != C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L))
+            if (PAUSE_SCREEN_DATA.targetBldAlpha != C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L))
             {
-                if (HIGH_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha) > gWrittenToBLDALPHA_H)
-                    gWrittenToBLDALPHA_H++;
+                if (HIGH_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha) > gWrittenToBldalpha_H)
+                    gWrittenToBldalpha_H++;
 
-                if (LOW_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha) > gWrittenToBLDALPHA_L)
-                    gWrittenToBLDALPHA_L++;
+                if (LOW_BYTE(PAUSE_SCREEN_DATA.targetBldAlpha) > gWrittenToBldalpha_L)
+                    gWrittenToBldalpha_L++;
             }
             else
             {

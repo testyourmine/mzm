@@ -122,7 +122,7 @@ void DemoInit(void)
             break;
 
         case 11:
-            write32(&gMinimapTilesWithObtainedItems[AREA_BRINSTAR][15], 1);
+            gMinimapTilesWithObtainedItems[AREA_BRINSTAR][15] = 1;
             break;
     }
 
@@ -184,8 +184,8 @@ void DemoEnd(void)
     if (gDemoState == DEMO_STATE_RECORDING_DEBUG)
     {
         // Debug, forward demo input and duration to SRAM, and save it flash
-        DMA_SET(3, gDemoInputData, gSramDemoInputData, C_32_2_16(DMA_ENABLE, DEMO_MAX_DURATION));
-        DMA_SET(3, gDemoInputDuration, gSramDemoInputDuration, C_32_2_16(DMA_ENABLE, DEMO_MAX_DURATION));
+        DMA_SET(3, gDemoInputData, gSramDemoInputData, C_32_2_16(DMA_ENABLE, sizeof(gSramDemoInputData) / 2));
+        DMA_SET(3, gDemoInputDuration, gSramDemoInputDuration, C_32_2_16(DMA_ENABLE, sizeof(gSramDemoInputDuration) / 2));
     
         DoSramOperation(SRAM_OPERATION_SAVE_RECORDED_DEMO);
 

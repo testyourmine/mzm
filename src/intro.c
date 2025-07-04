@@ -38,8 +38,8 @@ void IntroVBlank(void)
     write16(REG_DISPCNT, INTRO_DATA.dispcnt);
     write16(REG_BLDCNT, INTRO_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
     write16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 512));
     write16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 512));
 }
@@ -123,7 +123,7 @@ void IntroInit(void)
     INTRO_DATA.dispcnt = DCNT_OBJ;
     INTRO_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
 
     IntroVBlank();
 }
@@ -463,8 +463,8 @@ u8 IntroShipFlyingTowardsCamera(void)
     {
         case 0:
             INTRO_DATA.bldcnt = BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG0_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL;
-            gWrittenToBLDALPHA_L = 9;
-            gWrittenToBLDALPHA_H = 7;
+            gWrittenToBldalpha_L = 9;
+            gWrittenToBldalpha_H = 7;
             break;
 
         case DELTA_TIME:
@@ -953,9 +953,9 @@ u32 IntroSubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay != 0)
+            if (gWrittenToBldy_NonGameplay != 0)
             {
-                gWrittenToBLDY_NonGameplay--;
+                gWrittenToBldy_NonGameplay--;
                 break;
             }
             

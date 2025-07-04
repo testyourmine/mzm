@@ -480,10 +480,10 @@ u32 unk_76a98(void)
             break;
 
         case 2:
-            gWrittenToBLDY_NonGameplay += 4;
-            if (gWrittenToBLDY_NonGameplay >= BLDY_MAX_VALUE)
+            gWrittenToBldy_NonGameplay += 4;
+            if (gWrittenToBldy_NonGameplay >= BLDY_MAX_VALUE)
             {
-                gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+                gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
                 TITLE_SCREEN_DATA.unk_E++;
             }
             break;
@@ -497,13 +497,13 @@ u32 unk_76a98(void)
             break;
 
         case 7:
-            if (gWrittenToBLDY_NonGameplay >= 9)
+            if (gWrittenToBldy_NonGameplay >= 9)
             {
-                gWrittenToBLDY_NonGameplay -= 8;
+                gWrittenToBldy_NonGameplay -= 8;
                 break;
             }
 
-            gWrittenToBLDY_NonGameplay = 0;
+            gWrittenToBldy_NonGameplay = 0;
             TITLE_SCREEN_DATA.unk_E = 0;
             ended = TRUE;
             break;
@@ -1098,22 +1098,22 @@ u32 TitleScreenIdle(void)
         case TITLE_SCREEN_IDLE_STAGE_TITLE_FADING:
             if (gChangedInput != KEY_NONE)
             {
-                gWrittenToBLDALPHA_L = 16;
-                gWrittenToBLDALPHA_H = 0;
+                gWrittenToBldalpha_L = 16;
+                gWrittenToBldalpha_H = 0;
             }
             else if (TITLE_SCREEN_DATA.timer % 10 == 0)
             {
-                if (gWrittenToBLDALPHA_L >= 16)
+                if (gWrittenToBldalpha_L >= 16)
                 {
                     TitleScreenSetIdleStage(TITLE_SCREEN_IDLE_STAGE_IDLE);
                     break;
                 }
                 
-                gWrittenToBLDALPHA_L++;
-                gWrittenToBLDALPHA_H = 16 - gWrittenToBLDALPHA_L;
+                gWrittenToBldalpha_L++;
+                gWrittenToBldalpha_H = 16 - gWrittenToBldalpha_L;
             }
 
-            if (gWrittenToBLDALPHA_L >= 16)
+            if (gWrittenToBldalpha_L >= 16)
                 TitleScreenSetIdleStage(TITLE_SCREEN_IDLE_STAGE_IDLE);
             break;
 
@@ -1143,8 +1143,8 @@ void TitleScreenSetIdleStage(u8 stage)
                 BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
             TITLE_SCREEN_DATA.timer = 0;
-            gWrittenToBLDALPHA_L = 0;
-            gWrittenToBLDALPHA_H = 16;
+            gWrittenToBldalpha_L = 0;
+            gWrittenToBldalpha_H = 16;
             break;
 
         case 2:
@@ -1154,8 +1154,8 @@ void TitleScreenSetIdleStage(u8 stage)
                 BLDCNT_BG1_SECOND_TARGET_PIXEL | BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL |
                 BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
-            gWrittenToBLDALPHA_L = 16;
-            gWrittenToBLDALPHA_H = 0;
+            gWrittenToBldalpha_L = 16;
+            gWrittenToBldalpha_H = 0;
             TITLE_SCREEN_DATA.effectsTimer = 210;
             TITLE_SCREEN_DATA.unk_F = FALSE;
             TITLE_SCREEN_DATA.timer = 0;
@@ -1177,7 +1177,7 @@ void TitleScreenInit(void)
 
     write16(REG_BLDCNT, TITLE_SCREEN_DATA.bldcnt);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
 
     write16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt = 0);
 
@@ -1246,8 +1246,8 @@ void TitleScreenInit(void)
     gBg2HOFS_NonGameplay = gBg2VOFS_NonGameplay = 0;
     gBg3HOFS_NonGameplay = gBg3VOFS_NonGameplay = 0;
 
-    gWrittenToBLDALPHA_H = 16;
-    gWrittenToBLDALPHA_L = 0;
+    gWrittenToBldalpha_H = 16;
+    gWrittenToBldalpha_L = 0;
 
     TITLE_SCREEN_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
@@ -1264,8 +1264,8 @@ void TitleScreenInit(void)
 
         TITLE_SCREEN_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
         
-        gWrittenToBLDALPHA_L = 16;
-        gWrittenToBLDALPHA_H = 0;
+        gWrittenToBldalpha_L = 16;
+        gWrittenToBldalpha_H = 0;
 
         TITLE_SCREEN_DATA.effectsTimer = 210;
         TITLE_SCREEN_DATA.unk_F = FALSE;
@@ -1310,8 +1310,8 @@ void TitleScreenVBlank(void)
     write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
 
     write16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
     write16(REG_BLDCNT, TITLE_SCREEN_DATA.bldcnt);
 }
 

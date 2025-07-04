@@ -374,9 +374,9 @@ u8 GettingFullyPoweredSuitInit(void)
         BLDCNT_BG0_SECOND_TARGET_PIXEL | BLDCNT_BG1_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL |
         BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
 
-    gWrittenToBLDY_NonGameplay = 0;
-    gWrittenToBLDALPHA_L = 0;
-    gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = 0;
+    gWrittenToBldalpha_L = 0;
+    gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE;
 
     CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sGettingFullyPoweredSuitPageData[0].bg, NON_GAMEPLAY_START_BG_POS);
     CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sGettingFullyPoweredSuitPageData[1].bg, NON_GAMEPLAY_START_BG_POS);

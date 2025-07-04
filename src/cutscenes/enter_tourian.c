@@ -651,7 +651,7 @@ u8 EnterTourianInit(void)
     CUTSCENE_DATA.oam[MAX_METROID_IDS * 2].yPosition = sEnterTourian_760090[4][1];
 
     CUTSCENE_DATA.bldcnt = BLDCNT_OBJ_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
-    gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
+    gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
     CUTSCENE_DATA.unk_8.unk_2 = TRUE;
 
     PlayMusic(MUSIC_ENTERING_TOURIAN_CUTSCENE, 0);

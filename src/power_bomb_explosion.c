@@ -282,23 +282,23 @@ static void PowerBombExplosionEnd(void)
     if (gCurrentPowerBomb.stage == 0)
     {
         write16(REG_BLDY, 0);
-        gWrittenToBLDCNT = gIoRegistersBackup.Bldcnt_NonGameplay;
+        gWrittenToBldcnt = gIoRegistersBackup.Bldcnt_NonGameplay;
 
         if (sHazeData[gCurrentRoomEntry.visualEffect][3] == 2)
-            gWrittenToBLDALPHA = C_16_2_8(0, 16);
+            gWrittenToBldalpha = C_16_2_8(0, 16);
         else
-            gWrittenToBLDALPHA = C_16_2_8(16, 0);
+            gWrittenToBldalpha = C_16_2_8(16, 0);
 
-        gWrittenToDISPCNT = write16(REG_DISPCNT, read16(REG_DISPCNT) | DCNT_WIN1);
+        gWrittenToDispcnt = write16(REG_DISPCNT, read16(REG_DISPCNT) | DCNT_WIN1);
 
-        gWrittenToWIN1H = C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right);
-        gWrittenToWIN1V = C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom);
+        gWrittenToWin1H = C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right);
+        gWrittenToWin1V = C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom);
 
         // Set transparent color
         SET_BACKDROP_COLOR(COLOR_BLACK);
 
-        gWrittenToWININ_H = gIoRegistersBackup.WININ_H;
-        gWrittenToWINOUT_L = gIoRegistersBackup.WINOUT_L;
+        gWrittenToWinIn_H = gIoRegistersBackup.WININ_H;
+        gWrittenToWinOut_L = gIoRegistersBackup.WINOUT_L;
 
         // Get BGCNT backups
         write16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
@@ -306,7 +306,7 @@ static void PowerBombExplosionEnd(void)
         write16(REG_BG2CNT, gIoRegistersBackup.BG2CNT);
         write16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
 
-        gWrittenToDISPCNT = gIoRegistersBackup.Dispcnt_NonGameplay;
+        gWrittenToDispcnt = gIoRegistersBackup.Dispcnt_NonGameplay;
         gCurrentPowerBomb.stage = 1;
     }
     else if (gCurrentPowerBomb.stage == 1)
@@ -336,7 +336,7 @@ static void PowerBombExplosionEnd(void)
             done = FALSE;
         }
 
-        gWrittenToBLDALPHA = C_16_2_8(evb, eva);
+        gWrittenToBldalpha = C_16_2_8(evb, eva);
 
         if (done)
             gCurrentPowerBomb.stage = 2;

@@ -85,14 +85,14 @@ u32 EraseSramSubroutine(void)
             break;
 
         case 1:
-            if (gWrittenToBLDY_NonGameplay != 0)
+            if (gWrittenToBldy_NonGameplay != 0)
             {
-                gWrittenToBLDY_NonGameplay--;
+                gWrittenToBldy_NonGameplay--;
                 break;
             }
 
             ERASE_SRAM_DATA.bldcnt = (BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT) & ~BLDCNT_OBJ_FIRST_TARGET_PIXEL;
-            ERASE_SRAM_DATA.bldyTarget = gWrittenToBLDY_NonGameplay;
+            ERASE_SRAM_DATA.bldyTarget = gWrittenToBldy_NonGameplay;
 
             gGameModeSub1++;
             ERASE_SRAM_DATA.timer = 0;
@@ -121,9 +121,9 @@ u32 EraseSramSubroutine(void)
             break;
 
         case 4:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
             {
-                gWrittenToBLDY_NonGameplay++;
+                gWrittenToBldy_NonGameplay++;
                 break;
             }
 
@@ -142,9 +142,9 @@ u32 EraseSramSubroutine(void)
             break;
 
         case 6:
-            if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
+            if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
             {
-                gWrittenToBLDY_NonGameplay++;
+                gWrittenToBldy_NonGameplay++;
                 break;
             }
 
@@ -181,12 +181,12 @@ u32 EraseSramProcessInput(void)
         result = EraseSramCheckForInput();
 
     // Update BLDY based on target
-    if (ERASE_SRAM_DATA.bldyTarget != gWrittenToBLDY_NonGameplay)
+    if (ERASE_SRAM_DATA.bldyTarget != gWrittenToBldy_NonGameplay)
     {
-        if (ERASE_SRAM_DATA.bldyTarget > gWrittenToBLDY_NonGameplay)
-            gWrittenToBLDY_NonGameplay++;
+        if (ERASE_SRAM_DATA.bldyTarget > gWrittenToBldy_NonGameplay)
+            gWrittenToBldy_NonGameplay++;
         else
-            gWrittenToBLDY_NonGameplay--;
+            gWrittenToBldy_NonGameplay--;
     }
     
     EraseSramUpdateCursorPosition();
@@ -351,7 +351,7 @@ void EraseSramInit(void)
 
     write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
 
     dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
@@ -397,7 +397,7 @@ void EraseSramInit(void)
     write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
     write16(REG_BG3CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
 
-    gWrittenToBLDALPHA_H = 0;
+    gWrittenToBldalpha_H = 0;
     write16(REG_BLDALPHA, 0);
 
     gGameModeSub3 = 0;
@@ -472,7 +472,7 @@ void EraseSramVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
+    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
     write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
