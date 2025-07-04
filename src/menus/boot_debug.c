@@ -436,27 +436,28 @@ void BootDebugReadSram(void)
 void BootDebugWriteSram(u8 selectSaveFile)
 {
     u8* dst;
+    struct SaveBootDebug* pSave;
 
-    dst = gSram.bootDebugSave.zeroSaveText;
-    DmaTransfer(3, &sZeroSaveText, dst, ARRAY_SIZE(sZeroSaveText), 8);
-    gSram.bootDebugSave.debugMode = gDebugMode;
+    pSave = &gSram.bootDebugSave;
+    dst = pSave->zeroSaveText;
+    DmaTransfer(3, &sZeroSaveText, dst, 8, 8);
+    pSave->debugMode = gDebugMode;
 
-    if (selectSaveFile)
-    {
+    if (selectSaveFile) {
         if (gMostRecentSaveFile == 0)
-            gSram.bootDebugSave.sectionIndex = BOOT_DEBUG_SECTION_SAVE_A;
+            pSave->sectionIndex = BOOT_DEBUG_SECTION_SAVE_A;
         else if (gMostRecentSaveFile == 1)
-            gSram.bootDebugSave.sectionIndex = BOOT_DEBUG_SECTION_SAVE_B;
+            pSave->sectionIndex = BOOT_DEBUG_SECTION_SAVE_B;
         else if (gMostRecentSaveFile == 2)
-            gSram.bootDebugSave.sectionIndex = BOOT_DEBUG_SECTION_SAVE_C;
+            pSave->sectionIndex = BOOT_DEBUG_SECTION_SAVE_C;
         else
-            gSram.bootDebugSave.sectionIndex = 0;
+            pSave->sectionIndex = 0;
     }
     else
     {
-        gSram.bootDebugSave.sectionIndex = gCurrentArea;
+        pSave->sectionIndex = gCurrentArea;
     }
-    
+
     DoSramOperation(SRAM_OPERATION_SAVE_BOOT_DEBUG_RAM);
 }
 
