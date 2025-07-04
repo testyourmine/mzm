@@ -742,8 +742,7 @@ u32 Haze_PowerBombExpanding(void)
     xPosition = SUB_PIXEL_TO_PIXEL_(gCurrentPowerBomb.xPosition - gBg1XPosition);
     yPosition = SUB_PIXEL_TO_PIXEL_(gCurrentPowerBomb.yPosition - gBg1YPosition);
 
-    // FIXME use symbol
-    dst = (u16*)0x2026d00; // gPreviousHazeValues
+    dst = gPreviousHazeValues;
     for (i = 0; i <= 53 * 3; i++, dst++)
         *dst = 0;
 
@@ -764,8 +763,7 @@ u32 Haze_PowerBombExpanding(void)
         i = 53 * 3;
     }
 
-    // FIXME use symbol
-    dst = (u16*)0x2026d00 + i; // gPreviousHazeValues
+    dst = &gPreviousHazeValues[i];
     for (; i < screenY; i++, subSlice++, dst++)
     {
         yPosition = (s16)(xPosition + src[subSlice * 2 + 1] * 2);
@@ -818,8 +816,7 @@ u32 Haze_PowerBombRetracting(void)
     xPosition = SUB_PIXEL_TO_PIXEL_(gCurrentPowerBomb.xPosition - gBg1XPosition);
     yPosition = SUB_PIXEL_TO_PIXEL_(gCurrentPowerBomb.yPosition - gBg1YPosition);
 
-    // FIXME use symbol
-    dst = (u16*)0x2026d00; // gPreviousHazeValues
+    dst = gPreviousHazeValues;
     for (i = 0; i <= 53 * 3; i++, dst++)
         *dst = 0;
 
@@ -840,9 +837,7 @@ u32 Haze_PowerBombRetracting(void)
     {
         i = 53 * 3;
     }
-
-    // FIXME use symbol
-    dst = (u16*)0x2026d00 + i; // gPreviousHazeValues
+    dst = &gPreviousHazeValues[i];
     for (; i < screenY; i++, subSlice++, dst++)
     {
         yPosition = (s16)(xPosition + src[subSlice * 2 + 1] * 2);

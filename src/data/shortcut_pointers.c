@@ -46,7 +46,7 @@ u16* sBgPalramPointer = PALRAM_BASE;
 FORCE_RODATA
 u16* sObjPalramPointer = PALRAM_OBJ;
 FORCE_RODATA
-u32* sVisitedMinimapTilesPointer = gVisitedMinimapTiles;
+u32* sVisitedMinimapTilesPointer = (u32*)gVisitedMinimapTiles;
 FORCE_RODATA
 union NonGameplayRam* sNonGameplayRamPointer = &gNonGameplayRam;
 FORCE_RODATA

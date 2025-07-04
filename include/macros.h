@@ -33,12 +33,18 @@
 #define C_S8_2_S16(value) ((value) & 0x80 ? 0x100 + (value) : (value))
 #define C_S9_2_S16(value) ((value) & 0x100 ? 0x200 + (value) : (value))
 
-// Creates an array at the specified memory location, used to create symbols for Ewram arrays
-// e.g. :
-// `#define gSomeSymbol CAST_TO_ARRAY(u8, [8], EWRAM_BASE + 0x1000)`
-// Will create a symbol bound to address EWRAM_BASE + 0x1000 of type u8 [8]
-// In normal C code, that would be :
-// `extern u8 gSomeSymbol[8];`
+/**
+ * @brief  Creates an array at the specified memory location, used to create symbols for Ewram arrays
+ * e.g. :
+ * `#define gSomeSymbol CAST_TO_ARRAY(u8, [8], EWRAM_BASE + 0x1000)`
+ * Will create a symbol bound to address EWRAM_BASE + 0x1000 of type u8 [8]
+ * In normal C code, that would be :
+ * `extern u8 gSomeSymbol[8];`
+ * 
+ * @param type Array element type
+ * @param sizes Array sizes
+ * @param ptr Address
+ */
 #define CAST_TO_ARRAY(type, sizes, ptr) (*((type (*)sizes)((ptr))))
 
 #define OPPOSITE_DIRECTION(dir) ((dir) ^ (KEY_RIGHT | KEY_LEFT))
@@ -257,3 +263,4 @@
 
 #define FORCE_RODATA __attribute__((section(".rodata")))
 #define NAKED_FUNCTION __attribute__((naked))
+#define PACKED __attribute__((packed))

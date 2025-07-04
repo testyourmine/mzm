@@ -4,6 +4,8 @@
 #include "types.h"
 #include "macros.h"
 
+#include "structs/animated_graphics.h"
+
 // Structs
 
 struct Door {
@@ -82,15 +84,6 @@ struct HatchesState {
     u16 hatchesLockedWithEventUnlockable;
 };
 
-struct HatchFlashingAnimation {
-    u8 unlocking_delay;
-    s8 unlocking_paletteRow;
-
-    // Assumed to be left over from fusion (navigation doors)
-    u8 navigation_delay;
-    s8 navigation_paletteRow;
-};
-
 enum AreaConnectionField {
     AREA_CONNECTION_FIELD_SOURCE_AREA,
     AREA_CONNECTION_FIELD_SOURCE_DOOR,
@@ -128,7 +121,7 @@ extern struct HatchData gHatchData[MAX_AMOUNT_OF_HATCHES];
 extern struct LastElevatorUsed gLastElevatorUsed;
 extern u8 gNumberOfValidHatchesInRoom;
 
-extern struct HatchFlashingAnimation gHatchFlashingAnimation;
+extern struct AnimatedPaletteTiming gHatchFlashingAnimation;
 
 #define LOCK_DOORS() gDoorUnlockTimer = 1
 

@@ -2306,8 +2306,7 @@ void PauseScreenInit(void)
     }
 
     BitFill(3, 0x1140, VRAM_BASE + 0xE800, 0x1800, 16);
-    // 0x2034000 = gDecompressedMinimapVisitedTiles
-    DmaTransfer(3, (const void*)0x2034000, VRAM_BASE + 0xE000, sizeof(gDecompressedMinimapVisitedTiles), 16);
+    DmaTransfer(3, gDecompressedMinimapVisitedTiles, VRAM_BASE + 0xE000, sizeof(gDecompressedMinimapVisitedTiles), 16);
 
     if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_CHOZO_STATUE_HINT)
     {
@@ -2374,9 +2373,8 @@ void PauseScreenInit(void)
         gEquipment.downloadedMapStatus |= (1 << gCurrentArea);
         PAUSE_SCREEN_DATA.subroutineInfo.currentSubroutine = PAUSE_SCREEN_SUBROUTINE_MAP_DOWNLOAD;
 
-        // FIXME use symbol
-        PauseScreenGetMinimapData(gCurrentArea, (u16*)0x2034000); // gDecompressedMinimapData
-        MinimapSetDownloadedTiles(gCurrentArea, (u16*)0x2034000); // gDecompressedMinimapData
+        PauseScreenGetMinimapData(gCurrentArea, gDecompressedMinimapVisitedTiles);
+        MinimapSetDownloadedTiles(gCurrentArea, gDecompressedMinimapVisitedTiles);
         PauseScreenInitMapDownload();
     }
     else if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_GETTING_FULLY_POWERED)

@@ -391,15 +391,15 @@ void ColorFadingStartDefault(void)
     TransparencyUpdateBldcnt(2, gIoRegistersBackup.Bldcnt_NonGameplay);
     write16(REG_DISPCNT, gIoRegistersBackup.Dispcnt_NonGameplay);
 
-    if (gDoorUnlockTimer == 1 * DELTA_TIME)
+    if (gDoorUnlockTimer == DELTA_TIME)
         ConnectionLockHatchesWithTimer();
 }
 
 /**
- * @brief 5c220 | 5c | Starts a door transition fade | FIXME verify this function 
+ * @brief 5c220 | 5c | Starts a door transition fade
  * 
  */
-void ColorFadingStartDoorTransition(void)
+void unk_5c220(void)
 {
     gBackgroundPositions.doorTransition.y = gBackgroundPositions.bg[3].y;
     gBackgroundPositions.doorTransition.x = gBackgroundPositions.bg[3].x;
@@ -554,7 +554,7 @@ u8 ColorFadingProcess_DoorTransition(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.stage++;
             break;
 
@@ -665,7 +665,7 @@ u8 ColorFadingProcess_Default(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.stage++;
             break;
 
@@ -695,7 +695,7 @@ u8 ColorFadingProcess_EscapeFailed(void)
     {
         case 0:
             gPauseScreenFlag = 0;
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             FadeAllSounds(CONVERT_SECONDS(1.f));
             FadeMusic(CONVERT_SECONDS(1.f));
             gColorFading.stage++;
@@ -781,7 +781,7 @@ u8 ColorFadingProcess_BeforeDemoEnding(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
 
             // Set input ended flag
             if (gColorFading.type == COLOR_FADING_DEMO_ENDING_WITH_INPUT)
@@ -817,7 +817,7 @@ u8 ColorFadingProcess_TourianEscape(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.stage++;
             break;
 
@@ -855,7 +855,7 @@ u8 ColorFadingProcess_GettingFullyPowered(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.unk_3 = 0;
             gColorFading.stage++;
             break;
@@ -907,7 +907,7 @@ u8 ColorFadingProcess_BeforeRidleySpawn(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.unk_3 = 0;
             gColorFading.stage++;
             break;
@@ -948,7 +948,7 @@ u8 ColorFadingProcess_StatueOpening(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.stage++;
             break;
 
@@ -990,7 +990,7 @@ u8 ColorFadingProcess_BeforeIntroText(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.stage++;
             break;
 
@@ -1044,7 +1044,7 @@ u8 ColorFadingProcess_BeforeBlueShip(void)
     switch (gColorFading.stage)
     {
         case 0:
-            ColorFadingStartDoorTransition();
+            unk_5c220();
             gColorFading.stage++;
             break;
 

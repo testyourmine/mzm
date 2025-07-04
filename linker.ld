@@ -572,6 +572,7 @@ SECTIONS {
         src/menus/status_screen.o(.text);
         src/menus/pause_screen_sub_menus.o(.text);
         src/save_file.o(.text);
+        src/save_file_load.o(.text);
 
 #ifdef DEBUG
         src/menus/boot_debug.o(.text);

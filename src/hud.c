@@ -1222,7 +1222,7 @@ void HudUpdateGfx(void)
     if (gUpdateMinimapFlag != MINIMAP_UPDATE_FLAG_NONE)
     {
         gUpdateMinimapFlag--;
-        DMA_SET(3, (gMinimapTilesGfx + gUpdateMinimapFlag * 24), (VRAM_BASE + 0x11F80) + (gUpdateMinimapFlag * 1024), C_32_2_16(DMA_ENABLE, 48));
+        DMA_SET(3, (gMinimapTilesGfx + gUpdateMinimapFlag * 24), (VRAM_BASE + 0x11F80) + (gUpdateMinimapFlag * 1024), C_32_2_16(DMA_ENABLE, 24 * sizeof(u32) / 2));
     }
 }
 

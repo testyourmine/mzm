@@ -367,7 +367,7 @@ void AnimatedPaletteUpdate(void)
     update = FALSE;
 
     // Update timer
-    APPLY_DELTA_TIME_INC(gAnimatedPaletteTiming.timer);
+    APPLY_DELTA_TIME_INC(gAnimatedPaletteTiming.timer1);
 
     switch (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].type)
     {
@@ -377,14 +377,14 @@ void AnimatedPaletteUpdate(void)
 
         case ANIMATED_PALETTE_TYPE_NORMAL:
             // Standard animation progression
-            if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].framesPerState <= gAnimatedPaletteTiming.timer)
+            if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].framesPerState <= gAnimatedPaletteTiming.timer1)
             {
-                gAnimatedPaletteTiming.timer = 0;
-                gAnimatedPaletteTiming.row++;
+                gAnimatedPaletteTiming.timer1 = 0;
+                gAnimatedPaletteTiming.row1++;
 
-                if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates <= gAnimatedPaletteTiming.row)
+                if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates <= gAnimatedPaletteTiming.row1)
                 {
-                    gAnimatedPaletteTiming.row = 0;
+                    gAnimatedPaletteTiming.row1 = 0;
                     if (gDisableAnimatedPalette < 0)
                         gDisableAnimatedPalette = TRUE;
 
@@ -394,17 +394,17 @@ void AnimatedPaletteUpdate(void)
             break;
 
         case ANIMATED_PALETTE_TYPE_ALTERNATE:
-            if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].framesPerState <= gAnimatedPaletteTiming.timer)
+            if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].framesPerState <= gAnimatedPaletteTiming.timer1)
             {
-                gAnimatedPaletteTiming.timer = 0;
-                gAnimatedPaletteTiming.row++;
-                if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates <= gAnimatedPaletteTiming.row)
+                gAnimatedPaletteTiming.timer1 = 0;
+                gAnimatedPaletteTiming.row1++;
+                if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates <= gAnimatedPaletteTiming.row1)
                 {
                     newRow = sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates - 1;
-                    gAnimatedPaletteTiming.row = -newRow;
+                    gAnimatedPaletteTiming.row1 = -newRow;
                 }
             
-                if (gDisableAnimatedPalette < 0 && gAnimatedPaletteTiming.row == 0)
+                if (gDisableAnimatedPalette < 0 && gAnimatedPaletteTiming.row1 == 0)
                     gDisableAnimatedPalette = TRUE;
 
                 update++;
@@ -413,13 +413,13 @@ void AnimatedPaletteUpdate(void)
 
         case ANIMATED_PALETTE_TYPE_REVERSE:
             // Standard animation progression, just played backwards
-            if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].framesPerState <= gAnimatedPaletteTiming.timer)
+            if (sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].framesPerState <= gAnimatedPaletteTiming.timer1)
             {
-                gAnimatedPaletteTiming.timer = 0;
-                gAnimatedPaletteTiming.row--;
+                gAnimatedPaletteTiming.timer1 = 0;
+                gAnimatedPaletteTiming.row1--;
 
-                if (0 > gAnimatedPaletteTiming.row)
-                    gAnimatedPaletteTiming.row = sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates - 1;
+                if (gAnimatedPaletteTiming.row1 < 0)
+                    gAnimatedPaletteTiming.row1 = sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].numbersOfStates - 1;
                 
                 update++;
             }
@@ -430,7 +430,7 @@ void AnimatedPaletteUpdate(void)
         return;
 
     // Get row
-    row = gAnimatedPaletteTiming.row;
+    row = gAnimatedPaletteTiming.row1;
     if (row < 0)
         row = -row;
 
@@ -439,13 +439,13 @@ void AnimatedPaletteUpdate(void)
     {
         // Directly to palram if in game
         DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * PAL_ROW],
-            ANIMATED_PALETTE_PALRAM, C_32_2_16(DMA_ENABLE, PAL_ROW));
+            ANIMATED_PALETTE_PALRAM, C_32_2_16(DMA_ENABLE, PAL_ROW_SIZE / 2));
     }
     else
     {
         // To backup if not in game
         DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * PAL_ROW],
-            ANIMATED_PALETTE_EWRAM, C_32_2_16(DMA_ENABLE, PAL_ROW));    
+            ANIMATED_PALETTE_EWRAM, C_32_2_16(DMA_ENABLE, PAL_ROW_SIZE / 2));    
     }
 }
 
@@ -456,9 +456,7 @@ void AnimatedPaletteUpdate(void)
 void AnimatedPaletteCheckDisableOnTransition(void)
 {
     gAnimatedPaletteTiming = sAnimatedPaletteTiming_Empty;
-
-    // FIXME merge struct HatchFlashingAnimation and struct AnimatedPaletteTiming 
-    gHatchFlashingAnimation = *(struct HatchFlashingAnimation*)&sAnimatedPaletteTiming_Empty;
+    gHatchFlashingAnimation = sAnimatedPaletteTiming_Empty;
 
     gDisableAnimatedPalette = FALSE;
 

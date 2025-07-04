@@ -962,32 +962,32 @@ void RoomUpdateHatchFlashingAnimation(void)
     // Update hatches that unlocked
     if (gHatchesState.unlocking)
     {
-        APPLY_DELTA_TIME_INC(gHatchFlashingAnimation.unlocking_delay);
-        if (gHatchFlashingAnimation.unlocking_delay >= CONVERT_SECONDS(2.f / 15))
+        APPLY_DELTA_TIME_INC(gHatchFlashingAnimation.timer1);
+        if (gHatchFlashingAnimation.timer1 >= CONVERT_SECONDS(2.f / 15))
         {
-            gHatchFlashingAnimation.unlocking_delay = 0;
-            APPLY_DELTA_TIME_INC(gHatchFlashingAnimation.unlocking_paletteRow);
+            gHatchFlashingAnimation.timer1 = 0;
+            gHatchFlashingAnimation.row1++;
 
-            if (gHatchFlashingAnimation.unlocking_paletteRow >= CONVERT_SECONDS(.1f))
-                gHatchFlashingAnimation.unlocking_paletteRow = 0;
+            if (gHatchFlashingAnimation.row1 >= 6)
+                gHatchFlashingAnimation.row1 = 0;
 
-            DmaTransfer(3, &pPalette[gHatchFlashingAnimation.unlocking_paletteRow * PAL_ROW + 6], PALRAM_BASE + 1 * PAL_ROW_SIZE + 6 * sizeof(u16), 2 * sizeof(u16), 16);
+            DmaTransfer(3, &pPalette[gHatchFlashingAnimation.row1 * PAL_ROW + 6], PALRAM_BASE + 1 * PAL_ROW_SIZE + 6 * sizeof(u16), 2 * sizeof(u16), 16);
         }
     }
 
     // Left over code from fusion
     if (gHatchesState.navigationDoorsUnlocking)
     {
-        APPLY_DELTA_TIME_INC(gHatchFlashingAnimation.navigation_delay);
-        if (gHatchFlashingAnimation.navigation_delay >= CONVERT_SECONDS(2.f / 15))
+        APPLY_DELTA_TIME_INC(gHatchFlashingAnimation.timer2);
+        if (gHatchFlashingAnimation.timer2 >= CONVERT_SECONDS(2.f / 15))
         {
-            gHatchFlashingAnimation.navigation_delay = 0;
-            APPLY_DELTA_TIME_INC(gHatchFlashingAnimation.navigation_paletteRow);
+            gHatchFlashingAnimation.timer2 = 0;
+            gHatchFlashingAnimation.row2++;
 
-            if (gHatchFlashingAnimation.navigation_paletteRow >= CONVERT_SECONDS(.1f))
-                gHatchFlashingAnimation.navigation_paletteRow = 0;
+            if (gHatchFlashingAnimation.row2 >= 6)
+                gHatchFlashingAnimation.row2 = 0;
 
-            DMA_SET(3, &pPalette[gHatchFlashingAnimation.navigation_paletteRow * PAL_ROW + 6], PALRAM_BASE + 2 * PAL_ROW_SIZE + 6 * sizeof(u16), C_32_2_16(DMA_ENABLE, 2));
+            DMA_SET(3, &pPalette[gHatchFlashingAnimation.row2 * PAL_ROW + 6], PALRAM_BASE + 2 * PAL_ROW_SIZE + 6 * sizeof(u16), C_32_2_16(DMA_ENABLE, 2));
         }
     }
 }

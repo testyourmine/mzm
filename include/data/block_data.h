@@ -33,7 +33,7 @@ extern const struct TankBehavior sTankBehaviors[BEHAVIOR_TANK_AMOUNT];
 
 extern const u16 sHatchBehaviors[HATCH_COUNT][2];
 
-extern const u16 sBldalphaValuesForClipdata[11];
+extern const u16 sBldalphaValuesForClipdata[BEHAVIOR_BLDALPHA_AMOUNT];
 
 extern const s8 sSubBombChainPositionOffset[4][4];
 

@@ -239,7 +239,6 @@ STATIC_ASSERT(sizeof(struct Sram) <= SRAM_SIZE, SramStructSize);
 
 extern u8 gSramOperationStage;
 extern u8 gSramCorruptFlag;
-extern struct Sram gSram;
 
 extern u8 gUnk_3000c20;
 extern struct SaveFileInfo gSaveFilesInfo[3];
@@ -248,5 +247,11 @@ extern struct SectionInfo gSectionInfo;
 // Place holder symbols?
 extern u16 gSramDemoInputData[DEMO_MAX_DURATION];
 extern u16 gSramDemoInputDuration[DEMO_MAX_DURATION];
+
+#ifdef USE_EWRAM_SYMBOLS
+extern struct Sram gSram;
+#else
+#define gSram (*(struct Sram*)(EWRAM_BASE + 0x38000))
+#endif /* USE_EWRAM_SYMBOLS */
 
 #endif /* SAVE_FILE_STRUCT_H */

@@ -2,10 +2,11 @@
 #define ESCAPE_STRUCT_H
 
 #include "types.h"
+#include "macros.h"
 
 // Structs
 
-struct __attribute__((packed)) EscapeDigits {
+struct PACKED EscapeDigits {
     u8 hundredths;
     u8 tenths;
     u8 secondsOnes;

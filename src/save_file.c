@@ -1724,7 +1724,7 @@ void SramWrite_ToEwram_DemoRam(void)
     value = USHORT_MAX;
 
     // TODO macro for 0x2038000
-    pFile = (struct SaveDemo*)(0x2038000 + OFFSET_OF(struct Sram, demoSave));
+    pFile = &gSram.demoSave;
     BitFill(3, value, pFile, sizeof(struct SaveDemo), 16);
 
     pFile->currentArea = gCurrentArea;
@@ -1742,8 +1742,7 @@ void SramWrite_ToEwram_DemoRam(void)
     pFile->environmentalEffects[3] = gSamusEnvironmentalEffects[3];
     pFile->environmentalEffects[4] = gSamusEnvironmentalEffects[4];
 
-    // FIXME use symbol
-    DmaTransfer(3, (u32*)0x2037400 + gCurrentArea * MINIMAP_SIZE, pFile->visitedMinimapTiles, sizeof(pFile->visitedMinimapTiles), 16); // gVisitedMinimapTiles
+    DmaTransfer(3, gVisitedMinimapTiles[gCurrentArea], pFile->visitedMinimapTiles, sizeof(pFile->visitedMinimapTiles), 16);
     DmaTransfer(3, gHatchesOpened[gCurrentArea], pFile->hatchesOpened, sizeof(pFile->hatchesOpened), 16);
 
     pFile->text[0] = 'A';
@@ -1777,8 +1776,7 @@ void SramLoad_DemoRamValues(u8 loadSamusData, u8 demoNumber)
         gLastDoorUsed = pDemo->lastDoorUsed;
         gUseMotherShipDoors = pDemo->useMotherShipDoors;
 
-        // FIXME use symbol
-        DmaTransfer(3, pDemo->visitedMinimapTiles, (u32*)0x02037400 + gCurrentArea * MINIMAP_SIZE, sizeof(pDemo->visitedMinimapTiles), 16); // gVisitedMinimapTiles
+        DmaTransfer(3, pDemo->visitedMinimapTiles, gVisitedMinimapTiles[gCurrentArea], sizeof(pDemo->visitedMinimapTiles), 16);
         DmaTransfer(3, pDemo->hatchesOpened, gHatchesOpened[gCurrentArea], sizeof(pDemo->hatchesOpened), 16);
     } 
     else if (loadSamusData == TRUE)
@@ -2150,88 +2148,4 @@ void Sram_CheckLoadSaveFile(void)
     gLanguage = gGameCompletion.language;
     gSkipDoorTransition = FALSE;
     gDebugMode = FALSE;
-}
-
-/**
- * @brief 75a94 | 164 | To document
- * 
- */
-void Sram_InitSaveFile(void)
-{
-    s32 i;
-    s32 j;
-    u32 flags;
-    u32 flag;
-    
-    BitFill(3, 0, gVisitedMinimapTiles, 2 * sizeof(gVisitedMinimapTiles), 16);
-    BitFill(3, USHORT_MAX, gNeverReformBlocks, sizeof(gNeverReformBlocks), 16);
-    BitFill(3, USHORT_MAX, gItemsCollected, sizeof(gItemsCollected), 16);
-    BitFill(3, USHORT_MAX, gHatchesOpened, 2 * sizeof(gHatchesOpened), 16);
-    BitFill(3, 0, gEventsTriggered, sizeof(gEventsTriggered), 16);
-    BitFill(3, 0, gMinimapTilesWithObtainedItems, sizeof(gMinimapTilesWithObtainedItems), 16);
-
-    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
-    {
-        gNumberOfNeverReformBlocks[i] = 0;
-        gNumberOfItemsCollected[i] = 0;
-    }
-
-    gInGameTimer = sInGameTimer_Empty;
-
-    for (i = 0; i < ARRAY_SIZE(gBestCompletionTimes); i++)
-        gBestCompletionTimes[i] = sBestCompletionTime_Empty;
-
-    for (i = 0; i < ARRAY_SIZE(gInGameTimerAtBosses); i++)
-        gInGameTimerAtBosses[i] = sInGameTimer_Empty;
-
-    for (i = 0; i < ARRAY_SIZE(gInGameCutscenesTriggered); i++)
-    {
-        for (j = 0, flags = 0; j < ARRAY_SIZE(sInGameCutsceneData); j++)
-        {
-            if (sInGameCutsceneData[i * 32 + j].unk_0)
-                flag = TRUE;
-            else
-                flag = FALSE;
-
-            flags |= flag << j;
-        }
-        gInGameCutscenesTriggered[i] = flags;
-    }
-
-    do {
-    gDisableDrawingSamusAndScrolling = FALSE;
-    gDifficulty = DIFF_NORMAL;
-    } while(0);
-    gDifficulty = DIFF_NORMAL;
-
-    gTimeAttackFlag = FALSE;
-    #ifdef REGION_US_BETA
-    gIsLoadingFile = FALSE;
-    #else // !REGION_US_BETA
-    do {
-    gIsLoadingFile = FALSE;
-    } while(0);
-    #endif // REGION_US_BETA
-}
-
-/**
- * @brief 75bf8 | c | Empty V-blank code for SRAM
- * 
- */
-void Sram_VblankEmpty(void)
-{
-    vu8 c = 0;
-}
-
-/**
- * @brief 75c04 | 2c | To document
- * 
- * @param param_1 To document
- * @return u32 bool, is loading file
- */
-u32 unk_75c04(u8 param_1)
-{
-    CallbackSetVblank(Sram_VblankEmpty);
-    unk_7584c(param_1);
-    return gIsLoadingFile;
 }

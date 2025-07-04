@@ -25,7 +25,6 @@
 
 extern const struct Door* sAreaDoorsPointers[AREA_ENTRY_COUNT];
 
-// FIXME, find a better solution
 void BgClipSetClipdataBlockValue(u16, u16, u16); // From bg_clip.h
 // bg_clip.h must not be included, as declaring the correct signature for some
 // of its functions produces non-matching code here.
@@ -97,7 +96,7 @@ void ConnectionUpdateHatches(void)
         {
             if (gHatchData[i].state == HATCH_STATE_OPENING)
             {
-                gHatchData[i].currentAnimationFrame = 0x4;
+                gHatchData[i].currentAnimationFrame = 4;
                 ConnectionUpdateHatchAnimation(TRUE, i);
                 gHatchData[i].state = HATCH_STATE_OPENED;
                 gHatchData[i].currentAnimationFrame = 0;
@@ -343,7 +342,7 @@ u32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
             // Compute the vertical offset of Samus within the door
             // Start from the bottom of the door (+ 1 to align to the bottom of the door)
             // Then remove Samus's position
-            gSamusDoorPositionOffset = BLOCK_TO_SUB_PIXEL(pDoor->yEnd + 1) - gSamusData.yPosition - 1;
+            gSamusDoorPositionOffset = BLOCK_TO_SUB_PIXEL(pDoor->yEnd + 1) - gSamusData.yPosition - ONE_SUB_PIXEL;
             ConnectionProcessDoorType(pDoor->type);
 
             // Start the room loading behavior
@@ -471,7 +470,7 @@ u32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
     else
     {
         // Compute vertical offset as normal
-        gSamusDoorPositionOffset = BLOCK_TO_SUB_PIXEL(pDoor->yEnd + 1) - gSamusData.yPosition - 1;
+        gSamusDoorPositionOffset = BLOCK_TO_SUB_PIXEL(pDoor->yEnd + 1) - gSamusData.yPosition - ONE_SUB_PIXEL;
     }
 
     ColorFadingStart(COLOR_FADING_NO_TRANSITION);

@@ -122,7 +122,7 @@ void DemoInit(void)
             break;
 
         case 11:
-            write32(&gMinimapTilesWithObtainedItems[AREA_BRINSTAR * MINIMAP_SIZE + 15], 1);
+            write32(&gMinimapTilesWithObtainedItems[AREA_BRINSTAR][15], 1);
             break;
     }
 

@@ -2,6 +2,7 @@
 #define STATUS_SCREEN_MENU_STRUCT_H
 
 #include "types.h"
+#include "macros.h"
 
 struct StatusScreenItemData {
     u8 group;
@@ -17,7 +18,7 @@ struct StatusScreenItemAcquisitionData {
     u8 statusSlot;
 };
 
-struct __attribute__((packed)) StatusScreenGroupPositions {
+struct PACKED StatusScreenGroupPositions {
     u8 top;
     u8 bottom;
     u8 left;

@@ -199,8 +199,7 @@ void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
     }while(0);
     gLastAreaNameVisited.mapY = --yPosition;
 
-    //pMap = &gDecompressedMinimapData[actualX + actualY * MINIMAP_SIZE];
-    pMap = &((u16*)(0x02034800))[actualX + actualY * MINIMAP_SIZE];
+    pMap = &gDecompressedMinimapData[actualX + actualY * MINIMAP_SIZE];
 
     offset = area * MINIMAP_SIZE + actualY;
 
@@ -549,9 +548,9 @@ void MinimapCheckOnTransition(void)
 
         // Get new minimap
         gAreaBeforeTransition = gCurrentArea;
-        PauseScreenGetMinimapData(gAreaBeforeTransition, gDecompressedMinimapData); // Undefined
+        PauseScreenGetMinimapData(gAreaBeforeTransition, gDecompressedMinimapData);
 
-        DMA_SET(3, gDecompressedMinimapData, gDecompressedMinimapVisitedTiles, C_32_2_16(DMA_ENABLE, MINIMAP_SIZE * MINIMAP_SIZE));
+        DMA_SET(3, gDecompressedMinimapData, gDecompressedMinimapVisitedTiles, C_32_2_16(DMA_ENABLE, sizeof(gDecompressedMinimapData) / 2));
 
         MinimapCheckSetAreaNameAsExplored(TRUE);
         MinimapSetDownloadedTiles(gAreaBeforeTransition, gDecompressedMinimapVisitedTiles);
@@ -597,13 +596,11 @@ void MinimapUpdateForExploredTiles(void)
         return;
 
     offset = gMinimapX + gMinimapY * MINIMAP_SIZE;
-    // FIXME use symbol
-    tiles = (u16*)0x2034000 + offset; // gDecompressedMinimapVisitedTiles
+    tiles = &gDecompressedMinimapVisitedTiles[offset];
     
     if (!(*tiles & 0xF000))
     {
-        // FIXME use symbol
-        map = (u16*)0x2034800 + offset; // gDecompressedMinimapData
+        map = &gDecompressedMinimapData[offset];
         if (*map & 0xF000)
             *tiles = *map;
         else
@@ -644,9 +641,8 @@ void MinimapDraw(void)
     if (gUpdateMinimapFlag == MINIMAP_UPDATE_FLAG_NONE)
         return;
 
-    // FIXME use symbols
-    src = (u16*)0x2034000; // gDecompressedMinimapVisitedTiles
-    dst = (u32*)0x2037e20 + (gUpdateMinimapFlag - 1) * 24; // gMinimapTilesGfx
+    src = gDecompressedMinimapVisitedTiles;
+    dst = (u32*)gMinimapTilesGfx + (gUpdateMinimapFlag - 1) * 24;
 
     if (gUpdateMinimapFlag == MINIMAP_UPDATE_FLAG_LOWER_LINE)
         yOffset = 1;
@@ -885,8 +881,7 @@ void MinimapSetTilesWithObtainedItems(u8 area, u16* dst)
     if (area >= MAX_AMOUNT_OF_AREAS)
         return;
 
-    // 0x2033800 = gMinimapTilesWithObtainedItems
-    src = (u32*)(0x2033800 + area * 512 / 4);
+    src = gMinimapTilesWithObtainedItems[area];
 
     for (i = 0; i < MINIMAP_SIZE; i++, src++)
     {
@@ -975,8 +970,6 @@ void MinimapUpdateForCollectedItem(u8 xPosition, u8 yPosition)
 {
     u32 itemX;
     u32 itemY;
-    u32 offset;
-    u32 offset2;
     u32* ptr;
     u16* ptrU;
 
@@ -985,18 +978,15 @@ void MinimapUpdateForCollectedItem(u8 xPosition, u8 yPosition)
         itemX = (xPosition - SCREEN_X_PADDING) / SCREEN_SIZE_X_BLOCKS + gCurrentRoomEntry.mapX;
         itemY = (yPosition - SCREEN_Y_PADDING) / SCREEN_SIZE_Y_BLOCKS + gCurrentRoomEntry.mapY;
 
-        offset = gCurrentArea * MINIMAP_SIZE;
-        // FIXME use symbol
-        ptr = (u32*)(0x2033800) + offset; // gMinimapTilesWithObtainedItems
+        ptr = gMinimapTilesWithObtainedItems[gCurrentArea];
         ptr[itemY] |= sExploredMinimapBitFlags[itemX];
 
-        
         itemX += itemY * MINIMAP_SIZE;
-        // FIXME use symbol
-        ptrU = (u16*)0x2034000; // gDecompressedMinimapVisitedTiles
+
+        ptrU = gDecompressedMinimapVisitedTiles;
         ptrU[itemX]++;
-        // FIXME use symbol
-        ptrU = (u16*)0x2034800; // gDecompressedMinimapData
+
+        ptrU = gDecompressedMinimapData;
         ptrU[itemX]++;
 
         gUpdateMinimapFlag = MINIMAP_UPDATE_FLAG_LOWER_LINE;
@@ -1045,14 +1035,12 @@ void MinimapLoadTilesWithObtainedItems(void)
     u32 xOffset;
     u32 yOffset;
 
-    // FIXME use symbol
-    BitFill(3, 0, (void*)0x2033800, sizeof(gMinimapTilesWithObtainedItems), 16);
+    BitFill(3, 0, gMinimapTilesWithObtainedItems, sizeof(gMinimapTilesWithObtainedItems) * 2, 16);
 
     for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
     {
-        // FIXME use symbol
-        pItem = ((struct ItemInfo*)0x2036c00 + i * MAX_AMOUNT_OF_ITEMS_PER_AREA); // gItemsCollected
-        pTiles = ((u32*)0x2033800 + i * MINIMAP_SIZE); // gMinimapTilesWithObtainedItems
+        pItem = gItemsCollected[i];
+        pTiles = gMinimapTilesWithObtainedItems[i];
 
         for (j = 0; j < MINIMAP_SIZE * 2; j++, pItem++)
         {
@@ -1099,9 +1087,8 @@ void MinimapUpdateChunk(u8 event)
 
     i = sBossIcons[i][3] * MINIMAP_SIZE + sBossIcons[i][2];
 
-    // FIXME use symbol
-    pMinimap = (u16*)0x2034800 + i; // gDecompressedMinimapData
-    pVisited = (u16*)0x2034000 + i; // gDecompressedMinimapVisitedTiles
+    pMinimap = &gDecompressedMinimapData[i];
+    pVisited = &gDecompressedMinimapVisitedTiles[i];
 
     if (gCurrentArea == AREA_CRATERIA)
     {

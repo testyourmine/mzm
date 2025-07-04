@@ -476,67 +476,67 @@ const struct StatusScreenGroupPositions sStatusScreenUnknownItemsPositions[10] =
         .group = ABILITY_GROUP_BEAMS
     },
     [ABILITY_GROUP_BOMBS] = {
-            .top = 20,
-            .bottom = 24,
-            .left = 8,
-            .right = 19,
-            .group = ABILITY_GROUP_BOMBS
+        .top = 20,
+        .bottom = 24,
+        .left = 8,
+        .right = 19,
+        .group = ABILITY_GROUP_BOMBS
     },
     [ABILITY_GROUP_SUITS] = {
-            .top = 25,
-            .bottom = 27,
-            .left = 10,
-            .right = 19,
-            .group = ABILITY_GROUP_SUITS
+        .top = 25,
+        .bottom = 27,
+        .left = 10,
+        .right = 19,
+        .group = ABILITY_GROUP_SUITS
     },
     [ABILITY_GROUP_MISC] = {
-            .top = 24,
-            .bottom = 31,
-            .left = 20,
-            .right = 29,
-            .group = ABILITY_GROUP_MISC
+        .top = 24,
+        .bottom = 31,
+        .left = 20,
+        .right = 29,
+        .group = ABILITY_GROUP_MISC
     },
     [ABILITY_GROUP_MISSILES] = {
-            .top = 26,
-            .bottom = 31,
-            .left = 0,
-            .right = 8,
-            .group = ABILITY_GROUP_MISSILES
+        .top = 26,
+        .bottom = 31,
+        .left = 0,
+        .right = 8,
+        .group = ABILITY_GROUP_MISSILES
     },
     [ABILITY_GROUP_CURRENT_ENERGY] = {
-            .top = 0,
-            .bottom = 0,
-            .left = 0,
-            .right = 0,
-            .group = 0
+        .top = 0,
+        .bottom = 0,
+        .left = 0,
+        .right = 0,
+        .group = 0
     },
     [ABILITY_GROUP_MAX_ENERGY] = {
-            .top = 0,
-            .bottom = 0,
-            .left = 0,
-            .right = 0,
-            .group = 0
+        .top = 0,
+        .bottom = 0,
+        .left = 0,
+        .right = 0,
+        .group = 0
     },
     [ABILITY_GROUP_CURRENT_MISSILES] = {
-            .top = 0,
-            .bottom = 0,
-            .left = 0,
-            .right = 0,
-            .group = 0
+        .top = 0,
+        .bottom = 0,
+        .left = 0,
+        .right = 0,
+        .group = 0
     },
     [ABILITY_GROUP_MAX_MISSILES] = {
-            .top = 0,
-            .bottom = 0,
-            .left = 0,
-            .right = 0,
-            .group = 0
+        .top = 0,
+        .bottom = 0,
+        .left = 0,
+        .right = 0,
+        .group = 0
     },
     [ABILITY_GROUP_CURRENT_SUPER_MISSILES] = {
-            .top = 0,
-            .bottom = 0,
-            .left = 0,
-            .right = 0,
-            .group = 0
+        .top = 0,
+        .bottom = 0,
+        .left = 0,
+        .right = 0,
+        .group = 0
     }
 };
 

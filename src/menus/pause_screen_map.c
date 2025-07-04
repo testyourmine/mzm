@@ -316,9 +316,8 @@ void PauseScreenInitMapDownload(void)
                 *ptr_2 = 0xC0;
         }
     
-        // 0x2034000 is gDecompressedMinimapVisitedTiles, direct address is required to match
-        DMA_SET(3, 0x2034000, VRAM_BASE + 0xE000,
-            C_32_2_16(DMA_ENABLE, ARRAY_SIZE(gDecompressedMinimapVisitedTiles)));
+        DMA_SET(3, gDecompressedMinimapVisitedTiles, VRAM_BASE + 0xE000,
+            C_32_2_16(DMA_ENABLE, sizeof(gDecompressedMinimapVisitedTiles) / 2));
     }
 }
 
