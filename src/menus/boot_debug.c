@@ -440,10 +440,11 @@ void BootDebugWriteSram(u8 selectSaveFile)
 
     pSave = &gSram.bootDebugSave;
     dst = pSave->zeroSaveText;
-    DmaTransfer(3, &sZeroSaveText, dst, 8, 8);
+    DmaTransfer(3, &sZeroSaveText, dst, ARRAY_SIZE(sZeroSaveText), 8);
     pSave->debugMode = gDebugMode;
 
-    if (selectSaveFile) {
+    if (selectSaveFile)
+    {
         if (gMostRecentSaveFile == 0)
             pSave->sectionIndex = BOOT_DEBUG_SECTION_SAVE_A;
         else if (gMostRecentSaveFile == 1)
