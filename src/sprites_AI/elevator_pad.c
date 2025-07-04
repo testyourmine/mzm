@@ -35,7 +35,7 @@ void ElevatorPad(void)
         gCurrentSprite.hitboxLeft = -PIXEL_SIZE;
         gCurrentSprite.hitboxRight = PIXEL_SIZE;
 
-        gCurrentSprite.pOam = sElevatorPadOAM_Idle;
+        gCurrentSprite.pOam = sElevatorPadOam_Idle;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }
@@ -46,20 +46,20 @@ void ElevatorPad(void)
         gCurrentSprite.yPosition = gSamusData.yPosition;
         gCurrentSprite.xPosition = gSamusData.xPosition;
 
-        if (gCurrentSprite.pOam == sElevatorPadOAM_Idle)
+        if (gCurrentSprite.pOam == sElevatorPadOam_Idle)
         {
             // Set moving
-            gCurrentSprite.pOam = sElevatorPadOAM_Moving;
+            gCurrentSprite.pOam = sElevatorPadOam_Moving;
             gCurrentSprite.animationDurationCounter = 0;
             gCurrentSprite.currentAnimationFrame = 0;
         }
     }
     else
     {
-        if (gCurrentSprite.pOam == sElevatorPadOAM_Moving)
+        if (gCurrentSprite.pOam == sElevatorPadOam_Moving)
         {
             // Set idle
-            gCurrentSprite.pOam = sElevatorPadOAM_Idle;
+            gCurrentSprite.pOam = sElevatorPadOam_Idle;
             gCurrentSprite.animationDurationCounter = 0;
             gCurrentSprite.currentAnimationFrame = 0;
         }

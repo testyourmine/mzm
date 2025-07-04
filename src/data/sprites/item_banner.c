@@ -4,33 +4,33 @@
 const u32 sItemBannerGfx[139] = INCBIN_U32("data/sprites/ItemBanner.gfx.lz");
 const u16 sItemBannerPal[32] = INCBIN_U16("data/sprites/ItemBanner.pal");
 
-const u16 sSaveYesNoCursorOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sSaveYesNoCursorOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sSaveYesNoCursorOam_Idle_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sSaveYesNoCursorOam_Idle_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fd, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sSaveYesNoCursorOam_Idle_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sSaveYesNoCursorOam_Idle_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fe, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x1f8, OBJ_SPRITE_OAM | 0x25c
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1e8, OBJ_SPRITE_OAM | 0x25c,
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x8, OBJ_SPRITE_OAM | 0x25c
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame2[OAM_DATA_SIZE(4)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1c8, OBJ_SPRITE_OAM | 0x25c,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1e8, OBJ_SPRITE_OAM | 0x25c,
@@ -38,7 +38,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame2[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x28, OBJ_SPRITE_OAM | 0x25c
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame3[OAM_DATA_SIZE(6)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame3[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1a8, OBJ_SPRITE_OAM | 0x25c,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1c8, OBJ_SPRITE_OAM | 0x25c,
@@ -48,7 +48,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame3[OAM_DATA_SIZE(6)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x48, OBJ_SPRITE_OAM | 0x25c
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame4[OAM_DATA_SIZE(8)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame4[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x188, OBJ_SPRITE_OAM | 0x25c,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1a8, OBJ_SPRITE_OAM | 0x25c,
@@ -60,7 +60,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame4[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x68, OBJ_SPRITE_OAM | 0x25c
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame5[OAM_DATA_SIZE(16)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame5[OAM_DATA_SIZE(16)] = {
     0x10,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x188, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_SIZE_32x8 | 0x190, OBJ_SPRITE_OAM | 0x200,
@@ -80,7 +80,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame5[OAM_DATA_SIZE(16)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21f
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame6[OAM_DATA_SIZE(16)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame6[OAM_DATA_SIZE(16)] = {
     0x10,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x188, OBJ_SPRITE_OAM | 0x21c,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x8 | 0x190, OBJ_SPRITE_OAM | 0x200,
@@ -100,7 +100,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame6[OAM_DATA_SIZE(16)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21c
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame7[OAM_DATA_SIZE(20)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame7[OAM_DATA_SIZE(20)] = {
     0x14,
     0xf6, 0x188, OBJ_SPRITE_OAM | 0x21c,
     0x2, 0x188, OBJ_SPRITE_OAM | 0x23c,
@@ -124,7 +124,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame7[OAM_DATA_SIZE(20)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame8[OAM_DATA_SIZE(20)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame8[OAM_DATA_SIZE(20)] = {
     0x14,
     0xf4, 0x188, OBJ_SPRITE_OAM | 0x21c,
     0x4, 0x188, OBJ_SPRITE_OAM | 0x23c,
@@ -148,7 +148,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame8[OAM_DATA_SIZE(20)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sItemBannerOam_TwoLinesSpawn_Frame9[OAM_DATA_SIZE(20)] = {
+static const u16 sItemBannerOam_TwoLinesSpawn_Frame9[OAM_DATA_SIZE(20)] = {
     0x14,
     0xf2, 0x188, OBJ_SPRITE_OAM | 0x21c,
     0x6, 0x188, OBJ_SPRITE_OAM | 0x23c,
@@ -172,7 +172,7 @@ const u16 sItemBannerOam_TwoLinesSpawn_Frame9[OAM_DATA_SIZE(20)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sItemBannerOam_TwoLinesStatic_Frame0[OAM_DATA_SIZE(10)] = {
+static const u16 sItemBannerOam_TwoLinesStatic_Frame0[OAM_DATA_SIZE(10)] = {
     0xa,
     0xf0, 0x188, OBJ_SPRITE_OAM | 0x21c,
     0x8, 0x188, OBJ_SPRITE_OAM | 0x23c,
@@ -186,7 +186,7 @@ const u16 sItemBannerOam_TwoLinesStatic_Frame0[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21d
 };
 
-const u16 sItemBannerOam_OneLineSpawn_Frame5[OAM_DATA_SIZE(8)] = {
+static const u16 sItemBannerOam_OneLineSpawn_Frame5[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x188, OBJ_SPRITE_OAM | 0x27c,
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_SIZE_32x8 | 0x1a8, OBJ_SPRITE_OAM | 0x27c,
@@ -198,7 +198,7 @@ const u16 sItemBannerOam_OneLineSpawn_Frame5[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, 0x68, OBJ_SPRITE_OAM | 0x27c
 };
 
-const u16 sItemBannerOam_OneLineSpawn_Frame6[OAM_DATA_SIZE(18)] = {
+static const u16 sItemBannerOam_OneLineSpawn_Frame6[OAM_DATA_SIZE(18)] = {
     0x12,
     0xfa, 0x188, OBJ_SPRITE_OAM | 0x21f,
     0xfa, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21f,
@@ -220,7 +220,7 @@ const u16 sItemBannerOam_OneLineSpawn_Frame6[OAM_DATA_SIZE(18)] = {
     0xfe, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x23f
 };
 
-const u16 sItemBannerOam_OneLineSpawn_Frame7[OAM_DATA_SIZE(16)] = {
+static const u16 sItemBannerOam_OneLineSpawn_Frame7[OAM_DATA_SIZE(16)] = {
     0x10,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x188, OBJ_SPRITE_OAM | 0x21f,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_SIZE_32x8 | 0x190, OBJ_SPRITE_OAM | 0x200,
@@ -240,7 +240,7 @@ const u16 sItemBannerOam_OneLineSpawn_Frame7[OAM_DATA_SIZE(16)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_X_FLIP | 0x70, OBJ_SPRITE_OAM | 0x21f
 };
 
-const u16 sItemBannerOam_OneLineStatic_Frame0[OAM_DATA_SIZE(16)] = {
+static const u16 sItemBannerOam_OneLineStatic_Frame0[OAM_DATA_SIZE(16)] = {
     0x10,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x188, OBJ_SPRITE_OAM | 0x21c,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x8 | 0x190, OBJ_SPRITE_OAM | 0x200,

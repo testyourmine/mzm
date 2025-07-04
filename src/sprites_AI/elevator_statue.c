@@ -485,7 +485,7 @@ void ElevatorStatueDebris(void)
                 gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE);
                 gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 5);
 
-                gCurrentSprite.pOam = sElevatorStatueDebrisOAM_Dust;
+                gCurrentSprite.pOam = sElevatorStatueDebrisOam_Dust;
             }
             else
             {
@@ -496,9 +496,9 @@ void ElevatorStatueDebris(void)
                 gCurrentSprite.drawDistanceHorizontal = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 2);
 
                 if (gCurrentSprite.roomSlot == ELEVATOR_STATUE_DEBRIS_PART_KRAID)
-                    gCurrentSprite.pOam = sElevatorStatueDebrisOAM_Kraid;
+                    gCurrentSprite.pOam = sElevatorStatueDebrisOam_Kraid;
                 else
-                    gCurrentSprite.pOam = sElevatorStatueDebrisOAM_Ridley;
+                    gCurrentSprite.pOam = sElevatorStatueDebrisOam_Ridley;
             }
             break;
 

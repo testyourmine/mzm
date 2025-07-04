@@ -718,7 +718,7 @@ static void AtomicElectricityInit(void)
     gCurrentSprite.hitboxLeft = -PIXEL_SIZE;
     gCurrentSprite.hitboxRight = PIXEL_SIZE;
 
-    gCurrentSprite.pOam = sAtomicElectricityOAM_Charging;
+    gCurrentSprite.pOam = sAtomicElectricityOam_Charging;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
@@ -782,7 +782,7 @@ static void AtomicElectricitySpawn(void)
     if ((spriteY + BLOCK_SIZE) > samusY && (spriteY - BLOCK_SIZE) < samusY)
     {
         // Shooting horizontally
-        gCurrentSprite.pOam = sAtomicElectricityOAM_MovingHorizontal;
+        gCurrentSprite.pOam = sAtomicElectricityOam_MovingHorizontal;
         gCurrentSprite.ATOMIC_ELECTRICITY_DIRECTION = ATOMIC_DIRECTION_HORIZONTAL;
         gCurrentSprite.hitboxTop = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
         gCurrentSprite.hitboxBottom = HALF_BLOCK_SIZE - PIXEL_SIZE;
@@ -801,7 +801,7 @@ static void AtomicElectricitySpawn(void)
     else if ((spriteX + BLOCK_SIZE) > samusX && (spriteX - BLOCK_SIZE) < samusX)
     {
         // Shooting vertically
-        gCurrentSprite.pOam = sAtomicElectricityOAM_MovingVertical;
+        gCurrentSprite.pOam = sAtomicElectricityOam_MovingVertical;
         gCurrentSprite.ATOMIC_ELECTRICITY_DIRECTION = ATOMIC_DIRECTION_VERTICAL;
         gCurrentSprite.hitboxLeft = -(HALF_BLOCK_SIZE - PIXEL_SIZE);
         gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE - PIXEL_SIZE;
@@ -820,7 +820,7 @@ static void AtomicElectricitySpawn(void)
     else
     {
         // Shooting diagonally
-        gCurrentSprite.pOam = sAtomicElectricityOAM_MovingDiagonal;
+        gCurrentSprite.pOam = sAtomicElectricityOam_MovingDiagonal;
         gCurrentSprite.ATOMIC_ELECTRICITY_DIRECTION = ATOMIC_DIRECTION_DIAGONAL;
 
         if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
@@ -892,9 +892,9 @@ static void AtomicElectricityMove(void)
         gCurrentSprite.currentAnimationFrame = 0;
 
         if (gCurrentSprite.ATOMIC_ELECTRICITY_DIRECTION != ATOMIC_DIRECTION_DIAGONAL)
-            gCurrentSprite.pOam = sAtomicElectricityOAM_ExplodingNonDiagonal;
+            gCurrentSprite.pOam = sAtomicElectricityOam_ExplodingNonDiagonal;
         else
-            gCurrentSprite.pOam = sAtomicElectricityOAM_ExplodingDiagonal;
+            gCurrentSprite.pOam = sAtomicElectricityOam_ExplodingDiagonal;
 
         SoundPlay(SOUND_ATOMIC_ELECTRICITY_EXPLODING);
     }
@@ -917,7 +917,7 @@ static void AtomicElectricityExploding(void)
         gCurrentSprite.hitboxLeft = -QUARTER_BLOCK_SIZE;
         gCurrentSprite.hitboxRight = QUARTER_BLOCK_SIZE;
         gCurrentSprite.samusCollision = SSC_HURTS_SAMUS;
-        gCurrentSprite.pOam = sAtomicElectricityOAM_Charging;
+        gCurrentSprite.pOam = sAtomicElectricityOam_Charging;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }

@@ -100,7 +100,7 @@ static void DessgeegaInit(void)
     gCurrentSprite.hitboxLeft = -BLOCK_SIZE;
     gCurrentSprite.hitboxRight = BLOCK_SIZE;
 
-    gCurrentSprite.pOam = sDessgeegaOAM_Idle;
+    gCurrentSprite.pOam = sDessGeegaOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
@@ -118,7 +118,7 @@ static void DessgeegaJumpWarningInit(void)
     gCurrentSprite.pose = DESSGEEGA_POSE_JUMP_WARNING;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
-    gCurrentSprite.pOam = sDessgeegaOAM_JumpWarning;
+    gCurrentSprite.pOam = sDessGeegaOam_JumpWarning;
 }
 
 /**
@@ -131,7 +131,7 @@ static void DessgeegaJumpingInit(void)
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.work3 = 0;
-    gCurrentSprite.pOam = sDessgeegaOAM_Jumping;
+    gCurrentSprite.pOam = sDessGeegaOam_Jumping;
 
     // Set high or low jump depending on RNG
     if (MOD_AND(gSpriteRng, 2) != 0)
@@ -152,7 +152,7 @@ static void DessgeegaLandingInit(void)
     gCurrentSprite.pose = DESSGEEGA_POSE_LANDING;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
-    gCurrentSprite.pOam = sDessgeegaOAM_Landing;
+    gCurrentSprite.pOam = sDessGeegaOam_Landing;
 
     if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
         SoundPlayNotAlreadyPlaying(SOUND_DESSGEEGA_LANDING);
@@ -177,10 +177,10 @@ static void DessgeegaIdleInit(void)
 
         // Set screaming or idle
         if (gSpriteRng >= 8)
-            gCurrentSprite.pOam = sDessgeegaOAM_Idle;
+            gCurrentSprite.pOam = sDessGeegaOam_Idle;
         else
         {
-            gCurrentSprite.pOam = sDessgeegaOAM_Screaming;
+            gCurrentSprite.pOam = sDessGeegaOam_Screaming;
             if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
                 SoundPlayNotAlreadyPlaying(SOUND_DESSGEEGA_SCREAMING);
         }
@@ -197,7 +197,7 @@ static void DessgeegaFallingInit(void)
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.work3 = 0;
-    gCurrentSprite.pOam = sDessgeegaOAM_Jumping; // Use same animation as jumping
+    gCurrentSprite.pOam = sDessGeegaOam_Jumping; // Use same animation as jumping
 }
 
 /**
@@ -629,7 +629,7 @@ static void DessgeegaIdleGround(void)
                 DessgeegaJumpWarningInit();
             else
             {
-                if (gCurrentSprite.pOam == sDessgeegaOAM_Screaming && gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
+                if (gCurrentSprite.pOam == sDessGeegaOam_Screaming && gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
                     SoundPlayNotAlreadyPlaying(SOUND_DESSGEEGA_SCREAMING);
             }
         }
@@ -652,7 +652,7 @@ static void DessgeegaIdleCeiling(void)
                 DessgeegaJumpWarningInit();
             else
             {
-                if (gCurrentSprite.pOam == sDessgeegaOAM_Screaming && gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
+                if (gCurrentSprite.pOam == sDessGeegaOam_Screaming && gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
                     SoundPlayNotAlreadyPlaying(SOUND_DESSGEEGA_SCREAMING);
             }
         }
@@ -699,7 +699,7 @@ static void DessgeegaLongBeamDetectSamus(void)
         SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE * 12, BLOCK_SIZE * 4 - QUARTER_BLOCK_SIZE) != NSLR_OUT_OF_RANGE)
     {
         gCurrentSprite.pose = DESSGEEGA_POSE_LONG_BEAM_SPAWNING;
-        gCurrentSprite.pOam = sDessgeegaOAM_Jumping;
+        gCurrentSprite.pOam = sDessGeegaOam_Jumping;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
         gCurrentSprite.work3 = FALSE;

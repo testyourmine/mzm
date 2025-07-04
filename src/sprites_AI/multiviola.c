@@ -29,7 +29,7 @@ static void MultiviolaInit(void)
     gCurrentSprite.hitboxLeft = -HALF_BLOCK_SIZE;
     gCurrentSprite.hitboxRight = HALF_BLOCK_SIZE;
 
-    gCurrentSprite.pOam = sMultiviolaOAM_Moving;
+    gCurrentSprite.pOam = sMultiviolaOam_Moving;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = gCurrentSprite.primarySpriteRamSlot * 2;
 

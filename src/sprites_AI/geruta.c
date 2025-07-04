@@ -106,7 +106,7 @@ static void GerutaInit(void)
     gCurrentSprite.hitboxLeft = -THREE_QUARTER_BLOCK_SIZE;
     gCurrentSprite.hitboxRight = THREE_QUARTER_BLOCK_SIZE;
 
-    gCurrentSprite.pOam = sGerutaOAM_Idle;
+    gCurrentSprite.pOam = sGerutaOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
@@ -126,7 +126,7 @@ static void GerutaIdleInit(void)
 
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
-    gCurrentSprite.pOam = sGerutaOAM_Idle;
+    gCurrentSprite.pOam = sGerutaOam_Idle;
 }
 
 /**
@@ -162,7 +162,7 @@ static void GerutaWarningInit(void)
     gCurrentSprite.pose = GERUTA_POSE_WARNING;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
-    gCurrentSprite.pOam = sGerutaOAM_Warning;
+    gCurrentSprite.pOam = sGerutaOam_Warning;
 
     if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
         SoundPlay(SOUND_GERUTA_WARNING);
@@ -179,7 +179,7 @@ static void GerutaCheckWarningEnded(void)
         gCurrentSprite.pose = GERUTA_POSE_LAUNCHING;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sGerutaOAM_Launching;
+        gCurrentSprite.pOam = sGerutaOam_Launching;
     }
 }
 
@@ -194,7 +194,7 @@ static void GerutaCheckLaunchingAnimEnded(void)
         gCurrentSprite.pose = GERUTA_POSE_GOING_DOWN;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sGerutaOAM_GoingDown;
+        gCurrentSprite.pOam = sGerutaOam_GoingDown;
         gCurrentSprite.status |= SPRITE_STATUS_SAMUS_COLLIDING;
 
         SpriteUtilMakeSpriteFaceSamusDirection();
@@ -219,7 +219,7 @@ static void GerutaGoingDown(void)
         gCurrentSprite.pose = GERUTA_POSE_BOUNCING;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sGerutaOAM_Bouncing;
+        gCurrentSprite.pOam = sGerutaOam_Bouncing;
     }
 
     SpriteUtilCheckInRoomEffect(oldY, gCurrentSprite.yPosition, gCurrentSprite.xPosition, SPLASH_BIG);
@@ -237,7 +237,7 @@ static void GerutaCheckBouncingAnimEnded(void)
 
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sGerutaOAM_GoingUp;
+        gCurrentSprite.pOam = sGerutaOam_GoingUp;
 
         gCurrentSprite.status &= ~SPRITE_STATUS_SAMUS_COLLIDING;
         if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN)
@@ -260,7 +260,7 @@ static void GerutaGoingUp(void)
 
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pOam = sGerutaOAM_BouncingOnCeiling;
+        gCurrentSprite.pOam = sGerutaOam_BouncingOnCeiling;
     }
 }
 

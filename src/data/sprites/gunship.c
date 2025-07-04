@@ -24,7 +24,7 @@ const u32 sGunshipGfx[1027] = INCBIN_U32("data/sprites/Gunship.gfx.lz");
 const u16 sGunshipPal[48] = INCBIN_U16("data/sprites/Gunship.pal");
 const u16 sGunshipFlashingPal[8 * 16] = INCBIN_U16("data/sprites/GunshipFlashingPal.pal");
 
-const u16 sGunshipOam_Idle_Frame0[OAM_DATA_SIZE(17)] = {
+static const u16 sGunshipOam_Idle_Frame0[OAM_DATA_SIZE(17)] = {
     0x11,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1300,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1301,
@@ -45,7 +45,7 @@ const u16 sGunshipOam_Idle_Frame0[OAM_DATA_SIZE(17)] = {
     0xcb, OBJ_X_FLIP | OBJ_SIZE_64x64 | 0x0, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sGunshipOam_Idle_Frame1[OAM_DATA_SIZE(17)] = {
+static const u16 sGunshipOam_Idle_Frame1[OAM_DATA_SIZE(17)] = {
     0x11,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1340,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1341,
@@ -66,7 +66,7 @@ const u16 sGunshipOam_Idle_Frame1[OAM_DATA_SIZE(17)] = {
     0xcb, OBJ_X_FLIP | OBJ_SIZE_64x64 | 0x0, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sGunshipOam_Idle_Frame2[OAM_DATA_SIZE(17)] = {
+static const u16 sGunshipOam_Idle_Frame2[OAM_DATA_SIZE(17)] = {
     0x11,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1307,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1308,
@@ -87,7 +87,7 @@ const u16 sGunshipOam_Idle_Frame2[OAM_DATA_SIZE(17)] = {
     0xcb, OBJ_X_FLIP | OBJ_SIZE_64x64 | 0x0, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sGunshipOam_Idle_Frame3[OAM_DATA_SIZE(17)] = {
+static const u16 sGunshipOam_Idle_Frame3[OAM_DATA_SIZE(17)] = {
     0x11,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1347,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1348,
@@ -108,7 +108,7 @@ const u16 sGunshipOam_Idle_Frame3[OAM_DATA_SIZE(17)] = {
     0xcb, OBJ_X_FLIP | OBJ_SIZE_64x64 | 0x0, OBJ_SPRITE_OAM | 0x208
 };
 
-const u16 sGunshipPartOam_EntranceFrontClosed_Frame0[OAM_DATA_SIZE(4)] = {
+static const u16 sGunshipPartOam_EntranceFrontClosed_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xd0, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x210,
     0xd0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x210,
@@ -116,7 +116,7 @@ const u16 sGunshipPartOam_EntranceFrontClosed_Frame0[OAM_DATA_SIZE(4)] = {
     0xcf, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0xe, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpening_Frame0[OAM_DATA_SIZE(4)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpening_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xd0, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x210,
     0xd0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x210,
@@ -124,7 +124,7 @@ const u16 sGunshipPartOam_EntranceFrontOpening_Frame0[OAM_DATA_SIZE(4)] = {
     0xce, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0xf, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpening_Frame1[OAM_DATA_SIZE(4)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpening_Frame1[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xd0, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x210,
     0xd0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x210,
@@ -132,7 +132,7 @@ const u16 sGunshipPartOam_EntranceFrontOpening_Frame1[OAM_DATA_SIZE(4)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpening_Frame2[OAM_DATA_SIZE(4)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpening_Frame2[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xd0, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x210,
     0xd0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x210,
@@ -140,7 +140,7 @@ const u16 sGunshipPartOam_EntranceFrontOpening_Frame2[OAM_DATA_SIZE(4)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x11, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpening_Frame3[OAM_DATA_SIZE(4)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpening_Frame3[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xd0, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x210,
     0xd0, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x210,
@@ -148,7 +148,7 @@ const u16 sGunshipPartOam_EntranceFrontOpening_Frame3[OAM_DATA_SIZE(4)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x13, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpened_Frame0[OAM_DATA_SIZE(6)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpened_Frame0[OAM_DATA_SIZE(6)] = {
     0x6,
     0xd2, 0x1e6, OBJ_SPRITE_OAM | 0x121a,
     0xd2, OBJ_X_FLIP | 0x12, OBJ_SPRITE_OAM | 0x121a,
@@ -158,7 +158,7 @@ const u16 sGunshipPartOam_EntranceFrontOpened_Frame0[OAM_DATA_SIZE(6)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpened_Frame1[OAM_DATA_SIZE(6)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpened_Frame1[OAM_DATA_SIZE(6)] = {
     0x6,
     0xd2, 0x1e6, OBJ_SPRITE_OAM | 0x123a,
     0xd2, OBJ_X_FLIP | 0x12, OBJ_SPRITE_OAM | 0x123a,
@@ -168,7 +168,7 @@ const u16 sGunshipPartOam_EntranceFrontOpened_Frame1[OAM_DATA_SIZE(6)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpened_Frame2[OAM_DATA_SIZE(6)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpened_Frame2[OAM_DATA_SIZE(6)] = {
     0x6,
     0xd2, 0x1e6, OBJ_SPRITE_OAM | 0x125a,
     0xd2, OBJ_X_FLIP | 0x12, OBJ_SPRITE_OAM | 0x125a,
@@ -178,7 +178,7 @@ const u16 sGunshipPartOam_EntranceFrontOpened_Frame2[OAM_DATA_SIZE(6)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceFrontOpened_Frame3[OAM_DATA_SIZE(6)] = {
+static const u16 sGunshipPartOam_EntranceFrontOpened_Frame3[OAM_DATA_SIZE(6)] = {
     0x6,
     0xd2, 0x1e6, OBJ_SPRITE_OAM | 0x127a,
     0xd2, OBJ_X_FLIP | 0x12, OBJ_SPRITE_OAM | 0x127a,
@@ -188,7 +188,7 @@ const u16 sGunshipPartOam_EntranceFrontOpened_Frame3[OAM_DATA_SIZE(6)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x12, OBJ_SPRITE_OAM | 0x206
 };
 
-const u16 sGunshipPartOam_EntranceBackCLosed_Frame0[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackCLosed_Frame0[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xcb, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x290,
     0xcb, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x290,
@@ -197,7 +197,7 @@ const u16 sGunshipPartOam_EntranceBackCLosed_Frame0[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame0[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame0[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xca, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x290,
     0xca, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x290,
@@ -206,7 +206,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame0[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame1[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame1[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc8, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x290,
     0xc8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x290,
@@ -215,7 +215,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame1[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame2[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame2[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc6, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x290,
     0xc6, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x290,
@@ -224,7 +224,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame2[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame3[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame3[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc4, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x290,
     0xc4, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x290,
@@ -233,7 +233,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame3[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame4[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame4[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc5, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x290,
     0xc5, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x290,
@@ -242,7 +242,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame4[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame5[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame5[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc3, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x2d0,
     0xc3, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x2d0,
@@ -251,7 +251,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame5[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame6[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame6[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc3, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x214,
     0xc3, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x214,
@@ -260,7 +260,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame6[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpening_Frame7[OAM_DATA_SIZE(5)] = {
+static const u16 sGunshipPartOam_EntranceBackOpening_Frame7[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xc4, OBJ_SIZE_32x16 | 0x1e8, OBJ_SPRITE_OAM | 0x254,
     0xc4, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x254,
@@ -269,7 +269,7 @@ const u16 sGunshipPartOam_EntranceBackOpening_Frame7[OAM_DATA_SIZE(5)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpened_Frame0[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_EntranceBackOpened_Frame0[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xc7, 0x1ef, OBJ_SPRITE_OAM | 0x1218,
     0xc7, 0x1fc, OBJ_SPRITE_OAM | 0x1219,
@@ -281,7 +281,7 @@ const u16 sGunshipPartOam_EntranceBackOpened_Frame0[OAM_DATA_SIZE(8)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpened_Frame1[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_EntranceBackOpened_Frame1[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xc7, 0x1ef, OBJ_SPRITE_OAM | 0x1238,
     0xc7, 0x1fc, OBJ_SPRITE_OAM | 0x1239,
@@ -293,7 +293,7 @@ const u16 sGunshipPartOam_EntranceBackOpened_Frame1[OAM_DATA_SIZE(8)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpened_Frame2[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_EntranceBackOpened_Frame2[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xc7, 0x1ef, OBJ_SPRITE_OAM | 0x1258,
     0xc7, 0x1fc, OBJ_SPRITE_OAM | 0x1259,
@@ -305,7 +305,7 @@ const u16 sGunshipPartOam_EntranceBackOpened_Frame2[OAM_DATA_SIZE(8)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_EntranceBackOpened_Frame3[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_EntranceBackOpened_Frame3[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xc7, 0x1ef, OBJ_SPRITE_OAM | 0x1278,
     0xc7, 0x1fc, OBJ_SPRITE_OAM | 0x1279,
@@ -317,31 +317,31 @@ const u16 sGunshipPartOam_EntranceBackOpened_Frame3[OAM_DATA_SIZE(8)] = {
     0xcd, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x10, OBJ_SPRITE_OAM | 0x2d8
 };
 
-const u16 sGunshipPartOam_Platform_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sGunshipPartOam_Platform_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xfe, 0x1f0, OBJ_SPRITE_OAM | 0x12d4,
     OBJ_SHAPE_HORIZONTAL | 0xfe, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12d4
 };
 
-const u16 sGunshipPartOam_Platform_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sGunshipPartOam_Platform_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xfe, 0x1f0, OBJ_SPRITE_OAM | 0x12f4,
     OBJ_SHAPE_HORIZONTAL | 0xfe, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12f4
 };
 
-const u16 sGunshipPartOam_Platform_Frame2[OAM_DATA_SIZE(2)] = {
+static const u16 sGunshipPartOam_Platform_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xfe, 0x1f0, OBJ_SPRITE_OAM | 0x12d6,
     OBJ_SHAPE_HORIZONTAL | 0xfe, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12d6
 };
 
-const u16 sGunshipPartOam_Platform_Frame3[OAM_DATA_SIZE(2)] = {
+static const u16 sGunshipPartOam_Platform_Frame3[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xfe, 0x1f0, OBJ_SPRITE_OAM | 0x12f6,
     OBJ_SHAPE_HORIZONTAL | 0xfe, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x12f6
 };
 
-const u16 sGunshipOam_Flying_Frame0[OAM_DATA_SIZE(27)] = {
+static const u16 sGunshipOam_Flying_Frame0[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1300,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1301,
@@ -372,7 +372,7 @@ const u16 sGunshipOam_Flying_Frame0[OAM_DATA_SIZE(27)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf3, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x0, OBJ_SPRITE_OAM | 0x2352
 };
 
-const u16 sGunshipOam_Flying_Frame1[OAM_DATA_SIZE(27)] = {
+static const u16 sGunshipOam_Flying_Frame1[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1340,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1341,
@@ -403,7 +403,7 @@ const u16 sGunshipOam_Flying_Frame1[OAM_DATA_SIZE(27)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf3, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x0, OBJ_SPRITE_OAM | 0x2352
 };
 
-const u16 sGunshipOam_Flying_Frame2[OAM_DATA_SIZE(27)] = {
+static const u16 sGunshipOam_Flying_Frame2[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1307,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1308,
@@ -434,7 +434,7 @@ const u16 sGunshipOam_Flying_Frame2[OAM_DATA_SIZE(27)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf3, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x0, OBJ_SPRITE_OAM | 0x2352
 };
 
-const u16 sGunshipOam_Flying_Frame3[OAM_DATA_SIZE(27)] = {
+static const u16 sGunshipOam_Flying_Frame3[OAM_DATA_SIZE(27)] = {
     0x1b,
     OBJ_SHAPE_VERTICAL | 0xf8, 0x18d, OBJ_SPRITE_OAM | 0x1347,
     0xf4, 0x195, OBJ_SPRITE_OAM | 0x1348,
@@ -465,7 +465,7 @@ const u16 sGunshipOam_Flying_Frame3[OAM_DATA_SIZE(27)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf3, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x0, OBJ_SPRITE_OAM | 0x2352
 };
 
-const u16 sGunshipPartOam_FlamesHorizontal_Frame0[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_FlamesHorizontal_Frame0[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xf4, OBJ_SIZE_32x16 | 0x1a8, OBJ_SPRITE_OAM | 0x1356,
     0xf4, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1c8, OBJ_SPRITE_OAM | 0x1356,
@@ -477,7 +477,7 @@ const u16 sGunshipPartOam_FlamesHorizontal_Frame0[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0x4, OBJ_X_FLIP | OBJ_Y_FLIP | 0x48, OBJ_SPRITE_OAM | 0x1356
 };
 
-const u16 sGunshipPartOam_FlamesHorizontal_Frame1[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_FlamesHorizontal_Frame1[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_HORIZONTAL | 0xf4, OBJ_SIZE_32x16 | 0x1a0, OBJ_SPRITE_OAM | 0x1316,
     OBJ_SHAPE_HORIZONTAL | 0x4, OBJ_Y_FLIP | OBJ_SIZE_32x8 | 0x1a0, OBJ_SPRITE_OAM | 0x1316,
@@ -489,12 +489,12 @@ const u16 sGunshipPartOam_FlamesHorizontal_Frame1[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_HORIZONTAL | 0x4, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_32x8 | 0x40, OBJ_SPRITE_OAM | 0x1316
 };
 
-const u16 sGunshipPartOam_FlamesHorizontal_Frame2[OAM_DATA_SIZE(1)] = {
+static const u16 sGunshipPartOam_FlamesHorizontal_Frame2[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x280
 };
 
-const u16 sGunshipPartOam_FlamesVertical_Frame0[OAM_DATA_SIZE(4)] = {
+static const u16 sGunshipPartOam_FlamesVertical_Frame0[OAM_DATA_SIZE(4)] = {
     0x4,
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_SIZE_32x16 | 0x1a2, OBJ_SPRITE_OAM | 0x12da,
     OBJ_SHAPE_HORIZONTAL | 0xf4, OBJ_SIZE_32x16 | 0x1be, OBJ_SPRITE_OAM | 0x12da,
@@ -502,7 +502,7 @@ const u16 sGunshipPartOam_FlamesVertical_Frame0[OAM_DATA_SIZE(4)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf4, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x22, OBJ_SPRITE_OAM | 0x12da
 };
 
-const u16 sGunshipPartOam_FlamesVertical_Frame1[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_FlamesVertical_Frame1[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_VERTICAL | 0xfc, OBJ_SIZE_16x32 | 0x1a6, OBJ_SPRITE_OAM | 0x131a,
     OBJ_SHAPE_VERTICAL | 0xfc, OBJ_X_FLIP | OBJ_SIZE_8x32 | 0x1b6, OBJ_SPRITE_OAM | 0x131a,
@@ -514,7 +514,7 @@ const u16 sGunshipPartOam_FlamesVertical_Frame1[OAM_DATA_SIZE(8)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, OBJ_SIZE_8x32 | 0x26, OBJ_SPRITE_OAM | 0x131a
 };
 
-const u16 sGunshipPartOam_FlamesVertical_Frame2[OAM_DATA_SIZE(8)] = {
+static const u16 sGunshipPartOam_FlamesVertical_Frame2[OAM_DATA_SIZE(8)] = {
     0x8,
     OBJ_SHAPE_VERTICAL | 0xf0, OBJ_SIZE_16x32 | 0x1aa, OBJ_SPRITE_OAM | 0x129e,
     OBJ_SHAPE_VERTICAL | 0x10, OBJ_SIZE_16x32 | 0x1aa, OBJ_SPRITE_OAM | 0x131e,

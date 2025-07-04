@@ -398,7 +398,7 @@ void ChozoPillarPlatformShadow(void)
 
         gCurrentSprite.pose = 8;
 
-        gCurrentSprite.pOam = sRisingChozoPillarPlatformShadowOAM;
+        gCurrentSprite.pOam = sRisingChozoPillarPlatformShadowOam;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 

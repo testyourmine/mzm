@@ -46,7 +46,7 @@ void FallingChozoPillar(void)
             gCurrentSprite.samusCollision = SSC_NONE;
             gCurrentSprite.bgPriority = BGCNT_GET_PRIORITY(gIoRegistersBackup.BG1CNT);
 
-            gCurrentSprite.pOam = sFallingChozoPillarOAM_Falling;
+            gCurrentSprite.pOam = sFallingChozoPillarOam_Falling;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 

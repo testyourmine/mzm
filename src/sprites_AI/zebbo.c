@@ -51,7 +51,7 @@ static void ZebboIdleInit(void)
     gCurrentSprite.samusCollision = SSC_NONE;
     gCurrentSprite.pose = ZEBBO_POSE_IDLE;
 
-    gCurrentSprite.pOam = sZebboOAM_Idle;
+    gCurrentSprite.pOam = sZebboOam_Idle;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.animationDurationCounter = 0;
 
@@ -175,7 +175,7 @@ static void ZebboGoingUp(void)
             gCurrentSprite.pose = ZEBBO_POSE_MOVING;
             gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
 
-            gCurrentSprite.pOam = sZebboOAM_Moving;
+            gCurrentSprite.pOam = sZebboOam_Moving;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 

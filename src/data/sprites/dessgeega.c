@@ -13,7 +13,7 @@ const s16 sDessgeegaLowJumpYVelocity[10] = {
 const u32 sDessgeegaGfx[270] = INCBIN_U32("data/sprites/Dessgeega.gfx.lz");
 const u16 sDessgeegaPal[16] = INCBIN_U16("data/sprites/Dessgeega.pal");
 
-const u16 sDessgeegaOAM_Idle_Frame0[OAM_DATA_SIZE(10)] = {
+static const u16 sDessGeegaOam_Idle_Frame0[OAM_DATA_SIZE(10)] = {
     0xa,
     0xe9, 0x1f8, OBJ_SPRITE_OAM | 0x229,
     OBJ_SHAPE_VERTICAL | 0xf1, 0x1f8, OBJ_SPRITE_OAM | 0x208,
@@ -27,7 +27,7 @@ const u16 sDessgeegaOAM_Idle_Frame0[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_X_FLIP | 0x6, OBJ_SPRITE_OAM | 0x224
 };
 
-const u16 sDessgeegaOAM_Idle_Frame1[OAM_DATA_SIZE(10)] = {
+static const u16 sDessGeegaOam_Idle_Frame1[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xf0, 0x1f8, OBJ_SPRITE_OAM | 0x207,
     0xe8, 0x1f8, OBJ_SPRITE_OAM | 0x229,
@@ -41,7 +41,7 @@ const u16 sDessgeegaOAM_Idle_Frame1[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_X_FLIP | 0x6, OBJ_SPRITE_OAM | 0x200
 };
 
-const u16 sDessgeegaOAM_Idle_Frame2[OAM_DATA_SIZE(10)] = {
+static const u16 sDessGeegaOam_Idle_Frame2[OAM_DATA_SIZE(10)] = {
     0xa,
     0xe6, 0x1f8, OBJ_SPRITE_OAM | 0x209,
     OBJ_SHAPE_VERTICAL | 0xee, 0x1f8, OBJ_SPRITE_OAM | 0x206,
@@ -55,7 +55,7 @@ const u16 sDessgeegaOAM_Idle_Frame2[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfc, OBJ_X_FLIP | 0x6, OBJ_SPRITE_OAM | 0x220
 };
 
-const u16 sDessgeegaOAM_JumpWarning_Frame1[OAM_DATA_SIZE(10)] = {
+static const u16 sDessGeegaOam_JumpWarning_Frame1[OAM_DATA_SIZE(10)] = {
     0xa,
     OBJ_SHAPE_VERTICAL | 0xf3, 0x1f8, OBJ_SPRITE_OAM | 0x207,
     0xeb, 0x1f8, OBJ_SPRITE_OAM | 0x229,
@@ -69,7 +69,7 @@ const u16 sDessgeegaOAM_JumpWarning_Frame1[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf6, OBJ_X_FLIP | 0x6, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sDessgeegaOAM_JumpWarning_Frame2[OAM_DATA_SIZE(10)] = {
+static const u16 sDessGeegaOam_JumpWarning_Frame2[OAM_DATA_SIZE(10)] = {
     0xa,
     0xed, 0x1f8, OBJ_SPRITE_OAM | 0x209,
     OBJ_SHAPE_VERTICAL | 0xf5, 0x1f8, OBJ_SPRITE_OAM | 0x206,
@@ -83,7 +83,7 @@ const u16 sDessgeegaOAM_JumpWarning_Frame2[OAM_DATA_SIZE(10)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf8, OBJ_X_FLIP | 0x6, OBJ_SPRITE_OAM | 0x204
 };
 
-const u16 sDessgeegaOAM_Landing_Frame0[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Landing_Frame0[OAM_DATA_SIZE(12)] = {
     0xc,
     0xe1, 0x1f8, OBJ_SPRITE_OAM | 0x209,
     OBJ_SHAPE_VERTICAL | 0xe9, 0x1f8, OBJ_SPRITE_OAM | 0x206,
@@ -99,7 +99,7 @@ const u16 sDessgeegaOAM_Landing_Frame0[OAM_DATA_SIZE(12)] = {
     OBJ_SHAPE_HORIZONTAL | 0xfb, OBJ_X_FLIP | 0x7, OBJ_SPRITE_OAM | 0x200
 };
 
-const u16 sDessgeegaOAM_Jumping_Frame0[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Jumping_Frame0[OAM_DATA_SIZE(12)] = {
     0xc,
     0xd9, 0x1f8, OBJ_SPRITE_OAM | 0x209,
     OBJ_SHAPE_VERTICAL | 0xe1, 0x1f8, OBJ_SPRITE_OAM | 0x206,
@@ -115,7 +115,7 @@ const u16 sDessgeegaOAM_Jumping_Frame0[OAM_DATA_SIZE(12)] = {
     OBJ_SHAPE_VERTICAL | 0xe0, OBJ_X_FLIP | 0x1fe, OBJ_SPRITE_OAM | 0x219
 };
 
-const u16 sDessgeegaOAM_Jumping_Frame1[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Jumping_Frame1[OAM_DATA_SIZE(12)] = {
     0xc,
     0xd8, 0x1f8, OBJ_SPRITE_OAM | 0x209,
     OBJ_SHAPE_VERTICAL | 0xe0, 0x1f8, OBJ_SPRITE_OAM | 0x206,
@@ -131,7 +131,7 @@ const u16 sDessgeegaOAM_Jumping_Frame1[OAM_DATA_SIZE(12)] = {
     OBJ_SHAPE_VERTICAL | 0xdf, OBJ_X_FLIP | 0x1fe, OBJ_SPRITE_OAM | 0x219
 };
 
-const u16 sDessgeegaOAM_Screaming_Frame1[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Screaming_Frame1[OAM_DATA_SIZE(12)] = {
     0xc,
     0xe6, 0x1f8, OBJ_SPRITE_OAM | 0x22e,
     OBJ_SHAPE_VERTICAL | 0xee, 0x1f8, OBJ_SPRITE_OAM | 0x20c,
@@ -147,7 +147,7 @@ const u16 sDessgeegaOAM_Screaming_Frame1[OAM_DATA_SIZE(12)] = {
     0xee, OBJ_X_FLIP | 0x1fe, OBJ_SPRITE_OAM | 0x22a
 };
 
-const u16 sDessgeegaOAM_Screaming_Frame2[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Screaming_Frame2[OAM_DATA_SIZE(12)] = {
     0xc,
     0xe6, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x211,
     OBJ_SHAPE_VERTICAL | 0xee, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x210,
@@ -163,7 +163,7 @@ const u16 sDessgeegaOAM_Screaming_Frame2[OAM_DATA_SIZE(12)] = {
     0xef, OBJ_X_FLIP | 0x1fe, OBJ_SPRITE_OAM | 0x22a
 };
 
-const u16 sDessgeegaOAM_Screaming_Frame3[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Screaming_Frame3[OAM_DATA_SIZE(12)] = {
     0xc,
     0xe5, 0x1f8, OBJ_SPRITE_OAM | 0x213,
     OBJ_SHAPE_VERTICAL | 0xed, 0x1f8, OBJ_SPRITE_OAM | 0x212,
@@ -179,7 +179,7 @@ const u16 sDessgeegaOAM_Screaming_Frame3[OAM_DATA_SIZE(12)] = {
     0xef, OBJ_X_FLIP | 0x1ff, OBJ_SPRITE_OAM | 0x22a
 };
 
-const u16 sDessgeegaOAM_Screaming_Frame4[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Screaming_Frame4[OAM_DATA_SIZE(12)] = {
     0xc,
     0xe5, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x211,
     OBJ_SHAPE_VERTICAL | 0xed, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x210,
@@ -195,7 +195,7 @@ const u16 sDessgeegaOAM_Screaming_Frame4[OAM_DATA_SIZE(12)] = {
     0xef, OBJ_X_FLIP | 0x1fe, OBJ_SPRITE_OAM | 0x22a
 };
 
-const u16 sDessgeegaOAM_Screaming_Frame5[OAM_DATA_SIZE(12)] = {
+static const u16 sDessGeegaOam_Screaming_Frame5[OAM_DATA_SIZE(12)] = {
     0xc,
     0xe4, 0x1f8, OBJ_SPRITE_OAM | 0x213,
     OBJ_SHAPE_VERTICAL | 0xec, 0x1f8, OBJ_SPRITE_OAM | 0x212,
@@ -211,117 +211,117 @@ const u16 sDessgeegaOAM_Screaming_Frame5[OAM_DATA_SIZE(12)] = {
     0xee, OBJ_X_FLIP | 0x0, OBJ_SPRITE_OAM | 0x22a
 };
 
-const struct FrameData sDessgeegaOAM_Idle[5] = {
+const struct FrameData sDessGeegaOam_Idle[5] = {
     [0] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame0,
+        .pFrame = sDessGeegaOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [1] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame1,
+        .pFrame = sDessGeegaOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [2] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame2,
+        .pFrame = sDessGeegaOam_Idle_Frame2,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [3] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame1,
+        .pFrame = sDessGeegaOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sDessgeegaOAM_Screaming[12] = {
+const struct FrameData sDessGeegaOam_Screaming[12] = {
     [0] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame0,
+        .pFrame = sDessGeegaOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [1] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame1,
+        .pFrame = sDessGeegaOam_Screaming_Frame1,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [2] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame2,
+        .pFrame = sDessGeegaOam_Screaming_Frame2,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [3] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame3,
+        .pFrame = sDessGeegaOam_Screaming_Frame3,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame4,
+        .pFrame = sDessGeegaOam_Screaming_Frame4,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [5] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame5,
+        .pFrame = sDessGeegaOam_Screaming_Frame5,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [6] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame4,
+        .pFrame = sDessGeegaOam_Screaming_Frame4,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [7] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame5,
+        .pFrame = sDessGeegaOam_Screaming_Frame5,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [8] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame4,
+        .pFrame = sDessGeegaOam_Screaming_Frame4,
         .timer = CONVERT_SECONDS(0.05f)
     },
     [9] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame5,
+        .pFrame = sDessGeegaOam_Screaming_Frame5,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [10] = {
-        .pFrame = sDessgeegaOAM_Screaming_Frame1,
+        .pFrame = sDessGeegaOam_Screaming_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [11] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sDessgeegaOAM_JumpWarning[4] = {
+const struct FrameData sDessGeegaOam_JumpWarning[4] = {
     [0] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame0,
+        .pFrame = sDessGeegaOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(0.1f)
     },
     [1] = {
-        .pFrame = sDessgeegaOAM_JumpWarning_Frame1,
+        .pFrame = sDessGeegaOam_JumpWarning_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [2] = {
-        .pFrame = sDessgeegaOAM_JumpWarning_Frame2,
+        .pFrame = sDessGeegaOam_JumpWarning_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sDessgeegaOAM_Jumping[3] = {
+const struct FrameData sDessGeegaOam_Jumping[3] = {
     [0] = {
-        .pFrame = sDessgeegaOAM_Jumping_Frame0,
+        .pFrame = sDessGeegaOam_Jumping_Frame0,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [1] = {
-        .pFrame = sDessgeegaOAM_Jumping_Frame1,
+        .pFrame = sDessGeegaOam_Jumping_Frame1,
         .timer = CONVERT_SECONDS(1.f / 30)
     },
     [2] = FRAME_DATA_TERMINATOR
 };
 
-const struct FrameData sDessgeegaOAM_Landing[5] = {
+const struct FrameData sDessGeegaOam_Landing[5] = {
     [0] = {
-        .pFrame = sDessgeegaOAM_Landing_Frame0,
+        .pFrame = sDessGeegaOam_Landing_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [1] = {
-        .pFrame = sDessgeegaOAM_JumpWarning_Frame2,
+        .pFrame = sDessGeegaOam_JumpWarning_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sDessgeegaOAM_JumpWarning_Frame1,
+        .pFrame = sDessGeegaOam_JumpWarning_Frame1,
         .timer = CONVERT_SECONDS(2.f / 15)
     },
     [3] = {
-        .pFrame = sDessgeegaOAM_Idle_Frame0,
+        .pFrame = sDessGeegaOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(1.f / 15)
     },
     [4] = FRAME_DATA_TERMINATOR

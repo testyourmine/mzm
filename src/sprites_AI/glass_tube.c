@@ -113,14 +113,14 @@ static void GlassTubeInit(void)
     if (EventFunction(EVENT_ACTION_CHECKING, EVENT_GLASS_TUBE_BROKEN))
     {
         // Set broken behavior
-        gCurrentSprite.pOam = sGlassTubeOAM_Broken;
+        gCurrentSprite.pOam = sGlassTubeOam_Broken;
         gCurrentSprite.pose = GLASS_TUBE_POSE_IDLE;
         GlassTubeChangeCcaa(); // Remove collision
     }
     else
     {
         // Set waiting for power bomb behavior
-        gCurrentSprite.pOam = sGlassTubeOAM_Intact;
+        gCurrentSprite.pOam = sGlassTubeOam_Intact;
         gCurrentSprite.pose = GLASS_TUBE_POSE_POWER_BOMB_COLLISION;
     }
 
@@ -188,7 +188,7 @@ static void GlassTubeDelayBeforeBreaking(void)
     {
         // Set cracking behavior
         gCurrentSprite.pose = GLASS_TUBE_POSE_CRACKING;
-        gCurrentSprite.pOam = sGlassTubeOAM_Cracking;
+        gCurrentSprite.pOam = sGlassTubeOam_Cracking;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
         SoundPlay(SOUND_GLASS_TUBE_BREAKING);
@@ -205,7 +205,7 @@ static void GlassTubeCheckCrackingAnimEnded(void)
     {
         // Set breaking behavior
         gCurrentSprite.pose = GLASS_TUBE_POSE_BREAKING;
-        gCurrentSprite.pOam = sGlassTubeOAM_Breaking;
+        gCurrentSprite.pOam = sGlassTubeOam_Breaking;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
 
@@ -234,7 +234,7 @@ static void GlassTubeCheckBreakingAnimEnded(void)
     {
         // Set broken behavior
         gCurrentSprite.pose = GLASS_TUBE_POSE_IDLE;
-        gCurrentSprite.pOam = sGlassTubeOAM_Broken;
+        gCurrentSprite.pOam = sGlassTubeOam_Broken;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }

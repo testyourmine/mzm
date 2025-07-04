@@ -96,14 +96,14 @@ void Geron(void)
                 // Set destroyed
                 gCurrentSprite.pose = GERON_POSE_DESTROYED;
                 gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
-                gCurrentSprite.pOam = sGeronOAM_Destroyed;
+                gCurrentSprite.pOam = sGeronOam_Destroyed;
             }
             else
             {
                 // Set idle
                 gCurrentSprite.pose = GERON_POSE_IDLE;
                 gCurrentSprite.health = 1;
-                gCurrentSprite.pOam = sGeronOAM_Idle;
+                gCurrentSprite.pOam = sGeronOam_Idle;
 
                 yPosition = gCurrentSprite.yPosition - (HALF_BLOCK_SIZE);
                 xPosition = gCurrentSprite.xPosition;
@@ -161,7 +161,7 @@ void Geron(void)
                 // Set getting destroyed
                 gCurrentSprite.pose = GERON_POSE_GETTING_DESTROYED;
 
-                gCurrentSprite.pOam = sGeronOAM_GettingDestroyed;
+                gCurrentSprite.pOam = sGeronOam_GettingDestroyed;
                 gCurrentSprite.currentAnimationFrame = 0;
                 gCurrentSprite.animationDurationCounter = 0;
 
@@ -177,7 +177,7 @@ void Geron(void)
                     if (SPRITE_GET_ISFT(gCurrentSprite) == 2)
                     {
                         // Set shaking
-                        gCurrentSprite.pOam = sGeronOAM_Shaking;
+                        gCurrentSprite.pOam = sGeronOam_Shaking;
                         gCurrentSprite.currentAnimationFrame = 0;
                         gCurrentSprite.animationDurationCounter = 0;
                         SoundPlayNotAlreadyPlaying(SOUND_GERON_SHAKING);
@@ -185,10 +185,10 @@ void Geron(void)
                 }
                 else
                 {
-                    if (gCurrentSprite.pOam == sGeronOAM_Shaking && SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (gCurrentSprite.pOam == sGeronOam_Shaking && SpriteUtilCheckEndCurrentSpriteAnim())
                     {
                         // Set idle
-                        gCurrentSprite.pOam = sGeronOAM_Idle;
+                        gCurrentSprite.pOam = sGeronOam_Idle;
                         gCurrentSprite.currentAnimationFrame = 0;
                         gCurrentSprite.animationDurationCounter = 0;
                     }
@@ -235,7 +235,7 @@ void Geron(void)
             {
                 // Set destroyed
                 gCurrentSprite.pose = GERON_POSE_DESTROYED;
-                gCurrentSprite.pOam = sGeronOAM_Destroyed;
+                gCurrentSprite.pOam = sGeronOam_Destroyed;
                 gCurrentSprite.currentAnimationFrame = 0;
                 gCurrentSprite.animationDurationCounter = 0;
             }

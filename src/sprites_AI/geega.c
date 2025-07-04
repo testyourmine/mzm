@@ -51,7 +51,7 @@ static void GeegaIdleInit(void)
     gCurrentSprite.samusCollision = SSC_NONE;
     gCurrentSprite.pose = GEEGA_POSE_IDLE;
 
-    gCurrentSprite.pOam = sGeegaOAM_Idle;
+    gCurrentSprite.pOam = sGeegaOam_Idle;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.animationDurationCounter = 0;
 
@@ -164,7 +164,7 @@ static void GeegaGoingUp(void)
             gCurrentSprite.pose = GEEGA_POSE_MOVING;
             gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
 
-            gCurrentSprite.pOam = sGeegaOAM_Moving;
+            gCurrentSprite.pOam = sGeegaOam_Moving;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
             gCurrentSprite.bgPriority = 1;

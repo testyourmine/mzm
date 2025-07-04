@@ -48,7 +48,7 @@ void GeronNorfair(void)
 
         gCurrentSprite.pose = GERON_POSE_IDLE;
         gCurrentSprite.health = 1;
-        gCurrentSprite.pOam = sGeronNorfairOAM_Idle;
+        gCurrentSprite.pOam = sGeronNorfairOam_Idle;
 
         yPosition = gCurrentSprite.yPosition - HALF_BLOCK_SIZE;
         xPosition = gCurrentSprite.xPosition;

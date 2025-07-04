@@ -86,7 +86,7 @@ void EscapeGate(void)
             gCurrentSprite.hitboxRight = 0;
 
             gCurrentSprite.samusCollision = SSC_NONE;
-            gCurrentSprite.pOam = sEscapeGateOAM_Closed,
+            gCurrentSprite.pOam = sEscapeGateOam_Closed,
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 
@@ -134,7 +134,7 @@ void EscapeGate(void)
             if (spriteId != PSPRITE_ESCAPE_GATE1 || SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE, BLOCK_SIZE * 6) == NSLR_LEFT)
             {
                 // Open gate if samus near
-                gCurrentSprite.pOam = sEscapeGateOAM_Opening;
+                gCurrentSprite.pOam = sEscapeGateOam_Opening;
                 gCurrentSprite.currentAnimationFrame = 0;
                 gCurrentSprite.animationDurationCounter = 0;
 
@@ -148,7 +148,7 @@ void EscapeGate(void)
 
             if (SpriteUtilCheckEndCurrentSpriteAnim())
             {
-                gCurrentSprite.pOam = sEscapeGateOAM_Opened;
+                gCurrentSprite.pOam = sEscapeGateOam_Opened;
                 gCurrentSprite.currentAnimationFrame = 0;
                 gCurrentSprite.animationDurationCounter = 0;
 

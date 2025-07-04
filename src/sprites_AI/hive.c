@@ -293,7 +293,7 @@ static void HiveRootsInit(void)
 
     gCurrentSprite.pose = HIVE_ROOTS_POSE_IDLE;
 
-    gCurrentSprite.pOam = sHiveRootsOAM_Idle;
+    gCurrentSprite.pOam = sHiveRootsOam_Idle;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 

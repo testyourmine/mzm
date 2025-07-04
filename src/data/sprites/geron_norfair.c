@@ -4,7 +4,7 @@
 const u32 sGeronNorfairGfx[270] = INCBIN_U32("data/sprites/GeronNorfair.gfx.lz");
 const u16 sGeronNorfairPal[16] = INCBIN_U16("data/sprites/GeronNorfair.pal");
 
-const u16 sGeronNorfairOAM_Idle_Frame0[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame0[OAM_DATA_SIZE(14)] = {
     0xe,
     0xef, 0x8, OBJ_SPRITE_OAM | 0x218,
     0xe7, 0x1f1, OBJ_SPRITE_OAM | 0x238,
@@ -22,7 +22,7 @@ const u16 sGeronNorfairOAM_Idle_Frame0[OAM_DATA_SIZE(14)] = {
     0xce, OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x237
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame1[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame1[OAM_DATA_SIZE(14)] = {
     0xe,
     0xf0, 0x9, OBJ_SPRITE_OAM | 0x218,
     0xe6, 0x1f0, OBJ_SPRITE_OAM | 0x238,
@@ -40,7 +40,7 @@ const u16 sGeronNorfairOAM_Idle_Frame1[OAM_DATA_SIZE(14)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1ff, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame2[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame2[OAM_DATA_SIZE(14)] = {
     0xe,
     0xef, 0xa, OBJ_SPRITE_OAM | 0x238,
     0xe6, 0x1f1, OBJ_SPRITE_OAM | 0x238,
@@ -58,7 +58,7 @@ const u16 sGeronNorfairOAM_Idle_Frame2[OAM_DATA_SIZE(14)] = {
     0xe7, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1ff, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame3[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame3[OAM_DATA_SIZE(14)] = {
     0xe,
     0xf0, 0x9, OBJ_SPRITE_OAM | 0x238,
     0xe5, 0x1f0, OBJ_SPRITE_OAM | 0x238,
@@ -76,7 +76,7 @@ const u16 sGeronNorfairOAM_Idle_Frame3[OAM_DATA_SIZE(14)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame4[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame4[OAM_DATA_SIZE(14)] = {
     0xe,
     0xef, 0x8, OBJ_SPRITE_OAM | 0x219,
     0xe6, 0x1f1, OBJ_SPRITE_OAM | 0x218,
@@ -94,7 +94,7 @@ const u16 sGeronNorfairOAM_Idle_Frame4[OAM_DATA_SIZE(14)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Unused_Frame[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Unused_Frame[OAM_DATA_SIZE(14)] = {
     0xe,
     0xf0, 0x8, OBJ_SPRITE_OAM | 0x219,
     0xe5, 0x1f1, OBJ_SPRITE_OAM | 0x218,
@@ -112,7 +112,7 @@ const u16 sGeronNorfairOAM_Unused_Frame[OAM_DATA_SIZE(14)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame5[OAM_DATA_SIZE(15)] = {
+static const u16 sGeronNorfairOam_Idle_Frame5[OAM_DATA_SIZE(15)] = {
     0xf,
     0xf0, 0x8, OBJ_SPRITE_OAM | 0x219,
     0xe5, 0x1f1, OBJ_SPRITE_OAM | 0x218,
@@ -131,7 +131,7 @@ const u16 sGeronNorfairOAM_Idle_Frame5[OAM_DATA_SIZE(15)] = {
     0xe7, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1ff, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame6[OAM_DATA_SIZE(15)] = {
+static const u16 sGeronNorfairOam_Idle_Frame6[OAM_DATA_SIZE(15)] = {
     0xf,
     0xf0, 0x8, OBJ_SPRITE_OAM | 0x238,
     0xe7, 0x1f1, OBJ_SPRITE_OAM | 0x239,
@@ -150,7 +150,7 @@ const u16 sGeronNorfairOAM_Idle_Frame6[OAM_DATA_SIZE(15)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame7[OAM_DATA_SIZE(13)] = {
+static const u16 sGeronNorfairOam_Idle_Frame7[OAM_DATA_SIZE(13)] = {
     0xd,
     0xf0, 0x8, OBJ_SPRITE_OAM | 0x218,
     0xe5, 0x1f1, OBJ_SPRITE_OAM | 0x218,
@@ -167,7 +167,7 @@ const u16 sGeronNorfairOAM_Idle_Frame7[OAM_DATA_SIZE(13)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame8[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame8[OAM_DATA_SIZE(14)] = {
     0xe,
     0xf0, 0x8, OBJ_SPRITE_OAM | 0x239,
     0xe4, 0x1f1, OBJ_SPRITE_OAM | 0x238,
@@ -185,7 +185,7 @@ const u16 sGeronNorfairOAM_Idle_Frame8[OAM_DATA_SIZE(14)] = {
     0xe8, OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x21e
 };
 
-const u16 sGeronNorfairOAM_Idle_Frame9[OAM_DATA_SIZE(14)] = {
+static const u16 sGeronNorfairOam_Idle_Frame9[OAM_DATA_SIZE(14)] = {
     0xe,
     0xf0, 0x8, OBJ_SPRITE_OAM | 0x239,
     0xe5, 0x1f1, OBJ_SPRITE_OAM | 0x238,
@@ -203,45 +203,45 @@ const u16 sGeronNorfairOAM_Idle_Frame9[OAM_DATA_SIZE(14)] = {
     0xd1, OBJ_Y_FLIP | 0x8, OBJ_SPRITE_OAM | 0x237
 };
 
-const struct FrameData sGeronNorfairOAM_Idle[11] = {
+const struct FrameData sGeronNorfairOam_Idle[11] = {
     [0] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame0,
+        .pFrame = sGeronNorfairOam_Idle_Frame0,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [1] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame1,
+        .pFrame = sGeronNorfairOam_Idle_Frame1,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [2] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame2,
+        .pFrame = sGeronNorfairOam_Idle_Frame2,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [3] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame3,
+        .pFrame = sGeronNorfairOam_Idle_Frame3,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [4] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame4,
+        .pFrame = sGeronNorfairOam_Idle_Frame4,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [5] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame5,
+        .pFrame = sGeronNorfairOam_Idle_Frame5,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [6] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame6,
+        .pFrame = sGeronNorfairOam_Idle_Frame6,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [7] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame7,
+        .pFrame = sGeronNorfairOam_Idle_Frame7,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [8] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame8,
+        .pFrame = sGeronNorfairOam_Idle_Frame8,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [9] = {
-        .pFrame = sGeronNorfairOAM_Idle_Frame9,
+        .pFrame = sGeronNorfairOam_Idle_Frame9,
         .timer = CONVERT_SECONDS(0.2f)
     },
     [10] = FRAME_DATA_TERMINATOR

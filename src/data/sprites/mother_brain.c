@@ -148,7 +148,7 @@ const u8 sMotherBrainDynamicPaletteData[19][2] = {
 const u32 sMotherBrainGfx[1871] = INCBIN_U32("data/sprites/MotherBrain.gfx.lz");
 const u16 sMotherBrainPal[96] = INCBIN_U16("data/sprites/MotherBrain.pal");
 
-const u16 sMotherBrainOam_Idle_Frame0[OAM_DATA_SIZE(19)] = {
+static const u16 sMotherBrainOam_Idle_Frame0[OAM_DATA_SIZE(19)] = {
     0x13,
     OBJ_SHAPE_HORIZONTAL | 0xf3, 0x1d7, OBJ_SPRITE_OAM | 0x65a,
     0xf9, OBJ_SIZE_16x16 | 0x1d8, OBJ_SPRITE_OAM | 0x750,
@@ -171,7 +171,7 @@ const u16 sMotherBrainOam_Idle_Frame0[OAM_DATA_SIZE(19)] = {
     0xe9, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1d5, OBJ_SPRITE_OAM | 0x74c
 };
 
-const u16 sMotherBrainOam_Idle_Frame1[OAM_DATA_SIZE(19)] = {
+static const u16 sMotherBrainOam_Idle_Frame1[OAM_DATA_SIZE(19)] = {
     0x13,
     OBJ_SHAPE_HORIZONTAL | 0xf3, 0x1d6, OBJ_SPRITE_OAM | 0x65a,
     0xfa, OBJ_SIZE_16x16 | 0x1d8, OBJ_SPRITE_OAM | 0x750,
@@ -194,7 +194,7 @@ const u16 sMotherBrainOam_Idle_Frame1[OAM_DATA_SIZE(19)] = {
     0xe8, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1d6, OBJ_SPRITE_OAM | 0x74c
 };
 
-const u16 sMotherBrainOam_Idle_Frame2[OAM_DATA_SIZE(19)] = {
+static const u16 sMotherBrainOam_Idle_Frame2[OAM_DATA_SIZE(19)] = {
     0x13,
     OBJ_SHAPE_HORIZONTAL | 0xf4, 0x1d6, OBJ_SPRITE_OAM | 0x65a,
     0xfa, OBJ_SIZE_16x16 | 0x1d7, OBJ_SPRITE_OAM | 0x750,
@@ -217,43 +217,43 @@ const u16 sMotherBrainOam_Idle_Frame2[OAM_DATA_SIZE(19)] = {
     0xe6, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1d6, OBJ_SPRITE_OAM | 0x74e
 };
 
-const u16 sMotherBrainPartOam_EyeClosed_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_EyeClosed_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_X_FLIP | 0x1f2, OBJ_SPRITE_OAM | 0x6c1,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1e2, OBJ_SPRITE_OAM | 0x6c3
 };
 
-const u16 sMotherBrainPartOam_EyeClosed_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_EyeClosed_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf2, 0x1f2, OBJ_SPRITE_OAM | 0x6e1,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_SIZE_32x16 | 0x1e2, OBJ_SPRITE_OAM | 0x6c6
 };
 
-const u16 sMotherBrainPartOam_EyeClosed_Frame2[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_EyeClosed_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_X_FLIP | 0x1f2, OBJ_SPRITE_OAM | 0x701,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1e2, OBJ_SPRITE_OAM | 0x703
 };
 
-const u16 sMotherBrainPartOam_EyeOpening_Frame1[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_EyeOpening_Frame1[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf2, 0x1f2, OBJ_SPRITE_OAM | 0x721,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_SIZE_32x16 | 0x1e2, OBJ_SPRITE_OAM | 0x706
 };
 
-const u16 sMotherBrainPartOam_EyeOpening_Frame2[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_EyeOpening_Frame2[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_X_FLIP | 0x1f2, OBJ_SPRITE_OAM | 0x741,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_X_FLIP | OBJ_SIZE_32x16 | 0x1e2, OBJ_SPRITE_OAM | 0x743
 };
 
-const u16 sMotherBrainPartOam_EyeOpening_Frame3[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_EyeOpening_Frame3[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf2, 0x1f2, OBJ_SPRITE_OAM | 0x761,
     OBJ_SHAPE_HORIZONTAL | 0xfa, OBJ_SIZE_32x16 | 0x1e2, OBJ_SPRITE_OAM | 0x746
 };
 
-const u16 sMotherBrainPartOam_Bottom_Frame0[OAM_DATA_SIZE(5)] = {
+static const u16 sMotherBrainPartOam_Bottom_Frame0[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_SIZE_16x32 | 0x1f5, OBJ_SPRITE_OAM | 0x61c,
     OBJ_SHAPE_VERTICAL | 0xf0, OBJ_SIZE_16x32 | 0x1fe, OBJ_SPRITE_OAM | 0x61e,
@@ -262,7 +262,7 @@ const u16 sMotherBrainPartOam_Bottom_Frame0[OAM_DATA_SIZE(5)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf0, OBJ_SIZE_64x32 | 0x1e0, OBJ_SPRITE_OAM | 0x6ca
 };
 
-const u16 sMotherBrainPartOam_Bottom_Frame1[OAM_DATA_SIZE(5)] = {
+static const u16 sMotherBrainPartOam_Bottom_Frame1[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_SIZE_16x32 | 0x1f5, OBJ_SPRITE_OAM | 0x61c,
     OBJ_SHAPE_VERTICAL | 0xf0, OBJ_SIZE_16x32 | 0x1fe, OBJ_SPRITE_OAM | 0x61e,
@@ -271,7 +271,7 @@ const u16 sMotherBrainPartOam_Bottom_Frame1[OAM_DATA_SIZE(5)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf0, OBJ_SIZE_64x32 | 0x1e0, OBJ_SPRITE_OAM | 0x6ca
 };
 
-const u16 sMotherBrainPartOam_Bottom_Frame2[OAM_DATA_SIZE(5)] = {
+static const u16 sMotherBrainPartOam_Bottom_Frame2[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_SIZE_16x32 | 0x1f5, OBJ_SPRITE_OAM | 0x61c,
     OBJ_SHAPE_VERTICAL | 0xf1, OBJ_SIZE_16x32 | 0x1fe, OBJ_SPRITE_OAM | 0x61e,
@@ -280,7 +280,7 @@ const u16 sMotherBrainPartOam_Bottom_Frame2[OAM_DATA_SIZE(5)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf1, OBJ_SIZE_64x32 | 0x1e0, OBJ_SPRITE_OAM | 0x6ca
 };
 
-const u16 sMotherBrainPartOam_Bottom_Frame3[OAM_DATA_SIZE(5)] = {
+static const u16 sMotherBrainPartOam_Bottom_Frame3[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_SIZE_16x32 | 0x1f5, OBJ_SPRITE_OAM | 0x61c,
     OBJ_SHAPE_VERTICAL | 0xf2, OBJ_SIZE_16x32 | 0x1fe, OBJ_SPRITE_OAM | 0x61e,
@@ -289,13 +289,13 @@ const u16 sMotherBrainPartOam_Bottom_Frame3[OAM_DATA_SIZE(5)] = {
     OBJ_SHAPE_HORIZONTAL | 0xf2, OBJ_SIZE_64x32 | 0x1e0, OBJ_SPRITE_OAM | 0x6ca
 };
 
-const u16 sMotherBrainPartOam_BeamSpawning_Frame0[OAM_DATA_SIZE(2)] = {
+static const u16 sMotherBrainPartOam_BeamSpawning_Frame0[OAM_DATA_SIZE(2)] = {
     0x2,
     OBJ_SHAPE_HORIZONTAL | 0xf8, 0x1fc, OBJ_SPRITE_OAM | 0x129e,
     OBJ_SHAPE_HORIZONTAL | 0x0, 0x1fc, OBJ_SPRITE_OAM | 0x12fe
 };
 
-const u16 sMotherBrainPartOam_BeamSpawning_Frame1[OAM_DATA_SIZE(5)] = {
+static const u16 sMotherBrainPartOam_BeamSpawning_Frame1[OAM_DATA_SIZE(5)] = {
     0x5,
     OBJ_SHAPE_HORIZONTAL | 0xf8, 0x14, OBJ_SPRITE_OAM | 0x129e,
     OBJ_SHAPE_HORIZONTAL | 0x0, 0x14, OBJ_SPRITE_OAM | 0x12fe,
@@ -304,31 +304,31 @@ const u16 sMotherBrainPartOam_BeamSpawning_Frame1[OAM_DATA_SIZE(5)] = {
     OBJ_SHAPE_VERTICAL | 0xf8, 0x1fc, OBJ_SPRITE_OAM | 0x12b8
 };
 
-const u16 sMotherBrainPartOam_BeamSpawning_Frame2[OAM_DATA_SIZE(3)] = {
+static const u16 sMotherBrainPartOam_BeamSpawning_Frame2[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf0, OBJ_SIZE_32x32 | 0x10, OBJ_SPRITE_OAM | 0x131c,
     0xf5, OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x1338,
     0xfb, OBJ_SIZE_16x16 | 0x0, OBJ_SPRITE_OAM | 0x1338
 };
 
-const u16 sMotherBrainPartOam_BeamSpawning_Frame3[OAM_DATA_SIZE(3)] = {
+static const u16 sMotherBrainPartOam_BeamSpawning_Frame3[OAM_DATA_SIZE(3)] = {
     0x3,
     0xf0, OBJ_SIZE_32x32 | 0x20, OBJ_SPRITE_OAM | 0x129c,
     OBJ_SHAPE_VERTICAL | 0xf0, OBJ_SIZE_16x32 | 0x14, OBJ_SPRITE_OAM | 0x129a,
     0xf8, OBJ_SIZE_16x16 | 0x8, OBJ_SPRITE_OAM | 0x12b8
 };
 
-const u16 sMotherBrainBeamOam_Moving_Frame0[OAM_DATA_SIZE(1)] = {
+static const u16 sMotherBrainBeamOam_Moving_Frame0[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_HORIZONTAL | 0xf0, OBJ_SIZE_64x32 | 0x1d0, OBJ_SPRITE_OAM | 0x1298
 };
 
-const u16 sMotherBrainBeamOam_Moving_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sMotherBrainBeamOam_Moving_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     OBJ_SHAPE_HORIZONTAL | 0xf0, OBJ_SIZE_64x32 | 0x1cc, OBJ_SPRITE_OAM | 0x1318
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame0[OAM_DATA_SIZE(23)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame0[OAM_DATA_SIZE(23)] = {
     0x17,
     OBJ_SHAPE_VERTICAL | 0xcb, OBJ_SIZE_16x32 | 0x1d7, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0xe0, 0x1ec, OBJ_SPRITE_OAM | 0x12d4,
@@ -355,7 +355,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame0[OAM_DATA_SIZE(23)] = {
     0xc0, OBJ_X_FLIP | OBJ_SIZE_32x32 | 0x1da, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame2[OAM_DATA_SIZE(23)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame2[OAM_DATA_SIZE(23)] = {
     0x17,
     OBJ_SHAPE_VERTICAL | 0xc9, OBJ_SIZE_16x32 | 0x1d4, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0xdf, 0x1eb, OBJ_SPRITE_OAM | 0x12d4,
@@ -382,7 +382,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame2[OAM_DATA_SIZE(23)] = {
     0xbe, OBJ_X_FLIP | OBJ_SIZE_32x32 | 0x1d8, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame4[OAM_DATA_SIZE(23)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame4[OAM_DATA_SIZE(23)] = {
     0x17,
     OBJ_SHAPE_VERTICAL | 0xcd, OBJ_SIZE_16x32 | 0x1cc, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0xe0, 0x1e5, OBJ_SPRITE_OAM | 0x12d4,
@@ -409,7 +409,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame4[OAM_DATA_SIZE(23)] = {
     0xc0, OBJ_X_FLIP | OBJ_SIZE_32x32 | 0x1d1, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame6[OAM_DATA_SIZE(23)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame6[OAM_DATA_SIZE(23)] = {
     0x17,
     OBJ_SHAPE_VERTICAL | 0xd8, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x32 | 0x1c8, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0xe8, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1e0, OBJ_SPRITE_OAM | 0x12d4,
@@ -436,7 +436,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame6[OAM_DATA_SIZE(23)] = {
     0xc8, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_32x32 | 0x1cd, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame8[OAM_DATA_SIZE(23)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame8[OAM_DATA_SIZE(23)] = {
     0x17,
     OBJ_SHAPE_VERTICAL | 0xed, OBJ_SIZE_16x32 | 0x1c5, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0x0, 0x1da, OBJ_SPRITE_OAM | 0x12d4,
@@ -463,7 +463,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame8[OAM_DATA_SIZE(23)] = {
     0xd8, OBJ_X_FLIP | OBJ_SIZE_32x32 | 0x1c8, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame10[OAM_DATA_SIZE(15)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame10[OAM_DATA_SIZE(15)] = {
     0xf,
     OBJ_SHAPE_VERTICAL | 0x0, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x32 | 0x1c2, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0x16, OBJ_X_FLIP | OBJ_Y_FLIP | 0x1d8, OBJ_SPRITE_OAM | 0x12d4,
@@ -482,7 +482,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame10[OAM_DATA_SIZE(15)] = {
     0xec, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_32x32 | 0x1c8, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame12[OAM_DATA_SIZE(12)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame12[OAM_DATA_SIZE(12)] = {
     0xc,
     OBJ_SHAPE_VERTICAL | 0x1f, OBJ_SIZE_16x32 | 0x1c0, OBJ_SPRITE_OAM | 0x12d2,
     OBJ_SHAPE_VERTICAL | 0x30, 0x1d6, OBJ_SPRITE_OAM | 0x12d4,
@@ -498,7 +498,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame12[OAM_DATA_SIZE(12)] = {
     OBJ_SHAPE_VERTICAL | 0x30, 0x48, OBJ_SPRITE_OAM | 0x12d4
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame14[OAM_DATA_SIZE(6)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame14[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0x31, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x32 | 0x1c0, OBJ_SPRITE_OAM | 0x12d2,
     0x3a, OBJ_X_FLIP | OBJ_SIZE_16x16 | 0x1e9, OBJ_SPRITE_OAM | 0x1312,
@@ -508,7 +508,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame14[OAM_DATA_SIZE(6)] = {
     0x20, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_32x32 | 0x1c7, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame16[OAM_DATA_SIZE(6)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame16[OAM_DATA_SIZE(6)] = {
     0x6,
     OBJ_SHAPE_VERTICAL | 0x40, OBJ_SIZE_16x32 | 0x1c0, OBJ_SPRITE_OAM | 0x12d2,
     0x40, OBJ_X_FLIP | OBJ_Y_FLIP | OBJ_SIZE_16x16 | 0x1e8, OBJ_SPRITE_OAM | 0x1312,
@@ -518,7 +518,7 @@ const u16 sMotherBrainGlassBreakingOam_Breaking_Frame16[OAM_DATA_SIZE(6)] = {
     0x38, OBJ_Y_FLIP | OBJ_SIZE_32x32 | 0x1d0, OBJ_SPRITE_OAM | 0x1315
 };
 
-const u16 sMotherBrainGlassBreakingOam_Breaking_Frame1[OAM_DATA_SIZE(1)] = {
+static const u16 sMotherBrainGlassBreakingOam_Breaking_Frame1[OAM_DATA_SIZE(1)] = {
     0x1,
     0xfc, 0x1fc, OBJ_SPRITE_OAM | 0x1298
 };

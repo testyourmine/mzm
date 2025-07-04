@@ -51,7 +51,7 @@ static void GametIdleInit(void)
     gCurrentSprite.samusCollision = SSC_NONE;
     gCurrentSprite.pose = GAMET_POSE_IDLE;
 
-    gCurrentSprite.pOam = sGametOAM_Idle;
+    gCurrentSprite.pOam = sGametOam_Idle;
     gCurrentSprite.currentAnimationFrame = 0;
     gCurrentSprite.animationDurationCounter = 0;
 
@@ -179,7 +179,7 @@ static void GametGoingUp(void)
             gCurrentSprite.pose = GAMET_POSE_MOVING;
             gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
 
-            gCurrentSprite.pOam = sGametOAM_Moving;
+            gCurrentSprite.pOam = sGametOam_Moving;
             gCurrentSprite.currentAnimationFrame = 0;
             gCurrentSprite.animationDurationCounter = 0;
 
