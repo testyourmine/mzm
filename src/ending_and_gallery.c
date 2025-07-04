@@ -15,33 +15,12 @@
 #include "structs/ending_and_gallery.h"
 #include "structs/game_state.h"
 
-typedef u8 (*CreditsFunc_T)(void);
-
-static CreditsFunc_T sCreditsFunctionPointers[3] = {
-    [0] = CreditsDisplay,
-    [1] = CreditsChozoWallMovement,
-    [2] = CreditsChozoWallZoom
-};
-
-static CreditsFunc_T sEndScreenFunctionPointers[1] = {
-    [0] = EndScreenSamusPosing
-};
-
-static CreditsFunc_T sEndingImageFunctionPointers[1] = {
-    [0] = EndingImageDisplay
-};
-
-static CreditsFunc_T sUnlockedOptionsFunctionPointers[2] = {
-    [0] = UnlockedOptionsPopUp,
-    [1] = UnlockedOptionsPopUp
-};
-
 /**
  * @brief 84c34 | 48 | Checks if an ending letter should display
  * 
  * @param offset Offset, to document
  */
-void EndingImageUpdateLettersSpawnDelay(u32 offset)
+static void EndingImageUpdateLettersSpawnDelay(u32 offset)
 {
     if (ENDING_DATA.oamTypes[offset] == ENDING_OAM_TYPE_NONE)
         return;
@@ -59,7 +38,7 @@ void EndingImageUpdateLettersSpawnDelay(u32 offset)
  * 
  * @param set Set to load
  */
-void EndingImageLoadTextOAM(u32 set)
+static void EndingImageLoadTextOAM(u32 set)
 {
     s32 i;
 
@@ -156,7 +135,7 @@ void EndingImageLoadTextOAM(u32 set)
  * 
  * @param line Line
  */
-void EndingImageDisplayLinePermanently(u32 line)
+static void EndingImageDisplayLinePermanently(u32 line)
 {
     s32 i;
 
@@ -189,7 +168,7 @@ void EndingImageDisplayLinePermanently(u32 line)
  * @brief 84fb0 | 204 | To document
  * 
  */
-void EndingImageLoadIGTAndPercentageGraphics(void)
+static void EndingImageLoadIGTAndPercentageGraphics(void)
 {
     s32 hoursTens;
     s32 hoursOnes;
@@ -297,7 +276,7 @@ void EndingImageLoadIGTAndPercentageGraphics(void)
  * @brief 851b4 | 164 | V-blank code for gallery, ending image and credits
  * 
  */
-void GalleryVBlank(void)
+static void GalleryVBlank(void)
 {
     u32 buffer;
     u32 bgPos;
@@ -308,32 +287,23 @@ void GalleryVBlank(void)
     if (ENDING_DATA.unk_6 == 1)
     {
         DMA_SET(3, ENDING_DATA.creditLineTilemap_1, VRAM_BASE + ENDING_DATA.creditLineOffset_1,
-            DMA_ENABLE << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1));
+            C_32_2_16(DMA_ENABLE, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1)));
         DMA_SET(3, ENDING_DATA.creditLineTilemap_2, VRAM_BASE + ENDING_DATA.creditLineOffset_2,
-            DMA_ENABLE << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2));
+            C_32_2_16(DMA_ENABLE, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2)));
 
-        buffer = 0;
-        DMA_SET(3, &buffer, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_1,
-            (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) / 2);
-        buffer = 0;
-        DMA_SET(3, &buffer, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_2,
-            (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) / 2);
+        dma_fill32(3, 0, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_1, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) * 2);
+        dma_fill32(3, 0, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_2, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) * 2);
     }
     // On odd length lines
     else if (ENDING_DATA.unk_6 != 0)
     {
         DMA_SET(3, ENDING_DATA.creditLineTilemap_1, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_1,
-            DMA_ENABLE << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1));
+            C_32_2_16(DMA_ENABLE, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1)));
         DMA_SET(3, ENDING_DATA.creditLineTilemap_2, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_2,
-            DMA_ENABLE << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2));
+            C_32_2_16(DMA_ENABLE, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2)));
 
-        buffer = 0;
-        DMA_SET(3, &buffer, VRAM_BASE + ENDING_DATA.creditLineOffset_1,
-            (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) / 2);
-        buffer = 0;
-        DMA_SET(3, &buffer, VRAM_BASE + ENDING_DATA.creditLineOffset_2,
-            (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) / 2);
-        
+        dma_fill32(3, 0, VRAM_BASE + ENDING_DATA.creditLineOffset_1, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) * 2);
+        dma_fill32(3, 0, VRAM_BASE + ENDING_DATA.creditLineOffset_2, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) * 2);
     }
 
     write16(REG_DISPCNT, ENDING_DATA.dispcnt);
@@ -342,57 +312,55 @@ void GalleryVBlank(void)
     write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
     write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
 
-    write16(REG_BG0VOFS, bgPos = gBg0YPosition / 16 & 0x1FF);
+    write16(REG_BG0VOFS, bgPos = MOD_AND(gBg0YPosition / 16, 0x200));
     write16(REG_BG1VOFS, bgPos);
-    write16(REG_BG2VOFS, gBg2YPosition / 16 & 0x1FF);
-    write16(REG_BG3VOFS, gBg3YPosition / 16 & 0x1FF);
+    write16(REG_BG2VOFS, MOD_AND(gBg2YPosition / 16, 0x200));
+    write16(REG_BG3VOFS, MOD_AND(gBg3YPosition / 16, 0x200));
 }
 
 /**
  * @brief 85318 | a8 | V-blank code for the end screen
  * 
  */
-void EndScreenVBlank(void)
+static void EndScreenVBlank(void)
 {
-    DMA_SET(3, gOamData, OAM_BASE, (DMA_ENABLE | DMA_32BIT) << 16 | OAM_SIZE / sizeof(u32));
+    DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
     write16(REG_DISPCNT, ENDING_DATA.dispcnt);
     write16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, gWrittenToBLDALPHA_H << 8 | gWrittenToBLDALPHA_L);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
     write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
 
-    write16(REG_BG1HOFS, gBg1XPosition & 0x1FF);
-    write16(REG_BG2HOFS, gBg2XPosition & 0x1FF);
-    write16(REG_BG3HOFS, gBg3XPosition & 0x1FF);
+    write16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
+    write16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
+    write16(REG_BG3HOFS, MOD_AND(gBg3XPosition, 0x200));
 }
 
 /**
  * @brief 853c0 | a8 | V-blank code for the unlocked options
  * 
  */
-void UnlockedOptionsVBlank(void)
+static void UnlockedOptionsVBlank(void)
 {
-    DMA_SET(3, gOamData, OAM_BASE, (DMA_ENABLE | DMA_32BIT) << 16 | OAM_SIZE / sizeof(u32));
+    DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
     write16(REG_DISPCNT, ENDING_DATA.dispcnt);
     write16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, gWrittenToBLDALPHA_H << 8 | gWrittenToBLDALPHA_L);
+    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBLDALPHA_H, gWrittenToBLDALPHA_L));
     write16(REG_BLDY, gWrittenToBLDY_NonGameplay);
 
-    write16(REG_WIN0H, ENDING_DATA.oamXPositions[0] << 8 | ENDING_DATA.oamXPositions[1]);
-    write16(REG_WIN0V, ENDING_DATA.oamYPositions[0] << 8 | ENDING_DATA.oamYPositions[1]);
+    write16(REG_WIN0H, C_16_2_8(ENDING_DATA.oamXPositions[0], ENDING_DATA.oamXPositions[1]));
+    write16(REG_WIN0V, C_16_2_8(ENDING_DATA.oamYPositions[0], ENDING_DATA.oamYPositions[1]));
 }
 
 /**
  * @brief 85464 | 1f8 | Initializes the credits
  * 
  */
-void CreditsInit(void)
+static void CreditsInit(void)
 {
-    u32 zero;
-
     write16(REG_IME, FALSE);
     write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
     write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
@@ -405,8 +373,7 @@ void CreditsInit(void)
     CallbackSetVblank(GalleryVBlank);
     write16(REG_IME, TRUE);
 
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam))
 
     ClearGfxRam();
 
@@ -415,8 +382,8 @@ void CreditsInit(void)
     LZ77UncompVRAM(sCreditsChozoWallBottomTileTable, VRAM_BASE + 0xD800);
     LZ77UncompVRAM(sCreditsCharactersGfx, VRAM_BASE + 0x8000);
 
-    DMA_SET(3, sCreditsChozoWallPal, PALRAM_BASE, DMA_ENABLE << 16 | sizeof(sCreditsChozoWallPal) / 2);
-    DMA_SET(3, sCreditsCharactersPal, PALRAM_BASE + 0x1A0, DMA_ENABLE << 16 | sizeof(sCreditsCharactersPal) / 2);
+    DMA_SET(3, sCreditsChozoWallPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sCreditsChozoWallPal)));
+    DMA_SET(3, sCreditsCharactersPal, PALRAM_BASE + 13 * PAL_ROW_SIZE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sCreditsCharactersPal)));
 
     write16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
     write16(REG_BG1CNT, CREATE_BGCNT(2, 31, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
@@ -448,7 +415,7 @@ void CreditsInit(void)
     ENDING_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3;
     ENDING_DATA.bldcnt = BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDALPHA_L = 16;
+    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
     gWrittenToBLDALPHA_H = 0;
     gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
 
@@ -462,7 +429,7 @@ void CreditsInit(void)
  * @param line Line
  * @return u8 To document
  */
-u8 CreditsDisplayLine(u32 line)
+static u8 CreditsDisplayLine(u32 line)
 {
     u8 i;
     s32 tile;
@@ -642,7 +609,7 @@ u8 CreditsDisplayLine(u32 line)
  * 
  * @return u8 bool, ended
  */
-u8 CreditsDisplay(void)
+static u8 CreditsDisplay(void)
 {
     u8 ended;
     s32 temp;
@@ -656,17 +623,17 @@ u8 CreditsDisplay(void)
         ended = FALSE;
         switch (ENDING_DATA.timer++)
         {
-            case 464:
+            case CONVERT_SECONDS(7.f) + CONVERT_SECONDS(11.f / 15.f):
                 ENDING_DATA.unk_1++;
                 break;
 
-            case 528:
+            case CONVERT_SECONDS(8.8f):
                 ENDING_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG2_SECOND_TARGET_PIXEL;
                 gWrittenToBLDY_NonGameplay = 0;
                 ENDING_DATA.unk_1++;
                 break;
 
-            case 560:
+            case CONVERT_SECONDS(9.f) + ONE_THIRD_SECOND:
                 ENDING_DATA.dispcnt = DCNT_BG2 | DCNT_BG3;
                 ENDING_DATA.bldcnt = 0;
                 ended = TRUE;
@@ -675,7 +642,7 @@ u8 CreditsDisplay(void)
 
         if (ENDING_DATA.unk_1 == 2)
         {
-            if (!(ENDING_DATA.endScreenTimer++ & 3))
+            if (MOD_AND(ENDING_DATA.endScreenTimer++, 4) == 0)
             {
                 if (gWrittenToBLDY_NonGameplay)
                     gWrittenToBLDY_NonGameplay--;
@@ -683,12 +650,12 @@ u8 CreditsDisplay(void)
         }
         else if (ENDING_DATA.unk_1 == 3)
         {
-            if (ENDING_DATA.timer & 1)
+            if (MOD_AND(ENDING_DATA.timer, 2))
             {
                 if (gWrittenToBLDALPHA_L)
                 {
                     gWrittenToBLDALPHA_L--;
-                    gWrittenToBLDALPHA_H = 16 - gWrittenToBLDALPHA_L;
+                    gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE - gWrittenToBLDALPHA_L;
                 }
                 else
                     ENDING_DATA.unk_1++;
@@ -748,7 +715,7 @@ u8 CreditsDisplay(void)
  * 
  * @return u8 bool, ended
  */
-u8 CreditsChozoWallMovement(void)
+static u8 CreditsChozoWallMovement(void)
 {
     u8 ended;
 
@@ -766,7 +733,7 @@ u8 CreditsChozoWallMovement(void)
             ENDING_DATA.unk_1++;
             break;
 
-        case 512:
+        case CONVERT_SECONDS(8.f) + CONVERT_SECONDS(8.f / 15.f):
             write16(REG_BG1HOFS, 0);
             ended = TRUE;
             break;
@@ -790,7 +757,7 @@ u8 CreditsChozoWallMovement(void)
  * 
  * @return u8 bool, ended (0/2)
  */
-u8 CreditsChozoWallZoom(void)
+static u8 CreditsChozoWallZoom(void)
 {
     u8 ended;
 
@@ -816,7 +783,7 @@ u8 CreditsChozoWallZoom(void)
             ENDING_DATA.unk_1++;
             break;
 
-        case 192:
+        case CONVERT_SECONDS(3.2f):
             ENDING_DATA.dispcnt = DCNT_BG0;
             ENDING_DATA.bldcnt = 0;
             ENDING_DATA.unk_1++;
@@ -825,11 +792,11 @@ u8 CreditsChozoWallZoom(void)
             gWrittenToBLDALPHA_H = 0;
             break;
 
-        case 193:
+        case CONVERT_SECONDS(3.2f) + CONVERT_SECONDS(1.f / 60):
             LZ77UncompVRAM(sCreditsChozoDrawingGfx, VRAM_BASE + 0x8000);
             break;
 
-        case 194:
+        case CONVERT_SECONDS(3.2f) + CONVERT_SECONDS(2.f / 60):
             LZ77UncompVRAM(sCreditsChozoDrawingTileTable, VRAM_BASE + 0xF800);
             ENDING_DATA.dispcnt = DCNT_BG0 | DCNT_BG1;
             ENDING_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG1_SECOND_TARGET_PIXEL;
@@ -837,23 +804,23 @@ u8 CreditsChozoWallZoom(void)
             ENDING_DATA.unk_1++;
             break;
 
-        case 800:
+        case CONVERT_SECONDS(13.f) + ONE_THIRD_SECOND:
             ENDING_DATA.dispcnt = DCNT_BG1;
             ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
             ENDING_DATA.unk_1++;
             break;
 
-        case 960:
+        case CONVERT_SECONDS(16.f):
             ended = 2;
             break;
     }
 
     if (ENDING_DATA.unk_1 == 1)
     {
-        if (!(ENDING_DATA.timer & 7))
+        if (MOD_AND(ENDING_DATA.timer, 8) == 0)
         {
-            if (gWrittenToBLDALPHA_L < 16)
+            if (gWrittenToBLDALPHA_L < BLDALPHA_MAX_VALUE)
                 gWrittenToBLDALPHA_L++;
 
             if (gWrittenToBLDALPHA_H != 0)
@@ -862,18 +829,18 @@ u8 CreditsChozoWallZoom(void)
     }
     else if (ENDING_DATA.unk_1 == 3)
     {
-        if (!(ENDING_DATA.timer & 7))
+        if (MOD_AND(ENDING_DATA.timer, 8) == 0)
         {
             if (gWrittenToBLDALPHA_L != 0)
                 gWrittenToBLDALPHA_L--;
 
-            if (gWrittenToBLDALPHA_H < 16)
+            if (gWrittenToBLDALPHA_H < BLDALPHA_MAX_VALUE)
                 gWrittenToBLDALPHA_H++;
         }
     }
     else if (ENDING_DATA.unk_1 == 4)
     {
-        if (!(ENDING_DATA.timer & 7))
+        if (MOD_AND(ENDING_DATA.timer, 8) == 0)
         {
             if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
                 gWrittenToBLDY_NonGameplay++;
@@ -887,10 +854,8 @@ u8 CreditsChozoWallZoom(void)
  * @brief 85e08 | 248 | Initializes the end screen (samus posing)
  * 
  */
-void EndScreenInit(void)
+static void EndScreenInit(void)
 {
-    u32 zero;
-
     write16(REG_IME, FALSE);
     write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
     write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
@@ -945,13 +910,12 @@ void EndScreenInit(void)
     write16(REG_BG3HOFS, 0);
     write16(REG_BG3VOFS, 0);
 
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     ENDING_DATA.endingNumber = PEN_GET_ENDING(ChozodiaEscapeGetItemCountAndEndingNumber()) & 7;
     ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ;
 
-    gWrittenToBLDALPHA_L = 16;
+    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
     gWrittenToBLDALPHA_H = 0;
     gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
 
@@ -963,7 +927,7 @@ void EndScreenInit(void)
  * 
  * @return u8 bool, ended
  */
-u8 EndScreenSamusPosing(void)
+static u8 EndScreenSamusPosing(void)
 {
     u8 ended;
     u32 temp;
@@ -1082,7 +1046,7 @@ u8 EndScreenSamusPosing(void)
                     ENDING_DATA.oamTypes[1]++;
                 }
 
-                gWrittenToBLDALPHA_H = 16 - gWrittenToBLDALPHA_L;
+                gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE - gWrittenToBLDALPHA_L;
             }
             break;
 
@@ -1090,7 +1054,7 @@ u8 EndScreenSamusPosing(void)
             if (ENDING_DATA.endScreenTimer & 3)
                 break;
 
-            if (gWrittenToBLDALPHA_L < 16)
+            if (gWrittenToBLDALPHA_L < BLDALPHA_MAX_VALUE)
                 gWrittenToBLDALPHA_L++;
             else
             {
@@ -1113,7 +1077,7 @@ u8 EndScreenSamusPosing(void)
             break;
 
         case 4:
-            if (!(ENDING_DATA.endScreenTimer & 1))
+            if (MOD_AND(ENDING_DATA.endScreenTimer, 2) == 0)
                 break;
 
             if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
@@ -1123,7 +1087,7 @@ u8 EndScreenSamusPosing(void)
             break;
 
         case 5:
-            if (ENDING_DATA.endScreenTimer & 3)
+            if (MOD_AND(ENDING_DATA.endScreenTimer, 4))
                 break;
 
             if (gWrittenToBLDY_NonGameplay)
@@ -1146,7 +1110,7 @@ u8 EndScreenSamusPosing(void)
             LZ77UncompVRAM(sEndingSamusPosingTileTable_3, VRAM_BASE + 0xD000);
 
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
             gWrittenToBLDALPHA_H = 0;
             gBg1XPosition = BLOCK_SIZE * 4;
             ENDING_DATA.oamTypes[1]++;
@@ -1160,7 +1124,7 @@ u8 EndScreenSamusPosing(void)
             LZ77UncompVRAM(sEndingSamusPosingTileTable_4, VRAM_BASE + 0xE000);
 
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
             gWrittenToBLDALPHA_H = 0;
             gBg2XPosition = BLOCK_SIZE * 4;
             ENDING_DATA.oamTypes[1]++;
@@ -1174,7 +1138,7 @@ u8 EndScreenSamusPosing(void)
             LZ77UncompVRAM(sEndingSamusPosingTileTable_5, VRAM_BASE + 0xD000);
 
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
             gWrittenToBLDALPHA_H = 0;
             gBg1XPosition = BLOCK_SIZE * 4;
             ENDING_DATA.oamTypes[1]++;
@@ -1202,7 +1166,7 @@ u8 EndScreenSamusPosing(void)
 
             ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_BG3;
             ENDING_DATA.bldcnt = 0;
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
             gWrittenToBLDALPHA_H = 0;
             gBg2XPosition = 0;
 
@@ -1215,7 +1179,7 @@ u8 EndScreenSamusPosing(void)
                 BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL;
             
             gWrittenToBLDALPHA_L = 0;
-            gWrittenToBLDALPHA_H = 16;
+            gWrittenToBLDALPHA_H = BLDALPHA_MAX_VALUE;
             ENDING_DATA.oamTypes[0] = 2;
             ENDING_DATA.oamTypes[1]++;
             break;
@@ -1239,7 +1203,7 @@ u8 EndScreenSamusPosing(void)
             break;
 
         case 19:
-            DMA_SET(3, sEndingPosingPal, PALRAM_BASE, DMA_ENABLE << 16 | 0x50);
+            DMA_SET(3, sEndingPosingPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, 0x50));
             ENDING_DATA.oamTypes[1]++;
             break;
 
@@ -1247,13 +1211,13 @@ u8 EndScreenSamusPosing(void)
             ENDING_DATA.dispcnt = DCNT_BG2 | DCNT_BG3;
             ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-            gWrittenToBLDALPHA_L = 16;
+            gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
             gWrittenToBLDALPHA_H = 0;
             ended++;
             break;
     }
 
-    if (!(ENDING_DATA.endScreenTimer & 7))
+    if (MOD_AND(ENDING_DATA.endScreenTimer, 8) == 0)
         gBg3XPosition++;
 
     return ended;
@@ -1263,9 +1227,8 @@ u8 EndScreenSamusPosing(void)
  * @brief 867b4 | 29c | Initializes the ending image sequence
  * 
  */
-void EndingImageInit(void)
+static void EndingImageInit(void)
 {
-    u32 zero;
     u32 endingNbr;
     u32 energyNbr;
     u32 missilesNbr;
@@ -1285,8 +1248,7 @@ void EndingImageInit(void)
     CallbackSetVblank(GalleryVBlank);
     write16(REG_IME, TRUE);
 
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     pen = ChozodiaEscapeGetItemCountAndEndingNumber();
 
@@ -1302,7 +1264,7 @@ void EndingImageInit(void)
     LZ77UncompVRAM(sEndingImagesTopTileTablePointers[endingNbr], VRAM_BASE + 0xE000);
     LZ77UncompVRAM(sEndingImagesHalfTileTablePointers[endingNbr], VRAM_BASE + 0xF800);
     BitFill(3, 0x4FF04FF, VRAM_BASE + 0xE800, 0x800, 0x20);
-    DMA_SET(3, sEndingImagesPalPointers[endingNbr], PALRAM_BASE, DMA_ENABLE << 16 | 0x100);
+    DMA_SET(3, sEndingImagesPalPointers[endingNbr], PALRAM_BASE, C_32_2_16(DMA_ENABLE, 0x100));
 
     ENDING_DATA.completionPercentage = energyNbr + missilesNbr + superMissilesNbr + powerBombNbr + abilityCount;
 
@@ -1317,7 +1279,7 @@ void EndingImageInit(void)
     else
         LZ77UncompVRAM(sEndingImageTextGfx, VRAM_BASE + 0x11000);
 
-    DMA_SET(3, sEndingImageTextPal, PALRAM_OBJ, DMA_ENABLE << 16 | sizeof(sEndingImageTextPal) / 2);
+    DMA_SET(3, sEndingImageTextPal, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sEndingImageTextPal)));
 
     EndingImageLoadIGTAndPercentageGraphics();
     write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
@@ -1347,7 +1309,7 @@ void EndingImageInit(void)
     ENDING_DATA.dispcnt = DCNT_OBJ | DCNT_BG0 | DCNT_BG1;
     ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    gWrittenToBLDALPHA_L = 16;
+    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
     gWrittenToBLDALPHA_H = 0;
     gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
 
@@ -1358,7 +1320,7 @@ void EndingImageInit(void)
  * @brief 86a50 | 23c | Display the text on an ending image
  * 
  */
-void EndingImageDisplayText(void)
+static void EndingImageDisplayText(void)
 {
     u16* dst;
     const u16* src;
@@ -1398,7 +1360,7 @@ void EndingImageDisplayText(void)
 
         src = ENDING_DATA.oamFramePointers[i];
         part = *src++;
-        nextSlot += part & 0xFF;
+        nextSlot += MOD_AND(part, 0x100);
 
         for (; currSlot < nextSlot; currSlot++)
         {
@@ -1410,7 +1372,7 @@ void EndingImageDisplayText(void)
             part = *src++;
             *dst++ = part;
 
-            gOamData[currSlot].split.x = (part + ENDING_DATA.oamXPositions[i]) & 0x1FF;
+            gOamData[currSlot].split.x = MOD_AND(part + ENDING_DATA.oamXPositions[i], 0x200);
 
             *dst++ = *src++;
             gOamData[currSlot].split.paletteNum = palette;
@@ -1428,7 +1390,7 @@ void EndingImageDisplayText(void)
 
         src = sEndingImageOam_NewRecord;
         part = *src++;
-        nextSlot += part & 0xFF;
+        nextSlot += MOD_AND(part, 0x100);
 
         for (; currSlot < nextSlot; currSlot++)
         {
@@ -1440,7 +1402,7 @@ void EndingImageDisplayText(void)
             part = *src++;
             *dst++ = part;
 
-            gOamData[currSlot].split.x = (part + 48) & 0x1FF;
+            gOamData[currSlot].split.x = MOD_AND(part + 48, 0x200);
 
             *dst++ = *src++;
             gOamData[currSlot].split.paletteNum = palette;
@@ -1457,7 +1419,7 @@ void EndingImageDisplayText(void)
  * 
  * @return u8 bool, ended
  */
-u8 EndingImageDisplay(void)
+static u8 EndingImageDisplay(void)
 {
     u8 ended;
     u8 i;
@@ -1470,58 +1432,58 @@ u8 EndingImageDisplay(void)
             ENDING_DATA.unk_8++;
             break;
 
-        case 30:
+        case CONVERT_SECONDS(.5f):
             EndingImageLoadTextOAM(ENDING_IMAGE_OAM_SET_CLEAR_TIME);
             ENDING_DATA.unk_1 = TRUE;
             break;
 
-        case 110:
+        case CONVERT_SECONDS(1.f) + CONVERT_SECONDS(5.f / 6.f):
             EndingImageDisplayLinePermanently(ENDING_IMAGE_LINE_CLEAR_TIME);
             break;
 
-        case 180:
+        case CONVERT_SECONDS(3.f):
             EndingImageDisplayLinePermanently(ENDING_IMAGE_LINE_TIMER);
             if (gEndingFlags & ENDING_FLAG_NEW_TIME_ATTACK_RECORD)
                 ENDING_DATA.hasNewRecord++;
             break;
 
-        case 330:
+        case CONVERT_SECONDS(5.5f):
             EndingImageLoadTextOAM(ENDING_IMAGE_OAM_SET_YOUR_RATE);
             break;
 
-        case 375:
+        case CONVERT_SECONDS(6.25f):
             if (ENDING_DATA.language == LANGUAGE_JAPANESE || ENDING_DATA.language == LANGUAGE_ENGLISH ||
                 ENDING_DATA.language == LANGUAGE_ITALIAN)
                 EndingImageDisplayLinePermanently(ENDING_IMAGE_LINE_YOUR_RATE);
             break;
 
-        case 380:
+        case CONVERT_SECONDS(6.f) + ONE_THIRD_SECOND:
             if (ENDING_DATA.language == LANGUAGE_JAPANESE || ENDING_DATA.language == LANGUAGE_ENGLISH ||
                 ENDING_DATA.language == LANGUAGE_ITALIAN)
                 EndingImageLoadTextOAM(ENDING_IMAGE_OAM_SET_COLLECTING);
             break;
 
-        case 460:
+        case CONVERT_SECONDS(7.f) + TWO_THIRD_SECOND:
             EndingImageDisplayLinePermanently(ENDING_IMAGE_LINE_COLLECTING);
             break;
 
-        case 530:
+        case CONVERT_SECONDS(8.f) + CONVERT_SECONDS(5.f / 6.f):
             EndingImageDisplayLinePermanently(ENDING_IMAGE_LINE_PERCENTAGE);
             break;
 
-        case 780:
+        case CONVERT_SECONDS(13.f):
             if (ENDING_DATA.language != LANGUAGE_HIRAGANA)
                 EndingImageDisplayLinePermanently(ENDING_IMAGE_LINE_NEXT_MISSION);
             break;
 
-        case 1376:
+        case CONVERT_SECONDS(22.f) + CONVERT_SECONDS(14.f / 15.f):
             if (gChangedInput & (KEY_A | KEY_B | KEY_START))
-                FadeMusic(CONVERT_SECONDS(4.f) + CONVERT_SECONDS(4.f / 15)); // 4.25 + 1 * DELTA_TIME
+                FadeMusic(CONVERT_SECONDS(4.25f) + CONVERT_SECONDS(1.f / 60));
             else
                 ENDING_DATA.timer--;
             break;
 
-        case 1664:
+        case CONVERT_SECONDS(27.f) + CONVERT_SECONDS(11.f / 15.f):
             ended = TRUE;
     }
 
@@ -1540,10 +1502,10 @@ u8 EndingImageDisplay(void)
         }
     }
 
-    if (ENDING_DATA.timer > 1380)
+    if (ENDING_DATA.timer > CONVERT_SECONDS(23.f))
         return ended;
 
-    if (ENDING_DATA.timer > 809 && gButtonInput & (KEY_R | KEY_L))
+    if (ENDING_DATA.timer >= CONVERT_SECONDS(13.5f) && gButtonInput & (KEY_R | KEY_L))
         return ended;
 
     if (ENDING_DATA.unk_1 == TRUE)
@@ -1561,10 +1523,8 @@ u8 EndingImageDisplay(void)
  * @brief 86e78 | 158 | Initializes the unlocked options
  * 
  */
-void UnlockedOptionsInit(void)
+static void UnlockedOptionsInit(void)
 {
-    u32 zero;
-
     write16(REG_IME, FALSE);
     write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
     write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
@@ -1577,15 +1537,14 @@ void UnlockedOptionsInit(void)
     CallbackSetVblank(UnlockedOptionsVBlank);
     write16(REG_IME, TRUE);
 
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     ClearGfxRam();
 
     LZ77UncompVRAM(sUnlockedOptionsTileTable, VRAM_BASE + 0x8000);
     BitFill(3, -1, VRAM_BASE + 0x7FE0, 0x20, 32);
     BitFill(3, 0xF3FFF3FF, VRAM_BASE + 0x8800, 0x800, 32);
 
-    DMA_SET(3, sUnlockedOptionsPal, PALRAM_BASE + 0x1E0, DMA_ENABLE << 16 | ARRAY_SIZE(sUnlockedOptionsPal));
+    DMA_SET(3, sUnlockedOptionsPal, PALRAM_BASE + 15 * PAL_ROW_SIZE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sUnlockedOptionsPal)));
 
     write16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
     write16(REG_BG1CNT, CREATE_BGCNT(0, 17, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
@@ -1599,7 +1558,7 @@ void UnlockedOptionsInit(void)
     ENDING_DATA.dispcnt = 0;
     ENDING_DATA.bldcnt = 0;
 
-    gWrittenToBLDALPHA_L = 16;
+    gWrittenToBLDALPHA_L = BLDALPHA_MAX_VALUE;
     gWrittenToBLDALPHA_H = 0;
 
     gWrittenToBLDY_NonGameplay = BLDY_MAX_VALUE;
@@ -1612,7 +1571,7 @@ void UnlockedOptionsInit(void)
  * 
  * @return u8 0, 1 pop up ended, 2 ended
  */
-u8 UnlockedOptionsPopUp(void)
+static u8 UnlockedOptionsPopUp(void)
 {
     u32 msgNumber;
     u8 ended;
@@ -1637,19 +1596,19 @@ u8 UnlockedOptionsPopUp(void)
             ENDING_DATA.oamTypes[0] = 0;
             break;
 
-        case 32:
+        case CONVERT_SECONDS(.5f) + CONVERT_SECONDS(1.f / 30):
             ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_WIN0;
             write16(REG_WININ, 3);
             write16(REG_WINOUT, 0);
             ENDING_DATA.unk_1++;
 
-            ENDING_DATA.oamXPositions[0] = 0x78;
-            ENDING_DATA.oamXPositions[1] = 0x78;
-            ENDING_DATA.oamYPositions[0] = 0x50;
-            ENDING_DATA.oamYPositions[1] = 0x50;
+            ENDING_DATA.oamXPositions[0] = SCREEN_X_MIDDLE;
+            ENDING_DATA.oamXPositions[1] = SCREEN_X_MIDDLE;
+            ENDING_DATA.oamYPositions[0] = SCREEN_Y_MIDDLE;
+            ENDING_DATA.oamYPositions[1] = SCREEN_Y_MIDDLE;
             break;
 
-        case 128:
+        case CONVERT_SECONDS(2.f) + CONVERT_SECONDS(2.f / 15.f):
             ENDING_DATA.timer--;
             break;
     }
@@ -1708,6 +1667,25 @@ u8 UnlockedOptionsPopUp(void)
 
     return ended;
 }
+
+static CreditsFunc_T sCreditsFunctionPointers[3] = {
+    [0] = CreditsDisplay,
+    [1] = CreditsChozoWallMovement,
+    [2] = CreditsChozoWallZoom
+};
+
+static CreditsFunc_T sEndScreenFunctionPointers[1] = {
+    [0] = EndScreenSamusPosing
+};
+
+static CreditsFunc_T sEndingImageFunctionPointers[1] = {
+    [0] = EndingImageDisplay
+};
+
+static CreditsFunc_T sUnlockedOptionsFunctionPointers[2] = {
+    [0] = UnlockedOptionsPopUp,
+    [1] = UnlockedOptionsPopUp
+};
 
 /**
  * @brief 871dc | 208 | Subroutine for the credits
@@ -1849,9 +1827,8 @@ u32 CreditsSubroutine(void)
  * @brief 873e4 | 238 | Initializes the gallery
  * 
  */
-void GalleryInit(void)
+static void GalleryInit(void)
 {
-    u32 zero;
     u32 endingNbr;
     u32 i;
     u32 bit;
@@ -1871,9 +1848,7 @@ void GalleryInit(void)
     if (gGameModeSub1 == 0)
     {
         ClearGfxRam();
-
-        zero = 0;
-        DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
+        dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     }
 
     endingNbr = ENDING_DATA.endingNumber;
@@ -1909,7 +1884,7 @@ void GalleryInit(void)
 
     BitFill(3, 0x4FF04FF, VRAM_BASE + 0xE800, 0x800, 32);
 
-    DMA_SET(3, sEndingImagesPalPointers[endingNbr], PALRAM_BASE, DMA_ENABLE << 16 | PALRAM_SIZE / 4);
+    DMA_SET(3, sEndingImagesPalPointers[endingNbr], PALRAM_BASE, C_32_2_16(DMA_ENABLE, 16 * PAL_ROW));
 
     write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
     write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
@@ -1948,7 +1923,7 @@ void GalleryInit(void)
  * 
  * @return u32 
  */
-u32 GalleryDisplay(void)
+static u32 GalleryDisplay(void)
 {
     u8 endingNbr;
     u32 ended;
@@ -2083,7 +2058,7 @@ u32 GallerySubroutine(void)
         case 5:
             if (gWrittenToBLDY_NonGameplay < BLDY_MAX_VALUE)
             {
-                if (ENDING_DATA.timer++ & 1)
+                if (MOD_AND(ENDING_DATA.timer++, 2))
                     gWrittenToBLDY_NonGameplay++;
 
                 break;
