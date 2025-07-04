@@ -844,7 +844,7 @@ u32 TitleScreenProcessBottomSparkle(struct TitleScreenOamTiming* pTiming, struct
     {
         case 0:
             // Initialize OAM
-            DmaTransfer(3, &sTitleScreenBottomSparkleBaseOam, pOam, sizeof(sTitleScreenBottomSparkleBaseOam), 0x10);
+            DmaTransfer(3, &sTitleScreenBottomSparkleBaseOam, pOam, sizeof(sTitleScreenBottomSparkleBaseOam), 16);
             pTiming->stage++;
             pTiming->timer = 0;
             break;
@@ -1169,12 +1169,9 @@ void TitleScreenSetIdleStage(u8 stage)
  */
 void TitleScreenInit(void)
 {
-    u32 zero;
-
     CallbackSetVblank(TitleScreenVBlank_Empty);
-    
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, (DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16 | sizeof(gNonGameplayRam) / 4);
+
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam))
 
     TITLE_SCREEN_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
@@ -1191,8 +1188,7 @@ void TitleScreenInit(void)
     
     gOamXOffset_NonGameplay = gOamYOffset_NonGameplay = 0;
 
-    zero = 0;
-    DMA_SET(3, &zero, &gSamusPhysics, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gSamusPhysics) / sizeof(u32)));
+    dma_fill32(3, 0, &gSamusPhysics, sizeof(gSamusPhysics));
 
     gBootDebugActive = FALSE;
     gDebugMode = FALSE;

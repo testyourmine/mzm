@@ -486,8 +486,6 @@ static void unk_81ad8(void)
  */
 static void TourianEscapeInit(void)
 {
-    u32 zero;
-
     write16(REG_IME, FALSE);
     write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
     write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
@@ -505,8 +503,7 @@ static void TourianEscapeInit(void)
     CallbackSetVblank(NULL);
     write16(REG_IME, TRUE);
 
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     ClearGfxRam();
 
     LZ77UncompVRAM(sMotherShipBlowingUpExplosionsGfx, VRAM_OBJ);

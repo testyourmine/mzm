@@ -281,11 +281,9 @@ void GameOverUpdateTextGfx(void)
  */
 void GameOverInit(void)
 {
-    u32 zero;
-
     CallbackSetVblank(GameOverVBlank_Empty);
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));
+
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
@@ -347,11 +345,9 @@ void GameOverInit(void)
  */
 void GameOverInit_Debug(void)
 {
-    u32 zero;
-
     CallbackSetVblank(GameOverVBlank_Empty);
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));
+
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 

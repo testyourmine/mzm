@@ -425,8 +425,6 @@ void ChozodiaEscapeProcessOam_2(void)
  */
 void ChozodiaEscapeInit(void)
 {
-    u32 zero;
-
     write16(REG_IME, FALSE);
     write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
     write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
@@ -474,8 +472,7 @@ void ChozodiaEscapeInit(void)
     write16(REG_BG3HOFS, 0);
     write16(REG_BG3VOFS, 0);
 
-    zero = 0;
-    DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / 4));
+    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     gNextOamSlot = 0;
 

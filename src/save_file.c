@@ -143,8 +143,6 @@ void SramWrite_FileScreenOptionsUnlocked(void)
  */
 void SramRead_FileScreenOptionsUnlocked(void)
 {
-    u16 buffer;
-    u16* ptr;
     u32 fileASanityCheck;
     u32 fileBSanityCheck;
     u32 fileCSanityCheck;
@@ -157,27 +155,20 @@ void SramRead_FileScreenOptionsUnlocked(void)
     // even though only the one for file A actually matters
     if (fileASanityCheck)
     {
-        ptr = &buffer;
-        buffer = USHORT_MAX;
-        DMA_SET(3, ptr, &sSramEwramPointer->fileScreenOptions_fileA,
-            (DMA_ENABLE | DMA_SRC_FIXED) << 16 | sizeof(sSramEwramPointer->fileScreenOptions_fileA) / 2);
+        dma_fill16(3, USHORT_MAX, &sSramEwramPointer->fileScreenOptions_fileA, sizeof(sSramEwramPointer->fileScreenOptions_fileA));
 
         if (fileCSanityCheck)
         {
-            buffer = USHORT_MAX;
-            DMA_SET(3, ptr, &sSramEwramPointer->fileScreenOptions_fileC,
-                (DMA_ENABLE | DMA_SRC_FIXED) << 16 | sizeof(sSramEwramPointer->fileScreenOptions_fileC) / 2);
+            dma_fill16(3, USHORT_MAX, &sSramEwramPointer->fileScreenOptions_fileC, sizeof(sSramEwramPointer->fileScreenOptions_fileC));
 
             if (fileBSanityCheck)
             {
-                buffer = USHORT_MAX;
-                DMA_SET(3, ptr, &sSramEwramPointer->fileScreenOptions_fileB,
-                    (DMA_ENABLE | DMA_SRC_FIXED) << 16 | sizeof(sSramEwramPointer->fileScreenOptions_fileB) / 2);
+                dma_fill16(3, USHORT_MAX, &sSramEwramPointer->fileScreenOptions_fileB, sizeof(sSramEwramPointer->fileScreenOptions_fileB));
             }
             else
             {
                 DmaTransfer(3, &sSramEwramPointer->fileScreenOptions_fileB, &sSramEwramPointer->fileScreenOptions_fileA,
-                    sizeof(sSramEwramPointer->fileScreenOptions_fileA), 0x10);
+                    sizeof(sSramEwramPointer->fileScreenOptions_fileA), 16);
                 fileASanityCheck = 0;
                 DoSramOperation(SRAM_OPERATION_WRITE_FILE_SCREEN_OPTIONS);
             }
@@ -185,14 +176,14 @@ void SramRead_FileScreenOptionsUnlocked(void)
         else
         {
             DmaTransfer(3, &sSramEwramPointer->fileScreenOptions_fileC, &sSramEwramPointer->fileScreenOptions_fileA,
-                sizeof(sSramEwramPointer->fileScreenOptions_fileA), 0x10);
+                sizeof(sSramEwramPointer->fileScreenOptions_fileA), 16);
             fileASanityCheck = 0;
             DoSramOperation(SRAM_OPERATION_WRITE_FILE_SCREEN_OPTIONS);
 
             if (fileBSanityCheck)
             {
                 DmaTransfer(3, &sSramEwramPointer->fileScreenOptions_fileA, &sSramEwramPointer->fileScreenOptions_fileB,
-                    sizeof(sSramEwramPointer->fileScreenOptions_fileB), 0x10);
+                    sizeof(sSramEwramPointer->fileScreenOptions_fileB), 16);
                 DoSramOperation(1);
             }
         }
@@ -200,12 +191,12 @@ void SramRead_FileScreenOptionsUnlocked(void)
     else
     {
         DmaTransfer(3, &sSramEwramPointer->fileScreenOptions_fileA, &sSramEwramPointer->fileScreenOptions_fileB,
-            sizeof(sSramEwramPointer->fileScreenOptions_fileB), 0x10);
+            sizeof(sSramEwramPointer->fileScreenOptions_fileB), 16);
         DoSramOperation(1);
         if (fileCSanityCheck != 0)
         {
             DmaTransfer(3, &sSramEwramPointer->fileScreenOptions_fileA, &sSramEwramPointer->fileScreenOptions_fileC,
-                sizeof(sSramEwramPointer->fileScreenOptions_fileC), 0x10);
+                sizeof(sSramEwramPointer->fileScreenOptions_fileC), 16);
             DoSramOperation(2);
         }
     }
@@ -218,7 +209,7 @@ void SramRead_FileScreenOptionsUnlocked(void)
     
     // Sram is considered corrupted, fully clear it
     EraseSram();
-    DmaTransfer(3, &sFileScreenOptionsUnlocked_Empty, &gFileScreenOptionsUnlocked, sizeof(gFileScreenOptionsUnlocked), 0x10);
+    DmaTransfer(3, &sFileScreenOptionsUnlocked_Empty, &gFileScreenOptionsUnlocked, sizeof(gFileScreenOptionsUnlocked), 16);
     SramWrite_FileScreenOptionsUnlocked();
 }
 
@@ -332,7 +323,7 @@ u32 SramProcessIntroSave(void)
         case 3:
             // Make a backup of the file
             DmaTransfer(3, &sSramEwramPointer->files[gMostRecentSaveFile], &sSramEwramPointer->filesCopy[gMostRecentSaveFile],
-                sizeof(struct SaveFile), 0x10);
+                sizeof(struct SaveFile), 16);
             gSramOperationStage++;
             break;
 
@@ -458,7 +449,7 @@ u32 SramProcessEndingSave(void)
         case 4:
             // Make a backup of the file
             DmaTransfer(3, &sSramEwramPointer->files[gMostRecentSaveFile], &sSramEwramPointer->filesCopy[gMostRecentSaveFile],
-                sizeof(struct SaveFile), 0x10);
+                sizeof(struct SaveFile), 16);
             gSramOperationStage++;
             break;
 
@@ -610,7 +601,7 @@ u32 SramProcessEndingSave_Debug(void)
         case 4:
             // Make a backup of the file
             DmaTransfer(3, &sSramEwramPointer->files[gMostRecentSaveFile], &sSramEwramPointer->filesCopy[gMostRecentSaveFile],
-                sizeof(struct SaveFile), 0x10);
+                sizeof(struct SaveFile), 16);
             gSramOperationStage++;
             break;
 
@@ -673,7 +664,7 @@ u32 SramSaveFile(void)
         case 4:
             // Make a backup of the file
             DmaTransfer(3, &sSramEwramPointer->files[gMostRecentSaveFile], &sSramEwramPointer->filesCopy[gMostRecentSaveFile],
-                sizeof(struct SaveFile), 0x10);
+                sizeof(struct SaveFile), 16);
             gSramOperationStage++;
             break;
 
@@ -1137,9 +1128,9 @@ void SramWrite_Arrays(void)
 
     dst = &pFile->worldData;
     
-    DmaTransfer(3, gVisitedMinimapTiles, dst->visitedMinimapTiles, sizeof(dst->visitedMinimapTiles), 0x10);
-    DmaTransfer(3, gHatchesOpened, dst->hatchesOpened, sizeof(dst->hatchesOpened), 0x10);
-    DmaTransfer(3, gEventsTriggered, dst->eventsTriggered, sizeof(dst->eventsTriggered), 0x10);
+    DmaTransfer(3, gVisitedMinimapTiles, dst->visitedMinimapTiles, sizeof(dst->visitedMinimapTiles), 16);
+    DmaTransfer(3, gHatchesOpened, dst->hatchesOpened, sizeof(dst->hatchesOpened), 16);
+    DmaTransfer(3, gEventsTriggered, dst->eventsTriggered, sizeof(dst->eventsTriggered), 16);
 
     offset = 0;
     src = (u8*)gNeverReformBlocks;
@@ -1150,7 +1141,7 @@ void SramWrite_Arrays(void)
 
         size = gNumberOfNeverReformBlocks[i] * 2;
         DmaTransfer(3, &src[i * MINIMAP_SIZE * 16],
-            &dst->neverReformBlocksBroken[offset], size, 0x10);
+            &dst->neverReformBlocksBroken[offset], size, 16);
         offset += size;
     }
 
@@ -1163,7 +1154,7 @@ void SramWrite_Arrays(void)
             continue;
 
         DmaTransfer(3, &src[i * MAX_AMOUNT_OF_ITEMS_PER_AREA * sizeof(struct ItemInfo)],
-            &dst->itemsCollected[offset], size, 0x10);
+            &dst->itemsCollected[offset], size, 16);
         offset += size;
     }
 }
@@ -1271,7 +1262,6 @@ void SramWrite_MostRecentSaveFile(void)
  */
 void SramRead_MostRecentSaveFile(void)
 {
-    u16 buffer;
     u32 error;
     s32 i;
     u16 checksum;
@@ -1327,10 +1317,7 @@ void SramRead_MostRecentSaveFile(void)
         return;
     }
 
-    ptr = &buffer;
-    buffer = USHORT_MAX;
-    DMA_SET(3, &buffer, &sSramEwramPointer->mostRecentFileSave,
-        C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, sizeof(sSramEwramPointer->mostRecentFileSave) / 2));
+    dma_fill16(3, USHORT_MAX, &sSramEwramPointer->mostRecentFileSave, sizeof(sSramEwramPointer->mostRecentFileSave));
 
     gMostRecentSaveFile = 0;
 }
@@ -1384,7 +1371,6 @@ void SramWrite_SoundMode(void)
  */
 void SramRead_SoundMode(void)
 {
-    u16 buffer;
     u32 error;
     s32 i;
     u16 checksum;
@@ -1439,10 +1425,7 @@ void SramRead_SoundMode(void)
         return;
     }
 
-    ptr = &buffer;
-    buffer = USHORT_MAX;
-    DMA_SET(3, &buffer, &sSramEwramPointer->soundModeSave,
-        (DMA_ENABLE | DMA_SRC_FIXED) << 16 | sizeof(sSramEwramPointer->soundModeSave) / 2);
+    dma_fill16(3, USHORT_MAX, &sSramEwramPointer->soundModeSave, sizeof(sSramEwramPointer->soundModeSave));
 
     gStereoFlag = FALSE;
 }
@@ -1503,7 +1486,6 @@ void SramWrite_Language(void)
  */
 u32 SramRead_Language(void)
 {
-    u16 buffer;
     struct SaveValue* pSave;
     u32 error;
     s32 i;
@@ -1575,15 +1557,11 @@ u32 SramRead_Language(void)
         }
         else
         {
-            buffer = 0;
-            DMA_SET(3, &buffer, &sSramEwramPointer->languagesSave[0],
-                (DMA_ENABLE | DMA_SRC_FIXED) << 16 | sizeof(sSramEwramPointer->languagesSave[0]) / 2);
+            dma_fill16(3, 0, &sSramEwramPointer->languagesSave[0], sizeof(sSramEwramPointer->languagesSave[0]));
 
             DoSramOperation(SRAM_OPERATION_SAVE_LANGUAGE);
 
-            buffer = 0;
-            DMA_SET(3, &buffer, &sSramEwramPointer->languagesSave[1],
-                (DMA_ENABLE | DMA_SRC_FIXED) << 16 | sizeof(sSramEwramPointer->languagesSave[1]) / 2);
+            dma_fill16(3, 0, &sSramEwramPointer->languagesSave[1], sizeof(sSramEwramPointer->languagesSave[1]));
 
             DoSramOperation(SRAM_OPERATION_SAVE_LANGUAGE2);
         }
@@ -1900,7 +1878,7 @@ u32 SramCopyFile(u8 src, u8 dst)
             gSaveFilesInfo[dst] = gSaveFilesInfo[src];
 
             // Copy file
-            DmaTransfer(3, &pSram->files[src], &pSram->files[dst], sizeof(struct SaveFile), 0x10);
+            DmaTransfer(3, &pSram->files[src], &pSram->files[dst], sizeof(struct SaveFile), 16);
             gSramOperationStage++;
             break;
 
@@ -1913,7 +1891,7 @@ u32 SramCopyFile(u8 src, u8 dst)
 
         case 2:
             // Copy copy of the file
-            DmaTransfer(3, &pSram->filesCopy[src], &pSram->filesCopy[dst], sizeof(struct SaveFile), 0x10);
+            DmaTransfer(3, &pSram->filesCopy[src], &pSram->filesCopy[dst], sizeof(struct SaveFile), 16);
             gSramOperationStage++;
             break;
 

@@ -10,7 +10,6 @@
  */
 void InitializeAudio(void)
 {
-    vu16 zero;
     u8 i;
 
     if (gMusicInfo.occupied)
@@ -43,21 +42,18 @@ void InitializeAudio(void)
     gSoundCodeCPointer = (SoundCodeCFunc_T)(gSoundCodeC + 1);
     DMA_SET(3, CallSoundCodeC, gSoundCodeC, C_32_2_16(DMA_ENABLE, sizeof(gSoundCodeC) / 2));
 
-    zero = 0;
-    DMA_SET(3, &zero, &gMusicInfo, C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), 0xE));
+    dma_fill16(3, 0, &gMusicInfo, 28);
 
     gMusicInfo.unk_9 = (u8)gUnk_Audio0x64;
 
     for (i = 0; i < ARRAY_SIZE(gPsgSounds); i++)
     {
-        zero = 0;
-        DMA_SET(3, &zero, &gPsgSounds[i], C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), sizeof(struct PSGSoundData) / 2));
+        dma_fill16(3, 0, &gPsgSounds[i], sizeof(gPsgSounds[i]));
     }
 
     for (i = 0; i < (u16)gNumMusicPlayers; i++)
     {
-        zero = 0;
-        DMA_SET(3, &zero, sMusicTrackDataRom[i].pTrack, C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), 0x16));
+        dma_fill16(3, 0, sMusicTrackDataRom[i].pTrack, 44);
     }
 
     for (i = 0; i < (u16)gNumMusicPlayers; i++)
@@ -67,24 +63,22 @@ void InitializeAudio(void)
         sMusicTrackDataRom[i].pTrack->unk_1D = sMusicTrackDataRom[i].unk_A;
     }
 
-    DoSoundAction((u32)gUnk_Audio0x194F700); // SOUND_ACTION_DISABLE_STEREO | SOUND_ACTION_PWM(9) | SOUND_ACTION_FREQ_INDEX(SOUND_MODE_FREQ_13379) | SOUND_ACTION_VOLUME(15) | SOUND_ACTION_MAX_CHANNELS(7)
+     // SOUND_ACTION_DISABLE_STEREO | SOUND_ACTION_PWM(9) | SOUND_ACTION_FREQ_INDEX(SOUND_MODE_FREQ_13379) | SOUND_ACTION_VOLUME(15) | SOUND_ACTION_MAX_CHANNELS(7)
+    DoSoundAction((u32)gUnk_Audio0x194F700);
 
     for (i = 0; i < gMusicInfo.maxSoundChannels; i++)
     {
-        zero = 0;
-        DMA_SET(3, &zero, &gMusicInfo.soundChannels[i], C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), sizeof(struct SoundChannel) / 2));
+        dma_fill16(3, 0, &gMusicInfo.soundChannels[i], sizeof(gMusicInfo.soundChannels[i]));
     }
 
     for (i = 0; i < ARRAY_SIZE(gSoundChannelBackup); i++)
     {
-        zero = 0;
-        DMA_SET(3, &zero, &gSoundChannelBackup[i], C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), sizeof(struct SoundChannelBackup) / 2));
+        dma_fill16(3, 0, &gSoundChannelBackup[i], sizeof(gSoundChannelBackup[i]));
     }
 
     for (i = 0; i < (u16)gNumMusicPlayers; i++)
     {
-        zero = 0;
-        DMA_SET(3, &zero, &gSoundQueue[i], C_32_2_16((DMA_ENABLE | DMA_SRC_FIXED), sizeof(struct SoundQueue) / 2));
+        dma_fill16(3, 0, &gSoundQueue[i], sizeof(gSoundQueue[i]));
     }
 
     gMusicInfo.occupied = FALSE;

@@ -7973,7 +7973,6 @@ void SamusUpdateArmCannonPositionOffset(u8 direction)
 void SamusInit(void)
 {
     u8 i;
-    u32 buffer;
 
     if (gPauseScreenFlag == 0)
     {
@@ -7991,21 +7990,10 @@ void SamusInit(void)
         if (!gIsLoadingFile)
         {
             // Zero out most of samus's data
-            buffer = 0;
-            DMA_SET(3, &buffer, &gSamusData,
-                C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gSamusData) / sizeof(u32)));
-            
-            buffer = 0;
-            DMA_SET(3, &buffer, &gEquipment,
-                C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gEquipment) / sizeof(u32)));
-            
-            buffer = 0;
-            DMA_SET(3, &buffer, &gSamusWeaponInfo,
-                C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gSamusWeaponInfo) / sizeof(u32)));
-            
-            buffer = 0;
-            DMA_SET(3, &buffer, &gScrewSpeedAnimation,
-                C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gScrewSpeedAnimation) / sizeof(u32)));
+            dma_fill32(3, 0, &gSamusData, sizeof(gSamusData));
+            dma_fill32(3, 0, &gEquipment, sizeof(gEquipment));
+            dma_fill32(3, 0, &gSamusWeaponInfo, sizeof(gSamusWeaponInfo));
+            dma_fill32(3, 0, &gScrewSpeedAnimation, sizeof(gScrewSpeedAnimation));
 
             // Clear env effects
             for (i = 0; i < ARRAY_SIZE(gSamusEnvironmentalEffects); i++)
@@ -8021,8 +8009,7 @@ void SamusInit(void)
         else
         {
             // Clear physics
-            buffer = 0;
-            DMA_SET(3, &buffer, &gSamusPhysics, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gSamusPhysics) / sizeof(u32)));
+            dma_fill32(3, 0, &gSamusPhysics, sizeof(gSamusPhysics));
         }
     }
 }

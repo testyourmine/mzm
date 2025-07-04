@@ -41,21 +41,14 @@ static void LinkSendRecvDone(void);
  */
 u8 FusionGalleryLinkProcess(void)
 {
-    u16 buffer;
-    u16* ptr;
-
     gIoTransferInfo.result = TRANSFER_RESULT_NONE;
     APPLY_DELTA_TIME_INC(gIoTransferInfo.timer);
 
     switch (gIoTransferInfo.linkStage)
     {
         case LINK_STAGE_INIT:
-            ptr = &buffer;
-            buffer = 0;
-            DMA_SET(3, ptr, gSendCmd, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, CMD_LENGTH));
-
-            buffer = 0;
-            DMA_SET(3, ptr, gRecvCmds, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, MAX_LINK_PLAYERS * CMD_LENGTH));
+            dma_fill16(3, 0, gSendCmd, sizeof(gSendCmd));
+            dma_fill16(3, 0, gRecvCmds, sizeof(gRecvCmds));
 
             gLinkStatus = 0;
             gShouldAdvanceLinkState = 0;

@@ -885,7 +885,6 @@ void FileScreenProcessText(void)
 {
     u8 newIdQueue[2];
     u32* dst;
-    vu16 buffer;
     s32 var_0;
     u8 result;
     u32 dstType;
@@ -909,32 +908,22 @@ void FileScreenProcessText(void)
 
             if (dstType == 3 || dstType == 1)
             {
-                buffer = var_0;
-                DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]], C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x1000 / sizeof(u16)));
+                dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]], 0x1000);
             }
             else if (dstType == 2)
             {
-                buffer = var_0;
-                DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]], C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x200 / sizeof(u16)));
-
-                buffer = var_0;
-                DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0x400, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x200 / sizeof(u16)));
-
-                buffer = var_0;
-                DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0x600, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x800 / sizeof(u16)));
+                dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]], 0x200);
+                dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0x400, 0x200);
+                dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0x600, 0x800);
             }
             else
             {
-                buffer = var_0;
-                DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]], C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x800 / sizeof(u16)));
+                dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]], 0x800);
 
                 if (sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][2] == 3)
                 {
-                    buffer = var_0;
-                    DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0x800, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x200 / sizeof(u16)));
-
-                    buffer = var_0;
-                    DMA_SET(3, &buffer, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0xC00, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED, 0x200 / sizeof(u16)));
+                    dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0x800, 0x200);
+                    dma_fill16(3, var_0, sFileSelect_760bdc[sFileScreenMessagesInfo[FILE_SELECT_DATA.messageInfoIdQueue[0]][1]] + 0xC00, 0x200);
                 }
             }
 
