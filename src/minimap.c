@@ -1063,7 +1063,7 @@ void MinimapLoadTilesWithObtainedItems(void)
  * 
  * @param event Event linked
  */
-void MinimapUpdateChunk(u8 event)
+void MinimapUpdateChunk(Event event)
 {
     s32 i;
     u16* pMinimap;

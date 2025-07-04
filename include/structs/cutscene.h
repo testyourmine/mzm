@@ -4,6 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
+#include "constants/event.h"
+
 struct OamArray {
     const struct FrameData* const pOam;
     u8 preAction;
@@ -67,7 +69,7 @@ struct CutsceneInfo {
     u8 preBgFading;
     u16 fadingTimer;
     u8 bgFading;
-    u8 event;
+    Event event;
 };
 
 struct CutsceneSubroutineData {

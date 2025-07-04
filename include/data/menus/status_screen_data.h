@@ -2,10 +2,12 @@
 #define STATUS_SCREEN_MENU_DATA_H
 
 #include "types.h"
+
 #include "constants/menus/status_screen.h"
 #include "constants/game_state.h"
 #include "constants/event.h"
 #include "constants/connection.h"
+
 #include "structs/menus/status_screen.h"
 
 #ifdef DEBUG
@@ -104,7 +106,7 @@ extern const u8 sPauseDebugDifficultyPosition[2];
 extern const u8 sPauseDebugLanguagePosition[2];
 extern const u8 sPauseDebugSaveHightlightPosition[2];
 extern const struct StatusScreenGroupPositions sPauseDebugGroupsPositions[PAUSE_DEBUG_GROUP_END];
-extern const u8 sEasyHardEventActions[DIFF_END][2];
+extern const EventAction sEasyHardEventActions[DIFF_END][2];
 extern const struct PauseDebugEnergyAmmoInfo sPauseDebugEnergyAmmoInfo[8];
 
 #endif // DEBUG

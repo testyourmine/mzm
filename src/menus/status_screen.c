@@ -1749,7 +1749,7 @@ void PauseDebugDrawEventName(u16 event, u16* dst)
  * 
  * @param newSuit New suit type
  */
-void UpdateSuitType(u8 newSuit)
+void UpdateSuitType(SuitType newSuit)
 {
     if (gEquipment.suitType != newSuit)
         gEquipment.suitType = newSuit;

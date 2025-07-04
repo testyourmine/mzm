@@ -4,6 +4,8 @@
 #include "types.h"
 #include "macros.h"
 
+#include "constants/samus.h"
+
 #define SAMUS_CARRY_ELEVATOR_DIR()\
 do {\
     pData->elevatorDirection = pCopy->elevatorDirection;\
@@ -20,21 +22,21 @@ struct Equipment {
     u16 currentMissiles;
     u8 currentSuperMissiles;
     u8 currentPowerBombs;
-    u8 beamBombs;
-    u8 beamBombsActivation;
-    u8 suitMisc;
-    u8 suitMiscActivation;
+    BeamBombFlags beamBombs;
+    BeamBombFlags beamBombsActivation;
+    SuitMiscFlags suitMisc;
+    SuitMiscFlags suitMiscActivation;
     u8 downloadedMapStatus;
     u8 lowHealth;
-    u8 suitType;
+    SuitType suitType;
     u8 grabbedByMetroid;
 };
 
 
 struct WeaponInfo {
-    u8 diagonalAim;
+    DiagonalAim diagonalAim;
     u8 newProjectile;
-    u8 weaponHighlighted;
+    WeaponHightlighted weaponHighlighted;
     u8 missilesSelected;
     u8 cooldown;
     u8 chargeCounter;
@@ -42,11 +44,11 @@ struct WeaponInfo {
 };
 
 struct SamusData {
-    u8 pose;
-    u8 standingStatus;
-    u8 armCannonDirection;
+    SamusPose pose;
+    SamusStandingStatus standingStatus;
+    ArmCannonDirection armCannonDirection;
     u8 turning;
-    u8 forcedMovement;
+    ForcedMovement forcedMovement;
     u8 speedboostingShinesparking;
     u8 invincibilityTimer;
     u8 walljumpTimer;
@@ -89,13 +91,13 @@ struct SamusPhysics {
     u16 screwShinesparkGfxSize;
     u16 armCannonXPositionOffset;
     u16 armCannonYPositionOffset;
-    u8 horizontalMovingDirection;
-    u8 verticalMovingDirection;
+    HorizontalMovingDir horizontalMovingDirection;
+    VerticalMovingDir verticalMovingDirection;
     s16 hitboxLeft;
     s16 hitboxRight;
     s16 hitboxTop;
     u8 standingStatus;
-    u8 hitboxType;
+    SamusHitboxType hitboxType;
     u8 touchingSideBlock;
     u8 touchingTopBlock;
     u8 unk_5A;
@@ -129,7 +131,7 @@ struct HazardDamage {
 };
 
 struct EnvironmentalEffect {
-    u8 type;
+    EnvEffect type;
     u8 animationDurationCounter;
     u8 currentAnimationFrame;
     u8 breathingTimer;
@@ -175,7 +177,7 @@ struct SamusEffectAnimationData {
 
 // Typedefs
 
-typedef u8 (*SamusFunc_T)(struct SamusData*);
+typedef SamusPose (*SamusFunc_T)(struct SamusData*);
 
 // Globals
 

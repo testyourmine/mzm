@@ -999,7 +999,7 @@ u32 BlockUpdateMakeSolidBlocks(u8 makeSolid, u16 xPosition, u16 yPosition)
  * @param action Destructing action
  * @return u32 bool, block destroyed
  */
-u32 BlockSamusApplyScrewSpeedboosterDamageToEnvironment(u16 xPosition, u16 yPosition, u16 action)
+u32 BlockSamusApplyScrewSpeedboosterDamageToEnvironment(u16 xPosition, u16 yPosition, DestructingAction action)
 {
     u16 blockY;
     u16 blockX;

@@ -3243,11 +3243,11 @@ const struct ArmCannonAnimationData* const sArmCannonAnimPointers_Suitless_Crouc
 };
 
 const struct ArmCannonAnimationData* const sArmCannonAnimPointers_Suitless_CrawlingStopped[3][2] = {
-    [FALSE] = {
+    [FORCED_MOVEMENT_CRAWLING_ARM_CANNON_DOWN] = {
         sArmCannonAnim_Suitless_Right_CrawlingStopped,
         sArmCannonAnim_Suitless_Left_CrawlingStopped
     },
-    [TRUE] = {
+    [FORCED_MOVEMENT_CRAWLING_ARM_CANNON_UP] = {
         sArmCannonAnim_Suitless_Right_PistolUp_CrawlingStopped,
         sArmCannonAnim_Suitless_Left_PistolUp_CrawlingStopped
     },

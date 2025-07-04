@@ -6,6 +6,8 @@
 #include "gba.h"
 #include "sram_misc.h"
 
+#include "constants/samus.h"
+
 #include "structs/game_state.h"
 #include "structs/samus.h"
 #include "structs/scroll.h"
@@ -38,7 +40,7 @@ struct SaveFileInfo {
     u16 maxEnergy;
     u16 currentMissiles;
     u16 maxMissiles;
-    u8 suitType;
+    SuitType suitType;
     u8 igtHours;
     u8 igtMinutes;
     u8 igtSeconds;

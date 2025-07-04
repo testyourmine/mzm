@@ -264,3 +264,34 @@
 #define FORCE_RODATA __attribute__((section(".rodata")))
 #define NAKED_FUNCTION __attribute__((naked))
 #define PACKED __attribute__((packed))
+
+/**
+ * @brief Creates an enum and its underlying type
+ * 
+ * The underlying type will have the enum name, and the provided type.
+ * 
+ * The enum will have the name provided followed by an underscore (_).
+ * 
+ * e.g. Using the macro like this :
+ * 
+ * `MAKE_ENUM(u8, Event)`
+ * 
+ * will create this :
+ * 
+ * `typedef u8 Event;`
+ * 
+ * `enum Event_`
+ * 
+ * @param type Underlying enum type
+ * @param name Enum name
+ * 
+ */
+#define MAKE_ENUM(type, name)   \
+typedef type name;              \
+enum name ##_
+
+/**
+ * @brief Indicates that an enum is a list of flags.
+ * 
+ */
+#define ENUM_FLAG

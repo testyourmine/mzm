@@ -3,7 +3,11 @@
 
 #include "macros.h"
 
-enum Event {
+/**
+ * @brief List of event flags
+ * 
+ */
+MAKE_ENUM(u8, Event) {
     EVENT_NONE,
     EVENT_EASY,
     EVENT_HARD,
@@ -87,7 +91,7 @@ enum Event {
     EVENT_COUNT
 };
 
-enum EventAction {
+MAKE_ENUM(u8, EventAction) {
     EVENT_ACTION_CLEARING,
     EVENT_ACTION_SETTING,
     EVENT_ACTION_TOGGLING,

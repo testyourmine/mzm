@@ -4,6 +4,8 @@
 #include "types.h"
 #include "macros.h"
 
+#include "constants/event.h"
+
 #include "structs/animated_graphics.h"
 
 // Structs
@@ -23,13 +25,13 @@ struct Door {
 struct EventBasedConnection {
     u8 sourceArea;
     u8 sourceDoor;
-    u8 event;
+    Event event;
     u8 destinationDoor;
 };
 
 struct HatchLockEvent {
     u8 room;
-    u8 event;
+    Event event;
     u8 type;
     u8 hatchesToLock_0:1;
     u8 hatchesToLock_1:1;

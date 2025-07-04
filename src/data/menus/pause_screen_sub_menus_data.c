@@ -266,7 +266,7 @@ const u8 sChozoStatueTargetConditions[TARGET_END][2] = {
     }
 };
 
-const u8 sChozoStatueHintEvents[TARGET_END] = {
+const Event sChozoStatueHintEvents[TARGET_END] = {
     [TARGET_LONG_BEAM] = EVENT_STATUE_LONG_BEAM_GRABBED,
     [TARGET_BOMBS] = EVENT_STATUE_BOMBS_GRABBED,
     [TARGET_ICE_BEAM] = EVENT_STATUE_ICE_BEAM_GRABBED,

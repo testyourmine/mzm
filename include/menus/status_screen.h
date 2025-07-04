@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include "constants/samus.h"
+
 void UpdateMinimapAnimatedPalette(void);
 void LoadPauseScreenBgPalette(void);
 
@@ -29,7 +31,7 @@ void PauseDebugDrawEventName(u16 event, u16* dst);
 
 #endif
 
-void UpdateSuitType(u8 newSuit);
+void UpdateSuitType(SuitType newSuit);
 u32 StatusScreenDrawItems(u8 row);
 u8 StatusScreenGetSlotForNewItem(u8 param_1, u8 item);
 void StatusScreenDraw(void);

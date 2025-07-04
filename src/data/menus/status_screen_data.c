@@ -311,7 +311,7 @@ const struct StatusScreenGroupPositions sPauseDebugGroupsPositions[PAUSE_DEBUG_G
     }
 };
 
-const u8 sEasyHardEventActions[DIFF_END][2] = {
+const EventAction sEasyHardEventActions[DIFF_END][2] = {
     [DIFF_EASY] = { EVENT_ACTION_SETTING, EVENT_ACTION_CLEARING },
     [DIFF_NORMAL] = { EVENT_ACTION_CLEARING, EVENT_ACTION_CLEARING },
     [DIFF_HARD] = { EVENT_ACTION_CLEARING, EVENT_ACTION_SETTING }

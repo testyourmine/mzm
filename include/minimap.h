@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include "constants/event.h"
+
 #ifdef DEBUG
 void MinimapDrawRoomInfo(void);
 void MinimapDrawNumber(u8 value, void* dst);
@@ -24,6 +26,6 @@ void MinimapSetDownloadedTiles(u8 area, u16* dst);
 void MinimapUpdateForCollectedItem(u8 xPosition, u8 yPosition);
 u32 MinimapCheckIsTileExplored(u8 xPosition, u8 yPosition);
 void MinimapLoadTilesWithObtainedItems(void);
-void MinimapUpdateChunk(u8 event);
+void MinimapUpdateChunk(Event event);
 
 #endif /* MINIMAP_H */

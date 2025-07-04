@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include "constants/event.h"
+
 #define ROOM_SPRITE_DATA_TERMINATOR UCHAR_MAX, UCHAR_MAX, UCHAR_MAX
 
 struct AnimatedGraphicsEntry {
@@ -31,8 +33,8 @@ struct RoomEntry {
     u8 bg3Scrolling;
     u8 transparency;
     const u8* pEnemyRoomData;
-    u8 firstSpritesetEvent;
-    u8 secondSpritesetEvent;
+    Event firstSpritesetEvent;
+    Event secondSpritesetEvent;
     u8 mapX;
     u8 mapY;
     u8 visualEffect;

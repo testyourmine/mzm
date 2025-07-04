@@ -3008,7 +3008,7 @@ const u16 sMapScreenArrowsData[4][4] = {
     }
 };
 
-const u8 sStatusScreenBeamFlagsOrder[STATUS_SCREEN_BEAM_OFFSET_END] = {
+const BeamBombFlags sStatusScreenBeamFlagsOrder[STATUS_SCREEN_BEAM_OFFSET_END] = {
     [STATUS_SCREEN_BEAM_OFFSET_LONG] = BBF_LONG_BEAM,
     [STATUS_SCREEN_BEAM_OFFSET_CHARGE] = BBF_CHARGE_BEAM,
     [STATUS_SCREEN_BEAM_OFFSET_ICE] = BBF_ICE_BEAM,
@@ -3016,16 +3016,16 @@ const u8 sStatusScreenBeamFlagsOrder[STATUS_SCREEN_BEAM_OFFSET_END] = {
     [STATUS_SCREEN_BEAM_OFFSET_PLASMA] = BBF_PLASMA_BEAM
 };
 
-const u8 sStatusScreenBombFlagsOrder[1] = {
+const BeamBombFlags sStatusScreenBombFlagsOrder[1] = {
     BBF_BOMBS
 };
 
-const u8 sStatusScreenSuitFlagsOrder[STATUS_SCREEN_SUIT_OFFSET_END] = {
+const SuitMiscFlags sStatusScreenSuitFlagsOrder[STATUS_SCREEN_SUIT_OFFSET_END] = {
     [STATUS_SCREEN_SUIT_OFFSET_VARIA] = SMF_VARIA_SUIT,
     [STATUS_SCREEN_SUIT_OFFSET_GRAVITY] = SMF_GRAVITY_SUIT
 };
 
-const u8 sStatusScreenMiscFlagsOrder[STATUS_SCREEN_MISC_OFFSET_END] = {
+const SuitMiscFlags sStatusScreenMiscFlagsOrder[STATUS_SCREEN_MISC_OFFSET_END] = {
     [STATUS_SCREEN_MISC_OFFSET_MORPH_BALL] = SMF_MORPH_BALL,
     [STATUS_SCREEN_MISC_OFFSET_POWER_GRIP] = SMF_POWER_GRIP,
     [STATUS_SCREEN_MISC_OFFSET_SPEED_BOOSTER] = SMF_SPEEDBOOSTER,
