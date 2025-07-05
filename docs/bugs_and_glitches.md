@@ -19,13 +19,10 @@ These are known bugs and glitches in the game: code that clearly does not work a
 Fix : Edit `DessgeegaDeath` in [dessgeega.c](https://github.com/metroidret/mzm/blob/master/src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
 
 ```diff
-+if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
-+{
-     // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
-     EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
-     // Unlock doors
-     gDoorUnlockTimer = -ONE_THIRD_SECOND;
-+}
+```c
+#ifdef BUGFIX
+if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
+    // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
 ```
 
 
