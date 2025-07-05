@@ -3,9 +3,34 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 ## Contents
 
-### Bugs
-### Uninitialized Variables
-### Oversights and Design Flaws
+- [Bugs](#bugs)
+  - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
+- [Uninitialized Variables](#uninitialized-variables)
+- [Oversights and Design Flaws](#oversights-and-design-flaws)
+- [TODO](#todo)
+  - [Bugs](#bugs-1)
+  - [Uninitialized Variables](#uninitialized-variables-1)
+  - [Oversights and Design Flaws](#oversights-and-design-flaws-1)
+
+## Bugs
+
+### "Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors
+
+Fix : Edit `DessgeegaDeath` in [dessgeega.c](https://github.com/metroidret/mzm/blob/master/src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
+
+```diff
++if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
++{
+     // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
+     EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
+     // Unlock doors
+     gDoorUnlockTimer = -ONE_THIRD_SECOND;
++}
+```
+
+
+## Uninitialized Variables
+## Oversights and Design Flaws
 
 ## TODO
 
@@ -19,8 +44,6 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - Potential fixes: initialize work1 in SidehopperInit, or call SidehopperIdleInit
 - Turning when the game tries to lock you in place for the fully powered suit cutscene allows you to control Samus
   - Potential fix: check lastWallTouchedMidAir first ([code](https://github.com/metroidret/mzm/blob/4d9b219990ad5cce9c35f495195fe6019fecbac1/src/samus.c#L6551-L6555))
-- "Ground" Dessgeegas always run the logic for the Dessgeega long beam death, which includes setting the "long beam Dessgeega killed" event and unlocking doors ([code](https://github.com/metroidret/mzm/blob/4d9b219990ad5cce9c35f495195fe6019fecbac1/src/sprites_AI/dessgeega.c#L674-L677))
-  - Fix: check the sprite ID when setting the event
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
 - Door clipping using frozen enemies ([video](https://www.youtube.com/watch?v=iMObZ5EbooE))
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))

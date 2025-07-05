@@ -668,13 +668,21 @@ static void DessgeegaDeath(void)
     u16 yPosition;
 
     if (gCurrentSprite.status & SPRITE_STATUS_Y_FLIP)
+    {
         yPosition = gCurrentSprite.yPosition + THREE_QUARTER_BLOCK_SIZE;
+    }
     else
     {
-        // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
-        EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
-        // Unlock doors
-        gDoorUnlockTimer = -ONE_THIRD_SECOND;
+        // BUG: There's no check for the sprite id, so the event set and door unlock is done for every "ground" dessgeega
+        #ifdef BUGFIX
+        if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
+        #endif
+        {
+            // Set event
+            EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
+            // Unlock doors
+            gDoorUnlockTimer = -ONE_THIRD_SECOND;
+        }
         yPosition = gCurrentSprite.yPosition - THREE_QUARTER_BLOCK_SIZE;
     }
 
