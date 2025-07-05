@@ -3,6 +3,8 @@
 #include "dma.h"
 #include "gba.h"
 #include "color_effects.h" // Required
+#include "music_wrappers.h"
+#include "syscall_wrappers.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/cutscenes/before_charlie_data.h"
@@ -12,6 +14,10 @@
 
 #include "structs/display.h"
 
+static void BeforeCharlieWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGraphicsData* pGraphics);
+static void BeforeCharlieWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* pGraphics);
+static void BeforeCharlieWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphics);
+
 static struct CutsceneGraphicsData sBeforeCharlieCutsceneGraphicsData = {
     .active = FALSE,
     .paletteStage = 0,
@@ -20,35 +26,12 @@ static struct CutsceneGraphicsData sBeforeCharlieCutsceneGraphicsData = {
     .timer = 0,
 };
 
-static struct CutsceneSubroutineData sBeforeCharlieSubroutineData[5] = {
-    [0] = {
-        .pFunction = BeforeCharlieInit,
-        .oamLength = 0
-    },
-    [1] = {
-        .pFunction = BeforeCharlieChozoWallSides,
-        .oamLength = 0
-    },
-    [2] = {
-        .pFunction = BeforeCharlieWallAndGreyVoice,
-        .oamLength = 0
-    },
-    [3] = {
-        .pFunction = BeforeCharlieSamusCloseUp,
-        .oamLength = 0
-    },
-    [4] = {
-        .pFunction = CutsceneEndFunction,
-        .oamLength = 0
-    },
-};
-
 /**
  * @brief 663c8 | 270 | Handles the close up part
  * 
  * @return u8 FALSE
  */
-u8 BeforeCharlieSamusCloseUp(void)
+static u8 BeforeCharlieSamusCloseUp(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -170,7 +153,7 @@ u8 BeforeCharlieSamusCloseUp(void)
  * 
  * @return u8 FALSE
  */
-u8 BeforeCharlieWallAndGreyVoice(void)
+static u8 BeforeCharlieWallAndGreyVoice(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -356,7 +339,7 @@ void BeforeCharlieWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphic
  * 
  * @return u8 FALSE
  */
-u8 BeforeCharlieChozoWallSides(void)
+static u8 BeforeCharlieChozoWallSides(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -400,7 +383,7 @@ u8 BeforeCharlieChozoWallSides(void)
  * 
  * @return u8 FALSE
  */
-u8 BeforeCharlieInit(void)
+static u8 BeforeCharlieInit(void)
 {
     CutsceneFadeScreenToBlack();
 
@@ -435,6 +418,29 @@ u8 BeforeCharlieInit(void)
 
     return FALSE;
 }
+
+static struct CutsceneSubroutineData sBeforeCharlieSubroutineData[5] = {
+    [0] = {
+        .pFunction = BeforeCharlieInit,
+        .oamLength = 0
+    },
+    [1] = {
+        .pFunction = BeforeCharlieChozoWallSides,
+        .oamLength = 0
+    },
+    [2] = {
+        .pFunction = BeforeCharlieWallAndGreyVoice,
+        .oamLength = 0
+    },
+    [3] = {
+        .pFunction = BeforeCharlieSamusCloseUp,
+        .oamLength = 0
+    },
+    [4] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 0
+    },
+};
 
 /**
  * @brief 66bd0 | 30 | Subroutine for the before charlie cutscene

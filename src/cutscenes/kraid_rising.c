@@ -18,6 +18,10 @@
 #include "structs/display.h"
 #include "structs/samus.h"
 
+static struct CutsceneOamData* KraidRisingUpdatePuff(struct CutsceneOamData* pOam, u8 puffID);
+static struct CutsceneOamData* KraidRisingUpdateDebris(struct CutsceneOamData* pOam, u8 debrisID);
+static void KraidRisingProcessOam(void);
+
 // 0: x position
 // 1: y position
 // 2: oam id
@@ -97,31 +101,12 @@ static u16 sKraidRisingDebrisSpawnXPosition[KRAID_RISING_DEBRIS_AMOUNT] = {
     BLOCK_SIZE * 13 + HALF_BLOCK_SIZE
 };
 
-static struct CutsceneSubroutineData sKraidRisingSubroutineData[4] = {
-    {
-        .pFunction = KraidRisingInit,
-        .oamLength = 18
-    },
-    {
-        .pFunction = KraidRisingOpeningEyes,
-        .oamLength = 18
-    },
-    {
-        .pFunction = KraidRisingRising,
-        .oamLength = 18
-    },
-    {
-        .pFunction = CutsceneEndFunction,
-        .oamLength = 18
-    }
-};
-
 /**
  * @brief 6240c | 2ec | Handles the kraid rising part
  * 
  * @return u8 FALSE
  */
-u8 KraidRisingRising(void)
+static u8 KraidRisingRising(void)
 {
     u32 i;
 
@@ -252,7 +237,7 @@ u8 KraidRisingRising(void)
  * @param puffID Puff ID
  * @return struct CutsceneOamData* First param
  */
-struct CutsceneOamData* KraidRisingUpdatePuff(struct CutsceneOamData* pOam, u8 puffID)
+static struct CutsceneOamData* KraidRisingUpdatePuff(struct CutsceneOamData* pOam, u8 puffID)
 {
     s32 offset;
 
@@ -286,7 +271,7 @@ struct CutsceneOamData* KraidRisingUpdatePuff(struct CutsceneOamData* pOam, u8 p
  * @param puffID Debris ID
  * @return struct CutsceneOamData* First param
  */
-struct CutsceneOamData* KraidRisingUpdateDebris(struct CutsceneOamData* pOam, u8 debrisID)
+static struct CutsceneOamData* KraidRisingUpdateDebris(struct CutsceneOamData* pOam, u8 debrisID)
 {
     if (pOam->timer != 0)
     {
@@ -337,7 +322,7 @@ struct CutsceneOamData* KraidRisingUpdateDebris(struct CutsceneOamData* pOam, u8
  * 
  * @return u8 FALSE
  */
-u8 KraidRisingOpeningEyes(void)
+static u8 KraidRisingOpeningEyes(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -421,7 +406,7 @@ u8 KraidRisingOpeningEyes(void)
  * 
  * @return u8 
  */
-u8 KraidRisingInit(void)
+static u8 KraidRisingInit(void)
 {
     CutsceneFadeScreenToBlack();
 
@@ -477,6 +462,25 @@ u8 KraidRisingInit(void)
     return FALSE;
 }
 
+static struct CutsceneSubroutineData sKraidRisingSubroutineData[4] = {
+    [0] = {
+        .pFunction = KraidRisingInit,
+        .oamLength = 18
+    },
+    [1] = {
+        .pFunction = KraidRisingOpeningEyes,
+        .oamLength = 18
+    },
+    [2] = {
+        .pFunction = KraidRisingRising,
+        .oamLength = 18
+    },
+    [3] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 18
+    }
+};
+
 /**
  * @brief 62b24 | 37 | Kraid rising cutscene subroutine
  * 
@@ -498,7 +502,7 @@ u8 KraidRisingSubroutine(void)
  * @brief 62b58 | 38 | Processes the OAM for the cutscene
  * 
  */
-void KraidRisingProcessOam(void)
+static void KraidRisingProcessOam(void)
 {
     gNextOamSlot = 0;
 

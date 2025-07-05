@@ -31,7 +31,7 @@ SECTIONS {
         . = 0x00033800; gMinimapTilesWithObtainedItems = .;
         . = 0x00034000; gDecompressedMinimapVisitedTiles = .;
         . = 0x00034800; gDecompressedMinimapData = .;
-        . = 0x00035400; unk_02035400 = .;
+        . = 0x00035400; gUnk_02035400 = .;
         . = 0x00035c00; gNeverReformBlocks = .;
         . = 0x00036c00; gItemsCollected = .;
         . = 0x00037400; gVisitedMinimapTiles = .;
