@@ -106,6 +106,7 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 - Frame perfect pause buffering on ziplines ignores collision
 - Clipping into slopes ([video](https://www.youtube.com/watch?v=XiZRJesXHWw))
 - Chozo statue refill glitch
+- Collecting an item during a power bomb explosion allows Samus to move early
 
 ### Uninitialized Variables
 - [MinimapDraw](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/minimap.c#L680)
