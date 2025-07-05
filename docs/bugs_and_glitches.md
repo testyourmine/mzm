@@ -8,7 +8,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
 - [Uninitialized Variables](#uninitialized-variables)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
-  - [Floating point math is when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
+  - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
 - [TODO](#todo)
   - [Bugs](#bugs-1)
   - [Uninitialized Variables](#uninitialized-variables-1)

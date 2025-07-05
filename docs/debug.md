@@ -107,7 +107,7 @@ This menu lets you erase all SRAM, which does the same thing as the menu you get
 
 ## Pause Debug Menu
 
-The pause debug menu lets you change Samus's equipment, triggered events, and a few other options. You can access the pause debug menu from the status screen while the game is paused. The game must be launched from the boot debug menu, otherwise the pause debug menu won't be enabled. Holding `Select` while loading the status screen will load the normal status screen. Similary, holding `Select` while pausing will disable the debug menu until you pause again. Holding `L` + `Select` while pausing will download the map for the current area.
+The pause debug menu lets you change Samus's equipment, triggered events, and a few other options. You can access the pause debug menu from the status screen while the game is paused. The game must be launched from the boot debug menu, otherwise the pause debug menu won't be enabled. Holding `Select` while loading the status screen will load the normal status screen. Similarly, holding `Select` while pausing will disable the debug menu until you pause again. Holding `L` + `Select` while pausing will download the map for the current area.
 
 The top of the debug status screen shows the current area, room ID ("HEYA"), and door ID ("GATE"). Pressing `Select` on this screen will load the [event list](#event-list).
 
