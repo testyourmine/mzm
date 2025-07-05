@@ -11,7 +11,7 @@ typedef void (*MinimapFunc_T)(u32*, u16*, u8);
 
 struct LastAreaName {
     u8 flags;
-    u8 area;
+    Area area;
     u8 mapX;
     u8 mapY;
 };

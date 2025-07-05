@@ -22,6 +22,13 @@ typedef volatile signed int vs32;
 typedef volatile unsigned long long vu64;
 typedef volatile signed long long vs64;
 
+typedef u8 boolu8;
+typedef u16 boolu16;
+typedef u32 boolu32;
+typedef s8 bools8;
+typedef s16 bools16;
+typedef s32 bools32;
+
 #define SCHAR_MIN (-128)
 #define SCHAR_MAX (127)
 #define UCHAR_MAX (255)

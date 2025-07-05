@@ -519,7 +519,7 @@ void GameOverUpdateLettersPalette(void)
  * 
  * @param action Action done
  */
-void GameOverUpdateSamusHead(u8 action)
+void GameOverUpdateSamusHead(GameOverCursorAction action)
 {
     UpdateMenuOamDataID(&GAME_OVER_DATA.oam[0], sGameOverSamusHeadOamIds[gEquipment.suitType][action]);
 

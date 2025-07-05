@@ -77,7 +77,7 @@ u8 ColorFadingUpdate(void)
         color = 0;
 
     // Process color
-    colorType = sColorFadingData[gColorFading.type].pFadeSubroutine;
+    colorType = sColorFadingData[gColorFading.type].fadeSubroutine;
     if (sColorFadingSubroutinePointers[colorType](stage, color))
     {
         gColorFading.fadeTimer = 0;
@@ -363,7 +363,7 @@ void ColorFadingHideScreenDuringLoad(void)
  */
 void ColorFadingSetBg3Position(void)
 {
-    if (sColorFadingData[gColorFading.type].pFadeSubroutine == COLOR_FADING_SUBROUTINE_1)
+    if (sColorFadingData[gColorFading.type].fadeSubroutine == COLOR_FADING_SUBROUTINE_1)
         gWhichBGPositionIsWrittenToBG3OFS = 4;
     else
         gWhichBGPositionIsWrittenToBG3OFS = 3;
@@ -487,7 +487,7 @@ u32 ColorFadingFinishDoorTransition(void)
 
     if (sColorFadingData[gColorFading.type].pUpdateSubroutine && sColorFadingData[gColorFading.type].pUpdateSubroutine())
     {
-        switch (sColorFadingData[gColorFading.type].pFadeSubroutine)
+        switch (sColorFadingData[gColorFading.type].fadeSubroutine)
         {
             case COLOR_FADING_SUBROUTINE_1:
                 if (!gMusicTrackInfo.unk)

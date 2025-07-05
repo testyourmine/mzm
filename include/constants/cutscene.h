@@ -1,9 +1,12 @@
 #ifndef CUTSCENE_CONSTANTS_H
 #define CUTSCENE_CONSTANTS_H
 
+#include "types.h"
+#include "macros.h"
+
 #define CUTSCENE_DATA sNonGameplayRamPointer->cutscene
 
-enum Cutscene {
+MAKE_ENUM(s8, Cutscene) {
     CUTSCENE_NONE,
     CUTSCENE_INTRO_TEXT,
     CUTSCENE_MOTHERSHIP_MONOLOGUE,
@@ -31,7 +34,7 @@ enum CutsceneStage {
     CUTSCENE_STAGE_ENDING,
 };
 
-enum CutsceneType {
+MAKE_ENUM(u8, CutsceneType) {
     CUTSCENE_TYPE_NON_GAMEPLAY,
     CUTSCENE_TYPE_BETWEEN_GAMEPLAY,
     CUTSCENE_TYPE_IN_GAMEPLAY,

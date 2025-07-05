@@ -895,7 +895,7 @@ s32 BootDebugHandleInput(void)
                     }
                     else
                     {
-                        gCurrentDemo.noDemoShuffle = 1;
+                        gCurrentDemo.noDemoShuffle = TRUE;
                         DemoInit();
                         gGameModeSub2 = gDemoState != DEMO_STATE_NONE ? 6 : 1;
                     }

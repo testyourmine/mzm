@@ -2,8 +2,11 @@
 #define GAME_OVER_DATA_H
 
 #include "types.h"
+
 #include "constants/game_over.h"
 #include "constants/game_state.h"
+#include "constants/samus.h"
+
 #include "structs/menus/game_over.h"
 #include "structs/cutscene.h"
 
@@ -23,7 +26,7 @@ extern const struct GameOverDynamicPalette sGameOverDynamicPalette_Empty;
 extern const u16 sGameOverSamusHeadXPositions[LANGUAGE_END];
 extern const u16 sGameOverSamusHeadYPositions[2];
 
-extern const u8 sGameOverSamusHeadOamIds[3][3];
+extern const GameOverOamId sGameOverSamusHeadOamIds[SUIT_END][SAMUS_CURSOR_ACTION_END];
 extern const struct OamArray sGameOverOam[GAME_OVER_OAM_ID_END];
 
 #endif /* GAME_OVER_DATA_H */

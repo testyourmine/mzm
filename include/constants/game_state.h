@@ -1,7 +1,10 @@
 #ifndef GAME_STATE_CONSTANTS_H
 #define GAME_STATE_CONSTANTS_H
 
-enum GameMode {
+#include "types.h"
+#include "macros.h"
+
+MAKE_ENUM(s16, GameMode) {
     GM_SOFT_RESET,
     GM_INTRO,
     GM_TITLE,
@@ -21,7 +24,7 @@ enum GameMode {
     GM_DEBUG_MENU
 };
 
-enum Difficulty {
+MAKE_ENUM(u8, Difficulty) {
     DIFF_EASY,
     DIFF_NORMAL,
     DIFF_HARD,
@@ -29,7 +32,7 @@ enum Difficulty {
     DIFF_END
 };
 
-enum Language {
+MAKE_ENUM(s8, Language) {
     LANGUAGE_JAPANESE,
     LANGUAGE_HIRAGANA,
     LANGUAGE_ENGLISH,
@@ -47,7 +50,7 @@ enum Language {
 #define LANGUAGE_DEFAULT LANGUAGE_ENGLISH
 #endif // REGION_JP
 
-enum PauseScreenFlag {
+MAKE_ENUM(s8, PauseScreenFlag) {
     PAUSE_SCREEN_NONE,
     PAUSE_SCREEN_UNKNOWN_1,
     PAUSE_SCREEN_PAUSE_OR_CUTSCENE,

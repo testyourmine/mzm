@@ -4,6 +4,8 @@
 #include "types.h"
 #include "input.h"
 
+#include "constants/game_state.h"
+
 struct GameCompletion {
     s8 completedGame;
     u8 introPlayed;
@@ -38,24 +40,24 @@ extern u8 gTimeAttackFlag;
 extern u16 gButtonInput;
 extern u16 gPreviousButtonInput;
 extern u16 gChangedInput;
-extern s8 gIsLoadingFile;
-extern s8 gPauseScreenFlag;
-extern s8 gVblankActive;
+extern bools8 gIsLoadingFile;
+extern PauseScreenFlag gPauseScreenFlag;
+extern bools8 gVblankActive;
 extern u8 gFrameCounter8Bit;
 extern u16 gFrameCounter16Bit;
-extern u8 gDifficulty;
-extern s8 gLanguage;
+extern Difficulty gDifficulty;
+extern Language gLanguage;
 extern u8 gResetGame;
 extern u8 gNotPressingUp;
 extern u8 gEndingFlags;
 
-extern s16 gMainGameMode;
+extern GameMode gMainGameMode;
 extern s16 gGameModeSub1;
 extern s8 gGameModeSub2;
 extern s8 gGameModeSub3;
 extern u8 gSubGameModeStage;
 
-extern u8 gHasSaved;
+extern boolu8 gHasSaved;
 extern s8 gMostRecentSaveFile;
 extern u8 gCompletedGameFlagCopy;
 
@@ -64,4 +66,4 @@ extern u16 gDebugVCount_InGameEnd;
 extern s16 gDebugVCount_VBlankEnd;
 extern s16 gDebugVCount_AudioMax;
 
-#endif
+#endif /* GAME_STATE_STRUCT_H */

@@ -24,7 +24,7 @@ extern const struct RoomEntryROM* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
  * @param area Area
  * @param room Room id
  */
-void CheckPlayRoomMusicTrack(u8 area, u8 room)
+void CheckPlayRoomMusicTrack(Area area, u8 room)
 {
     gMusicTrackInfo.currentRoomTrack = sAreaRoomEntryPointers[area][room].musicTrack;
 

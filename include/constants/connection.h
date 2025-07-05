@@ -1,7 +1,10 @@
 #ifndef CONNECTION_CONSTANTS_H
 #define CONNECTION_CONSTANTS_H
 
-enum Area {
+#include "types.h"
+#include "macros.h"
+
+MAKE_ENUM(u8, Area) {
     AREA_BRINSTAR,
     AREA_KRAID,
     AREA_NORFAIR,
@@ -28,7 +31,7 @@ enum Area {
 
 #define AREA_NONE UCHAR_MAX
 
-enum DoorType {
+MAKE_ENUM(u8, DoorType) {
     DOOR_TYPE_NONE,
     DOOR_TYPE_AREA_CONNECTION,
     DOOR_TYPE_NO_HATCH,
@@ -39,12 +42,12 @@ enum DoorType {
 
     DOOR_TYPE_NO_FLAGS = (1 << 4) - 1,
 
-    DOOR_TYPE_EXISTS = (1 << 4),
-    DOOR_TYPE_LOAD_EVENT_BASED_ROOM = (1 << 5),
-    DOOR_TYPE_DISPLAYS_ROOM_LOCATION = (1 << 6)
+    DOOR_TYPE_EXISTS = 1 << 4,
+    DOOR_TYPE_LOAD_EVENT_BASED_ROOM = 1 << 5,
+    DOOR_TYPE_DISPLAYS_ROOM_LOCATION = 1 << 6
 };
 
-enum HatchType {
+MAKE_ENUM(u8, HatchType) {
     HATCH_NONE,
     HATCH_UNUSED,
     HATCH_NORMAL,
@@ -57,20 +60,20 @@ enum HatchType {
     HATCH_COUNT
 };
 
-enum HatchState {
+MAKE_ENUM(u8, HatchState) {
     HATCH_STATE_CLOSED,
     HATCH_STATE_OPENING,
     HATCH_STATE_OPENED,
     HATCH_STATE_CLOSING,
 };
 
-enum HatchLockState {
+MAKE_ENUM(u16, HatchLockState) {
     HATCH_LOCK_STATE_UNLOCKED,
     HATCH_LOCK_STATE_LOCKED,
     HATCH_LOCK_STATE_PERMA_LOCKED,
 };
 
-enum HatchAction {
+MAKE_ENUM(u8, HatchAction) {
     HATCH_ACTION_CHECKING_OPENED,
     HATCH_ACTION_SETTING_SOURCE_AND_DESTINATION,
     HATCH_ACTION_SETTING_SOURCE
@@ -82,14 +85,14 @@ enum HatchOpeningAction {
     HATCH_OPENING_ACTION_LOCKED
 };
 
-enum HatchLockEventType {
+MAKE_ENUM(u8, HatchLockEventType) {
     HATCH_LOCK_EVENT_TYPE_AFTER,
     HATCH_LOCK_EVENT_TYPE_BEFORE,
     HATCH_LOCK_EVENT_TYPE_AFTER_UNLOCKEABLE,
     HATCH_LOCK_EVENT_TYPE_BEFORE_UNLOCKEABLE,
 };
 
-enum ElevatorRoute {
+MAKE_ENUM(u8, ElevatorRoute) {
     ELEVATOR_ROUTE_NONE,
     ELEVATOR_ROUTE_CRATERIA_TO_BRINSTAR,
     ELEVATOR_ROUTE_BRINSTAR_TO_NORFAIR,
@@ -103,8 +106,10 @@ enum ElevatorRoute {
     ELEVATOR_ROUTE_COUNT
 };
 
-#define ELEVATOR_DIRECTION_DOWN 1
-#define ELEVATOR_DIRECTION_UP -1
+MAKE_ENUM(s8, ElevatorDirection) {
+    ELEVATOR_DIRECTION_DOWN = 1,
+    ELEVATOR_DIRECTION_UP = -1
+};
 
 #define HATCH_VERTICAL_SIZE 4
 

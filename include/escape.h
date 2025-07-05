@@ -3,10 +3,12 @@
 
 #include "types.h"
 
+#include "constants/escape.h"
+
 // Functions
 
-u8 EscapeDetermineTimer(void);
-u8 EscapeCheckHasEscaped(void);
+Escape EscapeDetermineTimer(void);
+boolu8 EscapeCheckHasEscaped(void);
 void EscapeUpdateOam(void);
 void EscapeCheckReloadGraphics(void);
 void EscapeStart(void);

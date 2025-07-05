@@ -52,13 +52,13 @@ struct WorldMapData {
 };
 
 struct MinimapAreaName {
-    u8 area1;
+    Area area1;
     u8 mapX1;
     u8 mapY1;
     s8 xOffset1;
     s8 yOffset1;
 
-    u8 area2;
+    Area area2;
     u8 mapX2;
     u8 mapY2;
     s8 xOffset2;

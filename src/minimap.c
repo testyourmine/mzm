@@ -871,7 +871,7 @@ void MinimapCopyTileXYFlippedGfx(u32* dst, u16* pTile, u8 palette)
  * @param area Area
  * @param dst Destination pointer
  */
-void MinimapSetTilesWithObtainedItems(u8 area, u16* dst)
+void MinimapSetTilesWithObtainedItems(Area area, u16* dst)
 {
     u32* src;
     u32 tile;
@@ -906,7 +906,7 @@ void MinimapSetTilesWithObtainedItems(u8 area, u16* dst)
  * @param area Area
  * @param dst Destination pointer
  */
-void MinimapSetDownloadedTiles(u8 area, u16* dst)
+void MinimapSetDownloadedTiles(Area area, u16* dst)
 {
     u32* pVisited;
     s32 i;

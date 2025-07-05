@@ -3,6 +3,8 @@
 
 #include "types.h"
 
-void LoadRoomCutscene(u8 area, u8 room, u16 bgX, u16 bgY);
+#include "constants/connection.h"
+
+void LoadRoomCutscene(Area area, u8 room, u16 bgX, u16 bgY);
 
 #endif /* ROOM_CUTSCENE_H */

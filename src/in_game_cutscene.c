@@ -35,7 +35,7 @@
  * @param cutsceneNumberNoFlag [Unused] Cutscene number (no start flag)
  * @return u8 bool, ended
  */
-u32 InGameCutsceneSamusCloseUp(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
+u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutsceneScene cutsceneNumberNoFlag)
 {
     u32 result;
 
@@ -215,7 +215,7 @@ void unk_5fd58(void)
  * @param cutsceneNumberNoFlag [Unused] Cutscene number (no start flag)
  * @return u8 bool, ended
  */
-u32 InGameCutsceneUpgradingSuit(u8 cutsceneNumber, u8 cutsceneNumberNoFlag)
+u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsceneScene cutsceneNumberNoFlag)
 {
     s32 changeStage;
     u8 ended;
@@ -614,7 +614,7 @@ u16 InGameCutsceneCalculateSuitFlashOffset(u8 intensity, u8 start, u8 end)
  * 
  * @param type Type
  */
-void MakeBackgroundFlash(u8 type)
+void MakeBackgroundFlash(BackgroundFlash type)
 {
     switch (type)
     {
@@ -644,7 +644,7 @@ void MakeBackgroundFlash(u8 type)
  * 
  * @param number Cutscene number
  */
-void InGameCutsceneStart(u8 number)
+void InGameCutsceneStart(InGameCutsceneScene number)
 {
     if (gInGameCutscene.cutsceneNumber == 0)
         gInGameCutscene.cutsceneNumber = number;
@@ -850,7 +850,7 @@ void InGameCutsceneCheckPlayOnTransition(void)
  * @param cutscene Cutscene
  * @return u8 bool, was queued
  */
-u32 InGameCutsceneTryQueue(u8 cutscene)
+u32 InGameCutsceneTryQueue(InGameCutsceneScene cutscene)
 {
     u8 queued;
 

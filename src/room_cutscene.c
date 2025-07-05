@@ -20,7 +20,7 @@
  * @param bgX Backgrounds X position
  * @param bgY Backgrounds Y position
  */
-void LoadRoomCutscene(u8 area, u8 room, u16 bgX, u16 bgY)
+void LoadRoomCutscene(Area area, u8 room, u16 bgX, u16 bgY)
 {
     // Set backgrounds position
     gBg0XPosition = bgX;
