@@ -109,10 +109,14 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 - Collecting an item during a power bomb explosion allows Samus to move early
 
 ### Uninitialized Variables
-- [MinimapDraw](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/minimap.c#L680)
-- [BlockSamusApplyScrewSpeedboosterDamageToEnvironment](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/block.c#L1053)
-- [BootDebugModeSubroutine](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/menus/boot_debug.c#L1513)
-- [BootDebugSoundSubroutine](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/menus/boot_debug.c#L1961)
+- [MinimapDraw (tmp1, tmp2)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/minimap.c#L680)
+- [BlockSamusApplyScrewSpeedboosterDamageToEnvironment (result)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/block.c#L1053)
+- [BgClipCheckOpeningHatch (action)](https://github.com/metroidret/mzm/blob/043610f452aa8bbbad96c0c4f2e70a46e60fd6cc/src/bg_clip.c#L774)
+- [SamusCheckSetEnvironmentalEffect (effect)](https://github.com/metroidret/mzm/blob/2bff56a86e36559955f1a6238df60829b61bb909/src/samus.c#L1348)
+- [SamusShinesparking (stop)](https://github.com/metroidret/mzm/blob/2bff56a86e36559955f1a6238df60829b61bb909/src/samus.c#L5895)
+- [unk_818cc (currSlot)](https://github.com/metroidret/mzm/blob/043610f452aa8bbbad96c0c4f2e70a46e60fd6cc/src/tourian_escape.c#L322)
+- [BootDebugModeSubroutine (updateTextAndEvents)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/menus/boot_debug.c#L1513)
+- [BootDebugSoundSubroutine (updateText)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/menus/boot_debug.c#L1961)
 
 ### Oversights and Design Flaws
 
