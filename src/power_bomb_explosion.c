@@ -3,6 +3,8 @@
 #include "audio_wrappers.h"
 #include "haze.h"
 #include "screen_shake.h"
+#include "fixed_point.h"
+#include "macros.h"
 
 #include "constants/audio.h"
 #include "constants/clipdata.h"
@@ -69,8 +71,13 @@ static void PowerBombExplosion(void)
     
     verticalAxis = gCurrentPowerBomb.semiMinorAxis * 4;
     horizontalAxis = gCurrentPowerBomb.semiMinorAxis * 8;
+    #ifdef BUGFIX
+    verticalAxis = FixedMultiplication(verticalAxis, Q_8_8(0.95));
+    horizontalAxis = FixedMultiplication(horizontalAxis, Q_8_8(0.95));
+    #else // !BUGFIX
     verticalAxis *= 0.95;
     horizontalAxis *= 0.95;
+    #endif // BUGFIX
 
     hitboxLeft = (s16)-horizontalAxis;
     hitboxRight = (s16)horizontalAxis;

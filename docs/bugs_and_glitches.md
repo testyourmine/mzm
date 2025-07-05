@@ -1,16 +1,19 @@
 # Bugs and Glitches
 These are known bugs and glitches in the game: code that clearly does not work as intended or was designed poorly. Some of them cause visible gameplay issues, while others are harmless. The bugs listed here can be fixed by compiling with the `BUGFIX` flag (bugs in the TODO section don't have a fix implemented yet). 
 
+
 ## Contents
 
 - [Bugs](#bugs)
   - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
 - [Uninitialized Variables](#uninitialized-variables)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
+  - [Floating point math is when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
 - [TODO](#todo)
   - [Bugs](#bugs-1)
   - [Uninitialized Variables](#uninitialized-variables-1)
   - [Oversights and Design Flaws](#oversights-and-design-flaws-1)
+
 
 ## Bugs
 
@@ -32,7 +35,54 @@ if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
 
 
 ## Uninitialized Variables
+
+
 ## Oversights and Design Flaws
+
+#### Floating point math is used when fixed point could have been used
+
+`PowerBombExplosion`:
+```c
+verticalAxis = gCurrentPowerBomb.semiMinorAxis * 4;
+horizontalAxis = gCurrentPowerBomb.semiMinorAxis * 8;
+#ifdef BUGFIX
+verticalAxis = FixedMultiplication(verticalAxis, Q_8_8(0.95));
+horizontalAxis = FixedMultiplication(horizontalAxis, Q_8_8(0.95));
+#else // !BUGFIX
+verticalAxis *= 0.95;
+horizontalAxis *= 0.95;
+#endif // BUGFIX
+```
+Could also do `verticalAxis * 19 / 20`
+
+`ImagoCocoonSporeMove`:
+```c
+case IMAGO_COCOON_SPORE_PART_DIAG_RIGHT_UP:
+    #ifdef BUGFIX
+    movement = FixedMultiplication(movement, Q_8_8(0.8));
+    #else // !BUGFIX
+    movement *= 0.8; // 4 * 0.8 = 3.2
+    #endif // BUGFIX
+    gCurrentSprite.yPosition -= movement;
+    gCurrentSprite.xPosition += movement;
+    break;
+```
+Could also do `movement * 4 / 5`
+
+`RidleyLandingShipLanding`:
+```c
+#ifdef BUGFIX
+if (movement >= 2848 - FixedMultiplication(sRidleyLandingScrollingInfo[1].length, Q_8_8(2.f / 3)))
+#else // !BUGFIX
+if (movement >= 2848 - sRidleyLandingScrollingInfo[1].length / 1.5)
+#endif // BUGFIX
+{
+    CUTSCENE_DATA.dispcnt |= sRidleyLandingPageData[2].bg;
+    CutsceneStartBackgroundScrolling(sRidleyLandingScrollingInfo[1], sRidleyLandingPageData[2].bg);
+}
+```
+Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
+
 
 ## TODO
 
@@ -65,9 +115,5 @@ if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
 
 ### Oversights and Design Flaws
 
-- Using floating point math when fixed point could have been used
-  - [RidleyLandingShipLanding](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/cutscenes/ridley_landing.c#L214)
-  - [ImagoCocoonSporeMove](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/sprites_AI/imago_cocoon.c#L1093-L1123)
-  - [PowerBombExplosion](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/power_bomb_explosion.c#L72-L73)
 - Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics from the message box
   - Potential fix: kill any missiles after mecha dies

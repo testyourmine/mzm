@@ -1,4 +1,5 @@
 #include "sprites_AI/imago_cocoon.h"
+#include "fixed_point.h"
 #include "macros.h"
 
 #include "data/sprites/imago_cocoon.h"
@@ -1091,7 +1092,11 @@ static void ImagoCocoonSporeMove(void)
     switch (gCurrentSprite.roomSlot)
     {
         case IMAGO_COCOON_SPORE_PART_DIAG_RIGHT_UP:
+            #ifdef BUGFIX
+            movement = FixedMultiplication(movement, Q_8_8(0.8));
+            #else // !BUGFIX
             movement *= 0.8; // 4 * 0.8 = 3.2
+            #endif // BUGFIX
             gCurrentSprite.yPosition -= movement;
             gCurrentSprite.xPosition += movement;
             break;

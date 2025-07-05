@@ -2,6 +2,8 @@
 #include "cutscenes/cutscene_utils.h"
 #include "dma.h"
 #include "temp_globals.h"
+#include "fixed_point.h"
+#include "macros.h"
 
 #include "data/cutscenes/cutscenes_data.h"
 #include "data/cutscenes/ridley_landing_data.h"
@@ -211,7 +213,11 @@ u8 RidleyLandingShipLanding(void)
 
             if (!(CUTSCENE_DATA.dispcnt & sRidleyLandingPageData[2].bg))
             {
+                #ifdef BUGFIX
+                if (movement >= 2848 - FixedMultiplication(sRidleyLandingScrollingInfo[1].length, Q_8_8(2.f / 3)))
+                #else // !BUGFIX
                 if (movement >= 2848 - sRidleyLandingScrollingInfo[1].length / 1.5)
+                #endif // BUGFIX
                 {
                     CUTSCENE_DATA.dispcnt |= sRidleyLandingPageData[2].bg;
                     CutsceneStartBackgroundScrolling(sRidleyLandingScrollingInfo[1], sRidleyLandingPageData[2].bg);
