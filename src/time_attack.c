@@ -4,7 +4,7 @@
 #include "data/intro_data.h"
 
 #include "constants/ending_and_gallery.h"
-#include "constants/time_attack.h"
+#include "constants/game_region.h"
 
 #include "structs/in_game_timer.h"
 #include "structs/game_state.h"

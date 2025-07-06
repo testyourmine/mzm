@@ -1,5 +1,6 @@
 #include "data/menus/status_screen_data.h"
 #include "constants/menus/pause_screen.h"
+#include "constants/game_region.h"
 #include "macros.h"
 
 #ifdef DEBUG
@@ -98,10 +99,10 @@ const u8 sPauseDebug_Language_Text[LANGUAGE_END + 1][3] = {
     [LANGUAGE_END] = "@NG"
 };
 
-const u8 sPauseDebug_Region_Text[3][2] = {
-    [0] = "JP",
-    [1] = "EU",
-    [2] = "US"
+const u8 sPauseDebug_Region_Text[GAME_REGION_END][2] = {
+    [GAME_REGION_JPN] = "JP",
+    [GAME_REGION_EUR] = "EU",
+    [GAME_REGION_USA] = "US"
 };
 
 const u8 sPauseDebug_Area_Text[AREA_COUNT][3] = {
