@@ -18,6 +18,7 @@
 #include "constants/game_state.h"
 #include "constants/menus/pause_screen.h"
 #include "constants/menus/status_screen.h"
+#include "constants/game_region.h"
 
 #include "structs/demo.h"
 #include "structs/game_state.h"
@@ -1098,8 +1099,8 @@ void PauseDebugDrawStaticInfo(void)
     // Region
     regionDst = VRAM_BASE + 0xB000 + sPauseDebugLanguagePosition[0] * 64 +
         sPauseDebugLanguagePosition[1] * 2;
-    regionDst[4] = (sPauseDebug_Region_Text[2][0] + 0x360) | 0xB000;
-    regionDst[5] = (sPauseDebug_Region_Text[2][1] + 0x360) | 0xB000;
+    regionDst[4] = (sPauseDebug_Region_Text[GAME_REGION][0] + 0x360) | 0xB000;
+    regionDst[5] = (sPauseDebug_Region_Text[GAME_REGION][1] + 0x360) | 0xB000;
 
     // Save
     dst = VRAM_BASE + 0xB000 + sPauseDebugSaveHightlightPosition[0] * 64 +
