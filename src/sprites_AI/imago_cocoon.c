@@ -1102,7 +1102,11 @@ static void ImagoCocoonSporeMove(void)
             break;
         
         case IMAGO_COCOON_SPORE_PART_DIAG_RIGHT_DOWN:
+            #ifdef BUGFIX
+            movement = FixedMultiplication(movement, Q_8_8(0.8));
+            #else // !BUGFIX
             movement *= 0.8;
+            #endif // BUGFIX
             gCurrentSprite.yPosition += movement;
             gCurrentSprite.xPosition += movement;
             break;
@@ -1116,13 +1120,21 @@ static void ImagoCocoonSporeMove(void)
             break;
         
         case IMAGO_COCOON_SPORE_PART_DIAG_LEFT_DOWN:
+            #ifdef BUGFIX
+            movement = FixedMultiplication(movement, Q_8_8(0.8));
+            #else // !BUGFIX
             movement *= 0.8;
+            #endif // BUGFIX
             gCurrentSprite.yPosition += movement;
             gCurrentSprite.xPosition -= movement;
             break;
         
         case IMAGO_COCOON_SPORE_PART_DIAG_LEFT_UP:
+            #ifdef BUGFIX
+            movement = FixedMultiplication(movement, Q_8_8(0.8));
+            #else // !BUGFIX
             movement *= 0.8;
+            #endif // BUGFIX
             gCurrentSprite.yPosition -= movement;
             gCurrentSprite.xPosition -= movement;
             break;
