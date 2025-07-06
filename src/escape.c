@@ -4,7 +4,6 @@
 #include "data/visual_effects_data.h"
 
 #include "constants/event.h"
-#include "constants/escape.h"
 #include "constants/game_state.h"
 #include "constants/particle.h"
 
@@ -18,7 +17,7 @@
  * 
  * @return u8 Escape ID
  */
-u8 EscapeDetermineTimer(void)
+Escape EscapeDetermineTimer(void)
 {
     if (!EventFunction(EVENT_ACTION_CHECKING, EVENT_ESCAPED_ZEBES))
     {
@@ -45,7 +44,7 @@ u8 EscapeDetermineTimer(void)
  * 
  * @return u8 TRUE if escaped, FALSE otherwise
  */
-u8 EscapeCheckHasEscaped(void)
+boolu8 EscapeCheckHasEscaped(void)
 {
 
     if (EventFunction(EVENT_ACTION_CHECKING, EVENT_MECHA_RIDLEY_KILLED))

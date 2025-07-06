@@ -892,7 +892,7 @@ void PauseScreenFadeWireframeSamus(void)
  * 
  * @param area Area
  */
-void PauseScreenUpdateWorldMapHighlight(u8 area)
+void PauseScreenUpdateWorldMapHighlight(Area area)
 {
     // Prevent overflow
     if (area >= MAX_AMOUNT_OF_AREAS - 1)
@@ -2796,7 +2796,7 @@ lbl_0806b0ee: \n\
  * @param area Area
  * @param dst Destination pointer
  */
-void PauseScreenGetMinimapData(u8 area, u16* dst)
+void PauseScreenGetMinimapData(Area area, u16* dst)
 {
     u32 position;
     s32 i;

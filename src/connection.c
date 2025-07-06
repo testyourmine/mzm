@@ -1,5 +1,5 @@
-#include "gba.h"
 #include "connection.h"
+#include "gba.h"
 
 #include "data/empty_datatypes.h"
 #include "data/hatch_data.h"
@@ -134,7 +134,7 @@ void ConnectionUpdateHatches(void)
  * @param dontSetRaw Flag for "do not set raw"
  * @param hatchNbr Hatch number
  */
-void ConnectionUpdateHatchAnimation(u8 dontSetRaw, u32 hatchNbr)
+void ConnectionUpdateHatchAnimation(boolu8 dontSetRaw, u32 hatchNbr)
 {
     s32 caf;
     u32 tilemapValue;
@@ -265,15 +265,15 @@ void ConnectionOverrideOpenedHatch(u8 hatch, u32 type)
  * 
  * @param yPosition Y Position
  * @param xPosition X Position
- * @return u8 Could enter
+ * @return boolu32 Could enter
  */
-u32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
+boolu32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
 {
     const struct Door* pDoor;
     struct HatchData* pHatch;
     s32 i;
     u8 state;
-    u8 doorType;
+    DoorType doorType;
 
     // Don't care for doors if not in control of samus
     if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
@@ -374,16 +374,16 @@ u32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
  * 
  * @param yPosition Y Position
  * @param xPosition X Position
- * @return u8 Could enter
+ * @return boolu32 Could enter
  */
-u32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
+boolu32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
 {
     const struct Door* pDoor;
     struct HatchData* pHatch;
     s32 i;
     s32 j;
     u8 state;
-    u8 doorType;
+    DoorType doorType;
 
     if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
         return FALSE;
@@ -491,7 +491,7 @@ u32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
  * 
  * @param type Door type
  */
-void ConnectionProcessDoorType(u8 type)
+void ConnectionProcessDoorType(DoorType type)
 {
     u8 transition;
 
@@ -557,10 +557,10 @@ u8 ConnectionFindEventBasedDoor(u8 sourceDoor)
  * @param hatch Hatch number
  * @return u32 bool, closed
  */
-u32 ConnectionSetHatchAsOpened(u8 action, u8 hatch)
+boolu32 ConnectionSetHatchAsOpened(HatchAction action, u8 hatch)
 {
     u32* pHatch;
-    u32 closed;
+    boolu32 closed;
     u32 doorBit;
     u32 chunk;
     struct Door currDoor;
@@ -633,7 +633,7 @@ void ConnectionCheckUnlockDoors(void)
  * @param hatch Hatch ID
  * @param state Opening status
  */
-void ConnectionHatchStartLockAnimation(u8 dontSetRaw, u8 hatch, u8 state)
+void ConnectionHatchStartLockAnimation(boolu8 dontSetRaw, u8 hatch, u8 state)
 {
     gHatchData[hatch].state = state;
     gHatchData[hatch].currentAnimationFrame = 0;
@@ -646,7 +646,7 @@ void ConnectionHatchStartLockAnimation(u8 dontSetRaw, u8 hatch, u8 state)
  * 
  * @param isEvent bool, is event lock
  */
-void ConnectionLockHatches(u8 isEvent)
+void ConnectionLockHatches(boolu8 isEvent)
 {
     s32 i;
     u16 lockedHatches;
@@ -801,7 +801,7 @@ void ConnectionLoadDoors(void)
             if (behaviorCheck < BEHAVIOR_TO_DOOR(CLIP_BEHAVIOR_POWER_BOMB_DOOR))
                 hatchType = BEHAVIOR_TO_DOOR(behavior);
             else
-                hatchType = 0;
+                hatchType = HATCH_NONE;
 
             // Get hatch type
             hatchType = sHatchTypeTable[hatchType];
@@ -1045,7 +1045,7 @@ void ConnectionCheckHatchLockEvents(void)
  * @param area Current area
  * @param dstRoomPlusOne Destination room (+ 1)
  */
-void ConnectionCheckPlayCutsceneDuringTransition(u8 area, u8 dstRoomPlusOne)
+void ConnectionCheckPlayCutsceneDuringTransition(Area area, u8 dstRoomPlusOne)
 {
     switch (area)
     {

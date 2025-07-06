@@ -279,7 +279,6 @@ static void LinkDisableSerial(void)
 static void LinkEnableSerial(void)
 {
     u32 buffer;
-    u32* ptr;
 
     // Disable Interrupts
     gLinkSavedIme = read16(REG_IME);

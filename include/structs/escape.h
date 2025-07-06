@@ -4,6 +4,8 @@
 #include "types.h"
 #include "macros.h"
 
+#include "constants/escape.h"
+
 // Structs
 
 struct PACKED EscapeDigits {
@@ -17,7 +19,7 @@ struct PACKED EscapeDigits {
 
 // Globals
 
-extern u8 gCurrentEscapeStatus;
+extern EscapeStatus gCurrentEscapeStatus;
 extern u8 gEscapeTimerCounter;
 extern struct EscapeDigits gEscapeTimerDigits;
 

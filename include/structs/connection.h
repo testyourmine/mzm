@@ -4,6 +4,7 @@
 #include "types.h"
 #include "macros.h"
 
+#include "constants/connection.h"
 #include "constants/event.h"
 
 #include "structs/animated_graphics.h"
@@ -11,7 +12,7 @@
 // Structs
 
 struct Door {
-    u8 type;
+    DoorType type;
     u8 sourceRoom;
     u8 xStart;
     u8 xEnd;
@@ -23,7 +24,7 @@ struct Door {
 };
 
 struct EventBasedConnection {
-    u8 sourceArea;
+    Area sourceArea;
     u8 sourceDoor;
     Event event;
     u8 destinationDoor;
@@ -32,40 +33,40 @@ struct EventBasedConnection {
 struct HatchLockEvent {
     u8 room;
     Event event;
-    u8 type;
-    u8 hatchesToLock_0:1;
-    u8 hatchesToLock_1:1;
-    u8 hatchesToLock_2:1;
-    u8 hatchesToLock_3:1;
-    u8 hatchesToLock_4:1;
-    u8 hatchesToLock_5:1;
-    u8 hatchesToLock_6:1;
-    u8 hatchesToLock_7:1;
-    u8 hatchesToLock_8:1;
-    u8 hatchesToLock_9:1;
-    u8 hatchesToLock_10:1;
-    u8 hatchesToLock_11:1;
-    u8 hatchesToLock_12:1;
-    u8 hatchesToLock_13:1;
-    u8 hatchesToLock_14:1;
-    u8 hatchesToLock_15:1;
+    HatchLockEventType type;
+    boolu8 hatchesToLock_0:1;
+    boolu8 hatchesToLock_1:1;
+    boolu8 hatchesToLock_2:1;
+    boolu8 hatchesToLock_3:1;
+    boolu8 hatchesToLock_4:1;
+    boolu8 hatchesToLock_5:1;
+    boolu8 hatchesToLock_6:1;
+    boolu8 hatchesToLock_7:1;
+    boolu8 hatchesToLock_8:1;
+    boolu8 hatchesToLock_9:1;
+    boolu8 hatchesToLock_10:1;
+    boolu8 hatchesToLock_11:1;
+    boolu8 hatchesToLock_12:1;
+    boolu8 hatchesToLock_13:1;
+    boolu8 hatchesToLock_14:1;
+    boolu8 hatchesToLock_15:1;
 };
 
 struct HatchData {
     /* 0 */
-    u16 exists:1;
+    boolu16 exists:1;
     u16 currentAnimationFrame:3;
-    u16 facingRight:1;
+    boolu16 facingRight:1;
     u16 securityLevel:3; // Left over from fusion
     /* 1 */
-    u8 state:2;
-    u16 locked:2;
+    HatchState state:2;
+    HatchLockState locked:2;
     u16 flashingTimer:4;
     /* 2 */
     u16 hitTimer:4;
     u16 hits:4;
     /* 3 */
-    u8 type;
+    HatchType type;
     u8 animationDurationCounter;
     u8 xPosition;
     u8 yPosition;
@@ -74,13 +75,13 @@ struct HatchData {
 
 struct LastElevatorUsed {
     u16 unused;
-    u8 route;
-    s8 direction;
+    ElevatorRoute route;
+    ElevatorDirection direction;
 };
 
 struct HatchesState {
-    s8 unlocking;
-    s8 navigationDoorsUnlocking;
+    bools8 unlocking;
+    bools8 navigationDoorsUnlocking;
     u16 hatchesLockedWithTimer;
     u16 hatchesLockedWithEvent;
     u16 hatchesLockedWithEventUnlockable;
@@ -106,17 +107,21 @@ enum EventBasedConnectionField {
 #define MAX_AMOUNT_OF_HATCHES 16
 #define MAX_AMOUNT_OF_AREAS 8
 
+#ifdef USE_EWRAM_SYMBOLS
+extern u32 gHatchesOpened[MAX_AMOUNT_OF_AREAS][8];
+#else
 #define gHatchesOpened CAST_TO_ARRAY(u32, [MAX_AMOUNT_OF_AREAS][8], EWRAM_BASE + 0x37C00)
+#endif /* USE_EWRAM_SYMBOLS */
 
 extern u8 gWhichBGPositionIsWrittenToBG3OFS;
 extern struct Coordinates gDoorPositionStart;
-extern u8 gUseMotherShipDoors;
-extern u8 gCurrentArea;
-extern u8 gAreaBeforeTransition;
+extern boolu8 gUseMotherShipDoors;
+extern Area gCurrentArea;
+extern Area gAreaBeforeTransition;
 extern u8 gCurrentRoom;
 extern u8 gLastDoorUsed;
 extern u8 gLastDoorProperties;
-extern u8 gDisplayLocationText;
+extern boolu8 gDisplayLocationText;
 extern s8 gDoorUnlockTimer;
 extern struct HatchesState gHatchesState;
 extern struct HatchData gHatchData[MAX_AMOUNT_OF_HATCHES];

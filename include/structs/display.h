@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-struct IORegistersBackup {
+struct IoRegistersBackup {
     u16 Dispcnt_NonGameplay;
     u16 Bldcnt_NonGameplay;
     u8 BLDALPHA_NonGameplay_EVA;
@@ -38,6 +38,6 @@ extern u16 gDispcntBackup;
 extern u16 gWrittenToDispcnt;
 extern u8 gWrittenToWinIn_H;
 extern u8 gWrittenToWinOut_L;
-extern struct IORegistersBackup gIoRegistersBackup;
+extern struct IoRegistersBackup gIoRegistersBackup;
 
-#endif
+#endif /* DISPLAY_STRUCT_H */

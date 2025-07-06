@@ -1,6 +1,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+// Include this here to make sure it's basically included everywhere
+#include "config.h"
+
 #define TRUE 1
 #define FALSE 0
 #define NULL ((void *)0)
@@ -21,6 +24,13 @@ typedef volatile unsigned int vu32;
 typedef volatile signed int vs32;
 typedef volatile unsigned long long vu64;
 typedef volatile signed long long vs64;
+
+typedef u8 boolu8;
+typedef u16 boolu16;
+typedef u32 boolu32;
+typedef s8 bools8;
+typedef s16 bools16;
+typedef s32 bools32;
 
 #define SCHAR_MIN (-128)
 #define SCHAR_MAX (127)

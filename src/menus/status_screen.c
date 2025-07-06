@@ -254,7 +254,7 @@ void LoadPauseScreenBgPalette(void)
  * @param param_0 TODO
  * @param area Area
  */
-void PauseDebugUpdateMapOverlay(u8 param_0, u8 area)
+void PauseDebugUpdateMapOverlay(u8 param_0, Area area)
 {
     switch (param_0)
     {

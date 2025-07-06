@@ -3,6 +3,7 @@
 
 #include "types.h"
 
+#include "constants/connection.h"
 #include "constants/samus.h"
 
 void UpdateMinimapAnimatedPalette(void);
@@ -10,7 +11,7 @@ void LoadPauseScreenBgPalette(void);
 
 #ifdef DEBUG
 
-void PauseDebugUpdateMapOverlay(u8 param_0, u8 area);
+void PauseDebugUpdateMapOverlay(u8 param_0, Area area);
 void PauseDebugActivateAbilities(void);
 u32 PauseDebugSubroutine(void);
 void PauseDebugToggleAbility(u8 isActivation, u8 group, u8 abilityNum);

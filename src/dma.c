@@ -39,7 +39,7 @@ void DmaTransfer(u8 channel, const void *src, void *dst, u32 len, u8 bitSize)
         // Code written like this to match
         tmp = DMA_32BIT;
         tmp <<= 16;
-        sizeControl = tmp;
+        sizeControl = DMA_32BIT << 16;
     }
     else
     {

@@ -49,7 +49,7 @@ union EwramData {
     struct BeforeCharlieEwramData beforeCharlie;
 };
 
-extern u16 unk_02035400;
+extern u16 gUnk_02035400;
 
 extern u8 gUnk_03004FC9;
 extern union NonGameplayRam gNonGameplayRam;

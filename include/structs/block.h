@@ -8,7 +8,7 @@
 #define MAX_AMOUNT_OF_BOMB_CHAINS 4
 
 struct BrokenBlock {
-    u8 broken;
+    boolu8 broken;
     u8 stage;
     u8 type;
     u8 xPosition;
@@ -55,7 +55,7 @@ struct BombChainReverseData {
 
 struct TankBehavior {
     u8 itemType;
-    u8 underwater;
+    boolu8 underwater;
     u8 messageID;
     u16 revealedClipdata;
 };
@@ -67,4 +67,4 @@ extern u16 gMakeSolidBlocks[MAX_AMOUNT_OF_MAKE_SOLID_BLOCKS];
 extern struct BombChain gBombChains[MAX_AMOUNT_OF_BOMB_CHAINS];
 extern u8 gActiveBombChainTypes;
 
-#endif
+#endif /* BLOCK_STRUCT_H */

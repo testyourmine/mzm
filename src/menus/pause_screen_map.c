@@ -902,7 +902,7 @@ void PauseScreenGetAllMinimapData(u8 start)
 {
     s32 size;
     s32 i;
-    u8 area;
+    Area area;
 
     if (start >= MAX_AMOUNT_OF_AREAS)
     {
@@ -1128,7 +1128,7 @@ void MapScreenChangeMap(void)
 {
     u32 i;
     s32 j;
-    u8 area;
+    Area area;
     u8 viewables;
     struct MenuOamData* pOam;
 
