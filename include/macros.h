@@ -34,7 +34,7 @@
 #define HIGH_SHORT(value) ((value) >> 16)
 
 /**
- * @brief Constructs an @c u32 from 2 @c u16
+ * @brief Constructs an @c u32 from 2 @c u32
  * 
  * @param high High
  * @param low Low
@@ -439,7 +439,7 @@
 #define PI_3_4 (PI * 3 / 4)
 
 /**
- * @brief Computes the sinus of a value
+ * @brief Computes the sine of a value
  * 
  * @param value Q8.8 Value
  * @return Q8.8 sin value
@@ -447,7 +447,7 @@
 #define SIN(value) (sSineTable[(value)])
 
 /**
- * @brief Computes the cosinus of a value
+ * @brief Computes the cosine of a value
  * 
  * @param value Q8.8 Value
  * @return Q8.8 cos value
@@ -553,14 +553,14 @@
 #define SCREEN_Y_BLOCK_PADDING (BLOCK_TO_SUB_PIXEL(SCREEN_Y_PADDING))
 
 /**
- * @brief Allows, via preproc, to convert an ascii text containing special tags to the custom encoding used in the engine
+ * @brief Allows, via preproc, to convert a string to the custom encoding used in the engine
  * 
  * @param x Text
  */
 #define INCTEXT(x)  {0}
 
 /**
- * @brief Allows, via preproc, to convert an ascii text o shift-jis encoding
+ * @brief Allows, via preproc, to convert a string to shift-jis encoding
  * 
  * @param x Text
  */
