@@ -37,8 +37,6 @@ void DMA2IntrCode(void)
  */
 void RestartSound(void)
 {
-    u32 value;
-
     if (gMusicInfo.occupied)
         return;
 
@@ -60,8 +58,7 @@ void RestartSound(void)
     WRITE_16(REG_DMA1_CNT + 2, DMA_SRC_FIXED | DMA_32BIT);
     WRITE_16(REG_DMA2_CNT + 2, DMA_SRC_FIXED | DMA_32BIT);
 
-    value = 0;
-    CpuSet(&value, gMusicInfo.soundRawData, C_32_2_16(CPU_SET_SRC_FIXED | CPU_SET_32BIT, sizeof(gMusicInfo.soundRawData) / sizeof(u32)));
+    CPU_FILL_32(0, gMusicInfo.soundRawData, sizeof(gMusicInfo.soundRawData));
     WRITE_8(REG_SOUNDCNT_X, 0); // Disable and reset sound (PSG and FIFO) registers
 
     gMusicInfo.occupied = FALSE;
@@ -73,8 +70,6 @@ void RestartSound(void)
  */
 void ClearSoundData(void)
 {
-    u32 value;
-
     if (gMusicInfo.occupied)
         return;
 
@@ -86,8 +81,7 @@ void ClearSoundData(void)
     WRITE_16(REG_DMA1_CNT + 2, DMA_SRC_FIXED | DMA_32BIT);
     WRITE_16(REG_DMA2_CNT + 2, DMA_SRC_FIXED | DMA_32BIT);
 
-    value = 0;
-    CpuSet(&value, gMusicInfo.soundRawData, C_32_2_16(CPU_SET_SRC_FIXED | CPU_SET_32BIT, sizeof(gMusicInfo.soundRawData) / sizeof(u32)));
+    CPU_FILL_32(0, gMusicInfo.soundRawData, sizeof(gMusicInfo.soundRawData));
 
     gMusicInfo.occupied = FALSE;
 }

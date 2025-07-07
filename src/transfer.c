@@ -27,8 +27,6 @@ u32 TransferProcessSend(u32 size, const u32* pData)
 {
     // pData is transfer rom, size is size of transfer rom
     u32 result;
-    u32 buffer;
-    s32 i;
 
     TransferBackupIoRegs();
 
@@ -76,8 +74,7 @@ u32 TransferProcessSend(u32 size, const u32* pData)
         VBlankIntrWait();
     }
 
-    buffer = 0;
-    CpuSet(&buffer, &gTransferManager, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gTransferManager) / sizeof(u32)));
+    CPU_FILL_32(0, &gTransferManager, sizeof(gTransferManager));
 
     TransferRetrieveIoRegs();
 
@@ -90,8 +87,6 @@ u32 TransferProcessSend(u32 size, const u32* pData)
  */
 static void TransferInit(void)
 {
-    u32 buffer;
-
     gTransferUnk_30058aa = 0;
     gTransferDataTimer = 0;
     gTransferStartupTimer = 0;
@@ -99,8 +94,7 @@ static void TransferInit(void)
     gTransferGbaDetectedCount = 0;
     gTransferGbaId = 0;
 
-    buffer = 0;
-    CpuSet(&buffer, &gTransferManager, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gTransferManager) / sizeof(u32)));
+    CPU_FILL_32(0, &gTransferManager, sizeof(gTransferManager));
 }
 
 /**

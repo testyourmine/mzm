@@ -256,8 +256,6 @@ static void LinkProcessRecvCmds(void)
  */
 static void LinkDisableSerial(void)
 {
-    u32 buffer;
-
     // Disable Interrupts
     gLinkSavedIme = READ_16(REG_IME);
     WRITE_16(REG_IME, FALSE);
@@ -268,8 +266,7 @@ static void LinkDisableSerial(void)
     WRITE_16(REG_TM3CNT_H, 0);
     WRITE_16(REG_IF, IF_TIMER3 | IF_SERIAL);
 
-    buffer = 0;
-    CpuSet(&buffer, &gLink, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gLink) / sizeof(u32)));
+    CPU_FILL_32(0, &gLink, sizeof(gLink));
 }
 
 /**
@@ -278,8 +275,6 @@ static void LinkDisableSerial(void)
  */
 static void LinkEnableSerial(void)
 {
-    u32 buffer;
-
     // Disable Interrupts
     gLinkSavedIme = READ_16(REG_IME);
     WRITE_16(REG_IME, FALSE);
@@ -299,8 +294,7 @@ static void LinkEnableSerial(void)
     WRITE_16(REG_SIO_DATA8, 0);
     WRITE_64(REG_SIO_MULTI, 0);
 
-    buffer = 0;
-    CpuSet(&buffer, &gLink, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gLink) / sizeof(u32)));
+    CPU_FILL_32(0, &gLink, sizeof(gLink));
 
     gNumVBlanksWithoutSerialIntr = 0;
     gSendBufferEmpty = 0;
