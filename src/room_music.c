@@ -16,7 +16,7 @@
 #include "structs/samus.h"
 #include "structs/sprite.h"
 
-extern const struct RoomEntryROM* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
+extern const struct RoomEntryRom* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 /**
  * @brief 60928 | bc | Checks if the current room music track should play

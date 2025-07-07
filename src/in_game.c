@@ -40,7 +40,7 @@ u32 InGameMainLoop(void)
     u32 changing;
 
     #ifdef DEBUG
-    gDebugVCount_InGameStart = read16(REG_VCOUNT);
+    gDebugVCount_InGameStart = READ_16(REG_VCOUNT);
     #endif // DEBUG
 
     SetVBlankCodeInGame();
@@ -194,7 +194,7 @@ u32 InGameMainLoop(void)
         gOamData[0x7E].split.x = 234;
         gOamData[0x7E].split.tileNum = 0x77;
         gOamData[0x7E].split.paletteNum = 4;
-        gOamData[0x7F].split.y = gDebugVCount_InGameEnd = read16(REG_VCOUNT);
+        gOamData[0x7F].split.y = gDebugVCount_InGameEnd = READ_16(REG_VCOUNT);
         gOamData[0x7F].split.x = 0;
         gOamData[0x7F].split.tileNum = 0x78;
         gOamData[0x7F].split.paletteNum = 4;
@@ -301,26 +301,26 @@ void VBlankCodeInGameLoad(void)
 
     if (gWrittenToBldcnt_Internal & BLDCNT_BRIGHTNESS_INCREASE_EFFECT)
     {
-        write16(REG_BLDCNT, gWrittenToBldcnt_Internal);
+        WRITE_16(REG_BLDCNT, gWrittenToBldcnt_Internal);
         gWrittenToBldcnt_Internal = 0;
     }
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
-    write16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
+    WRITE_16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
+    WRITE_16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
 
-    write16(REG_BG1HOFS, gBackgroundPositions.bg[1].x);
-    write16(REG_BG1VOFS, gBackgroundPositions.bg[1].y);
+    WRITE_16(REG_BG1HOFS, gBackgroundPositions.bg[1].x);
+    WRITE_16(REG_BG1VOFS, gBackgroundPositions.bg[1].y);
 
-    write16(REG_BG2HOFS, gBackgroundPositions.bg[2].x);
-    write16(REG_BG2VOFS, gBackgroundPositions.bg[2].y);
+    WRITE_16(REG_BG2HOFS, gBackgroundPositions.bg[2].x);
+    WRITE_16(REG_BG2VOFS, gBackgroundPositions.bg[2].y);
 
-    write16(REG_BG3HOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].x);
-    write16(REG_BG3VOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].y);
+    WRITE_16(REG_BG3HOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].x);
+    WRITE_16(REG_BG3VOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].y);
 
     #ifdef DEBUG
-    gDebugVCount_VBlankEnd = read16(REG_VCOUNT);
+    gDebugVCount_VBlankEnd = READ_16(REG_VCOUNT);
     #endif // DEBUG
 }
 
@@ -333,17 +333,17 @@ void TransferSamusAndBgGraphics(void)
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16((DMA_ENABLE | DMA_32BIT), OAM_SIZE / sizeof(u32)));
     TransferSamusGraphics(FALSE, &gSamusPhysics);
 
-    write16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
-    write16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
+    WRITE_16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
+    WRITE_16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
 
-    write16(REG_BG1HOFS, gBackgroundPositions.bg[1].x);
-    write16(REG_BG1VOFS, gBackgroundPositions.bg[1].y);
+    WRITE_16(REG_BG1HOFS, gBackgroundPositions.bg[1].x);
+    WRITE_16(REG_BG1VOFS, gBackgroundPositions.bg[1].y);
 
-    write16(REG_BG2HOFS, gBackgroundPositions.bg[2].x);
-    write16(REG_BG2VOFS, gBackgroundPositions.bg[2].y);
+    WRITE_16(REG_BG2HOFS, gBackgroundPositions.bg[2].x);
+    WRITE_16(REG_BG2VOFS, gBackgroundPositions.bg[2].y);
 
-    write16(REG_BG3HOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].x);
-    write16(REG_BG3VOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].y);
+    WRITE_16(REG_BG3HOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].x);
+    WRITE_16(REG_BG3VOFS, gBackgroundPositions.bg[gWhichBGPositionIsWrittenToBG3OFS].y);
 }
 
 /**
@@ -382,22 +382,22 @@ void VBlankCodeInGame(void)
 
     TransferSamusGraphics(TRUE, &gSamusPhysics);
 
-    write16(REG_MOSAIC, gWrittenToMosaic_H << 4 | gWrittenToMosaic_L);
+    WRITE_16(REG_MOSAIC, gWrittenToMosaic_H << 4 | gWrittenToMosaic_L);
 
-    write16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
-    write16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
+    WRITE_16(REG_BG0HOFS, gBackgroundPositions.bg[0].x);
+    WRITE_16(REG_BG0VOFS, gBackgroundPositions.bg[0].y);
 
-    write16(REG_BG1HOFS, gBackgroundPositions.bg[1].x);
-    write16(REG_BG1VOFS, gBackgroundPositions.bg[1].y);
+    WRITE_16(REG_BG1HOFS, gBackgroundPositions.bg[1].x);
+    WRITE_16(REG_BG1VOFS, gBackgroundPositions.bg[1].y);
 
-    write16(REG_BG2HOFS, gBackgroundPositions.bg[2].x);
-    write16(REG_BG2VOFS, gBackgroundPositions.bg[2].y);
+    WRITE_16(REG_BG2HOFS, gBackgroundPositions.bg[2].x);
+    WRITE_16(REG_BG2VOFS, gBackgroundPositions.bg[2].y);
 
-    write16(REG_BG3HOFS, gBackgroundPositions.bg[3].x);
-    write16(REG_BG3VOFS, gBackgroundPositions.bg[3].y);
+    WRITE_16(REG_BG3HOFS, gBackgroundPositions.bg[3].x);
+    WRITE_16(REG_BG3VOFS, gBackgroundPositions.bg[3].y);
 
     #ifdef DEBUG
-    gDebugVCount_VBlankEnd = read16(REG_VCOUNT);
+    gDebugVCount_VBlankEnd = READ_16(REG_VCOUNT);
     #endif // DEBUG
 }
 
@@ -416,11 +416,11 @@ void VBlankInGame_Empty(void)
  */
 void InitAndLoadGenerics(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
 
     CallbackSetVblank(VBlankInGame_Empty);
 
@@ -432,7 +432,7 @@ void InitAndLoadGenerics(void)
 
     gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE;
     ColorFadingHideScreenDuringLoad(); // Undefined
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
     if (gPauseScreenFlag != PAUSE_SCREEN_NONE || gCurrentCutscene != 0)
         DmaTransfer(3, EWRAM_BASE + 0x1E000, VRAM_OBJ, 0x4000, 16);
@@ -444,12 +444,12 @@ void InitAndLoadGenerics(void)
     SamusInit();
 
     do {
-    } while ((u16)(read16(REG_VCOUNT) - 21) < 140); // read16(REG_VCOUNT) <= SCREEN_SIZE_Y
+    } while ((u16)(READ_16(REG_VCOUNT) - 21) < 140); // READ_16(REG_VCOUNT) <= SCREEN_SIZE_Y
 
     RoomLoad();
 
     do {
-    } while ((u16)(read16(REG_VCOUNT) - 21) < 140); // read16(REG_VCOUNT) <= SCREEN_SIZE_Y
+    } while ((u16)(READ_16(REG_VCOUNT) - 21) < 140); // READ_16(REG_VCOUNT) <= SCREEN_SIZE_Y
 
     if (gPauseScreenFlag == PAUSE_SCREEN_NONE && gGameModeSub3 != 0)
     {
@@ -463,7 +463,7 @@ void InitAndLoadGenerics(void)
     TransferSamusAndBgGraphics();
 
     do {
-    } while ((u16)(read16(REG_VCOUNT) - 21) < 140); // read16(REG_VCOUNT) <= SCREEN_SIZE_Y
+    } while ((u16)(READ_16(REG_VCOUNT) - 21) < 140); // READ_16(REG_VCOUNT) <= SCREEN_SIZE_Y
 
     HudGenericResetHUDData();
     SpriteLoadAllData();
@@ -488,7 +488,7 @@ void InitAndLoadGenerics(void)
     gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE - 1;
 
     do {
-    } while ((u16)(read16(REG_VCOUNT) - 21) < 140); // read16(REG_VCOUNT) <= SCREEN_SIZE_Y
+    } while ((u16)(READ_16(REG_VCOUNT) - 21) < 140); // READ_16(REG_VCOUNT) <= SCREEN_SIZE_Y
 
     gIsLoadingFile = FALSE;
     gPauseScreenFlag = PAUSE_SCREEN_NONE;

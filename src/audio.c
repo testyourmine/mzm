@@ -36,7 +36,7 @@ void UpdateMusic(void)
     var_0 = tmp3 = gMusicInfo.unk_9;
     if (var_0 != 0)
     {
-        vcount = read8(REG_VCOUNT);
+        vcount = READ_8(REG_VCOUNT);
         if (vcount < SCREEN_SIZE_Y)
             vcount += VERTICAL_LINE_COUNT;
 
@@ -116,7 +116,7 @@ void UpdateMusic(void)
     {
         if (var_0 != 0)
         {
-            vcount = read8(REG_VCOUNT);
+            vcount = READ_8(REG_VCOUNT);
             if (vcount < SCREEN_SIZE_Y)
                 vcount += VERTICAL_LINE_COUNT;
 
@@ -340,7 +340,7 @@ void UpdatePsgSounds(void)
                 pSound->unk_1B = (pSound->unk_1A * pSound->envelope.sustain + 0xF) >> 4;
 
                 ptr = (u8*)(REG_SOUNDCNT_L + 1);
-                control = read8(ptr) & ~(0x11 << i);
+                control = READ_8(ptr) & ~(0x11 << i);
 
                 if (pSound->unk_2 >= pSound->unk_3)
                 {
@@ -1771,22 +1771,22 @@ void ClearRegistersForPsg(struct PSGSoundData* pSound, u8 channel)
     switch (channel)
     {
         case 0:
-            write8(REG_SOUND1CNT_H + 1, 8);
-            write16(REG_SOUND1CNT_X, SOUNDCNT_RESTART_SOUND);
+            WRITE_8(REG_SOUND1CNT_H + 1, 8);
+            WRITE_16(REG_SOUND1CNT_X, SOUNDCNT_RESTART_SOUND);
             break;
 
         case 1:
-            write8(REG_SOUND2CNT_L + 1, 8);
-            write16(REG_SOUND2CNT_H, SOUNDCNT_RESTART_SOUND);
+            WRITE_8(REG_SOUND2CNT_L + 1, 8);
+            WRITE_16(REG_SOUND2CNT_H, SOUNDCNT_RESTART_SOUND);
             break;
 
         case 2:
-            write8(REG_SOUND3CNT_L, 0);
+            WRITE_8(REG_SOUND3CNT_L, 0);
             break;
 
         case 3:
-            write8(REG_SOUND4CNT_L + 1, 8);
-            write16(REG_SOUND4CNT_H, SOUNDCNT_RESTART_SOUND);
+            WRITE_8(REG_SOUND4CNT_L + 1, 8);
+            WRITE_16(REG_SOUND4CNT_H, SOUNDCNT_RESTART_SOUND);
             break;
     }
 }
@@ -1802,19 +1802,19 @@ void ClearRegistersForPsg_Unused(struct PSGSoundData* pSound, u8 channel)
     switch (channel)
     {
         case 0:
-            write8(REG_SOUND1CNT_H + 1, 0);
+            WRITE_8(REG_SOUND1CNT_H + 1, 0);
             break;
 
         case 1:
-            write8(REG_SOUND2CNT_L + 1, 0);
+            WRITE_8(REG_SOUND2CNT_L + 1, 0);
             break;
 
         case 2:
-            write8(REG_SOUND3CNT_L, 0);
+            WRITE_8(REG_SOUND3CNT_L, 0);
             break;
 
         case 3:
-            write8(REG_SOUND4CNT_L + 1, 0);
+            WRITE_8(REG_SOUND4CNT_L + 1, 0);
             break;
     }
 }

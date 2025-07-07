@@ -15,7 +15,7 @@ void CallbackCallVblank(void)
     if (gVBlankCallback)
         gVBlankCallback();
 
-    write16(REG_IF, read16(REG_IF) | IF_VBLANK);
+    WRITE_16(REG_IF, READ_16(REG_IF) | IF_VBLANK);
     gVBlankRequestFlag = TRUE;
     gInterruptCheckFlag |= 1;
 
@@ -48,7 +48,7 @@ void CallbackCallHblank(void)
     if (gHBlankCallback)
         gHBlankCallback();
 
-    write16(REG_IF, read16(REG_IF) | IF_HBLANK);
+    WRITE_16(REG_IF, READ_16(REG_IF) | IF_HBLANK);
 }
 
 /**
@@ -76,7 +76,7 @@ void CallbackCallVcount(void)
     if (gVCountCallback)
         gVCountCallback();
 
-    write16(REG_IF, read16(REG_IF) | IF_VCOUNT);
+    WRITE_16(REG_IF, READ_16(REG_IF) | IF_VCOUNT);
 }
 
 /**
@@ -104,7 +104,7 @@ void CallbackCallSerialCommunication(void)
     if (gSerialCommunicationCallback)
         gSerialCommunicationCallback();
 
-    write16(REG_IF, read16(REG_IF) | IF_SERIAL);
+    WRITE_16(REG_IF, READ_16(REG_IF) | IF_SERIAL);
 }
 
 /**
@@ -132,7 +132,7 @@ void CallbackCallTimer3(void)
     if (gTimer3Callback)
         gTimer3Callback();
 
-    write16(REG_IF, read16(REG_IF) | IF_TIMER3);
+    WRITE_16(REG_IF, READ_16(REG_IF) | IF_TIMER3);
 }
 
 /**

@@ -57,7 +57,7 @@ void FallingChozoPillar(void)
 
         case FALLING_CHOZO_PILLAR_POSE_CHECK_SUIT_ANIM_ENDED:
             // Check suit animation ended
-            if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_SUIT_ANIM_ENDED)
+            if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_SUIT_ANIM_ENDED)
             {
                 gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
                 gCurrentSprite.pose = FALLING_CHOZO_PILLAR_POSE_CHECK_ON_SCREEN;

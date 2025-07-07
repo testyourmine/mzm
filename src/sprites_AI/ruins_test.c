@@ -381,8 +381,8 @@ static u8 RuinsTestCheckSymbolShot(void)
         {
             // Last symbol
             gCurrentSprite.pose = RUINS_TEST_POSE_BACK_TO_CENTER;
-            gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_LAST_SYMBOL_HIT;
-            gSubSpriteData1.workVariable1 = 1;
+            gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_LAST_SYMBOL_HIT;
+            gSubSpriteData1.work1 = 1;
             gCurrentSprite.scaling = 0;
             gCurrentSprite.samusCollision = SSC_NONE;
 
@@ -392,7 +392,7 @@ static u8 RuinsTestCheckSymbolShot(void)
             return TRUE;
         }
 
-        gSubSpriteData1.workVariable1 = 128;
+        gSubSpriteData1.work1 = 128;
         RuinsTestCalculateDelay(CONVERT_SECONDS(4.f));
     }
 
@@ -426,15 +426,15 @@ static u8 RuinsTestUpdateSymbol(void)
 {
     u8 ramSlot;
 
-    if (MOD_AND(gSubSpriteData1.workVariable1, 128))
+    if (MOD_AND(gSubSpriteData1.work1, 128))
     {
-        if (gSubSpriteData1.workVariable1 == 1)
+        if (gSubSpriteData1.work1 == 1)
         {
             if (!RuinsTestCheckHitByChargedPistol())
-                gSubSpriteData1.workVariable1--;
+                gSubSpriteData1.work1--;
         }
         else
-            gSubSpriteData1.workVariable1--;
+            gSubSpriteData1.work1--;
 
         if (gCurrentSprite.status & SPRITE_STATUS_IGNORE_PROJECTILES)
         {
@@ -452,7 +452,7 @@ static u8 RuinsTestUpdateSymbol(void)
         if (!(gCurrentSprite.status & SPRITE_STATUS_IGNORE_PROJECTILES))
             gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
 
-        if (!(gSubSpriteData1.workVariable1 & 0x80))
+        if (!(gSubSpriteData1.work1 & 0x80))
         {
             if (gBossWork.work3 == 0)
             {
@@ -465,13 +465,13 @@ static u8 RuinsTestUpdateSymbol(void)
             {
                 // Set timer for how long symbol stays active
                 if (gSubSpriteData1.health == 0)
-                    gSubSpriteData1.workVariable1 = CONVERT_SECONDS(2.f);
+                    gSubSpriteData1.work1 = CONVERT_SECONDS(2.f);
                 else if (gSubSpriteData1.health == 1)
-                    gSubSpriteData1.workVariable1 = CONVERT_SECONDS(1.5f);
+                    gSubSpriteData1.work1 = CONVERT_SECONDS(1.5f);
                 else if (gSubSpriteData1.health == 2)
-                    gSubSpriteData1.workVariable1 = CONVERT_SECONDS(1.f);
+                    gSubSpriteData1.work1 = CONVERT_SECONDS(1.f);
                 else
-                    gSubSpriteData1.workVariable1 = TWO_THIRD_SECOND;
+                    gSubSpriteData1.work1 = TWO_THIRD_SECOND;
 
                 // Get new delay
                 RuinsTestCalculateDelay(CONVERT_SECONDS(2.f));
@@ -585,9 +585,9 @@ static void RuinsTestInit(void)
     gSubSpriteData1.yPosition = yPosition;
     gSubSpriteData1.xPosition = xPosition;
 
-    gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_ON_GOING;
+    gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_ON_GOING;
     gSubSpriteData1.health = 0;
-    gSubSpriteData1.workVariable1 = 0;
+    gSubSpriteData1.work1 = 0;
 
     RuinsTestCalculateDelay(CONVERT_SECONDS(2.f));
 
@@ -1067,7 +1067,7 @@ static void RuinsTestMoveToCenter(void)
         gCurrentSprite.xPosition = targetX;
 
         gCurrentSprite.pose = RUINS_TEST_POSE_CHECK_GHOST_DISAPPEARING;
-        gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_GHOST_AT_CENTER;
+        gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_GHOST_AT_CENTER;
     }
     else
     {
@@ -1082,7 +1082,7 @@ static void RuinsTestMoveToCenter(void)
  */
 static void RuinsTestCheckIsGhostDisappearing(void)
 {
-    if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
+    if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
     {
         gCurrentSprite.pose = RUINS_TEST_POSE_DESPAWN;
         gCurrentSprite.work0 = CONVERT_SECONDS(1.f) + TWO_THIRD_SECOND;
@@ -1119,7 +1119,7 @@ static void RuinsTestDespawn(void)
                 gCurrentSprite.xPosition, 0);
         }
     }
-    else if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE_FADE)
+    else if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE_FADE)
     {
         // Set inactive
         gCurrentSprite.pose = RUINS_TEST_POSE_DEAD;
@@ -1246,7 +1246,7 @@ static void RuinsTestGhostIdle(void)
 {
     u8 ramSlot;
 
-    if (gSubSpriteData1.workVariable3 > RUINS_TEST_FIGHT_STAGE_GHOST_AT_CENTER)
+    if (gSubSpriteData1.work3 > RUINS_TEST_FIGHT_STAGE_GHOST_AT_CENTER)
     {
         if (gCurrentSprite.invincibilityStunFlashTimer == 0)
         {
@@ -1277,9 +1277,9 @@ static void RuinsTestGhostIdle(void)
         else
             gCurrentSprite.status |= SPRITE_STATUS_ALPHA_BLENDING;
 
-        if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_AT_CENTER)
+        if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_GHOST_AT_CENTER)
         {
-            gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_GHOST_FADING_BACK;
+            gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_GHOST_FADING_BACK;
             gCurrentSprite.work1 = 9;
             gCurrentSprite.work0 = 10;
 
@@ -1522,9 +1522,9 @@ static void RuinsTestGhostSymbolPlacing(void)
  */
 static void RuinsTestGhostSymbolSetGhostDisappearing(void)
 {
-    if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_FADING_BACK)
+    if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_GHOST_FADING_BACK)
     {
-        gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR;
+        gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR;
         gCurrentSprite.pose = RUINS_TEST_GHOST_POSE_SYMBOL_WAIT_FOR_END_OF_FIGHT;
     }
 }
@@ -1535,7 +1535,7 @@ static void RuinsTestGhostSymbolSetGhostDisappearing(void)
  */
 static void RuinsTestGhostSymbolWaitForEndOfFight(void)
 {
-    if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
+    if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
     {
         gCurrentSprite.work0 = CONVERT_SECONDS(1.f) + ONE_THIRD_SECOND;
         gCurrentSprite.pose = RUINS_TEST_GHOST_POSE_SYMBOL_DELAY_BEFORE_PLACING_END_OF_FIGHT;
@@ -1620,7 +1620,7 @@ void RuinsTest(void)
     }
 
     // Update work variables
-    if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_ON_GOING)
+    if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_ON_GOING)
     {
         if (!gBossWork.work4)
         {
@@ -1940,12 +1940,12 @@ void RuinsTestReflectionCover(void)
             gCurrentSprite.xPosition = gSpriteData[ramSlot].xPosition;
 
             // Display if no shootable symbol, hide otherwise
-            if (gSubSpriteData1.workVariable1 == 0)
+            if (gSubSpriteData1.work1 == 0)
                 gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
             else
                 gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN;
 
-            if (gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
+            if (gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
                 gCurrentSprite.pose = RUINS_TEST_REFLECTION_COVER_POSE_KILL;
             break;
 
@@ -2084,7 +2084,7 @@ void RuinsTestShootableSymbol(void)
             break;
 
         case RUINS_TEST_SHOOTABLE_SYMBOL_POSE_SPAWNED:
-            if (gSubSpriteData1.workVariable1 == 0)
+            if (gSubSpriteData1.work1 == 0)
             {
                 // Shootable timer done, despawn
                 gCurrentSprite.pOam = sRuinsTestShootableSymbolOam_Despawning;
@@ -2123,7 +2123,7 @@ void RuinsTestShootableSymbol(void)
             if (SpriteUtilCheckEndCurrentSpriteAnim())
             {
                 // Set shootable timer to 0
-                gSubSpriteData1.workVariable1 = 0;
+                gSubSpriteData1.work1 = 0;
                 gCurrentSprite.status = 0;
 
                 // Spawn symbol shot ghost
@@ -2189,9 +2189,9 @@ void RuinsTestSamusReflectionEnd(void)
     s32 offset;
     u8 stage;
     
-    if (gSubSpriteData1.workVariable3 > RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
+    if (gSubSpriteData1.work3 > RUINS_TEST_FIGHT_STAGE_GHOST_STARTING_TO_DISAPPEAR)
     {
-        switch (gSubSpriteData1.workVariable3)
+        switch (gSubSpriteData1.work3)
         {
             case RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE_FADE:
                 break;
@@ -2324,7 +2324,7 @@ void RuinsTestSamusReflectionEnd(void)
             APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
-                gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE_FADE;
+                gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE_FADE;
                 gCurrentSprite.pose = 0;
             }
     }
@@ -2358,7 +2358,7 @@ void RuinsTestLightning(void)
     u16 velocity;
 
     velocity = QUARTER_BLOCK_SIZE;
-    if (gSubSpriteData1.workVariable3 != RUINS_TEST_FIGHT_STAGE_ON_GOING)
+    if (gSubSpriteData1.work3 != RUINS_TEST_FIGHT_STAGE_ON_GOING)
     {
         gCurrentSprite.status = 0;
         return;

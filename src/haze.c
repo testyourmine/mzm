@@ -225,7 +225,7 @@ void HazeSetupCode(u8 hazeValue)
             gWrittenToBldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
                 BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-            write16(REG_BLDY, 12);
+            WRITE_16(REG_BLDY, 12);
 
             gWrittenToWin1V = SCREEN_SIZE_Y;
             gWrittenToWin1H = 0;
@@ -233,7 +233,7 @@ void HazeSetupCode(u8 hazeValue)
             PowerBombYellowTint(0);
 
             if (gIoRegistersBackup.Dispcnt_NonGameplay & DCNT_BG0 && gCurrentRoomEntry.bg0Prop != BG_PROP_DISABLE_TRANSPARENCY)
-                gWrittenToDispcnt = read16(REG_DISPCNT) ^ DCNT_BG0;
+                gWrittenToDispcnt = READ_16(REG_DISPCNT) ^ DCNT_BG0;
 
             gBackdropColor = COLOR_WHITE;
 

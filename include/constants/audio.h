@@ -1,7 +1,10 @@
 #ifndef AUDIO_CONSTANTS_H
 #define AUDIO_CONSTANTS_H
 
-enum Sound {
+#include "types.h"
+#include "macros.h"
+
+MAKE_ENUM(u16, Sound) {
     MUSIC_NONE, // 0x0
     MUSIC_BRINSTAR, // 0x1
     MUSIC_TITLE_SCREEN, // 0x2

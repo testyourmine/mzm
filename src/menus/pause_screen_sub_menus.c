@@ -100,13 +100,13 @@ u32 PauseScreenEasySleepSubroutine(void)
 
         case EASY_SLEEP_MENU_STAGE_HANDLE_SLEEP_WAKE:
             // Setup key control to exit easy sleep
-            write16(REG_KEY_CONTROL, KEY_CONTROL_ENABLE | KEY_CONTROL_ALL_INPUTS | KEY_SELECT | KEY_L | KEY_R);
+            WRITE_16(REG_KEY_CONTROL, KEY_CONTROL_ENABLE | KEY_CONTROL_ALL_INPUTS | KEY_SELECT | KEY_L | KEY_R);
 
             // Setup interrupt enable flags
-            write16(REG_IME, FALSE);
-            ie = read16(REG_IE);
-            write16(REG_IE, IF_KEYPAD | IF_GAMEPAK);
-            write16(REG_IME, TRUE);
+            WRITE_16(REG_IME, FALSE);
+            ie = READ_16(REG_IE);
+            WRITE_16(REG_IE, IF_KEYPAD | IF_GAMEPAK);
+            WRITE_16(REG_IME, TRUE);
 
             // Disable sound
             SoundBias0();
@@ -116,9 +116,9 @@ u32 PauseScreenEasySleepSubroutine(void)
             SoundBias200();
 
             // Retrieve interrupt enable flags
-            write16(REG_IME, FALSE);
-            write16(REG_IE, ie);
-            write16(REG_IME, TRUE);
+            WRITE_16(REG_IME, FALSE);
+            WRITE_16(REG_IE, ie);
+            WRITE_16(REG_IME, TRUE);
 
             // Re display screen
             PAUSE_SCREEN_DATA.dispcnt ^= DCNT_BLANK;

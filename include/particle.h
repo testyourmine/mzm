@@ -3,6 +3,9 @@
 
 #include "types.h"
 #include "oam.h"
+
+#include "constants/particle.h"
+
 #include "structs/particle.h"
 
 // Functions
@@ -10,8 +13,8 @@
 void ParticleCheckOnScreen(struct ParticleEffect* pParticle);
 void ParticleDraw(struct ParticleEffect* pParticle);
 void ParticleProcessAll(void);
-void ParticleSet(u16 yPosition, u16 xPosition, u8 effect);
-u8 ParticleUpdateAnimation(struct ParticleEffect* pParticle, const struct FrameData* pOam);
+void ParticleSet(u16 yPosition, u16 xPosition, ParticleEffectId effect);
+boolu8 ParticleUpdateAnimation(struct ParticleEffect* pParticle, const struct FrameData* pOam);
 void ParticleSetCurrentOamFramePointer(struct ParticleEffect* pParticle, const struct FrameData* pOam);
 void ParticleSpriteSplashWaterSmall(struct ParticleEffect* pParticle);
 void ParticleSpriteSplashWaterBig(struct ParticleEffect* pParticle);

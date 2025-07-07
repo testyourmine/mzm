@@ -147,14 +147,14 @@ u8 unk_5bdc8(u8 stage, u8 color)
             {
                 if (sColorFadingData[gColorFading.type].isWhite)
                 {
-                    write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+                    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
                 }
                 else
                 {
-                    write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+                    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
                 }
 
-                write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+                WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
             }
             else
             {
@@ -330,30 +330,30 @@ void ColorFadingHideScreenDuringLoad(void)
     {
         if (sColorFadingData[gColorFading.type].isWhite)
         {
-            write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+            WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
         }
         else
         {
-            write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+            WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
         }
 
-        write16(REG_DISPCNT, 0);
+        WRITE_16(REG_DISPCNT, 0);
     }
     else
     {
         if (sColorFadingData[gColorFading.type].isWhite)
         {
-            write16(REG_BLDCNT, BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
+            WRITE_16(REG_BLDCNT, BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
                 BLDCNT_BACKDROP_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
         }
         else
         {
-            write16(REG_BLDCNT, BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
+            WRITE_16(REG_BLDCNT, BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
                 BLDCNT_BACKDROP_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
         }
 
-        write16(REG_BG3CNT, (BGCNT_SIZE_512x256 << BGCNT_SCREEN_SIZE_SHIFT) | (6 << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (1 << BGCNT_CHAR_BASE_BLOCK_SHIFT));
-        write16(REG_DISPCNT, DCNT_BG3 | DCNT_OBJ);
+        WRITE_16(REG_BG3CNT, (BGCNT_SIZE_512x256 << BGCNT_SCREEN_SIZE_SHIFT) | (6 << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (1 << BGCNT_CHAR_BASE_BLOCK_SHIFT));
+        WRITE_16(REG_DISPCNT, DCNT_BG3 | DCNT_OBJ);
     }
 }
 
@@ -380,8 +380,8 @@ void ColorFadingStartDefault(void)
 
     DmaTransfer(3, gDecompBg3Map, VRAM_BASE + 0x3000, sizeof(gDecompBg3Map), 16);
 
-    write16(REG_BG0CNT, gIoRegistersBackup.unk_12);
-    write16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
+    WRITE_16(REG_BG0CNT, gIoRegistersBackup.unk_12);
+    WRITE_16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
 
     gDisableDrawingSprites = FALSE;
 
@@ -389,7 +389,7 @@ void ColorFadingStartDefault(void)
         gHazeInfo.active = TRUE;
 
     TransparencyUpdateBldcnt(2, gIoRegistersBackup.Bldcnt_NonGameplay);
-    write16(REG_DISPCNT, gIoRegistersBackup.Dispcnt_NonGameplay);
+    WRITE_16(REG_DISPCNT, gIoRegistersBackup.Dispcnt_NonGameplay);
 
     if (gDoorUnlockTimer == DELTA_TIME)
         ConnectionLockHatchesWithTimer();
@@ -453,18 +453,18 @@ void ColorFadingFinishDoorFade(void)
 {
     unk_5d09c();
     SET_BACKDROP_COLOR(COLOR_BLACK);
-    write16(REG_DISPCNT, read16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3));
+    WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3));
     
     // Decompress and write the door transition tilemap to BG3
     RoomRleDecompress(FALSE, sDoorTransitionTilemap, gDecompBg3Map);
     DmaTransfer(3, gDecompBg3Map, VRAM_BASE + 0x3000, sizeof(gDecompBg3Map), 16);
-    write16(REG_BG3CNT, (BGCNT_SIZE_512x256 << BGCNT_SCREEN_SIZE_SHIFT) | (6 << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (1 << BGCNT_CHAR_BASE_BLOCK_SHIFT));
+    WRITE_16(REG_BG3CNT, (BGCNT_SIZE_512x256 << BGCNT_SCREEN_SIZE_SHIFT) | (6 << BGCNT_SCREEN_BASE_BLOCK_SHIFT) | (1 << BGCNT_CHAR_BASE_BLOCK_SHIFT));
 
     gBackgroundPositions.bg[3].y = BLOCK_SIZE;
     gBackgroundPositions.doorTransition.y = BLOCK_SIZE;
 
-    write16(REG_BG3VOFS, BLOCK_SIZE);
-    write16(REG_DISPCNT, read16(REG_DISPCNT) | DCNT_BG3);
+    WRITE_16(REG_BG3VOFS, BLOCK_SIZE);
+    WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG3);
 
     if (gUseMotherShipDoors == TRUE)
     {
@@ -504,7 +504,7 @@ u32 ColorFadingFinishDoorTransition(void)
         gMusicTrackInfo.pauseScreenFlag = 0;
 
         ColorFadingStart(COLOR_FADING_CANCEL);
-        write16(REG_BLDY, gIoRegistersBackup.BLDY_NonGameplay);
+        WRITE_16(REG_BLDY, gIoRegistersBackup.BLDY_NonGameplay);
         TransparencyUpdateBldcnt(3, gIoRegistersBackup.Bldcnt_NonGameplay);
         gDisableDrawingSprites = FALSE;
         gColorFading.stage = 0;
@@ -581,7 +581,7 @@ u8 ColorFadingProcess_DoorTransition(void)
                 DmaTransfer(3, sDoorTransitionPal, PALRAM_BASE + 1 * PAL_ROW_SIZE, 2 * PAL_ROW_SIZE, 16);
             }
 
-            write16(REG_DISPCNT, read16(REG_DISPCNT) & ~(DCNT_BG2 | DCNT_BG3 | DCNT_WIN1));
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~(DCNT_BG2 | DCNT_BG3 | DCNT_WIN1));
             gSamusOnTopOfBackgrounds = FALSE;
             gColorFading.stage++;
             break;
@@ -598,8 +598,8 @@ u8 ColorFadingProcess_DoorTransition(void)
             offset = BLOCK_TO_SUB_PIXEL(gDoorPositionStart.y) - gBg1YPosition;
             gBackgroundPositions.doorTransition.y = SUB_PIXEL_TO_PIXEL_(BLOCK_SIZE * 16 - offset);
 
-            write16(REG_BG3HOFS, gBackgroundPositions.doorTransition.x);
-            write16(REG_BG3VOFS, gBackgroundPositions.doorTransition.y);
+            WRITE_16(REG_BG3HOFS, gBackgroundPositions.doorTransition.x);
+            WRITE_16(REG_BG3VOFS, gBackgroundPositions.doorTransition.y);
 
             gWrittenToBldcnt = BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET;
 
@@ -612,9 +612,9 @@ u8 ColorFadingProcess_DoorTransition(void)
             gWrittenToBldalpha = C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L);
 
             gBg3CntDuringDoorTransition = CREATE_BGCNT(1, 6, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_512x256);
-            gBg1CntDuringDoorTransition = read16(REG_BG1CNT) | BGCNT_HIGH_MID_PRIORITY;
+            gBg1CntDuringDoorTransition = READ_16(REG_BG1CNT) | BGCNT_HIGH_MID_PRIORITY;
 
-            gWrittenToDispcnt = read16(REG_DISPCNT);
+            gWrittenToDispcnt = READ_16(REG_DISPCNT);
             gWrittenToDispcnt |= DCNT_BG3;
             gWrittenToDispcnt &= ~DCNT_BG0;
 
@@ -641,7 +641,7 @@ u8 ColorFadingProcess_DoorTransition(void)
             }
             else
             {
-                write16(REG_DISPCNT, read16(REG_DISPCNT) & ~DCNT_BG1);
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG1);
                 gColorFading.unk_3 = 0;
                 gColorFading.stage = 5;
             }
@@ -737,7 +737,7 @@ u8 ColorFadingProcess_ChozodiaEscape(void)
     {
         case 0:
             SET_BACKDROP_COLOR(COLOR_BLACK);
-            gWrittenToDispcnt = read16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
+            gWrittenToDispcnt = READ_16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
             gColorFading.stage++;
             break;
 
@@ -881,7 +881,7 @@ u8 ColorFadingProcess_GettingFullyPowered(void)
             gCurrentCutscene = CUTSCENE_GETTING_FULLY_POWERED;
             ColorFadingStart(COLOR_FADING_CANCEL);
 
-            gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE;
+            gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_STARTING_CUTSCENE;
             EventFunction(EVENT_ACTION_SETTING, EVENT_STATUE_VARIA_SUIT_GRABBED);
 
             if (!EventFunction(EVENT_ACTION_CHECKING, EVENT_VARIA_SUIT_OBTAINED))
@@ -1208,14 +1208,14 @@ u8 ColorFadingUpdate_DoorTransition(void)
             }
             else
             {
-                write16(REG_DISPCNT, read16(REG_DISPCNT) | DCNT_BG1);
-                write16(REG_BLDCNT, read16(REG_BLDCNT) & ~BLDCNT_BG1_FIRST_TARGET_PIXEL);
-                write16(REG_DISPCNT, read16(REG_DISPCNT) & ~DCNT_BG3);
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG1);
+                WRITE_16(REG_BLDCNT, READ_16(REG_BLDCNT) & ~BLDCNT_BG1_FIRST_TARGET_PIXEL);
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG3);
 
                 DmaTransfer(3, gDecompBg3Map, BGCNT_TO_VRAM_TILE_BASE(6), sizeof(gDecompBg3Map), 16);
 
-                write16(REG_BG0CNT, gIoRegistersBackup.unk_12);
-                write16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
+                WRITE_16(REG_BG0CNT, gIoRegistersBackup.unk_12);
+                WRITE_16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
 
                 gBackgroundPositions.doorTransition.y = gBackgroundPositions.bg[3].y;
                 gBackgroundPositions.doorTransition.x = gBackgroundPositions.bg[3].x;
@@ -1224,7 +1224,7 @@ u8 ColorFadingUpdate_DoorTransition(void)
                     gHazeInfo.active = TRUE;
 
                 TransparencyUpdateBldcnt(2, gIoRegistersBackup.Bldcnt_NonGameplay);
-                write16(REG_DISPCNT, gIoRegistersBackup.Dispcnt_NonGameplay);
+                WRITE_16(REG_DISPCNT, gIoRegistersBackup.Dispcnt_NonGameplay);
 
                 gColorFading.unk_3 = 0;
                 gDisableDrawingSprites = FALSE;
@@ -1269,7 +1269,7 @@ void ColorFadingApplyMonochrome(void)
     {
         if (ColorFadingUpdate())
         {
-            write16(REG_DISPCNT, read16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3));
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3));
             gMonochromeBgFading = MONOCHROME_FADING_ENDED;
         }
     }

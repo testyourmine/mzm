@@ -812,9 +812,9 @@ void SpriteUtilSamusAndSpriteCollision(void)
                             pData->invincibilityTimer = CONVERT_SECONDS(4.f / 15);
 
                             SoundPlayNotAlreadyPlaying(SOUND_BUG_LEECHING);
-                            APPLY_DELTA_TIME_INC(gSubSpriteData1.workVariable2);
+                            APPLY_DELTA_TIME_INC(gSubSpriteData1.work2);
 
-                            if (MOD_AND(gSubSpriteData1.workVariable2, CONVERT_SECONDS(1.f / 15)) == 0)
+                            if (MOD_AND(gSubSpriteData1.work2, CONVERT_SECONDS(1.f / 15)) == 0)
                                 SoundPlay(SOUND_HURT);
                         }
                     }
@@ -3449,7 +3449,7 @@ void SpriteUtilUpdateSubSprite1Timer(void)
     u8 adc;
     u8 timer;
 
-    gSubSpriteData1.workVariable2 = 0;
+    gSubSpriteData1.work2 = 0;
 
     adc = gSubSpriteData1.animationDurationCounter;
     APPLY_DELTA_TIME_INC(adc);
@@ -3458,7 +3458,7 @@ void SpriteUtilUpdateSubSprite1Timer(void)
     if (gSubSpriteData1.pMultiOam[caf].timer < adc)
     {
         timer = caf;
-        gSubSpriteData1.workVariable2 = timer + 1;
+        gSubSpriteData1.work2 = timer + 1;
     }
 }
 

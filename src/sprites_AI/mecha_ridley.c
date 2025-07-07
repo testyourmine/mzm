@@ -118,7 +118,7 @@ enum HealthThreshold {
 #define CHECK_COVER_HEALTH_THRESHOLD(maxHealth)                     \
 do {                                                                \
 if (gSubSpriteData1.health < maxHealth * 3 / 4)                     \
-    gSubSpriteData1.workVariable3 = HEALTH_THRESHOLD_COVER_DAMAGED; \
+    gSubSpriteData1.work3 = HEALTH_THRESHOLD_COVER_DAMAGED; \
 } while(0);                                                         \
 
 
@@ -435,7 +435,7 @@ static void MechaRidleyCrawlingBackwardsInit(u8 leftArmSlot)
 {
     u8 rightArmSlot;
 
-    rightArmSlot = gSubSpriteData1.workVariable4;
+    rightArmSlot = gSubSpriteData1.work4;
     gBossWork.work7 = gSubSpriteData1.health;
 
     // Check current standing height
@@ -590,8 +590,8 @@ static void MechaRidleyInit(void)
     gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_CrawlingForwardLow;
     gSubSpriteData1.animationDurationCounter = 0;
     gSubSpriteData1.currentAnimationFrame = 0;
-    gSubSpriteData1.workVariable2 = 0;
-    gSubSpriteData1.workVariable3 = 0;
+    gSubSpriteData1.work2 = 0;
+    gSubSpriteData1.work3 = 0;
 
     LOCK_DOORS();
     gCurrentSprite.pose = MECHA_RIDLEY_POSE_CRAWLING_INIT;
@@ -601,7 +601,7 @@ static void MechaRidleyInit(void)
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
 
     // Spawn every part
-    gSubSpriteData1.workVariable4 = SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_RIGHT_ARM,
+    gSubSpriteData1.work4 = SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_RIGHT_ARM,
         gfxSlot, ramSlot, yPosition, xPosition, 0);
 
     SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_EYE,
@@ -622,7 +622,7 @@ static void MechaRidleyInit(void)
     SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_WAISTBAND,
         gfxSlot, ramSlot, yPosition, xPosition, 0);
 
-    gSubSpriteData1.workVariable5 = SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_LEFT_ARM,
+    gSubSpriteData1.work5 = SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_LEFT_ARM,
         gfxSlot, ramSlot, yPosition, xPosition, 0);
 
     SpriteSpawnSecondary(SSPRITE_MECHA_RIDLEY_PART, MECHA_RIDLEY_PART_TAIL,
@@ -669,8 +669,8 @@ static void MechaRidleyCrawling(void)
     u8 rightArmSlot;
     u8 leftArmSlot;
 
-    rightArmSlot = gSubSpriteData1.workVariable4;
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    rightArmSlot = gSubSpriteData1.work4;
+    leftArmSlot = gSubSpriteData1.work5;
 
     if (gSubSpriteData1.xPosition <= gBossWork.work2)
     {
@@ -776,7 +776,7 @@ static u8 MechaRidleyCheckStartFireballAttack(u8 ramSlot)
 
     gCurrentSprite.status &= ~SPRITE_STATUS_FACING_DOWN;
 
-    if (gSubSpriteData1.workVariable3 == HEALTH_THRESHOLD_COVER_DAMAGED && gBossWork.work6 == 0)
+    if (gSubSpriteData1.work3 == HEALTH_THRESHOLD_COVER_DAMAGED && gBossWork.work6 == 0)
     {
         if (gBossWork.work5 == MISSILE_LAUNCHER_STATE_IDLE && gEquipment.currentMissiles + gEquipment.currentSuperMissiles != 0)
         {
@@ -800,10 +800,10 @@ static void MechaRidleyIdle(void)
 {
     u8 leftArmSlot;
 
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    leftArmSlot = gSubSpriteData1.work5;
 
     // Update height, check trigger attacks (excluding fireballs for graphics conflits) and check timer
-    if ((MechaRidleyUpdateHeight() || !MechaRidleyCheckStartFireballAttack(leftArmSlot)) && gSubSpriteData1.workVariable2 == CONVERT_SECONDS(2.f + 5.f / 6))
+    if ((MechaRidleyUpdateHeight() || !MechaRidleyCheckStartFireballAttack(leftArmSlot)) && gSubSpriteData1.work2 == CONVERT_SECONDS(2.f + 5.f / 6))
         gBossWork.work5 = MISSILE_LAUNCHER_STATE_MISSILE_ATTACK_INIT; // Start missile attack
 }
 
@@ -831,7 +831,7 @@ static void MechaRidleyClawAttack(void)
         }
     }
 
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    leftArmSlot = gSubSpriteData1.work5;
 
     // Check is doing the attack from the back
     if (gSubSpriteData1.xPosition > gBossWork.work2 - BLOCK_SIZE)
@@ -859,7 +859,7 @@ static void MechaRidleyClawAttack(void)
         gSpriteData[leftArmSlot].currentAnimationFrame = 0;
 
         // Set delay for before mecha raises his arm
-        if (gSubSpriteData1.workVariable3 >= HEALTH_THRESHOLD_COVER_BROKEN)
+        if (gSubSpriteData1.work3 >= HEALTH_THRESHOLD_COVER_BROKEN)
         {
             if (gSubSpriteData1.health < coreSpawnHealth / 2)
                 gCurrentSprite.work0 = TWO_THIRD_SECOND;
@@ -886,7 +886,7 @@ static void MechaRidleyStandingUp(void)
 {
     u8 leftArmSlot;
 
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    leftArmSlot = gSubSpriteData1.work5;
 
     // Delay before raising arm
     if (gCurrentSprite.work0 != 0)
@@ -926,7 +926,7 @@ static void MechaRidleyCurledUp(void)
 {
     u8 leftArmSlot;
 
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    leftArmSlot = gSubSpriteData1.work5;
 
     if (!MechaRidleyUpdateHeight())
     {
@@ -943,7 +943,7 @@ static void MechaRidleyCurledUp(void)
     }
 
     // Check missile attack timer
-    if (gSubSpriteData1.workVariable2 ==  CONVERT_SECONDS(2.f) + CONVERT_SECONDS(5.f / 6))
+    if (gSubSpriteData1.work2 ==  CONVERT_SECONDS(2.f) + CONVERT_SECONDS(5.f / 6))
         gBossWork.work5 = MISSILE_LAUNCHER_STATE_MISSILE_ATTACK_INIT;
 }
 
@@ -956,8 +956,8 @@ static void MechaRidleyRetracting(void)
     u8 rightArmSlot;
     u8 leftArmSlot;
 
-    rightArmSlot = gSubSpriteData1.workVariable4;
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    rightArmSlot = gSubSpriteData1.work4;
+    leftArmSlot = gSubSpriteData1.work5;
 
     if (SpriteUtilCheckEndSubSprite1Anim())
     {
@@ -988,8 +988,8 @@ static void MechaRidleyCrawlingBack(void)
     u8 rightArmSlot;
     u8 leftArmSlot;
 
-    rightArmSlot = gSubSpriteData1.workVariable4;
-    leftArmSlot = gSubSpriteData1.workVariable5;
+    rightArmSlot = gSubSpriteData1.work4;
+    leftArmSlot = gSubSpriteData1.work5;
 
     if (gSubSpriteData1.xPosition < gBossWork.work2)
     {
@@ -1690,7 +1690,7 @@ static void MechaRidleyPartCoreCoverExplosion(void)
     gBossWork.work7 = gBossWork.work9;
 
     // Set cover destroyed flag
-    gSubSpriteData1.workVariable3 = HEALTH_THRESHOLD_COVER_BROKEN;
+    gSubSpriteData1.work3 = HEALTH_THRESHOLD_COVER_BROKEN;
 
     // Disable
     gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN;
@@ -1712,7 +1712,7 @@ static void MechaRidleyPartMissileLauncherIdle(void)
     switch (gBossWork.work5)
     {
         case MISSILE_LAUNCHER_STATE_MISSILE_ATTACK_INIT:
-            if (gSubSpriteData1.workVariable3 >= HEALTH_THRESHOLD_COVER_BROKEN || gEquipment.currentEnergy < 150 ||
+            if (gSubSpriteData1.work3 >= HEALTH_THRESHOLD_COVER_BROKEN || gEquipment.currentEnergy < 150 ||
                 gEquipment.currentMissiles + gEquipment.currentSuperMissiles == 0)
             {
                 // Set opening
@@ -1824,7 +1824,7 @@ static void MechaRidleyPartEyeIdle(void)
             break;
 
         case EYE_STATE_LASER_ATTACK_INIT:
-            if (gSubSpriteData1.workVariable3 < HEALTH_THRESHOLD_COVER_BROKEN)
+            if (gSubSpriteData1.work3 < HEALTH_THRESHOLD_COVER_BROKEN)
             {
                 gBossWork.work4 = EYE_STATE_IDLE;
                 break;
@@ -2661,18 +2661,18 @@ void MechaRidley(void)
             MechaRidleySecondEyeGlow();
     }
 
-    if (gSubSpriteData1.workVariable3 >= HEALTH_THRESHOLD_COVER_BROKEN)
+    if (gSubSpriteData1.work3 >= HEALTH_THRESHOLD_COVER_BROKEN)
     {
         gSubSpriteData1.health = gCurrentSprite.health;
 
         health = gBossWork.work9;
 
         if (gSubSpriteData1.health < health / 4)
-            gSubSpriteData1.workVariable3 = HEALTH_THRESHOLD_QUARTER;
+            gSubSpriteData1.work3 = HEALTH_THRESHOLD_QUARTER;
         else if (gSubSpriteData1.health < health / 2)
-            gSubSpriteData1.workVariable3 = HEALTH_THRESHOLD_HALF;
+            gSubSpriteData1.work3 = HEALTH_THRESHOLD_HALF;
         else if (gSubSpriteData1.health < health * 3 / 4)
-            gSubSpriteData1.workVariable3 = HEALTH_THRESHOLD_THREE_QUARTERS;
+            gSubSpriteData1.work3 = HEALTH_THRESHOLD_THREE_QUARTERS;
     }
 
     gCurrentSprite.work3++;
@@ -2680,7 +2680,7 @@ void MechaRidley(void)
     if (gCurrentSprite.pose == MECHA_RIDLEY_POSE_IDLE || gCurrentSprite.pose == MECHA_RIDLEY_POSE_CURLED_UP)
     #endif // !REGION_US_BETA
     {
-        APPLY_DELTA_TIME_INC(gSubSpriteData1.workVariable2); // Missile attack timer
+        APPLY_DELTA_TIME_INC(gSubSpriteData1.work2); // Missile attack timer
     }
 
     SpriteUtilUpdateSubSprite1Anim();
@@ -2784,7 +2784,7 @@ void MechaRidleyPart(void)
     {
         if (partNumber == MECHA_RIDLEY_PART_EYE)
         {
-            if (gSubSpriteData1.workVariable3 > HEALTH_THRESHOLD_COVER_DAMAGED)
+            if (gSubSpriteData1.work3 > HEALTH_THRESHOLD_COVER_DAMAGED)
                 gCurrentSprite.invincibilityStunFlashTimer = gSpriteData[ramSlot].invincibilityStunFlashTimer;
         }
         else 
@@ -2792,22 +2792,22 @@ void MechaRidleyPart(void)
             if (gSpriteData[ramSlot].pose > MECHA_RIDLEY_POSE_DELAY_BEFORE_CRAWLING)
                 BlackSpacePirateProjectileCollision();
 
-            if (gSubSpriteData1.workVariable3 > HEALTH_THRESHOLD_COVER_DAMAGED)
+            if (gSubSpriteData1.work3 > HEALTH_THRESHOLD_COVER_DAMAGED)
             {
                 gCurrentSprite.invincibilityStunFlashTimer = gSpriteData[ramSlot].invincibilityStunFlashTimer;
                 if (gCurrentSprite.paletteRow != NBR_OF_PALETTE_ROWS - SPRITE_STUN_PALETTE_OFFSET)
                 {
-                    if (gSubSpriteData1.workVariable3 > HEALTH_THRESHOLD_HALF)
+                    if (gSubSpriteData1.work3 > HEALTH_THRESHOLD_HALF)
                     {
                         gCurrentSprite.paletteRow = 4;
                         gCurrentSprite.absolutePaletteRow = gCurrentSprite.paletteRow;
                     }
-                    else if (gSubSpriteData1.workVariable3 > HEALTH_THRESHOLD_THREE_QUARTERS)
+                    else if (gSubSpriteData1.work3 > HEALTH_THRESHOLD_THREE_QUARTERS)
                     {
                         gCurrentSprite.paletteRow = 3;
                         gCurrentSprite.absolutePaletteRow = gCurrentSprite.paletteRow;
                     }
-                    else if (gSubSpriteData1.workVariable3 > HEALTH_THRESHOLD_COVER_BROKEN)
+                    else if (gSubSpriteData1.work3 > HEALTH_THRESHOLD_COVER_BROKEN)
                     {
                         gCurrentSprite.paletteRow = 2;
                         gCurrentSprite.absolutePaletteRow = gCurrentSprite.paletteRow;

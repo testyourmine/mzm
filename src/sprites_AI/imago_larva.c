@@ -212,10 +212,10 @@ static void ImagoLarvaInit(struct SubSpriteData* pSub)
     pSub->currentAnimationFrame = 0;
 
     // Immune to retreating flag
-    pSub->workVariable2 = FALSE;
+    pSub->work2 = FALSE;
 
     // Retreating counter
-    pSub->workVariable1 = 0;
+    pSub->work1 = 0;
 
     gCurrentSprite.drawOrder = 6;
     gCurrentSprite.frozenPaletteRowOffset = 2;
@@ -358,7 +358,7 @@ static void ImagoLarvaWarningInit(struct SubSpriteData* pSub)
 
     gCurrentSprite.pose = IMAGO_LARVA_POSE_WARNING;
     gCurrentSprite.work0 = 60;
-    pSub->workVariable1 = 0;
+    pSub->work1 = 0;
 
     SoundPlay(SOUND_IMAGO_LARVA_WARNING);
 }
@@ -439,7 +439,7 @@ static void ImagoLarvaTakingDamageInit(struct SubSpriteData* pSub)
 
     // Delay before it automatically attacks
     gCurrentSprite.work0 = 47;
-    pSub->workVariable1 = 0;
+    pSub->work1 = 0;
 
     SoundFade(SOUND_IMAGO_LARVA_ATTACKING, CONVERT_SECONDS(1.f / 6));
 }
@@ -703,7 +703,7 @@ static void ImagoLarvaPartShellIdle(struct SubSpriteData* pSub)
     else if (SPRITE_GET_ISFT(gCurrentSprite))
     {
         // Hit by something, check should retreat
-        if (!pSub->workVariable2)
+        if (!pSub->work2)
         {
             // Get speed
             health = UCHAR_MAX - gCurrentSprite.health;
@@ -720,14 +720,14 @@ static void ImagoLarvaPartShellIdle(struct SubSpriteData* pSub)
                 SoundPlay(SOUND_IMAGO_LARVA_CRAWLING_SLOW);
 
             // Update retreating counter
-            if (pSub->workVariable1 < 8)
-                pSub->workVariable1++;
+            if (pSub->work1 < 8)
+                pSub->work1++;
 
             // Set retracting
             gSpriteData[ramSlot].work0 = 16;
 
             // Set stunned delay
-            gSpriteData[ramSlot].work1 = pSub->workVariable1 * 8;
+            gSpriteData[ramSlot].work1 = pSub->work1 * 8;
 
             // Set moving speed
             gSpriteData[ramSlot].yPositionSpawn = speed;
@@ -766,7 +766,7 @@ static void ImagoLarvaPartDotIdle(struct SubSpriteData* pSub)
         gCurrentSprite.pose = IMAGO_LARVA_PART_POSE_DOT_REMOVING;
 
         // Set immune to retreat flag
-        pSub->workVariable2 = TRUE;
+        pSub->work2 = TRUE;
     }
 }
 
@@ -849,7 +849,7 @@ static void ImagoLarvaPartDotCheckAppearingAnimEnded(struct SubSpriteData* pSub)
         gCurrentSprite.pose = IMAGO_LARVA_PART_POSE_DOT_IDLE;
 
         // Remove immune to retreat flag
-        pSub->workVariable2 = FALSE;
+        pSub->work2 = FALSE;
     }
 }
 

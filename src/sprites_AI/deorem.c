@@ -1892,7 +1892,7 @@ enum DeoremSegment {
 /*static*/ void DeoremSegmentGoingDown(void)
 {
     u32 xMovement;
-    u32 workVariable2;
+    u32 work2;
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
@@ -1911,14 +1911,14 @@ enum DeoremSegment {
             gCurrentSprite.pose = DEOREM_SEGMENT_POSE_UP_SEGMENT_IDLE;
     }
             
-    workVariable2 = gCurrentSprite.work2;
-    xMovement = sDeoremSegmentXVelocity[workVariable2];
+    work2 = gCurrentSprite.work2;
+    xMovement = sDeoremSegmentXVelocity[work2];
     if (xMovement == SHORT_MAX)
     {
         xMovement = sDeoremSegmentXVelocity[0];
-        workVariable2 = 0;
+        work2 = 0;
     }
-    gCurrentSprite.work2 = workVariable2 + 1;
+    gCurrentSprite.work2 = work2 + 1;
     gCurrentSprite.xPosition += xMovement;
 }
 
@@ -1929,7 +1929,7 @@ enum DeoremSegment {
 /*static*/ void DeoremSegmentGoingUp(void)
 {
     u32 xMovement;
-    u32 workVariable2;
+    u32 work2;
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
@@ -1948,14 +1948,14 @@ enum DeoremSegment {
             gCurrentSprite.pose = DEOREM_SEGMENT_POSE_UP_SEGMENT_IDLE;
     }
             
-    workVariable2 = gCurrentSprite.work2;
-    xMovement = sDeoremSegmentXVelocity[workVariable2];
+    work2 = gCurrentSprite.work2;
+    xMovement = sDeoremSegmentXVelocity[work2];
     if (xMovement == SHORT_MAX)
     {
         xMovement = sDeoremSegmentXVelocity[0];
-        workVariable2 = 0;
+        work2 = 0;
     }
-    gCurrentSprite.work2 = workVariable2 + 1;
+    gCurrentSprite.work2 = work2 + 1;
     gCurrentSprite.xPosition += xMovement;
 }
 

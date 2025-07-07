@@ -110,14 +110,14 @@ static void TransferInit(void)
 static void TransferCloseSerial(void)
 {
     // Disable timer 3 and serial interrupt
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
+    WRITE_16(REG_IME, TRUE);
 
     // Reset timer 3 and serial and acknowledge outstanding interrupt requests
-    write16(REG_SIO, 0);
-    write16(REG_TM3CNT_H, 0);
-    write16(REG_IF, IF_TIMER3 | IF_SERIAL);
+    WRITE_16(REG_SIO, 0);
+    WRITE_16(REG_TM3CNT_H, 0);
+    WRITE_16(REG_IF, IF_TIMER3 | IF_SERIAL);
 }
 
 /**
@@ -127,20 +127,20 @@ static void TransferCloseSerial(void)
 static void TransferOpenSerialMulti(void)
 {
     // Disable timer 3 and serial interrupt
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
+    WRITE_16(REG_IME, TRUE);
 
-    write16(REG_RNCT, 0);
+    WRITE_16(REG_RNCT, 0);
 
     // Multi mode, baud rate = 115200 bits per second, request interrupt upon completion
-    write16(REG_SIO, SIO_MULTI_MODE);
-    write16(REG_SIO, read16(REG_SIO) | SIO_BAUD_RATE_115200 | SIO_IRQ_ENABLE);
+    WRITE_16(REG_SIO, SIO_MULTI_MODE);
+    WRITE_16(REG_SIO, READ_16(REG_SIO) | SIO_BAUD_RATE_115200 | SIO_IRQ_ENABLE);
 
     // Enable serial port interrupt
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) | IF_SERIAL);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) | IF_SERIAL);
+    WRITE_16(REG_IME, TRUE);
 }
 
 /**
@@ -149,9 +149,9 @@ static void TransferOpenSerialMulti(void)
  */
 static void TransferOpenSerial32(void)
 {
-    write16(REG_RNCT, 0);
-    write16(REG_SIO, SIO_32BIT_MODE | SIO_IRQ_ENABLE);
-    write16(REG_SIO, read16(REG_SIO) | SIO_MULTI_CONNECTION_READY);
+    WRITE_16(REG_RNCT, 0);
+    WRITE_16(REG_SIO, SIO_32BIT_MODE | SIO_IRQ_ENABLE);
+    WRITE_16(REG_SIO, READ_16(REG_SIO) | SIO_MULTI_CONNECTION_READY);
 }
 
 /**
@@ -261,7 +261,7 @@ static u16 TransferDetermineSendRecvState(u8 transferMode)
 {
     u16 isParent;
     // If all GBAs are ready and is currently the parent GBA
-    if ((read32(REG_SIO) & (SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID)) == (SIO_MULTI_CONNECTION_READY | SIO_MULTI_PARENT) && transferMode  != 0)
+    if ((READ_32(REG_SIO) & (SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID)) == (SIO_MULTI_CONNECTION_READY | SIO_MULTI_PARENT) && transferMode  != 0)
     {
         isParent = gTransferManager.status.isParent = TRUE;
     }
@@ -281,10 +281,10 @@ static u16 TransferDetermineSendRecvState(u8 transferMode)
  */
 static void TransferSetUpTransferManager(u32 size, const u32* pData, u32* recvBuffer)
 {
-    write16(REG_SIO, read16(REG_SIO) | SIO_BAUD_RATE_38400);
+    WRITE_16(REG_SIO, READ_16(REG_SIO) | SIO_BAUD_RATE_38400);
     
     gTransferManager.data.pData = pData;
-    write32(REG_SIO_MULTI, size); // transmit the size of data to transfer
+    WRITE_32(REG_SIO_MULTI, size); // transmit the size of data to transfer
 
     gTransferManager.data.sizeInt = (size / sizeof(u32)) + 1; // 32740 / 4 + 1 = 8186
 
@@ -298,13 +298,13 @@ static void TransferSetUpTransferManager(u32 size, const u32* pData, u32* recvBu
 static void TransferInitTimer(void)
 {
     // Load -101 into timer 3 (what is -101?)
-    write16(REG_TM3CNT_L, -101);
-    write16(REG_TM3CNT_H, TIMER_CONTROL_IRQ_ENABLE);
+    WRITE_16(REG_TM3CNT_L, -101);
+    WRITE_16(REG_TM3CNT_H, TIMER_CONTROL_IRQ_ENABLE);
 
     // Enable timer 3 interrupt
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) | IF_TIMER3);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) | IF_TIMER3);
+    WRITE_16(REG_IME, TRUE);
 }
 
 /**
@@ -331,13 +331,13 @@ void TransferExchangeData(void)
     u16 numGbaDetected;
     u16 numGbaSendingData;
 
-    control = read32(REG_SIO);
+    control = READ_32(REG_SIO);
 
     switch (gTransferManager.status.stage)
     {
         case TRANSFER_STAGE_SETUP_CONNECTION:
-            write16(REG_SIO_DATA8, TRANSFER_HANDSHAKE); // Outgoing data
-            write64(recv, read64(REG_SIO_MULTI));
+            WRITE_16(REG_SIO_DATA8, TRANSFER_HANDSHAKE); // Outgoing data
+            WRITE_64(recv, READ_64(REG_SIO_MULTI));
 
             i = 0;
             numGbaDetected = 0;
@@ -368,25 +368,25 @@ void TransferExchangeData(void)
             break;
 
         case TRANSFER_STAGE_TRANSFER_DATA:
-            read32(REG_SIO_MULTI); // why the read?
+            READ_32(REG_SIO_MULTI); // why the read?
 
             // If data still left to transfer
             if (gTransferManager.data.cursor < gTransferManager.data.sizeInt)
             {
                 // Transfer current byte and update checksum
-                write32(REG_SIO_MULTI, gTransferManager.data.pData[gTransferManager.data.cursor]);
+                WRITE_32(REG_SIO_MULTI, gTransferManager.data.pData[gTransferManager.data.cursor]);
                 gTransferManager.data.checksum += gTransferManager.data.pData[gTransferManager.data.cursor];
             }
             // If data all transferred
             else if (gTransferManager.data.cursor == gTransferManager.data.sizeInt)
             {
                 // Transfer checksum
-                write32(REG_SIO_MULTI, gTransferManager.data.checksum);
+                WRITE_32(REG_SIO_MULTI, gTransferManager.data.checksum);
             }
             // Sanity check to make sure more data than available not transferred?
             else
             {
-                write32(REG_SIO_MULTI, 0);
+                WRITE_32(REG_SIO_MULTI, 0);
             }
 
             gTransferManager.data.cursor++;
@@ -394,7 +394,7 @@ void TransferExchangeData(void)
             // Continue timer if still data to transfer (extra time for each GBA active?)
             if (gTransferManager.data.cursor < gTransferManager.data.sizeInt + gTransferGbaDetectedCount)
             {
-                write16(REG_TM3CNT_H, read16(REG_TM3CNT_H) | TIMER_CONTROL_ACTIVE);
+                WRITE_16(REG_TM3CNT_H, READ_16(REG_TM3CNT_H) | TIMER_CONTROL_ACTIVE);
             }
             else
             {
@@ -404,7 +404,7 @@ void TransferExchangeData(void)
             break;
 
         case TRANSFER_STAGE_VERIFY_DATA:
-            write64(recv, read64(REG_SIO_MULTI));
+            WRITE_64(recv, READ_64(REG_SIO_MULTI));
 
             i = 1; // start from GBA receiving data?
             numGbaDetected = 1;
@@ -439,7 +439,7 @@ void TransferExchangeData(void)
  */
 static void TransferStartTransfer(void)
 {
-    write16(REG_SIO, read16(REG_SIO) | SIO_START_BIT_ACTIVE);
+    WRITE_16(REG_SIO, READ_16(REG_SIO) | SIO_START_BIT_ACTIVE);
 }
 
 /**
@@ -448,8 +448,8 @@ static void TransferStartTransfer(void)
  */
 static void TransferStopTimer(void)
 {
-    write16(REG_TM3CNT_H, read16(REG_TM3CNT_H) & ~TIMER_CONTROL_ACTIVE);
-    write16(REG_TM3CNT_L, -101);
+    WRITE_16(REG_TM3CNT_H, READ_16(REG_TM3CNT_H) & ~TIMER_CONTROL_ACTIVE);
+    WRITE_16(REG_TM3CNT_L, -101);
 }
 
 /**
@@ -458,11 +458,11 @@ static void TransferStopTimer(void)
  */
 static void TransferBackupIoRegs(void)
 {
-    gRegIme_Backup = read16(REG_IME);
-    gRegIe_Backup = read16(REG_IE);
-    gRegTm3Cnt_H_Backup = read16(REG_TM3CNT_H);
-    gRegSiocnt_Backup = read16(REG_SIO);
-    gRegRcnt_Backup = read16(REG_RNCT);
+    gRegIme_Backup = READ_16(REG_IME);
+    gRegIe_Backup = READ_16(REG_IE);
+    gRegTm3Cnt_H_Backup = READ_16(REG_TM3CNT_H);
+    gRegSiocnt_Backup = READ_16(REG_SIO);
+    gRegRcnt_Backup = READ_16(REG_RNCT);
 }
 
 /**
@@ -471,9 +471,9 @@ static void TransferBackupIoRegs(void)
  */
 static void TransferRetrieveIoRegs(void)
 {
-    write16(REG_IME, gRegIme_Backup);
-    write16(REG_IE, gRegIe_Backup);
-    write16(REG_TM3CNT_H, gRegTm3Cnt_H_Backup);
-    write16(REG_SIO, gRegSiocnt_Backup);
-    write16(REG_RNCT, gRegRcnt_Backup);
+    WRITE_16(REG_IME, gRegIme_Backup);
+    WRITE_16(REG_IE, gRegIe_Backup);
+    WRITE_16(REG_TM3CNT_H, gRegTm3Cnt_H_Backup);
+    WRITE_16(REG_SIO, gRegSiocnt_Backup);
+    WRITE_16(REG_RNCT, gRegRcnt_Backup);
 }

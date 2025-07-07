@@ -12,45 +12,45 @@ void IoWriteRegisters(void)
 {
     if (gWrittenToDispcnt)
     {
-        write16(REG_DISPCNT, gWrittenToDispcnt);
+        WRITE_16(REG_DISPCNT, gWrittenToDispcnt);
         gWrittenToDispcnt = 0;
     }
 
     if (gWrittenToBldalpha)
     {
-        write16(REG_BLDALPHA, gWrittenToBldalpha);
+        WRITE_16(REG_BLDALPHA, gWrittenToBldalpha);
         gWrittenToBldalpha = 0;
     }
 
     if (gWrittenToBldy >= 0)
     {
-        write16(REG_BLDY, gWrittenToBldy);
+        WRITE_16(REG_BLDY, gWrittenToBldy);
         gWrittenToBldy = -1;
     }
 
     if (gWrittenToWinIn_H)
     {
-        write8(REG_WININ + 1, gWrittenToWinIn_H);
+        WRITE_8(REG_WININ + 1, gWrittenToWinIn_H);
         gWrittenToWinIn_H = 0;
     }
 
     if (gWrittenToWinOut_L)
     {
-        write8(REG_WINOUT, gWrittenToWinOut_L);
+        WRITE_8(REG_WINOUT, gWrittenToWinOut_L);
         gWrittenToWinOut_L = 0;
     }
 
     if (gWrittenToWin1H | gWrittenToWin1V)
     {
-        write16(REG_WIN1H, gWrittenToWin1H);
-        write16(REG_WIN1V, gWrittenToWin1V);
+        WRITE_16(REG_WIN1H, gWrittenToWin1H);
+        WRITE_16(REG_WIN1V, gWrittenToWin1V);
         gWrittenToWin1H = 0;
         gWrittenToWin1V = 0;
     }
 
     if (gWrittenToBldcnt)
     {
-        write16(REG_BLDCNT, gWrittenToBldcnt);
+        WRITE_16(REG_BLDCNT, gWrittenToBldcnt);
         gWrittenToBldcnt = 0;
     }
 
@@ -66,51 +66,51 @@ void IoWriteRegistersDuringTransition(void)
 {
     if (gWrittenToDispcnt)
     {
-        write16(REG_DISPCNT, gWrittenToDispcnt);
+        WRITE_16(REG_DISPCNT, gWrittenToDispcnt);
         gWrittenToDispcnt = 0;
     }
 
     if (gWrittenToBldalpha)
     {
-        write16(REG_BLDALPHA, gWrittenToBldalpha);
+        WRITE_16(REG_BLDALPHA, gWrittenToBldalpha);
         gWrittenToBldalpha = 0;
     }
 
     if (gWrittenToWinIn_H)
     {
-        write8(REG_WININ + 1, gWrittenToWinIn_H);
+        WRITE_8(REG_WININ + 1, gWrittenToWinIn_H);
         gWrittenToWinIn_H = 0;
     }
 
     if (gWrittenToWinOut_L)
     {
-        write8(REG_WINOUT, gWrittenToWinOut_L);
+        WRITE_8(REG_WINOUT, gWrittenToWinOut_L);
         gWrittenToWinOut_L = 0;
     }
 
     if (gWrittenToWin1H | gWrittenToWin1V)
     {
-        write16(REG_WIN1H, gWrittenToWin1H);
-        write16(REG_WIN1V, gWrittenToWin1V);
+        WRITE_16(REG_WIN1H, gWrittenToWin1H);
+        WRITE_16(REG_WIN1V, gWrittenToWin1V);
         gWrittenToWin1H = 0;
         gWrittenToWin1V = 0;
     }
 
     if (gWrittenToBldcnt)
     {
-        write16(REG_BLDCNT, gWrittenToBldcnt);
+        WRITE_16(REG_BLDCNT, gWrittenToBldcnt);
         gWrittenToBldcnt = 0;
     }
 
     if (gBg1CntDuringDoorTransition)
     {
-        write16(REG_BG1CNT, gBg1CntDuringDoorTransition);
+        WRITE_16(REG_BG1CNT, gBg1CntDuringDoorTransition);
         gBg1CntDuringDoorTransition = 0;
     }
 
     if (gBg3CntDuringDoorTransition)
     {
-        write16(REG_BG3CNT, gBg3CntDuringDoorTransition);
+        WRITE_16(REG_BG3CNT, gBg3CntDuringDoorTransition);
         gBg3CntDuringDoorTransition = 0;
     }
 
@@ -128,7 +128,7 @@ void IoUpdateDispcnt(u8 operation, u16 value)
 {
     if (value != 0)
     {
-        gWrittenToDispcnt = read16(REG_BASE);
+        gWrittenToDispcnt = READ_16(REG_BASE);
         if (operation)
             gDispcntBackup = gIoRegistersBackup.Dispcnt_NonGameplay | value;
         else

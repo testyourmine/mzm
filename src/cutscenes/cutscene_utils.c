@@ -80,7 +80,7 @@ u8 TourianEscapeSubroutine(void)
         if (gBootDebugActive)
         {
             SET_BACKDROP_COLOR(COLOR_BLACK);
-            write16(REG_DISPCNT, 0);
+            WRITE_16(REG_DISPCNT, 0);
             StopAllMusicAndSounds();
             return FALSE;
         }
@@ -403,25 +403,25 @@ void CutsceneVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, 0x100));
 
-    write16(REG_BG0HOFS, CUTSCENE_DATA.bg0hofs);
-    write16(REG_BG0VOFS, CUTSCENE_DATA.bg0vofs);
-    write16(REG_BG1HOFS, CUTSCENE_DATA.bg1hofs);
-    write16(REG_BG1VOFS, CUTSCENE_DATA.bg1vofs);
-    write16(REG_BG2HOFS, CUTSCENE_DATA.bg2hofs);
-    write16(REG_BG2VOFS, CUTSCENE_DATA.bg2vofs);
-    write16(REG_BG3HOFS, CUTSCENE_DATA.bg3hofs);
-    write16(REG_BG3VOFS, CUTSCENE_DATA.bg3vofs);
+    WRITE_16(REG_BG0HOFS, CUTSCENE_DATA.bg0hofs);
+    WRITE_16(REG_BG0VOFS, CUTSCENE_DATA.bg0vofs);
+    WRITE_16(REG_BG1HOFS, CUTSCENE_DATA.bg1hofs);
+    WRITE_16(REG_BG1VOFS, CUTSCENE_DATA.bg1vofs);
+    WRITE_16(REG_BG2HOFS, CUTSCENE_DATA.bg2hofs);
+    WRITE_16(REG_BG2VOFS, CUTSCENE_DATA.bg2vofs);
+    WRITE_16(REG_BG3HOFS, CUTSCENE_DATA.bg3hofs);
+    WRITE_16(REG_BG3VOFS, CUTSCENE_DATA.bg3vofs);
 
-    write16(REG_BG0CNT, CUTSCENE_DATA.bgcnt[0]);
-    write16(REG_BG1CNT, CUTSCENE_DATA.bgcnt[1]);
-    write16(REG_BG2CNT, CUTSCENE_DATA.bgcnt[2]);
-    write16(REG_BG3CNT, CUTSCENE_DATA.bgcnt[3]);
+    WRITE_16(REG_BG0CNT, CUTSCENE_DATA.bgcnt[0]);
+    WRITE_16(REG_BG1CNT, CUTSCENE_DATA.bgcnt[1]);
+    WRITE_16(REG_BG2CNT, CUTSCENE_DATA.bgcnt[2]);
+    WRITE_16(REG_BG3CNT, CUTSCENE_DATA.bgcnt[3]);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
-    write16(REG_BLDCNT, CUTSCENE_DATA.bldcnt);
-    write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, CUTSCENE_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, CUTSCENE_DATA.dispcnt);
 }
 
 /**
@@ -451,11 +451,11 @@ void CutsceneInit(void)
     gNextOamSlot = 0;
     ResetFreeOam();
 
-    write16(REG_BLDCNT, CUTSCENE_DATA.bldcnt = 0xFF);
+    WRITE_16(REG_BLDCNT, CUTSCENE_DATA.bldcnt = 0xFF);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
 
-    write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
+    WRITE_16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
 
     #ifdef DEBUG
     if (gBootDebugActive == 0)

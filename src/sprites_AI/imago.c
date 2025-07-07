@@ -300,7 +300,7 @@ static void ImagoInit(void)
 
     // Lock door, store initial max supers
     LOCK_DOORS();
-    gSubSpriteData1.workVariable4 = gEquipment.maxSuperMissiles;
+    gSubSpriteData1.work4 = gEquipment.maxSuperMissiles;
 
     // Set in ceiling
     gCurrentSprite.yPosition -= BLOCK_SIZE * 6;
@@ -339,8 +339,8 @@ static void ImagoInit(void)
     gSubSpriteData1.currentAnimationFrame = 0;
 
     // Last egg destroyed flag
-    gSubSpriteData1.workVariable3 = FALSE;
-    gSubSpriteData1.workVariable2 = 0;
+    gSubSpriteData1.work3 = FALSE;
+    gSubSpriteData1.work2 = 0;
     gCurrentSprite.pose = IMAGO_POSE_WAIT_FOR_LAST_EGG;
     gCurrentSprite.drawOrder = 5;
     gCurrentSprite.roomSlot = IMAGO_PART_IMAGO;
@@ -377,7 +377,7 @@ static void ImagoInit(void)
 static void ImagoWaitForLastEgg(void)
 {
     // Last egg destroyed flag
-    if (gSubSpriteData1.workVariable3)
+    if (gSubSpriteData1.work3)
     {
         gCurrentSprite.pose = IMAGO_POSE_SPAWN;
         FadeMusic(CONVERT_SECONDS(3.f / 5));
@@ -850,7 +850,7 @@ static void ImagoDyingInit(void)
     gCurrentSprite.hitboxBottom = 0;
     gCurrentSprite.samusCollision = SSC_NONE;
     // Retrieve previous pose
-    gCurrentSprite.pose = gSubSpriteData1.workVariable2;
+    gCurrentSprite.pose = gSubSpriteData1.work2;
 }
 
 /**
@@ -1145,7 +1145,7 @@ static void ImagoDying(void)
 static void ImagoSetEvent(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
-    if (gEquipment.maxSuperMissiles > gSubSpriteData1.workVariable4)
+    if (gEquipment.maxSuperMissiles > gSubSpriteData1.work4)
     {
         // More supers than at the beginning of the fight
         // Unlock doors
@@ -1453,7 +1453,7 @@ void Imago(void)
 
     if (gCurrentSprite.pose <= IMAGO_POSE_DYING && gCurrentSprite.status)
     {
-        gSubSpriteData1.workVariable2 = gCurrentSprite.pose;
+        gSubSpriteData1.work2 = gCurrentSprite.pose;
         if (gCurrentSprite.health == 0 && gCurrentSprite.pose <= IMAGO_POSE_CHARGING_THROUGH_WALL)
         {
             if (MOD_AND(gFrameCounter8Bit, 4) == 0)
@@ -1773,7 +1773,7 @@ void ImagoEgg(void)
                 SoundPlay(SOUND_IMAGO_EGG_BREAKING);
                 // Set last egg broken flag
                 if (gCurrentSprite.roomSlot == IMAGO_EGG_PART_LAST)
-                    gSubSpriteData1.workVariable3 = TRUE;
+                    gSubSpriteData1.work3 = TRUE;
             }
             break;
 
@@ -1799,7 +1799,7 @@ void ImagoEgg(void)
         default:
             // Set last egg broken flag
             if (gCurrentSprite.roomSlot == IMAGO_EGG_PART_LAST)
-                gSubSpriteData1.workVariable3 = TRUE;
+                gSubSpriteData1.work3 = TRUE;
             
             SpriteUtilSpriteDeath(DEATH_NO_DEATH_OR_RESPAWNING_ALREADY_HAS_DROP,
                 gCurrentSprite.yPosition - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE),

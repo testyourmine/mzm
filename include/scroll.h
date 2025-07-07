@@ -16,7 +16,7 @@ void ScrollWithNoScrollsY(struct Coordinates* pCoords);
 void ScrollWithNoScrollsX(struct Coordinates* pCoords);
 void ScrollUpdateEffectAndHazePosition(struct Coordinates* pCoords);
 void ScrollAutoBg0(void);
-u32 ScrollGetBG3Scroll(void);
+u32 ScrollGetBg3Scroll(void);
 void ScrollBg3(void);
 void ScrollBg3Related(void);
 void ScrollAutoBg3(void);

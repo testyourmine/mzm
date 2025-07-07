@@ -40,7 +40,7 @@
 
 #define dma_fill16(channel, value, dest, size)                                 \
     dma_fill(channel, value, dest, size, 16)
-#define dma_fill32(channel, value, dest, size)                                 \
+#define DMA_FILL_32(channel, value, dest, size)                                 \
     dma_fill(channel, value, dest, size, 32)
 
 #define dma_clear(channel, dest, size, bit)                                    \

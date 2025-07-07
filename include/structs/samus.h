@@ -27,9 +27,9 @@ struct Equipment {
     SuitMiscFlags suitMisc;
     SuitMiscFlags suitMiscActivation;
     u8 downloadedMapStatus;
-    u8 lowHealth;
+    boolu8 lowHealth;
     SuitType suitType;
-    u8 grabbedByMetroid;
+    boolu8 grabbedByMetroid;
 };
 
 
@@ -37,7 +37,7 @@ struct WeaponInfo {
     DiagonalAim diagonalAim;
     u8 newProjectile;
     WeaponHightlighted weaponHighlighted;
-    u8 missilesSelected;
+    boolu8 missilesSelected;
     u8 cooldown;
     u8 chargeCounter;
     u8 beamReleasePaletteTimer;
@@ -47,7 +47,7 @@ struct SamusData {
     SamusPose pose;
     SamusStandingStatus standingStatus;
     ArmCannonDirection armCannonDirection;
-    u8 turning;
+    boolu8 turning;
     ForcedMovement forcedMovement;
     u8 speedboostingShinesparking;
     u8 invincibilityTimer;
@@ -96,13 +96,13 @@ struct SamusPhysics {
     s16 hitboxLeft;
     s16 hitboxRight;
     s16 hitboxTop;
-    u8 standingStatus;
+    SamusStandingStatus standingStatus;
     SamusHitboxType hitboxType;
-    u8 touchingSideBlock;
-    u8 touchingTopBlock;
+    boolu8 touchingSideBlock;
+    boolu8 touchingTopBlock;
     u8 unk_5A;
-    u8 slowedByLiquid;
-    u8 hasNewProjectile;
+    boolu8 slowedByLiquid;
+    boolu8 hasNewProjectile;
     s16 xAcceleration;
     s16 xVelocityCap;
     s16 yAcceleration;
@@ -118,7 +118,7 @@ struct SamusPhysics {
 };
 
 struct ScrewSpeedAnimation {
-    u8 flag;
+    ScrewSpeedFlag flag;
     u8 animationDurationCounter;
     u8 currentAnimationFrame;
     u32 unknown;

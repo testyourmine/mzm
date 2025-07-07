@@ -6773,7 +6773,7 @@ void SamusUpdateGraphicsOam(struct SamusData* pData, u8 direction)
     const struct ArmCannonAnimationData* pArmCannonAnim;
     const struct SamusEffectAnimationData* pEffectAnim;
     const u8* pGraphics;
-    u8 pose;
+    SamusPose pose;
     ArmCannonDirection acd;
     u16 ppc;
 
@@ -8022,10 +8022,10 @@ void SamusInit(void)
         if (!gIsLoadingFile)
         {
             // Zero out most of samus's data
-            dma_fill32(3, 0, &gSamusData, sizeof(gSamusData));
-            dma_fill32(3, 0, &gEquipment, sizeof(gEquipment));
-            dma_fill32(3, 0, &gSamusWeaponInfo, sizeof(gSamusWeaponInfo));
-            dma_fill32(3, 0, &gScrewSpeedAnimation, sizeof(gScrewSpeedAnimation));
+            DMA_FILL_32(3, 0, &gSamusData, sizeof(gSamusData));
+            DMA_FILL_32(3, 0, &gEquipment, sizeof(gEquipment));
+            DMA_FILL_32(3, 0, &gSamusWeaponInfo, sizeof(gSamusWeaponInfo));
+            DMA_FILL_32(3, 0, &gScrewSpeedAnimation, sizeof(gScrewSpeedAnimation));
 
             // Clear env effects
             for (i = 0; i < ARRAY_SIZE(gSamusEnvironmentalEffects); i++)
@@ -8041,7 +8041,7 @@ void SamusInit(void)
         else
         {
             // Clear physics
-            dma_fill32(3, 0, &gSamusPhysics, sizeof(gSamusPhysics));
+            DMA_FILL_32(3, 0, &gSamusPhysics, sizeof(gSamusPhysics));
         }
     }
 }

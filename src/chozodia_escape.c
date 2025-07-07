@@ -37,18 +37,18 @@ void ChozodiaEscapeVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, CHOZODIA_ESCAPE_DATA.dispcnt);
-    write16(REG_BLDCNT, CHOZODIA_ESCAPE_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, CHOZODIA_ESCAPE_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, CHOZODIA_ESCAPE_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
-    write16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
-    write16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
-    write16(REG_BG1VOFS, MOD_AND(gBg1YPosition, 0x100));
-    write16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
-    write16(REG_BG2VOFS, MOD_AND(gBg2YPosition, 0x100));
+    WRITE_16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
+    WRITE_16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
+    WRITE_16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
+    WRITE_16(REG_BG1VOFS, MOD_AND(gBg1YPosition, 0x100));
+    WRITE_16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
+    WRITE_16(REG_BG2VOFS, MOD_AND(gBg2YPosition, 0x100));
 
     // Swap the buffer id for reading, it will use the buffer that was populated during this frame
     CHOZODIA_ESCAPE_DATA.hazeBufferReadingId = CHOZODIA_ESCAPE_DATA.hazeBufferWritingId;
@@ -62,12 +62,12 @@ void ChozodiaEscapeHBlank(void)
 {
     u16 vcount;
 
-    vcount = read16(REG_VCOUNT);
+    vcount = READ_16(REG_VCOUNT);
 
     // Write to the window 0 width register using the previously calculated haze values
     // Since this is h-blank code, this gets called at the end of each scanline, thus the VCOUNT register is used
     // to forward the correct value
-    write16(REG_WIN0H, CHOZODIA_ESCAPE_DATA.explosionHazeValues[CHOZODIA_ESCAPE_DATA.hazeBufferReadingId][vcount]);
+    WRITE_16(REG_WIN0H, CHOZODIA_ESCAPE_DATA.explosionHazeValues[CHOZODIA_ESCAPE_DATA.hazeBufferReadingId][vcount]);
 }
 
 /**
@@ -90,26 +90,26 @@ void ChozodiaEscapeSetHBlank(void)
 void ChozodiaEscapeSetupHBlankRegisters(void)
 {
     // Setup window 0 size (no width, max height)
-    write16(REG_WIN0H, 0);
-    write16(REG_WIN0V, SCREEN_SIZE_Y);
+    WRITE_16(REG_WIN0H, 0);
+    WRITE_16(REG_WIN0V, SCREEN_SIZE_Y);
     
     // Setup window 0 masks with every background and obj (BG0, BG1, BG2, BG3, OBJ)
     // Mask out color effects
-    write16(REG_WININ, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
-    write16(REG_WINOUT, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ);
+    WRITE_16(REG_WININ, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
+    WRITE_16(REG_WINOUT, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ);
 
     // Enable window 0 and H-blank
     CHOZODIA_ESCAPE_DATA.dispcnt |= (DCNT_OAM_HBL | DCNT_WIN0);
 
     // Disable interrupts
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
 
     // Enable H-blank
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) | DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) | IF_HBLANK);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) | DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) | IF_HBLANK);
 
     // Enable interrupts
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 }
 
 /**
@@ -425,17 +425,17 @@ void ChozodiaEscapeProcessOam_2(void)
  */
 void ChozodiaEscapeInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(ChozodiaEscapeVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
     ClearGfxRam();
 
@@ -450,9 +450,9 @@ void ChozodiaEscapeInit(void)
     DMA_SET(3, sCutsceneZebesPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sCutsceneZebesPal)));
     DMA_SET(3, sCutsceneMotherShipPal, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sCutsceneMotherShipPal)));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(2, 20, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG1CNT, CREATE_BGCNT(2, 21, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG2CNT, CREATE_BGCNT(0, 22, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 20, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 21, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(0, 22, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x512));
 
     gBg0XPosition = 0;
     gBg0YPosition = BLOCK_SIZE + HALF_BLOCK_SIZE;
@@ -463,16 +463,16 @@ void ChozodiaEscapeInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, BLOCK_SIZE + HALF_BLOCK_SIZE);
-    write16(REG_BG1HOFS, 0);
-    write16(REG_BG1VOFS, BLOCK_SIZE + HALF_BLOCK_SIZE);
-    write16(REG_BG2HOFS, 0);
-    write16(REG_BG2VOFS, BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + 8);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, BLOCK_SIZE + HALF_BLOCK_SIZE);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, BLOCK_SIZE + HALF_BLOCK_SIZE);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + 8);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     gNextOamSlot = 0;
 
@@ -675,11 +675,11 @@ u8 ChozodiaEscapeShipHeatingUp(void)
 
         case CONVERT_SECONDS(3.7f + 1.f / 30):
             // Disable H-blank callback
-            write16(REG_IME, FALSE);
-            write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-            write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-            write16(REG_IF, IF_HBLANK);
-            write16(REG_IME, TRUE);
+            WRITE_16(REG_IME, FALSE);
+            WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+            WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+            WRITE_16(REG_IF, IF_HBLANK);
+            WRITE_16(REG_IME, TRUE);
             ended = TRUE;
             break;
     }
@@ -803,8 +803,8 @@ u8 ChozodiaEscapeShipBlowingUp(void)
             DMA_SET(3, sChozodiaEscapeShipExplodingPal, PALRAM_BASE, DMA_ENABLE << 16 | ARRAY_SIZE(sChozodiaEscapeShipExplodingPal) - 16 * 2);
             DMA_SET(3, sMotherShipBlowingUpExplosionsPal, PALRAM_OBJ, DMA_ENABLE << 16 | ARRAY_SIZE(sMotherShipBlowingUpExplosionsPal));
 
-            write16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 29, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 29, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
 
             CHOZODIA_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_OBJ;
             CHOZODIA_ESCAPE_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG1_SECOND_TARGET_PIXEL;
@@ -997,9 +997,9 @@ u8 ChozodiaEscapeShipLeavingPlanet(void)
             CHOZODIA_ESCAPE_DATA.oamYPositions[CHOZODIA_ESCAPE_OAM_MOTHER_SHIP_DOOR] =
                 CHOZODIA_ESCAPE_DATA.oamYPositions[CHOZODIA_ESCAPE_OAM_BLUE_SHIP] * 8;
 
-            write16(REG_BG0CNT, CREATE_BGCNT(2, 31, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 29, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 31, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 29, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
 
             CHOZODIA_ESCAPE_DATA.dispcnt = DCNT_BG1 | DCNT_BG2 | DCNT_OBJ;
             gBg1XPosition = QUARTER_BLOCK_SIZE;

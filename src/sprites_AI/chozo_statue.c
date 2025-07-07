@@ -362,8 +362,8 @@ static void ChozoStatueInit(void)
     gSubSpriteData1.animationDurationCounter = 0;
     gSubSpriteData1.currentAnimationFrame = 0;
 
-    gSubSpriteData1.workVariable2 = 0;
-    gSubSpriteData1.workVariable3 = FALSE;
+    gSubSpriteData1.work2 = 0;
+    gSubSpriteData1.work3 = FALSE;
 
     behavior = ChozoStatueGetBehavior(gCurrentSprite.spriteId);
     if (behavior > CHOZO_STATUE_BEHAVIOR_REFILL)
@@ -379,7 +379,7 @@ static void ChozoStatueInit(void)
         else
         {
             // Set standing
-            gSubSpriteData1.workVariable3 = TRUE;
+            gSubSpriteData1.work3 = TRUE;
             gSubSpriteData1.pMultiOam = sChozoStatueMultiSpriteData_Standing;
             ChozoStatueStandingChangeClipdata(CAA_MAKE_NON_POWER_GRIP, CAA_MAKE_SOLID_GRIPPABLE);
         }
@@ -563,8 +563,8 @@ static void ChozoStatueSittingInit(void)
 static void ChozoStatueSitting(void)
 {
     SpriteUtilUpdateSubSprite1Timer();
-    if (gSubSpriteData1.workVariable2 != 0)
-        SpawnChozoStatueMovement(gSubSpriteData1.workVariable2);
+    if (gSubSpriteData1.work2 != 0)
+        SpawnChozoStatueMovement(gSubSpriteData1.work2);
 
     if (SpriteUtilCheckEndSubSprite1Anim())
     {
@@ -683,7 +683,7 @@ static void ChozoStatueSleeping(void)
         gCurrentSprite.pose = CHOZO_STATUE_POSE_DO_NOTHING;
 
         // Replay room music if hint
-        if (gSubSpriteData1.workVariable3)
+        if (gSubSpriteData1.work3)
             PlayMusic(gMusicTrackInfo.currentRoomTrack, 0);
     }
 }
@@ -882,8 +882,8 @@ static void ChozoStatuePartArmSitting(void)
     ChozoStatuePartSyncSamusPosition();
 
     // Spawn echo
-    if (gSubSpriteData1.workVariable2)
-        SpawnChozoStatueMovement(gSubSpriteData1.workVariable2);
+    if (gSubSpriteData1.work2)
+        SpawnChozoStatueMovement(gSubSpriteData1.work2);
 }
 
 /**
@@ -1172,8 +1172,8 @@ static void ChozoStatuePartLegIdle(void)
     if (gSpriteData[ramSlot].pose == CHOZO_STATUE_POSE_SITTING)
     {
         // Spawn echo
-        if (gSubSpriteData1.workVariable2 != 0)
-            SpawnChozoStatueMovement(gSubSpriteData1.workVariable2);
+        if (gSubSpriteData1.work2 != 0)
+            SpawnChozoStatueMovement(gSubSpriteData1.work2);
     }
     else if (gSpriteData[ramSlot].pose == CHOZO_STATUE_POSE_DELAY_AFTER_SITTING)
     {

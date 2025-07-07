@@ -3111,8 +3111,8 @@ u8 OptionsNesMetroidSubroutine(void)
             break;
 
         case 4:
-            write16(REG_IME, FALSE);
-            write16(REG_IF, USHORT_MAX);
+            WRITE_16(REG_IME, FALSE);
+            WRITE_16(REG_IF, USHORT_MAX);
 
             // Give control to some sort of bootloader?
             // Signature : void Func_T(void*)
@@ -4532,9 +4532,9 @@ void FileSelectInit(void)
 
     BitFill(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam), 32);
 
-    write16(REG_DISPCNT, FILE_SELECT_DATA.dispcnt = 0);
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
-    write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    WRITE_16(REG_DISPCNT, FILE_SELECT_DATA.dispcnt = 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
 
     gNextOamSlot = 0;
     ClearGfxRam();
@@ -4628,10 +4628,10 @@ void FileSelectInit(void)
     FILE_SELECT_DATA.unk_1E = CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256);
     FILE_SELECT_DATA.unk_20 = CREATE_BGCNT(0, 30, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256);
 
-    write16(REG_BG0CNT, FILE_SELECT_DATA.bg0cnt = 0);
-    write16(REG_BG1CNT, FILE_SELECT_DATA.bg1cnt = FILE_SELECT_DATA.unk_18);
-    write16(REG_BG2CNT, FILE_SELECT_DATA.bg2cnt = FILE_SELECT_DATA.unk_16);
-    write16(REG_BG3CNT, FILE_SELECT_DATA.bg3cnt = FILE_SELECT_DATA.unk_14);
+    WRITE_16(REG_BG0CNT, FILE_SELECT_DATA.bg0cnt = 0);
+    WRITE_16(REG_BG1CNT, FILE_SELECT_DATA.bg1cnt = FILE_SELECT_DATA.unk_18);
+    WRITE_16(REG_BG2CNT, FILE_SELECT_DATA.bg2cnt = FILE_SELECT_DATA.unk_16);
+    WRITE_16(REG_BG3CNT, FILE_SELECT_DATA.bg3cnt = FILE_SELECT_DATA.unk_14);
 
     FILE_SELECT_DATA.fileSelectCursors = sFileSelectMenuCursors_Empty;
 
@@ -4667,8 +4667,8 @@ void FileSelectInit(void)
     FileSelectProcessOAM();
     FileSelectInitFading(FALSE);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = 0);
-    write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = 0);
+    WRITE_16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt = 0);
 
     FileSelectVBlank();
     CallbackSetVblank(FileSelectVBlank);
@@ -4685,22 +4685,22 @@ void FileSelectVBlank(void)
 
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)))
 
-    write16(REG_BG0HOFS, gBg0HOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG0VOFS, gBg0VOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG1HOFS, gBg1HOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG1VOFS, gBg1VOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG2HOFS, gBg2HOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG2VOFS, gBg2VOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG3HOFS, gBg3HOFS_NonGameplay / PIXEL_SIZE);
-    write16(REG_BG3VOFS, gBg3VOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG0HOFS, gBg0HOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG0VOFS, gBg0VOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG1HOFS, gBg1HOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG1VOFS, gBg1VOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG2HOFS, gBg2HOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG2VOFS, gBg2VOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG3HOFS, gBg3HOFS_NonGameplay / PIXEL_SIZE);
+    WRITE_16(REG_BG3VOFS, gBg3VOFS_NonGameplay / PIXEL_SIZE);
 
-    write16(REG_DISPCNT, FILE_SELECT_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt);
-    write16(REG_BG0CNT, FILE_SELECT_DATA.bg0cnt);
-    write16(REG_BG1CNT, FILE_SELECT_DATA.bg1cnt);
-    write16(REG_BG2CNT, FILE_SELECT_DATA.bg2cnt);
+    WRITE_16(REG_DISPCNT, FILE_SELECT_DATA.dispcnt);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDCNT, FILE_SELECT_DATA.bldcnt);
+    WRITE_16(REG_BG0CNT, FILE_SELECT_DATA.bg0cnt);
+    WRITE_16(REG_BG1CNT, FILE_SELECT_DATA.bg1cnt);
+    WRITE_16(REG_BG2CNT, FILE_SELECT_DATA.bg2cnt);
 }
 
 /**
@@ -5478,10 +5478,10 @@ u8 FileSelectProcessFileSelection(void)
             FILE_SELECT_DATA.dispcnt |= DCNT_BG2;
             FILE_SELECT_DATA.dispcnt |= DCNT_WIN0;
 
-            write16(REG_WIN0H, C_16_2_8(70, 170));
-            write16(REG_WIN0V, C_16_2_8(0, 23));
-            write16(REG_WINOUT, C_16_2_8(0, WIN0_ALL));
-            write8(REG_WININ, C_16_2_8(0, WIN0_ALL_NO_COLOR_EFFECT));
+            WRITE_16(REG_WIN0H, C_16_2_8(70, 170));
+            WRITE_16(REG_WIN0V, C_16_2_8(0, 23));
+            WRITE_16(REG_WINOUT, C_16_2_8(0, WIN0_ALL));
+            WRITE_8(REG_WININ, C_16_2_8(0, WIN0_ALL_NO_COLOR_EFFECT));
 
             gWrittenToBldalpha_H = 0;
             gWrittenToBldalpha_L = 16;

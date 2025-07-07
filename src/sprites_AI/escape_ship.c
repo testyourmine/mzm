@@ -241,7 +241,7 @@ void EscapeShip(void)
             gCurrentSprite.animationDurationCounter = 0;
 
             gCurrentSprite.pose = ESCAPE_SHIP_POSE_CHECK_OPEN;
-            gSubSpriteData1.workVariable3 = 0;
+            gSubSpriteData1.work3 = 0;
 
             SpriteSpawnSecondary(SSPRITE_ESCAPE_SHIP_PART, ESCAPE_SHIP_PART_TOP, gCurrentSprite.spritesetGfxSlot,
                 gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
@@ -326,7 +326,7 @@ void EscapeShip(void)
                 gCurrentSprite.work2 = 0;
                 gCurrentSprite.work3 = 0;
 
-                gSubSpriteData1.workVariable3 = 1;
+                gSubSpriteData1.work3 = 1;
             }
             break;
 
@@ -407,7 +407,7 @@ void EscapeShip(void)
                     SoundPlay(SOUND_ESCAPE_SHIP_SHUTTER_OPENING);
                 }
                 else if (gCurrentSprite.work0 == CONVERT_SECONDS(1.f) + TWO_THIRD_SECOND)
-                    gSubSpriteData1.workVariable3 = 2;
+                    gSubSpriteData1.work3 = 2;
 
                 gCurrentSprite.yPosition -= PIXEL_SIZE / 2;
             }

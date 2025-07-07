@@ -90,13 +90,13 @@ void TitleScreenSetBGCNTPageData(const struct TitleScreenPageData* const pPageDa
         pPageData->graphicsPage << BGCNT_CHAR_BASE_BLOCK_SHIFT;
 
     if (pPageData->bg == DCNT_BG0)
-        write16(REG_BG0CNT, value);
+        WRITE_16(REG_BG0CNT, value);
     else if (pPageData->bg == DCNT_BG1)
-        write16(REG_BG1CNT, value);
+        WRITE_16(REG_BG1CNT, value);
     else if (pPageData->bg == DCNT_BG2)
-        write16(REG_BG2CNT, value);
+        WRITE_16(REG_BG2CNT, value);
     else
-        write16(REG_BG3CNT, value);
+        WRITE_16(REG_BG3CNT, value);
 }
 
 /**
@@ -1171,15 +1171,15 @@ void TitleScreenInit(void)
 {
     CallbackSetVblank(TitleScreenVBlank_Empty);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam))
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam))
 
     TITLE_SCREEN_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
-    write16(REG_BLDCNT, TITLE_SCREEN_DATA.bldcnt);
+    WRITE_16(REG_BLDCNT, TITLE_SCREEN_DATA.bldcnt);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
 
-    write16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt = 0);
+    WRITE_16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt = 0);
 
     gNextOamSlot = 0;
 
@@ -1188,7 +1188,7 @@ void TitleScreenInit(void)
     
     gOamXOffset_NonGameplay = gOamYOffset_NonGameplay = 0;
 
-    dma_fill32(3, 0, &gSamusPhysics, sizeof(gSamusPhysics));
+    DMA_FILL_32(3, 0, &gSamusPhysics, sizeof(gSamusPhysics));
 
     gBootDebugActive = FALSE;
     gDebugMode = FALSE;
@@ -1284,7 +1284,7 @@ void TitleScreenInit(void)
     TITLE_SCREEN_DATA.animatedPalettes[1] = sTitleScreenAnimatedPaletteTemplates[1];
     TITLE_SCREEN_DATA.animatedPalettes[2] = sTitleScreenAnimatedPaletteTemplates[2];
 
-    write16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt = DCNT_OBJ | sTitleScreenPageData[0].bg | sTitleScreenPageData[1].bg);
+    WRITE_16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt = DCNT_OBJ | sTitleScreenPageData[0].bg | sTitleScreenPageData[1].bg);
 
     CallbackSetVblank(TitleScreenVBlank);
 }
@@ -1297,22 +1297,22 @@ void TitleScreenVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay));
-    write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay));
+    WRITE_16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay));
+    WRITE_16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay));
 
-    write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
-    write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
+    WRITE_16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
+    WRITE_16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
 
-    write16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay));
-    write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay));
+    WRITE_16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay));
+    WRITE_16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay));
 
-    write16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay));
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
+    WRITE_16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay));
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
 
-    write16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDCNT, TITLE_SCREEN_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, TITLE_SCREEN_DATA.dispcnt);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDCNT, TITLE_SCREEN_DATA.bldcnt);
 }
 
 /**

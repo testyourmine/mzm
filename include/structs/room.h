@@ -48,7 +48,7 @@ struct RoomEntry {
     u8 animatedPalette;
 };
 
-struct RoomEntryROM {
+struct RoomEntryRom {
     u8 tileset;
     u8 bg0Prop;
     u8 bg1Prop;

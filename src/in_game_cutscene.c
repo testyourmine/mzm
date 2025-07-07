@@ -273,7 +273,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
             // Check if the cutscene should start
             // Item is varia, or item is gravity and the starting flag in sub sprite data is set
             if (gCurrentItemBeingAcquired == ITEM_ACQUISITION_VARIA || (gCurrentItemBeingAcquired == ITEM_ACQUISITION_GRAVITY && 
-                gSubSpriteData1.workVariable3 == RUINS_TEST_FIGHT_STAGE_STARTING_SUIT_ANIM))
+                gSubSpriteData1.work3 == RUINS_TEST_FIGHT_STAGE_STARTING_SUIT_ANIM))
             {
                 changeStage = TRUE;   
             }
@@ -325,7 +325,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
         case 4:
             // Fill BG0 tilemap with tile 0xC0, palette 9 
             BitFill(3, (9 << 12) | 0xC0, VRAM_BASE + (1 * BGCNT_VRAM_TILE_SIZE), 0x800, 16);
-            write16(REG_BG0CNT, CREATE_BGCNT(1, 1, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(1, 1, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
 
             changeStage = TRUE;
             break;
@@ -503,7 +503,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
         case 16:
             // Put BG0 in the state it was before the cutscene
             DMA_SET(3, EWRAM_BASE + 0x1E000, VRAM_BASE + (1 * BGCNT_VRAM_TILE_SIZE), C_32_2_16(DMA_ENABLE, BGCNT_VRAM_TILE_SIZE / 2));
-            write16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
+            WRITE_16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
 
             changeStage = TRUE;
             break;
@@ -545,7 +545,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
         case 19:
             // Flag cutscene has ended
             if (gCurrentItemBeingAcquired == ITEM_ACQUISITION_GRAVITY)
-                gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_SUIT_ANIM_ENDED;
+                gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_SUIT_ANIM_ENDED;
 
             // Give control back to player
             gSamusData.lastWallTouchedMidAir = FALSE;
@@ -813,7 +813,7 @@ void InGameCutsceneCheckPlayOnTransition(void)
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVA = gDefaultTransparency.evaCoef = 4;
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVB = gDefaultTransparency.evbCoef = 12;
 
-            write16(REG_BLDALPHA, gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA);
+            WRITE_16(REG_BLDALPHA, gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA);
             TransparencyUpdateBldalpha(4, 12, 1, 1);
 
             gIoRegistersBackup.Bldcnt_NonGameplay = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
@@ -839,7 +839,7 @@ void InGameCutsceneCheckPlayOnTransition(void)
             gIoRegistersBackup.BLDALPHA_NonGameplay_EVA = 16;
 
             TransparencyUpdateBldalpha(16, 0, 1, 1);
-            write16(REG_BLDALPHA, gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA);
+            WRITE_16(REG_BLDALPHA, gIoRegistersBackup.BLDALPHA_NonGameplay_EVB << 8 | gIoRegistersBackup.BLDALPHA_NonGameplay_EVA);
             break;
     }
 }

@@ -95,4 +95,4 @@ extern u8 gNoClipLockCamera;
 extern struct CameraScrollVelocityCaps gScrollingVelocityCaps;
 extern const u8* gCurrentRoomScrollDataPointer;
 
-#endif
+#endif /* SCROLL_STRUCT_H */

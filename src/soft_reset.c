@@ -51,12 +51,12 @@ void SoftResetInit(void)
 
     CallbackSetVblank(SoftResetVBlank_Empty);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
-    write16(REG_BLDCNT, CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+    WRITE_16(REG_BLDCNT, CUTSCENE_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
-    write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
 
     gNextOamSlot = 0;
     ClearGfxRam();
@@ -71,16 +71,16 @@ void SoftResetInit(void)
     gBg2HOFS_NonGameplay = gBg2VOFS_NonGameplay = 0;
     gBg3HOFS_NonGameplay = gBg3VOFS_NonGameplay = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, 0);
-    write16(REG_BG1HOFS, 0);
-    write16(REG_BG1VOFS, 0);
-    write16(REG_BG2HOFS, 0);
-    write16(REG_BG2VOFS, 0);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
     
-    write16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
+    WRITE_16(REG_DISPCNT, CUTSCENE_DATA.dispcnt = 0);
 
     CallbackSetVblank(SoftResetVBlank);
 }
@@ -91,7 +91,7 @@ void SoftResetInit(void)
  */
 void SoftResetVBlank(void)
 {
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 }
 
 /**

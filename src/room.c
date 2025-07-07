@@ -55,7 +55,7 @@ const struct Door* sAreaDoorsPointers[AREA_ENTRY_COUNT] = {
     #endif // DEBUG
 };
 
-const struct RoomEntryROM* sAreaRoomEntryPointers[AREA_ENTRY_COUNT] = {
+const struct RoomEntryRom* sAreaRoomEntryPointers[AREA_ENTRY_COUNT] = {
     [AREA_BRINSTAR] = sBrinstarRoomEntries,
     [AREA_KRAID] = sKraidRoomEntries,
     [AREA_NORFAIR] = sNorfairRoomEntries,
@@ -267,7 +267,7 @@ void RoomLoadTileset(void)
  */
 void RoomLoadEntry(void)
 {
-    struct RoomEntryROM entry;
+    struct RoomEntryRom entry;
 
     entry = sAreaRoomEntryPointers[gCurrentArea][gCurrentRoom];
 
@@ -340,7 +340,7 @@ void RoomLoadEntry(void)
  */
 void RoomLoadBackgrounds(void)
 {
-    struct RoomEntryROM entry;
+    struct RoomEntryRom entry;
     const u8* src;
 
     // Why

@@ -833,7 +833,7 @@ void PauseScreenFadeWireframeSamus(void)
 
         case 1:
             PAUSE_SCREEN_DATA.bldcnt &= ~BLDCNT_BG2_FIRST_TARGET_PIXEL;
-            write8(REG_WINOUT + 1, 0xD0);
+            WRITE_8(REG_WINOUT + 1, 0xD0);
             PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeStage++;
             break;
 
@@ -881,7 +881,7 @@ void PauseScreenFadeWireframeSamus(void)
             PAUSE_SCREEN_DATA.bldcnt = BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
                 BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL |
                 BLDCNT_OBJ_SECOND_TARGET_PIXEL | BLDCNT_BACKDROP_SECOND_TARGET_PIXEL;
-            write8(REG_WINOUT + 1, (WIN1_BG3 | WIN1_OBJ) >> 8);
+            WRITE_8(REG_WINOUT + 1, (WIN1_BG3 | WIN1_OBJ) >> 8);
             PAUSE_SCREEN_DATA.subroutineInfo.fadeWireframeStage = 0;
             break;
     }
@@ -2154,26 +2154,26 @@ void PauseScreenVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, PAUSE_SCREEN_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
-    write16(REG_MOSAIC, gWrittenToMosaic_L);
+    WRITE_16(REG_DISPCNT, PAUSE_SCREEN_DATA.dispcnt);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_MOSAIC, gWrittenToMosaic_L);
 
-    write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
     
-    write16(REG_BG0CNT, PAUSE_SCREEN_DATA.bg0cnt);
-    write16(REG_BG1CNT, PAUSE_SCREEN_DATA.bg1cnt);
-    write16(REG_BG2CNT, PAUSE_SCREEN_DATA.bg2cnt);
-    write16(REG_BG3CNT, PAUSE_SCREEN_DATA.bg3cnt);
+    WRITE_16(REG_BG0CNT, PAUSE_SCREEN_DATA.bg0cnt);
+    WRITE_16(REG_BG1CNT, PAUSE_SCREEN_DATA.bg1cnt);
+    WRITE_16(REG_BG2CNT, PAUSE_SCREEN_DATA.bg2cnt);
+    WRITE_16(REG_BG3CNT, PAUSE_SCREEN_DATA.bg3cnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcnt);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcnt);
 }
 
 /**
@@ -2193,10 +2193,10 @@ void PauseScreenInit(void)
 {
     CallbackSetVblank(PauseScreenVBlank_Empty);
     
-    write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
     
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_DISPCNT, 0);
 
     gNextOamSlot = 0;
     BitFill(3, 0, &gNonGameplayRam, sizeof(union NonGameplayRam), 32);
@@ -2459,22 +2459,22 @@ void PauseScreenInit(void)
         gWrittenToBldalpha_L = 10; 
     }
 
-    write8(REG_WINOUT, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
-    write8(REG_WINOUT + 1, WIN0_BG3 | WIN0_OBJ);
+    WRITE_8(REG_WINOUT, WIN0_BG0 | WIN0_BG1 | WIN0_BG2 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
+    WRITE_8(REG_WINOUT + 1, WIN0_BG3 | WIN0_OBJ);
     gWrittenToMosaic_L = 0;
 
-    write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
 
-    write16(REG_MOSAIC, 0);
-    write16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcnt);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_MOSAIC, 0);
+    WRITE_16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcnt);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
     if (PAUSE_SCREEN_DATA.typeFlags & PAUSE_SCREEN_TYPE_CHOZO_STATUE_HINT)
     {
@@ -2547,10 +2547,10 @@ void PauseScreenInit(void)
         }
     }
 
-    write16(REG_BG0CNT, PAUSE_SCREEN_DATA.bg0cnt);
-    write16(REG_BG1CNT, PAUSE_SCREEN_DATA.bg1cnt);
-    write16(REG_BG2CNT, PAUSE_SCREEN_DATA.bg2cnt);
-    write16(REG_BG3CNT, PAUSE_SCREEN_DATA.bg3cnt);
+    WRITE_16(REG_BG0CNT, PAUSE_SCREEN_DATA.bg0cnt);
+    WRITE_16(REG_BG1CNT, PAUSE_SCREEN_DATA.bg1cnt);
+    WRITE_16(REG_BG2CNT, PAUSE_SCREEN_DATA.bg2cnt);
+    WRITE_16(REG_BG3CNT, PAUSE_SCREEN_DATA.bg3cnt);
 
     PauseScreenLoadAreaNamesAndIcons();
 
@@ -2571,7 +2571,7 @@ void PauseScreenInit(void)
     PauseScreenUpdateOrStartFading(PAUSE_SCREEN_FADING_IN_INIT);
     
     CallbackSetVblank(PauseScreenVBlank);
-    write16(REG_DISPCNT, PAUSE_SCREEN_DATA.dispcnt);
+    WRITE_16(REG_DISPCNT, PAUSE_SCREEN_DATA.dispcnt);
 }
 
 /**

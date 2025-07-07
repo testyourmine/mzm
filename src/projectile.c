@@ -1,5 +1,5 @@
-#include "gba.h"
 #include "projectile.h"
+#include "gba.h"
 
 #include "data/projectile_data.h"
 #include "data/sprite_data.h"
@@ -33,7 +33,7 @@ void ProjectileProcessNormalBeam(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_NORMAL_BEAM);
             return;
         }
@@ -46,7 +46,7 @@ void ProjectileProcessNormalBeam(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_NORMAL_BEAM);
             return;
         }
@@ -92,7 +92,7 @@ void ProjectileProcessNormalBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -108,7 +108,7 @@ void ProjectileProcessLongBeam(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_LONG_BEAM);
             return;
         }
@@ -121,7 +121,7 @@ void ProjectileProcessLongBeam(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_LONG_BEAM);
             return;
         }
@@ -169,7 +169,7 @@ void ProjectileProcessLongBeam(struct ProjectileData* pProj)
     APPLY_DELTA_TIME_INC(pProj->timer);
     /*
     if (pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
     */
 }
 
@@ -186,16 +186,16 @@ void ProjectileProcessIceBeam(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_ICE_BEAM);
             return;
         }
 
         ProjectileMove(pProj, QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE + PIXEL_SIZE / 2);
         if (pProj->status & PROJ_STATUS_X_FLIP)
-            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f));
         else
-            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f));
     }
     else if (pProj->movementStage == PROJECTILE_STAGE_SPAWNING)
     {
@@ -203,7 +203,7 @@ void ProjectileProcessIceBeam(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_ICE_BEAM);
             return;
         }
@@ -249,7 +249,7 @@ void ProjectileProcessIceBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (!(gEquipment.beamBombsActivation & BBF_LONG_BEAM) && pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -385,9 +385,9 @@ void ProjectileProcessWaveBeam(struct ProjectileData* pProj)
         if (gEquipment.beamBombsActivation & BBF_ICE_BEAM)
         {
             if (pProj->status & PROJ_STATUS_X_FLIP)
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f));
             else
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f));
         }
     }
     else if (pProj->movementStage == PROJECTILE_STAGE_SPAWNING)
@@ -441,7 +441,7 @@ void ProjectileProcessWaveBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (!(gEquipment.beamBombsActivation & BBF_LONG_BEAM) && pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -459,7 +459,7 @@ void ProjectileProcessPlasmaBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_PLASMA_BEAM);
             return;
         }
@@ -475,9 +475,9 @@ void ProjectileProcessPlasmaBeam(struct ProjectileData* pProj)
         if (gEquipment.beamBombsActivation & BBF_ICE_BEAM)
         {
             if (pProj->status & PROJ_STATUS_X_FLIP)
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f));
             else
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f));
         }
     }
     else if (pProj->movementStage == PROJECTILE_STAGE_SPAWNING)
@@ -562,7 +562,7 @@ void ProjectileProcessPlasmaBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (!(gEquipment.beamBombsActivation & BBF_LONG_BEAM) && pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -578,7 +578,7 @@ void ProjectileProcessPistol(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_NORMAL_BEAM);
             return;
         }
@@ -591,7 +591,7 @@ void ProjectileProcessPistol(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_NORMAL_BEAM);
             return;
         }
@@ -650,7 +650,7 @@ void ProjectileProcessChargedNormalBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_NORMAL_BEAM);
             return;
         }
@@ -662,7 +662,7 @@ void ProjectileProcessChargedNormalBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_NORMAL_BEAM);
             return;
         }
@@ -708,7 +708,7 @@ void ProjectileProcessChargedNormalBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -723,7 +723,7 @@ void ProjectileProcessChargedLongBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_LONG_BEAM);
             return;
         }
@@ -736,7 +736,7 @@ void ProjectileProcessChargedLongBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_LONG_BEAM);
             return;
         }
@@ -795,16 +795,16 @@ void ProjectileProcessChargedIceBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_ICE_BEAM);
             return;
         }
 
         ProjectileMove(pProj, QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE + PIXEL_SIZE / 2);
         if (pProj->status & PROJ_STATUS_X_FLIP)
-            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f));
         else
-            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+            ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f));
 
         ProjectileSetTrail(pProj, PE_CHARGED_ICE_BEAM_TRAIL, CONVERT_SECONDS(.1f) + 1 * DELTA_TIME);
     }
@@ -813,7 +813,7 @@ void ProjectileProcessChargedIceBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_ICE_BEAM);
             return;
         }
@@ -859,7 +859,7 @@ void ProjectileProcessChargedIceBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (!(gEquipment.beamBombsActivation & BBF_LONG_BEAM) && pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -878,9 +878,9 @@ void ProjectileProcessChargedWaveBeam(struct ProjectileData* pProj)
         if (gEquipment.beamBombsActivation & BBF_ICE_BEAM)
         {
             if (pProj->status & PROJ_STATUS_X_FLIP)
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f));
             else
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f));
         }
         ProjectileSetTrail(pProj, PE_CHARGED_WAVE_BEAM_TRAIL, CONVERT_SECONDS(.1f) + 1 * DELTA_TIME);
     }
@@ -938,7 +938,7 @@ void ProjectileProcessChargedWaveBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (!(gEquipment.beamBombsActivation & BBF_LONG_BEAM) && pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -957,7 +957,7 @@ void ProjectileProcessChargedPlasmaBeam(struct ProjectileData* pProj)
         gCurrentClipdataAffectingAction = CAA_BEAM;
         if (ProjectileCheckVerticalCollisionAtPosition(pProj))
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_PLASMA_BEAM);
             return;
         }
@@ -971,9 +971,9 @@ void ProjectileProcessChargedPlasmaBeam(struct ProjectileData* pProj)
         if (gEquipment.beamBombsActivation & BBF_ICE_BEAM)
         {
             if (pProj->status & PROJ_STATUS_X_FLIP)
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_LEFT, CONVERT_SECONDS(.05f));
             else
-                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+                ProjectileSetTrail(pProj, PE_BEAM_TRAILING_RIGHT, CONVERT_SECONDS(.05f));
 
             if (hasWave)
                 ProjectileSetTrail(pProj, PE_CHARGED_FULL_BEAM_TRAIL, CONVERT_SECONDS(.1f) + 1 * DELTA_TIME);
@@ -1074,7 +1074,7 @@ void ProjectileProcessChargedPlasmaBeam(struct ProjectileData* pProj)
 
     APPLY_DELTA_TIME_INC(pProj->timer);
     if (!(gEquipment.beamBombsActivation & BBF_LONG_BEAM) && pProj->timer > PROJ_SHORT_BEAM_LIFETIME)
-        pProj->status = 0;
+        pProj->status = PROJ_STATUS_NONE;
 }
 
 /**
@@ -1090,7 +1090,7 @@ void ProjectileProcessChargedPistol(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_LONG_BEAM);
             return;
         }
@@ -1104,7 +1104,7 @@ void ProjectileProcessChargedPistol(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_LONG_BEAM);
             return;
         }
@@ -1191,7 +1191,7 @@ void ProjectileProcessMissile(struct ProjectileData* pProj)
         }
         else
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_MISSILE);
         }
     }
@@ -1201,7 +1201,7 @@ void ProjectileProcessMissile(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_MISSILE);
         }
         else
@@ -1289,11 +1289,11 @@ void ProjectileProcessSuperMissile(struct ProjectileData* pProj)
             if (pProj->timer <= CONVERT_SECONDS(.25f))
                 APPLY_DELTA_TIME_INC(pProj->timer);
 
-            ProjectileSetTrail(pProj, PE_SUPER_MISSILE_TRAIL, CONVERT_SECONDS(.05f)); // 3 * DELTA_TIME
+            ProjectileSetTrail(pProj, PE_SUPER_MISSILE_TRAIL, CONVERT_SECONDS(.05f));
         }
         else
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_SUPER_MISSILE);
         }
     }
@@ -1303,7 +1303,7 @@ void ProjectileProcessSuperMissile(struct ProjectileData* pProj)
         // Check for collision
         if (ProjectileCheckVerticalCollisionAtPosition(pProj) != COLLISION_AIR)
         {
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
             ParticleSet(pProj->yPosition, pProj->xPosition, PE_HITTING_SOMETHING_WITH_SUPER_MISSILE);
         }
         else
@@ -1565,7 +1565,7 @@ void ProjectileProcessBomb(struct ProjectileData* pProj)
             else
             {
                 // Explosion ended, destroy bomb
-                pProj->status = 0;
+                pProj->status = PROJ_STATUS_NONE;
             }
             break;
 
@@ -1607,7 +1607,7 @@ void ProjectileProcessBomb(struct ProjectileData* pProj)
         case BOMB_STAGE_EXPLODING_ON_LAUNCHER:
             // Calls the launching samus handler
             ProjectileMorphballLauncherCheckLaunchSamus(pProj);
-            pProj->status = 0;
+            pProj->status = PROJ_STATUS_NONE;
     }
 }
 
@@ -1689,7 +1689,7 @@ void ProjectileProcessPowerBomb(struct ProjectileData* pProj)
                 if (pProj->timer == 0)
                 {
                     PowerBombExplosionStart(pProj->xPosition, pProj->yPosition, FALSE);
-                    pProj->status = 0;
+                    pProj->status = PROJ_STATUS_NONE;
                 }
             }
     }

@@ -283,12 +283,12 @@ void GameOverInit(void)
 {
     CallbackSetVblank(GameOverVBlank_Empty);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
-    write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+    WRITE_16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_DISPCNT, 0);
 
     gNextOamSlot = 0;
     ClearGfxRam();
@@ -311,14 +311,14 @@ void GameOverInit(void)
     LZ77UncompVRAM(sFileSelectIconsGfx, VRAM_OBJ);
     LZ77UncompVRAM(sGameOverTextPromptGfxPointers[gLanguage], VRAM_BASE + 0xA800);
 
-    write16(REG_BG0CNT, CREATE_BGCNT(1, 0, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG1CNT, CREATE_BGCNT(1, 1, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG2CNT, CREATE_BGCNT(1, 2, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG3CNT, CREATE_BGCNT(1, 3, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(1, 0, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(1, 1, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(1, 2, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(1, 3, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
 
     GAME_OVER_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ;
-    write8(REG_WINOUT, WIN0_ALL_NO_COLOR_EFFECT);
-    write8(REG_WININ + 1, HIGH_BYTE(WIN1_ALL));
+    WRITE_8(REG_WINOUT, WIN0_ALL_NO_COLOR_EFFECT);
+    WRITE_8(REG_WININ + 1, HIGH_BYTE(WIN1_ALL));
 
     GAME_OVER_DATA.dynamicPalette = sGameOverDynamicPalette_Empty;
 
@@ -347,12 +347,12 @@ void GameOverInit_Debug(void)
 {
     CallbackSetVblank(GameOverVBlank_Empty);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
-    write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+    WRITE_16(REG_BLDCNT, GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
-    write16(REG_DISPCNT, GAME_OVER_DATA.dispcnt = 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_DISPCNT, GAME_OVER_DATA.dispcnt = 0);
 
     gNextOamSlot = 0;
     ClearGfxRam();
@@ -365,10 +365,10 @@ void GameOverInit_Debug(void)
 
     SET_BACKDROP_COLOR(COLOR_WHITE);
 
-    write16(REG_BG0CNT, 0);
-    write16(REG_BG1CNT, 0);
-    write16(REG_BG2CNT, 0);
-    write16(REG_BG3CNT, 0);
+    WRITE_16(REG_BG0CNT, 0);
+    WRITE_16(REG_BG1CNT, 0);
+    WRITE_16(REG_BG2CNT, 0);
+    WRITE_16(REG_BG3CNT, 0);
 
     gGameModeSub3 = 0;
 
@@ -397,26 +397,26 @@ void GameOverVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)))
 
-    write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay));
-    write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay));
+    WRITE_16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay));
+    WRITE_16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay));
 
-    write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
-    write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
+    WRITE_16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
+    WRITE_16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
 
-    write16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay));
-    write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay));
+    WRITE_16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2HOFS_NonGameplay));
+    WRITE_16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay));
 
-    write16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay));
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
+    WRITE_16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay));
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
 
-    write16(REG_DISPCNT, GAME_OVER_DATA.dispcnt);
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_DISPCNT, GAME_OVER_DATA.dispcnt);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
-    write16(REG_BLDCNT, GAME_OVER_DATA.bldcnt);
-    write16(REG_WIN1H, GAME_OVER_DATA.win1H);
-    write16(REG_WIN1V, GAME_OVER_DATA.win1V);
+    WRITE_16(REG_BLDCNT, GAME_OVER_DATA.bldcnt);
+    WRITE_16(REG_WIN1H, GAME_OVER_DATA.win1H);
+    WRITE_16(REG_WIN1V, GAME_OVER_DATA.win1V);
 }
 
 /**

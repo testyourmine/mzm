@@ -9326,7 +9326,7 @@ const struct Door sTestDoors[2] = {
 	}
 };
 
-const struct RoomEntryROM sBrinstarRoomEntries[42] = {
+const struct RoomEntryRom sBrinstarRoomEntries[42] = {
 	[0] = {
 		.tileset = 8,
 		.bg0Prop = BG_PROP_NONE,
@@ -10463,7 +10463,7 @@ const struct RoomEntryROM sBrinstarRoomEntries[42] = {
 	}
 };
 
-const struct RoomEntryROM sKraidRoomEntries[42] = {
+const struct RoomEntryRom sKraidRoomEntries[42] = {
 	[0] = {
 		.tileset = 22,
 		.bg0Prop = BG_PROP_NONE,
@@ -11600,7 +11600,7 @@ const struct RoomEntryROM sKraidRoomEntries[42] = {
 	}
 };
 
-const struct RoomEntryROM sNorfairRoomEntries[57] = {
+const struct RoomEntryRom sNorfairRoomEntries[57] = {
 	[0] = {
 		.tileset = 13,
 		.bg0Prop = BG_PROP_NONE,
@@ -13142,7 +13142,7 @@ const struct RoomEntryROM sNorfairRoomEntries[57] = {
 	}
 };
 
-const struct RoomEntryROM sRidleyRoomEntries[33] = {
+const struct RoomEntryRom sRidleyRoomEntries[33] = {
 	[0] = {
 		.tileset = 23,
 		.bg0Prop = BG_PROP_RLE_COMPRESSED,
@@ -14036,7 +14036,7 @@ const struct RoomEntryROM sRidleyRoomEntries[33] = {
 	}
 };
 
-const struct RoomEntryROM sTourianRoomEntries[20] = {
+const struct RoomEntryRom sTourianRoomEntries[20] = {
 	[0] = {
 		.tileset = 41,
 		.bg0Prop = BG_PROP_NONE,
@@ -14579,7 +14579,7 @@ const struct RoomEntryROM sTourianRoomEntries[20] = {
 	}
 };
 
-const struct RoomEntryROM sCrateriaRoomEntries[22] = {
+const struct RoomEntryRom sCrateriaRoomEntries[22] = {
 	[0] = {
 		.tileset = 67,
 		.bg0Prop = BG_PROP_LZ77_COMPRESSED,
@@ -15176,7 +15176,7 @@ const struct RoomEntryROM sCrateriaRoomEntries[22] = {
 	}
 };
 
-const struct RoomEntryROM sChozodiaRoomEntries[99] = {
+const struct RoomEntryRom sChozodiaRoomEntries[99] = {
 	[0] = {
 		.tileset = 50,
 		.bg0Prop = BG_PROP_RLE_COMPRESSED,
@@ -17856,7 +17856,7 @@ const struct RoomEntryROM sChozodiaRoomEntries[99] = {
 	}
 };
 
-const struct RoomEntryROM sTest1RoomEntries[5] = {
+const struct RoomEntryRom sTest1RoomEntries[5] = {
 	[0] = {
 		.tileset = 0,
 		.bg0Prop = BG_PROP_NONE,
@@ -17994,7 +17994,7 @@ const struct RoomEntryROM sTest1RoomEntries[5] = {
 	}
 };
 
-const struct RoomEntryROM sTest2RoomEntries[5] = {
+const struct RoomEntryRom sTest2RoomEntries[5] = {
 	[0] = {
 		.tileset = 0,
 		.bg0Prop = BG_PROP_NONE,
@@ -18132,7 +18132,7 @@ const struct RoomEntryROM sTest2RoomEntries[5] = {
 	}
 };
 
-const struct RoomEntryROM sTest3RoomEntries[5] = {
+const struct RoomEntryRom sTest3RoomEntries[5] = {
 	[0] = {
 		.tileset = 0,
 		.bg0Prop = BG_PROP_NONE,
@@ -18270,7 +18270,7 @@ const struct RoomEntryROM sTest3RoomEntries[5] = {
 	}
 };
 
-const struct RoomEntryROM sTestRoomEntries[1] = {
+const struct RoomEntryRom sTestRoomEntries[1] = {
 	[0] = {
 		.tileset = 0,
 		.bg0Prop = BG_PROP_NONE,

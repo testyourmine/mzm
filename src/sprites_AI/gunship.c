@@ -225,7 +225,7 @@ static void GunshipInit(void)
     gCurrentSprite.work0 = 0;
     gCurrentSprite.work3 = 0;
 
-    gSubSpriteData1.workVariable3 = FALSE;
+    gSubSpriteData1.work3 = FALSE;
 
     // Spawn entrance
     SpriteSpawnSecondary(SSPRITE_GUNSHIP_PART, GUNSHIP_PART_ENTRANCE_FRONT, gCurrentSprite.spritesetGfxSlot,
@@ -243,7 +243,7 @@ static void GunshipInit(void)
         gSamusData.timer = 0;
         gSamusData.lastWallTouchedMidAir = TRUE;
         gCurrentSprite.yPositionSpawn = 5 * BLOCK_SIZE + QUARTER_BLOCK_SIZE + PIXEL_SIZE;
-        gSubSpriteData1.workVariable3 = TRUE;
+        gSubSpriteData1.work3 = TRUE;
 
         SpriteSpawnSecondary(SSPRITE_GUNSHIP_PART, GUNSHIP_PART_PLATFORM, gCurrentSprite.spritesetGfxSlot,
             gCurrentSprite.primarySpriteRamSlot, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
@@ -1015,7 +1015,7 @@ static void GunshipPartFlickFlames_Unused(void)
  */
 static void GunshipPartEntranceFrontIdle(void)
 {
-    if (gSubSpriteData1.workVariable3 == TRUE)
+    if (gSubSpriteData1.work3 == TRUE)
     {
         if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontClosed)
         {
@@ -1104,7 +1104,7 @@ static void GunshipPartEntranceFrontOpenClose(void)
  */
 static void GunshipPartEntranceBackIdle(void)
 {
-    if (gSubSpriteData1.workVariable3 == TRUE)
+    if (gSubSpriteData1.work3 == TRUE)
     {
         if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackClosed)
         {
@@ -1201,7 +1201,7 @@ static void GunshipPartCheckPlatformGoUp(void)
     u8 ramSlot;
 
     ramSlot = SpriteUtilFindSecondaryWithRoomSlot(SSPRITE_GUNSHIP_PART, GUNSHIP_PART_ENTRANCE_BACK);
-    if (ramSlot != UCHAR_MAX && gSubSpriteData1.workVariable3 == TRUE && gSpriteData[ramSlot].pOam == sGunshipPartOam_EntranceBackOpening)
+    if (ramSlot != UCHAR_MAX && gSubSpriteData1.work3 == TRUE && gSpriteData[ramSlot].pOam == sGunshipPartOam_EntranceBackOpening)
     {
         gCurrentSprite.pose = GUNSHIP_PART_POSE_PLATFORM_GO_UP;
         gCurrentSprite.work0 = CONVERT_SECONDS(2.f / 15);
@@ -1243,7 +1243,7 @@ static void GunshipPartCheckPlatformGoDown(void)
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
-    if (!gSubSpriteData1.workVariable3)
+    if (!gSubSpriteData1.work3)
     {
         gCurrentSprite.pose = GUNSHIP_PART_POSE_PLATFORM_GO_DOWN;
         gCurrentSprite.work0 = CONVERT_SECONDS(2.f / 15);
@@ -1373,17 +1373,17 @@ void Gunship(void)
     }
 
     // Check set samus near flag
-    if (!gSubSpriteData1.workVariable3)
+    if (!gSubSpriteData1.work3)
     {
         // Check set
         if (SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE * 20, BLOCK_SIZE * 7) != NSLR_OUT_OF_RANGE)
-            gSubSpriteData1.workVariable3 = TRUE;
+            gSubSpriteData1.work3 = TRUE;
     }
     else
     {
         // Check remove
         if (SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE * 20, BLOCK_SIZE * 9) == NSLR_OUT_OF_RANGE)
-            gSubSpriteData1.workVariable3 = FALSE;
+            gSubSpriteData1.work3 = FALSE;
     }
 
     GunshipEntranceFlashingAnim();

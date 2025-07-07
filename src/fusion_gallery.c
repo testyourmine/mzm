@@ -24,35 +24,35 @@ static void FusionGalleryVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, FUSION_GALLERY_DATA.dispcnt);
-    write16(REG_BLDCNT, FUSION_GALLERY_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, FUSION_GALLERY_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, FUSION_GALLERY_DATA.bldcnt);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG0VOFS, MOD_AND(gBg0YPosition / 16, 0x200));
-    write16(REG_BG1VOFS, MOD_AND(gBg1YPosition / 16, 0x200));
+    WRITE_16(REG_BG0VOFS, MOD_AND(gBg0YPosition / 16, 0x200));
+    WRITE_16(REG_BG1VOFS, MOD_AND(gBg1YPosition / 16, 0x200));
 }
 
 static void FusionGalleryInit(void)
 {
     u32 image;
 
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(FusionGalleryVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
     if (gGameModeSub1 == 0)
     {
         ClearGfxRam();
-        dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+        DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     }
 
     image = FUSION_GALLERY_DATA.currentImage;
@@ -64,8 +64,8 @@ static void FusionGalleryInit(void)
     BitFill(3, 0x4FF04FF, VRAM_BASE + 0xE800, 0x800, 32);
     DMA_SET(3, sFusionGalleryData[image].pPalette, PALRAM_BASE, C_32_2_16(DMA_ENABLE, 16 * PAL_ROW));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
 
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -79,14 +79,14 @@ static void FusionGalleryInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, IMAGE_LENGTH);
-    write16(REG_BG1HOFS, 0);
-    write16(REG_BG1VOFS, IMAGE_LENGTH);
-    write16(REG_BG2HOFS, 0);
-    write16(REG_BG2VOFS, 0);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, IMAGE_LENGTH);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, IMAGE_LENGTH);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
 
     FUSION_GALLERY_DATA.finishedInitialScroll = FALSE;
     FUSION_GALLERY_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_OBJ;

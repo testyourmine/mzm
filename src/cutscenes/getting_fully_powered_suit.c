@@ -146,7 +146,7 @@ static u8 GettingFullyPoweredSuitAnimation(void)
     CLAMP2(i, 0, SCREEN_SIZE_Y);
 
     // Write to window 1 Y size
-    write16(REG_WIN1V, i);
+    WRITE_16(REG_WIN1V, i);
 
     // Update up sparkles
     for (i = OAM_UP_SPARKLES_START; i < OAM_UP_SPARKLES_END; i++)
@@ -424,12 +424,12 @@ static u8 GettingFullyPoweredSuitInit(void)
     CUTSCENE_DATA.dispcnt = DCNT_OBJ | DCNT_WIN1 | sGettingFullyPoweredSuitPageData[0].bg | sGettingFullyPoweredSuitPageData[1].bg;
 
     // Setup windows
-    write8(REG_WINOUT, WIN0_ALL);
-    write8(REG_WININ + 1, HIGH_BYTE(WIN1_ALL_NO_COLOR_EFFECT));
+    WRITE_8(REG_WINOUT, WIN0_ALL);
+    WRITE_8(REG_WININ + 1, HIGH_BYTE(WIN1_ALL_NO_COLOR_EFFECT));
 
     // Set entire screen for the size of window 1
-    write16(REG_WIN1H, SCREEN_SIZE_X);
-    write16(REG_WIN1V, SCREEN_SIZE_Y);
+    WRITE_16(REG_WIN1H, SCREEN_SIZE_X);
+    WRITE_16(REG_WIN1V, SCREEN_SIZE_Y);
 
     gPauseScreenFlag = PAUSE_SCREEN_NONE;
     PlayMusic(MUSIC_GETTING_FULLY_POWERED_SUIT_CUTSCENE, 0);

@@ -259,14 +259,14 @@ static void LinkDisableSerial(void)
     u32 buffer;
 
     // Disable Interrupts
-    gLinkSavedIme = read16(REG_IME);
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
-    write16(REG_IME, gLinkSavedIme);
+    gLinkSavedIme = READ_16(REG_IME);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
+    WRITE_16(REG_IME, gLinkSavedIme);
 
-    write16(REG_SIO, SIO_MULTI_MODE);
-    write16(REG_TM3CNT_H, 0);
-    write16(REG_IF, IF_TIMER3 | IF_SERIAL);
+    WRITE_16(REG_SIO, SIO_MULTI_MODE);
+    WRITE_16(REG_TM3CNT_H, 0);
+    WRITE_16(REG_IF, IF_TIMER3 | IF_SERIAL);
 
     buffer = 0;
     CpuSet(&buffer, &gLink, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gLink) / sizeof(u32)));
@@ -281,23 +281,23 @@ static void LinkEnableSerial(void)
     u32 buffer;
 
     // Disable Interrupts
-    gLinkSavedIme = read16(REG_IME);
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
-    write16(REG_IME, gLinkSavedIme);
+    gLinkSavedIme = READ_16(REG_IME);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~(IF_TIMER3 | IF_SERIAL));
+    WRITE_16(REG_IME, gLinkSavedIme);
 
-    write16(REG_RNCT, 0);
-    write16(REG_SIO, SIO_MULTI_MODE);
-    write16(REG_SIO, read16(REG_SIO) | SIO_BAUD_RATE_115200 | SIO_IRQ_ENABLE);
+    WRITE_16(REG_RNCT, 0);
+    WRITE_16(REG_SIO, SIO_MULTI_MODE);
+    WRITE_16(REG_SIO, READ_16(REG_SIO) | SIO_BAUD_RATE_115200 | SIO_IRQ_ENABLE);
 
     // Enable Interrupts
-    gLinkSavedIme = read16(REG_IME);
-    write16(REG_IME, FALSE);
-    write16(REG_IE, read16(REG_IE) | IF_SERIAL);
-    write16(REG_IME, gLinkSavedIme);
+    gLinkSavedIme = READ_16(REG_IME);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, READ_16(REG_IE) | IF_SERIAL);
+    WRITE_16(REG_IME, gLinkSavedIme);
 
-    write16(REG_SIO_DATA8, 0);
-    write64(REG_SIO_MULTI, 0);
+    WRITE_16(REG_SIO_DATA8, 0);
+    WRITE_64(REG_SIO_MULTI, 0);
 
     buffer = 0;
     CpuSet(&buffer, &gLink, C_32_2_16(CPU_SET_32BIT | CPU_SET_SRC_FIXED, sizeof(gLink) / sizeof(u32)));
@@ -366,7 +366,7 @@ static u32 LinkMain(u8* shouldAdvanceLinkState, u16 sendCmd[CMD_LENGTH], u16 rec
 
                 case 2:
                     gLink.session.state = LINK_STATE_START0;
-                    write16(REG_SIO_DATA8, 0);
+                    WRITE_16(REG_SIO_DATA8, 0);
                     break;
 
                 default:
@@ -437,7 +437,7 @@ static void LinkCheckParentOrChild(void)
 {
     u32 terminals;
 
-    terminals = read32(REG_SIO) & (SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
+    terminals = READ_32(REG_SIO) & (SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
     if (terminals == (SIO_MULTI_CONNECTION_READY | SIO_MULTI_PARENT) && gLink.session.localId == 0)
     {
         gLink.session.isParent = LINK_PARENT;
@@ -457,14 +457,14 @@ static void LinkInitTimer(void)
     if (gLink.session.isParent)
     {
         // Load -132 into timer 3 with 1/64 the normal frequency
-        write16(REG_TM3CNT_L, -132);
-        write16(REG_TM3CNT_H, TIMER_CONTROL_IRQ_ENABLE | 1);
+        WRITE_16(REG_TM3CNT_L, -132);
+        WRITE_16(REG_TM3CNT_H, TIMER_CONTROL_IRQ_ENABLE | 1);
 
         // Enable timer 3 interrupt, enable interrupts if already enabled
-        gLinkSavedIme = read16(REG_IME);
-        write16(REG_IME, FALSE);
-        write16(REG_IE, read16(REG_IE) | IF_TIMER3);
-        write16(REG_IME, gLinkSavedIme);
+        gLinkSavedIme = READ_16(REG_IME);
+        WRITE_16(REG_IME, FALSE);
+        WRITE_16(REG_IE, READ_16(REG_IE) | IF_TIMER3);
+        WRITE_16(REG_IME, gLinkSavedIme);
     }
 }
 
@@ -478,8 +478,8 @@ static void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
     u8 offset;
     u8 i;
 
-    gLinkSavedIme = read16(REG_IME);
-    write16(REG_IME, FALSE);
+    gLinkSavedIme = READ_16(REG_IME);
+    WRITE_16(REG_IME, FALSE);
 
     if (gLink.sendQueue.count < QUEUE_CAPACITY)
     {
@@ -507,7 +507,7 @@ static void LinkEnqueueSendCmd(u16 sendCmd[CMD_LENGTH])
         gSendNonzeroCheck = 0;
     }
 
-    write16(REG_IME, gLinkSavedIme);
+    WRITE_16(REG_IME, gLinkSavedIme);
     gLastSendQueueCount = gLink.sendQueue.count;
 }
 
@@ -521,8 +521,8 @@ static void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
     u8 i;
     u8 j;
 
-    gLinkSavedIme = read16(REG_IME);
-    write16(REG_IME, FALSE);
+    gLinkSavedIme = READ_16(REG_IME);
+    WRITE_16(REG_IME, FALSE);
 
     if (gLink.recvQueue.count == 0)
     {
@@ -557,7 +557,7 @@ static void LinkDequeueRecvCmds(u16 recvCmds[MAX_LINK_PLAYERS][CMD_LENGTH])
         gLink.session.receivedNothing = FALSE;
     }
 
-    write16(REG_IME, gLinkSavedIme);
+    WRITE_16(REG_IME, gLinkSavedIme);
 }
 
 /**
@@ -635,7 +635,7 @@ static void LinkCommunicate(void)
 {
     u32 control;
 
-    control = read32(REG_SIO);
+    control = READ_32(REG_SIO);
     gLink.session.localId = (control << 26) >> 30; // SIO_MULTI_CONNECTION_ID_FLAG
 
     switch (gLink.session.state)
@@ -679,7 +679,7 @@ static void LinkCommunicate(void)
  */
 static void LinkStartTransfer(void)
 {
-    write16(REG_SIO, read16(REG_SIO) | SIO_START_BIT_ACTIVE);
+    WRITE_16(REG_SIO, READ_16(REG_SIO) | SIO_START_BIT_ACTIVE);
 }
 
 /**
@@ -698,15 +698,15 @@ static u8 LinkDoHandshake(void)
 
     if (gLink.connection.handshakeAsParent == TRUE)
     {
-        write16(REG_SIO_DATA8, PARENT_HANDSHAKE);
+        WRITE_16(REG_SIO_DATA8, PARENT_HANDSHAKE);
     }
     else
     {
-        write16(REG_SIO_DATA8, CHILD_HANDSHAKE);
+        WRITE_16(REG_SIO_DATA8, CHILD_HANDSHAKE);
     }
     gLink.connection.handshakeAsParent = FALSE;
 
-    write64(gLink.session.handshakeBuffer, read64(REG_SIO_MULTI));
+    WRITE_64(gLink.session.handshakeBuffer, READ_64(REG_SIO_MULTI));
 
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {    
@@ -767,7 +767,7 @@ static void LinkDoRecv(void)
     u8 i;
     u8 offset;
 
-    write64(recv, read64(REG_SIO_MULTI));
+    WRITE_64(recv, READ_64(REG_SIO_MULTI));
 
     if (gLink.connection.sendCmdIndex == 0)
     {
@@ -820,7 +820,7 @@ static void LinkDoSend(void)
 {
     if (gLink.connection.sendCmdIndex == CMD_LENGTH)
     {
-        write16(REG_SIO_DATA8, gLink.connection.checksum);
+        WRITE_16(REG_SIO_DATA8, gLink.connection.checksum);
 
         if (!gSendBufferEmpty)
         {
@@ -846,11 +846,11 @@ static void LinkDoSend(void)
             
         if (gSendBufferEmpty)
         {
-            write16(REG_SIO_DATA8, 0);
+            WRITE_16(REG_SIO_DATA8, 0);
         }
         else
         {
-            write16(REG_SIO_DATA8, gLink.sendQueue.data[gLink.connection.sendCmdIndex][gLink.sendQueue.pos]);
+            WRITE_16(REG_SIO_DATA8, gLink.sendQueue.data[gLink.connection.sendCmdIndex][gLink.sendQueue.pos]);
         }
 
         gLink.connection.sendCmdIndex++;
@@ -866,8 +866,8 @@ static void LinkStopTimer(void)
     if (gLink.session.isParent)
     {
         // Turn off timer 3 and load in -132
-        write16(REG_TM3CNT_H, read16(REG_TM3CNT_H) & ~TIMER_CONTROL_ACTIVE);
-        write16(REG_TM3CNT_L, -132);
+        WRITE_16(REG_TM3CNT_H, READ_16(REG_TM3CNT_H) & ~TIMER_CONTROL_ACTIVE);
+        WRITE_16(REG_TM3CNT_L, -132);
     }
 }
 
@@ -884,7 +884,7 @@ static void LinkSendRecvDone(void)
     }
     else if (gLink.session.isParent)
     {
-        write16(REG_TM3CNT_H, read16(REG_TM3CNT_H) | TIMER_CONTROL_ACTIVE);
+        WRITE_16(REG_TM3CNT_H, READ_16(REG_TM3CNT_H) | TIMER_CONTROL_ACTIVE);
     }
 }
 

@@ -23,7 +23,7 @@
 #ifdef DEBUG
 
 extern const struct Door* sAreaDoorsPointers[AREA_ENTRY_COUNT];
-extern const struct RoomEntryROM* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
+extern const struct RoomEntryRom* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
 
 extern const u32* sMinimapDataPointers[AREA_COUNT];
 
@@ -501,7 +501,7 @@ s32 BootDebugSubroutine(void)
             {
                 if (inputResult == 2)
                 {
-                    write16(REG_BLDCNT, BLDCNT_BRIGHTNESS_INCREASE_EFFECT | BLDCNT_BACKDROP_FIRST_TARGET_PIXEL |
+                    WRITE_16(REG_BLDCNT, BLDCNT_BRIGHTNESS_INCREASE_EFFECT | BLDCNT_BACKDROP_FIRST_TARGET_PIXEL |
                             BLDCNT_OBJ_FIRST_TARGET_PIXEL | BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
                             BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG0_FIRST_TARGET_PIXEL);
                     gGameModeSub1 = 4;
@@ -562,7 +562,7 @@ s32 BootDebugSubroutine(void)
             }
             else
             {
-                write16(PALRAM_BASE, 0);
+                WRITE_16(PALRAM_BASE, 0);
                 changing = TRUE;
                 gGameModeSub1 = 0;
             }
@@ -581,7 +581,7 @@ s32 BootDebugSubroutine(void)
                 RestartSound();
                 EraseSram();
                 gResetGame = TRUE;
-                write16(PALRAM_BASE, 0);
+                WRITE_16(PALRAM_BASE, 0);
                 changing = TRUE;
                 gGameModeSub1 = 0;
             }
@@ -610,14 +610,14 @@ void VBlankCodeDuringBootDebug(void)
 
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
-    write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0VOFS_NonGameplay) & 0x1FF);
+    WRITE_16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0HOFS_NonGameplay) & 0x1FF);
 
-    write16(REG_DISPCNT, BOOT_DEBUG_DATA.dispcnt);
+    WRITE_16(REG_DISPCNT, BOOT_DEBUG_DATA.dispcnt);
 }
 
 /**
@@ -625,17 +625,17 @@ void VBlankCodeDuringBootDebug(void)
  */
 void BootDebugSetupMenu(void)
 {
-    write16(REG_IE, read16(REG_IE) ^ IF_VBLANK);
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) ^ IF_VBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
 
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
-    write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    WRITE_16(REG_DISPCNT, 0);
 
     StopAllMusicAndSounds();
     DoSoundAction(SOUND_ACTION_DISABLE_STEREO | SOUND_ACTION_PWM(9) | SOUND_ACTION_FREQ_INDEX(SOUND_MODE_FREQ_13379) |
@@ -673,14 +673,14 @@ void BootDebugSetupMenu(void)
     BitFill(3, 0x1140, BGCNT_TO_VRAM_TILE_BASE(23), BGCNT_VRAM_TILE_SIZE * 3, 16);
 
     gWrittenToBldy_NonGameplay = 0x10;
-    write16(REG_BG0VOFS, 0);
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG1VOFS, -QUARTER_BLOCK_SIZE);
-    write16(REG_BG1HOFS, -(BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE));
-    write16(REG_BG2VOFS, (gBg2VOFS_NonGameplay / 4) & 0x1FF);
-    write16(REG_BG2HOFS, (gBg2HOFS_NonGameplay / 4) & 0x1FF);
-    write16(REG_BG3VOFS, (gBg3VOFS_NonGameplay / 4) & 0x1FF);
-    write16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG1VOFS, -QUARTER_BLOCK_SIZE);
+    WRITE_16(REG_BG1HOFS, -(BLOCK_SIZE * 2 + HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE));
+    WRITE_16(REG_BG2VOFS, (gBg2VOFS_NonGameplay / 4) & 0x1FF);
+    WRITE_16(REG_BG2HOFS, (gBg2HOFS_NonGameplay / 4) & 0x1FF);
+    WRITE_16(REG_BG3VOFS, (gBg3VOFS_NonGameplay / 4) & 0x1FF);
+    WRITE_16(REG_BG3HOFS, 0);
 
     gIoTransferInfo = sIoTransferInfo_Empty;
     gIoTransferInfo.pFunction = BootDebugUpdateMenuOam;
@@ -698,26 +698,26 @@ void BootDebugSetupMenu(void)
     BootDebugDrawMenuNames();
 
     // Dimensions of the lighter blue square that holds the menu data
-    write16(REG_WIN1H, C_16_2_8(SCREEN_SIZE_X * .35, SCREEN_SIZE_X - 4));
-    write16(REG_WIN1V, C_16_2_8(SCREEN_SIZE_Y * .125, SCREEN_SIZE_Y * .975));
+    WRITE_16(REG_WIN1H, C_16_2_8(SCREEN_SIZE_X * .35, SCREEN_SIZE_X - 4));
+    WRITE_16(REG_WIN1V, C_16_2_8(SCREEN_SIZE_Y * .125, SCREEN_SIZE_Y * .975));
 
-    write16(REG_WINOUT, WIN0_BG0 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
-    write8(REG_WININ + 1, (WIN1_BG0 | WIN1_BG2 | WIN1_BG3 | WIN1_OBJ | WIN1_COLOR_EFFECT) >> 8);
-    write8(REG_WININ, WIN0_BG1 | WIN0_OBJ | WIN0_COLOR_EFFECT);
+    WRITE_16(REG_WINOUT, WIN0_BG0 | WIN0_BG3 | WIN0_OBJ | WIN0_COLOR_EFFECT);
+    WRITE_8(REG_WININ + 1, (WIN1_BG0 | WIN1_BG2 | WIN1_BG3 | WIN1_OBJ | WIN1_COLOR_EFFECT) >> 8);
+    WRITE_8(REG_WININ, WIN0_BG1 | WIN0_OBJ | WIN0_COLOR_EFFECT);
 
-    write16(REG_BG3CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG2CNT, CREATE_BGCNT(0, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG0CNT, CREATE_BGCNT(1, 22, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x512) | BGCNT_SCREEN_OVERFLOW);
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(0, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(1, 22, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x512) | BGCNT_SCREEN_OVERFLOW);
 
     BOOT_DEBUG_DATA.dispcnt = DCNT_BG2 | DCNT_BG3 | DCNT_OBJ | DCNT_WIN1;
-    write16(REG_DISPCNT, DCNT_BG2 | DCNT_BG3 | DCNT_OBJ | DCNT_WIN1);
+    WRITE_16(REG_DISPCNT, DCNT_BG2 | DCNT_BG3 | DCNT_OBJ | DCNT_WIN1);
 
     if (BOOT_DEBUG_DATA.menuCursor == BOOT_DEBUG_SUB_MENU_SECTION && BOOT_DEBUG_DATA.subMenuOption != BOOT_DEBUG_SECTION_BRINSTAR)
         BootDebugSectionMapDrawRoomAndDoorIds(FALSE);
 
     BootDebugSetVBlankCodePtr();
-    write16(REG_IE, read16(REG_IE) | IF_VBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) | IF_VBLANK);
 }
 
 /**
@@ -1042,8 +1042,8 @@ s32 BootDebugSectionSubroutine(void)
     {
         if (gChangedInput & (KEY_B | KEY_SELECT))
         {
-            write16(REG_WIN0H, 0);
-            write16(REG_WIN0V, 0);
+            WRITE_16(REG_WIN0H, 0);
+            WRITE_16(REG_WIN0V, 0);
             BOOT_DEBUG_DATA.dispcnt ^= DCNT_BG0 | DCNT_BG1 | DCNT_WIN0;
             BOOT_DEBUG_DATA.menuOam[3].exists = 0;
             BOOT_DEBUG_DATA.subMenuOption = 0;
@@ -1369,8 +1369,8 @@ void BootDebugSectionMapDrawRoomAndDoorIds(u8 initialized)
         gBg0VOFS_NonGameplay = BOOT_DEBUG_DATA.bg0vofs;
         gBg0HOFS_NonGameplay = BOOT_DEBUG_DATA.bg0hofs;
         
-        write16(REG_WIN0H, C_16_2_8(SCREEN_SIZE_X * .65, SCREEN_SIZE_X - 4));
-        write16(REG_WIN0V, C_16_2_8(SCREEN_SIZE_Y * .1, SCREEN_SIZE_Y * .2));
+        WRITE_16(REG_WIN0H, C_16_2_8(SCREEN_SIZE_X * .65, SCREEN_SIZE_X - 4));
+        WRITE_16(REG_WIN0V, C_16_2_8(SCREEN_SIZE_Y * .1, SCREEN_SIZE_Y * .2));
         BOOT_DEBUG_DATA.dispcnt |= DCNT_BG0 | DCNT_BG1 | DCNT_WIN0;
         BOOT_DEBUG_DATA.menuOam[BOOT_DEBUG_OAM_MAP_CURSOR].exists = OAM_ID_CHANGED_FLAG;
     }

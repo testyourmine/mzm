@@ -20,9 +20,9 @@ void SramWriteUnchecked(u8 *src, u8 *dest, u32 size)
     u16 csize;
     void *(*func)(u8 *, u8 *, u32);
 
-    write16(
+    WRITE_16(
         REG_WAITCNT,
-        read16(REG_WAITCNT) & ~WAIT_SRAM_CYCLES_MASK | WAIT_SRAM_8CYCLES);
+        READ_16(REG_WAITCNT) & ~WAIT_SRAM_CYCLES_MASK | WAIT_SRAM_8CYCLES);
 
     func_ptr = (u16 *)SramWriteUncheckedInternal;
     func_ptr = (u16 *)((u32)func_ptr & ~1);
@@ -42,8 +42,8 @@ void SramWriteUnchecked(u8 *src, u8 *dest, u32 size)
 
 void SramWrite(u8 *src, u8 *dest, u32 size)
 {
-    u16 w = read16(REG_WAITCNT) & ~WAIT_SRAM_CYCLES_MASK | WAIT_SRAM_8CYCLES;
-    write16(REG_WAITCNT, w);
+    u16 w = READ_16(REG_WAITCNT) & ~WAIT_SRAM_CYCLES_MASK | WAIT_SRAM_8CYCLES;
+    WRITE_16(REG_WAITCNT, w);
 
     while (size-- != 0) {
         *dest++ = *src++;
@@ -69,9 +69,9 @@ u8* SramCheck(u8 *src, u8 *dest, u32 size)
     u16 csize;
     void *(*func)(u8 *, u8 *, u32);
 
-    write16(
+    WRITE_16(
         REG_WAITCNT,
-        read16(REG_WAITCNT) & ~WAIT_SRAM_CYCLES_MASK | WAIT_SRAM_8CYCLES);
+        READ_16(REG_WAITCNT) & ~WAIT_SRAM_CYCLES_MASK | WAIT_SRAM_8CYCLES);
 
     func_ptr = (u16 *)SRAMCheckInternal;
     func_ptr = (u16 *)((u32)func_ptr & ~1);

@@ -221,7 +221,8 @@ void PowerBombExplosionStart(u16 xPosition, u16 yPosition, u8 owner)
         return;
 
     PowerBombExplosionSet0x12To0();
-    if (gCurrentPowerBomb.animationState == PB_STATE_NONE) // Check if there isn't already an explosion
+    // Check if there isn't already an explosion
+    if (gCurrentPowerBomb.animationState == PB_STATE_NONE)
     {
         gCurrentPowerBomb.xPosition = xPosition;
         gCurrentPowerBomb.yPosition = yPosition;
@@ -288,7 +289,7 @@ static void PowerBombExplosionEnd(void)
 
     if (gCurrentPowerBomb.stage == 0)
     {
-        write16(REG_BLDY, 0);
+        WRITE_16(REG_BLDY, 0);
         gWrittenToBldcnt = gIoRegistersBackup.Bldcnt_NonGameplay;
 
         if (sHazeData[gCurrentRoomEntry.visualEffect][3] == 2)
@@ -296,7 +297,7 @@ static void PowerBombExplosionEnd(void)
         else
             gWrittenToBldalpha = C_16_2_8(16, 0);
 
-        gWrittenToDispcnt = write16(REG_DISPCNT, read16(REG_DISPCNT) | DCNT_WIN1);
+        gWrittenToDispcnt = WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_WIN1);
 
         gWrittenToWin1H = C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right);
         gWrittenToWin1V = C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom);
@@ -308,10 +309,10 @@ static void PowerBombExplosionEnd(void)
         gWrittenToWinOut_L = gIoRegistersBackup.WINOUT_L;
 
         // Get BGCNT backups
-        write16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
-        write16(REG_BG1CNT, gIoRegistersBackup.BG1CNT);
-        write16(REG_BG2CNT, gIoRegistersBackup.BG2CNT);
-        write16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
+        WRITE_16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
+        WRITE_16(REG_BG1CNT, gIoRegistersBackup.BG1CNT);
+        WRITE_16(REG_BG2CNT, gIoRegistersBackup.BG2CNT);
+        WRITE_16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
 
         gWrittenToDispcnt = gIoRegistersBackup.Dispcnt_NonGameplay;
         gCurrentPowerBomb.stage = 1;
@@ -319,8 +320,8 @@ static void PowerBombExplosionEnd(void)
     else if (gCurrentPowerBomb.stage == 1)
     {
         // Fade BLDALPHA until it was the same as before the power bomb
-        eva = LOW_BYTE(read16(REG_BLDALPHA));
-        evb = HIGH_BYTE(read16(REG_BLDALPHA));
+        eva = LOW_BYTE(READ_16(REG_BLDALPHA));
+        evb = HIGH_BYTE(READ_16(REG_BLDALPHA));
         done = TRUE;
 
         if (gIoRegistersBackup.BLDALPHA_NonGameplay_EVB != evb)

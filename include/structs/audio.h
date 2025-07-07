@@ -228,7 +228,7 @@ struct SoundEntry {
 
 struct MusicInfo {
     u8 unk_0;
-    u8 occupied;
+    boolu8 occupied;
     u8 unk_2;
     u8 unk_3;
 
@@ -250,7 +250,7 @@ struct MusicInfo {
     u16 sampleRate;
     u32 unk_14; // unused, samples per frame
     u32 pitch;
-    u16 musicTrack;
+    Sound musicTrack;
     u16 unk_1E;
     u8 unk_20;
     u8 priority;

@@ -44,16 +44,16 @@ void SoftReset(void)
     HazeTransferAndDeactivate();
     RestartSound();
 
-    write16(REG_IME, FALSE);
-    write16(REG_IE, 0);
-    write16(REG_DISPSTAT, 0);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_IE, 0);
+    WRITE_16(REG_DISPSTAT, 0);
     SET_BACKDROP_COLOR(COLOR_BLACK);
-    write16(REG_DISPCNT, 0);
-    write16(REG_BLDY, BLDY_MAX_VALUE);
-    write16(REG_BLDCNT, 0xff);
+    WRITE_16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
 
-    dma_fill32(3, 0, EWRAM_BASE, EWRAM_SIZE);
-    dma_fill32(3, 0, IWRAM_BASE, IWRAM_SIZE - 0x200);
+    DMA_FILL_32(3, 0, EWRAM_BASE, EWRAM_SIZE);
+    DMA_FILL_32(3, 0, IWRAM_BASE, IWRAM_SIZE - 0x200);
 
     ClearGfxRam();
     LoadInterruptCode();
@@ -61,8 +61,8 @@ void SoftReset(void)
     SramRead_All();
     InitializeAudio();
 
-    write16(REG_IE, IF_VBLANK | IF_DMA2 | IF_GAMEPAK);
-    write16(REG_DISPSTAT, DSTAT_IF_VBLANK);
+    WRITE_16(REG_IE, IF_VBLANK | IF_DMA2 | IF_GAMEPAK);
+    WRITE_16(REG_DISPSTAT, DSTAT_IF_VBLANK);
 
     #ifdef DEBUG
     BootDebugReadSram();
@@ -79,6 +79,6 @@ void SoftReset(void)
     gPreviousButtonInput = KEY_NONE;
     gChangedInput = KEY_NONE;
 
-    write16(REG_IF, 0xffff);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IF, 0xffff);
+    WRITE_16(REG_IME, TRUE);
 }

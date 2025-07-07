@@ -103,7 +103,7 @@
 
 #define MAX_AMOUNT_OF_SPRITESET 114
 
-static Func_T sPrimarySpritesAIPointers[PSPRITE_END] = {
+static Func_T sPrimarySpritesAIPointers[PSPRITE_COUNT] = {
     [PSPRITE_UNUSED0] = UnusedSprites,
     [PSPRITE_UNUSED1] = UnusedSprites,
     [PSPRITE_UNUSED2] = UnusedSprites,
@@ -312,7 +312,7 @@ static Func_T sPrimarySpritesAIPointers[PSPRITE_END] = {
     [PSPRITE_RINKA_MOTHER_BRAIN6] = RinkaMotherBrain 
 };
 
-static const u32* sSpritesGraphicsPointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_END)] = {
+static const u32* sSpritesGraphicsPointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_COUNT)] = {
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_UNUSED16)] = sUnusedSpritesGfx,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ITEM_BANNER)] = sItemBannerGfx,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZOOMER_YELLOW)] = sZoomerGfx,
@@ -505,7 +505,7 @@ static const u32* sSpritesGraphicsPointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_E
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_RINKA_MOTHER_BRAIN6)] = sRinkaZebetiteAndCannonGfx
 };
 
-static const u16* sSpritesPalettePointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_END)] = {
+static const u16* sSpritesPalettePointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_COUNT)] = {
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_UNUSED16)] = sUnusedSpritesPal,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ITEM_BANNER)] = sItemBannerPal,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZOOMER_YELLOW)] = sZoomerPal,
@@ -698,7 +698,7 @@ static const u16* sSpritesPalettePointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_EN
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_RINKA_MOTHER_BRAIN6)] = sRinkaZebetiteAndCannonPal
 };
 
-static Func_T sSecondarySpritesAIPointers[SSPRITE_END] = {
+static Func_T sSecondarySpritesAIPointers[SSPRITE_COUNT] = {
     [SSPRITE_CHOZO_BALL] = ChozoBall,
     [SSPRITE_CHOZO_STATUE_PART] = ChozoStatuePart,
     [SSPRITE_CHOZO_STATUE_REFILL] = ChozoStatueRefill,

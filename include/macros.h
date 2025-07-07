@@ -88,7 +88,7 @@
 #define COLOR_PURPLE COLOR(COLOR_MASK, 0, COLOR_MASK)
 #define COLOR_LIGHT_BLUE COLOR(0, COLOR_MASK, COLOR_MASK)
 
-#define SET_BACKDROP_COLOR(color) (write16(PALRAM_BASE, (color)))
+#define SET_BACKDROP_COLOR(color) (WRITE_16(PALRAM_BASE, (color)))
 
 /**
  * @brief Generic Dma transfer to send palette to pal

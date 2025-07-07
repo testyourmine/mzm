@@ -71,6 +71,6 @@ void LoadRoomCutscene(Area area, u8 room, u16 bgX, u16 bgY)
     // Transfer background 3 map
     DmaTransfer(3, gDecompBg3Map, VRAM_BASE + 0x3000, sizeof(gDecompBg3Map), 16);
 
-    write16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
-    write16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
+    WRITE_16(REG_BG0CNT, gIoRegistersBackup.BG0CNT);
+    WRITE_16(REG_BG3CNT, gIoRegistersBackup.BG3CNT);
 }

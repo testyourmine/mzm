@@ -683,7 +683,7 @@ void PauseDebugStatusScreen(void)
             {
                 SramWrite_ToEwram_DemoRam();
                 SoundPlay(SOUND_GAME_BOY_BOOT);
-                write16(VRAM_BASE + 0xB000 +
+                WRITE_16(VRAM_BASE + 0xB000 +
                     (sPauseDebugGroupsPositions[PAUSE_DEBUG_GROUP_WRITE_DEMO_RAM].top * 32 +
                     sPauseDebugGroupsPositions[PAUSE_DEBUG_GROUP_WRITE_DEMO_RAM].left) * 2, 0xB3BA);
             }

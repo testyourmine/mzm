@@ -82,7 +82,7 @@ static void AcidWormHandleRotation(void)
     else
         angle = gCurrentSprite.rotation;
 
-    if (gSubSpriteData1.workVariable3 == TRUE)
+    if (gSubSpriteData1.work3 == TRUE)
         offset = PI * 3;
     else
         offset = PI * 2;
@@ -272,7 +272,7 @@ static void AcidWormChangeBigBlockTopCcaa(u8 caa)
  */
 static void AcidWormPlayRetractingSound(void)
 {
-    if (gSubSpriteData1.workVariable3 == FALSE)
+    if (gSubSpriteData1.work3 == FALSE)
     {
         // Extended into block
         SoundPlay(SOUND_ACID_WORM_RETRACT);
@@ -352,8 +352,8 @@ static void AcidWormInit(void)
     gCurrentSprite.yPositionSpawn = yPosition;
     gCurrentSprite.xPositionSpawn = xPosition;
 
-    gSubSpriteData1.workVariable3 = FALSE;
-    gSubSpriteData1.workVariable2 = FALSE;
+    gSubSpriteData1.work3 = FALSE;
+    gSubSpriteData1.work2 = FALSE;
 
     if (EventFunction(EVENT_ACTION_CHECKING, EVENT_ACID_WORM_KILLED))
     {
@@ -434,7 +434,7 @@ static void AcidWormSpawnStart(void)
     {
         // Set ignore projectiles
         gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
-        gSubSpriteData1.workVariable2 = TRUE;
+        gSubSpriteData1.work2 = TRUE;
         gCurrentSprite.pose = ACID_WORM_POSE_SPAWN_EXTEND;
         gCurrentSprite.work0 = 0;
 
@@ -589,13 +589,13 @@ static void AcidWormIdle(void)
             return;
 
         if (spritePos - samusY - (BLOCK_SIZE + QUARTER_BLOCK_SIZE + ONE_SUB_PIXEL) >= BLOCK_SIZE * 4 - QUARTER_BLOCK_SIZE - ONE_SUB_PIXEL)
-            gSubSpriteData1.workVariable3 = TRUE;
+            gSubSpriteData1.work3 = TRUE;
         else if (gSamusData.xPosition <= gCurrentSprite.xPositionSpawn - BLOCK_SIZE * 7)
-            gSubSpriteData1.workVariable3 = TRUE;
+            gSubSpriteData1.work3 = TRUE;
         else if (gSamusData.xPosition < gCurrentSprite.xPositionSpawn + BLOCK_SIZE * 7)
-            gSubSpriteData1.workVariable3 = FALSE;
+            gSubSpriteData1.work3 = FALSE;
         else
-            gSubSpriteData1.workVariable3 = TRUE;
+            gSubSpriteData1.work3 = TRUE;
 
         // This is needed for the code to match, might be a debug leftover like a print or something
         gSubSpriteData1.health += 0;
@@ -659,7 +659,7 @@ static void AcidWormExtend(void)
 
         if (gCurrentSprite.work0 == 0)
         {
-            if (!gSubSpriteData1.workVariable3)
+            if (!gSubSpriteData1.work3)
             {
                 if (gCurrentSprite.health <= spawnHealth / 4)
                     SoundPlay(SOUND_ACID_WORM_EXTEND_FAST);
@@ -679,7 +679,7 @@ static void AcidWormExtend(void)
     gEffectYPositionOffset += ONE_SUB_PIXEL;
 
     // Get speed based on destination or health
-    if (!gSubSpriteData1.workVariable3)
+    if (!gSubSpriteData1.work3)
     {
         // Normal extend
 
@@ -739,7 +739,7 @@ static void AcidWormExtend(void)
         gCurrentSprite.pose = ACID_WORM_POSE_EXTENDED;
 
         // If not spitting
-        if (!gSubSpriteData1.workVariable3)
+        if (!gSubSpriteData1.work3)
         {
             yPosition = gCurrentSprite.yPosition;
             xPosition = gCurrentSprite.xPosition;
@@ -833,7 +833,7 @@ static void AcidWormExtended(void)
     finishedSpitting = FALSE;
     AcidWormHandleRotation();
 
-    if (!gSubSpriteData1.workVariable3)
+    if (!gSubSpriteData1.work3)
     {
         // Hooked to block
         if (!AcidWormCollidingWithSamusWhenExtending())
@@ -1169,7 +1169,7 @@ static void AcidWormDying(void)
     // Check acid reached bottom 
     if (gEffectYPosition > gCurrentSprite.yPositionSpawn + (BLOCK_SIZE * 7 + HALF_BLOCK_SIZE))
     {
-        if (!gSubSpriteData1.workVariable2)
+        if (!gSubSpriteData1.work2)
         {
             gCurrentSprite.status = 0;
             PlayMusic(MUSIC_BOSS_KILLED, 0);
@@ -1178,7 +1178,7 @@ static void AcidWormDying(void)
         return;
     }
 
-    if (!gSubSpriteData1.workVariable2)
+    if (!gSubSpriteData1.work2)
     {
         if (gEffectYPosition < gCurrentSprite.yPositionSpawn)
         {
@@ -1564,7 +1564,7 @@ static void AcidWormPartDeath(void)
         if (roomSlot == ACID_WORM_PART_SEGMENT5)
         {
             // Last segment
-            gSubSpriteData1.workVariable2 = FALSE;
+            gSubSpriteData1.work2 = FALSE;
 
             ParticleSet(gSpriteData[mainSpriteSlot].yPositionSpawn + BLOCK_SIZE + HALF_BLOCK_SIZE,
                 gSpriteData[mainSpriteSlot].xPositionSpawn, PE_SPRITE_EXPLOSION_BIG);
@@ -1816,7 +1816,7 @@ void AcidWorm(void)
     }
 
     // Lock screen if not dead
-    if (gSubSpriteData1.workVariable2)
+    if (gSubSpriteData1.work2)
     {
         gLockScreen.lock = LOCK_SCREEN_TYPE_MIDDLE;
         gLockScreen.yPositionCenter = gCurrentSprite.yPositionSpawn - BLOCK_SIZE * 4;

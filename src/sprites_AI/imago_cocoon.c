@@ -320,8 +320,8 @@ static void ImagoCocoonInit(void)
         gSubSpriteData1.animationDurationCounter = 0;
         gSubSpriteData1.currentAnimationFrame = 0;
         
-        gSubSpriteData1.workVariable2 = 0;
-        gSubSpriteData1.workVariable1 = 0;
+        gSubSpriteData1.work2 = 0;
+        gSubSpriteData1.work1 = 0;
         // Number of vines alive
         gSubSpriteData1.health = 6;
 

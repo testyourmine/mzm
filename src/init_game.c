@@ -14,12 +14,12 @@
 
 void InitializeGame(void)
 {
-    write16(REG_DISPCNT, DCNT_BLANK);
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, 0);
+    WRITE_16(REG_DISPCNT, DCNT_BLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, 0);
 
-    dma_fill32(3, 0, EWRAM_BASE, EWRAM_SIZE);
-    dma_fill32(3, 0, IWRAM_BASE, IWRAM_SIZE - 0x200);
+    DMA_FILL_32(3, 0, EWRAM_BASE, EWRAM_SIZE);
+    DMA_FILL_32(3, 0, IWRAM_BASE, IWRAM_SIZE - 0x200);
 
     ClearGfxRam();
     LoadInterruptCode();
@@ -27,9 +27,9 @@ void InitializeGame(void)
     SramRead_All();
     InitializeAudio();
 
-    write16(REG_IE, IF_VBLANK | IF_DMA2 | IF_GAMEPAK);
-    write16(REG_DISPSTAT, DSTAT_IF_VBLANK);
-    write16(REG_WAITCNT, WAIT_SRAM_4CYCLES | WAIT_BANK0_3CYCLES
+    WRITE_16(REG_IE, IF_VBLANK | IF_DMA2 | IF_GAMEPAK);
+    WRITE_16(REG_DISPSTAT, DSTAT_IF_VBLANK);
+    WRITE_16(REG_WAITCNT, WAIT_SRAM_4CYCLES | WAIT_BANK0_3CYCLES
         | WAIT_BANK0_SUBSEQUENT_1CYCLE
         | WAIT_BANK1_3CYCLES | WAIT_BANK1_SUBSEQUENT_1CYCLE
         | WAIT_BANK2_3CYCLES | WAIT_BANK2_SUBSEQUENT_1CYCLE
@@ -66,6 +66,6 @@ void InitializeGame(void)
     gDisableSoftReset = FALSE;
     gStereoFlag = FALSE;
 
-    write16(REG_IF, USHORT_MAX);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IF, USHORT_MAX);
+    WRITE_16(REG_IME, TRUE);
 }

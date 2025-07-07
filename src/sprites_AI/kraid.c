@@ -256,8 +256,8 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
     pSprite = &gCurrentSprite;
 
     // Update opening mouth timer
-    if (gSubSpriteData1.workVariable2 != 0)
-        gSubSpriteData1.workVariable2--;
+    if (gSubSpriteData1.work2 != 0)
+        gSubSpriteData1.work2--;
 
     // Update animations and check whether or not the mouth is open
 
@@ -265,7 +265,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
     {
         // Closed
         closed = TRUE;
-        if (gSubSpriteData1.workVariable2 != 0)
+        if (gSubSpriteData1.work2 != 0)
         {
             // Opening mouth timer active, set opening
             pSprite->pOam = sKraidOam_OpeningMouth;
@@ -285,7 +285,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
     else if (pSprite->pOam == sKraidOam_MouthClosedBlink)
     {
         closed = TRUE;
-        if (gSubSpriteData1.workVariable2 != 0)
+        if (gSubSpriteData1.work2 != 0)
         {
             // Opening mouth timer active, set opening
             pSprite->pOam = sKraidOam_OpeningMouth;
@@ -333,7 +333,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
         {
             // Closed
             closed = TRUE;
-            if (gSubSpriteData1.workVariable2 != 0)
+            if (gSubSpriteData1.work2 != 0)
             {
                 // Opening mouth timer active, set opening
                 pSprite->pOam = sKraidOam_OpeningMouth;
@@ -359,7 +359,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
     {
         pOam = sKraidOam_Rising;
         closed = FALSE;
-        if (pSprite->pOam != pOam && gSubSpriteData1.workVariable2 == 0)
+        if (pSprite->pOam != pOam && gSubSpriteData1.work2 == 0)
         {
             pSprite->pOam = sKraidOam_ClosingMouth;
             pSprite->animationDurationCounter = 0;
@@ -500,7 +500,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
                     SPRITE_CLEAR_AND_SET_ISFT(*pSprite, CONVERT_SECONDS(1.f / 30));
 
                     // Set opening mouth timer to 3 seconds
-                    gSubSpriteData1.workVariable2 = CONVERT_SECONDS(3.f);
+                    gSubSpriteData1.work2 = CONVERT_SECONDS(3.f);
                     damage = 0;
                 }
 
@@ -1237,9 +1237,9 @@ static void KraidInit(void)
     gCurrentSprite.health = GET_PSPRITE_HEALTH(PSPRITE_KRAID);
     gSubSpriteData1.health = gCurrentSprite.health;
 
-    gSubSpriteData1.workVariable3 = 0;
-    gSubSpriteData1.workVariable2 = 0;
-    gSubSpriteData1.workVariable1 = 0;
+    gSubSpriteData1.work3 = 0;
+    gSubSpriteData1.work2 = 0;
+    gSubSpriteData1.work1 = 0;
 
     gSubSpriteData1.pMultiOam = sKraidMultiSpriteData_Rising;
     gSubSpriteData1.animationDurationCounter = 0;
@@ -1446,18 +1446,18 @@ static void KraidFirstStep(void)
     feetStatus = KraidMoveFeet();
     if (SpriteUtilCheckNearEndSubSprite1Anim())
     {
-        if (gSubSpriteData1.workVariable1 != 0)
+        if (gSubSpriteData1.work1 != 0)
         {
-            if (gSubSpriteData1.workVariable1 <= CONVERT_SECONDS(.05f))
+            if (gSubSpriteData1.work1 <= CONVERT_SECONDS(.05f))
             {
-                APPLY_DELTA_TIME_INC(gSubSpriteData1.workVariable1);
+                APPLY_DELTA_TIME_INC(gSubSpriteData1.work1);
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
                     gCurrentSprite.status &= ~SPRITE_STATUS_FACING_RIGHT;
                 gCurrentSprite.pose = KRAID_POSE_SECOND_STEP_INIT;
             }
             else
             {
-                gSubSpriteData1.workVariable1 = 0;
+                gSubSpriteData1.work1 = 0;
                 gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT;
                 gCurrentSprite.pose = KRAID_POSE_STANDING_BETWEEN_STEPS_INIT;
             }
@@ -1507,18 +1507,18 @@ static void KraidSecondStep(void)
     feetStatus = KraidMoveFeet();
     if (SpriteUtilCheckNearEndSubSprite1Anim())
     {
-        if (gSubSpriteData1.workVariable1 != 0)
+        if (gSubSpriteData1.work1 != 0)
         {
-            if (gSubSpriteData1.workVariable1 <= CONVERT_SECONDS(.05f))
+            if (gSubSpriteData1.work1 <= CONVERT_SECONDS(.05f))
             {
-                APPLY_DELTA_TIME_INC(gSubSpriteData1.workVariable1);
+                APPLY_DELTA_TIME_INC(gSubSpriteData1.work1);
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
                     gCurrentSprite.status &= ~SPRITE_STATUS_FACING_RIGHT;
                 gCurrentSprite.pose = KRAID_POSE_FIRST_STEP_INIT;
             }
             else
             {
-                gSubSpriteData1.workVariable1 = 0;
+                gSubSpriteData1.work1 = 0;
                 gCurrentSprite.status |= SPRITE_STATUS_FACING_RIGHT;
                 gCurrentSprite.pose = KRAID_POSE_STANDING_INIT;
             }
@@ -1562,9 +1562,9 @@ static void KraidStanding(void)
     if (SpriteUtilCheckNearEndSubSprite1Anim())
     {
         gCurrentSprite.pose = KRAID_POSE_FIRST_STEP_INIT;
-        if (gSubSpriteData1.workVariable1 == 1)
+        if (gSubSpriteData1.work1 == 1)
         {
-            gSubSpriteData1.workVariable1++;
+            gSubSpriteData1.work1++;
             gCurrentSprite.status &= ~SPRITE_STATUS_FACING_RIGHT;
         }
     }
@@ -1592,9 +1592,9 @@ static void KraidStandingBetweenSteps(void)
     {
         // Start second step
         gCurrentSprite.pose = KRAID_POSE_SECOND_STEP_INIT;
-        if (gSubSpriteData1.workVariable1 == 1)
+        if (gSubSpriteData1.work1 == 1)
         {
-            gSubSpriteData1.workVariable1++;
+            gSubSpriteData1.work1++;
             gCurrentSprite.status &= ~SPRITE_STATUS_FACING_RIGHT;
         }
     }
@@ -2644,7 +2644,7 @@ void Kraid(void)
             }
         }
 
-        if (gSubSpriteData1.workVariable1 != 0)
+        if (gSubSpriteData1.work1 != 0)
             gSubSpriteData1.animationDurationCounter += CONVERT_SECONDS(1.f / 15);
 
         gLockScreen.lock = LOCK_SCREEN_TYPE_POSITION;
@@ -2764,7 +2764,7 @@ void KraidPart(void)
     else
     {
         KraidSyncSubSprites();
-        if (gSubSpriteData1.workVariable1 != 0 && (gCurrentSprite.roomSlot == KRAID_PART_LEFT_FEET || gCurrentSprite.roomSlot == KRAID_PART_RIGHT_FEET))
+        if (gSubSpriteData1.work1 != 0 && (gCurrentSprite.roomSlot == KRAID_PART_LEFT_FEET || gCurrentSprite.roomSlot == KRAID_PART_RIGHT_FEET))
         {
             if (gCurrentSprite.animationDurationCounter < CONVERT_SECONDS(.2f))
                 gCurrentSprite.animationDurationCounter += CONVERT_SECONDS(1.f / 15);
@@ -2901,17 +2901,17 @@ void KraidSpike(void)
 
                     if (gCurrentSprite.roomSlot == KRAID_PART_TOP_HOLE_LEFT)
                     {
-                        if (!(gSubSpriteData1.workVariable3 & DESTROYED_BLOCK_STATUS_TOP))
+                        if (!(gSubSpriteData1.work3 & DESTROYED_BLOCK_STATUS_TOP))
                         {
-                            gSubSpriteData1.workVariable3 |= DESTROYED_BLOCK_STATUS_TOP;
+                            gSubSpriteData1.work3 |= DESTROYED_BLOCK_STATUS_TOP;
                             SoundPlay(SOUND_KRAID_SPIKE_DESTROYING_PLATFORM);
                         }
                     }
                     else if (gCurrentSprite.roomSlot == KRAID_PART_MIDDLE_HOLE_LEFT)
                     {
-                        if (!(gSubSpriteData1.workVariable3 & DESTROYED_BLOCK_STATUS_MIDDLE))
+                        if (!(gSubSpriteData1.work3 & DESTROYED_BLOCK_STATUS_MIDDLE))
                         {
-                            gSubSpriteData1.workVariable3 |= DESTROYED_BLOCK_STATUS_MIDDLE;
+                            gSubSpriteData1.work3 |= DESTROYED_BLOCK_STATUS_MIDDLE;
                             SoundPlay(SOUND_KRAID_SPIKE_DESTROYING_BLOCKS);
                         }
 
@@ -2924,9 +2924,9 @@ void KraidSpike(void)
                     }
                     else if (gCurrentSprite.roomSlot == KRAID_PART_BOTTOM_HOLE_LEFT)
                     {
-                        if (!(gSubSpriteData1.workVariable3 & DESTROYED_BLOCK_STATUS_BOTTOM))
+                        if (!(gSubSpriteData1.work3 & DESTROYED_BLOCK_STATUS_BOTTOM))
                         {
-                            gSubSpriteData1.workVariable3 |= DESTROYED_BLOCK_STATUS_BOTTOM;
+                            gSubSpriteData1.work3 |= DESTROYED_BLOCK_STATUS_BOTTOM;
                             SoundPlay(SOUND_KRAID_SPIKE_DESTROYING_BLOCKS);
                         }
 

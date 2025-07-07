@@ -291,8 +291,8 @@ static void GalleryVBlank(void)
         DMA_SET(3, ENDING_DATA.creditLineTilemap_2, VRAM_BASE + ENDING_DATA.creditLineOffset_2,
             C_32_2_16(DMA_ENABLE, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2)));
 
-        dma_fill32(3, 0, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_1, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) * 2);
-        dma_fill32(3, 0, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_2, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) * 2);
+        DMA_FILL_32(3, 0, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_1, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) * 2);
+        DMA_FILL_32(3, 0, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_2, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) * 2);
     }
     // On odd length lines
     else if (ENDING_DATA.unk_6 != 0)
@@ -302,20 +302,20 @@ static void GalleryVBlank(void)
         DMA_SET(3, ENDING_DATA.creditLineTilemap_2, VRAM_BASE + 0x800 + ENDING_DATA.creditLineOffset_2,
             C_32_2_16(DMA_ENABLE, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2)));
 
-        dma_fill32(3, 0, VRAM_BASE + ENDING_DATA.creditLineOffset_1, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) * 2);
-        dma_fill32(3, 0, VRAM_BASE + ENDING_DATA.creditLineOffset_2, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) * 2);
+        DMA_FILL_32(3, 0, VRAM_BASE + ENDING_DATA.creditLineOffset_1, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_1) * 2);
+        DMA_FILL_32(3, 0, VRAM_BASE + ENDING_DATA.creditLineOffset_2, ARRAY_SIZE(ENDING_DATA.creditLineTilemap_2) * 2);
     }
 
-    write16(REG_DISPCNT, ENDING_DATA.dispcnt);
-    write16(REG_BLDCNT, ENDING_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, ENDING_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG0VOFS, bgPos = MOD_AND(gBg0YPosition / 16, 0x200));
-    write16(REG_BG1VOFS, bgPos);
-    write16(REG_BG2VOFS, MOD_AND(gBg2YPosition / 16, 0x200));
-    write16(REG_BG3VOFS, MOD_AND(gBg3YPosition / 16, 0x200));
+    WRITE_16(REG_BG0VOFS, bgPos = MOD_AND(gBg0YPosition / 16, 0x200));
+    WRITE_16(REG_BG1VOFS, bgPos);
+    WRITE_16(REG_BG2VOFS, MOD_AND(gBg2YPosition / 16, 0x200));
+    WRITE_16(REG_BG3VOFS, MOD_AND(gBg3YPosition / 16, 0x200));
 }
 
 /**
@@ -326,15 +326,15 @@ static void EndScreenVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, ENDING_DATA.dispcnt);
-    write16(REG_BLDCNT, ENDING_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, ENDING_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
-    write16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
-    write16(REG_BG3HOFS, MOD_AND(gBg3XPosition, 0x200));
+    WRITE_16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
+    WRITE_16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
+    WRITE_16(REG_BG3HOFS, MOD_AND(gBg3XPosition, 0x200));
 }
 
 /**
@@ -345,14 +345,14 @@ static void UnlockedOptionsVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, ENDING_DATA.dispcnt);
-    write16(REG_BLDCNT, ENDING_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, ENDING_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, ENDING_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_WIN0H, C_16_2_8(ENDING_DATA.oamXPositions[0], ENDING_DATA.oamXPositions[1]));
-    write16(REG_WIN0V, C_16_2_8(ENDING_DATA.oamYPositions[0], ENDING_DATA.oamYPositions[1]));
+    WRITE_16(REG_WIN0H, C_16_2_8(ENDING_DATA.oamXPositions[0], ENDING_DATA.oamXPositions[1]));
+    WRITE_16(REG_WIN0V, C_16_2_8(ENDING_DATA.oamYPositions[0], ENDING_DATA.oamYPositions[1]));
 }
 
 /**
@@ -361,19 +361,19 @@ static void UnlockedOptionsVBlank(void)
  */
 static void CreditsInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(GalleryVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam))
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam))
 
     ClearGfxRam();
 
@@ -385,10 +385,10 @@ static void CreditsInit(void)
     DMA_SET(3, sCreditsChozoWallPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sCreditsChozoWallPal)));
     DMA_SET(3, sCreditsCharactersPal, PALRAM_BASE + 13 * PAL_ROW_SIZE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sCreditsCharactersPal)));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG1CNT, CREATE_BGCNT(2, 31, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG2CNT, CREATE_BGCNT(0, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG3CNT, CREATE_BGCNT(2, 26, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 31, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(0, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(2, 26, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x512));
 
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -402,14 +402,14 @@ static void CreditsInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, 0x1000);
-    write16(REG_BG1HOFS, 4);
-    write16(REG_BG1VOFS, 0x1000);
-    write16(REG_BG2HOFS, 0);
-    write16(REG_BG2VOFS, 0);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0x1000);
+    WRITE_16(REG_BG1HOFS, 4);
+    WRITE_16(REG_BG1VOFS, 0x1000);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
 
     ENDING_DATA.unk_E = 0x80;
     ENDING_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_BG3;
@@ -734,7 +734,7 @@ static u8 CreditsChozoWallMovement(void)
             break;
 
         case CONVERT_SECONDS(8.f) + CONVERT_SECONDS(8.f / 15.f):
-            write16(REG_BG1HOFS, 0);
+            WRITE_16(REG_BG1HOFS, 0);
             ended = TRUE;
             break;
     }
@@ -775,7 +775,7 @@ static u8 CreditsChozoWallZoom(void)
 
         case 1:
             LZ77UncompVRAM(sCreditsChozoWallBottomZoomedTileTable, VRAM_BASE + 0xF000);
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             ENDING_DATA.dispcnt = DCNT_BG0 | DCNT_BG2 | DCNT_BG3;
             ENDING_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
                 BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL;
@@ -856,17 +856,17 @@ static u8 CreditsChozoWallZoom(void)
  */
 static void EndScreenInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(EndScreenVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
     LZ77UncompVRAM(sEndingSamusPosingSpaceBackgroundGfx, VRAM_BASE + 0x3000);
     LZ77UncompVRAM(sEndingLightGfx, VRAM_BASE + 0xB000);
@@ -883,10 +883,10 @@ static void EndScreenInit(void)
 
     DMA_SET(3, sEndingPosingPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sEndingPosingPal)));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
-    write16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
-    write16(REG_BG3CNT, CREATE_BGCNT(0, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
     
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -901,16 +901,16 @@ static void EndScreenInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, 0);
-    write16(REG_BG1HOFS, 0x100);
-    write16(REG_BG1VOFS, 0);
-    write16(REG_BG2HOFS, 0x100);
-    write16(REG_BG2VOFS, 0);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0x100);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0x100);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     ENDING_DATA.endingNumber = PEN_GET_ENDING(ChozodiaEscapeGetItemCountAndEndingNumber()) & 7;
     ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_BG2 | DCNT_BG3 | DCNT_OBJ;
@@ -1103,8 +1103,8 @@ static u8 EndScreenSamusPosing(void)
     switch (ENDING_DATA.oamTypes[1])
     {
         case 1:
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
 
             LZ77UncompVRAM(sEndingSamusPosingGfx_3, VRAM_BASE);
             LZ77UncompVRAM(sEndingSamusPosingTileTable_3, VRAM_BASE + 0xD000);
@@ -1117,8 +1117,8 @@ static u8 EndScreenSamusPosing(void)
             break;
 
         case 3:
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
 
             LZ77UncompVRAM(sEndingSamusPosingGfx_4, VRAM_BASE + 0x8000);
             LZ77UncompVRAM(sEndingSamusPosingTileTable_4, VRAM_BASE + 0xE000);
@@ -1131,8 +1131,8 @@ static u8 EndScreenSamusPosing(void)
             break;
 
         case 5:
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
 
             LZ77UncompVRAM(sEndingSamusPosingGfx_5, VRAM_BASE);
             LZ77UncompVRAM(sEndingSamusPosingTileTable_5, VRAM_BASE + 0xD000);
@@ -1145,8 +1145,8 @@ static u8 EndScreenSamusPosing(void)
             break;
 
         case 7:
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_512x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_512x256));
 
             if (ENDING_DATA.endingNumber == 0)
             {
@@ -1237,18 +1237,18 @@ static void EndingImageInit(void)
     u32 abilityCount;
     u32 pen;
 
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, FALSE);
 
     CallbackSetVblank(GalleryVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     pen = ChozodiaEscapeGetItemCountAndEndingNumber();
 
@@ -1282,8 +1282,8 @@ static void EndingImageInit(void)
     DMA_SET(3, sEndingImageTextPal, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sEndingImageTextPal)));
 
     EndingImageLoadIGTAndPercentageGraphics();
-    write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
 
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -1297,14 +1297,14 @@ static void EndingImageInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, 0);
-    write16(REG_BG1HOFS, 0);
-    write16(REG_BG1VOFS, 0);
-    write16(REG_BG2HOFS, 0);
-    write16(REG_BG2VOFS, 0);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
 
     ENDING_DATA.dispcnt = DCNT_OBJ | DCNT_BG0 | DCNT_BG1;
     ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
@@ -1525,19 +1525,19 @@ static u8 EndingImageDisplay(void)
  */
 static void UnlockedOptionsInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(UnlockedOptionsVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     ClearGfxRam();
 
     LZ77UncompVRAM(sUnlockedOptionsTileTable, VRAM_BASE + 0x8000);
@@ -1546,14 +1546,14 @@ static void UnlockedOptionsInit(void)
 
     DMA_SET(3, sUnlockedOptionsPal, PALRAM_BASE + 15 * PAL_ROW_SIZE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sUnlockedOptionsPal)));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG1CNT, CREATE_BGCNT(0, 17, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 17, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
 
     gNextOamSlot = 0;
     ResetFreeOam();
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
 
     ENDING_DATA.dispcnt = 0;
     ENDING_DATA.bldcnt = 0;
@@ -1598,8 +1598,8 @@ static u8 UnlockedOptionsPopUp(void)
 
         case CONVERT_SECONDS(.5f) + CONVERT_SECONDS(1.f / 30):
             ENDING_DATA.dispcnt = DCNT_BG1 | DCNT_WIN0;
-            write16(REG_WININ, 3);
-            write16(REG_WINOUT, 0);
+            WRITE_16(REG_WININ, 3);
+            WRITE_16(REG_WINOUT, 0);
             ENDING_DATA.unk_1++;
 
             ENDING_DATA.oamXPositions[0] = SCREEN_X_MIDDLE;
@@ -1833,22 +1833,22 @@ static void GalleryInit(void)
     u32 i;
     u32 bit;
 
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(GalleryVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
     if (gGameModeSub1 == 0)
     {
         ClearGfxRam();
-        dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+        DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     }
 
     endingNbr = ENDING_DATA.endingNumber;
@@ -1886,8 +1886,8 @@ static void GalleryInit(void)
 
     DMA_SET(3, sEndingImagesPalPointers[endingNbr], PALRAM_BASE, C_32_2_16(DMA_ENABLE, 16 * PAL_ROW));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
-    write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x512));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x512));
 
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -1901,14 +1901,14 @@ static void GalleryInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, 0);
-    write16(REG_BG0VOFS, 0x1000);
-    write16(REG_BG1HOFS, 0);
-    write16(REG_BG1VOFS, 0x1000);
-    write16(REG_BG2HOFS, 0);
-    write16(REG_BG2VOFS, 0);
-    write16(REG_BG3HOFS, 0);
-    write16(REG_BG3VOFS, 0);
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0x1000);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0x1000);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
 
     ENDING_DATA.unk_8 = 0;
 

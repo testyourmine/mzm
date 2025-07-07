@@ -103,8 +103,8 @@ static void CrocomireInit(void)
     gSubSpriteData1.animationDurationCounter = 0;
     gSubSpriteData1.currentAnimationFrame = 0;
 
-    gSubSpriteData1.workVariable2 = 0;
-    gSubSpriteData1.workVariable1 = 0;
+    gSubSpriteData1.work2 = 0;
+    gSubSpriteData1.work1 = 0;
 
     gCurrentSprite.pose = CROCOMIRE_POSE_IDLE;
     gCurrentSprite.frozenPaletteRowOffset = 2;

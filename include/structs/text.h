@@ -2,6 +2,7 @@
 #define TEXT_STRUCT_H
 
 #include "types.h"
+#include "macros.h"
 
 struct Message {
     u16 textIndex;

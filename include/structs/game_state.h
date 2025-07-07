@@ -28,7 +28,7 @@ extern struct FileScreenOptionsUnlocked gFileScreenOptionsUnlocked;
 extern struct ButtonAssignments gButtonAssignments;
 extern s8 gTourianEscapeCutsceneStage;
 extern vu16 gVBlankRequestFlag;
-extern u8 gDisableSoftReset;
+extern boolu8 gDisableSoftReset;
 extern u8 gDebugMode;
 extern u8 gBootDebugActive;
 extern u8 gDisableMusic;

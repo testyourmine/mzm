@@ -39,16 +39,16 @@ void TransparencySetRoomEffectsTransparency(void)
             }
         }
 
-        write16(REG_BG1CNT, gIoRegistersBackup.BG1CNT);
-        write16(REG_BG2CNT, gIoRegistersBackup.BG2CNT);
+        WRITE_16(REG_BG1CNT, gIoRegistersBackup.BG1CNT);
+        WRITE_16(REG_BG2CNT, gIoRegistersBackup.BG2CNT);
 
-        write8(REG_WINOUT, gIoRegistersBackup.WINOUT_L);
-        write8(REG_WININ + 1, gIoRegistersBackup.WININ_H);
+        WRITE_8(REG_WINOUT, gIoRegistersBackup.WINOUT_L);
+        WRITE_8(REG_WININ + 1, gIoRegistersBackup.WININ_H);
 
-        write16(REG_WIN1H, C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right));
-        write16(REG_WIN1V, C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom));
+        WRITE_16(REG_WIN1H, C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right));
+        WRITE_16(REG_WIN1V, C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom));
 
-        write16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
+        WRITE_16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
         return;
     }
 
@@ -62,8 +62,8 @@ void TransparencySetRoomEffectsTransparency(void)
     gBldalphaData1 = sBldalphaData_Empty;
     gBldalphaData2 = sBldalphaData_Empty;
     gDefaultTransparency = sDefaultTransparency_Empty;
-    gBLDYData1 = sBldyData_Empty;
-    gBLDYData2 = sBldyData_Empty;
+    gBldyData1 = sBldyData_Empty;
+    gBldyData2 = sBldyData_Empty;
 
     if (gCurrentRoomEntry.bg0Prop & BG_PROP_LZ77_COMPRESSED)
         bgCnt[0] = TransparencyGetBgSizeFlag(gCurrentRoomEntry.bg0Size) | 2 << BGCNT_CHAR_BASE_BLOCK_SHIFT;
@@ -268,7 +268,7 @@ void TransparencySetRoomEffectsTransparency(void)
     gBldalphaData1.evaCoef = gDefaultTransparency.evaCoef;
     gBldalphaData1.evbCoef = gDefaultTransparency.evbCoef;
 
-    write16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
 
     gWrittenToBldalpha = 0;
     gWrittenToBldy = -1;
@@ -280,21 +280,21 @@ void TransparencySetRoomEffectsTransparency(void)
     gSuitFlashEffect.bottom = SCREEN_SIZE_Y;
     gSuitFlashEffect.timer = 0;
 
-    write8(REG_WININ, 0);
-    write16(REG_WIN0H, 0);
-    write16(REG_WIN0V, 0);
+    WRITE_8(REG_WININ, 0);
+    WRITE_16(REG_WIN0H, 0);
+    WRITE_16(REG_WIN0V, 0);
 
     gIoRegistersBackup.WININ_H = 0x3F;
     gIoRegistersBackup.WINOUT_L = 0x20;
 
-    write8(REG_WINOUT, 0x20);
-    write8(REG_WININ + 1, 0x3F);
+    WRITE_8(REG_WINOUT, 0x20);
+    WRITE_8(REG_WININ + 1, 0x3F);
 
-    write16(REG_WIN1H, SCREEN_SIZE_X);
-    write16(REG_WIN1V, SCREEN_SIZE_Y);
+    WRITE_16(REG_WIN1H, SCREEN_SIZE_X);
+    WRITE_16(REG_WIN1V, SCREEN_SIZE_Y);
 
-    write16(REG_BG1CNT, bgCnt[1]);
-    write16(REG_BG2CNT, bgCnt[2]);
+    WRITE_16(REG_BG1CNT, bgCnt[1]);
+    WRITE_16(REG_BG2CNT, bgCnt[2]);
 
     gIoRegistersBackup.BG0CNT = bgCnt[0];
     gIoRegistersBackup.unk_12 = bgCnt[0];
@@ -389,14 +389,14 @@ void TransparencyUpdateBldcnt(u8 action, u16 value)
             if (effects == BLDCNT_ALPHA_BLENDING_EFFECT)
                 gBldalphaData1.BLDCNT = value;
             else
-                gBLDYData1.BLDCNT = value;
+                gBldyData1.BLDCNT = value;
             break;
 
         case 1:
             if (effects == BLDCNT_ALPHA_BLENDING_EFFECT)
                 gBldalphaData2.BLDCNT = value;
             else
-                gBLDYData2.BLDCNT = value;
+                gBldyData2.BLDCNT = value;
             break;
 
         case 2:
@@ -404,7 +404,7 @@ void TransparencyUpdateBldcnt(u8 action, u16 value)
                 return;
 
         case 3:
-            write16(REG_BLDCNT, gIoRegistersBackup.Bldcnt_NonGameplay);
+            WRITE_16(REG_BLDCNT, gIoRegistersBackup.Bldcnt_NonGameplay);
 
         default:
             return;
@@ -436,15 +436,15 @@ void TransparencySpriteUpdateBLDY(u8 value, u32 delay, u32 intensity)
 
     if (above)
     {
-        gBLDYData2.activeFlag &= ~TRUE;
+        gBldyData2.activeFlag &= ~TRUE;
         return;
     }
     
-    gBLDYData2.delayMax = _delay;
-    gBLDYData2.intensity = _intensity;
-    gBLDYData2.value = value;
-    gBLDYData2.delay = above;
-    gBLDYData2.activeFlag = TRUE;
+    gBldyData2.delayMax = _delay;
+    gBldyData2.intensity = _intensity;
+    gBldyData2.value = value;
+    gBldyData2.delay = above;
+    gBldyData2.activeFlag = TRUE;
 
     TransparencyApplyNewEffects();
 }
@@ -516,11 +516,11 @@ void TransparencyUpdateBLDY(u8 value, s32 delay, u32 intensity)
     if (invalid)
         return;
 
-    gBLDYData1.delayMax = _delay;
-    gBLDYData1.intensity = _intensity;
-    gBLDYData1.value = value;
-    gBLDYData1.delay = 0;
-    gBLDYData1.activeFlag = TRUE;
+    gBldyData1.delayMax = _delay;
+    gBldyData1.intensity = _intensity;
+    gBldyData1.value = value;
+    gBldyData1.delay = 0;
+    gBldyData1.activeFlag = TRUE;
 }
 
 /**
@@ -569,19 +569,19 @@ void TransparencyApplyNewEffects(void)
 {
     if (gDefaultTransparency.unk_0 != 0)
     {
-        gBLDYData2.activeFlag &= TRUE;
+        gBldyData2.activeFlag &= TRUE;
         gBldalphaData2.activeFlag &= TRUE;
-        gBLDYData1.activeFlag &= TRUE;
+        gBldyData1.activeFlag &= TRUE;
         gBldalphaData1.activeFlag &= TRUE;
     }
     else
     {
-        if (gBLDYData2.activeFlag & TRUE)
-            TransparencyApplyNewBLDY(&gBLDYData2);
+        if (gBldyData2.activeFlag & TRUE)
+            TransparencyApplyNewBLDY(&gBldyData2);
         else if (gBldalphaData2.activeFlag & TRUE)
             TransparencyApplyNewBLDALPHA(&gBldalphaData2);
-        else if (gBLDYData1.activeFlag & TRUE)
-            TransparencyApplyNewBLDY(&gBLDYData1);
+        else if (gBldyData1.activeFlag & TRUE)
+            TransparencyApplyNewBLDY(&gBldyData1);
         else if (gBldalphaData1.activeFlag & TRUE)
             TransparencyApplyNewBLDALPHA(&gBldalphaData1);
     }

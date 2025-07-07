@@ -31,23 +31,23 @@ static void TourianEscapeVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, TOURIAN_ESCAPE_DATA.dispcnt);
-    write16(REG_BLDCNT, TOURIAN_ESCAPE_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, TOURIAN_ESCAPE_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, TOURIAN_ESCAPE_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gIoRegistersBackup.BLDALPHA_NonGameplay_EVB, gIoRegistersBackup.BLDALPHA_NonGameplay_EVA));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0XPosition));
-    write16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0YPosition));
+    WRITE_16(REG_BG0HOFS, SUB_PIXEL_TO_PIXEL(gBg0XPosition));
+    WRITE_16(REG_BG0VOFS, SUB_PIXEL_TO_PIXEL(gBg0YPosition));
 
-    write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1XPosition));
-    write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1YPosition));
+    WRITE_16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1XPosition));
+    WRITE_16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1YPosition));
 
-    write16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2XPosition));
-    write16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2YPosition));
+    WRITE_16(REG_BG2HOFS, SUB_PIXEL_TO_PIXEL(gBg2XPosition));
+    WRITE_16(REG_BG2VOFS, SUB_PIXEL_TO_PIXEL(gBg2YPosition));
 
-    write16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3XPosition));
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3YPosition));
+    WRITE_16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3XPosition));
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3YPosition));
 
     AnimatedGraphicsTransfer();
 }
@@ -60,23 +60,23 @@ static void TourianEscapeVBlankZebesExploding(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, TOURIAN_ESCAPE_DATA.dispcnt);
-    write16(REG_BLDCNT, TOURIAN_ESCAPE_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, TOURIAN_ESCAPE_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, TOURIAN_ESCAPE_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
-    write16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
+    WRITE_16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
+    WRITE_16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
 
-    write16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
-    write16(REG_BG1VOFS, MOD_AND(gBg1YPosition, 0x100));
+    WRITE_16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
+    WRITE_16(REG_BG1VOFS, MOD_AND(gBg1YPosition, 0x100));
 
-    write16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
-    write16(REG_BG2VOFS, MOD_AND(gBg2YPosition, 0x100));
+    WRITE_16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
+    WRITE_16(REG_BG2VOFS, MOD_AND(gBg2YPosition, 0x100));
 
-    write16(REG_WIN0H, C_16_2_8(TOURIAN_ESCAPE_DATA.win0h_H, TOURIAN_ESCAPE_DATA.win0h_L));
-    write16(REG_WIN0V, C_16_2_8(TOURIAN_ESCAPE_DATA.win0v_H, TOURIAN_ESCAPE_DATA.win0v_L));
+    WRITE_16(REG_WIN0H, C_16_2_8(TOURIAN_ESCAPE_DATA.win0h_H, TOURIAN_ESCAPE_DATA.win0h_L));
+    WRITE_16(REG_WIN0V, C_16_2_8(TOURIAN_ESCAPE_DATA.win0v_H, TOURIAN_ESCAPE_DATA.win0v_L));
 }
 
 /**
@@ -85,29 +85,29 @@ static void TourianEscapeVBlankZebesExploding(void)
  */
 static void TourianEscapeVBlankSamusSurrounded(void)
 {
-    write16(REG_DISPCNT, TOURIAN_ESCAPE_DATA.dispcnt);
-    write16(REG_BLDCNT, TOURIAN_ESCAPE_DATA.bldcnt);
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_DISPCNT, TOURIAN_ESCAPE_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, TOURIAN_ESCAPE_DATA.bldcnt);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
 
-    write16(REG_BG2PA, gWrittenToBg2Pa);
-    write16(REG_BG2PB, gWrittenToBg2Pb);
-    write16(REG_BG2PC, gWrittenToBg2Pc);
-    write16(REG_BG2PD, gWrittenToBg2Pd);
+    WRITE_16(REG_BG2PA, gWrittenToBg2Pa);
+    WRITE_16(REG_BG2PB, gWrittenToBg2Pb);
+    WRITE_16(REG_BG2PC, gWrittenToBg2Pc);
+    WRITE_16(REG_BG2PD, gWrittenToBg2Pd);
 
-    write16(REG_BG2X_L, gWrittenToBg2X);
-    write16(REG_BG2X_H, (gWrittenToBg2X & (0xFFF << 16)) >> 16);
+    WRITE_16(REG_BG2X_L, gWrittenToBg2X);
+    WRITE_16(REG_BG2X_H, (gWrittenToBg2X & (0xFFF << 16)) >> 16);
 
-    write16(REG_BG2Y_L, gWrittenToBg2Y);
-    write16(REG_BG2Y_H, (gWrittenToBg2Y & (0xFFF << 16)) >> 16);
+    WRITE_16(REG_BG2Y_L, gWrittenToBg2Y);
+    WRITE_16(REG_BG2Y_H, (gWrittenToBg2Y & (0xFFF << 16)) >> 16);
 
-    write16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
-    write16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
+    WRITE_16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 0x200));
+    WRITE_16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 0x100));
 
-    write16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
-    write16(REG_BG1VOFS, MOD_AND(gBg1YPosition, 0x100));
+    WRITE_16(REG_BG1HOFS, MOD_AND(gBg1XPosition, 0x200));
+    WRITE_16(REG_BG1VOFS, MOD_AND(gBg1YPosition, 0x100));
 
-    write16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
-    write16(REG_BG2VOFS, MOD_AND(gBg2YPosition, 0x100));
+    WRITE_16(REG_BG2HOFS, MOD_AND(gBg2XPosition, 0x200));
+    WRITE_16(REG_BG2VOFS, MOD_AND(gBg2YPosition, 0x100));
 }
 
 /**
@@ -486,24 +486,24 @@ static void unk_81ad8(void)
  */
 static void TourianEscapeInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
 
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
-    write16(REG_BLDCNT, 0);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDCNT, 0);
 
     gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE;
     gWrittenToBldalpha_H = 0;
     gWrittenToBldy_NonGameplay = 0;
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(NULL);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
     ClearGfxRam();
 
     LZ77UncompVRAM(sMotherShipBlowingUpExplosionsGfx, VRAM_OBJ);
@@ -513,9 +513,9 @@ static void TourianEscapeInit(void)
 
     LoadRoomCutscene(AREA_TOURIAN, 4 + 1, BLOCK_SIZE * 5, BLOCK_SIZE * 10);
 
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IME, FALSE);
     CallbackSetVblank(TourianEscapeVBlank);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
     gNextOamSlot = 0;
     ResetFreeOam();
 
@@ -623,9 +623,9 @@ static u8 TourianEscapeZebesExploding(void)
             break;
 
         case 246:
-            write16(REG_IME, FALSE);
+            WRITE_16(REG_IME, FALSE);
             CallbackSetVblank(TourianEscapeVBlankZebesExploding);
-            write16(REG_IME, TRUE);
+            WRITE_16(REG_IME, TRUE);
 
             LZ77UncompVRAM(sTourianEscapeZebesGfx, VRAM_BASE);
             break;
@@ -666,7 +666,7 @@ static u8 TourianEscapeZebesExploding(void)
             DMA_SET(3, sTourianEscapeExplodingPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sTourianEscapeExplodingPal)));
             DMA_SET(3, sTourianEscapeExplodingPal, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sTourianEscapeExplodingPal)));
 
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE / 2 + 2;
             gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE / 2 - 2;
@@ -904,8 +904,8 @@ static u8 TourianEscapeSamusInHerShip(void)
             break;
 
         case 3:
-            write16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
 
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG1 | DCNT_OBJ;
             TOURIAN_ESCAPE_DATA.bldcnt = BLDCNT_SCREEN_SECOND_TARGET;
@@ -921,8 +921,8 @@ static u8 TourianEscapeSamusInHerShip(void)
 
             gWrittenToBldy_NonGameplay = 10;
 
-            write16(REG_WININ, WIN0_ALL);
-            write16(REG_WINOUT, WIN0_ALL_NO_COLOR_EFFECT);
+            WRITE_16(REG_WININ, WIN0_ALL);
+            WRITE_16(REG_WINOUT, WIN0_ALL_NO_COLOR_EFFECT);
 
             TOURIAN_ESCAPE_DATA.win0h_H = SCREEN_X_MIDDLE - 1;
             TOURIAN_ESCAPE_DATA.win0h_L = SCREEN_X_MIDDLE + 1;
@@ -961,7 +961,7 @@ static u8 TourianEscapeSamusInHerShip(void)
             break;
 
         case 352:
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 15, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 15, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             break;
 
         case 372:
@@ -1073,7 +1073,7 @@ static u8 TourianEscapeSamusLookingAround(void)
             break;
 
         case 3:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             TOURIAN_ESCAPE_DATA.bldcnt = BLDCNT_OBJ_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG0_SECOND_TARGET_PIXEL;
             break;
@@ -1083,7 +1083,7 @@ static u8 TourianEscapeSamusLookingAround(void)
             break;
 
         case 32:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 17, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 17, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             break;
 
         case 56:
@@ -1146,15 +1146,15 @@ static u8 TourianEscapeSamusSurrounded(void)
             break;
 
         case 3:
-            write16(REG_IME, FALSE);
+            WRITE_16(REG_IME, FALSE);
             CallbackSetVblank(TourianEscapeVBlankSamusSurrounded);
-            write16(REG_IME, TRUE);
+            WRITE_16(REG_IME, TRUE);
             break;
 
         case 4:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 14, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(2, 15, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_512x256) | (1 << 7));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 14, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 15, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_512x256) | (1 << 7));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_MODE_1 | DCNT_BG0 | DCNT_BG2 | DCNT_OBJ;
             break;
 
@@ -1202,9 +1202,9 @@ static u8 TourianEscapeSamusFlyingIn(void)
     switch (TOURIAN_ESCAPE_DATA.timer++)
     {
         case 0:
-            write16(REG_IME, FALSE);
+            WRITE_16(REG_IME, FALSE);
             CallbackSetVblank(TourianEscapeVBlankZebesExploding);
-            write16(REG_IME, TRUE);
+            WRITE_16(REG_IME, TRUE);
 
             LZ77UncompVRAM(sIntroTextAndShipFlyingInGfx, VRAM_OBJ);
             SoundPlay(SOUND_TOURIAN_ESCAPE_SAMUS_FLYING_IN);
@@ -1220,7 +1220,7 @@ static u8 TourianEscapeSamusFlyingIn(void)
             DMA_SET(3, sIntroTextAndShipPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, sizeof(sIntroTextAndShipPal) / 2 + 16));
             DMA_SET(3, sIntroTextAndShipPal, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, sizeof(sIntroTextAndShipPal) / 2 + 16));
 
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
 
             gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE / 2 + 1;
@@ -1355,7 +1355,7 @@ static u8 TourianEscapeSamusChasedByPirates(void)
             break;
 
         case 3:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             break;
 
@@ -1735,7 +1735,7 @@ static u8 TourianEscapeSamusGettingShot(void)
             break;
 
         case 3:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             TOURIAN_ESCAPE_DATA.unk_8[4] = TRUE;
             TOURIAN_ESCAPE_DATA.unk_8[5] = 2;
@@ -1769,7 +1769,7 @@ static u8 TourianEscapeSamusGettingShot(void)
 
         case 336:
             DMA_SET(3, sTourianEscapeSamusGettingShotPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sTourianEscapeSamusGettingShotPal)));
-            write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG1 | DCNT_OBJ;
             TOURIAN_ESCAPE_DATA.unk_8[0] = 0;
             SoundPlay(SOUND_TOURIAN_ESCAPE_DECISIVE_SHOT);
@@ -1964,7 +1964,7 @@ static u8 TourianEscapeSamusGoingToCrash(void)
             break;
 
         case 3:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             TOURIAN_ESCAPE_DATA.bldcnt = BLDCNT_SCREEN_SECOND_TARGET | BLDCNT_ALPHA_BLENDING_EFFECT;
             SoundPlay(SOUND_TOURIAN_ESCAPE_SHIP_FREE_FALLING);
@@ -2049,8 +2049,8 @@ static u8 TourianEscapeSamusCrashing(void)
             break;
 
         case 5:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             break;
 
@@ -2146,9 +2146,9 @@ static u8 TourianEscapeSamusLookingAtSky(void)
             break;
 
         case 4:
-            write16(REG_BG0CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG2CNT, CREATE_BGCNT(0, 31, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG2CNT, CREATE_BGCNT(0, 31, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_BG2 | DCNT_OBJ;
 
         case 160:
@@ -2280,8 +2280,8 @@ static u8 TourianEscapeSamusLookingAtMotherShip(void)
             break;
 
         case 4:
-            write16(REG_BG0CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-            write16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 14, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+            WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
 
             TOURIAN_ESCAPE_DATA.dispcnt = DCNT_BG0 | DCNT_BG1 | DCNT_OBJ;
             TOURIAN_ESCAPE_DATA.bldcnt = BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_BG1_FIRST_TARGET_PIXEL |

@@ -319,8 +319,8 @@ SECTIONS {
         . = 0x000056c4; gDefaultTransparency = .;
         . = 0x000056cc; gBldalphaData1 = .;
         . = 0x000056d4; gBldalphaData2 = .;
-        . = 0x000056dc; gBLDYData1 = .;
-        . = 0x000056e4; gBLDYData2 = .;
+        . = 0x000056dc; gBldyData1 = .;
+        . = 0x000056e4; gBldyData2 = .;
         . = 0x000056ec; gAnimatedPaletteTiming = .;
         . = 0x000056f0; gHatchFlashingAnimation = .;
         . = 0x000056f4; gAnimatedGraphicsEntry = .;

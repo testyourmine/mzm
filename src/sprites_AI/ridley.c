@@ -687,7 +687,7 @@ static void RidleyInit(void)
         yPosition, xPosition, SPRITE_STATUS_X_FLIP);
 
     // Spawn head
-    gSubSpriteData1.workVariable4 = SpriteSpawnSecondary(SSPRITE_RIDLEY_PART, RIDLEY_PART_HEAD,
+    gSubSpriteData1.work4 = SpriteSpawnSecondary(SSPRITE_RIDLEY_PART, RIDLEY_PART_HEAD,
         gfxSlot, ramSlot, yPosition, xPosition, SPRITE_STATUS_X_FLIP);
 
     // Spawn tail
@@ -719,7 +719,7 @@ static void RidleyInit(void)
         yPosition, xPosition, SPRITE_STATUS_X_FLIP);
 
     // Spawn claw
-    gSubSpriteData1.workVariable5 = SpriteSpawnSecondary(SSPRITE_RIDLEY_PART, RIDLEY_PART_CLAW,
+    gSubSpriteData1.work5 = SpriteSpawnSecondary(SSPRITE_RIDLEY_PART, RIDLEY_PART_CLAW,
         gfxSlot, ramSlot, yPosition, xPosition, SPRITE_STATUS_X_FLIP);
 
     // Spawn right wing
@@ -846,9 +846,9 @@ static void RidleySpawning(void)
             APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
             if (gCurrentSprite.work0 == 0)
             {
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
                 SoundPlay(SOUND_RIDLEY_OPENING_MOUTH);
                 gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 12);
@@ -865,13 +865,13 @@ static void RidleySpawning(void)
                 gSubSpriteData1.animationDurationCounter = 0;
                 gSubSpriteData1.currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_MouthOpened;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_MouthOpened;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawSpittingFireballs;
-                gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawSpittingFireballs;
+                gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
                 gCurrentSprite.work1++;
                 SoundPlay(SOUND_RIDLEY_SPITTING_FIREBALLS);
@@ -903,9 +903,9 @@ static void RidleySpawning(void)
                     break;
             }
             
-            gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-            gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-            gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+            gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+            gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+            gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
             gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 12);
             gCurrentSprite.work1++;
@@ -920,13 +920,13 @@ static void RidleySpawning(void)
                 gSubSpriteData1.animationDurationCounter = 0;
                 gSubSpriteData1.currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadIdle;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadIdle;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawIdle;
-                gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawIdle;
+                gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
                 // Check turning
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
@@ -963,13 +963,13 @@ static void RidleySpawning(void)
                 gSubSpriteData1.animationDurationCounter = 0;
                 gSubSpriteData1.currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadTurningAround;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadTurningAround;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawTurningAroundFirstPart;
-                gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawTurningAroundFirstPart;
+                gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
                 gCurrentSprite.work1++;
             }
@@ -982,9 +982,9 @@ static void RidleySpawning(void)
                 gSubSpriteData1.animationDurationCounter = 0;
                 gSubSpriteData1.currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawTurningAroundSecondPart;
-                gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawTurningAroundSecondPart;
+                gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
                 gCurrentSprite.status ^= SPRITE_STATUS_FACING_RIGHT;
                 gCurrentSprite.work1++;
@@ -1003,13 +1003,13 @@ static void RidleySpawning(void)
                 gSubSpriteData1.animationDurationCounter = 0;
                 gSubSpriteData1.currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadIdle;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadIdle;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawIdle;
-                gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawIdle;
+                gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
                 gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
                 gCurrentSprite.work1 = RIDLEY_SPAWNING_ACTION_DELAY_BEFORE_OPENING_MOUTH;
@@ -1094,7 +1094,7 @@ static void RidleyIdleInit(void)
     u8 clawSlot;
     u16 range;
 
-    clawSlot = gSubSpriteData1.workVariable5;
+    clawSlot = gSubSpriteData1.work5;
 
     // Update multi sprite data
     gSubSpriteData1.pMultiOam = sRidleyMultiSpriteData_Idle;
@@ -1102,9 +1102,9 @@ static void RidleyIdleInit(void)
     gSubSpriteData1.currentAnimationFrame = 0;
 
     // Update head
-    gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadIdle;
-    gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-    gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+    gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadIdle;
+    gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+    gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
     // Update claw
     gSpriteData[clawSlot].pOam = sRidleyPartOam_ClawIdle;
@@ -1147,7 +1147,7 @@ static void RidleyIdle(void)
     samusGrabbed = FALSE;
     startSlide = FALSE;
 
-    clawSlot = gSubSpriteData1.workVariable5;
+    clawSlot = gSubSpriteData1.work5;
     action = gSpriteData[clawSlot].work1;
 
     if (gSpriteData[clawSlot].status & SPRITE_STATUS_SAMUS_COLLIDING)
@@ -1197,9 +1197,9 @@ static void RidleyIdle(void)
             APPLY_DELTA_TIME_DEC(gSpriteData[clawSlot].work0);
             if (gSpriteData[clawSlot].work0 == 0)
             {
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
                 
                 SoundPlay(SOUND_RIDLEY_OPENING_MOUTH);
                 gSpriteData[clawSlot].work1 = RIDLEY_SAMUS_GRABBED_ACTION_OPENING_MOUTH;
@@ -1215,9 +1215,9 @@ static void RidleyIdle(void)
                 gSubSpriteData1.animationDurationCounter = 0;
                 gSubSpriteData1.currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_MouthOpened;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_MouthOpened;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
                 
                 gSpriteData[clawSlot].work1 = RIDLEY_SAMUS_GRABBED_ACTION_SPITTING_FIREBALLS;
                 gSpriteData[clawSlot].work0 = 0;
@@ -1260,9 +1260,9 @@ static void RidleyIdle(void)
                 gSpriteData[clawSlot].animationDurationCounter = 0;
                 gSpriteData[clawSlot].currentAnimationFrame = 0;
 
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
                 gSpriteData[clawSlot].status &= ~SPRITE_STATUS_SAMUS_COLLIDING;
                 gSpriteData[clawSlot].work1 = RIDLEY_SAMUS_GRABBED_ACTION_RELEASING_SAMUS;
@@ -1490,14 +1490,14 @@ static void RidleyTurningAroundInit(void)
     gSubSpriteData1.currentAnimationFrame = 0;
 
     // Update head
-    gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadTurningAround;
-    gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-    gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+    gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadTurningAround;
+    gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+    gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
     // Update claw
-    gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawTurningAroundFirstPart;
-    gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-    gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+    gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawTurningAroundFirstPart;
+    gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+    gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
     gCurrentSprite.pose = RIDLEY_POSE_TURNING_AROUND_FIRST_PART;
 }
@@ -1520,9 +1520,9 @@ static void RidleyTurningAroundFirstPart(void)
         gSubSpriteData1.currentAnimationFrame = 0;
 
         // Update claw
-        gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawTurningAroundSecondPart;
-        gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-        gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+        gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawTurningAroundSecondPart;
+        gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+        gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
         // Flip
         gCurrentSprite.status ^= SPRITE_STATUS_FACING_RIGHT;
@@ -1552,14 +1552,14 @@ static void RidleyTurningAroundSecondPart(void)
         gSubSpriteData1.currentAnimationFrame = 0;
 
         // Update head
-        gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadIdle;
-        gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-        gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+        gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadIdle;
+        gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+        gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
         // Update claw
-        gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawIdle;
-        gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-        gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+        gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawIdle;
+        gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+        gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
     }
 }
 
@@ -1571,7 +1571,7 @@ static void RidleySmallFireballsAttackInit(void)
 {
     u8 clawSlot;
 
-    clawSlot = gSubSpriteData1.workVariable5;
+    clawSlot = gSubSpriteData1.work5;
 
     gSpriteData[clawSlot].pOam = sRidleyPartOam_ClawSpittingFireballs;
     gSpriteData[clawSlot].animationDurationCounter = 0;
@@ -1631,9 +1631,9 @@ static void RidleySmallFireballsAttack(void)
             if (gCurrentSprite.work0 == 0)
             {
                 // Update head
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
                 SoundPlay(SOUND_RIDLEY_OPENING_MOUTH);
                 gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 12);
@@ -1652,9 +1652,9 @@ static void RidleySmallFireballsAttack(void)
                 gSubSpriteData1.currentAnimationFrame = 0;
 
                 // Update head
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_MouthOpened;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_MouthOpened;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
                 gCurrentSprite.work1++;
                 SoundPlay(SOUND_RIDLEY_SPITTING_FIREBALLS);
@@ -1686,9 +1686,9 @@ static void RidleySmallFireballsAttack(void)
             }
 
             // Update head
-            gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-            gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-            gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+            gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+            gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+            gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
             gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 12);
             gCurrentSprite.work1++;
@@ -1705,14 +1705,14 @@ static void RidleySmallFireballsAttack(void)
                 gSubSpriteData1.currentAnimationFrame = 0;
 
                 // Update head
-                gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadIdle;
-                gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadIdle;
+                gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
                 // Update claw
-                gSpriteData[gSubSpriteData1.workVariable5].pOam = sRidleyPartOam_ClawIdle;
-                gSpriteData[gSubSpriteData1.workVariable5].animationDurationCounter = 0;
-                gSpriteData[gSubSpriteData1.workVariable5].currentAnimationFrame = 0;
+                gSpriteData[gSubSpriteData1.work5].pOam = sRidleyPartOam_ClawIdle;
+                gSpriteData[gSubSpriteData1.work5].animationDurationCounter = 0;
+                gSpriteData[gSubSpriteData1.work5].currentAnimationFrame = 0;
 
                 gCurrentSprite.work1 = RIDLEY_SMALL_FIREBALLS_ATTACK_ACTION_TAKING_OFF;
                 gCurrentSprite.work0 = CONVERT_SECONDS(.5f);
@@ -1753,15 +1753,15 @@ static void RidleyTailAttacksInit(void)
 {
     u8 clawSlot;
 
-    clawSlot = gSubSpriteData1.workVariable5;
+    clawSlot = gSubSpriteData1.work5;
 
     gSubSpriteData1.pMultiOam = sRidleyMultiSpriteData_Idle;
     gSubSpriteData1.animationDurationCounter = 0;
     gSubSpriteData1.currentAnimationFrame = 0;
 
-    gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadIdle;
-    gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-    gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+    gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadIdle;
+    gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+    gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
 
     gSpriteData[clawSlot].pOam = sRidleyPartOam_ClawIdle;
     gSpriteData[clawSlot].animationDurationCounter = 0;
@@ -1786,7 +1786,7 @@ static void RidleyBigFireballsAttackInit(void)
     u8 clawSlot;
     u8 pose;
 
-    clawSlot = gSubSpriteData1.workVariable5;
+    clawSlot = gSubSpriteData1.work5;
 
     gSubSpriteData1.pMultiOam = sRidleyMultiSpriteData_SpittingFireballs;
     gSubSpriteData1.animationDurationCounter = 0;
@@ -1795,17 +1795,17 @@ static void RidleyBigFireballsAttackInit(void)
     if (gCurrentSprite.pose == RIDLEY_POSE_BIG_FIREBALLS_ATTACK_INIT)
     {
         // Normal attack
-        gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_MouthOpened;
-        gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-        gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+        gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_MouthOpened;
+        gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+        gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
         pose = RIDLEY_POSE_BIG_FIREBALLS_ATTACK;
     }
     else
     {
         // Attack forced because Ridley got hurt
-        gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_HeadDying;
-        gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-        gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+        gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_HeadDying;
+        gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+        gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
         pose = RIDLEY_POSE_HURT_BIG_FIREBALLS_ATTACK;
     }
 
@@ -1864,9 +1864,9 @@ static void RidleyBigFireballsAttack(void)
     else if (gCurrentSprite.work0 == CONVERT_SECONDS(1.f / 15))
     {
         // Update head
-        gSpriteData[gSubSpriteData1.workVariable4].pOam = sRidleyPartOam_OpeningMouth;
-        gSpriteData[gSubSpriteData1.workVariable4].animationDurationCounter = 0;
-        gSpriteData[gSubSpriteData1.workVariable4].currentAnimationFrame = 0;
+        gSpriteData[gSubSpriteData1.work4].pOam = sRidleyPartOam_OpeningMouth;
+        gSpriteData[gSubSpriteData1.work4].animationDurationCounter = 0;
+        gSpriteData[gSubSpriteData1.work4].currentAnimationFrame = 0;
     }
     else if (gCurrentSprite.work0 == ONE_THIRD_SECOND)
     {
@@ -2987,7 +2987,7 @@ void Ridley(void)
             gCurrentSprite.hitboxRight = RIDLEY_RIGHT_HITBOX;
         }
 
-        if (gSamusData.yPosition < (BLOCK_SIZE * 13 - ONE_SUB_PIXEL) && !(gSpriteData[gSubSpriteData1.workVariable5].status & SPRITE_STATUS_SAMUS_COLLIDING))
+        if (gSamusData.yPosition < (BLOCK_SIZE * 13 - ONE_SUB_PIXEL) && !(gSpriteData[gSubSpriteData1.work5].status & SPRITE_STATUS_SAMUS_COLLIDING))
         {
             gLockScreen.lock = LOCK_SCREEN_TYPE_NONE;
         }

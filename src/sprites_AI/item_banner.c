@@ -307,7 +307,7 @@ static void ItemBannerRemovalAnimation(void)
         else if (msg == MESSAGE_FULLY_POWERED_SUIT)
         {
             // Start suit animation
-            gSubSpriteData1.workVariable3 = RUINS_TEST_FIGHT_STAGE_STARTING_SUIT_ANIM;
+            gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_STARTING_SUIT_ANIM;
 
             // Spawn chozo pillar
             SpriteLoadGfx(PSPRITE_FALLING_CHOZO_PILLAR, 7);

@@ -35,13 +35,13 @@ void IntroVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, INTRO_DATA.dispcnt);
-    write16(REG_BLDCNT, INTRO_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, INTRO_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, INTRO_DATA.bldcnt);
 
-    write16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
-    write16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 512));
-    write16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 512));
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_H, gWrittenToBldalpha_L));
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BG0HOFS, MOD_AND(gBg0XPosition, 512));
+    WRITE_16(REG_BG0VOFS, MOD_AND(gBg0YPosition, 512));
 }
 
 /**
@@ -52,8 +52,8 @@ void IntroFuzzVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_DISPCNT, INTRO_DATA.dispcnt);
-    write16(REG_BLDCNT, INTRO_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, INTRO_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, INTRO_DATA.bldcnt);
 
     DMA_SET(3, INTRO_DATA.fuzzPalette, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(INTRO_DATA.fuzzPalette)));
 }
@@ -64,20 +64,20 @@ void IntroFuzzVBlank(void)
  */
 void IntroInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
 
-    write16(REG_IF, IF_HBLANK);
-    write16(REG_IME, TRUE);
-    write16(REG_DISPCNT, 0);
-    write16(REG_IME, FALSE);
+    WRITE_16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+    WRITE_16(REG_DISPCNT, 0);
+    WRITE_16(REG_IME, FALSE);
 
     CallbackSetVblank(IntroVBlank);
 
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, TRUE);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     INTRO_DATA.scaling = Q_8_8(.125f);
     INTRO_DATA.charDrawerX = SCREEN_SIZE_X / 5 + 8;
@@ -94,8 +94,8 @@ void IntroInit(void)
     DMA_SET(3, sIntroTextAndShipPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sIntroTextAndShipPal)));
     DMA_SET(3, sIntroPal_45f9d4, PALRAM_BASE + 15 * PAL_ROW_SIZE, C_32_2_16(DMA_ENABLE, ARRAY_SIZE(sIntroPal_45f9d4)));
 
-    write16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG1CNT, CREATE_BGCNT(0, 18, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 16, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 18, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
 
     gNextOamSlot = 0;
     ResetFreeOam();
@@ -109,14 +109,14 @@ void IntroInit(void)
     gBg3XPosition = 0;
     gBg3YPosition = 0;
 
-    write16(REG_BG0HOFS, gBg0XPosition);
-    write16(REG_BG0VOFS, gBg0YPosition);
-    write16(REG_BG1HOFS, gBg1XPosition);
-    write16(REG_BG1VOFS, gBg1YPosition);
-    write16(REG_BG2HOFS, gBg2XPosition);
-    write16(REG_BG2VOFS, gBg2YPosition);
-    write16(REG_BG3HOFS, gBg3XPosition);
-    write16(REG_BG3VOFS, gBg3YPosition);
+    WRITE_16(REG_BG0HOFS, gBg0XPosition);
+    WRITE_16(REG_BG0VOFS, gBg0YPosition);
+    WRITE_16(REG_BG1HOFS, gBg1XPosition);
+    WRITE_16(REG_BG1VOFS, gBg1YPosition);
+    WRITE_16(REG_BG2HOFS, gBg2XPosition);
+    WRITE_16(REG_BG2VOFS, gBg2YPosition);
+    WRITE_16(REG_BG3HOFS, gBg3XPosition);
+    WRITE_16(REG_BG3VOFS, gBg3YPosition);
 
     UpdateMusicPriority(1);
 
@@ -707,7 +707,7 @@ u8 IntroViewOfZebes(void)
             break;
 
         case DELTA_TIME * 3:
-            write16(REG_BLDALPHA, C_16_2_8(7, 9));
+            WRITE_16(REG_BLDALPHA, C_16_2_8(7, 9));
             INTRO_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             INTRO_DATA.bldcnt = BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG0_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL;
             SoundPlay(SOUND_INTRO_SHIP_FLYING_DOWN);

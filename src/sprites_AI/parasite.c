@@ -76,7 +76,7 @@ static void ParasiteInit(struct SpriteData* pSprite)
     pSprite->samusCollision = SSC_PARASITE;
     pSprite->health = 1;
 
-    gSubSpriteData1.workVariable2 = 0;
+    gSubSpriteData1.work2 = 0;
     SpriteUtilChooseRandomXFlip();
 
     pSprite->pose = PARASITE_POSE_IDLE_INIT;

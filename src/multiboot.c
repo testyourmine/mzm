@@ -23,9 +23,9 @@ void MultiBootInit(struct MultiBootData* pMultiBoot)
     pMultiBoot->sendFlag = FALSE;
     pMultiBoot->handshakeTimeout = 0;
 
-    write16(REG_RNCT, 0);
-    write16(REG_SIO, SIO_MULTI_MODE | SIO_BAUD_RATE_115200);
-    write16(REG_SIO_DATA8, 0);
+    WRITE_16(REG_RNCT, 0);
+    WRITE_16(REG_SIO, SIO_MULTI_MODE | SIO_BAUD_RATE_115200);
+    WRITE_16(REG_SIO_DATA8, 0);
 }
 
 /**
@@ -65,7 +65,7 @@ output_burst:
          * communication does not have timeout error.
          * When the connection ID is not the parent, or there is a bad connection, or the receive ID was set to child, an error occurs.
          */
-        i = read16(REG_SIO) & (SIO_START_BIT_ACTIVE | SIO_MULTI_ERROR | SIO_MULTI_CONNECTION_ID_FLAG | SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
+        i = READ_16(REG_SIO) & (SIO_START_BIT_ACTIVE | SIO_MULTI_ERROR | SIO_MULTI_CONNECTION_ID_FLAG | SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
         if (i != SIO_MULTI_CONNECTION_READY)
         {
             MultiBootInit(pMultiBoot);
@@ -421,15 +421,15 @@ static u32 MultiBootSend(struct MultiBootData* pMultiBoot, u16 data)
      * (reconnect cable) May be first communication so no check for
      * error bit or connection ID.
      */
-    u16 control = read16(REG_SIO) & (SIO_START_BIT_ACTIVE | SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
+    u16 control = READ_16(REG_SIO) & (SIO_START_BIT_ACTIVE | SIO_MULTI_CONNECTION_READY | SIO_MULTI_RECEIVE_ID);
     if (control != SIO_MULTI_CONNECTION_READY)
     {
         MultiBootInit(pMultiBoot);
         return control ^ SIO_MULTI_CONNECTION_READY;
     }
 
-    write16(REG_SIO_DATA8, data);
-    write16(REG_SIO, SIO_MULTI_MODE | SIO_START_BIT_ACTIVE | SIO_BAUD_RATE_115200);
+    WRITE_16(REG_SIO_DATA8, data);
+    WRITE_16(REG_SIO, SIO_MULTI_MODE | SIO_START_BIT_ACTIVE | SIO_BAUD_RATE_115200);
     pMultiBoot->sendFlag = TRUE;
     return FALSE;
 }
@@ -681,7 +681,7 @@ static void MultiBootWaitSendDone(void)
      */
     for (i = 0; i <= (u16)(CLOCKRATE / FRAMES_PER_SECOND / 9); i++)
     {
-        if ((read16(REG_SIO) & SIO_START_BIT_ACTIVE) == 0)
+        if ((READ_16(REG_SIO) & SIO_START_BIT_ACTIVE) == 0)
         {
             break;
         }

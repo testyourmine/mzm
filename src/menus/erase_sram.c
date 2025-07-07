@@ -341,19 +341,19 @@ u32 EraseSramCheckForInput(void)
  */
 void EraseSramInit(void)
 {
-    write16(REG_IME, FALSE);
-    write16(REG_DISPSTAT, read16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
-    write16(REG_IE, read16(REG_IE) & ~IF_HBLANK);
-    write16(REG_IF, IF_HBLANK);
-    write16(REG_IME, TRUE);
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IF, IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
     
     CallbackSetVblank(EraseSramVBlank_Empty);
 
-    write16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay = BLDY_MAX_VALUE);
 
-    dma_fill32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
     ClearGfxRam();
     gNextOamSlot = 0;
@@ -373,7 +373,7 @@ void EraseSramInit(void)
         ERASE_SRAM_DATA.language = LANGUAGE_DEFAULT;
     }
 
-    while (read16(REG_VCOUNT) >= 21 && read16(REG_VCOUNT) <= SCREEN_SIZE_Y);
+    while (READ_16(REG_VCOUNT) >= 21 && READ_16(REG_VCOUNT) <= SCREEN_SIZE_Y);
 
     DMA_SET(3, sEraseSramMenuBackgroundPal, PALRAM_BASE, C_32_2_16(DMA_ENABLE, (13 * PAL_ROW_SIZE) / sizeof(u16)));
     DMA_SET(3, sEraseSramMenuObjectsPal, PALRAM_OBJ, C_32_2_16(DMA_ENABLE, sizeof(sEraseSramMenuObjectsPal) / sizeof(u16)));
@@ -391,14 +391,14 @@ void EraseSramInit(void)
     LZ77UncompVRAM(sEraseSramMenuBoxTileTable, VRAM_BASE + 0xD000);
     LZ77UncompVRAM(sEraseSramMenuBackgroundTileTable, VRAM_BASE + 0xF000);
 
-    write16(REG_BG0CNT, 0);
-    write16(REG_BG2CNT, 0);
+    WRITE_16(REG_BG0CNT, 0);
+    WRITE_16(REG_BG2CNT, 0);
     
-    write16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
-    write16(REG_BG3CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 26, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
 
     gWrittenToBldalpha_H = 0;
-    write16(REG_BLDALPHA, 0);
+    WRITE_16(REG_BLDALPHA, 0);
 
     gGameModeSub3 = 0;
 
@@ -412,9 +412,9 @@ void EraseSramInit(void)
     EraseSramProcessOAM();
     EraseSramVBlank();
 
-    ERASE_SRAM_DATA.bldcnt = read16(REG_BLDCNT);
+    ERASE_SRAM_DATA.bldcnt = READ_16(REG_BLDCNT);
     ERASE_SRAM_DATA.dispcnt = DCNT_BG1 | DCNT_BG3 | DCNT_OBJ;
-    write16(REG_DISPCNT, ERASE_SRAM_DATA.dispcnt);
+    WRITE_16(REG_DISPCNT, ERASE_SRAM_DATA.dispcnt);
 
     CallbackSetVblank(EraseSramVBlank);
 }
@@ -472,16 +472,16 @@ void EraseSramVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
-    write16(REG_BLDY, gWrittenToBldy_NonGameplay);
+    WRITE_16(REG_BLDY, gWrittenToBldy_NonGameplay);
 
-    write16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
-    write16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
+    WRITE_16(REG_BG1HOFS, SUB_PIXEL_TO_PIXEL(gBg1HOFS_NonGameplay));
+    WRITE_16(REG_BG1VOFS, SUB_PIXEL_TO_PIXEL(gBg1VOFS_NonGameplay));
 
-    write16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay));
-    write16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
+    WRITE_16(REG_BG3HOFS, SUB_PIXEL_TO_PIXEL(gBg3HOFS_NonGameplay));
+    WRITE_16(REG_BG3VOFS, SUB_PIXEL_TO_PIXEL(gBg3VOFS_NonGameplay));
 
-    write16(REG_BLDCNT, ERASE_SRAM_DATA.bldcnt);
-    write16(REG_DISPCNT, ERASE_SRAM_DATA.dispcnt);
+    WRITE_16(REG_BLDCNT, ERASE_SRAM_DATA.bldcnt);
+    WRITE_16(REG_DISPCNT, ERASE_SRAM_DATA.dispcnt);
 }
 
 /**

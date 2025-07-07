@@ -903,7 +903,9 @@ void ScrollUpdateEffectAndHazePosition(struct Coordinates* pCoords)
                 waterOffset = sWaterLoopCounterArray[gWaterMovement.stage][0];
             }
             else
+            {
                 waterOffset = 0;
+            }
 
             gWaterMovement.yOffset = (waterOffset - 8) * 4;
             position += waterOffset;
@@ -913,7 +915,7 @@ void ScrollUpdateEffectAndHazePosition(struct Coordinates* pCoords)
                 if (gIoRegistersBackup.unk_12 & 0xC000 && gIoRegistersBackup.BG0CNT & 0xC000)
                 {
                     gIoRegistersBackup.unk_12 &= ~0xC000;
-                    write16(REG_BG0CNT, gIoRegistersBackup.unk_12);
+                    WRITE_16(REG_BG0CNT, gIoRegistersBackup.unk_12);
                 }
             }
             else
@@ -921,7 +923,7 @@ void ScrollUpdateEffectAndHazePosition(struct Coordinates* pCoords)
                 if (!(gIoRegistersBackup.unk_12 & 0xC000) && gIoRegistersBackup.BG0CNT & 0xC000)
                 {
                     gIoRegistersBackup.unk_12 |= (gIoRegistersBackup.BG0CNT & 0xC000);
-                    write16(REG_BG0CNT, read16(REG_BG0CNT) | gIoRegistersBackup.unk_12);
+                    WRITE_16(REG_BG0CNT, READ_16(REG_BG0CNT) | gIoRegistersBackup.unk_12);
                 }
             }
 
@@ -1030,7 +1032,7 @@ void ScrollAutoBg0(void)
  * 
  * @return u32 Types (y << 16 | x)
  */
-u32 ScrollGetBG3Scroll(void)
+u32 ScrollGetBg3Scroll(void)
 {
     u32 xScroll;
     u32 yScroll;
@@ -1100,7 +1102,7 @@ void ScrollBg3(void)
     s32 size;
 
     // Get scrolling values
-    yScrolling = ScrollGetBG3Scroll();
+    yScrolling = ScrollGetBg3Scroll();
     xScrolling = LOW_BYTE(yScrolling);
     yScrolling = HIGH_SHORT(yScrolling);
 
@@ -1161,7 +1163,7 @@ void ScrollBg3Related(void)
 {
     u32 xScroll;
 
-    xScroll = LOW_BYTE(ScrollGetBG3Scroll());
+    xScroll = LOW_BYTE(ScrollGetBg3Scroll());
 
     if (xScroll == BG3_SCROLLING_TYPE_NONE)
         gBg3XPosition = 0;
