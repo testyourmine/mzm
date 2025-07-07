@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "macros.h"
+#include "oam.h"
 
 #include "constants/particle.h"
 

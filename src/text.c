@@ -702,7 +702,7 @@ void TextDrawLocationTextCharacters(u8 param_1, const u16** ppText)
             indent = **ppText & 0xFF;
             drawFlag = FALSE;
         }
-        else if ((**ppText & CHAR_MASK) == CHAR_COLOR_MASK)
+        else if ((**ppText & CHAR_MASK) == CHAR_COLOR_MAX)
         {
             width = 0;
             color = **ppText & 0xFF;
@@ -1337,7 +1337,7 @@ u8 TextProcessCurrentMessage(struct Message* pMessage, const u16* pText, u32* ds
                     pMessage->indent = *pText & UCHAR_MAX;
                     break;
 
-                case CHAR_COLOR_MASK:
+                case CHAR_COLOR_MAX:
                     // Special color character, changes the color
                     pMessage->color = *pText;
                     break;
@@ -1448,7 +1448,7 @@ void TextDrawYesNoEasySleep(void)
         else if (*pText & CHAR_WIDTH_MASK)
         {
             // Check for color change
-            if ((*pText & CHAR_TERMINATOR) == CHAR_COLOR_MASK)
+            if ((*pText & CHAR_TERMINATOR) == CHAR_COLOR_MAX)
                 gCurrentMessage.color = *pText;
 
             shouldDraw = FALSE;

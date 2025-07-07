@@ -101,19 +101,19 @@ static void AcidWormHandleRotation(void)
     else
         posOffset = (s16)(offset + sine * 16);
 
-    temp = sine_ = sin(angle);
+    temp = sine_ = SIN(angle);
     if (temp < 0)
     {
-        temp = Q_8_8_TO_SHORT(-temp * posOffset);
+        temp = Q_8_8_TO_S16(-temp * posOffset);
         gCurrentSprite.yPosition = gSubSpriteData1.yPosition - temp;
     }
     else
     {
-        temp = Q_8_8_TO_SHORT(sine_ * posOffset);
+        temp = Q_8_8_TO_S16(sine_ * posOffset);
         gCurrentSprite.yPosition = gSubSpriteData1.yPosition + temp;
     }
 
-    c = cos(angle);
+    c = COS(angle);
     position = (s16)gSubSpriteData1.xPosition;
     if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
         position = (s16)(position + offset);
@@ -122,12 +122,12 @@ static void AcidWormHandleRotation(void)
 
     if (c < 0)
     {
-        c = Q_8_8_TO_SHORT(-c * posOffset);
+        c = Q_8_8_TO_S16(-c * posOffset);
         gCurrentSprite.xPosition = position - c;
     }
     else
     {
-        c = Q_8_8_TO_SHORT(c * posOffset);
+        c = Q_8_8_TO_S16(c * posOffset);
         gCurrentSprite.xPosition = position + c;
     }
 }

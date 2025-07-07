@@ -517,27 +517,27 @@ static void RuinsTestGhostMove(u8 dAngle)
     radius = (s16)gCurrentSprite.scaling;
     angle = gCurrentSprite.work1;
 
-    temp = s = sin(angle);
+    temp = s = SIN(angle);
     if (temp < 0)
     {
-        temp = Q_8_8_TO_SHORT(-temp * radius);
+        temp = Q_8_8_TO_S16(-temp * radius);
         gCurrentSprite.yPosition = gCurrentSprite.yPositionSpawn - temp;
     }
     else
     {
-        temp = Q_8_8_TO_SHORT(s * radius);
+        temp = Q_8_8_TO_S16(s * radius);
         gCurrentSprite.yPosition = gCurrentSprite.yPositionSpawn + temp;
     }
 
-    temp2 = c = cos(angle);
+    temp2 = c = COS(angle);
     if (c < 0)
     {
-        temp2 = Q_8_8_TO_SHORT(-temp2 * radius);
+        temp2 = Q_8_8_TO_S16(-temp2 * radius);
         gCurrentSprite.xPosition = gCurrentSprite.xPositionSpawn - temp2;
     }
     else
     {
-        temp2 = Q_8_8_TO_SHORT(c * radius);
+        temp2 = Q_8_8_TO_S16(c * radius);
         gCurrentSprite.xPosition = gCurrentSprite.xPositionSpawn + temp2;
     }
 }

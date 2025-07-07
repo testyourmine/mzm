@@ -1365,7 +1365,7 @@ static void WingedRipperMove(void)
     angle = gCurrentSprite.work1;
 
     // Update Y position
-    s = sin(angle);
+    s = SIN(angle);
     previousY = (s16)gCurrentSprite.yPosition;
 
     if (s < 0)
@@ -1380,7 +1380,7 @@ static void WingedRipperMove(void)
     }
 
     // Update X position
-    c = cos(angle);
+    c = COS(angle);
     previousX = (s16)gCurrentSprite.xPosition;
 
     if (c < 0)

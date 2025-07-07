@@ -9,6 +9,7 @@
 
 #include "constants/audio.h"
 #include "constants/clipdata.h"
+#include "constants/ending_and_gallery.h"
 #include "constants/game_state.h"
 #include "constants/samus.h"
 #include "constants/sprite.h"

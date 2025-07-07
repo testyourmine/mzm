@@ -1444,17 +1444,17 @@ void SpriteDraw(struct SpriteData* pSprite, s32 slot)
             // isn't supported by hardware when affine transformation is enabled
             if (xFlip)
             {
-                gOamData[slot * 4 + 0].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(-scaling));
-                gOamData[slot * 4 + 1].all.affineParam = FixedMultiplication(sin(rotation), FixedInverse(-scaling));
+                gOamData[slot * 4 + 0].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(-scaling));
+                gOamData[slot * 4 + 1].all.affineParam = FixedMultiplication(SIN(rotation), FixedInverse(-scaling));
             }
             else
             {
-                gOamData[slot * 4 + 0].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(scaling));
-                gOamData[slot * 4 + 1].all.affineParam = FixedMultiplication(sin(rotation), FixedInverse(scaling));
+                gOamData[slot * 4 + 0].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(scaling));
+                gOamData[slot * 4 + 1].all.affineParam = FixedMultiplication(SIN(rotation), FixedInverse(scaling));
             }
             
-            gOamData[slot * 4 + 2].all.affineParam = FixedMultiplication(-sin(rotation), FixedInverse(scaling));
-            gOamData[slot * 4 + 3].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(scaling));
+            gOamData[slot * 4 + 2].all.affineParam = FixedMultiplication(-SIN(rotation), FixedInverse(scaling));
+            gOamData[slot * 4 + 3].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(scaling));
         }
     }
     else
@@ -1499,8 +1499,8 @@ void SpriteDraw(struct SpriteData* pSprite, s32 slot)
             tmpX = (s16)(x - xPosition + xOffset);
 
             // Apply scaling
-            tmpX = (s16)(Q_8_8_TO_SHORT_DIV(tmpX * scaling) - tmpX);
-            tmpY = (s16)(Q_8_8_TO_SHORT_DIV(tmpY * scaling) - tmpY);
+            tmpX = (s16)(Q_8_8_TO_S16_DIV(tmpX * scaling) - tmpX);
+            tmpY = (s16)(Q_8_8_TO_S16_DIV(tmpY * scaling) - tmpY);
         
             x = (s16)(x + tmpX);
             y = (s16)(y + tmpY);
@@ -1510,8 +1510,8 @@ void SpriteDraw(struct SpriteData* pSprite, s32 slot)
             unk_3 = (s16)(y - yPosition + yOffset);
         
             // Rotation matrix
-            x = Q_8_8_TO_SHORT(unk_2 * cos(rotation) - unk_3 * sin(rotation));
-            y = Q_8_8_TO_SHORT(unk_2 * sin(rotation) + unk_3 * cos(rotation));
+            x = Q_8_8_TO_S16(unk_2 * COS(rotation) - unk_3 * SIN(rotation));
+            y = Q_8_8_TO_S16(unk_2 * SIN(rotation) + unk_3 * COS(rotation));
         
             if (doubleSize)
             {
@@ -1592,30 +1592,30 @@ void SpriteDraw(struct SpriteData* pSprite, s32 slot)
         // and
         // [ cos / -scaling, -sin / scaling ]
         // [ sin / -scaling,  cos / scaling ]
-        dy = FixedMultiplication(-sin(rotation), FixedInverse(scaling));
-        dmy = FixedMultiplication(cos(rotation), FixedInverse(scaling));
+        dy = FixedMultiplication(-SIN(rotation), FixedInverse(scaling));
+        dmy = FixedMultiplication(COS(rotation), FixedInverse(scaling));
 
         if (mosaic)
         {
-            gOamData[28 * 4 + 0].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(scaling));
-            gOamData[28 * 4 + 1].all.affineParam = FixedMultiplication(sin(rotation), FixedInverse(scaling));
+            gOamData[28 * 4 + 0].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(scaling));
+            gOamData[28 * 4 + 1].all.affineParam = FixedMultiplication(SIN(rotation), FixedInverse(scaling));
             gOamData[28 * 4 + 2].all.affineParam = dy;
             gOamData[28 * 4 + 3].all.affineParam = dmy;
 
-            gOamData[29 * 4 + 0].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(-scaling));
-            gOamData[29 * 4 + 1].all.affineParam = FixedMultiplication(sin(rotation), FixedInverse(-scaling));
+            gOamData[29 * 4 + 0].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(-scaling));
+            gOamData[29 * 4 + 1].all.affineParam = FixedMultiplication(SIN(rotation), FixedInverse(-scaling));
             gOamData[29 * 4 + 2].all.affineParam = dy;
             gOamData[29 * 4 + 3].all.affineParam = dmy;
         }
         else
         {
-            gOamData[30 * 4 + 0].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(scaling));
-            gOamData[30 * 4 + 1].all.affineParam = FixedMultiplication(sin(rotation), FixedInverse(scaling));
+            gOamData[30 * 4 + 0].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(scaling));
+            gOamData[30 * 4 + 1].all.affineParam = FixedMultiplication(SIN(rotation), FixedInverse(scaling));
             gOamData[30 * 4 + 2].all.affineParam = dy;
             gOamData[30 * 4 + 3].all.affineParam = dmy;
 
-            gOamData[31 * 4 + 0].all.affineParam = FixedMultiplication(cos(rotation), FixedInverse(-scaling));
-            gOamData[31 * 4 + 1].all.affineParam = FixedMultiplication(sin(rotation), FixedInverse(-scaling));
+            gOamData[31 * 4 + 0].all.affineParam = FixedMultiplication(COS(rotation), FixedInverse(-scaling));
+            gOamData[31 * 4 + 1].all.affineParam = FixedMultiplication(SIN(rotation), FixedInverse(-scaling));
             gOamData[31 * 4 + 2].all.affineParam = dy;
             gOamData[31 * 4 + 3].all.affineParam = dmy;
         }

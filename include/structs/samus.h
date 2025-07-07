@@ -200,4 +200,6 @@ extern u16 gSamusPalette[16 * 2];
 extern u16 gSamusPaletteSize;
 extern s16 gSamusDoorPositionOffset;
 
+#define HAS_AREA_MAP(area) ((gEquipment.downloadedMapStatus >> (area)) & 1)
+
 #endif /* SAMUS_STRUCT_H */

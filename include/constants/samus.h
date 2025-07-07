@@ -290,6 +290,9 @@ MAKE_ENUM(u8, ScrewSpeedFlag) {
     SCREW_SPEED_FLAG_STORING_SHINESPARK = 8,
 };
 
+#define VELOCITY_TO_SUB_PIXEL(velocity) (DIV_SHIFT((velocity), 8))
+#define SUB_PIXEL_TO_VELOCITY(velocity) ((s16)((velocity) * 8))
+
 #define SAMUS_X_ACCELERATION 8
 #define SAMUS_X_VELOCITY_CAP 96
 #define SAMUS_X_MID_AIR_VELOCITY_CAP 64

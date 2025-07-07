@@ -10,6 +10,13 @@
 // #define DEBUG
 
 /**
+ * @brief Indicates that the game is being compiled using a modern compiler
+ * This enables certain features that agbcc lacks
+ * 
+ */
+// #define MODERN
+
+/**
  * @brief Enables various fixes to known bugs, issues, or bad code.
  * 
  * (see https://github.com/metroidret/mzm/blob/master/docs/bugs_and_glitches.md for reference)

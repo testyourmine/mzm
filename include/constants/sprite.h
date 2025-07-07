@@ -429,4 +429,6 @@ MAKE_ENUM(u16, SpriteWeakness) {
 // Computes a probability for the sprite rng value [0;16[
 #define SPRITE_RNG_PROB(prob) ((s32)((prob) * SPRITE_RNG_MAX))
 
+#define SPRITESET_IDX(idx) (16 + idx + 1)
+
 #endif /* SPRITE_CONSTANTS_H */

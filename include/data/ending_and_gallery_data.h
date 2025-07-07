@@ -4,7 +4,7 @@
 #include "types.h"
 #include "constants/ending_and_gallery.h"
 #include "structs/ending_and_gallery.h"
-#include "macros.h"
+#include "oam.h"
 
 extern const u16 sEndingImageTextPal[14 * 16];
 

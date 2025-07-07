@@ -497,7 +497,7 @@ enum DescriptionTextId {
 
 #define CHAR_MASK 0xFF00
 #define CHAR_WIDTH_MASK 0x8000
-#define CHAR_COLOR_MASK 0x8100
+#define CHAR_COLOR_MAX 0x8100
 #define CHAR_INDENT_MASK 0x8300
 #define CHAR_DELAY_MASK 0xE100
 #define CHAR_NEW_PAGE 0xFD00

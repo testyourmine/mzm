@@ -197,9 +197,9 @@ static void TourianEscapeProcessOam(void)
  */
 static void TourianEscapeCalculateBg2(void)
 {
-    gWrittenToBg2Pa = FixedMultiplication(cos(gBg2Rotation), FixedInverse(gBg2XScaling));
-    gWrittenToBg2Pb = FixedMultiplication(sin(gBg2Rotation), FixedInverse(gBg2XScaling));
-    gWrittenToBg2Pc = FixedMultiplication(-sin(gBg2Rotation), FixedInverse(gBg2YScaling));
+    gWrittenToBg2Pa = FixedMultiplication(COS(gBg2Rotation), FixedInverse(gBg2XScaling));
+    gWrittenToBg2Pb = FixedMultiplication(SIN(gBg2Rotation), FixedInverse(gBg2XScaling));
+    gWrittenToBg2Pc = FixedMultiplication(-SIN(gBg2Rotation), FixedInverse(gBg2YScaling));
     gWrittenToBg2Pd = gWrittenToBg2Pa;
 
     gWrittenToBg2X = (SCREEN_X_MIDDLE << 8) - gWrittenToBg2Pa * SCREEN_X_MIDDLE - gWrittenToBg2Pb * SCREEN_Y_MIDDLE;

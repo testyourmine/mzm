@@ -1,40 +1,83 @@
-#define BOMB_CHAIN_TYPE_TO_FLAG(type) (1 << type)
+#include "config.h"
+#include "io.h"
 
-#define LOW_BYTE(value) ((value) & UCHAR_MAX)
-#define HIGH_BYTE(value) (((value) & UCHAR_MAX << 8) >> 8)
+/**
+ * @brief Fetches the low byte from an @c u16
+ * 
+ * @param value Value
+ * @return Low byte
+ */
+#define LOW_BYTE(value) ((value) & 0xFF)
 
-#define LOW_SHORT(value) ((value) & USHORT_MAX)
+/**
+ * @brief Fetches the high byte from an @c u16
+ * 
+ * @param value Value
+ * @return High byte
+ */
+#define HIGH_BYTE(value) (((value) & 0xFF << 8) >> 8)
+
+/**
+ * @brief Fetches the low short from an @c u32
+ * 
+ * @param value Value
+ * @return Low short
+ */
+#define LOW_SHORT(value) ((value) & 0xFFFF)
+
+/**
+ * @brief Fetches the high short from an @c u16
+ * 
+ * @param value Value
+ * @return High short
+ */
 #define HIGH_SHORT(value) ((value) >> 16)
 
 /**
- * @brief Constructs an uint from 2 ushorts (high << 16 | low)
+ * @brief Constructs an @c u32 from 2 @c u16
  * 
  * @param high High
  * @param low Low
+ * @return Value (high << 16 | low)
  */
 #define C_32_2_16(high, low) ((high) << 16 | (low))
 
 /**
- * @brief Constructs an ushort from 2 bytes (high << 8 | low)
+ * @brief Constructs an @c u16 from 2 @c u8
  * 
  * @param high High
  * @param low Low
+ * @return Value (high << 8 | low)
  */
 #define C_16_2_8(high, low) ((s32)(high) << 8 | (s32)(low))
 
 /**
- * @brief Constructs an ushort from 2 bytes (low | high << 8)
+ * @brief Constructs an @c u16 from 2 @c u8
  * 
  * @param high High
  * @param low Low
+ * @return Value (low | high << 8)
  */
 #define C_16_2_8_(high, low) ((low) | (high) << 8)
 
+/**
+ * @brief Creates a signed 8-bit value from an @c s16
+ * 
+ * @param value Value
+ * @return Result
+ */
 #define C_S8_2_S16(value) ((value) & 0x80 ? 0x100 + (value) : (value))
+
+/**
+ * @brief Creates a signed 9-bit value from an @c s16
+ * 
+ * @param value Value
+ * @return Result
+ */
 #define C_S9_2_S16(value) ((value) & 0x100 ? 0x200 + (value) : (value))
 
 /**
- * @brief  Creates an array at the specified memory location, used to create symbols for Ewram arrays
+ * @brief Creates an array at the specified memory location, used to create symbols for Ewram arrays
  * e.g. :
  * `#define gSomeSymbol CAST_TO_ARRAY(u8, [8], EWRAM_BASE + 0x1000)`
  * Will create a symbol bound to address EWRAM_BASE + 0x1000 of type u8 [8]
@@ -47,10 +90,47 @@
  */
 #define CAST_TO_ARRAY(type, sizes, ptr) (*((type (*)sizes)((ptr))))
 
-#define OPPOSITE_DIRECTION(dir) ((dir) ^ (KEY_RIGHT | KEY_LEFT))
+/**
+ * @brief Gets the offset, in bytes, of an element in a struct
+ * 
+ * @param type Base type
+ * @param element Element name
+ * @return Offset of the element, in byes
+ */
+#define OFFSET_OF(type, element) ((s32)&(((type*)0)->element))
+
+/**
+ * @brief Gets the number of elements in an array
+ * 
+ * @param a Array
+ * @return Number of elements in the array
+ */
 #define ARRAY_SIZE(a) ((s32)(sizeof((a)) / sizeof((a)[0])))
-#define ARRAY_ACCESS(a, o) (a[(u32)(o) % ARRAY_SIZE(a)])
-#define OFFSET_OF(type, element) ((int)&(((type*)0)->element))
+
+/**
+ * @brief Accesses an array in a safe way, preventing overflow
+ * 
+ * @param a Array
+ * @param o Index
+ * @return Array value 
+ */
+#define ARRAY_ACCESS(a, i) (a[(u32)(i) % ARRAY_SIZE(a)])
+
+/**
+ * @brief Ceils a value
+ * 
+ * @param v Value
+ * @return Ceiled value
+ */
+#define CEIL(v) ((int)(((float)v) + .5) == (int)(v) ? ((int)(v)) : (int)(((float)v) + .5))
+
+/**
+ * @brief Clamps a value (checks for max first)
+ * 
+ * @param value Value
+ * @param min Minimum
+ * @param max Maximum
+ */
 #define CLAMP(value, min, max)\
 {                             \
     if (value > (max))        \
@@ -58,6 +138,14 @@
     else if (value < (min))   \
         value = (min);        \
 }
+
+/**
+ * @brief Clamps a value (checks for min first)
+ * 
+ * @param value Value
+ * @param min Minimum
+ * @param max Maximum
+ */
 #define CLAMP2(value, min, max)\
 {                              \
     if (value < (min))         \
@@ -66,28 +154,144 @@
         value = (max);         \
 }
 
-#define CEIL(v) ((int)(((float)v) + .5) == (int)(v) ? ((int)(v)) : (int)(((float)v) + .5))
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+/**
+ * @brief Computes the absolute distance between 2 points on the same axis
+ * 
+ * @param a A
+ * @param b B
+ * @return Absolute distance
+ */
 #define ABS_DIFF(a, b) ((a) > (b) ? (a) - (b) : (b) - (a))
 
+#ifdef MODERN
+/**
+ * @brief Performs a static assertion
+ * 
+ * @param expr Expression to assert
+ * @param id Error message
+ */
+#define STATIC_ASSERT(expr, id) static_assert(expr, "Assert failed : " #id)
+#else
+/**
+ * @brief Performs a static assertion
+ * 
+ * @param expr Expression to assert
+ * @param id Struct name, this will be printed in the error message
+ */
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
+#endif
+
+/**
+ * @brief Empty `do while(0)` statement
+ * 
+ */
 #define EMPTY_DO_WHILE {do {} while(0);}
 
-#define COLOR_MASK 0x1F
-#define RED(c) ((c) & COLOR_MASK)
-#define GREEN(c) (((c) & (COLOR_MASK << 5)) >> 5)
-#define BLUE(c) (((c) & (COLOR_MASK << 10)) >> 10)
-#define COLOR(r, g, b) (((b) << 10) | ((g) << 5) | (r))
-#define COLOR_GRAD(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
-#define COLOR_WHITE COLOR(COLOR_MASK, COLOR_MASK, COLOR_MASK)
-#define COLOR_BLACK COLOR(0, 0, 0)
-#define COLOR_RED COLOR(COLOR_MASK, 0, 0)
-#define COLOR_GREEN COLOR(0, COLOR_MASK, 0)
-#define COLOR_BLUE COLOR(0, 0, COLOR_MASK)
-#define COLOR_YELLOW COLOR(COLOR_MASK, COLOR_MASK, 0)
-#define COLOR_PURPLE COLOR(COLOR_MASK, 0, COLOR_MASK)
-#define COLOR_LIGHT_BLUE COLOR(0, COLOR_MASK, COLOR_MASK)
+#define OPPOSITE_DIRECTION(dir) ((dir) ^ (KEY_RIGHT | KEY_LEFT))
 
+/**
+ * @brief Max color value that can be represented using 5-bit depth
+ * 
+ */
+#define COLOR_MAX 0x1F
+
+/**
+ * @brief Extracts the red component from a color
+ * 
+ * @param c Color
+ * @return Red component
+ */
+#define RED(c) ((c) & COLOR_MAX)
+
+/**
+ * @brief Extracts the green component from a color
+ * 
+ * @param c Color
+ * @return Green component
+ */
+#define GREEN(c) (((c) & (COLOR_MAX << 5)) >> 5)
+
+/**
+ * @brief Extracts the blue component from a color
+ * 
+ * @param c Color
+ * @return Blue component
+ */
+#define BLUE(c) (((c) & (COLOR_MAX << 10)) >> 10)
+
+/**
+ * @brief Creates a color with the 3 specified components
+ * 
+ * @param r Red
+ * @param g Green
+ * @param b Blue
+ * @return Color
+ */
+#define COLOR(r, g, b) (((b) << 10) | ((g) << 5) | (r))
+
+/**
+ * @brief Creates a color with the 3 specified components (same as @c COLOR)
+ * 
+ * @param r Red
+ * @param g Green
+ * @param b Blue
+ * @return Color
+ */
+#define COLOR_GRAD(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
+
+/**
+ * @brief White color constant
+ * 
+ */
+#define COLOR_WHITE COLOR(COLOR_MAX, COLOR_MAX, COLOR_MAX)
+
+/**
+ * @brief Black color constant
+ * 
+ */
+#define COLOR_BLACK COLOR(0, 0, 0)
+
+/**
+ * @brief Red color constant
+ * 
+ */
+#define COLOR_RED COLOR(COLOR_MAX, 0, 0)
+
+/**
+ * @brief Green color constant
+ * 
+ */
+#define COLOR_GREEN COLOR(0, COLOR_MAX, 0)
+
+/**
+ * @brief Blue color constant
+ * 
+ */
+#define COLOR_BLUE COLOR(0, 0, COLOR_MAX)
+
+/**
+ * @brief Yellow color constant
+ * 
+ */
+#define COLOR_YELLOW COLOR(COLOR_MAX, COLOR_MAX, 0)
+
+/**
+ * @brief Purple color constant
+ * 
+ */
+#define COLOR_PURPLE COLOR(COLOR_MAX, 0, COLOR_MAX)
+
+/**
+ * @brief Light blue color constant
+ * 
+ */
+#define COLOR_LIGHT_BLUE COLOR(0, COLOR_MAX, COLOR_MAX)
+
+/**
+ * @brief Sets the backdrop color
+ * 
+ * @param color Color
+ */
 #define SET_BACKDROP_COLOR(color) (WRITE_16(PALRAM_BASE, (color)))
 
 /**
@@ -98,42 +302,68 @@
  */
 #define SEND_TO_PALRAM(pal, dst) (DmaTransfer(3, pal, dst, sizeof(pal), 16))
 
-#define OAM_PART_SIZE 3
-#define OAM_DATA_SIZE(nbrOfParts) (1 + (nbrOfParts) * OAM_PART_SIZE)
-#define GET_OAM_DATA_SIZE(size) (((size) - 1) / OAM_PART_SIZE)
-
-// Converts a number to Q8.8 fixed-point format
+/**
+ * @brief Converts a number to Q8.8 fixed-point format
+ * 
+ * @param n Value
+ * @return Q8.8 value
+ */
 #define Q_8_8(n) ((s16)((n) * 256))
 
-// Converts a Q8.8 fixed-point format number to a regular short
-#define Q_8_8_TO_SHORT(n) ((s16)((n) >> 8))
+/**
+ * @brief Converts a Q8.8 fixed-point format number to a regular @c s16
+ * 
+ * @param n Value
+ * @return @c s16 Regular value
+ */
+#define Q_8_8_TO_S16(n) ((s16)((n) >> 8))
 
-// Converts a Q8.8 fixed-point format number to a regular short
-#define Q_8_8_TO_SHORT_DIV(n) (((n) / 256))
+/**
+ * @brief Converts a Q8.8 fixed-point format number to a regular @c s16
+ * 
+ * @param n Value
+ * @return @c s16 Regular value
+ */
+#define Q_8_8_TO_S16_DIV(n) (((n) / 256))
 
-// Converts a number to Q4.12 fixed-point format
-#define Q_4_12(n)  ((s16)((n) * 4096))
+/**
+ * @brief Converts a number to Q16.16 fixed-point format
+ * 
+ * @param n Value
+ * @return Q16.16 value
+ */
+#define Q_16_16(n) ((s32)((n) * 65536))
 
-// Converts a number to Q16.16 fixed-point format
-#define Q_16_16(n)  ((s32)((n) * 65536))
+/**
+ * @brief Converts a number to Q24.8 fixed-point format
+ * 
+ * @param n Value
+ * @return Q24.8 value
+ */
+#define Q_24_8(n) ((s32)((n) << 8))
 
-// Converts a number to Q24.8 fixed-point format
-#define Q_24_8(n)  ((s32)((n) << 8))
+/**
+ * @brief Converts a Q8.8 fixed-point format number to a regular integer
+ * 
+ * @param n Q8.8 value
+ * @return @c s32 Value
+ */
+#define Q_8_8_TO_S32(n) ((s32)((n) / 256))
 
-// Converts a Q8.8 fixed-point format number to a regular integer
-#define Q_8_8_TO_INT(n) ((s32)((n) / 256))
-
-// Converts a Q4.12 fixed-point format number to a regular integer
-#define Q_4_12_TO_INT(n)  ((s32)((n) / 4096))
-
-// Converts a Q24.8 fixed-point format number to a regular integer
-#define Q_24_8_TO_INT(n) ((s32)((n) >> 8))
+/**
+ * @brief Converts a Q24.8 fixed-point format number to a regular integer
+ * 
+ * @param n Q24.8 value
+ * @return @c s32 Value
+ */
+#define Q_24_8_TO_S32(n) ((s32)((n) >> 8))
 
 /**
  * @brief Performs a modulo (value % mod) operation on a value using the and operation (WARNING only use a value for mod that is a power of 2)
  * 
  * @param value Value
  * @param mod Modulo
+ * @return Result (value % mod)
  */
 #define MOD_AND(value, mod) ((value) & ((mod) - 1))
 
@@ -142,6 +372,7 @@
  * 
  * @param value Value
  * @param div Divisor
+ * @return Result (value / div)
  */
 #define DIV_SHIFT(value, div) ((value) >> ((div) == 2 ? 1 : ((div) == 4 ? 2 : ((div) == 8 ? 3 : ((div) == 16 ? 4 : ((div) == 32 ? 5 : ((div) == 64 ? 6 : ((div) == 128 ? 7 : ((div) == 256 ? 8 : ((div) == 512 ? 9 : ((div) == 1024 ? 10 : 0)))))))))))
 
@@ -150,6 +381,7 @@
  * 
  * @param value Value
  * @param mul Multiplier
+ * @return Result (value * mul)
  */
 #define MUL_SHIFT(value, mul) ((value) << ((mul) == 2 ? 1 : ((mul) == 4 ? 2 : ((mul) == 8 ? 3 : ((mul) == 16 ? 4 : ((mul) == 32 ? 5 : ((mul) == 64 ? 6 : ((mul) == 128 ? 7 : ((mul) == 256 ? 8 : ((mul) == 512 ? 9 : ((mul) == 1024 ? 10 : 0)))))))))))
 
@@ -159,6 +391,7 @@
  * @param value Value
  * @param num Numerator
  * @param den Denominator
+ * @return Result (value * num / den)
  */
 #define FRACT_MUL(value, num, den) ((value) * (num) / (den))
 
@@ -167,7 +400,7 @@
  * 
  * @param value Value
  * @param f Floating point value
- * 
+ * @return Result (value * f)
  */
 #define FLOAT_MUL(value, f) ((value) * ((s32)((f) * 10)) / 10)
 
@@ -181,88 +414,277 @@
  */
 #define MOD_BLOCK_AND(value, mod) ((value) & (mod))
 
-// PI is half a rotation on the unit circle, a full rotation is Q_8_8(1.f)
+/**
+ * @brief PI is half a rotation on the unit circle, a full rotation is Q_8_8(1.f)
+ * 
+ */
 #define PI Q_8_8(.5f)
-// Shorthand for PI / 2
+
+/**
+ * @brief Shorthand for PI / 2
+ * 
+ */
 #define PI_2 (PI / 2)
-// Shorthand for PI / 4
+
+/**
+ * @brief Shorthand for PI / 4
+ * 
+ */
 #define PI_4 (PI / 4)
-// Shorthand for PI * 3 / 4
+
+/**
+ * @brief Shorthand for PI * 3 / 4
+ * 
+ */
 #define PI_3_4 (PI * 3 / 4)
 
-#define sin(a) (sSineTable[(a)])
-#define cos(a) (sSineTable[(a) + PI_2])
+/**
+ * @brief Computes the sinus of a value
+ * 
+ * @param value Q8.8 Value
+ * @return Q8.8 sin value
+ */
+#define SIN(value) (sSineTable[(value)])
 
-#define GET_PSPRITE_HEALTH(id) sPrimarySpriteStats[(id)][0]
-#define GET_SSPRITE_HEALTH(id) sSecondarySpriteStats[(id)][0]
+/**
+ * @brief Computes the cosinus of a value
+ * 
+ * @param value Q8.8 Value
+ * @return Q8.8 cos value
+ */
+#define COS(value) (sSineTable[(value) + PI_2])
 
-#define GET_PSPRITE_DAMAGE(id) sPrimarySpriteStats[(id)][1]
-#define GET_SSPRITE_DAMAGE(id) sSecondarySpriteStats[(id)][1]
+/**
+ * @brief Converts from sub-pixel to pixel coordinates
+ * 
+ * @param subPixel Sub pixel coordinates
+ * @return Pixel coordinates
+ */
+#define SUB_PIXEL_TO_PIXEL(subPixel) ((subPixel) / SUB_PIXEL_RATIO)
 
-#define GET_PSPRITE_WEAKNESS(id) sPrimarySpriteStats[(id)][2]
-#define GET_SSPRITE_WEAKNESS(id) sSecondarySpriteStats[(id)][2]
+/**
+ * @brief !!NOT RECOMMENDED!! Converts from sub-pixel to pixel coordinates.
+ * This version of the macro uses a shift instead of a division and should only be used for matching purposes.
+ * 
+ * @param subPixel Sub pixel coordinates
+ * @return Pixel coordinates
+ */
+#define SUB_PIXEL_TO_PIXEL_(subPixel) (DIV_SHIFT(subPixel, SUB_PIXEL_RATIO))
 
-// Converts from sub-pixel to pixel
-#define SUB_PIXEL_TO_PIXEL(pixel) ((pixel) / SUB_PIXEL_RATIO)
-// !!NOT RECOMMENDED!! Converts from sub-pixel to pixel.
-// This version of the macro uses a shift instead of a division and should only be used for matching purposes.
-#define SUB_PIXEL_TO_PIXEL_(pixel) (DIV_SHIFT(pixel, SUB_PIXEL_RATIO))
-// Converts from pixel to sub-pixel
+/**
+ * @brief Converts from pixel to sub pixel coordinates
+ * 
+ * @param pixel Pixel coordinates
+ * @return Sub pixel coordinates
+ */
 #define PIXEL_TO_SUB_PIXEL(pixel) ((pixel) * SUB_PIXEL_RATIO)
 
-// Converts from sub-pixel to block
-#define SUB_PIXEL_TO_BLOCK(pixel) ((pixel) / BLOCK_SIZE)
-// !!NOT RECOMMENDED!! Converts from sub-pixel to block.
-// This version of the macro uses a shift instead of a division and should only be used for matching purposes.
-#define SUB_PIXEL_TO_BLOCK_(pixel) (DIV_SHIFT((pixel), BLOCK_SIZE))
-// Converts from block to sub-pixel
-#define BLOCK_TO_SUB_PIXEL(block) ((block) * BLOCK_SIZE)
-#define VELOCITY_TO_SUB_PIXEL(velocity) (DIV_SHIFT((velocity), 8))
-#define SUB_PIXEL_TO_VELOCITY(velocity) ((s16)((velocity) * 8))
+/**
+ * @brief Converts from sub pixel to block coordinates
+ * 
+ * @param subPixel Sub pixel coordinates
+ * @return Block coordinates
+ */
+#define SUB_PIXEL_TO_BLOCK(subPixel) ((subPixel) / BLOCK_SIZE)
 
+/**
+ * @brief !!NOT RECOMMENDED!! Converts from sub pixel to block coordinates
+ * This version of the macro uses a shift instead of a division and should only be used for matching purposes.
+ * 
+ * @param subPixel Sub pixel coordinates
+ * @return Block coordinates
+ */
+#define SUB_PIXEL_TO_BLOCK_(pixel) (DIV_SHIFT((pixel), BLOCK_SIZE))
+
+/**
+ * @brief Converts from block to sub pixel coordinates
+ * 
+ * @param block Block coordinates
+ * @return Sub pixel coordinates
+ */
+#define BLOCK_TO_SUB_PIXEL(block) ((block) * BLOCK_SIZE)
+
+/**
+ * @brief Screen size X, in sub pixel coordinates
+ * 
+ */
 #define SCREEN_SIZE_X_SUB_PIXEL (PIXEL_TO_SUB_PIXEL(SCREEN_SIZE_X))
+
+/**
+ * @brief Screen size Y, in sub pixel coordinates
+ * 
+ */
 #define SCREEN_SIZE_Y_SUB_PIXEL (PIXEL_TO_SUB_PIXEL(SCREEN_SIZE_Y))
 
+/**
+ * @brief Screen size X, in block coordinates
+ * 
+ */
 #define SCREEN_SIZE_X_BLOCKS (SUB_PIXEL_TO_BLOCK(SCREEN_SIZE_X_SUB_PIXEL))
+
+/**
+ * @brief Screen size Y, in block coordinates
+ * 
+ */
 #define SCREEN_SIZE_Y_BLOCKS (SUB_PIXEL_TO_BLOCK(SCREEN_SIZE_Y_SUB_PIXEL))
 
+/**
+ * @brief How many blocks of padding there is on each X edge of a room
+ * 
+ */
 #define SCREEN_X_PADDING 2
-#define SCREEN_X_BLOCK_PADDING (BLOCK_SIZE * SCREEN_X_PADDING)
+
+/**
+ * @brief How many blocks of padding there is on each X edge of a room, in sub-pixel
+ * 
+ */
+#define SCREEN_X_BLOCK_PADDING (BLOCK_TO_SUB_PIXEL(SCREEN_X_PADDING))
+
+/**
+ * @brief How many blocks of padding there is on each Y edge of a room
+ * 
+ */
 #define SCREEN_Y_PADDING 2
-#define SCREEN_Y_BLOCK_PADDING (BLOCK_SIZE * SCREEN_Y_PADDING)
 
-#define SPRITESET_IDX(idx) (16 + idx + 1)
+/**
+ * @brief How many blocks of padding there is on each Y edge of a room, in sub-pixel
+ * 
+ */
+#define SCREEN_Y_BLOCK_PADDING (BLOCK_TO_SUB_PIXEL(SCREEN_Y_PADDING))
 
-
-#define HAS_AREA_MAP(area) ((gEquipment.downloadedMapStatus >> (area)) & 1)
-
-#define PEN_GET_ENDING(pen) ((pen) & 0xF)
-#define PEN_GET_ABILITY(pen) ((pen) >> 4 & 0xF)
-#define PEN_GET_POWER_BOMB(pen) ((pen) >> 8 & 0xF)
-#define PEN_GET_SUPER_MISSILE(pen) ((pen) >> 12 & 0xF)
-#define PEN_GET_MISSILE(pen) (LOW_BYTE((pen) >> 16))
-#define PEN_GET_ENERGY(pen) (LOW_BYTE((pen) >> 24))
-
-
+/**
+ * @brief Allows, via preproc, to convert an ascii text containing special tags to the custom encoding used in the engine
+ * 
+ * @param x Text
+ */
 #define INCTEXT(x)  {0}
+
+/**
+ * @brief Allows, via preproc, to convert an ascii text o shift-jis encoding
+ * 
+ * @param x Text
+ */
 #define SHIFT_JIS(x) {0}
 
+/**
+ * @private
+ * @brief Dummy macro for preproc, do not use
+ * 
+ */
 #define INCBIN(...) {0}
-#define INCBIN_U8   INCBIN
-#define INCBIN_U16  INCBIN
-#define INCBIN_U32  INCBIN
-#define INCBIN_S8   INCBIN
-#define INCBIN_S16  INCBIN
-#define INCBIN_S32  INCBIN
-#define _INCBIN_U8  INCBIN
-#define _INCBIN_U16 INCBIN
-#define _INCBIN_U32 INCBIN
-#define _INCBIN_S8  INCBIN
-#define _INCBIN_S16 INCBIN
-#define _INCBIN_S32 INCBIN
 
+/**
+ * @brief Includes a binary file as an array of @c u8
+ * 
+ * @param path File path
+ */
+#define INCBIN_U8(path)   INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c u16
+ * 
+ * @param path File path
+ */
+#define INCBIN_U16(path)  INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c u32
+ * 
+ * @param path File path
+ */
+#define INCBIN_U32(path)  INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c s8
+ * 
+ * @param path File path
+ */
+#define INCBIN_S8(path)   INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c s8
+ * 
+ * @param path File path
+ */
+#define INCBIN_S16(path)  INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c s32
+ * 
+ * @param path File path
+ */
+#define INCBIN_S32(path)  INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c u8
+ * 
+ * Does not add curly braces
+ * 
+ * @param path File path
+ */
+#define _INCBIN_U8(path)  INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c u16
+ * 
+ * Does not add curly braces
+ * 
+ * @param path File path
+ */
+#define _INCBIN_U16(path) INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c u32
+ * 
+ * Does not add curly braces
+ * 
+ * @param path File path
+ */
+#define _INCBIN_U32(path) INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c s8
+ * 
+ * Does not add curly braces
+ * 
+ * @param path File path
+ */
+#define _INCBIN_S8(path)  INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c s16
+ * 
+ * Does not add curly braces
+ * 
+ * @param path File path
+ */
+#define _INCBIN_S16(path) INCBIN(path)
+
+/**
+ * @brief Includes a binary file as an array of @c s32
+ * 
+ * Does not add curly braces
+ * 
+ * @param path File path
+ */
+#define _INCBIN_S32(path) INCBIN(path)
+
+/**
+ * @brief Shorthand to specify that something should be in the .rodata section
+ * 
+ */
 #define FORCE_RODATA __attribute__((section(".rodata")))
+
+/**
+ * @brief Shorthand to specify that a function is naked (no prologue and no epilogue)
+ * 
+ */
 #define NAKED_FUNCTION __attribute__((naked))
+
+/**
+ * @brief Shorthand to specify that something should be packed
+ * 
+ */
 #define PACKED __attribute__((packed))
 
 /**

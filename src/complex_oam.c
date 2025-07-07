@@ -59,8 +59,8 @@ u8 ProcessComplexOam(u32 oamSlot, s16 xPosition, s16 yPosition, u16 rotation, s1
     tmpY = (s16)(y - yOrigin + yHalfRadius);
 
     // Scale x and y
-    scaledX = (s16)(Q_24_8_TO_INT(tmpX * _scaling) - tmpX);
-    scaledY = (s16)(Q_24_8_TO_INT(tmpY * _scaling) - tmpY);
+    scaledX = (s16)(Q_24_8_TO_S32(tmpX * _scaling) - tmpX);
+    scaledY = (s16)(Q_24_8_TO_S32(tmpY * _scaling) - tmpY);
 
     x = (s16)(x + scaledX);
     y = (s16)(y + scaledY);
@@ -69,8 +69,8 @@ u8 ProcessComplexOam(u32 oamSlot, s16 xPosition, s16 yPosition, u16 rotation, s1
     unk_3 = (s16)(y - yOrigin + yHalfRadius);
 
     // Rotate x and y
-    x = Q_8_8_TO_SHORT(unk_2 * cos(rotation) - unk_3 * sin(rotation));
-    y = Q_8_8_TO_SHORT(unk_2 * sin(rotation) + unk_3 * cos(rotation));
+    x = Q_8_8_TO_S16(unk_2 * COS(rotation) - unk_3 * SIN(rotation));
+    y = Q_8_8_TO_S16(unk_2 * SIN(rotation) + unk_3 * COS(rotation));
 
     if (!_doubleSize)
     {
@@ -141,18 +141,18 @@ void CalculateOamPart4(u16 rotation, s16 scaling, u16 oamSlot)
 
     negativeScaling = scaling; // Needed to produce matching ASM.
     _oamSlot = oamSlot; // Needed to produce matching ASM
-    dy1 = FixedMultiplication(cos(rotation), FixedInverse(scaling));
+    dy1 = FixedMultiplication(COS(rotation), FixedInverse(scaling));
 
     // The following expression writes uselessly first to dmy2 to produce matching ASM:
-    dmy1 = (dmy2 = FixedMultiplication(sin(rotation), FixedInverse(scaling)));
-    dx1 = FixedMultiplication(-sin(rotation), FixedInverse(scaling));
+    dmy1 = (dmy2 = FixedMultiplication(SIN(rotation), FixedInverse(scaling)));
+    dx1 = FixedMultiplication(-SIN(rotation), FixedInverse(scaling));
 
     negativeScaling = -scaling;
 
-    dmx1 = FixedMultiplication(cos(rotation), FixedInverse(negativeScaling));
+    dmx1 = FixedMultiplication(COS(rotation), FixedInverse(negativeScaling));
 
-    dy2 = FixedMultiplication(sin(rotation), FixedInverse(negativeScaling));
-    dmy2 = FixedMultiplication(-sin(rotation), FixedInverse(negativeScaling));
+    dy2 = FixedMultiplication(SIN(rotation), FixedInverse(negativeScaling));
+    dmy2 = FixedMultiplication(-SIN(rotation), FixedInverse(negativeScaling));
 
     gOamData[_oamSlot].all.affineParam = dy1;
     gOamData[_oamSlot + 1].all.affineParam = dmy1;

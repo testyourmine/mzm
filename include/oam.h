@@ -72,6 +72,10 @@ struct FrameData {
     .timer = 0\
 }
 
+#define OAM_PART_SIZE 3
+#define OAM_DATA_SIZE(nbrOfParts) (1 + (nbrOfParts) * OAM_PART_SIZE)
+#define GET_OAM_DATA_SIZE(size) (((size) - 1) / OAM_PART_SIZE)
+
 #define FRAME_DATA_NBR_OF_FRAMES(oam) (ARRAY_SIZE((oam)) - 1)
 #define FRAME_DATA_LAST_ANIM_FRAME(oam) (ARRAY_SIZE((oam)) - 2)
 

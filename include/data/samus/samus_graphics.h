@@ -4,7 +4,7 @@
 #include "types.h"
 #include "structs/samus.h"
 
-#include "macros.h"
+#include "oam.h"
 
 #define SAMUS_GFX_PART_SIZE 32
 #define SAMUS_GFX_SIZE(size1, size2) (2 + size1 * SAMUS_GFX_PART_SIZE + size2 * SAMUS_GFX_PART_SIZE)
