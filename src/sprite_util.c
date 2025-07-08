@@ -67,13 +67,13 @@ void SpriteUtilCheckStopSamusAgainstSolidSpriteLeft(u16 samusY, u16 spriteX)
 {
     u16 xPosition;
 
-    xPosition = spriteX - gSamusPhysics.drawDistanceRightOffset;
+    xPosition = spriteX - gSamusPhysics.hitboxRight;
 
-    SpriteUtilCheckCollisionAtPosition(samusY, xPosition + gSamusPhysics.drawDistanceLeftOffset);
+    SpriteUtilCheckCollisionAtPosition(samusY, xPosition + gSamusPhysics.hitboxLeft);
     if (gPreviousCollisionCheck != COLLISION_AIR)
         return;
 
-    SpriteUtilCheckCollisionAtPosition(samusY - BLOCK_SIZE, xPosition + gSamusPhysics.drawDistanceLeftOffset);
+    SpriteUtilCheckCollisionAtPosition(samusY - BLOCK_SIZE, xPosition + gSamusPhysics.hitboxLeft);
     if (gPreviousCollisionCheck == COLLISION_AIR || SpriteUtilCheckMorphed())
     {
         gSamusData.xPosition = xPosition;
@@ -92,13 +92,13 @@ void SpriteUtilCheckStopSamusAgainstSolidSpriteRight(u16 samusY, u16 spriteX)
 {
     u16 xPosition;
 
-    xPosition = spriteX - gSamusPhysics.drawDistanceLeftOffset;
+    xPosition = spriteX - gSamusPhysics.hitboxLeft;
 
-    SpriteUtilCheckCollisionAtPosition(samusY, xPosition + gSamusPhysics.drawDistanceRightOffset);
+    SpriteUtilCheckCollisionAtPosition(samusY, xPosition + gSamusPhysics.hitboxRight);
     if (gPreviousCollisionCheck != COLLISION_AIR)
         return;
 
-    SpriteUtilCheckCollisionAtPosition(samusY - BLOCK_SIZE, xPosition + gSamusPhysics.drawDistanceRightOffset);
+    SpriteUtilCheckCollisionAtPosition(samusY - BLOCK_SIZE, xPosition + gSamusPhysics.hitboxRight);
     if (gPreviousCollisionCheck == COLLISION_AIR || SpriteUtilCheckMorphed())
     {
         gSamusData.xPosition = xPosition + ONE_SUB_PIXEL;
@@ -234,10 +234,10 @@ void SpriteUtilSamusAndSpriteCollision(void)
     samusX = pData->xPosition;
     previousX = gPreviousXPosition;
 
-    samusTop = samusY + gSamusPhysics.drawDistanceTop;
-    samusBottom = samusY + gSamusPhysics.drawDistanceBottom;
-    samusLeft = samusX + gSamusPhysics.drawDistanceLeftOffset;
-    samusRight = samusX + gSamusPhysics.drawDistanceRightOffset;
+    samusTop = samusY + gSamusPhysics.hitboxTop;
+    samusBottom = samusY + gSamusPhysics.hitboxBottom;
+    samusLeft = samusX + gSamusPhysics.hitboxLeft;
+    samusRight = samusX + gSamusPhysics.hitboxRight;
 
     if (pData->pose == SPOSE_BALLSPARKING)
     {
@@ -340,7 +340,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                 {
                     if (samusY - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE) < spriteTop)
                     {
-                        SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.drawDistanceTop, samusX);
+                        SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.hitboxTop, samusX);
                         if (gPreviousCollisionCheck == COLLISION_AIR && pData->yVelocity <= 0)
                         {
                             // Make Samus stand on the sprite
@@ -351,11 +351,11 @@ void SpriteUtilSamusAndSpriteCollision(void)
                     }
                     else if (samusTop + QUARTER_BLOCK_SIZE > spriteBottom)
                     {
-                        SpriteUtilCheckCollisionAtPosition(spriteBottom - gSamusPhysics.drawDistanceTop, samusX);
+                        SpriteUtilCheckCollisionAtPosition(spriteBottom - gSamusPhysics.hitboxTop, samusX);
                         if (gPreviousCollisionCheck == COLLISION_AIR)
                         {
                             // Put Samus right below the sprite
-                            pData->yPosition = spriteBottom - gSamusPhysics.drawDistanceTop;
+                            pData->yPosition = spriteBottom - gSamusPhysics.hitboxTop;
 
                             // If Samus was moving upwards, zero out velocity
                             if (pData->yVelocity > 0 && gEquipment.currentEnergy != 0)
@@ -389,7 +389,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                     {
                         if (samusY - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE) < spriteTop)
                         {
-                            SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.drawDistanceTop, samusX);
+                            SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.hitboxTop, samusX);
                             if (gPreviousCollisionCheck == COLLISION_AIR && pData->yVelocity <= 0)
                             {
                                 // Make Samus stand on the sprite
@@ -400,11 +400,11 @@ void SpriteUtilSamusAndSpriteCollision(void)
                         }
                         else if (samusTop + QUARTER_BLOCK_SIZE > spriteBottom)
                         {
-                            SpriteUtilCheckCollisionAtPosition(spriteBottom - gSamusPhysics.drawDistanceTop, samusX);
+                            SpriteUtilCheckCollisionAtPosition(spriteBottom - gSamusPhysics.hitboxTop, samusX);
                             if (gPreviousCollisionCheck == COLLISION_AIR)
                             {
                                 // Put Samus right below the sprite
-                                pData->yPosition = spriteBottom - gSamusPhysics.drawDistanceTop;
+                                pData->yPosition = spriteBottom - gSamusPhysics.hitboxTop;
                                 
                                 // If Samus was moving upwards, zero out velocity
                                 if (pData->yVelocity > 0 && gEquipment.currentEnergy != 0)
@@ -427,7 +427,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                     if (!SpriteUtilCheckPullingSelfUp() && SpriteUtilSpriteTakeDamageFromSamusContact(pSprite, pData) == DCT_NONE &&
                         samusY - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE) < spriteTop)
                     {
-                        SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.drawDistanceTop, samusX);
+                        SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.hitboxTop, samusX);
                         if (gPreviousCollisionCheck == COLLISION_AIR && pData->yVelocity <= 0)
                         {
                             // Make Samus stand on the sprite
@@ -445,7 +445,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                         {
                             if (!SpriteUtilCheckPullingSelfUp() && pData->invincibilityTimer < TWO_THIRD_SECOND)
                             {
-                                SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.drawDistanceTop, samusX);
+                                SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.hitboxTop, samusX);
                                 if (gPreviousCollisionCheck == COLLISION_AIR && pData->yVelocity <= 0)
                                 {
                                     // Make Samus stand on the sprite
@@ -488,7 +488,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                     }
                     else if (samusY - (QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE) < spriteTop && !SpriteUtilCheckPullingSelfUp() && pData->invincibilityTimer < 38)
                     {
-                        SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.drawDistanceTop, samusX);
+                        SpriteUtilCheckCollisionAtPosition(spriteTop + ONE_SUB_PIXEL + gSamusPhysics.hitboxTop, samusX);
                         if (gPreviousCollisionCheck == COLLISION_AIR && pData->yVelocity <= 0)
                         {
                             // Make Samus stand on the sprite
@@ -768,7 +768,7 @@ void SpriteUtilSamusAndSpriteCollision(void)
                         }
                         else if (gPreviousCollisionCheck == COLLISION_AIR)
                         {
-                            SpriteUtilCheckCollisionAtPosition(samusY + ONE_SUB_PIXEL + gSamusPhysics.drawDistanceTop, samusX);
+                            SpriteUtilCheckCollisionAtPosition(samusY + ONE_SUB_PIXEL + gSamusPhysics.hitboxTop, samusX);
                             if (gPreviousCollisionCheck == COLLISION_AIR)
                             {
                                 SamusSetPose(SPOSE_KNOCKBACK_REQUEST);
@@ -1710,8 +1710,8 @@ NearLeftRight SpriteUtilCheckSamusNearSpriteLeftRight(u16 yRange, u16 xRange)
 
     result = NSLR_OUT_OF_RANGE;
 
-    // Get samus middle position visually
-    samusY = gSamusData.yPosition + gSamusPhysics.drawDistanceTop / 2;
+    // Get samus middle Y hitbox
+    samusY = gSamusData.yPosition + gSamusPhysics.hitboxTop / 2;
     samusX = gSamusData.xPosition;
 
     // Get sprite position
@@ -1766,8 +1766,8 @@ NearAboveBelow SpriteUtilCheckSamusNearSpriteAboveBelow(u16 yRange, u16 xRange)
 
     result = NSAB_OUT_OF_RANGE;
 
-    // Get samus middle position visually
-    samusY = gSamusData.yPosition + gSamusPhysics.drawDistanceTop / 2;
+    // Get samus middle Y hitbox
+    samusY = gSamusData.yPosition + gSamusPhysics.hitboxTop / 2;
     samusX = gSamusData.xPosition;
 
     // Get sprite position
@@ -1825,8 +1825,8 @@ NearFrontBack SpriteUtilCheckSamusNearSpriteFrontBehind(u16 yRange, u16 xRangeFr
     result = NSFB_OUT_OF_RANGE;
     xFlip = FALSE;
 
-    // Get samus middle position visually
-    samusY = gSamusData.yPosition + gSamusPhysics.drawDistanceTop / 2;
+    // Get samus middle Y hitbox
+    samusY = gSamusData.yPosition + gSamusPhysics.hitboxTop / 2;
     samusX = gSamusData.xPosition;
 
     // Get sprite position
@@ -3613,11 +3613,11 @@ void SpriteUtilSyncCurrentSpritePositionWithSubSpritePositionAndOam(struct SubSp
 }
 
 /**
- * @brief 1157c | a4 | Checks if the current sprite is colliding with Samus visually (using the draw distances)
+ * @brief 1157c | a4 | Checks if the current sprite is colliding with Samus
  * 
- * @return u8 bool, colliding
+ * @return boolu8 bool, colliding
  */
-boolu8 SpriteCheckCollidingWithSamusDrawing(void)
+boolu8 SpriteCheckCollidingWithSamus(void)
 {
     u16 spriteY;
     u16 spriteX;
@@ -3643,10 +3643,10 @@ boolu8 SpriteCheckCollidingWithSamusDrawing(void)
     samusY = gSamusData.yPosition;
     samusX = gSamusData.xPosition;
 
-    samusTop = samusY + gSamusPhysics.drawDistanceTop;
-    samusBottom = samusY + gSamusPhysics.drawDistanceBottom;
-    samusLeft = samusX + gSamusPhysics.drawDistanceLeftOffset;
-    samusRight = samusX + gSamusPhysics.drawDistanceRightOffset;
+    samusTop = samusY + gSamusPhysics.hitboxTop;
+    samusBottom = samusY + gSamusPhysics.hitboxBottom;
+    samusLeft = samusX + gSamusPhysics.hitboxLeft;
+    samusRight = samusX + gSamusPhysics.hitboxRight;
 
     if (SpriteUtilCheckObjectsTouching(spriteTop, spriteBottom, spriteLeft, spriteRight, samusTop, samusBottom, samusLeft, samusRight))
         return TRUE;

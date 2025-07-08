@@ -332,8 +332,8 @@ u32 RidleyCheckGrabbing(u16 yPosition, u16 xPosition)
     else
         xOffset = xPosition - (BLOCK_SIZE * 3 - QUARTER_BLOCK_SIZE);
 
-    if (SpriteUtilGetCollisionAtPosition(yPosition, xOffset + gSamusPhysics.drawDistanceLeftOffset) == COLLISION_AIR &&
-        SpriteUtilGetCollisionAtPosition(yPosition, xOffset + gSamusPhysics.drawDistanceRightOffset) == COLLISION_AIR)
+    if (SpriteUtilGetCollisionAtPosition(yPosition, xOffset + gSamusPhysics.hitboxLeft) == COLLISION_AIR &&
+        SpriteUtilGetCollisionAtPosition(yPosition, xOffset + gSamusPhysics.hitboxRight) == COLLISION_AIR)
     {
         return TRUE;
     }
@@ -479,8 +479,8 @@ static void RidleyPartClawIdle(u8 ramSlot)
 
     if (updatePosition)
     {
-        if (SpriteUtilGetCollisionAtPosition(yPosition, xPosition + gSamusPhysics.drawDistanceLeftOffset) == COLLISION_AIR &&
-            SpriteUtilGetCollisionAtPosition(yPosition, xPosition + gSamusPhysics.drawDistanceRightOffset) == COLLISION_AIR)
+        if (SpriteUtilGetCollisionAtPosition(yPosition, xPosition + gSamusPhysics.hitboxLeft) == COLLISION_AIR &&
+            SpriteUtilGetCollisionAtPosition(yPosition, xPosition + gSamusPhysics.hitboxRight) == COLLISION_AIR)
         {
             gSamusData.yPosition = yPosition;
             gSamusData.xPosition = xPosition;

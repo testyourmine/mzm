@@ -136,8 +136,8 @@ static void ParasiteGrabSamus(struct SpriteData* pSprite)
     pSprite->work0 = 0;
 
     // Get samus position
-    samusY = gSamusData.yPosition + gSamusPhysics.drawDistanceTop;
-    samusX = gSamusData.xPosition + gSamusPhysics.drawDistanceLeftOffset;
+    samusY = gSamusData.yPosition + gSamusPhysics.hitboxTop;
+    samusX = gSamusData.xPosition + gSamusPhysics.hitboxLeft;
 
     // Get Y offset
     if (pSprite->yPosition < samusY)
@@ -188,7 +188,7 @@ static void ParasiteSamusGrabbed(struct SpriteData* pSprite)
         // Check update vertical direction
         if (pSprite->status & SPRITE_STATUS_Y_FLIP)
         {
-            if (gSamusData.yPosition + gSamusPhysics.drawDistanceBottom < pSprite->yPosition + EIGHTH_BLOCK_SIZE)
+            if (gSamusData.yPosition + gSamusPhysics.hitboxBottom < pSprite->yPosition + EIGHTH_BLOCK_SIZE)
             {
                 pSprite->status &= ~SPRITE_STATUS_Y_FLIP;
                 pSprite->work0 = gSpriteRng;
@@ -196,7 +196,7 @@ static void ParasiteSamusGrabbed(struct SpriteData* pSprite)
         }
         else
         {
-            if (gSamusData.yPosition + gSamusPhysics.drawDistanceTop > pSprite->yPosition - EIGHTH_BLOCK_SIZE)
+            if (gSamusData.yPosition + gSamusPhysics.hitboxTop > pSprite->yPosition - EIGHTH_BLOCK_SIZE)
             {
                 pSprite->status |= SPRITE_STATUS_Y_FLIP;
                 pSprite->work0 = gSpriteRng;
@@ -206,7 +206,7 @@ static void ParasiteSamusGrabbed(struct SpriteData* pSprite)
         // Check update horizontal direction
         if (pSprite->status & SPRITE_STATUS_X_FLIP)
         {
-            if (gSamusData.xPosition + gSamusPhysics.drawDistanceRightOffset < pSprite->xPosition + EIGHTH_BLOCK_SIZE)
+            if (gSamusData.xPosition + gSamusPhysics.hitboxRight < pSprite->xPosition + EIGHTH_BLOCK_SIZE)
             {
                 pSprite->status &= ~SPRITE_STATUS_X_FLIP;
                 pSprite->work0 = gSpriteRng;
@@ -214,7 +214,7 @@ static void ParasiteSamusGrabbed(struct SpriteData* pSprite)
         }
         else
         {
-            if (gSamusData.xPosition + gSamusPhysics.drawDistanceLeftOffset > pSprite->xPosition - EIGHTH_BLOCK_SIZE)
+            if (gSamusData.xPosition + gSamusPhysics.hitboxLeft > pSprite->xPosition - EIGHTH_BLOCK_SIZE)
             {
                 pSprite->status |= SPRITE_STATUS_X_FLIP;
                 pSprite->work0 = gSpriteRng;
@@ -254,8 +254,8 @@ static void ParasiteSamusGrabbed(struct SpriteData* pSprite)
         }
 
         // Get samus position
-        samusY = gSamusData.yPosition + gSamusPhysics.drawDistanceTop;
-        samusX = gSamusData.xPosition + gSamusPhysics.drawDistanceLeftOffset;
+        samusY = gSamusData.yPosition + gSamusPhysics.hitboxTop;
+        samusX = gSamusData.xPosition + gSamusPhysics.hitboxLeft;
         
         // Update position
         pSprite->yPosition = samusY + pSprite->yPositionSpawn;

@@ -1417,16 +1417,16 @@ u32 BlockCheckSamusInReformingBlock(u8 xPosition, u8 yPosition)
 
     // Check in X
     inX = FALSE;
-    if (SUB_PIXEL_TO_BLOCK_(gSamusData.xPosition + gSamusPhysics.drawDistanceLeftOffset) <= xPosition &&
-        xPosition <= SUB_PIXEL_TO_BLOCK_(gSamusData.xPosition + gSamusPhysics.drawDistanceRightOffset))
+    if (SUB_PIXEL_TO_BLOCK_(gSamusData.xPosition + gSamusPhysics.hitboxLeft) <= xPosition &&
+        xPosition <= SUB_PIXEL_TO_BLOCK_(gSamusData.xPosition + gSamusPhysics.hitboxRight))
     {
         inX = TRUE;
     }
 
     // Check in Y
     inY = FALSE;
-    if (SUB_PIXEL_TO_BLOCK_(gSamusData.yPosition + gSamusPhysics.drawDistanceTop) <= yPosition &&
-        yPosition <= SUB_PIXEL_TO_BLOCK_(gSamusData.yPosition + gSamusPhysics.drawDistanceBottom))
+    if (SUB_PIXEL_TO_BLOCK_(gSamusData.yPosition + gSamusPhysics.hitboxTop) <= yPosition &&
+        yPosition <= SUB_PIXEL_TO_BLOCK_(gSamusData.yPosition + gSamusPhysics.hitboxBottom))
     {
         inY = TRUE;
     }

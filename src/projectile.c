@@ -1377,10 +1377,10 @@ void ProjectileMorphballLauncherCheckLaunchSamus(struct ProjectileData* pProj)
 
     samusY = gSamusData.yPosition;
     samusX = gSamusData.xPosition;
-    samusTop = samusY + gSamusPhysics.drawDistanceTop;
-    samusBottom = samusY + gSamusPhysics.drawDistanceBottom;
-    samusLeft = samusX + gSamusPhysics.drawDistanceLeftOffset;
-    samusRight = samusX + gSamusPhysics.drawDistanceRightOffset;
+    samusTop = samusY + gSamusPhysics.hitboxTop;
+    samusBottom = samusY + gSamusPhysics.hitboxBottom;
+    samusLeft = samusX + gSamusPhysics.hitboxLeft;
+    samusRight = samusX + gSamusPhysics.hitboxRight;
 
     projY = pProj->yPosition;
     projX = pProj->xPosition;
@@ -1435,10 +1435,10 @@ void ProjectileCheckSamusBombBounce(struct ProjectileData* pProj)
         !(ClipdataProcess(samusY - (BLOCK_SIZE + HALF_BLOCK_SIZE), samusX) & CLIPDATA_TYPE_SOLID_FLAG))
     {
         previousX = gPreviousXPosition;
-        samusTop = samusY + gSamusPhysics.drawDistanceTop;
-        samusBottom = samusY + gSamusPhysics.drawDistanceBottom;
-        samusLeft = samusX + gSamusPhysics.drawDistanceLeftOffset;
-        samusRight = samusX + gSamusPhysics.drawDistanceRightOffset;
+        samusTop = samusY + gSamusPhysics.hitboxTop;
+        samusBottom = samusY + gSamusPhysics.hitboxBottom;
+        samusLeft = samusX + gSamusPhysics.hitboxLeft;
+        samusRight = samusX + gSamusPhysics.hitboxRight;
     
         projY = pProj->yPosition;
         projX = pProj->xPosition;

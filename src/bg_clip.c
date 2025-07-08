@@ -188,7 +188,7 @@ void BgClipApplyClipdataChangingTransparency(void)
     xPosition = SUB_PIXEL_TO_BLOCK_(position);
 
     // Get Y position
-    position = gSamusData.yPosition + (gSamusPhysics.drawDistanceTop >> 1);
+    position = gSamusData.yPosition + (gSamusPhysics.hitboxTop >> 1);
     CLAMP2(position, 0, BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataHeight));
     yPosition = SUB_PIXEL_TO_BLOCK_(position);
 
@@ -271,20 +271,20 @@ void BgClipCheckWalkingOnCrumbleBlock(void)
         return;
 
     // Get max position to check for crumble blocks
-    behavior = gSamusData.xPosition + gSamusPhysics.drawDistanceRightOffset;
+    behavior = gSamusData.xPosition + gSamusPhysics.hitboxRight;
 
     checkPos = (u32)behavior / BLOCK_SIZE;
     if (checkPos > gBgPointersAndDimensions.clipdataWidth)
         checkPos = gBgPointersAndDimensions.clipdataWidth;
 
     // Get positions
-    behavior = gSamusData.xPosition + gSamusPhysics.drawDistanceLeftOffset;
+    behavior = gSamusData.xPosition + gSamusPhysics.hitboxLeft;
     if (behavior < 0)
         behavior = 0;
 
     xPosition = (u32)behavior / BLOCK_SIZE;
 
-    behavior = gSamusData.yPosition + gSamusPhysics.drawDistanceBottom;
+    behavior = gSamusData.yPosition + gSamusPhysics.hitboxBottom;
     yPosition = (u32)(behavior + 2) / BLOCK_SIZE;
 
     if (yPosition > gBgPointersAndDimensions.clipdataHeight)
@@ -348,11 +348,11 @@ void BgClipCheckTouchingTransitionOnElevator(void)
     // Get Y position
     if (!goingDown)
     {
-        position = gSamusData.yPosition + gSamusPhysics.drawDistanceBottom + BLOCK_SIZE * 2;
+        position = gSamusData.yPosition + gSamusPhysics.hitboxBottom + BLOCK_SIZE * 2;
     }
     else
     {
-        position = gSamusData.yPosition + gSamusPhysics.drawDistanceTop - BLOCK_SIZE * 2;
+        position = gSamusData.yPosition + gSamusPhysics.hitboxTop - BLOCK_SIZE * 2;
     }
 
     behavior = position;
@@ -405,12 +405,12 @@ void BgClipCheckTouchingTransitionOrTank(void)
 
     // Get X positions
     // On the right
-    j = DIV_SHIFT(gSamusPhysics.drawDistanceRightOffset, 2) + gSamusData.xPosition;
+    j = DIV_SHIFT(gSamusPhysics.hitboxRight, 2) + gSamusData.xPosition;
     CLAMP2(j, 0, BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataWidth));
     xPositions[0] = SUB_PIXEL_TO_BLOCK_(j);
 
     // On the left
-    j = DIV_SHIFT(gSamusPhysics.drawDistanceLeftOffset, 2) + gSamusData.xPosition;
+    j = DIV_SHIFT(gSamusPhysics.hitboxLeft, 2) + gSamusData.xPosition;
     CLAMP2(j, 0, BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataWidth));
     xPositions[1] = SUB_PIXEL_TO_BLOCK_(j);
 
@@ -421,17 +421,17 @@ void BgClipCheckTouchingTransitionOrTank(void)
 
     // Get Y positions
     // Center
-    j = DIV_SHIFT(gSamusPhysics.drawDistanceTop, 2) + gSamusData.yPosition;
+    j = DIV_SHIFT(gSamusPhysics.hitboxTop, 2) + gSamusData.yPosition;
     CLAMP2(j, 0, BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataHeight));
     yPositions[0] = SUB_PIXEL_TO_BLOCK_(j);
 
     // Bottom
-    j = DIV_SHIFT(gSamusPhysics.drawDistanceTop, 4) + gSamusData.yPosition;
+    j = DIV_SHIFT(gSamusPhysics.hitboxTop, 4) + gSamusData.yPosition;
     CLAMP2(j, 0, BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataHeight));
     yPositions[1] = SUB_PIXEL_TO_BLOCK_(j);
 
     // Top
-    j = DIV_SHIFT(gSamusPhysics.drawDistanceTop, 4) + DIV_SHIFT(gSamusPhysics.drawDistanceTop, 2) + gSamusData.yPosition;
+    j = DIV_SHIFT(gSamusPhysics.hitboxTop, 4) + DIV_SHIFT(gSamusPhysics.hitboxTop, 2) + gSamusData.yPosition;
     CLAMP2(j, 0, BLOCK_TO_SUB_PIXEL(gBgPointersAndDimensions.clipdataHeight));
     yPositions[2] = SUB_PIXEL_TO_BLOCK_(j);
 

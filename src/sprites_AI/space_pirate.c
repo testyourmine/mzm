@@ -1523,7 +1523,7 @@ u8 SpacePirateClimbingCheckWallJumpOrFire(void)
             {
                 if (gSpriteDrawOrder[0] == 0x0)
                 {
-                    samusRange = gSamusData.yPosition + gSamusPhysics.drawDistanceTop / 2;
+                    samusRange = gSamusData.yPosition + gSamusPhysics.hitboxTop / 2;
                     pirateRange = yPosition - BLOCK_SIZE * 2;
 
                     if (pirateRange > samusRange)

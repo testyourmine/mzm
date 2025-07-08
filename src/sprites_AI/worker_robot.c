@@ -64,10 +64,10 @@ static u8 WorkerRobotCheckSamusInFront(void)
 
         samusY = gSamusData.yPosition;
         samusX = gSamusData.xPosition;
-        samusTop = gSamusData.yPosition + gSamusPhysics.drawDistanceTop;
-        samusBottom = gSamusData.yPosition + gSamusPhysics.drawDistanceBottom;
-        samusLeft = gSamusData.xPosition + gSamusPhysics.drawDistanceLeftOffset;
-        samusRight = gSamusData.xPosition + gSamusPhysics.drawDistanceRightOffset;
+        samusTop = gSamusData.yPosition + gSamusPhysics.hitboxTop;
+        samusBottom = gSamusData.yPosition + gSamusPhysics.hitboxBottom;
+        samusLeft = gSamusData.xPosition + gSamusPhysics.hitboxLeft;
+        samusRight = gSamusData.xPosition + gSamusPhysics.hitboxRight;
 
         if (SpriteUtilCheckObjectsTouching(spriteTop, spriteBottom, spriteLeft, spriteRight,
             samusTop, samusBottom, samusLeft, samusRight))

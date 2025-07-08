@@ -89,13 +89,13 @@ struct SamusPhysics {
     u16 screwSpeedGfxSize;
     const u8* pScrewShinesparkGfx;
     u16 screwShinesparkGfxSize;
-    u16 armCannonXPositionOffset;
-    u16 armCannonYPositionOffset;
+    u16 armCannonXOffset;
+    u16 armCannonYOffset;
     HorizontalMovingDir horizontalMovingDirection;
     VerticalMovingDir verticalMovingDirection;
-    s16 hitboxLeft;
-    s16 hitboxRight;
-    s16 hitboxTop;
+    s16 blockHitboxLeft;
+    s16 blockHitboxRight;
+    s16 blockHitboxTop;
     SamusStandingStatus standingStatus;
     SamusHitboxType hitboxType;
     boolu8 touchingSideBlock;
@@ -111,10 +111,10 @@ struct SamusPhysics {
     s16 midairXAcceleration;
     s16 midairXVelocityCap;
     s16 midairMorphedXVelocityCap;
-    s16 drawDistanceLeftOffset;
-    s16 drawDistanceTop;
-    s16 drawDistanceRightOffset;
-    s16 drawDistanceBottom;
+    s16 hitboxLeft;
+    s16 hitboxTop;
+    s16 hitboxRight;
+    s16 hitboxBottom;
 };
 
 struct ScrewSpeedAnimation {

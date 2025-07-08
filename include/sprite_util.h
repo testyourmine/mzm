@@ -88,7 +88,7 @@ void SpriteUtilSyncCurrentSpritePositionWithSubSpriteData2PositionAndOAM(void);
 void SpriteUtilUpdateSubSpriteAnim(struct SubSpriteData* pSub);
 void SpriteUtilSyncCurrentSpritePositionWithSubSpritePosition(struct SubSpriteData* pSub);
 void SpriteUtilSyncCurrentSpritePositionWithSubSpritePositionAndOam(struct SubSpriteData* pSub);
-boolu8 SpriteCheckCollidingWithSamusDrawing(void);
+boolu8 SpriteCheckCollidingWithSamus(void);
 void SpriteUtilSetSplashEffect(u16 yPosition, u16 xPosition, SplashSize size);
 boolu32 SpriteUtilCheckOutOfRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, SplashSize size);
 boolu32 SpriteUtilCheckInRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, SplashSize size);

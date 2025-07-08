@@ -198,8 +198,8 @@ void ProjectileUpdate(void)
     SamusCallUpdateArmCannonPositionOffset();
 
     // Samus position is in sub pixels, the offsets are in pixel, and the final result is in sub pixels
-    gArmCannonY = PIXEL_TO_SUB_PIXEL(SUB_PIXEL_TO_PIXEL(gSamusData.yPosition) + gSamusPhysics.armCannonYPositionOffset);
-    gArmCannonX = PIXEL_TO_SUB_PIXEL(SUB_PIXEL_TO_PIXEL(gSamusData.xPosition) + gSamusPhysics.armCannonXPositionOffset);
+    gArmCannonY = PIXEL_TO_SUB_PIXEL(SUB_PIXEL_TO_PIXEL(gSamusData.yPosition) + gSamusPhysics.armCannonYOffset);
+    gArmCannonX = PIXEL_TO_SUB_PIXEL(SUB_PIXEL_TO_PIXEL(gSamusData.xPosition) + gSamusPhysics.armCannonXOffset);
 
     // Check spawn the charging beam particle effect
     if (gSamusWeaponInfo.chargeCounter == CHARGE_BEAM_START_THRESHOLD && gEquipment.suitType != SUIT_SUITLESS)

@@ -760,7 +760,7 @@ static void MetroidMovement(void)
 
     // Move
     MetroidCheckBouncingOnMetroid(ONE_SUB_PIXEL);
-    MetroidMove(gSamusData.yPosition + gSamusPhysics.drawDistanceTop, gSamusData.xPosition,
+    MetroidMove(gSamusData.yPosition + gSamusPhysics.hitboxTop, gSamusData.xPosition,
         HALF_BLOCK_SIZE - PIXEL_SIZE / 2, HALF_BLOCK_SIZE + EIGHTH_BLOCK_SIZE, 2);
 }
 
@@ -815,7 +815,7 @@ static void MetroidSamusGrabbed(void)
     else
         gCurrentSprite.xPosition = gSamusData.xPosition;
 
-    gCurrentSprite.yPosition = gSamusData.yPosition + gSamusPhysics.drawDistanceTop;
+    gCurrentSprite.yPosition = gSamusData.yPosition + gSamusPhysics.hitboxTop;
 
     if (MetroidBombDetection())
     {

@@ -146,7 +146,7 @@ static void SecurityGateCheckClosingAnimEnded(void)
  */
 static void SecurityGateDefaultOpenOpenAfterAlarm(void)
 {
-    if (!gCurrentSprite.work0 && !SpriteCheckCollidingWithSamusDrawing()) // ?
+    if (!gCurrentSprite.work0 && !SpriteCheckCollidingWithSamus()) // ?
     {
         SecurityGateChangeClipdata(CAA_MAKE_NON_POWER_GRIP);
         gCurrentSprite.work0++;
@@ -249,7 +249,7 @@ static void SecurityGateDefaultClosedCheckAlarm(void)
  */
 static void SecurityGateDefaultClosedCloseAfterAlarm(void)
 {
-    if (!gCurrentSprite.work0 && !SpriteCheckCollidingWithSamusDrawing())
+    if (!gCurrentSprite.work0 && !SpriteCheckCollidingWithSamus())
     {
         SecurityGateChangeClipdata(CAA_MAKE_NON_POWER_GRIP);
         gCurrentSprite.work0++;

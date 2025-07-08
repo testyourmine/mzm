@@ -371,7 +371,7 @@ static void MellowInit(struct SpriteData* pSprite)
         pSprite->pose = MELLOW_POSE_MOVE;
         pSprite->scaling = 0x20;
         SpriteUtilMakeSpriteFaceSamusDirection();
-        if (pSprite->yPosition > gSamusData.yPosition + gSamusPhysics.drawDistanceTop)
+        if (pSprite->yPosition > gSamusData.yPosition + gSamusPhysics.hitboxTop)
             pSprite->status &= ~SPRITE_STATUS_FACING_DOWN;
         else
             pSprite->status |= SPRITE_STATUS_FACING_DOWN;
@@ -476,7 +476,7 @@ static void MellowMoveInit(struct SpriteData* pSprite)
     pSprite->scaling = CONVERT_SECONDS(.5f + 1.f / 30);
 
     SpriteUtilMakeSpriteFaceSamusDirection();
-    if (pSprite->yPosition > gSamusData.yPosition + gSamusPhysics.drawDistanceTop)
+    if (pSprite->yPosition > gSamusData.yPosition + gSamusPhysics.hitboxTop)
         pSprite->status &= ~SPRITE_STATUS_FACING_DOWN;
     else
         pSprite->status |= SPRITE_STATUS_FACING_DOWN;

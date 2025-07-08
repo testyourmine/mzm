@@ -192,13 +192,13 @@ void SamusCheckScrewSpeedboosterAffectingEnvironment(struct SamusData* pData, st
     if (action == DESTRUCTING_ACTION_NONE)
         return;
 
-    hitboxLeft = pData->xPosition + pPhysics->hitboxLeft;
-    hitboxRight = pData->xPosition + pPhysics->hitboxRight;
-    hitboxTop = pData->yPosition + pPhysics->hitboxTop;
+    hitboxLeft = pData->xPosition + pPhysics->blockHitboxLeft;
+    hitboxRight = pData->xPosition + pPhysics->blockHitboxRight;
+    hitboxTop = pData->yPosition + pPhysics->blockHitboxTop;
     hitboxBottom = pData->yPosition;
     
     checkBlockBelow = FALSE;
-    if (pPhysics->hitboxTop < -BLOCK_SIZE)
+    if (pPhysics->blockHitboxTop < -BLOCK_SIZE)
         checkBlockBelow = TRUE;
 
     BlockSamusApplyScrewSpeedboosterDamageToEnvironment(hitboxLeft, hitboxTop, action);
@@ -325,11 +325,11 @@ u8 unk_5604(struct SamusData* pData, struct SamusPhysics* pPhysics, u16 xPositio
     result = SAMUS_COLLISION_DETECTION_NONE;
 
     if (pPhysics->horizontalMovingDirection == HDMOVING_LEFT)
-        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxLeft;
+        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxLeft;
     else
-        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxRight + SUB_PIXEL_POSITION_FLAG;
+        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxRight + SUB_PIXEL_POSITION_FLAG;
 
-    yPosition = pData->yPosition + pPhysics->hitboxTop;
+    yPosition = pData->yPosition + pPhysics->blockHitboxTop;
     clipdata = ClipdataProcessForSamus(yPosition, xPosition);
 
     switch (LOW_BYTE(clipdata))
@@ -347,7 +347,7 @@ u8 unk_5604(struct SamusData* pData, struct SamusPhysics* pPhysics, u16 xPositio
                 result += SAMUS_COLLISION_DETECTION_LEFT_MOST;
     }
 
-    if (pPhysics->hitboxTop >= -BLOCK_SIZE)
+    if (pPhysics->blockHitboxTop >= -BLOCK_SIZE)
         return result;
 
     clipdata = ClipdataProcessForSamus(yPosition + BLOCK_SIZE, xPosition);
@@ -388,9 +388,9 @@ u8 SamusCheckTopSideCollisionMidAir(struct SamusData* pData, struct SamusPhysics
     result = SAMUS_COLLISION_DETECTION_NONE;
     
     if (pPhysics->horizontalMovingDirection == HDMOVING_LEFT)
-        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxLeft;
+        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxLeft;
     else
-        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxRight + SUB_PIXEL_POSITION_FLAG;
+        *pPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxRight + SUB_PIXEL_POSITION_FLAG;
 
     yPosition = pData->yPosition;
     clipdata = ClipdataProcessForSamus(yPosition, xPosition);
@@ -428,7 +428,7 @@ u8 SamusCheckTopSideCollisionMidAir(struct SamusData* pData, struct SamusPhysics
         }
     }
 
-    if (pPhysics->hitboxTop < -BLOCK_SIZE)
+    if (pPhysics->blockHitboxTop < -BLOCK_SIZE)
     {
         clipdata = ClipdataProcessForSamus(yPosition - BLOCK_SIZE, xPosition);
 
@@ -524,20 +524,20 @@ u8 SamusCheckCollisionAbove(struct SamusData* pData, s32 hitbox)
     result = SAMUS_COLLISION_DETECTION_NONE;
 
     yPosition = pData->yPosition + hitbox;
-    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + pPhysics->hitboxLeft);
+    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + pPhysics->blockHitboxLeft);
     
     if (clipdata & CLIPDATA_TYPE_SOLID_FLAG)
         result += SAMUS_COLLISION_DETECTION_LEFT_MOST;
 
-    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + sSamusHitboxData_Above[SAMUS_HITBOX_LEFT]);
+    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + sSamusBlockHitboxData_Above[SAMUS_BLOCK_HITBOX_LEFT]);
     if (clipdata & CLIPDATA_TYPE_SOLID_FLAG)
         result += SAMUS_COLLISION_DETECTION_MIDDLE_LEFT;
 
-    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + sSamusHitboxData_Above[SAMUS_HITBOX_RIGHT]);
+    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + sSamusBlockHitboxData_Above[SAMUS_BLOCK_HITBOX_RIGHT]);
     if (clipdata & CLIPDATA_TYPE_SOLID_FLAG)
         result += SAMUS_COLLISION_DETECTION_MIDDLE_RIGHT;
 
-    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + pPhysics->hitboxRight);
+    clipdata = ClipdataProcessForSamus(yPosition, pData->xPosition + pPhysics->blockHitboxRight);
     if (clipdata & CLIPDATA_TYPE_SOLID_FLAG)
         result += SAMUS_COLLISION_DETECTION_RIGHT_MOST;
 
@@ -566,14 +566,14 @@ SamusPose SamusCheckWalkingSidesCollision(struct SamusData* pData, struct SamusP
     if (pPhysics->horizontalMovingDirection == HDMOVING_LEFT)
     {
         slope = KEY_LEFT;
-        frontHitbox = pPhysics->hitboxLeft;
-        backHitbox = pPhysics->hitboxRight;
+        frontHitbox = pPhysics->blockHitboxLeft;
+        backHitbox = pPhysics->blockHitboxRight;
     }
     else
     {
         slope = KEY_RIGHT;
-        frontHitbox = pPhysics->hitboxRight;
-        backHitbox = pPhysics->hitboxLeft;
+        frontHitbox = pPhysics->blockHitboxRight;
+        backHitbox = pPhysics->blockHitboxLeft;
     }
 
     result = unk_5604(pData, pPhysics, pData->xPosition + frontHitbox, &nextX);
@@ -696,9 +696,9 @@ SamusPose SamusCheckWalkingSidesCollision(struct SamusData* pData, struct SamusP
             if (result != SAMUS_COLLISION_DETECTION_NONE)
             {
                 if (pPhysics->horizontalMovingDirection == HDMOVING_LEFT)
-                    pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxLeft;
+                    pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxLeft;
                 else
-                    pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxRight + SUB_PIXEL_POSITION_FLAG;
+                    pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxRight + SUB_PIXEL_POSITION_FLAG;
 
                 pData->yPosition = nextY - ONE_SUB_PIXEL;
             }
@@ -763,24 +763,24 @@ SamusPose SamusCheckStandingOnGroundCollision(struct SamusData* pData, struct Sa
     u16 xPosition;
     u16 slope;
 
-    above = SamusCheckCollisionAbove(pData, pPhysics->hitboxTop);
+    above = SamusCheckCollisionAbove(pData, pPhysics->blockHitboxTop);
     if (above == SAMUS_COLLISION_DETECTION_LEFT_MOST ||
         above == (SAMUS_COLLISION_DETECTION_LEFT_MOST | SAMUS_COLLISION_DETECTION_MIDDLE_LEFT))
     {
-        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxLeft;
+        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxLeft;
     }
     else if (above == SAMUS_COLLISION_DETECTION_RIGHT_MOST ||
         above == (SAMUS_COLLISION_DETECTION_RIGHT_MOST | SAMUS_COLLISION_DETECTION_MIDDLE_RIGHT))
     {
-        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxRight + SUB_PIXEL_POSITION_FLAG;
+        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxRight + SUB_PIXEL_POSITION_FLAG;
     }
 
     if (pData->standingStatus != STANDING_ENEMY)
     {
-        if (SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->hitboxLeft, pData->yPosition + 1,
+        if (SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->blockHitboxLeft, pData->yPosition + 1,
             &xPosition, &yPosition, &slope) == CLIPDATA_TYPE_AIR)
         {
-            if (SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->hitboxRight, pData->yPosition + 1,
+            if (SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->blockHitboxRight, pData->yPosition + 1,
                 &xPosition, &yPosition, &slope) == CLIPDATA_TYPE_AIR)
                 return SPOSE_MID_AIR_REQUEST;
         }
@@ -814,12 +814,12 @@ SamusPose SamusCheckLandingCollision(struct SamusData* pData, struct SamusPhysic
 
     if (pPhysics->horizontalMovingDirection == HDMOVING_LEFT)
     {
-        hHitbox = pPhysics->hitboxLeft;
+        hHitbox = pPhysics->blockHitboxLeft;
     }
     else
     {
-        hHitbox = pPhysics->hitboxLeft;
-        hHitbox = pPhysics->hitboxRight;
+        hHitbox = pPhysics->blockHitboxLeft;
+        hHitbox = pPhysics->blockHitboxRight;
     }
 
     if (unk_5604(pData, pPhysics, pData->xPosition + hHitbox, &resultXLeft) != SAMUS_COLLISION_DETECTION_NONE)
@@ -834,10 +834,10 @@ SamusPose SamusCheckLandingCollision(struct SamusData* pData, struct SamusPhysic
     blockY = pData->yPosition & BLOCK_POSITION_FLAG;
     prevBlockY = gPreviousYPosition & BLOCK_POSITION_FLAG;
 
-    collisionLeft = SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->hitboxLeft, pData->yPosition,
+    collisionLeft = SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->blockHitboxLeft, pData->yPosition,
         &resultXLeft, &resultYLeft, &resultSlopeLeft);
 
-    collisionRight = SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->hitboxRight, pData->yPosition,
+    collisionRight = SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->blockHitboxRight, pData->yPosition,
         &resultXRight, &resultYRight, &resultSlopeRight);
 
     if (blockY > prevBlockY)
@@ -860,7 +860,7 @@ SamusPose SamusCheckLandingCollision(struct SamusData* pData, struct SamusPhysic
             {
                 u16 tmpResultSlopeLeft;
 
-                SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->hitboxLeft, pData->yPosition - BLOCK_SIZE,
+                SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->blockHitboxLeft, pData->yPosition - BLOCK_SIZE,
                     &resultXLeft, &resultYLeft, &resultSlopeLeft);
 
                 pData->yPosition = resultYLeft;
@@ -880,7 +880,7 @@ SamusPose SamusCheckLandingCollision(struct SamusData* pData, struct SamusPhysic
             }
             else
             {
-                SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->hitboxRight, pData->yPosition - BLOCK_SIZE,
+                SamusCheckCollisionAtPosition(pData->xPosition + pPhysics->blockHitboxRight, pData->yPosition - BLOCK_SIZE,
                     &resultXLeft, &resultYLeft, &resultSlopeLeft);
 
                 pData->yPosition = resultYLeft;
@@ -908,7 +908,7 @@ SamusPose SamusCheckLandingCollision(struct SamusData* pData, struct SamusPhysic
             return SPOSE_LANDING_REQUEST;
         }
 
-        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxLeft;
+        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxLeft;
         pPhysics->touchingSideBlock++;
     }
     else if (collisionRight != CLIPDATA_TYPE_AIR)
@@ -920,7 +920,7 @@ SamusPose SamusCheckLandingCollision(struct SamusData* pData, struct SamusPhysic
             return SPOSE_LANDING_REQUEST;
         }
 
-        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxRight + SUB_PIXEL_POSITION_FLAG;
+        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxRight + SUB_PIXEL_POSITION_FLAG;
         pPhysics->touchingSideBlock++;
     }
 
@@ -946,10 +946,10 @@ SamusPose SamusCheckTopCollision(struct SamusData* pData, struct SamusPhysics* p
     u16 nextSlope;
 
     if (pPhysics->horizontalMovingDirection == HDMOVING_LEFT)
-        hitbox = pPhysics->hitboxLeft;
+        hitbox = pPhysics->blockHitboxLeft;
     else
-        hitbox = pPhysics->hitboxRight;
-    pLeftHitbox = &pPhysics->hitboxLeft;
+        hitbox = pPhysics->blockHitboxRight;
+    pLeftHitbox = &pPhysics->blockHitboxLeft;
 
     result = SamusCheckTopSideCollisionMidAir(pData, pPhysics, pData->xPosition + hitbox, &nextX);
 
@@ -971,7 +971,7 @@ SamusPose SamusCheckTopCollision(struct SamusData* pData, struct SamusPhysics* p
         pPhysics->touchingSideBlock++;
     }
 
-    result = SamusCheckCollisionAbove(pData, pPhysics->hitboxTop);
+    result = SamusCheckCollisionAbove(pData, pPhysics->blockHitboxTop);
     
     if (result == SAMUS_COLLISION_DETECTION_LEFT_MOST)
     {
@@ -980,13 +980,13 @@ SamusPose SamusCheckTopCollision(struct SamusData* pData, struct SamusPhysics* p
     }
     else if (result == SAMUS_COLLISION_DETECTION_RIGHT_MOST)
     {
-        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->hitboxRight + SUB_PIXEL_POSITION_FLAG;
+        pData->xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxRight + SUB_PIXEL_POSITION_FLAG;
         gPreviousXPosition = pData->xPosition;
     }
     else if (result & SAMUS_COLLISION_DETECTION_MIDDILE)
     {
-        topOffset = pData->yPosition + pPhysics->hitboxTop;
-        pData->yPosition = (topOffset & BLOCK_POSITION_FLAG) - pPhysics->hitboxTop + BLOCK_SIZE;
+        topOffset = pData->yPosition + pPhysics->blockHitboxTop;
+        pData->yPosition = (topOffset & BLOCK_POSITION_FLAG) - pPhysics->blockHitboxTop + BLOCK_SIZE;
         pData->yVelocity = 0;
         pPhysics->touchingTopBlock++;
     }
@@ -1382,7 +1382,7 @@ void SamusCheckSetEnvironmentalEffect(struct SamusData* pData, u32 defaultOffset
                 xPosition = pData->xPosition - (QUARTER_BLOCK_SIZE - PIXEL_SIZE);
 
             // Spawn near head
-            yPosition = pData->yPosition + pPhysics->drawDistanceTop + QUARTER_BLOCK_SIZE;
+            yPosition = pData->yPosition + pPhysics->hitboxTop + QUARTER_BLOCK_SIZE;
             SoundPlay(SOUND_WATER_BUBBLES);
             break;
 
@@ -1527,13 +1527,13 @@ void SamusUpdateEnvironmentalEffect(struct SamusData* pData)
 
         // Get liquid at the current position and above samus
         affecting = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(yPosition, pData->xPosition));
-        affectingTop = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(yPosition + pPhysics->drawDistanceTop - EIGHTH_BLOCK_SIZE,
+        affectingTop = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(yPosition + pPhysics->hitboxTop - EIGHTH_BLOCK_SIZE,
             pData->xPosition));
 
-        if (pPhysics->drawDistanceTop > -BLOCK_SIZE)
+        if (pPhysics->hitboxTop > -BLOCK_SIZE)
             liquidY = yPosition - BLOCK_SIZE;
         else
-            liquidY = yPosition + pPhysics->drawDistanceTop;
+            liquidY = yPosition + pPhysics->hitboxTop;
 
         affectingLiquid = LOW_BYTE(ClipdataCheckCurrentAffectingAtPosition(liquidY, pData->xPosition));
 
@@ -1720,7 +1720,7 @@ void SamusSetMidAir(struct SamusData* pData, struct SamusData* pCopy, struct Wea
                 pData->yVelocity = pCopy->yVelocity;
 
             // Offset down if there's a ceiling to prevent going into the ceiling
-            if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) != SAMUS_COLLISION_DETECTION_NONE)
+            if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) != SAMUS_COLLISION_DETECTION_NONE)
                 pData->yPosition += HALF_BLOCK_SIZE;
             break;
 
@@ -1849,7 +1849,7 @@ void SamusSetMidAir(struct SamusData* pData, struct SamusData* pCopy, struct Wea
         case SPOSE_CROUCHING:
         case SPOSE_TURNING_AROUND_AND_CROUCHING:
         case SPOSE_SHOOTING_AND_CROUCHING:
-            if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) != SAMUS_COLLISION_DETECTION_NONE)
+            if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) != SAMUS_COLLISION_DETECTION_NONE)
                 pData->yPosition += HALF_BLOCK_SIZE;
 
         default:
@@ -1923,7 +1923,7 @@ void SamusSetLandingPose(struct SamusData* pData, struct SamusData* pCopy, struc
     switch (pCopy->pose)
     {
         case SPOSE_MIDAIR:
-            collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+            collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
             if (collision != SAMUS_COLLISION_DETECTION_NONE)
             {
                 // Blocks above, set crouched
@@ -1957,7 +1957,7 @@ void SamusSetLandingPose(struct SamusData* pData, struct SamusData* pCopy, struc
             if (gButtonInput & KEY_A && gEquipment.suitMiscActivation & SMF_HIGH_JUMP)
             {
                 // Check bounce from maintained A
-                collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+                collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
 
                 if (!(collision & SAMUS_COLLISION_DETECTION_MIDDILE))
                     pData->forcedMovement = FORCED_MOVEMENT_MORPH_BALL_BOUNCE_BEFORE_JUMP;
@@ -2022,7 +2022,7 @@ void SamusSetLandingPose(struct SamusData* pData, struct SamusData* pCopy, struc
             break;
 
         default:
-            collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+            collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
             if (collision != SAMUS_COLLISION_DETECTION_NONE)
             {
                 // Blocks above, set crouched
@@ -2105,7 +2105,7 @@ void SamusChangeToHurtPose(struct SamusData* pData, struct SamusData* pCopy, str
 
             default:
                 // Get collision above
-                collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+                collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
 
                 // Set hurt
                 pData->pose = SPOSE_GETTING_HURT;
@@ -2193,7 +2193,7 @@ void SamusChangeToKnockbackPose(struct SamusData* pData, struct SamusData* pCopy
 
         default:
             // Get collision above
-            collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+            collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
 
             // Set knocked back
             pData->pose = SPOSE_GETTING_KNOCKED_BACK;
@@ -2823,12 +2823,12 @@ void SamusUpdateHitboxMovingDirection(void)
     }
 
     // Update standing status
-    pPhysics->standingStatus = sSamusVisualData[pData->pose][2];
+    pPhysics->standingStatus = sSamusCollisionData[pData->pose][SCDF_STANDING_STATUS];
 
     // Update hitbox
-    pPhysics->hitboxLeft = sSamusHitboxData[pPhysics->hitboxType][SAMUS_HITBOX_LEFT];
-    pPhysics->hitboxRight = sSamusHitboxData[pPhysics->hitboxType][SAMUS_HITBOX_RIGHT];
-    pPhysics->hitboxTop = sSamusHitboxData[pPhysics->hitboxType][SAMUS_HITBOX_TOP];
+    pPhysics->blockHitboxLeft = sSamusBlockHitboxData[pPhysics->hitboxType][SAMUS_BLOCK_HITBOX_LEFT];
+    pPhysics->blockHitboxRight = sSamusBlockHitboxData[pPhysics->hitboxType][SAMUS_BLOCK_HITBOX_RIGHT];
+    pPhysics->blockHitboxTop = sSamusBlockHitboxData[pPhysics->hitboxType][SAMUS_BLOCK_HITBOX_TOP];
 
     if (pPhysics->standingStatus == STANDING_NOT_IN_CONTROL)
         pPhysics->verticalMovingDirection = VDMOVING_DOWN;
@@ -4018,7 +4018,7 @@ SamusPose SamusStanding(struct SamusData* pData)
     // Check shinesparking
     if (!(gButtonInput & (KEY_RIGHT | KEY_LEFT)) && gChangedInput & KEY_A && pData->shinesparkTimer != 0)
     {
-        hitbox = sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP] - HALF_BLOCK_SIZE;
+        hitbox = sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP] - HALF_BLOCK_SIZE;
         if (SamusCheckCollisionAbove(pData, hitbox) == SAMUS_COLLISION_DETECTION_NONE)
         {
             pData->yPosition -= HALF_BLOCK_SIZE;
@@ -4125,7 +4125,7 @@ SamusPose SamusTurningAround(struct SamusData* pData)
     // Check shinesparking
     if (!(gButtonInput & (KEY_RIGHT | KEY_LEFT)) && gChangedInput & KEY_A && pData->shinesparkTimer != 0)
     {
-        hitbox = sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP] - HALF_BLOCK_SIZE;
+        hitbox = sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP] - HALF_BLOCK_SIZE;
         if (SamusCheckCollisionAbove(pData, hitbox) == SAMUS_COLLISION_DETECTION_NONE)
         {
             pData->yPosition -= HALF_BLOCK_SIZE;
@@ -4212,7 +4212,7 @@ SamusPose SamusCrouching(struct SamusData* pData)
     // Check start shinespark
     if (!(gButtonInput & (KEY_RIGHT | KEY_LEFT)) && gChangedInput & KEY_A && pData->shinesparkTimer != 0)
     {
-        hitbox = sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP] - HALF_BLOCK_SIZE;
+        hitbox = sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP] - HALF_BLOCK_SIZE;
         if (SamusCheckCollisionAbove(pData, hitbox) == SAMUS_COLLISION_DETECTION_NONE)
         {
             pData->yPosition -= HALF_BLOCK_SIZE;
@@ -4220,13 +4220,13 @@ SamusPose SamusCrouching(struct SamusData* pData)
         }
     }
 
-    collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+    collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
 
     // Smooth clamp the X position
     if (collision == SAMUS_COLLISION_DETECTION_LEFT_MOST)
-        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_LEFT];
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT];
     else if (collision == SAMUS_COLLISION_DETECTION_RIGHT_MOST)
-        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
 
     // Check can jump
     if (SamusCheckJumping(pData) && !(collision & SAMUS_COLLISION_DETECTION_MIDDILE))
@@ -4324,7 +4324,7 @@ SamusPose SamusTurningAroundAndCrouching(struct SamusData* pData)
     // Check start shinespark
     if (!(gButtonInput & (KEY_RIGHT | KEY_LEFT)) && gChangedInput & KEY_A && pData->shinesparkTimer != 0)
     {
-        hitbox = sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP] - HALF_BLOCK_SIZE;
+        hitbox = sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP] - HALF_BLOCK_SIZE;
         if (SamusCheckCollisionAbove(pData, hitbox) == SAMUS_COLLISION_DETECTION_NONE)
         {
             pData->yPosition -= HALF_BLOCK_SIZE;
@@ -4332,13 +4332,13 @@ SamusPose SamusTurningAroundAndCrouching(struct SamusData* pData)
         }
     }
 
-    collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+    collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
 
     // Smooth clamp the X position
     if (collision == SAMUS_COLLISION_DETECTION_LEFT_MOST)
-        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_LEFT];
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT];
     else if (collision == SAMUS_COLLISION_DETECTION_RIGHT_MOST)
-        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
 
     // Check can jump
     if (SamusCheckJumping(pData) && !(collision & SAMUS_COLLISION_DETECTION_MIDDILE))
@@ -4953,7 +4953,7 @@ SamusPose SamusMorphball(struct SamusData* pData)
     // Check start ballsparking
     if (gChangedInput & KEY_A && gEquipment.suitMiscActivation & SMF_HIGH_JUMP && pData->shinesparkTimer != 0)
     {
-        hitbox = sSamusHitboxData[SAMUS_HITBOX_TYPE_MORPHED][SAMUS_HITBOX_TOP] - BLOCK_SIZE;
+        hitbox = sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_MORPHED][SAMUS_BLOCK_HITBOX_TOP] - BLOCK_SIZE;
         if (SamusCheckCollisionAbove(pData, hitbox) == SAMUS_COLLISION_DETECTION_NONE)
         {
             pData->yPosition -= HALF_BLOCK_SIZE;
@@ -4982,7 +4982,7 @@ SamusPose SamusMorphball(struct SamusData* pData)
     // Check unmorphing
     if (gChangedInput & KEY_UP)
     {
-        collision = SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]);
+        collision = SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]);
 
         // Check for smooth unmorph if only slightly in a block
 
@@ -4993,9 +4993,9 @@ SamusPose SamusMorphball(struct SamusData* pData)
         if (collision == SAMUS_COLLISION_DETECTION_LEFT_MOST)
         {
             xPosition = pData->xPosition;
-            xPosition += sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_LEFT];
+            xPosition += sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT];
 
-            pData->xPosition = (xPosition & BLOCK_POSITION_FLAG) - sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_LEFT] + BLOCK_SIZE;
+            pData->xPosition = (xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT] + BLOCK_SIZE;
             gPreviousXPosition = pData->xPosition;
 
             collision = SAMUS_COLLISION_DETECTION_NONE;
@@ -5003,9 +5003,9 @@ SamusPose SamusMorphball(struct SamusData* pData)
         else if (collision == SAMUS_COLLISION_DETECTION_RIGHT_MOST)
         {
             xPosition = pData->xPosition;
-            xPosition += sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_RIGHT];
+            xPosition += sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_RIGHT];
 
-            pData->xPosition = (xPosition & BLOCK_POSITION_FLAG) - sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_RIGHT] - ONE_SUB_PIXEL;
+            pData->xPosition = (xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_RIGHT] - ONE_SUB_PIXEL;
             gPreviousXPosition = pData->xPosition;
 
             collision = SAMUS_COLLISION_DETECTION_NONE;
@@ -5059,7 +5059,7 @@ SamusPose SamusRolling(struct SamusData* pData)
     }
 
     // Check unmorph, no block above
-    if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
+    if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
     {
         // Pressed up
         if (gChangedInput & KEY_UP)
@@ -5130,7 +5130,7 @@ SamusPose SamusRollingGfx(struct SamusData* pData)
  */
 SamusPose SamusUnmorphing(struct SamusData* pData)
 {
-    if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
+    if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
     {
         // Check force jump
         if (gChangedInput & KEY_A)
@@ -5178,7 +5178,7 @@ SamusPose SamusMorphballMidAir(struct SamusData* pData)
     if (gChangedInput & KEY_UP)
     {
         // Check no block on where Samus's head should be
-        if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
+        if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
         {
             if (gSamusPhysics.slowedByLiquid == TRUE)
                 SoundPlay(SOUND_UNMORPHING);
@@ -6408,7 +6408,7 @@ SamusPose SamusCrawlingStopped(struct SamusData* pData)
     // Keep x velocity at 0
     pData->xVelocity = 0;
 
-    if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) == 0)
+    if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) == 0)
     {
         // No collision above, exit crawl
         return SPOSE_UNCROUCHING_FROM_CRAWLING;
@@ -6452,7 +6452,7 @@ SamusPose SamusStartingToCrawlGfx(struct SamusData* pData)
  */
 SamusPose SamusCrawling(struct SamusData* pData)
 {
-    if (SamusCheckCollisionAbove(pData, sSamusHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
+    if (SamusCheckCollisionAbove(pData, sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_TOP]) == SAMUS_COLLISION_DETECTION_NONE)
     {
         // No collision above, exit crawl
         return SPOSE_UNCROUCHING_FROM_CRAWLING;
@@ -6684,7 +6684,7 @@ void SamusUpdateVelocityPosition(struct SamusData* pData)
     s32 velocity;
     s32 yVelocity;
 
-    gSamusPhysics.hitboxType = sSamusVisualData[pData->pose][1];
+    gSamusPhysics.hitboxType = sSamusCollisionData[pData->pose][SCDF_BLOCK_HITBOX];
 
     switch (pData->pose)
     {
@@ -7747,16 +7747,16 @@ void SamusCheckPlayLowHealthSound(void)
  */
 void SamusUpdateDrawDistanceAndStandingStatus(struct SamusData* pData, struct SamusPhysics* pPhysics)
 {
-    u8 offset;
+    SamusHitboxType offset;
     SamusStandingStatus standing;
-    
-    offset = sSamusVisualData[pData->pose][0];
-    pPhysics->drawDistanceLeftOffset = sSamusDrawDistanceOffsets[offset][0];
-    pPhysics->drawDistanceTop = sSamusDrawDistanceOffsets[offset][1];
-    pPhysics->drawDistanceRightOffset = sSamusDrawDistanceOffsets[offset][2];
-    pPhysics->drawDistanceBottom = sSamusDrawDistanceOffsets[offset][3];
 
-    standing = sSamusVisualData[pData->pose][2];
+    offset = sSamusCollisionData[pData->pose][SCDF_HITBOX];
+    pPhysics->hitboxLeft = sSamusHitboxData[offset][SAMUS_HITBOX_LEFT];
+    pPhysics->hitboxTop = sSamusHitboxData[offset][SAMUS_HITBOX_TOP];
+    pPhysics->hitboxRight = sSamusHitboxData[offset][SAMUS_HITBOX_RIGHT];
+    pPhysics->hitboxBottom = sSamusHitboxData[offset][SAMUS_HITBOX_BOTTOM];
+
+    standing = sSamusCollisionData[pData->pose][SCDF_STANDING_STATUS];
     if (pData->standingStatus != STANDING_ENEMY)
         pData->standingStatus = standing;
 }
@@ -7984,18 +7984,18 @@ void SamusUpdateArmCannonPositionOffset(u8 direction)
     // Check sign bit set (8-bit)
     offset = pOffset->y;
     if (offset & 0x80)
-        pPhysics->armCannonYPositionOffset = offset - 0x80 * 2;
+        pPhysics->armCannonYOffset = offset - 0x80 * 2;
     else
-        pPhysics->armCannonYPositionOffset = offset;
-    pPhysics->armCannonYPositionOffset++;
+        pPhysics->armCannonYOffset = offset;
+    pPhysics->armCannonYOffset++;
 
     // Update X offset
     // Check sign bit set (9-bit)
     offset = pOffset->x;
     if (offset & 0x100)
-        pPhysics->armCannonXPositionOffset = offset - 0x100 * 2;
+        pPhysics->armCannonXOffset = offset - 0x100 * 2;
     else
-        pPhysics->armCannonXPositionOffset = offset;
+        pPhysics->armCannonXOffset = offset;
 }
 
 /**

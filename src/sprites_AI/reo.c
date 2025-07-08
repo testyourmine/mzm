@@ -119,7 +119,7 @@ static void ReoMovingInit(void)
 
     SpriteUtilMakeSpriteFaceSamusDirection();
 
-    if (gCurrentSprite.yPosition > gSamusData.yPosition + gSamusPhysics.drawDistanceTop)
+    if (gCurrentSprite.yPosition > gSamusData.yPosition + gSamusPhysics.hitboxTop)
         gCurrentSprite.status &= ~SPRITE_STATUS_FACING_DOWN;
     else
         gCurrentSprite.status |= SPRITE_STATUS_FACING_DOWN;

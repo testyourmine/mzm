@@ -218,7 +218,7 @@ static void SkulteraChasingSamus(void)
     u16 spriteY;
     u32 nslr;
 
-    samusY = gSamusData.yPosition + gSamusPhysics.drawDistanceTop / 2;
+    samusY = gSamusData.yPosition + gSamusPhysics.hitboxTop / 2;
     spriteY = gCurrentSprite.yPosition - HALF_BLOCK_SIZE;
 
     // Check move vertically
