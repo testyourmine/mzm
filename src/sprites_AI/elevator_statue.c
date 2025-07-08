@@ -214,7 +214,7 @@ static void KraidElevatorStatueFalling(void)
     }
 
     // Check set fallen
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         KraidElevatorStatueFallenInit();
 }
 
@@ -391,7 +391,7 @@ static void RidleyElevatorStatueFalling(void)
     }
 
     // Check set fallen
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         RidleyElevatorStatueFallenInit();
 }
 
@@ -504,7 +504,7 @@ void ElevatorStatueDebris(void)
 
         case ELEVATOR_STATUE_DEBRIS_POSE_IDLE:
             // Kill if animation ended
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.status = 0;
     }
 }

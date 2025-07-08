@@ -164,7 +164,7 @@ static void GadoraSamusDetection(void)
  */
 static void GadoraCheckWarningAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = GADORA_POSE_CHECK_OPENING_EYE_ENDED;
 
@@ -185,7 +185,7 @@ static void GadoraCheckOpeningEyeAnimEnded(void)
     u16 xPosition;
     u16 status;
     
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = GADORA_POSE_EYE_OPENED;
 
@@ -232,7 +232,7 @@ static void GadoraEyeOpened(void)
     // Check set the eye moving OAM
     if (gCurrentSprite.pOam == sGadoraOam_EyeOpened)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sGadoraOam_EyeMoving;
             gCurrentSprite.animationDurationCounter = 0;
@@ -254,7 +254,7 @@ static void GadoraEyeOpened(void)
  */
 static void GadoraCheckClosingEyeAnimNearEnded(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = GADORA_POSE_IDLE_INIT; // Set idle
 }
 

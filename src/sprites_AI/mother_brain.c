@@ -320,7 +320,7 @@ static void MotherBrainMainLoop(void)
     if (gSpriteData[eyeSlot].pOam == sMotherBrainPartOam_EyeClosing)
     {
         // Check should close
-        if (SpriteUtilCheckEndSpriteAnim(eyeSlot))
+        if (SpriteUtilHasAnimationEnded(eyeSlot))
         {
             gSpriteData[eyeSlot].pOam = sMotherBrainPartOam_EyeClosed;
             gSpriteData[eyeSlot].animationDurationCounter = 0;
@@ -955,7 +955,7 @@ void MotherBrainGlassBreaking(void)
             break;
 
         case MOTHER_BRAIN_GLASS_BREAKING_POSE_BREAKING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.status = 0;
     }
 }

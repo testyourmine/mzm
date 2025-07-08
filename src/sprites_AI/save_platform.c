@@ -157,7 +157,7 @@ static void SavePlatformSamusDetection(void)
  */
 static void SavePlatformCheckOpeningAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_POSE_OPENED;
         gCurrentSprite.pOam = sSavePlatformOam_Opened;
@@ -203,7 +203,7 @@ static void SavePlatformSecondSamusDetection(void)
  */
 static void SavePlatformCheckClosingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_POSE_IDLE;
         gCurrentSprite.pOam = sSavePlatformOam_Idle;
@@ -481,7 +481,7 @@ static void SavePlatformPartExtendingInit(void)
  */
 static void SavePlatformPartTopExtending(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_PART_POSE_TOP_IDLE;
         gCurrentSprite.pOam = sSavePlatformPartOam_TopExtended;
@@ -510,7 +510,7 @@ static void SavePlatformPartTopRetractingInit(void)
  */
 static void SavePlatformPartTopRetracting(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_PART_POSE_TOP_IDLE;
         gCurrentSprite.pOam = sSavePlatformPartOam_TopIdle;
@@ -525,7 +525,7 @@ static void SavePlatformPartTopRetracting(void)
  */
 static void SavePlatformPartTubeSpawning(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_PART_POSE_TUBE_CHECK_SHADOW_DISAPPEARED;
         gCurrentSprite.pOam = sSavePlatformPartOam_TubeIdle;
@@ -578,7 +578,7 @@ static void SavePlatformPartTubeIdle(void)
  */
 static void SavePlatformPartTubeDespawning(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.status = 0;
         gSpriteData[gSpriteData[gCurrentSprite.primarySpriteRamSlot].work3].pose = SAVE_PLATFORM_PART_POSE_TOP_RETRACTING_INIT;
@@ -591,7 +591,7 @@ static void SavePlatformPartTubeDespawning(void)
  */
 static void SavePlatformPartTubeShadowIdle(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 

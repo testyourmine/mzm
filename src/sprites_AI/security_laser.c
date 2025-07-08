@@ -223,7 +223,7 @@ static void SecurityLaserCheckDespawnAnimEnded(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SECURITY_LASER_POSE_SET_ALARM;
         gCurrentSprite.currentAnimationFrame = 0;
@@ -288,7 +288,7 @@ static void SecurityLaser_Unused(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SECURITY_LASER_POSE_IDLE;
         gCurrentSprite.currentAnimationFrame = 0;

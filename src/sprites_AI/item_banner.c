@@ -204,7 +204,7 @@ static void ItemBannerPopUp(void)
     }
 
     // Text not done
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Spawning animation ended
         gCurrentSprite.animationDurationCounter = 0;
@@ -296,7 +296,7 @@ static void ItemBannerRemovalAnimation(void)
 
     msg = gCurrentSprite.roomSlot;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.status = 0;
         if (msg == MESSAGE_SAVE_COMPLETE)

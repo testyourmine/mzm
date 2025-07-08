@@ -909,7 +909,7 @@ static void AtomicElectricityExploding(void)
     if (gCurrentSprite.currentAnimationFrame < 4)
         gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = ATOMIC_POSE_MOVE_BACK_IDLE;
         gCurrentSprite.hitboxTop = -QUARTER_BLOCK_SIZE;
@@ -929,7 +929,7 @@ static void AtomicElectricityExploding(void)
  */
 static void AtomicElectricityCheckOnGroundAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0; // Kill sprite
 }
 

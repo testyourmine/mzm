@@ -67,7 +67,7 @@ void WaterDrop(void)
             break;
 
         case WATER_DROP_POSE_CHECK_SPAWNING_ENDED:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sWaterDropOam_Falling;
                 gCurrentSprite.currentAnimationFrame = 0;
@@ -135,7 +135,7 @@ void WaterDrop(void)
             if (gCurrentSprite.work1)
                 gCurrentSprite.yPosition = gEffectYPosition;
 
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.status |= SPRITE_STATUS_NOT_DRAWN;
                 gCurrentSprite.pose = WATER_DROP_POSE_SPAWNING;

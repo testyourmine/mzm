@@ -110,7 +110,7 @@ static void Ripper2TurnAroundInit(void)
  */
 static void Ripper2TurnAroundPart1(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.status ^= SPRITE_STATUS_X_FLIP;
         gCurrentSprite.pose = RIPPER2_POSE_TURNING_AROUND_SECOND_PART;
@@ -127,7 +127,7 @@ static void Ripper2TurnAroundPart1(void)
  */
 static void Ripper2TurnAroundPart2(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = RIPPER2_POSE_MOVING_INIT;
 }
 

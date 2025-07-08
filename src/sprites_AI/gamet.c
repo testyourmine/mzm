@@ -82,7 +82,7 @@ static void GametIdle(void)
 
     if (gCurrentSprite.spriteId == PSPRITE_GAMET_BLUE_LEADER)
     {
-        if (SpriteUtilCountPrimarySpritesWithCurrentSpriteRAMSlot(PSPRITE_GAMET_BLUE_FOLLOWER) != 0)
+        if (SpriteUtilCountChildPrimarySprites(PSPRITE_GAMET_BLUE_FOLLOWER) != 0)
             return;
     }
 

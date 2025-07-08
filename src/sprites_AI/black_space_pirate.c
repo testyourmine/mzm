@@ -417,7 +417,7 @@ static void BlackSpacePirateShooting(void)
         return;
     }
 
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         if (gSpriteDrawOrder[2] == FALSE)
         {
@@ -483,7 +483,7 @@ static void BlackSpacePirateJumping(void)
 
     if (gCurrentSprite.status & SPRITE_STATUS_DOUBLE_SIZE)
     {
-        if (!SpriteUtilCheckNearEndCurrentSpriteAnim())
+        if (!SpriteUtilHasCurrentAnimationNearlyEnded())
             return;
 
         if (gCurrentSprite.status & SPRITE_STATUS_FACING_DOWN)
@@ -825,7 +825,7 @@ static void BlackSpacePirateWalkingAlerted(void)
         {
             if (gCurrentSprite.pOam == sSpacePirateOam_Crouched)
             {
-                if (!SpriteUtilCheckEndCurrentSpriteAnim())
+                if (!SpriteUtilHasCurrentAnimationEnded())
                     return;
 
                 gCurrentSprite.pOam = sSpacePirateOam_Walking;

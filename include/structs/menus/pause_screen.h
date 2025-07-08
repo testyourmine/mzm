@@ -5,6 +5,7 @@
 
 #include "constants/menus/status_screen.h"
 #include "constants/samus.h"
+#include "constants/text.h"
 
 #include "structs/menu.h"
 #include "structs/connection.h"
@@ -227,7 +228,7 @@ struct PauseScreenData {
 
     u8 unk_56;
     u8 currentStatusSlot;
-    u8 currentEquipment;
+    DescriptionTextId currentEquipment;
 
     u8 padding_59[3];
 

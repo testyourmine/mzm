@@ -166,7 +166,7 @@ static void WorkerRobotWakingUpInit(void)
  */
 static void WorkerRobotWakingUp(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = WORKER_ROBOT_POSE_STANDING_INIT;
 }
 
@@ -511,7 +511,7 @@ static void WorkerRobotBackToSleepInit(void)
  */
 static void WorkerRobotBackToSleep(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = WORKER_ROBOT_POSE_TURNING_AROUND;
 
@@ -529,7 +529,7 @@ static void WorkerRobotBackToSleep(void)
  */
 static void WorkerRobotTurningAroundInit(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
             gCurrentSprite.status &= ~(SPRITE_STATUS_X_FLIP | SPRITE_STATUS_FACING_RIGHT);
@@ -550,7 +550,7 @@ static void WorkerRobotTurningAroundInit(void)
  */
 static void WorkerRobotCheckTurningAroundAnimEnded(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = WORKER_ROBOT_POSE_SLEEPING_INIT;
 }
 

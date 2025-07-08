@@ -495,7 +495,7 @@ static void AcidWormSpawnStayingOnTop(void)
     AcidWormWiggleHorizontally();
 
     // Go down if anim ended
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = ACID_WORM_POSE_SPAWN_RETRACT;
         gCurrentSprite.pOam = sAcidWormOam_MouthClosed;
@@ -621,7 +621,7 @@ static void AcidWormCheckWarningAnimEnded(void)
 {
     AcidWormHandleRotation();
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Init extending
         gCurrentSprite.pOam = sAcidWormOam_Moving;
@@ -861,7 +861,7 @@ static void AcidWormExtended(void)
     {
         finishedSpitting++;
     }
-    else if (SpriteUtilCheckEndCurrentSpriteAnim())
+    else if (SpriteUtilHasCurrentAnimationEnded())
     {
         finishedSpitting++;
     }
@@ -1720,7 +1720,7 @@ static void AcidWormSpitExplodingInit(void)
 static void AcidWormSpitExploding(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0; // Kill sprite
 }
 
@@ -1735,7 +1735,7 @@ static void AcidWormSpitCheckExplodingOnAcidAnimEnded(void)
 
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0; // Kill sprite
 }
 

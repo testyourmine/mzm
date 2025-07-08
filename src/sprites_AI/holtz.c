@@ -228,7 +228,7 @@ static void HoltzCheckWarningAnimEnded(void)
     gCurrentSprite.work3 = offset + 1;
     gCurrentSprite.yPosition += movement;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set going down behavior
         gCurrentSprite.pose = HOLTZ_POSE_GOING_DOWN;
@@ -281,7 +281,7 @@ static void HoltzSlidingMove(void)
 {
     HoltzXMovement(gCurrentSprite.work2); // X Movement
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set going up behavior
         gCurrentSprite.pose = HOLTZ_POSE_GOING_UP;
@@ -350,7 +350,7 @@ static void HoltzBackToCeiling(void)
     gCurrentSprite.work3 = offset + 1;
     gCurrentSprite.yPosition += movement;
 
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = HOLTZ_POSE_IDLE_INIT; // Set idle
 }
 

@@ -1,35 +1,42 @@
 #ifndef SPRITE_UTIL_CONSTANTS_H
 #define SPRITE_UTIL_CONSTANTS_H
 
-#define NSLR_OUT_OF_RANGE 0x0
-#define NSLR_LEFT 0x4
-#define NSLR_RIGHT 0x8
+#include "types.h"
+#include "macros.h"
 
-#define NSAB_OUT_OF_RANGE 0x0
-#define NSAB_ABOVE 0x1
-#define NSAB_BELOW 0x2
+MAKE_ENUM(u32, NearLeftRight) {
+    NSLR_OUT_OF_RANGE,
+    NSLR_LEFT = 4,
+    NSLR_RIGHT = 8,
+};
 
-#define NSFB_OUT_OF_RANGE 0x0
-#define NSFB_IN_FRONT 0x3
-#define NSFB_BEHIND 0xC
+MAKE_ENUM(u32, NearAboveBelow) {
+    NSAB_OUT_OF_RANGE,
+    NSAB_ABOVE,
+    NSAB_BELOW
+};
 
-enum DamageContactType {
+MAKE_ENUM(u32, NearFrontBack) {
+    NSFB_OUT_OF_RANGE,
+    NSFB_IN_FRONT = 3,
+    NSFB_BEHIND = 12
+};
+
+MAKE_ENUM(u32, DamageContactType) {
     DCT_NONE,
     DCT_SHINESPARK,
     DCT_SPEEDBOOSTER,
     DCT_SCREW_ATTACK,
-    DCT_PSEUDO_SCREW,
-
-    DCT_END
+    DCT_PSEUDO_SCREW
 };
 
-enum SpriteDeathType {
+MAKE_ENUM(u8, SpriteDeathType) {
     DEATH_NORMAL,
     DEATH_RESPAWNING,
     DEATH_NO_DEATH_OR_RESPAWNING_ALREADY_HAS_DROP
 };
 
-enum SplashSize {
+MAKE_ENUM(u8, SplashSize) {
     SPLASH_NONE,
     SPLASH_SMALL,
     SPLASH_BIG,

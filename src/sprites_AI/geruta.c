@@ -174,7 +174,7 @@ static void GerutaWarningInit(void)
  */
 static void GerutaCheckWarningEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = GERUTA_POSE_LAUNCHING;
         gCurrentSprite.animationDurationCounter = 0;
@@ -189,7 +189,7 @@ static void GerutaCheckWarningEnded(void)
  */
 static void GerutaCheckLaunchingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = GERUTA_POSE_GOING_DOWN;
         gCurrentSprite.animationDurationCounter = 0;
@@ -231,7 +231,7 @@ static void GerutaGoingDown(void)
  */
 static void GerutaCheckBouncingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = GERUTA_POSE_GOING_UP;
 
@@ -270,7 +270,7 @@ static void GerutaGoingUp(void)
  */
 static void GerutaCheckBouncingOnCeilingAnimEnded(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = GERUTA_POSE_IDLE_INIT;
 }
 

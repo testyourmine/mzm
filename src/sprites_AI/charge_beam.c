@@ -66,7 +66,7 @@ static void ChargeBeamSpawnGlow(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         gCurrentSprite.pose = CHARGE_BEAM_POSE_IDLE_INIT;
 

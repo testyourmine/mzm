@@ -566,7 +566,7 @@ static void ChozoStatueSitting(void)
     if (gSubSpriteData1.work2 != 0)
         SpawnChozoStatueMovement(gSubSpriteData1.work2);
 
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         gSubSpriteData1.pMultiOam = sChozoStatueMultiSpriteData_Seated;
         gSubSpriteData1.animationDurationCounter = 0;
@@ -1118,7 +1118,7 @@ static void ChozoStatuePartEyeOpeningInit(void)
  */
 static void ChozoStatuePartEyeOpening(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = CHOZO_STATUE_PART_POSE_DO_NOTHING;
 
@@ -1148,7 +1148,7 @@ static void ChozoStatuePartEyeClosingInit(void)
  */
 static void ChozoStatuePartEyeClosing(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = CHOZO_STATUE_PART_POSE_DO_NOTHING;
 

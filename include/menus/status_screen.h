@@ -5,6 +5,7 @@
 
 #include "constants/connection.h"
 #include "constants/samus.h"
+#include "constants/text.h"
 
 void UpdateMinimapAnimatedPalette(void);
 void LoadPauseScreenBgPalette(void);
@@ -52,7 +53,7 @@ u32 StatusScreenFindUnknownItemSlot(u8 wantUnknownItem);
 u32 StatusScreenUpdateUnknownItemPalette(u8 stage);
 u32 StatusScreenFullyPoweredItems(void);
 void StatusScreenSubroutine(void);
-u8 StatusScreenGetCurrentEquipmentSelected(u8 statusSlot);
+DescriptionTextId StatusScreenGetCurrentEquipmentSelected(u8 statusSlot);
 u32 StatusScreenUpdateCursorPosition(u8 statusSlot);
 u32 StatusScreenIsStatusSlotEnabled(u8 statusSlot);
 u32 StatusScreenToggleItem(u8 statusSlot, u8 action);

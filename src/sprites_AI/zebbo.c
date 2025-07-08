@@ -82,7 +82,7 @@ static void ZebboIdle(void)
 
     if (gCurrentSprite.spriteId == PSPRITE_ZEBBO_GREEN_LEADER)
     {
-        if (SpriteUtilCountPrimarySpritesWithCurrentSpriteRAMSlot(PSPRITE_ZEBBO_GREEN_FOLLOWER) != 0)
+        if (SpriteUtilCountChildPrimarySprites(PSPRITE_ZEBBO_GREEN_FOLLOWER) != 0)
             return;
     }
 

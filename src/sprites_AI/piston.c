@@ -219,7 +219,7 @@ static void PistonOpen(void)
         gCurrentSprite.status &= ~SPRITE_STATUS_SAMUS_COLLIDING;
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Opening animation done, set opened behavior
         gCurrentSprite.pOam = sPistonOam_Opened;

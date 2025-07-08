@@ -739,7 +739,7 @@ static void ZeelaTurningAroundInit(void)
  */
 static void ZeelaTurning(void)
 {
-    if (!SpriteUtilCheckEndCurrentSpriteAnim())
+    if (!SpriteUtilHasCurrentAnimationEnded())
         return;
 
     gCurrentSprite.pose = ZEELA_POSE_IDLE;
@@ -872,7 +872,7 @@ static void ZeelaLanding(void)
     
     if (ZeelaCheckCollidingWithAir())
         gCurrentSprite.pose = ZEELA_POSE_FALLING_INIT;
-    else if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    else if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = ZEELA_POSE_IDLE_INIT;
 }
 
@@ -1127,7 +1127,7 @@ static void ZeelaEyesExploding(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 

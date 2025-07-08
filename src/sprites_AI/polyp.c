@@ -75,7 +75,7 @@ static void PolypCheckSpawnProjectile(void)
 
     // Shoot if on screen, not already shooted and projectile doesn't have an active drop
     if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN &&
-        SpriteUtilCountSecondarySpritesWithCurrentSpriteRAMSlot(SSPRITE_POLYP_PROJECTILE) == 0 &&
+        SpriteUtilCountChildSecondarySprites(SSPRITE_POLYP_PROJECTILE) == 0 &&
         !SpriteUtilCheckHasDrops())
     {
         // Set warning behavior
@@ -101,7 +101,7 @@ static void PolypCheckSpawnProjectile(void)
  */
 static void PolypCheckWarningEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set spitting behavior
         gCurrentSprite.pose = POLYP_POSE_SPITTING;
@@ -144,7 +144,7 @@ static void PolypSpawnProjectile(void)
  */
 static void PolypCheckAfterSpittingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set retracting behavior
         gCurrentSprite.pose = POLYP_POSE_RETRACTING;
@@ -161,7 +161,7 @@ static void PolypCheckAfterSpittingAnimEnded(void)
  */
 static void PolypCheckRetractingAnimEnded(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = POLYP_POSE_IDLE_INIT; // Set idle
 }
 
@@ -292,7 +292,7 @@ static void PolypProjectileCheckExplodingAnimEnded(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0; // Kill sprite
 }
 

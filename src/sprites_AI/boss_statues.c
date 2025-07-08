@@ -243,7 +243,7 @@ static void KraidStatueOpening(void)
     if (gCurrentSprite.currentAnimationFrame == 29 && gCurrentSprite.animationDurationCounter == 1 * DELTA_TIME)
         KraidStatueInsideChangeCcaa(CAA_REMOVE_SOLID);
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set opened
         KraidStatueOpenedInit();
@@ -482,7 +482,7 @@ static void RidleyStatueOpening(void)
         if (gCurrentSprite.currentAnimationFrame == 29 && gCurrentSprite.animationDurationCounter == 1 * DELTA_TIME)
             RidleyStatueInsideChangeCcaa(CAA_REMOVE_SOLID);
 
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             // Set opened
             RidleyStatueOpenedInit();

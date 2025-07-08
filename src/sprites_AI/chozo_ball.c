@@ -252,7 +252,7 @@ static void ChozoBallRevealingInit(void)
  */
 static void ChozoBallCheckRevealingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = CHOZO_BALL_POSE_IDLE;
 

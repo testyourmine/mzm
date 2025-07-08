@@ -2,6 +2,9 @@
 #define TEXT_H
 
 #include "types.h"
+
+#include "constants/text.h"
+
 #include "structs/text.h"
 
 u32 TextGetCharacterWidth(u16 charID);
@@ -12,7 +15,7 @@ void TextDrawLocation(u8 locationText, u8 gfxSlot);
 u8 unk_6f0a8(u8 textID, u8 gfxSlot, u8 param_3);
 void TextStartMessage(u8 textID, u8 gfxSlot);
 u8 TextProcessItemBanner(void);
-void TextStartStory(u8 textID);
+void TextStartStory(StoryTextId textId);
 u8 TextProcessStory(void);
 void TextStartFileScreen(u8 textID);
 u8 TextProcessFileScreenPopUp(void);

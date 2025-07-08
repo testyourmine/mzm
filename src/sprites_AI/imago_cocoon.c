@@ -1037,7 +1037,7 @@ static void ImagoCocoonSporeSpawning(void)
         SoundPlay(SOUND_IMAGO_COCOON_SPORE_SPAWNING);
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set nest
         gCurrentSprite.pOam = sImagoCocoonSporeOam_Nest;
@@ -1175,7 +1175,7 @@ static void ImagoCocoonSporeExplodingInit(void)
 static void ImagoCocoonSporeCheckExplodingAnimEnded(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 
@@ -1307,7 +1307,7 @@ static void WingedRipperMove(void)
                 gCurrentSprite.animationDurationCounter = 0;
             }
         }
-        else if (gCurrentSprite.pOam == sWingedRipperOam_TurningAround && SpriteUtilCheckEndCurrentSpriteAnim())
+        else if (gCurrentSprite.pOam == sWingedRipperOam_TurningAround && SpriteUtilHasCurrentAnimationEnded())
         {
             if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
             {
@@ -1336,7 +1336,7 @@ static void WingedRipperMove(void)
                 gCurrentSprite.animationDurationCounter = 0;
             }
         }
-        else if (gCurrentSprite.pOam == sWingedRipperOam_TurningAround && SpriteUtilCheckEndCurrentSpriteAnim())
+        else if (gCurrentSprite.pOam == sWingedRipperOam_TurningAround && SpriteUtilHasCurrentAnimationEnded())
         {
             if (gCurrentSprite.status & SPRITE_STATUS_X_FLIP)
             {

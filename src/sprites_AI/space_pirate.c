@@ -2092,7 +2092,7 @@ void SpacePirateFalling(void)
 
     if (gCurrentSprite.status & SPRITE_STATUS_DOUBLE_SIZE)
     {
-        if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationNearlyEnded())
         {
             if (gCurrentSprite.status & SPRITE_STATUS_FACING_DOWN)
             {
@@ -2192,7 +2192,7 @@ void unk_2a7c0(void)
 
     if (gPreviousVerticalCollisionCheck == COLLISION_AIR)
         gCurrentSprite.pose = SPACE_PIRATE_POSE_FALLING_INIT;
-    else if (SpriteUtilCheckNearEndCurrentSpriteAnim() && !unk_29b68())
+    else if (SpriteUtilHasCurrentAnimationNearlyEnded() && !unk_29b68())
         gCurrentSprite.pose = SPACE_PIRATE_POSE_WALKING_INIT;
 }
 
@@ -2242,7 +2242,7 @@ void SpacePirateWalking(void)
         {
             if (gCurrentSprite.pOam == sSpacePirateOam_Crouched)
             {
-                if (!SpriteUtilCheckEndCurrentSpriteAnim())
+                if (!SpriteUtilHasCurrentAnimationEnded())
                     return;
 
                 gCurrentSprite.pOam = sSpacePirateOam_Walking;
@@ -2308,7 +2308,7 @@ void SpacePirateIdle(void)
             {
                 if (gCurrentSprite.status & SPRITE_STATUS_SAMUS_COLLIDING)
                 {
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                         turn++;
                 }
                 else
@@ -2335,7 +2335,7 @@ void SpacePirateIdle(void)
             break;
 
         case 0x1:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.work1 = 0x2;
 
@@ -2349,7 +2349,7 @@ void SpacePirateIdle(void)
             break;
 
         case 0x2:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.work1 = 0;
 
@@ -2412,10 +2412,10 @@ void unk_2aa88(void)
     {
         if (gCurrentSprite.work0 != 0)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.work0--;
         }
-        else if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+        else if (SpriteUtilHasCurrentAnimationNearlyEnded())
         {
             gCurrentSprite.pose = SPACE_PIRATE_POSE_TURNING_AROUND_ALERTED_INIT;
         }
@@ -2481,7 +2481,7 @@ void unk_2ab58(void)
         return;
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SPACE_PIRATE_POSE_TURNING_AROUND_FIRST_PART;
         gCurrentSprite.scaling = 0;
@@ -2515,7 +2515,7 @@ void SpacePirateTurningAroundInit(void)
  */
 void SpacePirateTurningAroundFirstPart(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SPACE_PIRATE_POSE_TURNING_AROUND_SECOND_PART;
 
@@ -2534,7 +2534,7 @@ void SpacePirateTurningAroundFirstPart(void)
  */
 void SpacePirateTurningAroundSecondPart(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         if (unk_29b68())
         {
@@ -2572,7 +2572,7 @@ void SpacePirateTurningAroundFirstPartAlerted(void)
 {
     APPLY_DELTA_TIME_INC(gCurrentSprite.animationDurationCounter);
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SPACE_PIRATE_POSE_TURNING_AROUND_ALERTED_SECOND_PART;
 
@@ -2593,7 +2593,7 @@ void SpacePirateTurningAroundSecondPartAlerted(void)
 {
     APPLY_DELTA_TIME_INC(gCurrentSprite.animationDurationCounter);
 
-    if (!SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (!SpriteUtilHasCurrentAnimationNearlyEnded())
         return;
 
     if (gCurrentSprite.status & SPRITE_STATUS_FACING_DOWN)
@@ -2683,7 +2683,7 @@ void SpacePirateWalkingAlerted(void)
             {
                 if (gCurrentSprite.pOam == sSpacePirateOam_Crouched)
                 {
-                    if (!SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (!SpriteUtilHasCurrentAnimationEnded())
                         return;
 
                     gCurrentSprite.pOam = sSpacePirateOam_Walking;
@@ -2755,7 +2755,7 @@ void SpacePirateJumping(void)
     colliding = FALSE;
     if (gCurrentSprite.status & SPRITE_STATUS_DOUBLE_SIZE)
     {
-        if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationNearlyEnded())
         {
             if (gCurrentSprite.status & SPRITE_STATUS_FACING_DOWN)
             {
@@ -3081,7 +3081,7 @@ void SpacePirateShootingLaser(void)
         return;
     }
     
-    if (!SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (!SpriteUtilHasCurrentAnimationNearlyEnded())
         return;
 
     if (gSpriteDrawOrder[2] == 0x0)
@@ -3604,7 +3604,7 @@ void unk_2ba98(void)
     switch (gCurrentSprite.work1)
     {
         case 1:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sSpacePirateOam_AimingWhileClimbing;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -3614,7 +3614,7 @@ void unk_2ba98(void)
             break;
 
         case 2:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 pose = SpacePirateClimbingCheckWallJumpOrFire();
 
@@ -3670,7 +3670,7 @@ void unk_2ba98(void)
             break;
 
         case 3:
-            if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationNearlyEnded())
                 gCurrentSprite.pose = gCurrentSprite.work0;
             break;
 
@@ -3702,7 +3702,7 @@ void SpacePirateClimbingChargingLaserInit(void)
  */
 void SpacePirateClimbingChargingLaser(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = SPACE_PIRATE_POSE_CLIMBING_SHOOTING_LASER_INIT;
 }
 
@@ -3766,7 +3766,7 @@ void SpacePirateClimbingShootingLaser(void)
         SpacePirateFireLaserWall();
     }
 
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         gCurrentSprite.pOam = sSpacePirateOam_AimingWhileClimbing;
         gCurrentSprite.animationDurationCounter = 0;
@@ -3798,12 +3798,12 @@ void SpacePirateTurningAroundToWallJump(void)
 {
     if (gCurrentSprite.work0)
     {
-        if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationNearlyEnded())
             gCurrentSprite.pose = SPACE_PIRATE_POSE_LAUNCHING_FROM_WALL_INIT;
     }
     else
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pose = SPACE_PIRATE_POSE_DELAY_BEFORE_LAUNCHING_FROM_WALL;
 
@@ -3852,7 +3852,7 @@ void SpacePirateDelayBeforeLaunchingFromWall(void)
         }
     }
 
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = SPACE_PIRATE_POSE_LAUNCHING_FROM_WALL_INIT;
 }
 
@@ -3875,7 +3875,7 @@ void SpacePirateLaunchingFromWallInit(void)
  */
 void SpacePirateLaunchingFromWall(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         gCurrentSprite.pose = SPACE_PIRATE_POSE_WALL_JUMPING;
 
@@ -3936,7 +3936,7 @@ void SpacePirateStartingToCrawl(void)
                 gCurrentSprite.xPosition -= HALF_BLOCK_SIZE;
         }
 
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pose = SPACE_PIRATE_POSE_CRAWLING;
 
@@ -4050,7 +4050,7 @@ void SpacePirateTurningAroundWhileCrawlingInit(void)
  */
 void SpacePirateTurningWhileCrawlingFirstPart(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SPACE_PIRATE_POSE_TURNING_AROUND_WHILE_CRAWLING_SECOND_PART;
 
@@ -4069,7 +4069,7 @@ void SpacePirateTurningWhileCrawlingFirstPart(void)
  */
 void SpacePirateTurningWhileCrawlingSecondPart(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SPACE_PIRATE_POSE_CRAWLING;
 
@@ -4125,7 +4125,7 @@ void SpacePirateStandingUp(void)
     else
     {
         gCurrentSprite.hitboxTop = -(BLOCK_SIZE * 2 + HALF_BLOCK_SIZE);
-        if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationNearlyEnded())
         {
             if (unk_29b68())
             {
@@ -4222,7 +4222,7 @@ void SpacePirateCrawlingStoppedInit(void)
  */
 void SpacePirateCrawlingStopped(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = SPACE_PIRATE_POSE_TURNING_AROUND_WHILE_CRAWLING_INIT;
 }
 
@@ -4407,7 +4407,7 @@ void SpacePirateLaserCheckExplodingAnimEnded(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 

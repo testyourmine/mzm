@@ -372,7 +372,7 @@ static void ImagoLarvaCheckWarningAnimEnded(struct SubSpriteData* pSub)
 {
     ImagoLarvaUpdatePalette();
 
-    if (SpriteUtilCheckNearEndSubSpriteAnim(pSub))
+    if (SpriteUtilHasSubSpriteAnimationNearlyEnded(pSub))
         gCurrentSprite.pose = IMAGO_LARVA_POSE_ATTACKING_INIT;
 }
 
@@ -777,7 +777,7 @@ static void ImagoLarvaPartDotIdle(struct SubSpriteData* pSub)
  */
 static void ImagoLarvaPartDotCheckDisappearingAnimEnded(struct SubSpriteData* pSub)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set visible, but won't be drawn
         if (gCurrentSprite.roomSlot == IMAGO_LARVA_PART_RIGHT_DOT)
@@ -833,7 +833,7 @@ static void ImagoLarvaPartDotCheckShouldReappear(struct SubSpriteData* pSub)
  */
 static void ImagoLarvaPartDotCheckAppearingAnimEnded(struct SubSpriteData* pSub)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set visible
         if (gCurrentSprite.roomSlot == IMAGO_LARVA_PART_RIGHT_DOT)

@@ -151,7 +151,7 @@ static void SavePlatformChozodiaSamusDetection(void)
  */
 static void SavePlatformChozodiaCheckOpeningAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_OPENED;
         gCurrentSprite.pOam = sSavePlatformChozodiaOam_Opened;
@@ -198,7 +198,7 @@ static void SavePlatformChozodiaSecondSamusDetection(void)
  */
 static void SavePlatformChozodiaCheckClosingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_IDLE;
         gCurrentSprite.pOam = sSavePlatformChozodiaOam_Idle;
@@ -681,7 +681,7 @@ static void SavePlatformChozodiaPartTopExtendingInit(void)
  */
 static void SavePlatformChozodiaPartTopExtending(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_PART_POSE_TOP_IDLE;
 
@@ -713,7 +713,7 @@ static void SavePlatformChozodiaPartTopRetractingInit(void)
  */
 static void SavePlatformChozodiaPartTopRetracting(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_PART_POSE_TOP_IDLE;
 
@@ -729,7 +729,7 @@ static void SavePlatformChozodiaPartTopRetracting(void)
  */
 static void SavePlatformChozodiaPartTubeSpawning(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_PART_POSE_TUBE_CHECK_SHADOW_DISAPPEARED;
         
@@ -783,7 +783,7 @@ static void SavePlatformChozodiaPartTubeIdle(void)
  */
 static void SavePlatformChozodiaPartTubeDespawning(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.status = 0;
         gSpriteData[gSpriteData[gCurrentSprite.primarySpriteRamSlot].work3].pose = SAVE_PLATFORM_CHOZODIA_PART_POSE_TOP_RETRACTING_INIT;
@@ -796,7 +796,7 @@ static void SavePlatformChozodiaPartTubeDespawning(void)
  */
 static void SavePlatformChozodiaPartTubeShadowIdle(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 

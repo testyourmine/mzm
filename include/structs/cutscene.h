@@ -6,6 +6,7 @@
 
 #include "constants/cutscene.h"
 #include "constants/event.h"
+#include "constants/text.h"
 
 MAKE_ENUM(u8, OamArrayPreAction) {
     OAM_ARRAY_PRE_ACTION_NONE,
@@ -65,7 +66,7 @@ struct CutsceneInfo {
     boolu8 playRoomMusic:4;
     boolu8 isElevator:2;
     boolu8 skippable:2;
-    u8 storyText;
+    StoryTextId storyText;
     CutsceneFunc_T pFunction;
     u8 preBgFading;
     u16 fadingTimer;

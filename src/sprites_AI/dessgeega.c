@@ -223,7 +223,7 @@ static void DessgeegaJumpWarningGround(void)
         }
     }
     
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         DessgeegaJumpingInit(); // Jump if anim ended
 }
 
@@ -233,7 +233,7 @@ static void DessgeegaJumpWarningGround(void)
  */
 static void DessgeegaJumpWarningCeiling(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         DessgeegaJumpingInit(); // Jump if anim ended
 }
 
@@ -491,7 +491,7 @@ static void DessgeegaJumpingCeiling(void)
  */
 static void DessgeegaCheckLandingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         DessgeegaIdleInit(); // Set idle
 }
 
@@ -623,7 +623,7 @@ static void DessgeegaIdleGround(void)
                 return;
             }
         }
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             if (gCurrentSprite.work0++ == gCurrentSprite.work1)
                 DessgeegaJumpWarningInit();
@@ -646,7 +646,7 @@ static void DessgeegaIdleCeiling(void)
         DessgeegaJumpWarningInit();
     else
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             if (gCurrentSprite.work0++ == gCurrentSprite.work1)
                 DessgeegaJumpWarningInit();

@@ -876,7 +876,7 @@ enum DeoremSegment {
         {
             if (gCurrentSprite.pOam == sDeoremOam_Closing)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sDeoremOam_ClosedFast;
                     gCurrentSprite.animationDurationCounter = 0;
@@ -885,7 +885,7 @@ enum DeoremSegment {
             }
             else if (gCurrentSprite.pOam == sDeoremOam_Opening)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sDeoremOam_OpenedFast;
                     gCurrentSprite.animationDurationCounter = 0;
@@ -942,7 +942,7 @@ enum DeoremSegment {
     {
         if (gCurrentSprite.pOam == sDeoremOam_Warning)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 if (gCurrentSprite.status & SPRITE_STATUS_MOSAIC)
                 {
@@ -1024,7 +1024,7 @@ enum DeoremSegment {
 
     if (gCurrentSprite.work0 != 0)
     {
-        if (gCurrentSprite.pOam == sDeoremOam_Opening && SpriteUtilCheckEndCurrentSpriteAnim())
+        if (gCurrentSprite.pOam == sDeoremOam_Opening && SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sDeoremOam_OpenedFast;
             gCurrentSprite.animationDurationCounter = 0;
@@ -1124,7 +1124,7 @@ enum DeoremSegment {
             gSpriteData[eyeSlot].status |= SPRITE_STATUS_IGNORE_PROJECTILES;
             SoundPlay(SOUND_DEOREM_CLOSING_JAW);
         }
-        else if (gCurrentSprite.pOam == sDeoremOam_Closing && SpriteUtilCheckEndCurrentSpriteAnim())
+        else if (gCurrentSprite.pOam == sDeoremOam_Closing && SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sDeoremOam_ClosedFast;
             gCurrentSprite.animationDurationCounter = 0;
@@ -1145,7 +1145,7 @@ enum DeoremSegment {
  */
 /*static*/ void DeoremAfterThorns(void)
 {
-    if (gCurrentSprite.pOam == sDeoremOam_Closing && SpriteUtilCheckEndCurrentSpriteAnim())
+    if (gCurrentSprite.pOam == sDeoremOam_Closing && SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pOam = sDeoremOam_ClosedFast;
         gCurrentSprite.animationDurationCounter = 0;
@@ -1232,7 +1232,7 @@ enum DeoremSegment {
 {
     if (gCurrentSprite.pOam == sDeoremOam_Closing || gCurrentSprite.pOam == sDeoremOam_ClosedFast)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sDeoremOam_ClosedSlow;
             gCurrentSprite.animationDurationCounter = 0;
@@ -2497,7 +2497,7 @@ enum DeoremSegment {
 
     if (gCurrentSprite.pOam == sDeoremEyeOam_Pulsing)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             rng = gSpriteRng;
             

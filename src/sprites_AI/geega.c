@@ -82,7 +82,7 @@ static void GeegaIdle(void)
 
     if (gCurrentSprite.spriteId == PSPRITE_GEEGA_LEADER)
     {
-        if (SpriteUtilCountPrimarySpritesWithCurrentSpriteRAMSlot(PSPRITE_GEEGA_FOLLOWER) != 0)
+        if (SpriteUtilCountChildPrimarySprites(PSPRITE_GEEGA_FOLLOWER) != 0)
             return;
     }
 

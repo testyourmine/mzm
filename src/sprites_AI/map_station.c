@@ -138,7 +138,7 @@ static void MapStationIdle(void)
  */
 static void MapStationCheckSamusGrabbedAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set downloading
         gCurrentSprite.pOam = sMapStationOam_Downloading;
@@ -180,7 +180,7 @@ static void MapStationDownloading(void)
  */
 static void MapStationSpawnMessage(void)
 {
-    u8 text;
+    MessageId text;
 
     APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
     if (gCurrentSprite.work0 != 0)
@@ -384,7 +384,7 @@ void MapStationPart(void)
             break;
 
         case MAP_STATION_PART_POSE_DOWNLOADED:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.status = 0;
     }
 }

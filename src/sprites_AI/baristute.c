@@ -123,7 +123,7 @@ static void BaristuteCheckBeforeJumpingAnimEnded(void)
         return;
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set jumping behavior
         gCurrentSprite.pose = BARISTUTE_POSE_JUMPING;
@@ -232,7 +232,7 @@ static void BaristuteLandingInit(void)
  */
 static void BaristuteCheckLandingAnimNearEnded(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = BARISTUTE_POSE_IDLE_INIT; // Set idle
 }
 
@@ -274,7 +274,7 @@ static void BaristuteIdle(void)
     }
 
     // Wait for the idle animation to end
-    if (!SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (!SpriteUtilHasCurrentAnimationNearlyEnded())
         return;
 
     #ifdef REGION_US_BETA

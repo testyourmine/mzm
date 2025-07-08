@@ -655,7 +655,7 @@ static void RuinsTestTurningIntoReflection(void)
         }
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pOam = sRuinsTestOam_Symbol;
         gCurrentSprite.currentAnimationFrame = 0;
@@ -1496,7 +1496,7 @@ static void RuinsTestGhostSymbolPlacing(void)
         }
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pOam = sRuinsTestGhostOam_SymbolPlaced;
         gCurrentSprite.currentAnimationFrame = 0;
@@ -1758,7 +1758,7 @@ void RuinsTestSymbol(void)
                 }
             }
 
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sRuinsTestSymbolOam_Merging;
                 gCurrentSprite.currentAnimationFrame = 0;
@@ -1815,7 +1815,7 @@ void RuinsTestSymbol(void)
                 }
             }
 
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.status = 0;
     }
 }
@@ -2020,7 +2020,7 @@ void RuinsTestGhostOutline(void)
                 }
             }
             
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.status = 0;
                 if (gCurrentSprite.roomSlot != RUINS_TEST_GHOST_OUTLINE_PART_OUTLINE)
@@ -2074,7 +2074,7 @@ void RuinsTestShootableSymbol(void)
 
         case RUINS_TEST_SHOOTABLE_SYMBOL_POSE_SPAWNING:
             gCurrentSprite.animationDurationCounter++;
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sRuinsTestShootableSymbolOam_Spawned;
                 gCurrentSprite.currentAnimationFrame = 0;
@@ -2097,7 +2097,7 @@ void RuinsTestShootableSymbol(void)
 
         case RUINS_TEST_SHOOTABLE_SYMBOL_POSE_DESPAWNING:
             gCurrentSprite.animationDurationCounter++;
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.status = 0;
             break;
 
@@ -2120,7 +2120,7 @@ void RuinsTestShootableSymbol(void)
                 }
             }
 
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Set shootable timer to 0
                 gSubSpriteData1.work1 = 0;
@@ -2439,7 +2439,7 @@ void RuinsTestLightning(void)
             break;
 
         case RUINS_TEST_LIGHTNING_POSE_GOING_ON_GROUND:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Set on ground
                 RuinsTestLightningOnGroundInit();

@@ -185,7 +185,7 @@ void Geron(void)
                 }
                 else
                 {
-                    if (gCurrentSprite.pOam == sGeronOam_Shaking && SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (gCurrentSprite.pOam == sGeronOam_Shaking && SpriteUtilHasCurrentAnimationEnded())
                     {
                         // Set idle
                         gCurrentSprite.pOam = sGeronOam_Idle;
@@ -231,7 +231,7 @@ void Geron(void)
             break;
 
         case GERON_POSE_DELAY_BEFORE_DESTROYED:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Set destroyed
                 gCurrentSprite.pose = GERON_POSE_DESTROYED;

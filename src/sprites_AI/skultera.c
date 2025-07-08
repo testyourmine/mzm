@@ -303,7 +303,7 @@ static void SkulteraTurningAroundInit(void)
  */
 static void SkulteraCheckTurningAroundAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set idle behavior
         SkulteraIdleInit();

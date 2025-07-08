@@ -1025,7 +1025,7 @@ static void GunshipPartEntranceFrontIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontOpening)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceFrontOpened;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1034,7 +1034,7 @@ static void GunshipPartEntranceFrontIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontClosing)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceFrontOpening;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1052,7 +1052,7 @@ static void GunshipPartEntranceFrontIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontClosing)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceFrontClosed;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1061,7 +1061,7 @@ static void GunshipPartEntranceFrontIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontOpening)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceFrontClosing;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1079,7 +1079,7 @@ static void GunshipPartEntranceFrontOpenClose(void)
 {
     if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontClosing)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sGunshipPartOam_EntranceFrontClosed;
             gCurrentSprite.animationDurationCounter = 0;
@@ -1088,7 +1088,7 @@ static void GunshipPartEntranceFrontOpenClose(void)
     }
     else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceFrontOpening)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sGunshipPartOam_EntranceFrontOpened;
             gCurrentSprite.animationDurationCounter = 0;
@@ -1116,7 +1116,7 @@ static void GunshipPartEntranceBackIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackOpening)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceBackOpened;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1125,7 +1125,7 @@ static void GunshipPartEntranceBackIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackClosing)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceBackOpening;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1145,7 +1145,7 @@ static void GunshipPartEntranceBackIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackClosing)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceBackClosed;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1154,7 +1154,7 @@ static void GunshipPartEntranceBackIdle(void)
         }
         else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackOpening)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sGunshipPartOam_EntranceBackClosing;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -1173,7 +1173,7 @@ static void GunshipPartEntranceBackOpenClose(void)
 {
     if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackClosing)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sGunshipPartOam_EntranceBackClosed;
             gCurrentSprite.animationDurationCounter = 0;
@@ -1182,7 +1182,7 @@ static void GunshipPartEntranceBackOpenClose(void)
     }
     else if (gCurrentSprite.pOam == sGunshipPartOam_EntranceBackOpening)
     {
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sGunshipPartOam_EntranceBackOpened;
             gCurrentSprite.animationDurationCounter = 0;

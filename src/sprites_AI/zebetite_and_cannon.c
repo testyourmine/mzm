@@ -463,7 +463,7 @@ void Cannon(void)
         case CANNON_AIM_LEFT:
             if (gCurrentSprite.pOam == sCannonOam_ShootingLeft)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sCannonOam_AimingLeft;
                     gCurrentSprite.animationDurationCounter = 0;
@@ -487,7 +487,7 @@ void Cannon(void)
             break;
 
         case CANNON_AIM_LEFT_TO_DOWN_LEFT_TRANSITION:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
                 {
@@ -516,7 +516,7 @@ void Cannon(void)
         case CANNON_AIM_DOWN_LEFT:
             if (gCurrentSprite.pOam == sCannonOam_ShootingDownLeft)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sCannonOam_AimingDownLeft;
                     gCurrentSprite.animationDurationCounter = 0;
@@ -549,7 +549,7 @@ void Cannon(void)
             break;
 
         case CANNON_AIM_DOWN_LEFT_TO_DOWN_TRANSITION:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
                 {
@@ -578,7 +578,7 @@ void Cannon(void)
         case CANNON_AIM_DOWN:
             if (gCurrentSprite.pOam == sCannonOam_ShootingDown)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sCannonOam_AimingDown;
                     gCurrentSprite.animationDurationCounter = 0;
@@ -614,7 +614,7 @@ void Cannon(void)
             break;
 
         case CANNON_AIM_DOWN_TO_DOWN_RIGHT_TRANSITION:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
                 {
@@ -642,7 +642,7 @@ void Cannon(void)
         case CANNON_AIM_DOWN_RIGHT:
             if (gCurrentSprite.pOam == sCannonOam_ShootingDownRight)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sCannonOam_AimingDownRight;
                     gCurrentSprite.animationDurationCounter = 0;
@@ -675,7 +675,7 @@ void Cannon(void)
             break;
 
         case CANNON_AIM_DOWN_RIGHT_TO_RIGHT_TRANSITION:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 if (gCurrentSprite.status & SPRITE_STATUS_FACING_RIGHT)
                 {
@@ -704,7 +704,7 @@ void Cannon(void)
         case CANNON_AIM_RIGHT:
             if (gCurrentSprite.pOam == sCannonOam_ShootingRight)
             {
-                if (SpriteUtilCheckEndCurrentSpriteAnim())
+                if (SpriteUtilHasCurrentAnimationEnded())
                 {
                     gCurrentSprite.pOam = sCannonOam_AimingRight;
                     gCurrentSprite.animationDurationCounter = 0;

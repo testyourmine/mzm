@@ -4,6 +4,7 @@
 #include "types.h"
 
 #include "constants/samus.h"
+#include "constants/text.h"
 #include "constants/menus/file_select.h"
 
 #include "structs/menu.h"
@@ -93,7 +94,7 @@ struct FileSelectData {
 
     struct FileSelectMenuCursors fileSelectCursors;
     u8 processTextStage;
-    u8 messageInfoIdQueue[3];
+    FileScreenMessageInfoId messageInfoIdQueue[3];
     u8 difficultyMessage;
     u8 continueNewMessage;
     u8 unk_3A; // action for process file selection stage 38

@@ -952,7 +952,7 @@ static void ParasiteTurningAroundInit(struct SpriteData* pSprite)
  */
 static void ParasiteTurningAroundFirstPart(struct SpriteData* pSprite)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         pSprite->status ^= SPRITE_STATUS_X_FLIP;
         pSprite->pose = PARASITE_POSE_TURNING_AROUND_SECOND_PART;
@@ -966,7 +966,7 @@ static void ParasiteTurningAroundFirstPart(struct SpriteData* pSprite)
  */
 static void ParasiteTurningAroundSecondPart(struct SpriteData* pSprite)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         pSprite->pose = PARASITE_POSE_IDLE_INIT;
 }
 
@@ -1021,7 +1021,7 @@ static void ParasiteLanding(struct SpriteData* pSprite)
             pSprite->animationDurationCounter = 0;
         }
     }
-    else if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    else if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         setPose++; // Anim ended, set pose
     }
@@ -1113,7 +1113,7 @@ static void ParasiteDying(struct SpriteData* pSprite)
 {
     pSprite->ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         pSprite->status = 0;
 }
 
@@ -1126,7 +1126,7 @@ static void ParasiteMultipleDying(struct SpriteData* pSprite)
 {
     pSprite->ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         pSprite->status = 0;
         gSpriteData[pSprite->primarySpriteRamSlot].status = 0;

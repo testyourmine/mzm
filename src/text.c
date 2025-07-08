@@ -702,7 +702,7 @@ void TextDrawLocationTextCharacters(u8 param_1, const u16** ppText)
             indent = **ppText & 0xFF;
             drawFlag = FALSE;
         }
-        else if ((**ppText & CHAR_MASK) == CHAR_COLOR_MAX)
+        else if ((**ppText & CHAR_MASK) == CHAR_COLOR_MASK)
         {
             width = 0;
             color = **ppText & 0xFF;
@@ -932,10 +932,10 @@ u8 TextProcessItemBanner(void)
  * 
  * @param textID Story text ID
  */
-void TextStartStory(u8 textID)
+void TextStartStory(StoryTextId textId)
 {
     gCurrentMessage = sMessageStoryText_Empty;
-    gCurrentMessage.messageID = textID;
+    gCurrentMessage.messageID = textId;
 }
 
 /**
@@ -1138,7 +1138,7 @@ void TextProcessDescription(void)
         PAUSE_SCREEN_DATA.miscOam[1].exists = FALSE;
         PAUSE_SCREEN_DATA.unk_56 = 0;
         PAUSE_SCREEN_DATA.currentStatusSlot = PAUSE_SCREEN_DATA.statusScreenData.currentStatusSlot;
-        PAUSE_SCREEN_DATA.currentEquipment = 0;
+        PAUSE_SCREEN_DATA.currentEquipment = DESCRIPTION_TEXT_LONG_BEAM;
 
         gCurrentMessage = sMessageDescription_Empty;
     }
@@ -1150,7 +1150,7 @@ void TextProcessDescription(void)
             PAUSE_SCREEN_DATA.currentEquipment = StatusScreenGetCurrentEquipmentSelected(PAUSE_SCREEN_DATA.currentStatusSlot);
             BitFill(3, 0, VRAM_BASE + 0x7800, 0x800, 16);
 
-            if (PAUSE_SCREEN_DATA.currentEquipment < DESCRIPTION_TEXT_END)
+            if (PAUSE_SCREEN_DATA.currentEquipment < DESCRIPTION_TEXT_COUNT)
                 PAUSE_SCREEN_DATA.unk_56++;
             else
                 PAUSE_SCREEN_DATA.unk_56 = 0x80;
@@ -1337,7 +1337,7 @@ u8 TextProcessCurrentMessage(struct Message* pMessage, const u16* pText, u32* ds
                     pMessage->indent = *pText & UCHAR_MAX;
                     break;
 
-                case CHAR_COLOR_MAX:
+                case CHAR_COLOR_MASK:
                     // Special color character, changes the color
                     pMessage->color = *pText;
                     break;
@@ -1448,7 +1448,7 @@ void TextDrawYesNoEasySleep(void)
         else if (*pText & CHAR_WIDTH_MASK)
         {
             // Check for color change
-            if ((*pText & CHAR_TERMINATOR) == CHAR_COLOR_MAX)
+            if ((*pText & CHAR_TERMINATOR) == CHAR_COLOR_MASK)
                 gCurrentMessage.color = *pText;
 
             shouldDraw = FALSE;

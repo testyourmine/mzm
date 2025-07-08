@@ -106,7 +106,7 @@ static void SkreeSpinningInit(void)
  */
 static void SkreeCheckSpinAnimEnded(void)
 {
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = SKREE_POSE_GOING_DOWN_INIT;
 }
 
@@ -320,7 +320,7 @@ static void SkreeExplosionMove(void)
     else
         gCurrentSprite.yPosition -= PIXEL_SIZE;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 

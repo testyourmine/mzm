@@ -3262,9 +3262,9 @@ void StatusScreenSubroutine(void)
  * @param statusSlot Status slot
  * @return u8 Equipment id (description text id)
  */
-u8 StatusScreenGetCurrentEquipmentSelected(u8 statusSlot)
+DescriptionTextId StatusScreenGetCurrentEquipmentSelected(u8 statusSlot)
 {
-    u8 descriptionTextId;
+    DescriptionTextId descriptionTextId;
     u32 activation;
     u8 slot;
 

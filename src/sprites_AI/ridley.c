@@ -976,7 +976,7 @@ static void RidleySpawning(void)
             break;
             
         case RIDLEY_SPAWNING_ACTION_TURNING_AROUND_FIRST_PART:
-            if (SpriteUtilCheckEndSubSprite1Anim())
+            if (SpriteUtilHasSubSprite1AnimationEnded())
             {
                 gSubSpriteData1.pMultiOam = sRidleyMultiSpriteData_TurningAroundSecondPart;
                 gSubSpriteData1.animationDurationCounter = 0;
@@ -997,7 +997,7 @@ static void RidleySpawning(void)
             break;
             
         case RIDLEY_SPAWNING_ACTION_TURNING_AROUND_SECOND_PART:
-            if (SpriteUtilCheckEndSubSprite1Anim())
+            if (SpriteUtilHasSubSprite1AnimationEnded())
             {
                 gSubSpriteData1.pMultiOam = sRidleyMultiSpriteData_Idle;
                 gSubSpriteData1.animationDurationCounter = 0;
@@ -1510,7 +1510,7 @@ static void RidleyTurningAroundFirstPart(void)
 {
     RidleyIdleYFloatingMovement();
 
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         gCurrentSprite.pose = RIDLEY_POSE_TURNING_AROUND_SECOND_PART;
 
@@ -1541,7 +1541,7 @@ static void RidleyTurningAroundSecondPart(void)
 {
     RidleyIdleYFloatingMovement();
 
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set idle
         gCurrentSprite.pose = RIDLEY_POSE_IDLE;
@@ -2323,7 +2323,7 @@ static void RidleyTailIdle(void)
  */
 static void RidleyTailCheckMovingToAttackAnimEnded(void)
 {
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         gSubSpriteData2.pMultiOam = sRidleyTailMultiSpriteData_SettingUpDiagonalTailAttack;
         gSubSpriteData2.animationDurationCounter = 0;
@@ -2342,7 +2342,7 @@ static void RidleyTailSettingUpAttack(void)
     if (gSubSpriteData2.currentAnimationFrame == 3 && gSubSpriteData2.animationDurationCounter == DELTA_TIME)
         SoundPlay(SOUND_RIDLEY_TAIL_SPINNING);
 
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         gSubSpriteData2.pMultiOam = sRidleyTailMultiSpriteData_ChargingDiagonalTailAttack;
         gSubSpriteData2.animationDurationCounter = 0;
@@ -2376,7 +2376,7 @@ static void RidleyTailChargingAttack(void)
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
     doDiagonal = FALSE;
 
-    if (!SpriteUtilCheckEndSubSprite2Anim())
+    if (!SpriteUtilHasSubSprite2AnimationEnded())
         return;
 
     gSpriteData[ramSlot].pose = RIDLEY_POSE_TAIL_ATTACKS;
@@ -2445,7 +2445,7 @@ static void RidleyTailFirstVerticalAttack(void)
     if (gSubSpriteData2.currentAnimationFrame == 3 && gSubSpriteData2.animationDurationCounter == DELTA_TIME)
         SoundPlay(SOUND_RIDLEY_TAIL_VERTICAL_SWIPE);
 
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         gSubSpriteData2.pMultiOam = sRidleyTailMultiSpriteData_VerticalTailAttack;
         gSubSpriteData2.animationDurationCounter = 0;
@@ -2479,7 +2479,7 @@ static void RidleyTailVerticalAttack(void)
     stopAttack = FALSE;
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
 
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         // Check stop attack
         gCurrentSprite.work0--;
@@ -2531,7 +2531,7 @@ static void RidleyTailLastVerticalAttack(void)
     if (gSubSpriteData2.currentAnimationFrame == 0 && gSubSpriteData2.animationDurationCounter == DELTA_TIME)
         SoundPlay(SOUND_RIDLEY_TAIL_VERTICAL_SWIPE);
 
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         // Check still has swipes left
         if (gCurrentSprite.work0 != 0)
@@ -2574,7 +2574,7 @@ static void RidleyTailDiagonalAttack(void)
     // Commented out code probably
     if (gCurrentSprite.status) {}
 
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         // Decrement swipe counter
         gCurrentSprite.work0--;
@@ -2615,7 +2615,7 @@ static void RidleyTailCheckBackToIdleAnimEnded(void)
     if (gSubSpriteData1.yPosition > (RIDLEY_GROUND_POSITION - BLOCK_SIZE * 8))
         gSubSpriteData1.yPosition -= EIGHTH_BLOCK_SIZE;
 
-    if (SpriteUtilCheckEndSubSprite2Anim())
+    if (SpriteUtilHasSubSprite2AnimationEnded())
     {
         // Update multi sprite data
         gSubSpriteData2.pMultiOam = sRidleyTailMultiSpriteData_Idle;

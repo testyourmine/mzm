@@ -154,7 +154,7 @@ static void ZiplineUpdateOAM(void)
                     break;
 
                 case ZIPLINE_ANIMATION_STATE_GRABBING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OnSamusGrabbed;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -166,7 +166,7 @@ static void ZiplineUpdateOAM(void)
                     break;
 
                 case ZIPLINE_ANIMATION_STATE_RELEASING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OnSamusGrabbed;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -198,7 +198,7 @@ static void ZiplineUpdateOAM(void)
                     break;
 
                 case ZIPLINE_ANIMATION_STATE_GRABBING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OffSamusGrabbed;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -209,7 +209,7 @@ static void ZiplineUpdateOAM(void)
                     break;
                 
                 case ZIPLINE_ANIMATION_STATE_RELEASING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OffSamusGrabbed;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -244,7 +244,7 @@ static void ZiplineUpdateOAM(void)
                     break;
 
                 case ZIPLINE_ANIMATION_STATE_GRABBING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OnIdle;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -255,7 +255,7 @@ static void ZiplineUpdateOAM(void)
                     break;
                 
                 case ZIPLINE_ANIMATION_STATE_RELEASING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OnIdle;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -287,7 +287,7 @@ static void ZiplineUpdateOAM(void)
                     break;
 
                 case ZIPLINE_ANIMATION_STATE_GRABBING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OffIdle;
                         gCurrentSprite.animationDurationCounter = 0;
@@ -298,7 +298,7 @@ static void ZiplineUpdateOAM(void)
                     break;
                 
                 case ZIPLINE_ANIMATION_STATE_RELEASING:
-                    if (SpriteUtilCheckEndCurrentSpriteAnim())
+                    if (SpriteUtilHasCurrentAnimationEnded())
                     {
                         gCurrentSprite.pOam = sZiplineOam_OffIdle;
                         gCurrentSprite.animationDurationCounter = 0;

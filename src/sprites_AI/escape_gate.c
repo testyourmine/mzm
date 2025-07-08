@@ -146,7 +146,7 @@ void EscapeGate(void)
         case ESCAPE_GATE_POSE_OPENING:
             delay = 3 * DELTA_TIME;
 
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sEscapeGateOam_Opened;
                 gCurrentSprite.currentAnimationFrame = 0;

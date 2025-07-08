@@ -367,7 +367,7 @@ static u8 MechaRidleyUpdateHeight(void)
             gSubSpriteData1.currentAnimationFrame = 0;
             changing = TRUE;
         }
-        else if (SpriteUtilCheckEndSubSprite1Anim() && gBossWork.work3 == MECHA_RIDLEY_SAMUS_POSITION_LOW)
+        else if (SpriteUtilHasSubSprite1AnimationEnded() && gBossWork.work3 == MECHA_RIDLEY_SAMUS_POSITION_LOW)
         {
             // Middle to low
             gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_MiddleToLow;
@@ -379,7 +379,7 @@ static u8 MechaRidleyUpdateHeight(void)
     else if (gSubSpriteData1.pMultiOam == sMechaRidleyMultiSpriteData_StandingHigh)
     {
         // High height
-        if (SpriteUtilCheckEndSubSprite1Anim())
+        if (SpriteUtilHasSubSprite1AnimationEnded())
         {
             if (gBossWork.work3 == MECHA_RIDLEY_SAMUS_POSITION_LOW)
             {
@@ -399,7 +399,7 @@ static u8 MechaRidleyUpdateHeight(void)
             }
         }
     }
-    else if (SpriteUtilCheckEndSubSprite1Anim())
+    else if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set new height
         if (gSubSpriteData1.pMultiOam == sMechaRidleyMultiSpriteData_LowToMiddle)
@@ -676,7 +676,7 @@ static void MechaRidleyCrawling(void)
     {
         // Reached spawn position
         gSubSpriteData1.xPosition = gBossWork.work2;
-        if (SpriteUtilCheckEndSubSprite1Anim())
+        if (SpriteUtilHasSubSprite1AnimationEnded())
         {
             // Finished crawling, set idle
             gCurrentSprite.pose = MECHA_RIDLEY_POSE_DELAY_BEFORE_IDLE;
@@ -849,7 +849,7 @@ static void MechaRidleyClawAttack(void)
         }
     }
 
-    if (SpriteUtilCheckEndSpriteAnim(leftArmSlot))
+    if (SpriteUtilHasAnimationEnded(leftArmSlot))
     {
         // Set forward position
         gSubSpriteData1.xPosition = gBossWork.work2 - BLOCK_SIZE;
@@ -902,7 +902,7 @@ static void MechaRidleyStandingUp(void)
     }
     else
     {
-        if (SpriteUtilCheckEndSpriteAnim(leftArmSlot))
+        if (SpriteUtilHasAnimationEnded(leftArmSlot))
         {
             // Set curled up
             gSpriteData[leftArmSlot].pOam = sMechaRidleyPartOam_LeftArmHeldUp;
@@ -959,7 +959,7 @@ static void MechaRidleyRetracting(void)
     rightArmSlot = gSubSpriteData1.work4;
     leftArmSlot = gSubSpriteData1.work5;
 
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set crawling backwards
         gSpriteData[rightArmSlot].pOam = sMechaRidleyPartOam_RightArmCrawlingBackwards;
@@ -1000,7 +1000,7 @@ static void MechaRidleyCrawlingBack(void)
     // Set back position
     gSubSpriteData1.xPosition = gBossWork.work2;
 
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set standing
         gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_StandingLow;
@@ -1051,7 +1051,7 @@ static void MechaRidleyStandingForFireballsInit(void)
  */
 static void MechaRidleyStandingForFireballs(void)
 {
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set opening mouth
         gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_OpeningMouthHigh;
@@ -1069,7 +1069,7 @@ static void MechaRidleyStandingForFireballs(void)
  */
 static void MechaRidleyCheckOpeningMouthAnimEnded(void)
 {
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set spitting fireballs
         gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_SpittingFireballsHigh;
@@ -1126,7 +1126,7 @@ static void MechaRidleyFireballsAttack(void)
  */
 static void MechaRidleyCheckClosingMouthAnimEnded(void)
 {
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set going low
         gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_HighToLow;
@@ -1143,7 +1143,7 @@ static void MechaRidleyCheckClosingMouthAnimEnded(void)
  */
 static void MechaRidleyRetractingAfterFireballAttack(void)
 {
-    if (SpriteUtilCheckEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationEnded())
     {
         // Set standing low
         gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_StandingLow;
@@ -1731,7 +1731,7 @@ static void MechaRidleyPartMissileLauncherIdle(void)
             break;
 
         case MISSILE_LAUNCHER_STATE_OPENING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Set opened
                 gCurrentSprite.pOam = sMechaRidleyPartOam_MissileLauncherOpened;
@@ -1744,7 +1744,7 @@ static void MechaRidleyPartMissileLauncherIdle(void)
             break;
 
         case MISSILE_LAUNCHER_STATE_OPENED:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
                 if (gCurrentSprite.work0 == 0)
@@ -1787,7 +1787,7 @@ static void MechaRidleyPartMissileLauncherIdle(void)
             break;
 
         case MISSILE_LAUNCHER_STATE_CLOSING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Set closed
                 gCurrentSprite.pOam = sMechaRidleyPartOam_MissileLauncherClosed;
@@ -1874,7 +1874,7 @@ static void MechaRidleyPartEyeIdle(void)
 
                 SoundPlay(SOUND_MECHA_RIDLEY_PREPARING_LASER);
             }
-            else if (SpriteUtilCheckEndCurrentSpriteAnim())
+            else if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Spawn laser
                 direction = gCurrentSprite.work1;

@@ -206,7 +206,7 @@ static void DragonTurningAroundFirstHalf(void)
 {
     DragonYMovement();
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pose = DRAGON_POSE_TURN_AROUND_SECOND_HALF;
 
@@ -226,7 +226,7 @@ static void DragonTurningAroundSecondHalf(void)
 {
     DragonYMovement();
 
-    if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationNearlyEnded())
     {
         // Immediatly spit after turning around
         gCurrentSprite.pose = DRAGON_POSE_WARNING_INIT;
@@ -421,7 +421,7 @@ static void DragonFireballCheckExplodingAnimEnded(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }
 

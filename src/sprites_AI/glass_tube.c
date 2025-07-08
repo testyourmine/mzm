@@ -201,7 +201,7 @@ static void GlassTubeDelayBeforeBreaking(void)
  */
 static void GlassTubeCheckCrackingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set breaking behavior
         gCurrentSprite.pose = GLASS_TUBE_POSE_BREAKING;
@@ -230,7 +230,7 @@ static void GlassTubeCheckCrackingAnimEnded(void)
  */
 static void GlassTubeCheckBreakingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set broken behavior
         gCurrentSprite.pose = GLASS_TUBE_POSE_IDLE;

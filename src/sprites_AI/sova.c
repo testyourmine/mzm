@@ -698,7 +698,7 @@ static void SovaTurningAroundInit(void)
  */
 static void SovaTurningAround(void)
 {
-    if (!SpriteUtilCheckEndCurrentSpriteAnim())
+    if (!SpriteUtilHasCurrentAnimationEnded())
         return;
 
     gCurrentSprite.pose = SOVA_POSE_IDLE;
@@ -851,7 +851,7 @@ static void SovaLanding(void)
 {
     if (SovaCheckCollidingWithAir())
         gCurrentSprite.pose = SOVA_POSE_FALLING_INIT;
-    else if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    else if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = SOVA_POSE_IDLE_INIT;
 }
 

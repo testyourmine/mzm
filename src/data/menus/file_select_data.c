@@ -2171,7 +2171,7 @@ const struct OamArray sOptionsOam[OPTIONS_OAM_ID_END] = {
 };
 
 // text_id, dst_type, unk
-const u8 sFileScreenMessagesInfo[FILE_SCREEN_MESSAGE_INFO_ID_END][3] = {
+const u8 sFileScreenMessagesInfo[FILE_SCREEN_MESSAGE_INFO_ID_COUNT][3] = {
     [0] = {
         FILE_SCREEN_TEXT_START_GAME,
         0,

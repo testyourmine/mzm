@@ -47,7 +47,7 @@ const u16 sJapaneseText_Message_ActivateEasySleep[] = INCTEXT("{WIDTH(53)}スリ
 const u16 sJapaneseText_Message_PressSelectLAndR[] = INCTEXT("{WIDTH(50)}{Select_button} と {L_button} と {R_button} を\n{WIDTH(67)}同時に押してください");
 const u16 sJapaneseText_Message_EasySleepPrompt[] = INCTEXT("{WIDTH(101)}Yes\n{WIDTH(104)}No");
 
-static const u16* sJapaneseTextPointers_Message[MESSAGE_END] = {
+static const u16* sJapaneseTextPointers_Message[MESSAGE_COUNT] = {
     [MESSAGE_DUMMY] = sJapaneseText_Message_Dummy,
     [MESSAGE_ENERGY_TANK_ACQUIRED] = sJapaneseText_Message_EnergyTankAcquired,
     [MESSAGE_MISSILE_TANK_ACQUIRED] = sJapaneseText_Message_MissileTankAcquired,
@@ -185,7 +185,7 @@ const u16 sHiraganaText_Message_ActivateEasySleep[] = INCTEXT("{WIDTH(50)}スリ
 const u16 sHiraganaText_Message_PressSelectLAndR[] = INCTEXT("{WIDTH(50)}{Select_button} と {L_button} と {R_button} を\n{WIDTH(66)}どうじにおしてください");
 const u16 sHiraganaText_Message_EasySleepPrompt[] = INCTEXT("{WIDTH(102)}はい\n{WIDTH(98)}いいえ");
 
-static const u16* sHiraganaTextPointers_Message[MESSAGE_END] = {
+static const u16* sHiraganaTextPointers_Message[MESSAGE_COUNT] = {
     [MESSAGE_DUMMY] = sHiraganaText_Message_Dummy,
     [MESSAGE_ENERGY_TANK_ACQUIRED] = sHiraganaText_Message_EnergyTankAcquired,
     [MESSAGE_MISSILE_TANK_ACQUIRED] = sHiraganaText_Message_MissileTankAcquired,
@@ -323,7 +323,7 @@ const u16 sEnglishText_Message_ActivateEasySleep[] = INCTEXT("{WIDTH(52)}Activat
 const u16 sEnglishText_Message_PressSelectLAndR[] = INCTEXT("{WIDTH(37)}press {Select_button}, {L_button}, and {R_button}\n{WIDTH(72)}simultaneously.");
 const u16 sEnglishText_Message_EasySleepPrompt[] = INCTEXT("{WIDTH(101)}Yes\n{WIDTH(104)}No");
 
-static const u16* sEnglishTextPointers_Message[MESSAGE_END] = {
+static const u16* sEnglishTextPointers_Message[MESSAGE_COUNT] = {
     [MESSAGE_DUMMY] = sEnglishText_Message_Dummy,
     [MESSAGE_ENERGY_TANK_ACQUIRED] = sEnglishText_Message_EnergyTankAcquired,
     [MESSAGE_MISSILE_TANK_ACQUIRED] = sEnglishText_Message_MissileTankAcquired,
@@ -473,7 +473,7 @@ const u16 sJapaneseText_Description_SpaceJump[] = INCTEXT("回転ジャンプ中
 const u16 sJapaneseText_Description_UnknownItem[] = INCTEXT("{COLOR(6)}解析不能{COLOR(0)}\n現在のスーツに不適合");
 const u16 sJapaneseText_Description_Pistol[] = INCTEXT("自動で{COLOR(5)}パワーが充填される{COLOR(5)}短銃\n{COLOR(5)}パワー充填発射{COLOR(0)}で敵を{COLOR(6)}マヒ{COLOR(0)}させる");
 
-const u16* sJapaneseTextPointers_Description[DESCRIPTION_TEXT_END] = {
+const u16* sJapaneseTextPointers_Description[DESCRIPTION_TEXT_COUNT] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sJapaneseText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sJapaneseText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sJapaneseText_Description_IceBeam,
@@ -502,7 +502,7 @@ const u16 sJapaneseText_Story_Emergency[] = INCTEXT("{WIDTH(92)}緊急指令");
 const u16 sJapaneseText_Story_Exterminate[] = INCTEXT("{WIDTH(50)}惑星ゼーベスの「メトロイド」を\n{WIDTH(66)}殲滅せよ。そして・・・");
 const u16 sJapaneseText_Story_Defeat[] = INCTEXT("{WIDTH(25)}機械生命体「マザーブレイン」を破壊せよ。");
 
-const u16* sJapaneseTextPointers_Story[STORY_TEXT_END] = {
+const u16* sJapaneseTextPointers_Story[STORY_TEXT_COUNT] = {
     [STORY_TEXT_PLANET_ZEBES] = sJapaneseText_Story_PlanetZebes,
     [STORY_TEXT_THE_TIMING] = sJapaneseText_Story_TheTiming,
     [STORY_TEXT_COULD_I_SURVIVE] = sJapaneseText_Story_CouldISurvive,
@@ -611,7 +611,7 @@ const u16 sHiraganaText_Description_SpaceJump[] = INCTEXT("かいてんジャン
 const u16 sHiraganaText_Description_UnknownItem[] = INCTEXT("{COLOR(6)}これがなにか、わかりません{COLOR(0)}\nいまのスーツでは、うごきません");
 const u16 sHiraganaText_Description_Pistol[] = INCTEXT("じどうで{COLOR(5)}パワーがたまる{COLOR(5)}ピストル\n{COLOR(5)}パワーをためてから、うつ{COLOR(0)}と　{COLOR(0)}てきが{COLOR(6)}しびれて、すこしとまる{COLOR(0)}");
 
-const u16* sHiraganaTextPointers_Description[DESCRIPTION_TEXT_END] = {
+const u16* sHiraganaTextPointers_Description[DESCRIPTION_TEXT_COUNT] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sHiraganaText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sHiraganaText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sHiraganaText_Description_IceBeam,
@@ -640,7 +640,7 @@ const u16 sHiraganaText_Story_Emergency[] = INCTEXT("{WIDTH(80)}きんきゅう�
 const u16 sHiraganaText_Story_Exterminate[] = INCTEXT("{WIDTH(44)}わくせいゼーベスの「メトロイド」を\n{WIDTH(52)}ぜんぶやっつけろ。そして・・・");
 const u16 sHiraganaText_Story_Defeat[] = INCTEXT("きかいじかけのいきもの「マザーブレイン」を、はかいせよ。");
 
-const u16* sHiraganaTextPointers_Story[STORY_TEXT_END] = {
+const u16* sHiraganaTextPointers_Story[STORY_TEXT_COUNT] = {
     [STORY_TEXT_PLANET_ZEBES] = sHiraganaText_Story_PlanetZebes,
     [STORY_TEXT_THE_TIMING] = sHiraganaText_Story_TheTiming,
     [STORY_TEXT_COULD_I_SURVIVE] = sHiraganaText_Story_CouldISurvive,
@@ -747,7 +747,7 @@ const u16 sEnglishText_Description_SpaceJump[] = INCTEXT("Somersault continually
 const u16 sEnglishText_Description_UnknownItem[] = INCTEXT("{COLOR(6)}Analysis inconclusive.{COLOR(0)}\nItem incompatible with current suit.");
 const u16 sEnglishText_Description_Pistol[] = INCTEXT("An {COLOR(5)}auto-charging{COLOR(5)} pistol.\n{COLOR(6)}Stun{COLOR(0)} enemies with {COLOR(5)}charged shots{COLOR(0)}.");
 
-const u16* sEnglishTextPointers_Description[DESCRIPTION_TEXT_END] = {
+const u16* sEnglishTextPointers_Description[DESCRIPTION_TEXT_COUNT] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sEnglishText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sEnglishText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sEnglishText_Description_IceBeam,
@@ -778,7 +778,7 @@ const u16 sEnglishText_Story_Emergency[] = INCTEXT("Emergency Order");
 const u16 sEnglishText_Story_Exterminate[] = INCTEXT("Exterminate all Metroid organisms\non Planet Zebes...");
 const u16 sEnglishText_Story_Defeat[] = INCTEXT("And defeat the mechanical life-form,\nMother Brain.");
 
-const u16* sEnglishTextPointers_Story[STORY_TEXT_END] = {
+const u16* sEnglishTextPointers_Story[STORY_TEXT_COUNT] = {
     [STORY_TEXT_PLANET_ZEBES] = sEnglishText_Story_PlanetZebes,
     [STORY_TEXT_THE_TIMING] = sEnglishText_Story_TheTiming,
     [STORY_TEXT_COULD_I_SURVIVE] = sEnglishText_Story_CouldISurvive,
@@ -891,7 +891,7 @@ const u16 sGermanText_Description_ScrewAttack[] = INCTEXT("回転ジャンプで
 const u16 sGermanText_Description_SpaceJump[] = INCTEXT("回転ジャンプ中に再びジャンプできる\n〈回転ジャンプ中にもう一度{A_button}〉");
 const u16 sGermanText_Description_UnknownItem[] = INCTEXT("Analysis is impossible.");
 
-const u16* sGermanTextPointers_Description[DESCRIPTION_TEXT_END - 1] = {
+const u16* sGermanTextPointers_Description[DESCRIPTION_TEXT_COUNT - 1] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sGermanText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sGermanText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sGermanText_Description_IceBeam,
@@ -948,7 +948,7 @@ const u16 sFrenchText_Description_ScrewAttack[] = INCTEXT("回転ジャンプで
 const u16 sFrenchText_Description_SpaceJump[] = INCTEXT("回転ジャンプ中に再びジャンプできる\n〈回転ジャンプ中にもう一度{A_button}〉");
 const u16 sFrenchText_Description_UnknownItem[] = INCTEXT("Analysis is impossible.");
 
-const u16* sFrenchTextPointers_Description[DESCRIPTION_TEXT_END - 1] = {
+const u16* sFrenchTextPointers_Description[DESCRIPTION_TEXT_COUNT - 1] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sFrenchText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sFrenchText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sFrenchText_Description_IceBeam,
@@ -1005,7 +1005,7 @@ const u16 sItalianText_Description_ScrewAttack[] = INCTEXT("回転ジャンプ�
 const u16 sItalianText_Description_SpaceJump[] = INCTEXT("回転ジャンプ中に再びジャンプできる\n〈回転ジャンプ中にもう一度{A_button}〉");
 const u16 sItalianText_Description_UnknownItem[] = INCTEXT("Analysis is impossible.");
 
-const u16* sItalianTextPointers_Description[DESCRIPTION_TEXT_END - 1] = {
+const u16* sItalianTextPointers_Description[DESCRIPTION_TEXT_COUNT - 1] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sItalianText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sItalianText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sItalianText_Description_IceBeam,
@@ -1062,7 +1062,7 @@ const u16 sSpanishText_Description_ScrewAttack[] = INCTEXT("回転ジャンプ�
 const u16 sSpanishText_Description_SpaceJump[] = INCTEXT("回転ジャンプ中に再びジャンプできる\n〈回転ジャンプ中にもう一度{A_button}〉");
 const u16 sSpanishText_Description_UnknownItem[] = INCTEXT("Analysis is impossible.");
 
-const u16* sSpanishTextPointers_Description[DESCRIPTION_TEXT_END - 1] = {
+const u16* sSpanishTextPointers_Description[DESCRIPTION_TEXT_COUNT - 1] = {
     [DESCRIPTION_TEXT_LONG_BEAM] = sSpanishText_Description_LongBeam,
     [DESCRIPTION_TEXT_CHARGE_BEAM] = sSpanishText_Description_ChargeBeam,
     [DESCRIPTION_TEXT_ICE_BEAM] = sSpanishText_Description_IceBeam,

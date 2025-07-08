@@ -118,7 +118,7 @@ void UnknownItemBlock(void)
             break; // No behavior (don't go to default)
 
         case UNKNOWN_ITEM_BLOCK_POSE_EXPLODING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.status = 0;
                 return;
@@ -210,6 +210,6 @@ void UnknownItemBlockLight(void)
         gCurrentSprite.drawDistanceBottom = SUB_PIXEL_TO_PIXEL(BLOCK_SIZE * 6);
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0;
 }

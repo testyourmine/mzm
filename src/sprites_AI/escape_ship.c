@@ -313,7 +313,7 @@ void EscapeShip(void)
             break;
 
         case ESCAPE_SHIP_POSE_CLOSING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sEscapeShipOam_Idle;
                 gCurrentSprite.currentAnimationFrame = 0;

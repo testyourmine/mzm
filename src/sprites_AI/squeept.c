@@ -185,7 +185,7 @@ static void SqueeptGoUp(void)
  */
 static void SqueeptTurningAround(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         // Set going down
         SqueeptGoingDownInit();

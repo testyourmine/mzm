@@ -349,7 +349,7 @@ void ChozoPillarPlatform(void)
             break;
 
         case RISING_CHOZO_PILLAR_PLATFORM_POSE_SPAWNING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pose = RISING_CHOZO_PILLAR_PLATFORM_POSE_IDLE;
                 gCurrentSprite.animationDurationCounter = 0;

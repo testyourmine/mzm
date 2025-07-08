@@ -190,7 +190,7 @@ static void ImagoShootNeedles(void)
             APPLY_DELTA_TIME_INC(gCurrentSprite.animationDurationCounter);
         }
 
-        if (SpriteUtilCheckEndSubSprite1Anim())
+        if (SpriteUtilHasSubSprite1AnimationEnded())
         {
             // Set recharging needles
             gSubSpriteData1.pMultiOam = sImagoMultiSpriteData_RechargingNeedles;
@@ -207,7 +207,7 @@ static void ImagoShootNeedles(void)
             APPLY_DELTA_TIME_INC(gCurrentSprite.animationDurationCounter);
         }
 
-        if (SpriteUtilCheckEndSubSprite1Anim())
+        if (SpriteUtilHasSubSprite1AnimationEnded())
         {
             // Set idle
             gSubSpriteData1.pMultiOam = sImagoMultiSpriteData_Idle;

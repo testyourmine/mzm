@@ -79,7 +79,7 @@ static void AreaBannerSpawningInit(void)
  */
 static void AreaBannerSpawning(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
@@ -135,7 +135,7 @@ static void AreaBannerStatic(void)
  */
 static void AreaBannerLeaving(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         gCurrentSprite.status = 0; // Kill sprite
 }
 

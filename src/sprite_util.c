@@ -1,6 +1,6 @@
+#include "sprite_util.h"
 #include "gba.h"
 #include "oam.h"
-#include "sprite_util.h"
 #include "clipdata.h"
 #include "sprites_AI/parasite.h"
 #include "sprites_AI/ridley.h"
@@ -32,7 +32,7 @@ void SpriteUtilInitLocationText(void)
     u8 gfxSlot;
 
     gfxSlot = LocationTextGetGfxSlot();
-    if (gfxSlot < 8)
+    if (gfxSlot < SPRITE_GFX_SLOT_MAX)
     {
         gSpriteData[0].status = SPRITE_STATUS_EXISTS | SPRITE_STATUS_ONSCREEN | SPRITE_STATUS_NOT_DRAWN |
             SPRITE_STATUS_UNKNOWN_10 | SPRITE_STATUS_IGNORE_PROJECTILES;
@@ -115,10 +115,10 @@ void SpriteUtilCheckStopSamusAgainstSolidSpriteRight(u16 samusY, u16 spriteX)
  * @param dmgMultiplier Damage Multiplier
  * @return bool, samus alive
  */
-u8 SpriteUtilTakeDamageFromSprite(u8 kbFlag, struct SpriteData* pSprite, u16 dmgMultiplier)
+boolu8 SpriteUtilTakeDamageFromSprite(boolu8 kbFlag, struct SpriteData* pSprite, u16 dmgMultiplier)
 {
     u16 damage;
-    u16 flags;
+    SuitMiscFlags flags;
 
     // Get damage
     if (pSprite->properties & SP_SECONDARY_SPRITE)
@@ -188,7 +188,7 @@ u8 SpriteUtilTakeDamageFromSprite(u8 kbFlag, struct SpriteData* pSprite, u16 dmg
  * @param o2Right Object 2 Right
  * @return u32 bool, touching
  */
-u32 SpriteUtilCheckObjectsTouching(u16 o1Top, u16 o1Bottom, u16 o1Left, u16 o1Right, u16 o2Top, u16 o2Bottom, u16 o2Left, u16 o2Right)
+boolu32 SpriteUtilCheckObjectsTouching(u16 o1Top, u16 o1Bottom, u16 o1Left, u16 o1Right, u16 o2Top, u16 o2Bottom, u16 o2Left, u16 o2Right)
 {
     if (o2Bottom >= o1Top && o2Top < o1Bottom && o2Right >= o1Left && o2Left < o1Right)
         return TRUE;
@@ -1501,7 +1501,7 @@ u8 SpriteUtilMakeSpriteFaceSamusRotation(s32 rotation, s32 targetY, s32 targetX,
  * 
  * @return u32 bool, ended
  */
-u32 SpriteUtilCheckEndCurrentSpriteAnim(void)
+boolu32 SpriteUtilHasCurrentAnimationEnded(void)
 {
     u8 adc;
     u16 caf;
@@ -1522,7 +1522,7 @@ u32 SpriteUtilCheckEndCurrentSpriteAnim(void)
  * 
  * @return u32 bool, nearly ended
  */
-u32 SpriteUtilCheckNearEndCurrentSpriteAnim(void)
+boolu32 SpriteUtilHasCurrentAnimationNearlyEnded(void)
 {
     u8 adc;
     u16 caf;
@@ -1545,7 +1545,7 @@ u32 SpriteUtilCheckNearEndCurrentSpriteAnim(void)
  * @param ramSlot Sprite slot
  * @return u32 bool, ended
  */
-u32 SpriteUtilCheckEndSpriteAnim(u8 ramSlot)
+boolu32 SpriteUtilHasAnimationEnded(u8 ramSlot)
 {
     u8 adc;
     u16 caf;
@@ -1567,7 +1567,7 @@ u32 SpriteUtilCheckEndSpriteAnim(u8 ramSlot)
  * @param ramSlot Sprite slot
  * @return u32 bool, nearly ended
  */
-u32 SpriteUtilCheckNearEndSpriteAnim(u8 ramSlot)
+boolu32 SpriteUtilHasAnimationNearlyEnded(u8 ramSlot)
 {
     u8 adc;
     u16 caf;
@@ -1589,7 +1589,7 @@ u32 SpriteUtilCheckNearEndSpriteAnim(u8 ramSlot)
  * 
  * @return u8 bool, ended
  */
-u8 SpriteUtilCheckEndSubSprite1Anim(void)
+boolu32 SpriteUtilHasSubSprite1AnimationEnded(void)
 {
     u8 adc;
     u16 caf;
@@ -1610,7 +1610,7 @@ u8 SpriteUtilCheckEndSubSprite1Anim(void)
  * 
  * @return u32 bool, nearly ended
  */
-u8 SpriteUtilCheckNearEndSubSprite1Anim(void)
+boolu32 SpriteUtilHasSubSprite1AnimationNearlyEnded(void)
 {
     u8 adc;
     u16 caf;
@@ -1632,7 +1632,7 @@ u8 SpriteUtilCheckNearEndSubSprite1Anim(void)
  * 
  * @return u32 bool, ended
  */
-u32 SpriteUtilCheckEndSubSprite2Anim(void)
+boolu32 SpriteUtilHasSubSprite2AnimationEnded(void)
 {
     u8 adc;
     u16 caf;
@@ -1654,7 +1654,7 @@ u32 SpriteUtilCheckEndSubSprite2Anim(void)
  * @param pSub Sub sprite data pointer
  * @return u8 bool, ended
  */
-u32 SpriteUtilCheckEndSubSpriteAnim(struct SubSpriteData* pSub)
+boolu32 SpriteUtilHasSubSpriteAnimationEnded(struct SubSpriteData* pSub)
 {
     u8 adc;
     u16 caf;
@@ -1676,7 +1676,7 @@ u32 SpriteUtilCheckEndSubSpriteAnim(struct SubSpriteData* pSub)
  * @param pSub Sub sprite data Pointer
  * @return u32 bool, nearly ended
  */
-u8 SpriteUtilCheckNearEndSubSpriteAnim(struct SubSpriteData* pSub)
+boolu32 SpriteUtilHasSubSpriteAnimationNearlyEnded(struct SubSpriteData* pSub)
 {
     u8 adc;
     u16 caf;
@@ -1698,9 +1698,9 @@ u8 SpriteUtilCheckNearEndSubSpriteAnim(struct SubSpriteData* pSub)
  * 
  * @param yRange Y range
  * @param xRange X range
- * @return u8 Result (NSLR enum)
+ * @return NearLeftRight Result
  */
-u8 SpriteUtilCheckSamusNearSpriteLeftRight(u16 yRange, u16 xRange)
+NearLeftRight SpriteUtilCheckSamusNearSpriteLeftRight(u16 yRange, u16 xRange)
 {
     u8 result;
     u16 samusY;
@@ -1754,9 +1754,9 @@ u8 SpriteUtilCheckSamusNearSpriteLeftRight(u16 yRange, u16 xRange)
  * 
  * @param yRange Y range
  * @param xRange X range
- * @return u8 Result (NSLR enum)
+ * @return NearAboveBelow Result
  */
-u8 SpriteUtilCheckSamusNearSpriteAboveBelow(u16 yRange, u16 xRange)
+NearAboveBelow SpriteUtilCheckSamusNearSpriteAboveBelow(u16 yRange, u16 xRange)
 {
     u8 result;
     u16 samusY;
@@ -1811,9 +1811,9 @@ u8 SpriteUtilCheckSamusNearSpriteAboveBelow(u16 yRange, u16 xRange)
  * @param yRange Y range
  * @param xRangeFront X range (in front)
  * @param xRangeBehind X range (behind)
- * @return u32 Result (NSFB enum)
+ * @return NearFrontBack Result
  */
-u32 SpriteUtilCheckSamusNearSpriteFrontBehind(u16 yRange, u16 xRangeFront, u16 xRangeBehind)
+NearFrontBack SpriteUtilCheckSamusNearSpriteFrontBehind(u16 yRange, u16 xRangeFront, u16 xRangeBehind)
 {
     u8 result;
     u16 samusY;
@@ -2082,7 +2082,7 @@ void SpriteUtilUpdatePrimarySpriteFreezeTimerOfCurrent(void)
  * @param spriteId Sprite ID
  * @param ramSlot Ram slot
  */
-void SpriteUtilUnfreezeSecondarySprites(u8 spriteId, u8 ramSlot)
+void SpriteUtilUnfreezeSecondarySprites(SecondarySprite spriteId, u8 ramSlot)
 {
     u8 i;
 
@@ -2107,7 +2107,7 @@ void SpriteUtilUnfreezeSecondarySprites(u8 spriteId, u8 ramSlot)
  * 
  * @return u8 bool, ongoing
  */
-u8 SpriteUtilRefillEnergy(void)
+boolu32 SpriteUtilRefillEnergy(void)
 {
     u16 current;
     u16 max;
@@ -2139,7 +2139,7 @@ u8 SpriteUtilRefillEnergy(void)
  * 
  * @return u8 bool, ongoing
  */
-u8 SpriteUtilRefillMissiles(void)
+boolu32 SpriteUtilRefillMissiles(void)
 {
     u16 current;
     u16 max;
@@ -2171,7 +2171,7 @@ u8 SpriteUtilRefillMissiles(void)
  * 
  * @return u8 bool, ongoing
  */
-u8 SpriteUtilRefillSuperMissiles(void)
+boolu32 SpriteUtilRefillSuperMissiles(void)
 {
     u16 current;
 
@@ -2202,7 +2202,7 @@ u8 SpriteUtilRefillSuperMissiles(void)
  * 
  * @return u8 bool, ongoing
  */
-u8 SpriteUtilRefillPowerBombs(void)
+boolu32 SpriteUtilRefillPowerBombs(void)
 {
     u16 current;
 
@@ -2233,7 +2233,7 @@ u8 SpriteUtilRefillPowerBombs(void)
  * 
  * @return u8 bool, crouching or morphed
  */
-u8 SpriteUtilCheckCrouchingOrMorphed(void)
+boolu32 SpriteUtilCheckCrouchingOrMorphed(void)
 {
     switch (gSamusData.pose)
     {
@@ -2265,7 +2265,7 @@ u8 SpriteUtilCheckCrouchingOrMorphed(void)
  * 
  * @return u8 bool, crouching or crawling
  */
-u8 SpriteUtilCheckCrouchingOrCrawling(void)
+boolu32 SpriteUtilCheckCrouchingOrCrawling(void)
 {
     switch (gSamusData.pose)
     {
@@ -2291,7 +2291,7 @@ u8 SpriteUtilCheckCrouchingOrCrawling(void)
  * 
  * @return u32 bool, morphed
  */
-u32 SpriteUtilCheckMorphed(void)
+boolu32 SpriteUtilCheckMorphed(void)
 {
     switch (gSamusData.pose)
     {
@@ -2312,7 +2312,7 @@ u32 SpriteUtilCheckMorphed(void)
  * 
  * @return u32 bool, stop sprites
  */
-u32 SpriteUtilCheckStopSpritesPose(void)
+boolu32 SpriteUtilCheckStopSpritesPose(void)
 {
     // Movement is prevented
     if (gPreventMovementTimer != 0)
@@ -2336,14 +2336,14 @@ u32 SpriteUtilCheckStopSpritesPose(void)
  * @param pData Samus data pointer
  * @return The damage contact type
  */
-u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struct SamusData* pData)
+DamageContactType SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struct SamusData* pData)
 {
-    u8 dct;
+    DamageContactType dct;
     struct Equipment* pEquipment;
-    u16 weakness;
-    u16 bbf;
+    SpriteWeakness weakness;
+    BeamBombFlags bbf;
     u16 damage;
-    u8 isDead;
+    boolu8 isDead;
     u8 isft;
 
     dct = DCT_NONE;
@@ -2486,7 +2486,7 @@ u32 SpriteUtilSpriteTakeDamageFromSamusContact(struct SpriteData* pSprite, struc
  * 
  * @return u32 bool, pulling self up
  */
-u32 SpriteUtilCheckPullingSelfUp(void)
+boolu32 SpriteUtilCheckPullingSelfUp(void)
 {
     switch (gSamusData.pose)
     {
@@ -2504,7 +2504,7 @@ u32 SpriteUtilCheckPullingSelfUp(void)
  * 
  * @return u32 bool, on zipline
  */
-u32 SpriteUtilCheckOnZipline(void)
+boolu32 SpriteUtilCheckOnZipline(void)
 {
     switch (gSamusData.pose)
     {
@@ -2524,7 +2524,7 @@ u32 SpriteUtilCheckOnZipline(void)
  * @param spriteId Sprite ID
  * @return u8 Count
  */
-u8 SpriteUtilCountPrimarySprites(u8 spriteId)
+u8 SpriteUtilCountPrimarySprites(PrimarySprite spriteId)
 {
     u8 count;
     struct SpriteData* pSprite;
@@ -2533,7 +2533,10 @@ u8 SpriteUtilCountPrimarySprites(u8 spriteId)
 
     for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
     {
-        if (pSprite->status & SPRITE_STATUS_EXISTS && !(pSprite->properties & SP_SECONDARY_SPRITE) && pSprite->spriteId == spriteId)
+        if (!(pSprite->status & SPRITE_STATUS_EXISTS))
+            continue;
+
+        if (!(pSprite->properties & SP_SECONDARY_SPRITE) && pSprite->spriteId == spriteId)
             count++;
     }
 
@@ -2541,12 +2544,12 @@ u8 SpriteUtilCountPrimarySprites(u8 spriteId)
 }
 
 /**
- * @brief 10738 | 60 | Counts the number of secondary sprites the current sprite ram slot
+ * @brief 10738 | 60 | Counts the number of secondary sprites who are children of the current sprite
  * 
  * @param spriteId Sprite ID
  * @return u8 Count
  */
-u8 SpriteUtilCountSecondarySpritesWithCurrentSpriteRAMSlot(u8 spriteId)
+u8 SpriteUtilCountChildSecondarySprites(SecondarySprite spriteId)
 {
     u8 count;
     u8 ramSlot;
@@ -2557,23 +2560,26 @@ u8 SpriteUtilCountSecondarySpritesWithCurrentSpriteRAMSlot(u8 spriteId)
 
     for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
     {
-        if (pSprite->status & SPRITE_STATUS_EXISTS && pSprite->properties & SP_SECONDARY_SPRITE &&
-            pSprite->spriteId == spriteId && pSprite->primarySpriteRamSlot == ramSlot)
-        {
+        if (!(pSprite->status & SPRITE_STATUS_EXISTS))
+            continue;
+
+        if (!(pSprite->properties & SP_SECONDARY_SPRITE))
+            continue;
+
+        if (pSprite->spriteId == spriteId && pSprite->primarySpriteRamSlot == ramSlot)
             count++;
-        }
     }
 
     return count;
 }
 
 /**
- * @brief 10798 | 60 | Counts the number of primary sprites the current sprite ram slot
+ * @brief 10798 | 60 | Counts the number of primary sprites who are children of the current sprite
  * 
  * @param spriteId Sprite ID
  * @return u8 Count
  */
-u8 SpriteUtilCountPrimarySpritesWithCurrentSpriteRAMSlot(u8 spriteId)
+u8 SpriteUtilCountChildPrimarySprites(PrimarySprite spriteId)
 {
     u8 count;
     u8 ramSlot;
@@ -2603,19 +2609,23 @@ u8 SpriteUtilCountPrimarySpritesWithCurrentSpriteRAMSlot(u8 spriteId)
  * @param spriteId Sprite ID
  * @return u8 Ram slot
  */
-u8 SpriteUtilFindPrimary(u8 spriteId)
+u8 SpriteUtilFindPrimary(PrimarySprite spriteId)
 {
     u8 ramSlot;
     struct SpriteData* pSprite;
 
     ramSlot = 0;
 
-    for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
+    for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; ramSlot++, pSprite++)
     {
-        if (pSprite->status & SPRITE_STATUS_EXISTS && !(pSprite->properties & SP_SECONDARY_SPRITE) && pSprite->spriteId == spriteId)
-            return ramSlot;
+        if (!(pSprite->status & SPRITE_STATUS_EXISTS))
+            continue;
 
-        ramSlot++;
+        if (pSprite->properties & SP_SECONDARY_SPRITE)
+            continue;
+
+        if (pSprite->spriteId == spriteId)
+            return ramSlot;
     }
 
     return UCHAR_MAX;
@@ -2628,22 +2638,23 @@ u8 SpriteUtilFindPrimary(u8 spriteId)
  * @param roomSlot Room slot/part number
  * @return u8 Ram slot
  */
-u8 SpriteUtilFindSecondaryWithRoomSlot(u8 spriteId, u8 roomSlot)
+u8 SpriteUtilFindSecondaryWithRoomSlot(SecondarySprite spriteId, u8 roomSlot)
 {
     u8 ramSlot;
     struct SpriteData* pSprite;
 
     ramSlot = 0;
 
-    for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
+    for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; ramSlot++, pSprite++)
     {
-        if (pSprite->status & SPRITE_STATUS_EXISTS && pSprite->properties & SP_SECONDARY_SPRITE &&
-            pSprite->spriteId == spriteId && pSprite->roomSlot == roomSlot)
-        {
-            return ramSlot;
-        }
+        if (!(pSprite->status & SPRITE_STATUS_EXISTS))
+            continue;
 
-        ramSlot++;
+        if (!(pSprite->properties & SP_SECONDARY_SPRITE))
+            continue;
+
+        if (pSprite->spriteId == spriteId && pSprite->roomSlot == roomSlot)
+            return ramSlot;
     }
 
     return UCHAR_MAX;
@@ -2654,10 +2665,10 @@ u8 SpriteUtilFindSecondaryWithRoomSlot(u8 spriteId, u8 roomSlot)
  * 
  * @return u8 bool, has drop
  */
-u8 SpriteUtilCheckHasDrops(void)
+boolu8 SpriteUtilCheckHasDrops(void)
 {
     u8 ramSlot;
-    u8 collision;
+    SamusSpriteCollision collision;
     struct SpriteData* pSprite;
 
     ramSlot = gCurrentSprite.primarySpriteRamSlot;
@@ -2665,7 +2676,10 @@ u8 SpriteUtilCheckHasDrops(void)
 
     for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
     {
-        if (pSprite->status & SPRITE_STATUS_EXISTS && pSprite->primarySpriteRamSlot == ramSlot && pSprite->samusCollision >= collision)
+        if (!(pSprite->status & SPRITE_STATUS_EXISTS))
+            continue;
+
+        if (pSprite->primarySpriteRamSlot == ramSlot && pSprite->samusCollision >= collision)
             return TRUE;
     }
 
@@ -2680,7 +2694,7 @@ u8 SpriteUtilCheckHasDrops(void)
 u8 SpriteUtilCountDrops(void)
 {
     u8 count;
-    u8 spriteId;
+    PrimarySprite spriteId;
     struct SpriteData* pSprite;
 
     count = 0;
@@ -3074,7 +3088,7 @@ void SpriteUtilRandomSpriteDebris(u8 cloudType, u8 number, u16 yPosition, u16 xP
     }
 }
 
-u8 SpriteUtilGetAmmoDrop(u8 rng)
+PrimarySprite SpriteUtilGetAmmoDrop(u8 rng)
 {
     if (gEquipment.currentEnergy == gEquipment.maxEnergy)
     {
@@ -3096,7 +3110,7 @@ u8 SpriteUtilGetAmmoDrop(u8 rng)
  * 
  * @return u8 Drop sprite ID
  */
-u8 SpriteUtilDetermineEnemyDrop(void)
+PrimarySprite SpriteUtilDetermineEnemyDrop(void)
 {
     u8 drop;
     u8 fullLife;
@@ -3297,11 +3311,11 @@ u8 SpriteUtilDetermineEnemyDrop(void)
  * @param yPosition Y Position
  * @param xPosition X Position
  * @param playSound Play Sound flag
- * @param effect Particle Effect if not killed by damage contact
+ * @param effect Particle eEffect if not killed by damage contact
  */
-void SpriteUtilSpriteDeath(u8 deathType, u16 yPosition, u16 xPosition, u8 playSound, u8 effect)
+void SpriteUtilSpriteDeath(SpriteDeathType deathType, u16 yPosition, u16 xPosition, boolu8 playSound, ParticleEffectId effect)
 {
-    u8 drop;
+    PrimarySprite drop;
 
     switch (gCurrentSprite.pose)
     {
@@ -3402,9 +3416,9 @@ void SpriteUtilSpriteDeath(u8 deathType, u16 yPosition, u16 xPosition, u8 playSo
  * 
  * @return bool, stunned
  */
-u8 SpriteUtilIsSpriteStunned(void)
+boolu8 SpriteUtilIsSpriteStunned(void)
 {
-    u8 isStunned;
+    boolu8 isStunned;
     u8 stunTimer;
 
     isStunned = FALSE;
@@ -3431,7 +3445,7 @@ u8 SpriteUtilIsSpriteStunned(void)
  * 
  * @return bool, should fall
  */
-u8 SpriteUtilShouldFall(void)
+boolu8 SpriteUtilShouldFall(void)
 {
     // On screen and any screen shake active
     if (gCurrentSprite.status & SPRITE_STATUS_ONSCREEN && (gScreenShakeY.timer != 0 || gScreenShakeX.timer != 0))
@@ -3603,7 +3617,7 @@ void SpriteUtilSyncCurrentSpritePositionWithSubSpritePositionAndOam(struct SubSp
  * 
  * @return u8 bool, colliding
  */
-u8 SpriteCheckCollidingWithSamusDrawing(void)
+boolu8 SpriteCheckCollidingWithSamusDrawing(void)
 {
     u16 spriteY;
     u16 spriteX;
@@ -3647,7 +3661,7 @@ u8 SpriteCheckCollidingWithSamusDrawing(void)
  * @param xPosition X Position
  * @param size Splash Size
  */
-void SpriteUtilSetSplashEffect(u16 yPosition, u16 xPosition, u8 size)
+void SpriteUtilSetSplashEffect(u16 yPosition, u16 xPosition, SplashSize size)
 {
     switch (gCurrentAffectingClipdata.hazard)
     {
@@ -3688,9 +3702,9 @@ void SpriteUtilSetSplashEffect(u16 yPosition, u16 xPosition, u8 size)
  * @param yPosition Current Y position
  * @param xPosition Current X position
  * @param size Size of the splash
- * @return u8 bool, out of effect
+ * @return boolu32 bool, out of effect
  */
-u32 SpriteUtilCheckOutOfRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, u8 size)
+boolu32 SpriteUtilCheckOutOfRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, SplashSize size)
 {
     if (oldY > gEffectYPosition && yPosition <= gEffectYPosition)
     {
@@ -3715,7 +3729,7 @@ u32 SpriteUtilCheckOutOfRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, u8 si
  * @param size Size of the splash
  * @return u8 bool, in effect
  */
-u32 SpriteUtilCheckInRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, u8 size)
+boolu32 SpriteUtilCheckInRoomEffect(u16 oldY, u16 yPosition, u16 xPosition, SplashSize size)
 {
     if (oldY < gEffectYPosition && yPosition >= gEffectYPosition)
     {

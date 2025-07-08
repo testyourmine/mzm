@@ -304,7 +304,7 @@ void ZiplineGeneratorPart(void)
             break;
 
         case ZIPLINE_GENERATOR_PART_POSE_MORPH_SYMBOL_ACTIVATING:
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
                 gCurrentSprite.status = 0;
     }
 }

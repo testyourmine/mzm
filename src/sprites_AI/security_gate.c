@@ -129,7 +129,7 @@ static void SecurityGateDefaultOpenCheckAlarm(void)
  */
 static void SecurityGateCheckClosingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pOam = sSecurityGateOam_Closed;
         gCurrentSprite.animationDurationCounter = 0;
@@ -170,7 +170,7 @@ static void SecurityGateDefaultOpenOpenAfterAlarm(void)
  */
 static void SecurityGateOpening(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pOam = sSecurityGateOam_Opened;
         gCurrentSprite.animationDurationCounter = 0;

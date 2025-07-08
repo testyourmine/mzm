@@ -216,7 +216,7 @@ static void SidehopperJumpWarningGround(void)
         }
     }
     
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         SidehopperJumpingInit();
 }
 
@@ -226,7 +226,7 @@ static void SidehopperJumpWarningGround(void)
  */
 static void SidehopperJumpWarningCeiling(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         SidehopperJumpingInit();
 }
 
@@ -488,7 +488,7 @@ static void SidehopperJumpingCeiling(void)
  */
 static void SidehopperCheckLandingAnimEnded(void)
 {
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
         SidehopperIdleInit();
 }
 
@@ -631,7 +631,7 @@ static void SidehopperIdleGround(void)
         }
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         if (gCurrentSprite.work0++ == gCurrentSprite.work1)
         {
@@ -657,7 +657,7 @@ static void SidehopperIdleCeiling(void)
         return;
     }
 
-    if (SpriteUtilCheckEndCurrentSpriteAnim())
+    if (SpriteUtilHasCurrentAnimationEnded())
     {
         if (gCurrentSprite.work0++ == gCurrentSprite.work1)
         {

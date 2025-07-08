@@ -145,7 +145,7 @@ static void RinkaSpawning(void)
             if (gCurrentSprite.work0 == 0)
                 gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
         }
-        else if (SpriteUtilCheckEndCurrentSpriteAnim())
+        else if (SpriteUtilHasCurrentAnimationEnded())
         {
             if (gCurrentSprite.spriteId == PSPRITE_RINKA_GREEN)
                 gCurrentSprite.pOam = sRinkaGreenOam_Moving;
@@ -465,7 +465,7 @@ static void RinkaMotherBrainSpawning(void)
             if (gCurrentSprite.work0 == 0)
                 gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
         }
-        else if (SpriteUtilCheckEndCurrentSpriteAnim())
+        else if (SpriteUtilHasCurrentAnimationEnded())
         {
             gCurrentSprite.pOam = sRinkaMotherBrainOam_Moving;
 

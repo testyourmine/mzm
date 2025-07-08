@@ -274,7 +274,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
 
             SoundPlay(SOUND_KRAID_OPENING_MOUTH);
         }
-        else if (SpriteUtilCheckEndCurrentSpriteAnim() && gSpriteRng < SPRITE_RNG_PROB(5.f / 16))
+        else if (SpriteUtilHasCurrentAnimationEnded() && gSpriteRng < SPRITE_RNG_PROB(5.f / 16))
         {
             // Random blinking animation
             pSprite->pOam = sKraidOam_MouthClosedBlink;
@@ -294,7 +294,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
 
             SoundPlay(SOUND_KRAID_OPENING_MOUTH);
         }
-        else if (SpriteUtilCheckEndCurrentSpriteAnim())
+        else if (SpriteUtilHasCurrentAnimationEnded())
         {
             // Back to normal animation
             pSprite->pOam = sKraidOam_MouthClosed;
@@ -308,7 +308,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
         {
             // Enable projectile collision
             closed = FALSE;
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Set opened
                 pSprite->pOam = sKraidOam_MouthOpened;
@@ -342,7 +342,7 @@ static void KraidOpenCloseRoutineAndProjectileCollision(void)
 
                 SoundPlay(SOUND_KRAID_OPENING_MOUTH);
             }
-            else if (SpriteUtilCheckEndCurrentSpriteAnim())
+            else if (SpriteUtilHasCurrentAnimationEnded())
             {
                 // Random animation
                 if (MOD_AND(gSpriteRng, 2))
@@ -1444,7 +1444,7 @@ static void KraidFirstStep(void)
     u8 feetStatus;
 
     feetStatus = KraidMoveFeet();
-    if (SpriteUtilCheckNearEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationNearlyEnded())
     {
         if (gSubSpriteData1.work1 != 0)
         {
@@ -1505,7 +1505,7 @@ static void KraidSecondStep(void)
     u8 feetStatus;
 
     feetStatus = KraidMoveFeet();
-    if (SpriteUtilCheckNearEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationNearlyEnded())
     {
         if (gSubSpriteData1.work1 != 0)
         {
@@ -1559,7 +1559,7 @@ static void KraidStandingInit(void)
  */
 static void KraidStanding(void)
 {
-    if (SpriteUtilCheckNearEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationNearlyEnded())
     {
         gCurrentSprite.pose = KRAID_POSE_FIRST_STEP_INIT;
         if (gSubSpriteData1.work1 == 1)
@@ -1588,7 +1588,7 @@ static void KraidStandingBetweenStepsInit(void)
  */
 static void KraidStandingBetweenSteps(void)
 {
-    if (SpriteUtilCheckNearEndSubSprite1Anim())
+    if (SpriteUtilHasSubSprite1AnimationNearlyEnded())
     {
         // Start second step
         gCurrentSprite.pose = KRAID_POSE_SECOND_STEP_INIT;
@@ -1661,7 +1661,7 @@ static void KraidDying(void)
 {
     u8 rng;
 
-    if (gCurrentSprite.pOam == sKraidOam_OpeningMouth && SpriteUtilCheckEndCurrentSpriteAnim())
+    if (gCurrentSprite.pOam == sKraidOam_OpeningMouth && SpriteUtilHasCurrentAnimationEnded())
     {
         gCurrentSprite.pOam = sKraidOam_MouthOpened;
         gCurrentSprite.animationDurationCounter = 0;
@@ -2051,7 +2051,7 @@ static void KraidPartThrowNails(void)
                 gCurrentSprite.xPosition + BLOCK_SIZE * 3 + HALF_BLOCK_SIZE, 0);
         }
 
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             // Set idle
             gCurrentSprite.pOam = sKraidPartOam_LeftArmIdle;
@@ -2078,7 +2078,7 @@ static void KraidPartCheckAttack(void)
     if (gSpriteData[ramSlot].status & SPRITE_STATUS_SAMUS_COLLIDING)
     {
         // Already attacking
-        if (SpriteUtilCheckEndCurrentSpriteAnim())
+        if (SpriteUtilHasCurrentAnimationEnded())
         {
             // Set idle
             gSpriteData[ramSlot].status &= ~SPRITE_STATUS_SAMUS_COLLIDING;
@@ -2293,7 +2293,7 @@ static void KraidPartDyingSinking(void)
     {
         if (gCurrentSprite.roomSlot == KRAID_PART_RIGHT_ARM)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sKraidPartOam_RightArmIdle;
                 gCurrentSprite.animationDurationCounter = 0;
@@ -2305,7 +2305,7 @@ static void KraidPartDyingSinking(void)
         }
         else if (gCurrentSprite.roomSlot == KRAID_PART_LEFT_ARM)
         {
-            if (SpriteUtilCheckEndCurrentSpriteAnim())
+            if (SpriteUtilHasCurrentAnimationEnded())
             {
                 gCurrentSprite.pOam = sKraidPartOam_LeftArmIdle;
                 gCurrentSprite.animationDurationCounter = 0;

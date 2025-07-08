@@ -648,7 +648,7 @@ static void ZoomerTurningAroundInit(void)
  */
 static void ZoomerTurningAround(void)
 {
-    if (!SpriteUtilCheckEndCurrentSpriteAnim())
+    if (!SpriteUtilHasCurrentAnimationEnded())
         return;
 
     gCurrentSprite.pose = ZOOMER_POSE_IDLE;
@@ -777,7 +777,7 @@ static void ZoomerLanding(void)
 {
     if (ZoomerCheckCollidingWithAir())
         gCurrentSprite.pose = ZOOMER_POSE_FALLING_INIT;
-    else if (SpriteUtilCheckNearEndCurrentSpriteAnim())
+    else if (SpriteUtilHasCurrentAnimationNearlyEnded())
         gCurrentSprite.pose = ZOOMER_POSE_IDLE_INIT;
 }
 
