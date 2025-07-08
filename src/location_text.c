@@ -14,11 +14,11 @@
 /**
  * @brief 11ed8 | b8 | Gets the location text of the current room for brinstar 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetBrinstar(void)
+LocationTextId LocationTextGetBrinstar(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -44,11 +44,11 @@ u8 LocationTextGetBrinstar(void)
 /**
  * @brief 11f90 | d0 | Gets the location text of the current room for kraid 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetKraid(void)
+LocationTextId LocationTextGetKraid(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -75,11 +75,11 @@ u8 LocationTextGetKraid(void)
 /**
  * @brief 12060 | 7c | Gets the location text of the current room for crateria 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetCrateria(void)
+LocationTextId LocationTextGetCrateria(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -113,11 +113,11 @@ u8 LocationTextGetCrateria(void)
 /**
  * @brief 120dc | e8 | Gets the location text of the current room for norfair 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetNorfair(void)
+LocationTextId LocationTextGetNorfair(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -147,11 +147,11 @@ u8 LocationTextGetNorfair(void)
 /**
  * @brief 121c4 | 98 | Gets the location text of the current room for ridley 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetRidley(void)
+LocationTextId LocationTextGetRidley(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -178,11 +178,11 @@ u8 LocationTextGetRidley(void)
 /**
  * @brief 1225c | 1a8 | Gets the location text of the current room for chozodia 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetChozodia(void)
+LocationTextId LocationTextGetChozodia(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -213,11 +213,11 @@ u8 LocationTextGetChozodia(void)
 /**
  * @brief 12404 | 80 | Gets the location text of the current room for tourian 
  * 
- * @return u8 Location text
+ * @return LocationTextId Location text
  */
-u8 LocationTextGetTourian(void)
+LocationTextId LocationTextGetTourian(void)
 {
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     switch (gCurrentRoom)
@@ -240,7 +240,7 @@ u8 LocationTextGetTourian(void)
 /**
  * @brief 12484 | 58 | Loads area banner graphics and palette
  * 
- * @return u8 Gfx Slot
+ * @return u8 Gfx slot
  */
 u8 LocationTextLoadAreaBannerGfx(void)
 {
@@ -261,27 +261,26 @@ u8 LocationTextLoadAreaBannerGfx(void)
     }
 
     // Check if found an area banner
-    if (gfxSlot > 7)
+    if (gfxSlot >= SPRITE_GFX_SLOT_MAX)
     {
         // Use 7 as default and load Gfx/Pal
-        gfxSlot = 7;
-        SpriteLoadGfx(PSPRITE_AREA_BANNER, 7);
-        SpriteLoadPal(PSPRITE_AREA_BANNER, 7, 1);
+        gfxSlot = SPRITE_GFX_SLOT_MAX - 1;
+        SpriteLoadGfx(PSPRITE_AREA_BANNER, gfxSlot);
+        SpriteLoadPal(PSPRITE_AREA_BANNER, gfxSlot, 1);
     }
 
     return gfxSlot;
 }
 
 /**
- * 124dc | 10c | 
- * Gets the current area location text number and returns the Gfx slot for it, also does some part of the area banner sprite setup 
+ * 124dc | 10c | Gets the current area location text number and returns the Gfx slot for it, also does some part of the area banner sprite setup 
  * 
- * @return The Gfx Slot 
+ * @return u8 Gfx slot 
  */
 u8 LocationTextGetGfxSlot(void)
 {
     u8 gfxSlot;
-    u8 lt;
+    LocationTextId lt;
 
     lt = LT_INVALID;
     gfxSlot = UCHAR_MAX;
@@ -354,7 +353,10 @@ u8 LocationTextGetGfxSlot(void)
 
                 // Load different palette for some reason
                 if (lt < LT_SAVE_ROOM)
-                    DMA_SET(3, sAreaBannerLocationTextPal, (PALRAM_BASE + 0x300) + (gfxSlot * 0x20), C_32_2_16(DMA_ENABLE, 16));
+                {
+                    DMA_SET(3, sAreaBannerLocationTextPal, PALRAM_OBJ + PAL_ROW_SIZE * 8 + (gfxSlot * PAL_ROW_SIZE),
+                        C_32_2_16(DMA_ENABLE, PAL_ROW_SIZE / 2));
+                }
             }
         }
     }

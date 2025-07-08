@@ -116,7 +116,7 @@ const u16 sJapaneseText_Location_Unused16[] = INCTEXT("{WIDTH(93)}空き１６")
 const u16 sJapaneseText_Location_Unused17[] = INCTEXT("{WIDTH(93)}空き１７");
 const u16 sJapaneseText_Location_Unused18[] = INCTEXT("{WIDTH(93)}空き１８");
 
-static const u16* sJapaneseTextPointers_Location[LT_END] = {
+static const u16* sJapaneseTextPointers_Location[LT_COUNT] = {
     [LT_BRINSTAR] = sJapaneseText_Location_Brinstar,
     [LT_KRAID] = sJapaneseText_Location_Kraid,
     [LT_NORFAIR] = sJapaneseText_Location_Norfair,
@@ -254,7 +254,7 @@ const u16 sHiraganaText_Location_Unused16[] = INCTEXT("{WIDTH(93)}空き１６")
 const u16 sHiraganaText_Location_Unused17[] = INCTEXT("{WIDTH(93)}空き１７");
 const u16 sHiraganaText_Location_Unused18[] = INCTEXT("{WIDTH(93)}空き１８");
 
-static const u16* sHiraganaTextPointers_Location[LT_END] = {
+static const u16* sHiraganaTextPointers_Location[LT_COUNT] = {
     [LT_BRINSTAR] = sHiraganaText_Location_Brinstar,
     [LT_KRAID] = sHiraganaText_Location_Kraid,
     [LT_NORFAIR] = sHiraganaText_Location_Norfair,
@@ -392,7 +392,7 @@ const u16 sEnglishText_Location_Unused16[] = INCTEXT("{WIDTH(66)}UNUSED OBJ 16")
 const u16 sEnglishText_Location_Unused17[] = INCTEXT("{WIDTH(66)}UNUSED OBJ 17");
 const u16 sEnglishText_Location_Unused18[] = INCTEXT("{WIDTH(66)}UNUSED OBJ 18");
 
-static const u16* sEnglishTextPointers_Location[LT_END] = {
+static const u16* sEnglishTextPointers_Location[LT_COUNT] = {
     [LT_BRINSTAR] = sEnglishText_Location_Brinstar,
     [LT_KRAID] = sEnglishText_Location_Kraid,
     [LT_NORFAIR] = sEnglishText_Location_Norfair,
