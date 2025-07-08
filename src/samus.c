@@ -1152,6 +1152,10 @@ void SamusCheckSetEnvironmentalEffect(struct SamusData* pData, u32 defaultOffset
     u16 previousY;
     struct SamusPhysics* pPhysics;
 
+    #ifdef BUGFIX
+    effect = ENV_EFFECT_NONE;
+    #endif // BUGFIX
+
     pPhysics = &gSamusPhysics;
     found = FALSE;
     canSpawn = TRUE;
@@ -5863,6 +5867,10 @@ SamusPose SamusShinesparking(struct SamusData* pData)
     s32 xOffset;
     u8 stop;
 
+    #ifdef BUGFIX
+    stop = FALSE;
+    #endif // BUGFIX
+
     hittingSideBlock = FALSE;
 
     if (pData->forcedMovement == FORCED_MOVEMENT_UPWARDS_SHINESPARK)
@@ -7389,6 +7397,10 @@ void SamusUpdateGraphicsOam(struct SamusData* pData, u8 direction)
         return;
 
     pPhysics->unk_36 = 1 * SAMUS_GFX_PART_SIZE;
+
+    #ifdef BUGFIX
+    pEffectAnim = NULL;
+    #endif // BUGFIX
 
     // Fetch current effect graphics and OAM based on the current pose and the effect flag
     switch (pose)

@@ -1436,6 +1436,10 @@ void BootDebugModeSubroutine(void)
 {
     s32 updateTextAndEvents;
 
+    #ifdef BUGFIX
+    updateTextAndEvents = FALSE;
+    #endif // BUGFIX
+    
     if (BOOT_DEBUG_DATA.menuDepth == BOOT_DEBUG_MENU_SUB)
     {
         if (gChangedInput & KEY_A)
@@ -1459,7 +1463,9 @@ void BootDebugModeSubroutine(void)
     }
     else // menuDepth == BOOT_DEBUG_MENU_OPTION
     {
+        #ifndef BUGFIX
         updateTextAndEvents = FALSE;
+        #endif // !BUGFIX
 
         switch (BOOT_DEBUG_DATA.subMenuOption)
         {
@@ -1868,6 +1874,10 @@ void BootDebugSoundSubroutine(void)
     s32 updateText;
     s32 value;
     
+    #ifdef BUGFIX
+    updateText = FALSE;
+    #endif // BUGFIX
+
     if (BOOT_DEBUG_DATA.menuDepth == BOOT_DEBUG_MENU_SUB)
     {
         if (gChangedInput & (KEY_RIGHT | KEY_A))
@@ -1887,7 +1897,9 @@ void BootDebugSoundSubroutine(void)
     }
     else
     {
+        #ifndef BUGFIX
         updateText = FALSE;
+        #endif // !BUGFIX
 
         switch (BOOT_DEBUG_DATA.subMenuOption)
         {

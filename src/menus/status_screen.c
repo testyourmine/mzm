@@ -1860,6 +1860,11 @@ u8 StatusScreenGetSlotForNewItem(u8 param_1, u8 item)
     else if (sStatusScreenItemsAcquisitionData[item].unk_0 != 3)
         return sStatusScreenItemsAcquisitionData[item].statusSlot;
 
+    #ifdef BUGFIX
+    pActivation = NULL;
+    pStatusActivation = NULL;
+    #endif // BUGFIX
+
     flag = 0;
     slot = sStatusScreenItemsAcquisitionData[item].statusSlot;
 
@@ -2157,6 +2162,10 @@ void StatusScreenSetBeamsVisibility(u16* pTilemap)
 
         if (gEquipment.beamBombs & sStatusScreenFlagsOrderPointers[ABILITY_GROUP_BEAMS][i])
         {
+            #ifdef BUGFIX
+            ptr = NULL;
+            #endif // BUGFIX
+
             pVisibility[row] = sStatusScreenFlagsOrderPointers[ABILITY_GROUP_BEAMS][i];
 
             for (j = 0; j <= sStatusScreenGroupsPositions[ABILITY_GROUP_BEAMS].right - sStatusScreenGroupsPositions[ABILITY_GROUP_BEAMS].left; j++)
@@ -2242,6 +2251,10 @@ void StatusScreenSetSuitsVisibility(u16* pTilemap)
 
         if (gEquipment.suitMisc & sStatusScreenFlagsOrderPointers[ABILITY_GROUP_SUITS][i])
         {
+            #ifdef BUGFIX
+            ptr = NULL;
+            #endif // BUGFIX
+
             pVisibility[row] = sStatusScreenFlagsOrderPointers[ABILITY_GROUP_SUITS][i];
 
             for (j = 0; j <= sStatusScreenGroupsPositions[ABILITY_GROUP_SUITS].right - sStatusScreenGroupsPositions[ABILITY_GROUP_SUITS].left; j++)
@@ -3503,7 +3516,11 @@ u32 StatusScreenToggleItem(u8 statusSlot, u8 action)
     u8 i;
     u8 isActivated;
     u8 subActivated;
-    
+
+    #ifdef BUGFIX
+    pActivation = NULL;
+    #endif // BUGFIX
+
     flag = 0;
     switch (sStatusScreenItemsData[statusSlot].group)
     {

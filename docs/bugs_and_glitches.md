@@ -6,12 +6,11 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 - [Bugs](#bugs)
   - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
-- [Uninitialized Variables](#uninitialized-variables)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
+- [Uninitialized Variables](#uninitialized-variables)
 - [TODO](#todo)
   - [Bugs](#bugs-1)
-  - [Uninitialized Variables](#uninitialized-variables-1)
   - [Oversights and Design Flaws](#oversights-and-design-flaws-1)
 
 
@@ -32,9 +31,6 @@ if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
     gDoorUnlockTimer = -ONE_THIRD_SECOND;
 }
 ```
-
-
-## Uninitialized Variables
 
 
 ## Oversights and Design Flaws
@@ -83,6 +79,28 @@ if (movement >= 2848 - sRidleyLandingScrollingInfo[1].length / 1.5)
 ```
 Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 
+## Uninitialized Variables
+
+| Variable | Function | File |
+|----------|----------|------|
+| `effect` | `SamusCheckSetEnvironmentalEffect` | [samus.c](../src/samus.c) |
+| `stop` | `SamusShinesparking` | [samus.c](../src/samus.c) |
+| `pEffectAnim` | `SamusUpdateGraphicsOam` | [samus.c](../src/samus.c) |
+| `result` | `BlockSamusApplyScrewSpeedboosterDamageToEnvironment` | [block.c](../src/block.c) |
+| `action` | `BgClipCheckOpeningHatch` | [bg_clip.c](../src/bg_clip.c) |
+| `pDoor` | `ConnectionCheckAreaConnection` | [connection.c](../src/connection.c) |
+| `dst` | `TextProcessStory` | [text.c](../src/text.c) |
+| `tmp1`, `tmp2` | `MinimapDraw` | [minimap.c](../src/minimap.c) |
+| `pActivation`, `pStatusActivation` | `StatusScreenGetSlotForNewItem` | [status_screen.c](../src/menus/status_screen.c) |
+| `ptr` | `StatusScreenSetBeamsVisibility` | [status_screen.c](../src/menus/status_screen.c) |
+| `ptr` | `StatusScreenSetSuitsVisibility` | [status_screen.c](../src/menus/status_screen.c) |
+| `pActivation` | `StatusScreenToggleItem` | [status_screen.c](../src/menus/status_screen.c) |
+| `src` | `TitleScreenTransferGroundGraphics` | [title_screen.c](../src/menus/title_screen.c) |
+| `currSlot` | `unk_818cc` | [tourian_escape.c](../src/tourian_escape.c) |
+| `diff` | `SramWriteChecked` | [sram.c](../src/sram/sram.c) |
+| `updateTextAndEvents` | `BootDebugModeSubroutine` | [boot_debug.c](../src/menus/boot_debug.c) |
+| `updateText` | `BootDebugSoundSubroutine` | [boot_debug.c](../src/menus/boot_debug.c) |
+
 
 ## TODO
 
@@ -108,16 +126,6 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 - Chozo statue refill glitch
 - Collecting an item during a power bomb explosion allows Samus to move early
 - "Stop enemy" clipdata prevents bomb jumping
-
-### Uninitialized Variables
-- [MinimapDraw (tmp1, tmp2)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/minimap.c#L680)
-- [BlockSamusApplyScrewSpeedboosterDamageToEnvironment (result)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/block.c#L1053)
-- [BgClipCheckOpeningHatch (action)](https://github.com/metroidret/mzm/blob/043610f452aa8bbbad96c0c4f2e70a46e60fd6cc/src/bg_clip.c#L774)
-- [SamusCheckSetEnvironmentalEffect (effect)](https://github.com/metroidret/mzm/blob/2bff56a86e36559955f1a6238df60829b61bb909/src/samus.c#L1348)
-- [SamusShinesparking (stop)](https://github.com/metroidret/mzm/blob/2bff56a86e36559955f1a6238df60829b61bb909/src/samus.c#L5895)
-- [unk_818cc (currSlot)](https://github.com/metroidret/mzm/blob/043610f452aa8bbbad96c0c4f2e70a46e60fd6cc/src/tourian_escape.c#L322)
-- [BootDebugModeSubroutine (updateTextAndEvents)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/menus/boot_debug.c#L1513)
-- [BootDebugSoundSubroutine (updateText)](https://github.com/metroidret/mzm/blob/22dceb902f66667378076e5022e12ef89c5ccf3f/src/menus/boot_debug.c#L1961)
 
 ### Oversights and Design Flaws
 

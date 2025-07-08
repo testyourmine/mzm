@@ -624,6 +624,10 @@ void TitleScreenTransferGroundGraphics(void)
     s32 var_1;
     u8* src;
 
+    #ifdef BUGFIX
+    src = NULL;
+    #endif // BUGFIX
+
     var_0 = -1;
     var_1 = -1;
 
