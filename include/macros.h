@@ -276,16 +276,16 @@
 #define COLOR_YELLOW COLOR(COLOR_MAX, COLOR_MAX, 0)
 
 /**
- * @brief Purple color constant
+ * @brief Magenta color constant
  * 
  */
-#define COLOR_PURPLE COLOR(COLOR_MAX, 0, COLOR_MAX)
+#define COLOR_MAGENTA COLOR(COLOR_MAX, 0, COLOR_MAX)
 
 /**
- * @brief Light blue color constant
+ * @brief Cyan color constant
  * 
  */
-#define COLOR_LIGHT_BLUE COLOR(0, COLOR_MAX, COLOR_MAX)
+#define COLOR_CYAN COLOR(0, COLOR_MAX, COLOR_MAX)
 
 /**
  * @brief Sets the backdrop color
