@@ -339,7 +339,7 @@ void agbmain(void)
                     }
                 }
                 #else // !DEBUG
-                for (;;) {}
+                while (TRUE);
                 #endif // DEBUG
                 break;
         }

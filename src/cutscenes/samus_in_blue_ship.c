@@ -8,33 +8,19 @@
 #include "constants/audio.h"
 #include "constants/cutscene.h"
 
+#include "structs/cutscene.h"
 #include "structs/display.h"
 
-static u8 sSamusInBlueShipPanelTransparency[4] = {
-    16, 15, 14, 15
-};
-
-static struct CutsceneSubroutineData sSamusInBlueShipSubroutineData[3] = {
-    [0] = {
-        .pFunction = SamusInBlueShipInit,
-        .oamLength = 1
-    },
-    [1] = {
-        .pFunction = SamusInBlueShipPoweringUp,
-        .oamLength = 1
-    },
-    [2] = {
-        .pFunction = CutsceneEndFunction,
-        .oamLength = 1
-    }
-};
+static void SamusInBlueShipShakeScreen(struct CutsceneGraphicsData* pGraphics);
+static void SamusInBlueShipUpdateControlPanel(struct CutsceneOamData* pOam);
+static void SamusInBlueShipProcessOAM(void);
 
 /**
  * @brief 67d8c | f8 | Handles the sip powering up part (entire cutscene)
  * 
  * @return u8 FALSE
  */
-u8 SamusInBlueShipPoweringUp(void)
+static u8 SamusInBlueShipPoweringUp(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -104,7 +90,7 @@ u8 SamusInBlueShipPoweringUp(void)
  * 
  * @param pGraphics Cutscene graphics data pointer
  */
-void SamusInBlueShipShakeScreen(struct CutsceneGraphicsData* pGraphics)
+static void SamusInBlueShipShakeScreen(struct CutsceneGraphicsData* pGraphics)
 {
     if (!pGraphics->active)
         return;
@@ -119,12 +105,16 @@ void SamusInBlueShipShakeScreen(struct CutsceneGraphicsData* pGraphics)
         *CutsceneGetBgHorizontalPointer(sSamusInBlueShipPageData[0].bg) -= PIXEL_SIZE;
 }
 
+static u8 sSamusInBlueShipPanelTransparency[4] = {
+    16, 15, 14, 15
+};
+
 /**
  * @brief 67ed0 | c0 | Updates the control panel object
  * 
  * @param pOam Cutscene OAM data pointer
  */
-void SamusInBlueShipUpdateControlPanel(struct CutsceneOamData* pOam)
+static void SamusInBlueShipUpdateControlPanel(struct CutsceneOamData* pOam)
 {
     switch (pOam->actions)
     {
@@ -176,7 +166,7 @@ void SamusInBlueShipUpdateControlPanel(struct CutsceneOamData* pOam)
  * 
  * @return u8 FALSE
  */
-u8 SamusInBlueShipInit(void)
+static u8 SamusInBlueShipInit(void)
 {
     CutsceneFadeScreenToBlack();
 
@@ -215,6 +205,21 @@ u8 SamusInBlueShipInit(void)
     return FALSE;
 }
 
+static struct CutsceneSubroutineData sSamusInBlueShipSubroutineData[3] = {
+    [0] = {
+        .pFunction = SamusInBlueShipInit,
+        .oamLength = 1
+    },
+    [1] = {
+        .pFunction = SamusInBlueShipPoweringUp,
+        .oamLength = 1
+    },
+    [2] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 1
+    }
+};
+
 /**
  * @brief 680bc | 34 | Subroutine for the samus in blue ship cutscene
  * 
@@ -235,7 +240,7 @@ u8 SamusInBlueShipSubroutine(void)
  * @brief 680f0 | 38 | Processes the OAM
  * 
  */
-void SamusInBlueShipProcessOAM(void)
+static void SamusInBlueShipProcessOAM(void)
 {
     gNextOamSlot = 0;
     ProcessCutsceneOam(sSamusInBlueShipSubroutineData[CUTSCENE_DATA.timeInfo.stage].oamLength, CUTSCENE_DATA.oam, sSamusInBlueShipOam);

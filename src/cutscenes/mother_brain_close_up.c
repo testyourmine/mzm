@@ -11,6 +11,7 @@
 #include "constants/cutscene.h"
 #include "constants/samus.h"
 
+#include "structs/cutscene.h"
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/samus.h"
@@ -24,44 +25,14 @@
 
 #define OAM_SLOT_EYE_PUPIL 1
 
+static void MotherBrainCloseUpUpdateElevatorReflection(struct CutsceneOamData* pOam);
+static void MotherBrainCloseUpProcessOAM(void);
+static void MotherBrainCloseUpUpdateEye(u8 lookingAtSamus);
+static void MotherBrainCloseUpUpdateBubble(struct CutsceneOamData* pOam);
+static u8 MotherBrainCloseUpInitBubbles(u8 packId);
+
 static u16 sMotherBrainCloseUpLookingAtSamusTimers[2] = {
-    CONVERT_SECONDS(3.f) + CONVERT_SECONDS(1.f / 6), CONVERT_SECONDS(2.f)
-};
-
-static u16 sMotherBrainCloseUpEyeOpeningTimers[4] = {
-    TWO_THIRD_SECOND, TWO_THIRD_SECOND, CONVERT_SECONDS(1.f) + ONE_THIRD_SECOND, CONVERT_SECONDS(1.f)
-};
-
-static struct CutsceneSubroutineData sMotherBrainCloseUpSubroutineData[5] = {
-    [0] = {
-        .pFunction = MotherBrainCloseUpInit,
-        .oamLength = 0
-    },
-    [1] = {
-        .pFunction = MotherBrainCloseUpTankView,
-        .oamLength = 0
-    },
-    [2] = {
-        .pFunction = MotherBrainCloseUpEyeOpening,
-        .oamLength = 8
-    },
-    [3] = {
-        .pFunction = MotherBrainCloseUpLookingAtSamus,
-        .oamLength = 2
-    },
-    [4] = {
-        .pFunction = CutsceneEndFunction,
-        .oamLength = 2
-    }
-};
-
-static u16 sMotherBrainCloseUpBubblesSpawnPositions[2][2] = {
-    [0] = {
-        BLOCK_SIZE * 11 + EIGHTH_BLOCK_SIZE, BLOCK_SIZE * 10 + THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE
-    },
-    [1] = {
-        BLOCK_SIZE * 4 - QUARTER_BLOCK_SIZE, BLOCK_SIZE * 10 + QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3
-    }
+    CONVERT_SECONDS(3.f + (1.f / 6)), CONVERT_SECONDS(2.f)
 };
 
 /**
@@ -69,7 +40,7 @@ static u16 sMotherBrainCloseUpBubblesSpawnPositions[2][2] = {
  * 
  * @return u8 FALSE
  */
-u8 MotherBrainCloseUpLookingAtSamus(void)
+static u8 MotherBrainCloseUpLookingAtSamus(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -177,7 +148,7 @@ u8 MotherBrainCloseUpLookingAtSamus(void)
  * 
  * @param pOam Cutscene OAM data pointer
  */
-void MotherBrainCloseUpUpdateElevatorReflection(struct CutsceneOamData* pOam)
+static void MotherBrainCloseUpUpdateElevatorReflection(struct CutsceneOamData* pOam)
 {
     if (pOam->actions == CUTSCENE_OAM_ACTION_NONE)
         return;
@@ -211,12 +182,16 @@ void MotherBrainCloseUpUpdateElevatorReflection(struct CutsceneOamData* pOam)
     }
 }
 
+static u16 sMotherBrainCloseUpEyeOpeningTimers[4] = {
+    TWO_THIRD_SECOND, TWO_THIRD_SECOND, CONVERT_SECONDS(1.f) + ONE_THIRD_SECOND, CONVERT_SECONDS(1.f)
+};
+
 /**
  * @brief 63284 | 23c | Handles the eye opening part
  * 
  * @return u8 FALSE
  */
-u8 MotherBrainCloseUpEyeOpening(void)
+static u8 MotherBrainCloseUpEyeOpening(void)
 {
     s32 i;
 
@@ -245,7 +220,7 @@ u8 MotherBrainCloseUpEyeOpening(void)
             MotherBrainCloseUpUpdateEye(FALSE);
             CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sMotherBrainCloseUpPageData[2].bg, NON_GAMEPLAY_START_BG_POS);
 
-            // Setup transparency for the flicket effect
+            // Setup transparency for the flicker effect
             gWrittenToBldalpha_L = 6;
             gWrittenToBldalpha_H = 12;
 
@@ -338,7 +313,7 @@ u8 MotherBrainCloseUpEyeOpening(void)
  * 
  * @return u8 FALSE
  */
-u8 MotherBrainCloseUpTankView(void)
+static u8 MotherBrainCloseUpTankView(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -398,7 +373,7 @@ u8 MotherBrainCloseUpTankView(void)
  * 
  * @return u8 FALSE
  */
-u8 MotherBrainCloseUpInit(void)
+static u8 MotherBrainCloseUpInit(void)
 {
     CutsceneFadeScreenToBlack();
 
@@ -430,6 +405,29 @@ u8 MotherBrainCloseUpInit(void)
     return FALSE;
 }
 
+static struct CutsceneSubroutineData sMotherBrainCloseUpSubroutineData[5] = {
+    [0] = {
+        .pFunction = MotherBrainCloseUpInit,
+        .oamLength = 0
+    },
+    [1] = {
+        .pFunction = MotherBrainCloseUpTankView,
+        .oamLength = 0
+    },
+    [2] = {
+        .pFunction = MotherBrainCloseUpEyeOpening,
+        .oamLength = 8
+    },
+    [3] = {
+        .pFunction = MotherBrainCloseUpLookingAtSamus,
+        .oamLength = 2
+    },
+    [4] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 2
+    }
+};
+
 /**
  * @brief 6363c | 34 | Subroutine for the mother brain close up cutscene
  * 
@@ -450,7 +448,7 @@ u8 MotherBrainCloseUpSubroutine(void)
  * @brief 63670 | 38 | Processes the OAM
  * 
  */
-void MotherBrainCloseUpProcessOAM(void)
+static void MotherBrainCloseUpProcessOAM(void)
 {
     gNextOamSlot = 0;
     ProcessCutsceneOam(sMotherBrainCloseUpSubroutineData[CUTSCENE_DATA.timeInfo.stage].oamLength, CUTSCENE_DATA.oam, sMotherBrainCloseUpCutsceneOam);
@@ -462,7 +460,7 @@ void MotherBrainCloseUpProcessOAM(void)
  * 
  * @param lookingAtSamus bool, looking at samus
  */
-void MotherBrainCloseUpUpdateEye(u8 lookingAtSamus)
+static void MotherBrainCloseUpUpdateEye(u8 lookingAtSamus)
 {
     struct CutsceneOamData* pOam;
     struct CutsceneOamData* pEye;
@@ -513,7 +511,7 @@ void MotherBrainCloseUpUpdateEye(u8 lookingAtSamus)
  * 
  * @param pOam Cutscene oam data pointer
  */
-void MotherBrainCloseUpUpdateBubble(struct CutsceneOamData* pOam)
+static void MotherBrainCloseUpUpdateBubble(struct CutsceneOamData* pOam)
 {
     s32 yPosition;
     s32 convertedY;
@@ -546,13 +544,22 @@ void MotherBrainCloseUpUpdateBubble(struct CutsceneOamData* pOam)
     }
 }
 
+static u16 sMotherBrainCloseUpBubblesSpawnPositions[2][2] = {
+    [0] = {
+        BLOCK_SIZE * 11 + EIGHTH_BLOCK_SIZE, BLOCK_SIZE * 10 + THREE_QUARTER_BLOCK_SIZE + EIGHTH_BLOCK_SIZE
+    },
+    [1] = {
+        BLOCK_SIZE * 4 - QUARTER_BLOCK_SIZE, BLOCK_SIZE * 10 + QUARTER_BLOCK_SIZE + PIXEL_SIZE * 3
+    }
+};
+
 /**
  * @brief 6380c | 78 | Initializes all the bubbles
  * 
  * @param packId Bubble pack ID
  * @return u8 bool, couldn't initialize
  */
-u8 MotherBrainCloseUpInitBubbles(u8 packId)
+static u8 MotherBrainCloseUpInitBubbles(u8 packId)
 {
     s32 i;
 

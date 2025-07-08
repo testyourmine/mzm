@@ -13,6 +13,7 @@
 #include "constants/game_state.h"
 #include "constants/text.h"
 
+#include "structs/cutscene.h"
 #include "structs/display.h"
 #include "structs/game_state.h"
 #include "structs/text.h"
@@ -34,43 +35,12 @@ const u16** sStoryTextPointers[7] = {
     #endif // REGION_US_BETA
 };
 
-static struct CutsceneSubroutineData sStoryTextCutsceneSubroutineData[7] = {
-    [0] = {
-        .pFunction = StoryTextCutsceneInit,
-        .oamLength = 0
-    },
-    [1] = {
-        .pFunction = StoryTextCutsceneProcessText,
-        .oamLength = 0
-    },
-    [2] = {
-        .pFunction = StoryTextCutsceneSetVerticalOffset,
-        .oamLength = 0
-    },
-    [3] = {
-        .pFunction = StoryTextCutsceneFadeIn,
-        .oamLength = 0
-    },
-    [4] = {
-        .pFunction = StoryTextCutsceneCheckInput,
-        .oamLength = 0
-    },
-    [5] = {
-        .pFunction = StoryTextCutsceneFadeOut,
-        .oamLength = 0
-    },
-    [6] = {
-        .pFunction = StoryTextCutsceneEnd,
-        .oamLength = 0
-    },
-};
-
 /**
  * @brief 62b90 | fc | Initializes a story text cutscene
  * 
  * @return u8 FALSE
  */
-u8 StoryTextCutsceneInit(void)
+static u8 StoryTextCutsceneInit(void)
 {
     // Reset message
     BitFill(3, 0, &gCurrentMessage, sizeof(gCurrentMessage), 32);
@@ -80,12 +50,12 @@ u8 StoryTextCutsceneInit(void)
     CutsceneFadeScreenToBlack();
 
     // Load palette
-    DmaTransfer(3, sStoryTextCutscenePal, PALRAM_BASE + PAL_SIZE - 1 * PAL_ROW_SIZE, sizeof(sStoryTextCutscenePal), 16);
+    DmaTransfer(3, sStoryTextCutscenePal, PALRAM_BASE + 15 * PAL_ROW_SIZE, sizeof(sStoryTextCutscenePal), 16);
     SET_BACKDROP_COLOR(COLOR_BLACK);
 
     // Load tiletable and clear graphics
-    CallLZ77UncompVram(sStoryTextCutsceneTileTable, VRAM_BASE + sStoryTextCutscenePagesData[0].tiletablePage * 0x800);
-    BitFill(3, 0, VRAM_BASE + 0x3000 + sStoryTextCutscenePagesData[0].graphicsPage * 0x4000, 0x5000, 32);
+    CallLZ77UncompVram(sStoryTextCutsceneTileTable, BGCNT_TO_VRAM_TILE_BASE(sStoryTextCutscenePagesData[0].tiletablePage));
+    BitFill(3, 0, BGCNT_TO_VRAM_CHAR_BASE(sStoryTextCutscenePagesData[0].graphicsPage) + 0x3000, 0x5000, 32);
 
     CutsceneSetBgcntPageData(sStoryTextCutscenePagesData[0]);
     
@@ -121,14 +91,14 @@ u8 StoryTextCutsceneInit(void)
  * 
  * @return u8 FALSE
  */
-u8 StoryTextCutsceneProcessText(void)
+static u8 StoryTextCutsceneProcessText(void)
 {
     u32* dst;
     s32 line;
     s32 result;
     u32 flag;
 
-    dst = VRAM_BASE + 0x3000 + sStoryTextCutscenePagesData[0].graphicsPage * 0x4000;
+    dst = BGCNT_TO_VRAM_CHAR_BASE(sStoryTextCutscenePagesData[0].graphicsPage) + 0x3000;
 
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -199,7 +169,7 @@ u8 StoryTextCutsceneProcessText(void)
  * 
  * @return u8 FALSE
  */
-u8 StoryTextCutsceneSetVerticalOffset(void)
+static u8 StoryTextCutsceneSetVerticalOffset(void)
 {
     u32 bgPosition;
 
@@ -224,7 +194,7 @@ u8 StoryTextCutsceneSetVerticalOffset(void)
  * 
  * @return u8 FALSE
  */
-u8 StoryTextCutsceneFadeIn(void)
+static u8 StoryTextCutsceneFadeIn(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -261,7 +231,7 @@ u8 StoryTextCutsceneFadeIn(void)
  * 
  * @return u8 FALSE
  */
-u8 StoryTextCutsceneFadeOut(void)
+static u8 StoryTextCutsceneFadeOut(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -305,7 +275,7 @@ u8 StoryTextCutsceneFadeOut(void)
  * 
  * @return u8 FALSE
  */
-u8 StoryTextCutsceneCheckInput(void)
+static u8 StoryTextCutsceneCheckInput(void)
 {
     u8 subStage;
 
@@ -349,7 +319,7 @@ u8 StoryTextCutsceneCheckInput(void)
  * 
  * @return u8 bool, ended
  */
-u8 StoryTextCutsceneEnd(void)
+static u8 StoryTextCutsceneEnd(void)
 {
     void* dst;
 
@@ -357,7 +327,7 @@ u8 StoryTextCutsceneEnd(void)
         return TRUE; // Message is done, end cutscene
 
     // Stil has some text to process, clear graphics
-    dst = VRAM_BASE + 0x3000 + sStoryTextCutscenePagesData[0].graphicsPage * 0x4000;
+    dst = BGCNT_TO_VRAM_CHAR_BASE(sStoryTextCutscenePagesData[0].graphicsPage) + 0x3000;
     BitFill(3, 0, dst + CUTSCENE_DATA.timeInfo.subStage * 0x1000, 0x1000, 32);
 
     CUTSCENE_DATA.timeInfo.subStage++;
@@ -370,6 +340,37 @@ u8 StoryTextCutsceneEnd(void)
 
     return FALSE;
 }
+
+static struct CutsceneSubroutineData sStoryTextCutsceneSubroutineData[7] = {
+    [0] = {
+        .pFunction = StoryTextCutsceneInit,
+        .oamLength = 0
+    },
+    [1] = {
+        .pFunction = StoryTextCutsceneProcessText,
+        .oamLength = 0
+    },
+    [2] = {
+        .pFunction = StoryTextCutsceneSetVerticalOffset,
+        .oamLength = 0
+    },
+    [3] = {
+        .pFunction = StoryTextCutsceneFadeIn,
+        .oamLength = 0
+    },
+    [4] = {
+        .pFunction = StoryTextCutsceneCheckInput,
+        .oamLength = 0
+    },
+    [5] = {
+        .pFunction = StoryTextCutsceneFadeOut,
+        .oamLength = 0
+    },
+    [6] = {
+        .pFunction = StoryTextCutsceneEnd,
+        .oamLength = 0
+    },
+};
 
 /**
  * @brief 62fd8 | 30 | Subroutine for the story text cutscenes

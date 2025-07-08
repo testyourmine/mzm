@@ -8,6 +8,22 @@
 
 #include "constants/audio_engine.h"
 
+static void unk_1bf0(struct TrackVariables* pVariables);
+static void unk_1c18(struct TrackVariables* pVariables);
+static void unk_1c3c(struct TrackVariables* pVariables);
+static void unk_1ccc(struct TrackVariables* pVariables, s16 param_2);
+static void unk_1d5c(struct TrackVariables* pVariables);
+static void unk_1d78(struct TrackVariables* pVariables);
+static void unk_1ddc(struct TrackVariables* pVariables);
+static void unk_1de8(struct TrackVariables* pVariables);
+static void unk_1e2c(struct TrackData* pTrack, struct TrackVariables* pVariables);
+static void unk_1f3c(struct TrackData* pTrack, struct TrackVariables* pVariables);
+static void unk_1f90(struct TrackData* pTrack, struct TrackVariables* pVariables);
+static void unk_1fe0(struct TrackData* pTrack, struct TrackVariables* pVariables);
+static void unk_2030(struct PSGSoundData* pSound, struct TrackVariables* pVariables, u32 param_3);
+
+static u16 GetNoteDelay(struct TrackVariables* pVariables, u8 param_2, u8 param_3);
+
 /**
  * @brief 10c4 | 394 | To document
  * 
@@ -891,7 +907,7 @@ void UpdateTrack(struct TrackData* pTrack)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1bf0(struct TrackVariables* pVariables)
+static void unk_1bf0(struct TrackVariables* pVariables)
 {
     struct SoundChannel* pChannel;
 
@@ -912,7 +928,7 @@ void unk_1bf0(struct TrackVariables* pVariables)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1c18(struct TrackVariables* pVariables)
+static void unk_1c18(struct TrackVariables* pVariables)
 {
     struct PSGSoundData* pSound;
 
@@ -933,7 +949,7 @@ void unk_1c18(struct TrackVariables* pVariables)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1c3c(struct TrackVariables* pVariables)
+static void unk_1c3c(struct TrackVariables* pVariables)
 {
     struct SoundChannel* pChannel;
     s32 frequency;
@@ -984,7 +1000,7 @@ void unk_1c3c(struct TrackVariables* pVariables)
  * @param pVariables Track variables pointer
  * @param param_2 To document
  */
-void unk_1ccc(struct TrackVariables* pVariables, s16 param_2)
+static void unk_1ccc(struct TrackVariables* pVariables, s16 param_2)
 {
     struct PSGSoundData* pSound;
     s16 var_0;
@@ -1023,7 +1039,7 @@ void unk_1ccc(struct TrackVariables* pVariables, s16 param_2)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1d5c(struct TrackVariables* pVariables)
+static void unk_1d5c(struct TrackVariables* pVariables)
 {
     struct SoundChannel* pChannel;
 
@@ -1036,7 +1052,7 @@ void unk_1d5c(struct TrackVariables* pVariables)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1d78(struct TrackVariables* pVariables)
+static void unk_1d78(struct TrackVariables* pVariables)
 {
     struct SoundChannel* pChannel;
     s32 frequency;
@@ -1069,7 +1085,7 @@ void unk_1d78(struct TrackVariables* pVariables)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1ddc(struct TrackVariables* pVariables)
+static void unk_1ddc(struct TrackVariables* pVariables)
 {
     pVariables->pSoundPSG->unk_F |= 0x10;
 }
@@ -1079,7 +1095,7 @@ void unk_1ddc(struct TrackVariables* pVariables)
  * 
  * @param pVariables Track variables pointer
  */
-void unk_1de8(struct TrackVariables* pVariables)
+static void unk_1de8(struct TrackVariables* pVariables)
 {
     s16 var_0;
 
@@ -1100,7 +1116,7 @@ void unk_1de8(struct TrackVariables* pVariables)
  * @param pTrack Track data pointer
  * @param pVariables Track variables pointer
  */
-void unk_1e2c(struct TrackData* pTrack, struct TrackVariables* pVariables)
+static void unk_1e2c(struct TrackData* pTrack, struct TrackVariables* pVariables)
 {
     u8 var_0;
     u8 var_1;
@@ -1191,7 +1207,7 @@ void unk_1e2c(struct TrackData* pTrack, struct TrackVariables* pVariables)
  * @param pTrack Track data pointer
  * @param pVariables Track variables pointer
  */
-void unk_1f3c(struct TrackData* pTrack, struct TrackVariables* pVariables)
+static void unk_1f3c(struct TrackData* pTrack, struct TrackVariables* pVariables)
 {
     if (pTrack->flags & 0x80)
     {
@@ -1211,7 +1227,7 @@ void unk_1f3c(struct TrackData* pTrack, struct TrackVariables* pVariables)
  * @param pTrack Track data pointer
  * @param pVariables Track variables pointer
  */
-void unk_1f90(struct TrackData* pTrack, struct TrackVariables* pVariables)
+static void unk_1f90(struct TrackData* pTrack, struct TrackVariables* pVariables)
 {
     u8 var_0;
     struct PSGSoundData* pSound;
@@ -1237,7 +1253,7 @@ void unk_1f90(struct TrackData* pTrack, struct TrackVariables* pVariables)
  * @param pTrack Track data pointer
  * @param pVariables Track variables pointer
  */
-void unk_1fe0(struct TrackData* pTrack, struct TrackVariables* pVariables)
+static void unk_1fe0(struct TrackData* pTrack, struct TrackVariables* pVariables)
 {
     u8 var_0;
     struct PSGSoundData* pSound;
@@ -1264,7 +1280,7 @@ void unk_1fe0(struct TrackData* pTrack, struct TrackVariables* pVariables)
  * @param pVariables Track variables pointer
  * @param param_3 To document
  */
-void unk_2030(struct PSGSoundData* pSound, struct TrackVariables* pVariables, u32 param_3)
+static void unk_2030(struct PSGSoundData* pSound, struct TrackVariables* pVariables, u32 param_3)
 {
     s16 var_0;
     s16 tmp;
@@ -1324,7 +1340,7 @@ void unk_20a4(struct SoundChannel* pChannel)
  * @param param_3 To document
  * @return u16 Delay
  */
-u16 GetNoteDelay(struct TrackVariables* pVariables, u8 param_2, u8 param_3)
+static u16 GetNoteDelay(struct TrackVariables* pVariables, u8 param_2, u8 param_3)
 {
     u16 delay;
     u16 temp;

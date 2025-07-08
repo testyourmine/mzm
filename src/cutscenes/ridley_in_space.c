@@ -11,6 +11,7 @@
 #include "constants/audio.h"
 #include "constants/cutscene.h"
 
+#include "structs/cutscene.h"
 #include "structs/display.h"
 #include "structs/game_state.h"
 
@@ -27,6 +28,18 @@
 #define PARTICLE_ACTION_MOVE 1
 
 #define SHIP_MAX_X BLOCK_SIZE * 4 + QUARTER_BLOCK_SIZE
+
+static void RidleyInSpaceUpdateShipLeaving(struct CutsceneOamData* pOam);
+static void RidleyInSpaceUpdateAlertPalette(struct CutscenePaletteData* pPalette);
+static void RidleyInSpaceUpdateViewOfShip(struct CutsceneOamData* pOam);
+static void RidleyInSpaceUpdateRightBlueShip(struct CutsceneOamData* pOam);
+static void RidleyInSpaceUpdateLeftBlueShip(struct CutsceneOamData* pOam);
+static void RidleyInSpaceProcessOAM(void);
+
+static void RidleyInSpaceViewOfShipParticles(void);
+static u32 RidleyInSpaceViewOfShipUpdateParticle(struct CutsceneOamData* pOam);
+static void RidleyInSpaceShipLeavingParticles(void);
+static struct CutsceneOamData* RidleyInSpaceShipLeavingUpdateParticle(struct CutsceneOamData* pOam);
 
 static struct Coordinates sRidleyInSpaceShipLeavingPosition = {
     .x = -(BLOCK_SIZE * 4 + QUARTER_BLOCK_SIZE),
@@ -52,39 +65,12 @@ static s8 sRidleyInSpaceShipsYMovementOffsets[8] = {
     PIXEL_SIZE, PIXEL_SIZE, -PIXEL_SIZE, -PIXEL_SIZE, -PIXEL_SIZE, -PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE
 };
 
-static struct CutsceneSubroutineData sRidleyInSpaceSubroutineData[6] = {
-    [0] = {
-        .pFunction = RidleyInSpaceInit,
-        .oamLength = 30
-    },
-    [1] = {
-        .pFunction = RidleyInSpaceViewOfShip,
-        .oamLength = 30
-    },
-    [2] = {
-        .pFunction = RidleyInSpaceRedAlert,
-        .oamLength = 30
-    },
-    [3] = {
-        .pFunction = RidleyInSpaceRidleySuspicious,
-        .oamLength = 30
-    },
-    [4] = {
-        .pFunction = RidleyInSpaceShipLeaving,
-        .oamLength = 30
-    },
-    [5] = {
-        .pFunction = CutsceneEndFunction,
-        .oamLength = 30
-    }
-};
-
 /**
  * @brief 63884 | 298 | Handles the ship leaving part
  * 
  * @return u8 FALSE
  */
-u8 RidleyInSpaceShipLeaving(void)
+static u8 RidleyInSpaceShipLeaving(void)
 {
     s32 i;
 
@@ -227,7 +213,7 @@ u8 RidleyInSpaceShipLeaving(void)
  * 
  * @param pOam Cutscene oam data pointer
  */
-void RidleyInSpaceUpdateShipLeaving(struct CutsceneOamData* pOam)
+static void RidleyInSpaceUpdateShipLeaving(struct CutsceneOamData* pOam)
 {
     if (pOam->actions & MOTHER_SHIP_ACTION_MOVE)
     {
@@ -297,7 +283,7 @@ void RidleyInSpaceUpdateShipLeaving(struct CutsceneOamData* pOam)
  * 
  * @return u8 FALSE
  */
-u8 RidleyInSpaceRidleySuspicious(void)
+static u8 RidleyInSpaceRidleySuspicious(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -387,7 +373,7 @@ u8 RidleyInSpaceRidleySuspicious(void)
  * 
  * @return u8 FALSE
  */
-u8 RidleyInSpaceRedAlert(void)
+static u8 RidleyInSpaceRedAlert(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -482,7 +468,7 @@ u8 RidleyInSpaceRedAlert(void)
  * 
  * @param pPalette Cutscene palette data pointer
  */
-void RidleyInSpaceUpdateAlertPalette(struct CutscenePaletteData* pPalette)
+static void RidleyInSpaceUpdateAlertPalette(struct CutscenePaletteData* pPalette)
 {
     if (!(pPalette->active & TRUE))
         return;
@@ -511,7 +497,7 @@ void RidleyInSpaceUpdateAlertPalette(struct CutscenePaletteData* pPalette)
  * 
  * @return u8 FALSE
  */
-u8 RidleyInSpaceViewOfShip(void)
+static u8 RidleyInSpaceViewOfShip(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -612,7 +598,7 @@ u8 RidleyInSpaceViewOfShip(void)
  * 
  * @param pOam Cutscene OAM data pointer
  */
-void RidleyInSpaceUpdateViewOfShip(struct CutsceneOamData* pOam)
+static void RidleyInSpaceUpdateViewOfShip(struct CutsceneOamData* pOam)
 {
     if (pOam->actions & MOTHER_SHIP_ACTION_MOVE_VERTICALLY)
     {
@@ -642,7 +628,7 @@ void RidleyInSpaceUpdateViewOfShip(struct CutsceneOamData* pOam)
  * 
  * @param pOam Cutscene oam data pointer
  */
-void RidleyInSpaceUpdateRightBlueShip(struct CutsceneOamData* pOam)
+static void RidleyInSpaceUpdateRightBlueShip(struct CutsceneOamData* pOam)
 {
     s32 yVelocity;
     
@@ -680,7 +666,7 @@ void RidleyInSpaceUpdateRightBlueShip(struct CutsceneOamData* pOam)
  * 
  * @param pOam Cutscene oam data pointer
  */
-void RidleyInSpaceUpdateLeftBlueShip(struct CutsceneOamData* pOam)
+static void RidleyInSpaceUpdateLeftBlueShip(struct CutsceneOamData* pOam)
 {
     if (pOam->actions & SHIP_ACTION_MOVE_HORIZONTALLY)
     {
@@ -714,7 +700,7 @@ void RidleyInSpaceUpdateLeftBlueShip(struct CutsceneOamData* pOam)
  * 
  * @return u8 FALSE
  */
-u8 RidleyInSpaceInit(void)
+static u8 RidleyInSpaceInit(void)
 {
     CutsceneFadeScreenToBlack();
 
@@ -768,6 +754,33 @@ u8 RidleyInSpaceInit(void)
     return FALSE;
 }
 
+static struct CutsceneSubroutineData sRidleyInSpaceSubroutineData[6] = {
+    [0] = {
+        .pFunction = RidleyInSpaceInit,
+        .oamLength = 30
+    },
+    [1] = {
+        .pFunction = RidleyInSpaceViewOfShip,
+        .oamLength = 30
+    },
+    [2] = {
+        .pFunction = RidleyInSpaceRedAlert,
+        .oamLength = 30
+    },
+    [3] = {
+        .pFunction = RidleyInSpaceRidleySuspicious,
+        .oamLength = 30
+    },
+    [4] = {
+        .pFunction = RidleyInSpaceShipLeaving,
+        .oamLength = 30
+    },
+    [5] = {
+        .pFunction = CutsceneEndFunction,
+        .oamLength = 30
+    }
+};
+
 /**
  * @brief 64418 | 34 | Subroutine for the ridley in space cutscene
  * 
@@ -788,7 +801,7 @@ u8 RidleyInSpaceSubroutine(void)
  * @brief 6444c | 4c | Processes the OAM for the cutscene
  * 
  */
-void RidleyInSpaceProcessOAM(void)
+static void RidleyInSpaceProcessOAM(void)
 {
     gNextOamSlot = 0;
     ProcessCutsceneOam(sRidleyInSpaceSubroutineData[CUTSCENE_DATA.timeInfo.stage].oamLength, CUTSCENE_DATA.oam, sRidleyInSpaceCutsceneOAM);
@@ -801,7 +814,7 @@ void RidleyInSpaceProcessOAM(void)
  * @brief 64498 | 144 | Updates the particles during the view of ship part
  * 
  */
-void RidleyInSpaceViewOfShipParticles(void)
+static void RidleyInSpaceViewOfShipParticles(void)
 {
     s32 i;
     u32 oamId;
@@ -868,7 +881,7 @@ void RidleyInSpaceViewOfShipParticles(void)
  * @param pOam Cutscene oam data pointer
  * @return u32 Oam id
  */
-u32 RidleyInSpaceViewOfShipUpdateParticle(struct CutsceneOamData* pOam)
+static u32 RidleyInSpaceViewOfShipUpdateParticle(struct CutsceneOamData* pOam)
 {
     u32 oamId;
     s32 divisor;
@@ -948,7 +961,7 @@ u32 RidleyInSpaceViewOfShipUpdateParticle(struct CutsceneOamData* pOam)
  * @brief 6469c | fc | Updates the particles during the ship leaving part
  * 
  */
-void RidleyInSpaceShipLeavingParticles(void)
+static void RidleyInSpaceShipLeavingParticles(void)
 {
     s32 i;
     s32 newY;
@@ -1013,7 +1026,7 @@ void RidleyInSpaceShipLeavingParticles(void)
  * @param pOam Cutscene OAM Data Pointer
  * @return struct CutsceneOamData* First param
  */
-struct CutsceneOamData* RidleyInSpaceShipLeavingUpdateParticle(struct CutsceneOamData* pOam)
+static struct CutsceneOamData* RidleyInSpaceShipLeavingUpdateParticle(struct CutsceneOamData* pOam)
 {
     if (pOam->actions == CUTSCENE_OAM_ACTION_NONE)
     {

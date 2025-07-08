@@ -1152,7 +1152,7 @@ void unk_42bc(Sound musicTrack)
 
     gMusicInfo.priority &= 0x80;
     if (musicTrack == MUSIC_NONE)
-        musicTrack = 0x12B;
+        musicTrack = SOUND_BOSS_STATUES_KRAID_STATUE_OPENING;
 
     InitTrack(sMusicTrackDataRom[0].pTrack, sSoundDataEntries[musicTrack].pHeader);
     

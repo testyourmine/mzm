@@ -1766,8 +1766,6 @@ void SpriteLoadSpriteset(void)
 
     for (j = 0, i = 0; i < MAX_AMOUNT_OF_SPRITE_TYPES; i++)
     {
-        const u32 * const *spritesetGraphicsPointers;
-
         spriteId = sSpritesetPointers[spriteset][j * 2 + 0];
         gfxSlot = sSpritesetPointers[spriteset][j * 2 + 1];
 
@@ -1791,8 +1789,7 @@ void SpriteLoadSpriteset(void)
 
         spriteId = PSPRITE_OFFSET_FOR_GRAPHICS(spriteId);
 
-        spritesetGraphicsPointers = sSpritesGraphicsPointers; // Needed to produce matching ASM.
-        LZ77UncompVRAM(spritesetGraphicsPointers[spriteId], VRAM_BASE + 0x14000 + gfxSlot * 2048);
+        LZ77UncompVRAM(sSpritesGraphicsPointers[spriteId], VRAM_BASE + 0x14000 + gfxSlot * 2048);
 
         ctrl_1 = ((u8*)sSpritesGraphicsPointers[spriteId])[1];
         ctrl_2 = ((u8*)sSpritesGraphicsPointers[spriteId])[2] << 8;

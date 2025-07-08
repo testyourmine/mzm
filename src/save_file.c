@@ -966,7 +966,7 @@ void unk_743a4(void)
         }
         else
         {
-            for (;;);
+            while (TRUE);
         }
     }
 
@@ -1723,7 +1723,6 @@ void SramWrite_ToEwram_DemoRam(void)
 
     value = USHORT_MAX;
 
-    // TODO macro for 0x2038000
     pFile = &gSram.demoSave;
     BitFill(3, value, pFile, sizeof(struct SaveDemo), 16);
 
