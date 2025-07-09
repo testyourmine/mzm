@@ -131,3 +131,6 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 
 - Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics from the message box
   - Potential fix: kill any missiles after mecha dies
+- ClipdataConvertToCollision is copied to RAM, but the code immediately jumps to the code in ROM
+  - The function has a switch statement which compiles as a jump table using the original ROM addresses
+  - Potential fix: call ClipdataConvertToCollision directly instead of copying it to RAM
