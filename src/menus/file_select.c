@@ -28,6 +28,42 @@
 #include "structs/game_state.h"
 #include "structs/menus/file_select.h"
 
+static void OptionsUpdateStereoOam(u16 flags);
+static void FileSelectResetIOTransferInfo(void);
+static u8 OptionsNesMetroidSubroutine(void);
+static u8 OptionsSubMenu_Empty(void);
+static u8 OptionsGallerySubroutine(void);
+static u8 OptionsStereoSubroutine(void);
+static u8 OptionsSoundTestSubroutine(void);
+static u32 OptionsSoundTestCheckNotAlreadyPlaying(void);
+static void OptionsSoundTestUpdateIdGfx(void);
+static u8 OptionsTimeAttackRecordsSubroutine(void);
+#ifndef REGION_US_BETA
+static void OptionsTimeAttackLoadBestTimeMessage(void);
+#endif // !REGION_US_BETA
+static void OptionsTimeAttackLoadRecord(u8 id);
+static void unk_7b854(void);
+static void OptionsTimeAttackLoadPassword(u8 part);
+static u8 OptionsMetroidFusionLinkSubroutine(void);
+static u32 FileSelectUpdateFading(void);
+static void FileSelectInitFading(u8 fadingOut);
+static void FileSelectApplyFading(void);
+static void FileSelectInit(void);
+static void FileSelectVBlank(void);
+static void FileSelectVBlank_Empty(void);
+static void FileSelectDisplaySaveFileInfo(void);
+static void FileSelectDisplaySaveFileHealth(u8 file);
+static void FileSelectDisplaySaveFileTimer(u8 file);
+static void FileSelectDisplaySaveFileMiscInfo(struct SaveFileInfo* pFile, u8 file);
+static void FileScreenSetEnabledMenuFlags(void);
+static u8 FileSelectApplyMenuSelectInput(u8 set, u8* pFileNumber);
+static void FileSelectFindFirstNonEmptyFile(u8* pFileNumber);
+static u8 FileSelectUpdateSubMenu(void);
+static u8 FileSelectProcessFileSelection(void);
+static void unk_7e3fc(u8 param_1, u8 param_2);
+static u32 FileSelectUpdateTilemap(u8 request);
+static void unk_7eedc(u16* pTilemap);
+
 static s8 sSaveFileAreasId[12] = {
     [0] = AREA_KRAID,
     [1] = AREA_NORFAIR,
@@ -238,85 +274,6 @@ static u16 sSoundTestSoundIds[24] = {
     [23] = MUSIC_CREDITS,
 };
 
-static u32* sFileSelect_760bdc[4] = {
-    VRAM_BASE + 0x5800,
-    VRAM_BASE + 0x6000,
-    VRAM_BASE + 0x6200,
-    VRAM_BASE + 0x7000
-};
-
-static u16 sOptionsOptionsTilemapOffsets[OPTION_END] = {
-    [OPTION_NONE] = 0,
-    [OPTION_STEREO_SELECT] = 0,
-    [OPTION_SOUND_TEST] = BLOCK_SIZE * 10,
-    [OPTION_TIME_ATTACK] = BLOCK_SIZE * 11,
-    [OPTION_GALLERY] = BLOCK_SIZE * 12,
-    [OPTION_FUSION_GALLERY] = BLOCK_SIZE * 14,
-    [OPTION_FUSION_LINK] = BLOCK_SIZE * 13,
-    [OPTION_NES_METROID] = BLOCK_SIZE * 15
-};
-
-static struct OptionsSubroutineInfo sOptionsSubroutineInfo[OPTION_END + 1] = {
-    [OPTION_NONE] = {
-        .pFunction = OptionsSubMenu_Empty,
-        .gameMode = 0
-    },
-    [OPTION_STEREO_SELECT] = {
-        .pFunction = OptionsStereoSubroutine,
-        .gameMode = 0
-    },
-    [OPTION_SOUND_TEST] = {
-        .pFunction = OptionsSoundTestSubroutine,
-        .gameMode = 0
-    },
-    [OPTION_TIME_ATTACK] = {
-        .pFunction = OptionsTimeAttackRecordsSubroutine,
-        .gameMode = 0
-    },
-    [OPTION_GALLERY] = {
-        .pFunction = OptionsGallerySubroutine,
-        .gameMode = 5
-    },
-    [OPTION_FUSION_GALLERY] = {
-        .pFunction = OptionsMetroidFusionLinkSubroutine,
-        .gameMode = 4
-    },
-    [OPTION_FUSION_LINK] = {
-        .pFunction = OptionsMetroidFusionLinkSubroutine,
-        .gameMode = 0
-    },
-    [OPTION_NES_METROID] = {
-        .pFunction = OptionsNesMetroidSubroutine,
-        .gameMode = 0
-    },
-    [8] = {
-        .pFunction = OptionsSubMenu_Empty,
-        .gameMode = 0
-    }
-};
-
-static u8 sFileSelectDefaultPassword[8] = "--------";
-#ifdef REGION_US_BETA
-static u8 sFileSelectBlankPassword[20] = "--------------------";
-static u8 sFileSelectBlank100Password[20] = "====================";
-#endif // REGION_US_BETA
-
-static u16 sMenuSounds[MENU_SOUND_REQUEST_END] = {
-    [MENU_SOUND_REQUEST_SUB_MENU_CURSOR] = SOUND_SUB_MENU_CURSOR,
-    [MENU_SOUND_REQUEST_ACCEPT_CONFIRM_MENU] = SOUND_ACCEPT_CONFIRM_MENU,
-    [MENU_SOUND_REQUEST_CURSOR] = SOUND_MENU_CURSOR,
-    [MENU_SOUND_REQUEST_FILE_SELECT] = SOUND_FILE_SELECT,
-    [MENU_SOUND_REQUEST_START_GAME] = SOUND_START_GAME,
-    [MENU_SOUND_REQUEST_OPEN_SUB_MENU] = SOUND_OPEN_SUB_MENU,
-    [MENU_SOUND_REQUEST_CLOSE_SUB_MENU] = SOUND_CLOSE_SUB_MENU,
-    [MENU_SOUND_REQUEST_CLOSE_SUB_MENU2] = SOUND_CLOSE_SUB_MENU,
-    [MENU_SOUND_REQUEST_COPY_DELETE] = SOUND_FILE_SELECT_COPY_DELETE,
-    [MENU_SOUND_REQUEST_COPY_DELETE_MOVING] = SOUND_FILE_SELECT_COPY_MOVING,
-    [MENU_SOUND_REQUEST_COPY_CONFIRM] = SOUND_FILE_SELECT_COPY_CONFIRM,
-    [MENU_SOUND_REQUEST_GAME_OVER_MENU_CURSOR] = SOUND_MENU_CURSOR,
-    [MENU_SOUND_REQUEST_GAME_OVER_START_GAME] = SOUND_START_GAME,
-};
-
 /**
  * @brief 78228 | 24 | Applies the stereo settings
  * 
@@ -372,7 +329,7 @@ void FileSelectProcessOAM(void)
  * @brief 782ac | 258 | Initializes the OAM for the file and options screens
  * 
  */
-void FileSelectResetOAM(void)
+static void FileSelectResetOAM(void)
 {
     s32 i;
     struct MenuOamData* pOam;
@@ -459,7 +416,7 @@ void FileSelectResetOAM(void)
  * @param cursorPose Cursor pose
  * @param position Cursor position
  */
-void FileSelectUpdateCursor(u8 cursorPose, u8 position)
+static void FileSelectUpdateCursor(u8 cursorPose, u8 position)
 {
     u32 oamId;
 
@@ -562,7 +519,7 @@ void FileSelectUpdateCursor(u8 cursorPose, u8 position)
  * @param cursorPose Cursor pose
  * @param fileNumber File number
  */
-void FileSelectUpdateCopyCursor(u8 cursorPose, u8 fileNumber)
+static void FileSelectUpdateCopyCursor(u8 cursorPose, u8 fileNumber)
 {
     u32 oamId;
 
@@ -638,7 +595,7 @@ void FileSelectUpdateCopyCursor(u8 cursorPose, u8 fileNumber)
  * @param arrowPose Arrow pose
  * @param dstFileNumber Destination file number
  */
-void FileSelectUpdateCopyArrow(u8 arrowPose, u8 dstFileNumber)
+static void FileSelectUpdateCopyArrow(u8 arrowPose, u8 dstFileNumber)
 {
     u32 oamId;
 
@@ -730,7 +687,7 @@ void FileSelectUpdateCopyArrow(u8 arrowPose, u8 dstFileNumber)
  * @param cursorPose Cursor pose
  * @param fileNumber File number
  */
-void FileSelectUpdateEraseCursor(u8 cursorPose, u8 fileNumber)
+static void FileSelectUpdateEraseCursor(u8 cursorPose, u8 fileNumber)
 {
     u32 oamId;
 
@@ -805,7 +762,7 @@ void FileSelectUpdateEraseCursor(u8 cursorPose, u8 fileNumber)
  * 
  * @param cursorPose Cursor pose
  */
-void OptionsUpdateCursor(u8 cursorPose)
+static void OptionsUpdateCursor(u8 cursorPose)
 {
     switch (cursorPose)
     {
@@ -842,7 +799,7 @@ void OptionsUpdateCursor(u8 cursorPose)
  * 
  * @param flags Update flags
  */
-void OptionsUpdateStereoOam(u16 flags)
+static void OptionsUpdateStereoOam(u16 flags)
 {
     u32 offset;
 
@@ -877,11 +834,18 @@ void OptionsUpdateStereoOam(u16 flags)
     }
 }
 
+static u32* sFileSelect_760bdc[4] = {
+    VRAM_BASE + 0x5800,
+    VRAM_BASE + 0x6000,
+    VRAM_BASE + 0x6200,
+    VRAM_BASE + 0x7000
+};
+
 /**
  * @brief 78da0 | 32c | Processes the current file screen text
  * 
  */
-void FileScreenProcessText(void)
+static void FileScreenProcessText(void)
 {
     u8 newIdQueue[2];
     u32* dst;
@@ -1004,7 +968,7 @@ void FileScreenProcessText(void)
  * @param newMessageInfoId ID for new message info
  * @return u32 Bool, result of update, option 0: added to queue, option 1: not in queue, option 2: always true
  */
-u32 FileScreenUpdateMessageInfoIdQueue(u8 updateOption, u8 newMessageInfoId)
+static u32 FileScreenUpdateMessageInfoIdQueue(u8 updateOption, u8 newMessageInfoId)
 {
     u32 result;
 
@@ -1057,7 +1021,7 @@ u32 FileScreenUpdateMessageInfoIdQueue(u8 updateOption, u8 newMessageInfoId)
  * @brief 79178 | 98 | Selects a file to be used as a copy destination
  * 
  */
-void FileSelectFileCopyChooseBaseDestinationFile(void)
+static void FileSelectFileCopyChooseBaseDestinationFile(void)
 {
     s32 file;
 
@@ -1090,7 +1054,7 @@ void FileSelectFileCopyChooseBaseDestinationFile(void)
 }
 
 #ifdef NON_MATCHING
-u32 FileSelectCopyFileSubroutine(void)
+static u32 FileSelectCopyFileSubroutine(void)
 {
     // https://decomp.me/scratch/Rz4bp
 
@@ -1374,7 +1338,7 @@ u32 FileSelectCopyFileSubroutine(void)
 }
 #else
 NAKED_FUNCTION
-u32 FileSelectCopyFileSubroutine(void)
+static u32 FileSelectCopyFileSubroutine(void)
 {
     asm(" \n\
     push {r4, r5, r6, r7, lr} \n\
@@ -2051,7 +2015,7 @@ lbl_08079794: \n\
  * 
  * @return u32 bool, ended
  */
-u32 FileSelectEraseFileSubroutine(void)
+static u32 FileSelectEraseFileSubroutine(void)
 {
     u32 ended;
     u32 action;
@@ -2249,7 +2213,7 @@ u32 FileSelectEraseFileSubroutine(void)
  * 
  * @return u32 bool, ended
  */
-u32 FileSelectCorruptedFileSubroutine(void)
+static u32 FileSelectCorruptedFileSubroutine(void)
 {
     u8 done;
 
@@ -2426,7 +2390,7 @@ u32 FileSelectCorruptedFileSubroutine(void)
  * @brief 79ecc | ec | To document
  * 
  */
-void unk_79ecc(void)
+static void unk_79ecc(void)
 {
     DmaTransfer(3, (void*)sEwramPointer + 0x5100, VRAM_BASE + 0xF000, 0x800, 16);
 
@@ -2448,11 +2412,22 @@ void unk_79ecc(void)
     FILE_SELECT_DATA.fileScreenOam[FILE_SELECT_OAM_CURSOR].notDrawn = TRUE;
 }
 
+static u16 sOptionsOptionsTilemapOffsets[OPTION_END] = {
+    [OPTION_NONE] = 0,
+    [OPTION_STEREO_SELECT] = 0,
+    [OPTION_SOUND_TEST] = BLOCK_SIZE * 10,
+    [OPTION_TIME_ATTACK] = BLOCK_SIZE * 11,
+    [OPTION_GALLERY] = BLOCK_SIZE * 12,
+    [OPTION_FUSION_GALLERY] = BLOCK_SIZE * 14,
+    [OPTION_FUSION_LINK] = BLOCK_SIZE * 13,
+    [OPTION_NES_METROID] = BLOCK_SIZE * 15
+};
+
 /**
  * @brief 79fb8 | 1ec | Sets up the options tile table and determines which options are unlocked
  * 
  */
-void OptionsSetupTiletable(void)
+static void OptionsSetupTiletable(void)
 {
     u8 i;
     s32 j;
@@ -2565,7 +2540,7 @@ void OptionsSetupTiletable(void)
  * @brief 7a1a4 | 118 | Copies the time attack best times to RAM
  * 
  */
-void FileSelectCopyTimeAttackTime(void)
+static void FileSelectCopyTimeAttackTime(void)
 {
     s32 value;
 
@@ -2623,7 +2598,7 @@ void FileSelectCopyTimeAttackTime(void)
  * @param leavingOptions Leaving options flag
  * @return u8 bool, ended
  */
-u8 FileSelectOptionTransition(u8 leavingOptions)
+static u8 FileSelectOptionTransition(u8 leavingOptions)
 {
     u16 bgPos;
     u32 fadeEnded;
@@ -2901,12 +2876,51 @@ u8 FileSelectOptionTransition(u8 leavingOptions)
     return FALSE;
 }
 
+static struct OptionsSubroutineInfo sOptionsSubroutineInfo[OPTION_END + 1] = {
+    [OPTION_NONE] = {
+        .pFunction = OptionsSubMenu_Empty,
+        .gameMode = 0
+    },
+    [OPTION_STEREO_SELECT] = {
+        .pFunction = OptionsStereoSubroutine,
+        .gameMode = 0
+    },
+    [OPTION_SOUND_TEST] = {
+        .pFunction = OptionsSoundTestSubroutine,
+        .gameMode = 0
+    },
+    [OPTION_TIME_ATTACK] = {
+        .pFunction = OptionsTimeAttackRecordsSubroutine,
+        .gameMode = 0
+    },
+    [OPTION_GALLERY] = {
+        .pFunction = OptionsGallerySubroutine,
+        .gameMode = 5
+    },
+    [OPTION_FUSION_GALLERY] = {
+        .pFunction = OptionsMetroidFusionLinkSubroutine,
+        .gameMode = 4
+    },
+    [OPTION_FUSION_LINK] = {
+        .pFunction = OptionsMetroidFusionLinkSubroutine,
+        .gameMode = 0
+    },
+    [OPTION_NES_METROID] = {
+        .pFunction = OptionsNesMetroidSubroutine,
+        .gameMode = 0
+    },
+    [8] = {
+        .pFunction = OptionsSubMenu_Empty,
+        .gameMode = 0
+    }
+};
+
 /**
  * @brief 7a7e4 | 248 | Subroutine for the options
  * 
  * @return u8 bool, leaving
  */
-u8 OptionsSubroutine(void)
+static u8 OptionsSubroutine(void)
 {
     u8 result;
 
@@ -3028,7 +3042,7 @@ u8 OptionsSubroutine(void)
  * @brief 7aa2c | 48 | Resets the IO transfer info
  * 
  */
-void FileSelectResetIOTransferInfo(void)
+static void FileSelectResetIOTransferInfo(void)
 {
     switch (FILE_SELECT_DATA.optionsUnlocked[gOptionsOptionSelected])
     {
@@ -3044,7 +3058,7 @@ void FileSelectResetIOTransferInfo(void)
  * 
  * @return u8 bool, leaving
  */
-u8 OptionsNesMetroidSubroutine(void)
+static u8 OptionsNesMetroidSubroutine(void)
 {
     u8 i;
     NesEmuFunc_T func;
@@ -3130,7 +3144,7 @@ u8 OptionsNesMetroidSubroutine(void)
  * 
  * @return u8 bool, leaving
  */
-u8 OptionsSubMenu_Empty(void)
+static u8 OptionsSubMenu_Empty(void)
 {
     APPLY_DELTA_TIME_INC(FILE_SELECT_DATA.subroutineTimer);
 
@@ -3145,7 +3159,7 @@ u8 OptionsSubMenu_Empty(void)
  * 
  * @return u8 bool, leaving
  */
-u8 OptionsGallerySubroutine(void)
+static u8 OptionsGallerySubroutine(void)
 {
     APPLY_DELTA_TIME_INC(FILE_SELECT_DATA.subroutineTimer);
 
@@ -3171,7 +3185,7 @@ u8 OptionsGallerySubroutine(void)
  * 
  * @return u8 bool, leaving
  */
-u8 OptionsStereoSubroutine(void)
+static u8 OptionsStereoSubroutine(void)
 {
     u8 updatedStereo;
 
@@ -3245,7 +3259,7 @@ u8 OptionsStereoSubroutine(void)
  * 
  * @return u8 bool, leaving
  */
-u8 OptionsSoundTestSubroutine(void)
+static u8 OptionsSoundTestSubroutine(void)
 {
     s32 action;
 
@@ -3411,7 +3425,7 @@ u8 OptionsSoundTestSubroutine(void)
  * 
  * @return u32 bool, not currently playing
  */
-u32 OptionsSoundTestCheckNotAlreadyPlaying(void)
+static u32 OptionsSoundTestCheckNotAlreadyPlaying(void)
 {
     u32 notCurrentlyPlaying;
 
@@ -3440,7 +3454,7 @@ u32 OptionsSoundTestCheckNotAlreadyPlaying(void)
  * @brief 7b094 | b0 | Updates the number graphics of the sound test id
  * 
  */
-void OptionsSoundTestUpdateIdGfx(void)
+static void OptionsSoundTestUpdateIdGfx(void)
 {
     u32 number;
     u32 offset;
@@ -3462,7 +3476,7 @@ void OptionsSoundTestUpdateIdGfx(void)
  * 
  * @return u8 bool, ended
  */
-u8 OptionsTimeAttackRecordsSubroutine(void)
+static u8 OptionsTimeAttackRecordsSubroutine(void)
 {
     u32 action;
 
@@ -3744,7 +3758,7 @@ u8 OptionsTimeAttackRecordsSubroutine(void)
  * @brief 7b71c | 28 | Adds best time or best time 100 message to queue
  * 
  */
-void OptionsTimeAttackLoadBestTimeMessage(void)
+static void OptionsTimeAttackLoadBestTimeMessage(void)
 {
     if (FILE_SELECT_DATA.timeAttack100Only)
         FileScreenUpdateMessageInfoIdQueue(0, FILE_SCREEN_MESSAGE_INFO_ID_BEST_TIME_100);
@@ -3758,7 +3772,7 @@ void OptionsTimeAttackLoadBestTimeMessage(void)
  * 
  * @param id Id to load : 0 = Any%, 1 = 100%
  */
-void OptionsTimeAttackLoadRecord(u8 id)
+static void OptionsTimeAttackLoadRecord(u8 id)
 {
     u16* dst;
     u16 baseTile;
@@ -3803,11 +3817,13 @@ void OptionsTimeAttackLoadRecord(u8 id)
     dst[7 + 32] = baseTile | (FILE_SELECT_DATA.timeAttackBestTimes[id][5] + FILE_SELECT_TILE_NUMBER_LOW);
 }
 
+static u8 sFileSelectDefaultPassword[8] = "--------";
+
 /**
  * @brief 7b854 | d8 | To document
  * 
  */
-void unk_7b854(void)
+static void unk_7b854(void)
 {
     const u8* password;
     s32 i;
@@ -3843,12 +3859,17 @@ void unk_7b854(void)
     DmaTransfer(3, dstHigh + 0x400, dstHigh + 0x1400, 0x100, 16);
 }
 
+#ifdef REGION_US_BETA
+static u8 sFileSelectBlankPassword[20] = "--------------------";
+static u8 sFileSelectBlank100Password[20] = "====================";
+#endif // REGION_US_BETA
+
 /**
  * @brief 7b92c | bc | Loads a part of the time attack password to VRAM
  * 
  * @param part 2 bits : XY, where X is id and Y which half
  */
-void OptionsTimeAttackLoadPassword(u8 part)
+static void OptionsTimeAttackLoadPassword(u8 part)
 {
     const u8* password;
     s32 i;
@@ -3902,7 +3923,7 @@ void OptionsTimeAttackLoadPassword(u8 part)
  * 
  * @return u8 bool, ended
  */
-u8 OptionsMetroidFusionLinkSubroutine(void)
+static u8 OptionsMetroidFusionLinkSubroutine(void)
 {
     APPLY_DELTA_TIME_INC(FILE_SELECT_DATA.subroutineTimer);
 
@@ -4335,7 +4356,7 @@ u32 FileSelectMenuSubroutine(void)
  * 
  * @return u32 bool, ended
  */
-u32 FileSelectUpdateFading(void)
+static u32 FileSelectUpdateFading(void)
 {
     u32 ended;
     u16* src;
@@ -4449,7 +4470,7 @@ u32 FileSelectUpdateFading(void)
  * 
  * @param fadingOut Bool, file select fading out
  */
-void FileSelectInitFading(u8 fadingOut)
+static void FileSelectInitFading(u8 fadingOut)
 {
     FILE_SELECT_DATA.colorToApply = 0;
     FILE_SELECT_DATA.paletteUpdated = 0;
@@ -4479,7 +4500,7 @@ void FileSelectInitFading(u8 fadingOut)
  * @brief 7c568 | 3c | Transfers the fading palette to palette RAM
  * 
  */
-void FileSelectApplyFading(void)
+static void FileSelectApplyFading(void)
 {
     if (FILE_SELECT_DATA.paletteUpdated)
     {
@@ -4492,7 +4513,7 @@ void FileSelectApplyFading(void)
  * @brief 7c5a4 | 3c | Sets the language to the default for the game's region
  * 
  */
-void FileSelectSetLanguage(void)
+static void FileSelectSetLanguage(void)
 {
     s32 i;
 
@@ -4526,7 +4547,7 @@ void FileSelectSetLanguage(void)
  * @brief 7c5e0 | 448 | Initializes the file select menu 
  * 
  */
-void FileSelectInit(void)
+static void FileSelectInit(void)
 {
     CallbackSetVblank(FileSelectVBlank_Empty);
 
@@ -4678,7 +4699,7 @@ void FileSelectInit(void)
  * @brief 7ca28 | f8 | File select menu V-blank code
  * 
  */
-void FileSelectVBlank(void)
+static void FileSelectVBlank(void)
 {
     if (gIoTransferInfo.linkInProgress)
         LinkVSync();
@@ -4707,7 +4728,7 @@ void FileSelectVBlank(void)
  * @brief 7cb20 | c | Empty v-blank for file select
  * 
  */
-void FileSelectVBlank_Empty(void)
+static void FileSelectVBlank_Empty(void)
 {
     vu8 c = 0;
 }
@@ -4716,7 +4737,7 @@ void FileSelectVBlank_Empty(void)
  * @brief 7cb2c | 224 | Displays the info of every save file
  * 
  */
-void FileSelectDisplaySaveFileInfo(void)
+static void FileSelectDisplaySaveFileInfo(void)
 {
     FileSelectDisplaySaveFileHealth(FILE_SELECT_CURSOR_POSITION_FILE_A);
     FileSelectDisplaySaveFileTimer(FILE_SELECT_CURSOR_POSITION_FILE_A);
@@ -4766,7 +4787,7 @@ void FileSelectDisplaySaveFileInfo(void)
  * 
  * @param file File number
  */
-void FileSelectDisplaySaveFileHealth(u8 file)
+static void FileSelectDisplaySaveFileHealth(u8 file)
 {
     u32 offset;
 
@@ -4800,7 +4821,7 @@ void FileSelectDisplaySaveFileHealth(u8 file)
  * 
  * @param file File number
  */
-void FileSelectDisplaySaveFileTimer(u8 file)
+static void FileSelectDisplaySaveFileTimer(u8 file)
 {
     u16 baseTile;
     u16* dst;
@@ -4898,7 +4919,7 @@ void FileSelectDisplaySaveFileTimer(u8 file)
  * @param pFile Save file info pointer
  * @param file Save file number
  */
-void FileSelectDisplaySaveFileMiscInfo(struct SaveFileInfo* pFile, u8 file)
+static void FileSelectDisplaySaveFileMiscInfo(struct SaveFileInfo* pFile, u8 file)
 {
     s32 offset;
     s32 temp;
@@ -4999,7 +5020,7 @@ void FileSelectDisplaySaveFileMiscInfo(struct SaveFileInfo* pFile, u8 file)
  * @brief 7d0b0 | ec | Sets the enabled menus flags
  * 
  */
-void FileScreenSetEnabledMenuFlags(void)
+static void FileScreenSetEnabledMenuFlags(void)
 {
     u16 palette;
     u16* src;
@@ -5051,7 +5072,7 @@ void FileScreenSetEnabledMenuFlags(void)
  * @param pFileNumber File number pointer
  * @return u8 Could move
  */
-u8 FileSelectApplyMenuSelectInput(u8 set, u8* pFileNumber)
+static u8 FileSelectApplyMenuSelectInput(u8 set, u8* pFileNumber)
 {
     s32 direction;
     u8 position;
@@ -5127,7 +5148,7 @@ u8 FileSelectApplyMenuSelectInput(u8 set, u8* pFileNumber)
  * 
  * @param pFileNumber File number pointer
  */
-void FileSelectFindFirstNonEmptyFile(u8* pFileNumber)
+static void FileSelectFindFirstNonEmptyFile(u8* pFileNumber)
 {
     u8 file;
     u8 flags;
@@ -5152,7 +5173,7 @@ void FileSelectFindFirstNonEmptyFile(u8* pFileNumber)
  * 
  * @return u8 bool, leaving
  */
-u8 FileSelectUpdateSubMenu(void)
+static u8 FileSelectUpdateSubMenu(void)
 {
     u8 result;
     u8 cursorPose;
@@ -5401,7 +5422,7 @@ u8 FileSelectUpdateSubMenu(void)
  * 
  * @return u32 bool, fully entered
  */
-u32 FileSelectCheckInputtingTimeAttackCode(void)
+static u32 FileSelectCheckInputtingTimeAttackCode(void)
 {
     u16 input;
 
@@ -5453,7 +5474,7 @@ u32 FileSelectCheckInputtingTimeAttackCode(void)
  * 
  * @return u8 Leaving, 
  */
-u8 FileSelectProcessFileSelection(void)
+static u8 FileSelectProcessFileSelection(void)
 {
     u32 leaving;
     u32 offset;
@@ -6221,7 +6242,7 @@ u8 FileSelectProcessFileSelection(void)
  * @param param_1 To document
  * @param param_2 To document
  */
-void unk_7e3fc(u8 param_1, u8 param_2)
+static void unk_7e3fc(u8 param_1, u8 param_2)
 {
     switch (param_1)
     {
@@ -6408,7 +6429,7 @@ void unk_7e3fc(u8 param_1, u8 param_2)
 }
 
 #ifdef NON_MATCHING
-u32 FileSelectUpdateTilemap(u8 request)
+static u32 FileSelectUpdateTilemap(u8 request)
 {
     // https://decomp.me/scratch/ZaBhq
 
@@ -6743,7 +6764,7 @@ u32 FileSelectUpdateTilemap(u8 request)
 }
 #else
 NAKED_FUNCTION
-u32 FileSelectUpdateTilemap(u8 request)
+static u32 FileSelectUpdateTilemap(u8 request)
 {
     asm(" \n\
     push {r4, r5, r6, r7, lr} \n\
@@ -7701,7 +7722,7 @@ lbl_0807eed8: .4byte sNonGameplayRamPointer \n\
  * 
  * @param pTilemap Tilemap pointer
  */
-void unk_7eedc(u16* pTilemap)
+static void unk_7eedc(u16* pTilemap)
 {
     s32 i;
     s32 j;
@@ -7729,6 +7750,22 @@ void unk_7eedc(u16* pTilemap)
         }
     }
 }
+
+static u16 sMenuSounds[MENU_SOUND_REQUEST_END] = {
+    [MENU_SOUND_REQUEST_SUB_MENU_CURSOR] = SOUND_SUB_MENU_CURSOR,
+    [MENU_SOUND_REQUEST_ACCEPT_CONFIRM_MENU] = SOUND_ACCEPT_CONFIRM_MENU,
+    [MENU_SOUND_REQUEST_CURSOR] = SOUND_MENU_CURSOR,
+    [MENU_SOUND_REQUEST_FILE_SELECT] = SOUND_FILE_SELECT,
+    [MENU_SOUND_REQUEST_START_GAME] = SOUND_START_GAME,
+    [MENU_SOUND_REQUEST_OPEN_SUB_MENU] = SOUND_OPEN_SUB_MENU,
+    [MENU_SOUND_REQUEST_CLOSE_SUB_MENU] = SOUND_CLOSE_SUB_MENU,
+    [MENU_SOUND_REQUEST_CLOSE_SUB_MENU2] = SOUND_CLOSE_SUB_MENU,
+    [MENU_SOUND_REQUEST_COPY_DELETE] = SOUND_FILE_SELECT_COPY_DELETE,
+    [MENU_SOUND_REQUEST_COPY_DELETE_MOVING] = SOUND_FILE_SELECT_COPY_MOVING,
+    [MENU_SOUND_REQUEST_COPY_CONFIRM] = SOUND_FILE_SELECT_COPY_CONFIRM,
+    [MENU_SOUND_REQUEST_GAME_OVER_MENU_CURSOR] = SOUND_MENU_CURSOR,
+    [MENU_SOUND_REQUEST_GAME_OVER_START_GAME] = SOUND_START_GAME,
+};
 
 /**
  * @brief 7ef7c | 20 | Plays a menu sound

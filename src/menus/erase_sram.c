@@ -15,6 +15,16 @@
 #include "structs/game_state.h"
 #include "structs/menus/erase_sram.h"
 
+static u32 EraseSramProcessInput(void);
+static void EraseSramApplyInput(void);
+static u32 EraseSramCheckForInput(void);
+static void EraseSramInit(void);
+static void EraseSramResetOam(void);
+static void EraseSramUpdateCursorPosition(void);
+static void EraseSramVBlank(void);
+static void EraseSramVBlank_Empty(void);
+static void EraseSramProcessOAM(void);
+
 static const u32* sEraseSramTextGfxPointers[LANGUAGE_END][2] = {
     [LANGUAGE_JAPANESE] = {
         sEraseSramMenuQuestionJapaneseGfx,
@@ -169,7 +179,7 @@ u32 EraseSramSubroutine(void)
  * 
  * @return u32 action
  */
-u32 EraseSramProcessInput(void)
+static u32 EraseSramProcessInput(void)
 {
     u32 result;
 
@@ -198,7 +208,7 @@ u32 EraseSramProcessInput(void)
  * @brief 75dd0 | ac | Applies the input
  * 
  */
-void EraseSramApplyInput(void)
+static void EraseSramApplyInput(void)
 {
     if (ERASE_SRAM_DATA.oam[0].oamID == ERASE_SRAM_OAM_ID_CURSOR_SELECTING)
         return;
@@ -239,7 +249,7 @@ void EraseSramApplyInput(void)
  * 
  * @return u32 action
  */
-u32 EraseSramCheckForInput(void)
+static u32 EraseSramCheckForInput(void)
 {
     u32 sound;
     u32 result;
@@ -339,7 +349,7 @@ u32 EraseSramCheckForInput(void)
  * @brief 75f88 | 24c | Initializes the erase sram menu
  * 
  */
-void EraseSramInit(void)
+static void EraseSramInit(void)
 {
     WRITE_16(REG_IME, FALSE);
     WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
@@ -423,7 +433,7 @@ void EraseSramInit(void)
  * @brief 761d4 | c4 | Initializes the OAM for the erase sram menu
  * 
  */
-void EraseSramResetOam(void)
+static void EraseSramResetOam(void)
 {
     s32 i;
     
@@ -454,7 +464,7 @@ void EraseSramResetOam(void)
  * @brief 76298 | 48 | Updates the cursor position based on the current option
  * 
  */
-void EraseSramUpdateCursorPosition(void)
+static void EraseSramUpdateCursorPosition(void)
 {
     // Panel position + option position
     ERASE_SRAM_DATA.oam[0].yPosition = sEraseSramMenuCursorPosition[DIV_SHIFT(ERASE_SRAM_DATA.currentOption, 2)][1] +
@@ -468,7 +478,7 @@ void EraseSramUpdateCursorPosition(void)
  * @brief 762e0 | 78 | Erase sram menu V-blank code
  * 
  */
-void EraseSramVBlank(void)
+static void EraseSramVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
@@ -488,7 +498,7 @@ void EraseSramVBlank(void)
  * @brief 76358 | c | Empty v-blank for the erase sram menu
  * 
  */
-void EraseSramVBlank_Empty(void)
+static void EraseSramVBlank_Empty(void)
 {
     vu8 c = 0;
 }
@@ -497,7 +507,7 @@ void EraseSramVBlank_Empty(void)
  * @brief 76364 | 2c | Processes the OAM for the erase sram menu
  * 
  */
-void EraseSramProcessOAM(void)
+static void EraseSramProcessOAM(void)
 {
     gNextOamSlot = 0;
     ProcessMenuOam(ARRAY_SIZE(ERASE_SRAM_DATA.oam), ERASE_SRAM_DATA.oam, sEraseSramMenuOam);

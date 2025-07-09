@@ -21,30 +21,15 @@
 #include "structs/game_state.h"
 #include "structs/samus.h"
 
-static const u32* sGameOverTextPromptGfxPointers[LANGUAGE_END] = {
-    [LANGUAGE_JAPANESE] = sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_HIRAGANA] = sGameOverTextPromptHiraganaGfx,
-    [LANGUAGE_ENGLISH] = sGameOverTextPromptEnglishGfx,
-    #ifdef REGION_US_BETA
-    [LANGUAGE_GERMAN] = sGameOverTextPromptGermanGfx,
-    [LANGUAGE_FRENCH] = sGameOverTextPromptFrenchGfx,
-    [LANGUAGE_ITALIAN] = sGameOverTextPromptItalianGfx,
-    [LANGUAGE_SPANISH] = sGameOverTextPromptSpanishGfx
-    #else // !REGION_US_BETA
-    [LANGUAGE_GERMAN] = sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_FRENCH] = sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_ITALIAN] = sGameOverTextPromptEnglishGfx,
-    [LANGUAGE_SPANISH] = sGameOverTextPromptEnglishGfx
-    #endif // REGION_US_BETA
-};
-
-static u8 sGameOverTextPaletteMaxTimers[3] = {
-    ONE_THIRD_SECOND, ONE_THIRD_SECOND, ONE_THIRD_SECOND
-};
-
-static s8 sGameOverTextGradientPaletteOffset[9] = {
-    0, 1, 2, 3, 2, 1, 0, 0, 0
-};
+static u32 GameOverProcessInput(void);
+static void GameOverUpdateTextGfx(void);
+static void GameOverInit(void);
+static void GameOverInit_Debug(void);
+static void GameOverVBlank(void);
+static void GameOverVBlank_Empty(void);
+static void GameOverUpdateLettersPalette(void);
+static void GameOverUpdateSamusHead(GameOverCursorAction action);
+static void GameOverProcessOAM(void);
 
 /**
  * @brief 778c4 | 214 | Subroutine for the game over
@@ -202,7 +187,7 @@ u32 GameOverSubroutine(void)
  * 
  * @return u32 bool, leaving
  */
-u32 GameOverProcessInput(void)
+static u32 GameOverProcessInput(void)
 {
     u32 doingSomething;
 
@@ -248,7 +233,7 @@ u32 GameOverProcessInput(void)
  * @brief 77b4c | 5c | Updates the graphics of the text
  * 
  */
-void GameOverUpdateTextGfx(void)
+static void GameOverUpdateTextGfx(void)
 {
     u8 palette;
     u16* dst;
@@ -275,11 +260,28 @@ void GameOverUpdateTextGfx(void)
         *dst = (*dst & 0xFFF) | palette << 12;
 }
 
+static const u32* sGameOverTextPromptGfxPointers[LANGUAGE_END] = {
+    [LANGUAGE_JAPANESE] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_HIRAGANA] = sGameOverTextPromptHiraganaGfx,
+    [LANGUAGE_ENGLISH] = sGameOverTextPromptEnglishGfx,
+    #ifdef REGION_US_BETA
+    [LANGUAGE_GERMAN] = sGameOverTextPromptGermanGfx,
+    [LANGUAGE_FRENCH] = sGameOverTextPromptFrenchGfx,
+    [LANGUAGE_ITALIAN] = sGameOverTextPromptItalianGfx,
+    [LANGUAGE_SPANISH] = sGameOverTextPromptSpanishGfx
+    #else // !REGION_US_BETA
+    [LANGUAGE_GERMAN] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_FRENCH] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_ITALIAN] = sGameOverTextPromptEnglishGfx,
+    [LANGUAGE_SPANISH] = sGameOverTextPromptEnglishGfx
+    #endif // REGION_US_BETA
+};
+
 /**
  * @brief 77ba8 | 230 | Initializes the game over menu
  * 
  */
-void GameOverInit(void)
+static void GameOverInit(void)
 {
     CallbackSetVblank(GameOverVBlank_Empty);
 
@@ -343,7 +345,7 @@ void GameOverInit(void)
  * @brief 77dd8 | 134 | Initializes the game over menu for debug
  * 
  */
-void GameOverInit_Debug(void)
+static void GameOverInit_Debug(void)
 {
     CallbackSetVblank(GameOverVBlank_Empty);
 
@@ -393,7 +395,7 @@ void GameOverInit_Debug(void)
  * @brief 77f0c | dc | V-blank code for the game over
  * 
  */
-void GameOverVBlank(void)
+static void GameOverVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)))
 
@@ -423,16 +425,24 @@ void GameOverVBlank(void)
  * @brief 77fe8 | c | Empty V-blank code
  * 
  */
-void GameOverVBlank_Empty(void)
+static void GameOverVBlank_Empty(void)
 {
     vu8 c = 0;
 }
+
+static u8 sGameOverTextPaletteMaxTimers[3] = {
+    ONE_THIRD_SECOND, ONE_THIRD_SECOND, ONE_THIRD_SECOND
+};
+
+static s8 sGameOverTextGradientPaletteOffset[9] = {
+    0, 1, 2, 3, 2, 1, 0, 0, 0
+};
 
 /**
  * @brief 77ff4 | 180 | Handles the animation of the GAME OVER letters
  * 
  */
-void GameOverUpdateLettersPalette(void)
+static void GameOverUpdateLettersPalette(void)
 {
     s32 i;
     s32 j;
@@ -519,7 +529,7 @@ void GameOverUpdateLettersPalette(void)
  * 
  * @param action Action done
  */
-void GameOverUpdateSamusHead(GameOverCursorAction action)
+static void GameOverUpdateSamusHead(GameOverCursorAction action)
 {
     UpdateMenuOamDataID(&GAME_OVER_DATA.oam[0], sGameOverSamusHeadOamIds[gEquipment.suitType][action]);
 
@@ -527,18 +537,18 @@ void GameOverUpdateSamusHead(GameOverCursorAction action)
     GAME_OVER_DATA.oam[0].yPosition = sGameOverSamusHeadYPositions[GAME_OVER_DATA.optionSelected];
 
     if (GAME_OVER_DATA.optionSelected != 0)
-        GAME_OVER_DATA.win1V = C_16_2_8(0x7E, 0x91 + 1);
+        GAME_OVER_DATA.win1V = C_16_2_8(126, 145 + 1);
     else
-        GAME_OVER_DATA.win1V = C_16_2_8(0x66, 0x79 + 1);
+        GAME_OVER_DATA.win1V = C_16_2_8(102, 121 + 1);
 
-    GAME_OVER_DATA.win1H = C_16_2_8(0, 0xEF + 1);
+    GAME_OVER_DATA.win1H = C_16_2_8(0, 239 + 1);
 }
 
 /**
  * @brief 781fc | 2c | Processes the OAM for the game over menu
  * 
  */
-void GameOverProcessOAM(void)
+static void GameOverProcessOAM(void)
 {
     gNextOamSlot = 0;
     ProcessComplexMenuOam(ARRAY_SIZE(GAME_OVER_DATA.oam), GAME_OVER_DATA.oam, sGameOverOam);

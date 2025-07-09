@@ -12,7 +12,7 @@ _start: @ 0x080000c0
     msr cpsr_fc, r0
     ldr sp, gSpSys_ptr
     ldr r1, gIntrVector_ptr
-    add r0, pc, #0x20 @ intr_main
+    add r0, pc, #0x20 @ IntrMain
     str r0, [r1]
     ldr r1, agbmain_ptr
     mov lr, pc
