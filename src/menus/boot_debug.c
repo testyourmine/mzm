@@ -1463,9 +1463,7 @@ void BootDebugModeSubroutine(void)
     }
     else // menuDepth == BOOT_DEBUG_MENU_OPTION
     {
-        #ifndef BUGFIX
         updateTextAndEvents = FALSE;
-        #endif // !BUGFIX
 
         switch (BOOT_DEBUG_DATA.subMenuOption)
         {
@@ -1897,9 +1895,7 @@ void BootDebugSoundSubroutine(void)
     }
     else
     {
-        #ifndef BUGFIX
         updateText = FALSE;
-        #endif // !BUGFIX
 
         switch (BOOT_DEBUG_DATA.subMenuOption)
         {
