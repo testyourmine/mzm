@@ -1040,6 +1040,12 @@ u32 BlockSamusApplyScrewSpeedboosterDamageToEnvironment(u16 xPosition, u16 yPosi
                 BlockApplyCcaa(blockY, blockX, clipdata);
             }
         }
+        #ifdef BUGFIX
+        else
+        {
+            result = FALSE;
+        }
+        #endif // BUGFIX
     }
     else
     {

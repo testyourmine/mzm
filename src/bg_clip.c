@@ -701,6 +701,10 @@ u8 BgClipCheckOpeningHatch(u16 xPosition, u16 yPosition)
     s32 i;
     u8 action;
 
+    #ifdef BUGFIX
+    action = HATCH_OPENING_ACTION_NOT_OPENING;
+    #endif // BUGFIX
+
     for (i = 0; i < MAX_AMOUNT_OF_HATCHES; i++)
     {
         if (!gHatchData[i].exists || gHatchData[i].state != HATCH_STATE_CLOSED)

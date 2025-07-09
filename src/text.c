@@ -974,6 +974,10 @@ u8 TextProcessStory(void)
             break;
 
         case 2:
+            #ifdef BUGFIX
+            dst = NULL;
+            #endif // BUGFIX
+
             i = 6;
             if (gCurrentMessage.gfxSlot != 0)
             {

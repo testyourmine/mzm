@@ -282,6 +282,10 @@ static void unk_818cc(void)
     u16 xPosition;
     u16 i;
 
+    #ifdef BUGFIX
+    currSlot = 0;
+    #endif // BUGFIX
+
     dst = (u16*)gOamData;
 
     if (TOURIAN_ESCAPE_DATA.unk_8[0])
@@ -292,7 +296,7 @@ static void unk_818cc(void)
 
         yPosition = TOURIAN_ESCAPE_DATA.oamYPositions[0];
         xPosition = TOURIAN_ESCAPE_DATA.oamXPositions[0];
-    
+        
         for (currSlot = 0; currSlot < nextSlot; currSlot++)
         {
             part = *src++;

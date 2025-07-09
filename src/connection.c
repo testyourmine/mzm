@@ -388,6 +388,10 @@ boolu32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
     if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
         return FALSE;
 
+    #ifdef BUGFIX
+    pDoor = NULL;
+    #endif
+
     state = FALSE;
     pHatch = gHatchData;
 

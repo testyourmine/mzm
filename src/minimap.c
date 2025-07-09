@@ -635,8 +635,10 @@ void MinimapDraw(void)
     u32 flip;
     u16* src;
     u16* tmp;
+    #ifndef BUGFIX
     u16 tmp1;
     u16 tmp2;
+    #endif // !BUGFIX
 
     if (gUpdateMinimapFlag == MINIMAP_UPDATE_FLAG_NONE)
         return;
@@ -676,8 +678,11 @@ void MinimapDraw(void)
 
         tmp = &src[yPosition * MINIMAP_SIZE + xPosition];
 
+        #ifndef BUGFIX
         // BUG: uses uninitalized variables
         tmp1 = tmp2 & 0xC00;
+        #endif // !BUGFIX
+
         do {
         flip = (*tmp & 0xC00) >> 0xA;
         } while(0);
