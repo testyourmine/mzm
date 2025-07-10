@@ -9,6 +9,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
+  - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
 - [Uninitialized Variables](#uninitialized-variables)
 - [TODO](#todo)
   - [Bugs](#bugs-1)
@@ -19,7 +20,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 ### "Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors
 
-Fix : Edit `DessgeegaDeath` in [dessgeega.c](https://github.com/metroidret/mzm/blob/master/src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
+**Fix:** Edit `DessgeegaDeath` in [dessgeega.c](https://github.com/metroidret/mzm/blob/master/src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
 
 ```diff
 + if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
@@ -49,9 +50,14 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 + }
 ```
 
+
 ## Oversights and Design Flaws
 
-#### Floating point math is used when fixed point could have been used
+### Floating point math is used when fixed point could have been used
+
+Floating point math is used in a few instances even when the result is assigned to or compared with an integer. Fixed point math is much faster and nearly just as accurate.
+
+**Fix:** Call `FixedMultiplication` and convert the fractional part to [Q8.8 format](https://en.wikipedia.org/wiki/Q_(number_format)).
 
 `PowerBombExplosion`:
 ```diff
@@ -85,6 +91,15 @@ Could also do `movement * 4 / 5`
   }
 ```
 Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
+
+### `ClipdataConvertToCollision` is copied to RAM but still runs in ROM
+
+`ClipdataConvertToCollision` is copied to RAM, presumably for performance reasons, because it is often called many times per frame and code runs faster in RAM. However, the switch statement gets compiled as a jump table, which ends up jumping to the code in ROM.
+
+**Fix:** Convert the switch statement to a series of if statements. Order them such that common block types (like solid and air) are checked first.
+
+See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
+
 
 ## Uninitialized Variables
 
@@ -136,6 +151,3 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 
 - Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics from the message box
   - Potential fix: kill any missiles after mecha dies
-- ClipdataConvertToCollision is copied to RAM, but the code immediately jumps to the code in ROM
-  - The function has a switch statement which compiles as a jump table using the original ROM addresses
-  - Potential fix: call ClipdataConvertToCollision directly instead of copying it to RAM

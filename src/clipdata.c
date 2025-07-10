@@ -148,6 +148,140 @@ u32 ClipdataConvertToCollision(struct CollisionData* pCollision)
 
     result = CLIPDATA_TYPE_AIR;
 
+    #ifdef BUGFIX
+
+    // This function is copied to RAM, presumably for performance reasons, because it is often
+    // called many times per frame and code runs faster in RAM. However, the switch statement gets
+    // compiled as a jump table, which ends up jumping to the code in ROM. To fix this, a series
+    // of if statements is used instead.
+    // Solid and air blocks are the most common, so they're checked first. Pass through bottom
+    // blocks are unused in vanilla, so they're checked last.
+
+    if (pCollision->clipdataType == CLIPDATA_TYPE_SOLID)
+    {
+        // No calculations needed, return type and add solid flag
+        result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_AIR)
+    {
+        // No calculations needed, return type
+        result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_LEFT_STEEP_FLOOR_SLOPE)
+    {
+        // Checking if in the solid or air part of the slope
+        // The slope forms a rectangle triangle with the right angle being in the bottom left
+        // For the sub-pixels coordinates, 0,0 is the top left, and 3F,3F the bottom right
+        // So in order to determine whether it's colliding with the solid part or not, we simply check if Y > X
+        if (pCollision->subPixelY >= pCollision->subPixelX)
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        else
+            result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_RIGHT_STEEP_FLOOR_SLOPE)
+    {
+        // Checking if in the solid or air part of the slope
+        // Same logic, however since the slope is "flipped" in regards to the coordinates, we substract the X to 3F
+        if (pCollision->subPixelY >= SUB_PIXEL_POSITION_FLAG - pCollision->subPixelX)
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        else
+            result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_LEFT_UPPER_SLIGHT_FLOOR_SLOPE)
+    {
+        // Checking if in the solid or air part of the slope
+        // Same logic, however the triangle hypotenuse is "larger" and extends on 2 block, with the angle being twice as big
+        // Hence why the subpixel X is divided by 2, it's to compensate
+        if (pCollision->subPixelY >= pCollision->subPixelX >> 1)
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        else
+            result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_LEFT_LOWER_SLIGHT_FLOOR_SLOPE)
+    {
+        // Checking if in the solid or air part of the slope
+        // Same logic, we add 0x3F because it's the lower part of the slope
+        if (pCollision->subPixelY >= (pCollision->subPixelX + SUB_PIXEL_POSITION_FLAG) >> 1)
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        else
+            result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_RIGHT_LOWER_SLIGHT_FLOOR_SLOPE)
+    {
+        // Checking if in the solid or air part of the slope
+        // Same logic
+        if (pCollision->subPixelY >= SUB_PIXEL_POSITION_FLAG - (pCollision->subPixelX >> 1))
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        else
+            result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_RIGHT_UPPER_SLIGHT_FLOOR_SLOPE)
+    {
+        // Checking if in the solid or air part of the slope
+        // Same logic
+        if (pCollision->subPixelY >= (SUB_PIXEL_POSITION_FLAG - pCollision->subPixelX) >> 1)
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        else
+            result = pCollision->clipdataType;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_ENEMY_ONLY)
+    {
+        if (pCollision->actorType > CLIPDATA_ACTOR_NON_SPRITE)
+        {
+            // Only for sprites
+            pCollision->clipdataType = CLIPDATA_TYPE_AIR;
+            result = CLIPDATA_TYPE_AIR;
+        }
+        else
+        {
+            // For non sprite
+            pCollision->clipdataType = CLIPDATA_TYPE_SOLID;
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        }
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_DOOR)
+    {
+        pCollision->clipdataType = CLIPDATA_TYPE_SOLID;
+        result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_STOP_ENEMY)
+    {
+        if (pCollision->actorType < CLIPDATA_ACTOR_SPRITE)
+        {
+            // For non sprite
+            pCollision->clipdataType = CLIPDATA_TYPE_AIR;
+            result = CLIPDATA_TYPE_AIR;
+        }
+        else
+        {
+            // For sprite
+            pCollision->clipdataType = CLIPDATA_TYPE_SOLID;
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        }
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_TANK)
+    {
+        if (pCollision->actorType == CLIPDATA_ACTOR_SAMUS)
+        {
+            // For samus
+            pCollision->clipdataType = CLIPDATA_TYPE_AIR;
+            result = CLIPDATA_TYPE_AIR;
+        }
+        else
+        {
+            // For non samus
+            pCollision->clipdataType = CLIPDATA_TYPE_SOLID;
+            result = pCollision->clipdataType | CLIPDATA_TYPE_SOLID_FLAG;
+        }
+    }
+    else if (pCollision->clipdataType == CLIPDATA_TYPE_PASS_THROUGH_BOTTOM)
+    {
+        // No calculations needed, return type
+        result = pCollision->clipdataType;
+    }
+
+    #else // !BUGFIX
+    
     switch (pCollision->clipdataType)
     {
         case CLIPDATA_TYPE_SOLID:
@@ -271,6 +405,8 @@ u32 ClipdataConvertToCollision(struct CollisionData* pCollision)
         default:
             break;
     }
+
+    #endif // BUGFIX
 
     return result;
 }
