@@ -38,16 +38,6 @@ MAKE_ENUM(u8, LocationTextId) {
     LT_INVALID = UCHAR_MAX
 };
 
-// Functions
-
-LocationTextId LocationTextGetBrinstar(void);
-LocationTextId LocationTextGetKraid(void);
-LocationTextId LocationTextGetCrateria(void);
-LocationTextId LocationTextGetNorfair(void);
-LocationTextId LocationTextGetRidley(void);
-LocationTextId LocationTextGetChozodia(void);
-LocationTextId LocationTextGetTourian(void);
-u8 LocationTextLoadAreaBannerGfx(void);
 u8 LocationTextGetGfxSlot(void);
 
 #endif /* LOCATION_TEXT_H */

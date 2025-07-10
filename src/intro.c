@@ -2,6 +2,7 @@
 #include "callbacks.h"
 #include "macros.h"
 #include "complex_oam.h" // Required
+#include "text.h"
 
 #include "data/shortcut_pointers.h"
 #include "data/intro_data.h"
@@ -16,22 +17,11 @@
 #include "structs/game_state.h"
 #include "structs/intro.h"
 
-static IntroFunc_T sIntroSubroutinesFunctionsPointer[8] = {
-    [0] = IntroEmergencyOrder,
-    [1] = IntroShipFlyingTowardsCamera,
-    [2] = IntroSamusInHerShip,
-    [3] = IntroExterminate,
-    [4] = IntroViewOfZebes,
-    [5] = IntroDefeat,
-    [6] = IntroMotherBrain,
-    [7] = IntroFuzz
-};
-
 /**
  * @brief 800f4 | 90 | V-blank code for the intro
  * 
  */
-void IntroVBlank(void)
+static void IntroVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
@@ -48,7 +38,7 @@ void IntroVBlank(void)
  * @brief 80184 | 58 | V-blank code for the intro fuzz
  * 
  */
-void IntroFuzzVBlank(void)
+static void IntroFuzzVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
@@ -62,7 +52,7 @@ void IntroFuzzVBlank(void)
  * @brief 801dc | 1d4 | Initializes the intro
  * 
  */
-void IntroInit(void)
+static void IntroInit(void)
 {
     WRITE_16(REG_IME, FALSE);
     WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
@@ -128,7 +118,7 @@ void IntroInit(void)
     IntroVBlank();
 }
 
-void IntroTextProcessOam(void)
+static void IntroTextProcessOam(void)
 {
     const u16* src;
     u16* dst;
@@ -226,7 +216,7 @@ void IntroTextProcessOam(void)
  * @param indent Indent
  * @return u8 To document
  */
-u8 IntroProcessText(u8 action, u16 indent)
+static u8 IntroProcessText(u8 action, u16 indent)
 {
     u8 dontProcess;
     u8 skipCharacter;
@@ -341,7 +331,7 @@ u8 IntroProcessText(u8 action, u16 indent)
  * 
  * @return u8 FALSE
  */
-u8 IntroEmergencyOrder(void)
+static u8 IntroEmergencyOrder(void)
 {
     u8 textResult;
 
@@ -391,7 +381,7 @@ u8 IntroEmergencyOrder(void)
  * @brief 807b8 | 134 | Processes the OAM for the ship flying towards the camera
  * 
  */
-void IntroShipFlyingTowardsCameraProcessOam(void)
+static void IntroShipFlyingTowardsCameraProcessOam(void)
 {
     const u16* src;
     u16* dst;
@@ -453,7 +443,7 @@ void IntroShipFlyingTowardsCameraProcessOam(void)
  * 
  * @return u8 FALSE
  */
-u8 IntroShipFlyingTowardsCamera(void)
+static u8 IntroShipFlyingTowardsCamera(void)
 {
     u8 ended;
 
@@ -463,8 +453,8 @@ u8 IntroShipFlyingTowardsCamera(void)
     {
         case 0:
             INTRO_DATA.bldcnt = BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG0_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL;
-            gWrittenToBldalpha_L = 9;
-            gWrittenToBldalpha_H = 7;
+            gWrittenToBldalpha_L = BLDALPHA_MAX_VALUE / 2 + 1;
+            gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE / 2 - 1;
             break;
 
         case DELTA_TIME:
@@ -494,7 +484,7 @@ u8 IntroShipFlyingTowardsCamera(void)
  * 
  * @return u8 FALSE
  */
-u8 IntroSamusInHerShip(void)
+static u8 IntroSamusInHerShip(void)
 {
     u8 ended;
 
@@ -556,7 +546,7 @@ u8 IntroSamusInHerShip(void)
  * 
  * @return u8 
  */
-u8 IntroExterminate(void)
+static u8 IntroExterminate(void)
 {
     u8 textResult;
 
@@ -606,7 +596,7 @@ u8 IntroExterminate(void)
  * @brief 80b78 | 154 | Processes the OAM for the view of zebes part of the intro
  * 
  */
-void IntroViewOfZebesProcessOAM(void)
+static void IntroViewOfZebesProcessOAM(void)
 {
     const u16* src;
     u16* dst;
@@ -683,7 +673,7 @@ void IntroViewOfZebesProcessOAM(void)
  * 
  * @return u8 FALSE
  */
-u8 IntroViewOfZebes(void)
+static u8 IntroViewOfZebes(void)
 {
     u8 ended;
 
@@ -707,7 +697,7 @@ u8 IntroViewOfZebes(void)
             break;
 
         case DELTA_TIME * 3:
-            WRITE_16(REG_BLDALPHA, C_16_2_8(7, 9));
+            WRITE_16(REG_BLDALPHA, C_16_2_8(BLDALPHA_MAX_VALUE / 2 - 1, BLDALPHA_MAX_VALUE / 2 + 1));
             INTRO_DATA.dispcnt = DCNT_BG0 | DCNT_OBJ;
             INTRO_DATA.bldcnt = BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG0_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL;
             SoundPlay(SOUND_INTRO_SHIP_FLYING_DOWN);
@@ -745,7 +735,7 @@ u8 IntroViewOfZebes(void)
  * 
  * @return u8 FALSE
  */
-u8 IntroDefeat(void)
+static u8 IntroDefeat(void)
 {
     u8 textResult;
 
@@ -798,7 +788,7 @@ u8 IntroDefeat(void)
  * 
  * @return u8 FALSE
  */
-u8 IntroMotherBrain(void)
+static u8 IntroMotherBrain(void)
 {
     u8 ended;
 
@@ -853,7 +843,7 @@ u8 IntroMotherBrain(void)
  * @brief 81018 | 88 | Processes the OAM for the intro fuzz
  * 
  */
-void IntroFuzzProcessOAM(void)
+static void IntroFuzzProcessOAM(void)
 {
     u16* dst;
     const u16* src;
@@ -890,7 +880,7 @@ void IntroFuzzProcessOAM(void)
  * 
  * @return u8 bool, ended
  */
-u8 IntroFuzz(void)
+static u8 IntroFuzz(void)
 {
     switch (INTRO_DATA.timer++)
     {
@@ -932,6 +922,17 @@ u8 IntroFuzz(void)
     IntroFuzzProcessOAM();
     return FALSE;
 }
+
+static IntroFunc_T sIntroSubroutinesFunctionsPointer[8] = {
+    [0] = IntroEmergencyOrder,
+    [1] = IntroShipFlyingTowardsCamera,
+    [2] = IntroSamusInHerShip,
+    [3] = IntroExterminate,
+    [4] = IntroViewOfZebes,
+    [5] = IntroDefeat,
+    [6] = IntroMotherBrain,
+    [7] = IntroFuzz
+};
 
 /**
  * @brief 8117c | cc | Subroutine for the intro

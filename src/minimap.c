@@ -17,24 +17,18 @@
 #include "structs/samus.h"
 #include "structs/room.h"
 
+#ifdef DEBUG
+static void MinimapDrawNumber(u8 value, void* dst);
+#endif // DEBUG
+static void MinimapSetTileAsExplored(void);
+static void MinimapCheckForUnexploredTile(void);
+static void MinimapUpdateForExploredTiles(void);
+static void MinimapCopyTileGfx(u32* dst, u16* pTile, u8 palette);
+static void MinimapCopyTileXFlippedGfx(u32* dst, u16* pTile, u8 palette);
+static void MinimapCopyTileYFlippedGfx(u32* dst, u16* pTile, u8 palette);
+static void MinimapCopyTileXYFlippedGfx(u32* dst, u16* pTile, u8 palette);
+
 extern const struct RoomEntryRom* sAreaRoomEntryPointers[AREA_ENTRY_COUNT];
-
-static u32 sExploredMinimapBitFlags[32] = {
-    1 << 0,  1 << 1,  1 << 2,  1 << 3,  1 << 4,
-    1 << 5,  1 << 6,  1 << 7,  1 << 8,  1 << 9,
-    1 << 10, 1 << 11, 1 << 12, 1 << 13, 1 << 14,
-    1 << 15, 1 << 16, 1 << 17, 1 << 18, 1 << 19,
-    1 << 20, 1 << 21, 1 << 22, 1 << 23, 1 << 24,
-    1 << 25, 1 << 26, 1 << 27, 1 << 28, 1 << 29,
-    1 << 30, 1 << 31
-};
-
-static MinimapFunc_T sMinimapTilesCopyGfxFunctionPointers[4] = {
-    MinimapCopyTileGfx,
-    MinimapCopyTileXFlippedGfx,
-    MinimapCopyTileYFlippedGfx,
-    MinimapCopyTileXYFlippedGfx,
-};
 
 #ifdef DEBUG
 
@@ -55,7 +49,7 @@ void MinimapDrawRoomInfo(void)
  * @param value Number to draw
  * @param dst Destination address
  */
-void MinimapDrawNumber(u8 value, void* dst)
+static void MinimapDrawNumber(u8 value, void* dst)
 {
     s32 zeroTile;
     s32 divisor;
@@ -98,13 +92,24 @@ void MinimapUpdate(void)
     MinimapDraw();
 }
 
+static u32 sExploredMinimapBitFlags[32] = {
+    1 << 0,  1 << 1,  1 << 2,  1 << 3,  1 << 4,
+    1 << 5,  1 << 6,  1 << 7,  1 << 8,  1 << 9,
+    1 << 10, 1 << 11, 1 << 12, 1 << 13, 1 << 14,
+    1 << 15, 1 << 16, 1 << 17, 1 << 18, 1 << 19,
+    1 << 20, 1 << 21, 1 << 22, 1 << 23, 1 << 24,
+    1 << 25, 1 << 26, 1 << 27, 1 << 28, 1 << 29,
+    1 << 30, 1 << 31
+};
+
 /**
  * @brief 6c178 | 4c | Sets the current minimap tile to be explored
  * 
  */
-void MinimapSetTileAsExplored(void)
+static void MinimapSetTileAsExplored(void)
 {
     u32 offset;
+
     if (!gShipLandingFlag)
     {
         offset = gCurrentArea * MINIMAP_SIZE + gMinimapY; 
@@ -113,7 +118,7 @@ void MinimapSetTileAsExplored(void)
 }
 
 #ifdef NON_MATCHING
-void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
+static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
 {
     // https://decomp.me/scratch/lc52R
     
@@ -227,7 +232,7 @@ void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
 }
 #else
 NAKED_FUNCTION
-void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
+static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
 {
     asm(" \n\
     push {r4, r5, r6, r7, lr} \n\
@@ -479,7 +484,7 @@ lbl_0806c398: .4byte 0x000003ff \n\
  * @brief 6c39c | d8 | Checks if Samus is on an unexplored minimap tile
  * 
  */
-void MinimapCheckForUnexploredTile(void)
+static void MinimapCheckForUnexploredTile(void)
 {
     u16 samusX;
     u16 samusY;
@@ -585,7 +590,7 @@ void MinimapCheckOnTransition(void)
  * @brief 6c518 | 9c | Updates the minimap for the explored tiles
  * 
  */
-void MinimapUpdateForExploredTiles(void)
+static void MinimapUpdateForExploredTiles(void)
 {
     u32 offset;
     u32 tile;
@@ -616,6 +621,13 @@ void MinimapUpdateForExploredTiles(void)
         }
     }
 }
+
+static MinimapFunc_T sMinimapTilesCopyGfxFunctionPointers[4] = {
+    MinimapCopyTileGfx,
+    MinimapCopyTileXFlippedGfx,
+    MinimapCopyTileYFlippedGfx,
+    MinimapCopyTileXYFlippedGfx,
+};
 
 /**
  * @brief 6c5b4 | 100 | To document
@@ -710,7 +722,7 @@ void MinimapDraw(void)
  * @param pTile Tile pointer
  * @param palette Palette
  */
-void MinimapCopyTileGfx(u32* dst, u16* pTile, u8 palette)
+static void MinimapCopyTileGfx(u32* dst, u16* pTile, u8 palette)
 {
     s32 i;
     u32 value;
@@ -749,7 +761,7 @@ void MinimapCopyTileGfx(u32* dst, u16* pTile, u8 palette)
  * @param pTile Tile pointer
  * @param palette Palette
  */
-void MinimapCopyTileXFlippedGfx(u32* dst, u16* pTile, u8 palette)
+static void MinimapCopyTileXFlippedGfx(u32* dst, u16* pTile, u8 palette)
 {
     s32 i;
     u32 value;
@@ -791,7 +803,7 @@ void MinimapCopyTileXFlippedGfx(u32* dst, u16* pTile, u8 palette)
  * @param pTile Tile pointer
  * @param palette Palette
  */
-void MinimapCopyTileYFlippedGfx(u32* dst, u16* pTile, u8 palette)
+static void MinimapCopyTileYFlippedGfx(u32* dst, u16* pTile, u8 palette)
 {
     s32 i;
     u32 value;
@@ -832,7 +844,7 @@ void MinimapCopyTileYFlippedGfx(u32* dst, u16* pTile, u8 palette)
  * @param pTile Tile pointer
  * @param palette Palette
  */
-void MinimapCopyTileXYFlippedGfx(u32* dst, u16* pTile, u8 palette)
+static void MinimapCopyTileXYFlippedGfx(u32* dst, u16* pTile, u8 palette)
 {
     s32 i;
     u32 value;

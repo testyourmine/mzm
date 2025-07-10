@@ -1,6 +1,7 @@
 #include "location_text.h"
 #include "gba.h"
 #include "macros.h"
+#include "sprite.h"
 
 #include "data/sprites/area_banner.h"
 
@@ -16,7 +17,7 @@
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetBrinstar(void)
+static LocationTextId LocationTextGetBrinstar(void)
 {
     LocationTextId lt;
 
@@ -46,7 +47,7 @@ LocationTextId LocationTextGetBrinstar(void)
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetKraid(void)
+static LocationTextId LocationTextGetKraid(void)
 {
     LocationTextId lt;
 
@@ -77,7 +78,7 @@ LocationTextId LocationTextGetKraid(void)
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetCrateria(void)
+static LocationTextId LocationTextGetCrateria(void)
 {
     LocationTextId lt;
 
@@ -115,7 +116,7 @@ LocationTextId LocationTextGetCrateria(void)
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetNorfair(void)
+static LocationTextId LocationTextGetNorfair(void)
 {
     LocationTextId lt;
 
@@ -149,7 +150,7 @@ LocationTextId LocationTextGetNorfair(void)
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetRidley(void)
+static LocationTextId LocationTextGetRidley(void)
 {
     LocationTextId lt;
 
@@ -180,7 +181,7 @@ LocationTextId LocationTextGetRidley(void)
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetChozodia(void)
+static LocationTextId LocationTextGetChozodia(void)
 {
     LocationTextId lt;
 
@@ -215,7 +216,7 @@ LocationTextId LocationTextGetChozodia(void)
  * 
  * @return LocationTextId Location text
  */
-LocationTextId LocationTextGetTourian(void)
+static LocationTextId LocationTextGetTourian(void)
 {
     LocationTextId lt;
 
@@ -242,7 +243,7 @@ LocationTextId LocationTextGetTourian(void)
  * 
  * @return u8 Gfx slot
  */
-u8 LocationTextLoadAreaBannerGfx(void)
+static u8 LocationTextLoadAreaBannerGfx(void)
 {
     u8 count;
     u8 gfxSlot;

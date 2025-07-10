@@ -19,21 +19,11 @@
 #include "structs/chozodia_escape.h"
 #include "structs/display.h"
 
-typedef u8 (*ChozodiaEscapeFunc_T)(void);
-
-static ChozodiaEscapeFunc_T sChozodiaEscapeFunctionPointers[5] = {
-    [0] = ChozodiaEscapeShipLeaving,
-    [1] = ChozodiaEscapeShipHeatingUp,
-    [2] = ChozodiaEscapeShipBlowingUp,
-    [3] = ChozodiaEscapeShipLeavingPlanet,
-    [4] = ChozodiaEscapeMissionAccomplished,
-};
-
 /**
  * @brief 8784c | ec | V-blank code for the chozodia escape
  * 
  */
-void ChozodiaEscapeVBlank(void)
+static void ChozodiaEscapeVBlank(void)
 {
     DMA_SET(3, gOamData, OAM_BASE, C_32_2_16(DMA_ENABLE | DMA_32BIT, OAM_SIZE / sizeof(u32)));
 
@@ -58,7 +48,7 @@ void ChozodiaEscapeVBlank(void)
  * @brief 87938 | 3c | H-blank code for the chozodia escape
  * 
  */
-void ChozodiaEscapeHBlank(void)
+static void ChozodiaEscapeHBlank(void)
 {
     u16 vcount;
 
@@ -74,7 +64,7 @@ void ChozodiaEscapeHBlank(void)
  * @brief 87974 | 34 | Transfers and sets the h-blank code
  * 
  */
-void ChozodiaEscapeSetHBlank(void)
+static void ChozodiaEscapeSetHBlank(void)
 {
     // Transfer code to RAM
     DMA_SET(3, ChozodiaEscapeHBlank, CHOZODIA_ESCAPE_DATA.hblankCode, C_32_2_16(DMA_ENABLE, 0x20));
@@ -87,7 +77,7 @@ void ChozodiaEscapeSetHBlank(void)
  * @brief 879a8 | 64 | Sets up the registers for the h-blank code
  * 
  */
-void ChozodiaEscapeSetupHBlankRegisters(void)
+static void ChozodiaEscapeSetupHBlankRegisters(void)
 {
     // Setup window 0 size (no width, max height)
     WRITE_16(REG_WIN0H, 0);
@@ -116,7 +106,7 @@ void ChozodiaEscapeSetupHBlankRegisters(void)
  * @brief 87a0c | e0 | Updates the explosion haze values
  * 
  */
-void ChozodiaEscapeUpdateExplosionHaze(void)
+static void ChozodiaEscapeUpdateExplosionHaze(void)
 {
     u32 semiMinorAxis;
     u32 subSlice;
@@ -294,7 +284,7 @@ u32 ChozodiaEscapeGetItemCountAndEndingNumber(void)
  * @brief 87c08 | f4 | Processes the OAM for the chozodia escape, to document
  * 
  */
-void ChozodiaEscapeProcessOam_1(void)
+static void ChozodiaEscapeProcessOam_1(void)
 {
     u16* dst;
     const u16* src;
@@ -350,7 +340,7 @@ void ChozodiaEscapeProcessOam_1(void)
  * @brief 87cfc | 150 | Processes the OAM for the chozodia escape, to document
  * 
  */
-void ChozodiaEscapeProcessOam_2(void)
+static void ChozodiaEscapeProcessOam_2(void)
 {
     u16* dst;
     const u16* src;
@@ -423,7 +413,7 @@ void ChozodiaEscapeProcessOam_2(void)
  * @brief 87e4c | 30c | Initializes the chozodia escape
  * 
  */
-void ChozodiaEscapeInit(void)
+static void ChozodiaEscapeInit(void)
 {
     WRITE_16(REG_IME, FALSE);
     WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
@@ -546,7 +536,7 @@ void ChozodiaEscapeInit(void)
  * 
  * @return u8 bool, ended
  */
-u8 ChozodiaEscapeShipLeaving(void)
+static u8 ChozodiaEscapeShipLeaving(void)
 {
     u8 ended;
     s32 velocity;
@@ -643,7 +633,7 @@ u8 ChozodiaEscapeShipLeaving(void)
  * 
  * @return u8 bool, ended
  */
-u8 ChozodiaEscapeShipHeatingUp(void)
+static u8 ChozodiaEscapeShipHeatingUp(void)
 {
     u8 ended;
     u32 timer;
@@ -773,7 +763,7 @@ u8 ChozodiaEscapeShipHeatingUp(void)
  * 
  * @return u8 bool, ended
  */
-u8 ChozodiaEscapeShipBlowingUp(void)
+static u8 ChozodiaEscapeShipBlowingUp(void)
 {
     u8 ended;
     u8 i;
@@ -951,7 +941,7 @@ u8 ChozodiaEscapeShipBlowingUp(void)
  * 
  * @return u8 bool, ended
  */
-u8 ChozodiaEscapeShipLeavingPlanet(void)
+static u8 ChozodiaEscapeShipLeavingPlanet(void)
 {
     u8 ended;
     u32 yPosition;
@@ -1107,7 +1097,7 @@ u8 ChozodiaEscapeShipLeavingPlanet(void)
  * 
  * @return u8 bool, ended (0, 2)
  */
-u8 ChozodiaEscapeMissionAccomplished(void)
+static u8 ChozodiaEscapeMissionAccomplished(void)
 {
     u8 ended;
 
@@ -1181,6 +1171,14 @@ u8 ChozodiaEscapeMissionAccomplished(void)
 
     return ended;
 }
+
+static ChozodiaEscapeFunc_T sChozodiaEscapeFunctionPointers[5] = {
+    [0] = ChozodiaEscapeShipLeaving,
+    [1] = ChozodiaEscapeShipHeatingUp,
+    [2] = ChozodiaEscapeShipBlowingUp,
+    [3] = ChozodiaEscapeShipLeavingPlanet,
+    [4] = ChozodiaEscapeMissionAccomplished,
+};
 
 /**
  * @brief 88d5c | 144 | Subroutine for the chozodia escape
