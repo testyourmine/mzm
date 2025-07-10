@@ -6,6 +6,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 - [Bugs](#bugs)
   - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
+  - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
 - [Uninitialized Variables](#uninitialized-variables)
@@ -38,14 +39,21 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 
 **Fix:** Edit `MotherBrainSpawnBlock` in [mother_brain.c](../src/sprites_AI/mother_brain.c) to check if the block sprite was spawned successfully before changing to the next Mother Brain sprite pose. The `SpriteSpawnSecondary()` function returns `0xFF` if it failed to spawn the sprite. By not changing the pose, the game will keep trying to spawn the block until it succeeds. This usually happens just a few frames before the first attempt, so no side effects are noticeable in the Mother Brain fight.
 
-```diff
--       SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
-+       u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
-+       if (blockSlot != UCHAR_MAX)
-+       {
+```c
+#ifdef BUGFIX
+        u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+            gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
+        if (blockSlot != UCHAR_MAX)
+        {
             gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
             gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
-+       }
+        }
+#else // !BUGFIX
+        SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+            gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
+        gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
+        gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
+#endif // BUGFIX
 ```
 
 ## Oversights and Design Flaws
