@@ -21,16 +21,14 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 Fix : Edit `DessgeegaDeath` in [dessgeega.c](https://github.com/metroidret/mzm/blob/master/src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
 
-```c
-#ifdef BUGFIX
-if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
-#endif
-{
-    // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
-    EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
-    // Unlock doors
-    gDoorUnlockTimer = -ONE_THIRD_SECOND;
-}
+```diff
++ if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
++ {
+      // Set event every time a ground dessgeega is killed instead of checking for the sprite ID ?
+      EventFunction(EVENT_ACTION_SETTING, EVENT_LONG_BEAM_DESSGEEGA_KILLED);
+      // Unlock doors
+      gDoorUnlockTimer = -ONE_THIRD_SECOND;
++ }
 ```
 
 ### Mother Brain block does not spawn when there are too many sprites
@@ -39,21 +37,16 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 
 **Fix:** Edit `MotherBrainSpawnBlock` in [mother_brain.c](../src/sprites_AI/mother_brain.c) to check if the block sprite was spawned successfully before changing to the next Mother Brain sprite pose. The `SpriteSpawnSecondary()` function returns `0xFF` if it failed to spawn the sprite. By not changing the pose, the game will keep trying to spawn the block until it succeeds. This usually happens just a few frames before the first attempt, so no side effects are noticeable in the Mother Brain fight.
 
-```c
-#ifdef BUGFIX
-u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
-    gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
-if (blockSlot != UCHAR_MAX)
-{
-    gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
-    gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
-}
-#else // !BUGFIX
-SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
-    gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
-gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
-gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
-#endif // BUGFIX
+```diff
+- SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+-      gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
++ u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
++      gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
++ if (blockSlot != UCHAR_MAX)
++ {
+      gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
+      gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
++ }
 ```
 
 ## Oversights and Design Flaws
@@ -61,44 +54,35 @@ gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
 #### Floating point math is used when fixed point could have been used
 
 `PowerBombExplosion`:
-```c
-verticalAxis = gCurrentPowerBomb.semiMinorAxis * 4;
-horizontalAxis = gCurrentPowerBomb.semiMinorAxis * 8;
-#ifdef BUGFIX
-verticalAxis = FixedMultiplication(verticalAxis, Q_8_8(0.95));
-horizontalAxis = FixedMultiplication(horizontalAxis, Q_8_8(0.95));
-#else // !BUGFIX
-verticalAxis *= 0.95;
-horizontalAxis *= 0.95;
-#endif // BUGFIX
+```diff
+  verticalAxis = gCurrentPowerBomb.semiMinorAxis * 4;
+  horizontalAxis = gCurrentPowerBomb.semiMinorAxis * 8;
++ verticalAxis = FixedMultiplication(verticalAxis, Q_8_8(0.95));
++ horizontalAxis = FixedMultiplication(horizontalAxis, Q_8_8(0.95));
+- verticalAxis *= 0.95;
+- horizontalAxis *= 0.95;
 ```
 Could also do `verticalAxis * 19 / 20`
 
 `ImagoCocoonSporeMove`:
-```c
-case IMAGO_COCOON_SPORE_PART_DIAG_RIGHT_UP:
-    #ifdef BUGFIX
-    movement = FixedMultiplication(movement, Q_8_8(0.8));
-    #else // !BUGFIX
-    movement *= 0.8; // 4 * 0.8 = 3.2
-    #endif // BUGFIX
-    gCurrentSprite.yPosition -= movement;
-    gCurrentSprite.xPosition += movement;
-    break;
+```diff
+  case IMAGO_COCOON_SPORE_PART_DIAG_RIGHT_UP:
++     movement = FixedMultiplication(movement, Q_8_8(0.8));
+-     movement *= 0.8; // 4 * 0.8 = 3.2
+      gCurrentSprite.yPosition -= movement;
+      gCurrentSprite.xPosition += movement;
+      break;
 ```
 Could also do `movement * 4 / 5`
 
 `RidleyLandingShipLanding`:
-```c
-#ifdef BUGFIX
-if (movement >= 2848 - FixedMultiplication(sRidleyLandingScrollingInfo[1].length, Q_8_8(2.f / 3)))
-#else // !BUGFIX
-if (movement >= 2848 - sRidleyLandingScrollingInfo[1].length / 1.5)
-#endif // BUGFIX
-{
-    CUTSCENE_DATA.dispcnt |= sRidleyLandingPageData[2].bg;
-    CutsceneStartBackgroundScrolling(sRidleyLandingScrollingInfo[1], sRidleyLandingPageData[2].bg);
-}
+```diff
++ if (movement >= 2848 - FixedMultiplication(sRidleyLandingScrollingInfo[1].length, Q_8_8(2.f / 3)))
+- if (movement >= 2848 - sRidleyLandingScrollingInfo[1].length / 1.5)
+  {
+      CUTSCENE_DATA.dispcnt |= sRidleyLandingPageData[2].bg;
+      CutsceneStartBackgroundScrolling(sRidleyLandingScrollingInfo[1], sRidleyLandingPageData[2].bg);
+  }
 ```
 Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 
