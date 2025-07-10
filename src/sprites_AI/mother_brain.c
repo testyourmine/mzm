@@ -622,10 +622,20 @@ static void MotherBrainSpawnBlock(void)
 
     if (gSamusData.xPosition < xPosition - (BLOCK_SIZE - PIXEL_SIZE))
     {
-        SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.primarySpriteRamSlot,
-            yPosition, xPosition, 0);
+        #ifdef BUGFIX
+        u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+            gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
+        if (blockSlot != UCHAR_MAX)
+        {
+            gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
+            gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
+        }
+        #else // !BUGFIX
+        SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+            gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
         gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
         gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
+        #endif // BUGFIX
     }
 }
 
