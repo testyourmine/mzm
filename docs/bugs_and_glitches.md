@@ -32,6 +32,21 @@ if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
 }
 ```
 
+### Mother Brain block does not spawn when there are too many sprites
+
+Whenever there are too many (24) active sprites in the Mother Brain room, the block that is meant to prevent Samus from leaving the Mother Brain fight fails to spawn. This happens because the block is its own independent sprite, and needs an additional free sprite slot to spawn. The code tries to spawn the block only once, and does not check if it was successfully spawned. The fight continues regardless, and the next Mother Brain pose is set.
+
+**Fix:** Edit `MotherBrainSpawnBlock` in [mother_brain.c](../src/sprites_AI/mother_brain.c) to check if the block sprite was spawned successfully before changing to the next Mother Brain sprite pose. The `SpriteSpawnSecondary()` function returns `0xFF` if it failed to spawn the sprite. By not changing the pose, the game will keep trying to spawn the block until it succeeds. This usually happens just a few frames before the first attempt, so no side effects are noticeable in the Mother Brain fight.
+
+```diff
+-       SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
++       u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
++       if (blockSlot != UCHAR_MAX)
++       {
+            gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
+            gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
++       }
+```
 
 ## Oversights and Design Flaws
 
@@ -117,8 +132,6 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
 - Door clipping using frozen enemies ([video](https://www.youtube.com/watch?v=iMObZ5EbooE))
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))
-- Mother Brain block not spawning when there are too many sprites ([code](https://github.com/metroidret/mzm/blob/4d9b219990ad5cce9c35f495195fe6019fecbac1/src/sprites_AI/mother_brain.c#L625-L626))
-  - Potential fix: remove a cannon sprite from the right side of the room
 - Killing Imago with pseudo screw softlocks the game
   - Fix: add a case in the AI for pseudo screw
 - Frame perfect pause buffering on ziplines ignores collision
