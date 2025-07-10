@@ -41,18 +41,18 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 
 ```c
 #ifdef BUGFIX
-        u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
-            gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
-        if (blockSlot != UCHAR_MAX)
-        {
-            gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
-            gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
-        }
+u8 blockSlot = SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+    gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
+if (blockSlot != UCHAR_MAX)
+{
+    gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
+    gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
+}
 #else // !BUGFIX
-        SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
-            gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
-        gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
-        gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
+SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
+    gCurrentSprite.primarySpriteRamSlot, yPosition, xPosition, 0);
+gCurrentSprite.pose = MOTHER_BRAIN_PART_POSE_GLASS_STAGE_1;
+gCurrentSprite.status &= ~SPRITE_STATUS_IGNORE_PROJECTILES;
 #endif // BUGFIX
 ```
 
