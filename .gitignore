@@ -21,3 +21,5 @@ tools/c_extractor
 .vscode
 
 err.log
+
+!/sound/direct_sound_samples/*.bin
