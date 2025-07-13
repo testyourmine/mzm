@@ -86,6 +86,7 @@ GBAFIX = tools/gbafix/gbafix
 PYTHON = python3
 EXTRACTOR = tools/extractor.py
 PREPROC = tools/preproc/preproc
+AIF2PCM = tools/aif2pcm/aif2pcm
 
 # Flags
 ASFLAGS += -mcpu=arm7tdmi
@@ -162,6 +163,8 @@ ifeq ($(DATA),1)
 endif
 	$(MSG) RM linker.ld.pp
 	$Q$(RM) linker.ld.pp
+	$(MSG) RM sound/direct_sound_samples/*.bin
+	$Q$(RM) sound/direct_sound_samples/*.bin
 
 .PHONY: help
 help:
@@ -178,6 +181,8 @@ help:
 	@echo '  V=1: enable verbose output'
 	@echo '  REGION=<region>: selects the region of the ROM, possible values are "us", "eu", "jp" and "cn"'
 	@echo '  DEBUG=1: enables the debug code'
+
+sound/%.bin: sound/%.aif ; $(AIF2PCM) $< $@
 
 $(TARGET): $(ELF) $(GBAFIX)
 	$(MSG) OBJCOPY $@
