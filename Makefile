@@ -182,12 +182,10 @@ help:
 	@echo '  REGION=<region>: selects the region of the ROM, possible values are "us", "eu", "jp" and "cn"'
 	@echo '  DEBUG=1: enables the debug code'
 
+# Force dependency check on .aif
 AIF_FILES := $(wildcard sound/direct_sound_samples/*.aif)
 BIN_FILES := $(patsubst %.aif,%.bin,$(AIF_FILES))
-
 sound/direct_sound_data.s: $(BIN_FILES)
-
-sound/%.bin: sound/%.aif ; $(AIF2PCM) $< $@
 
 $(TARGET): $(ELF) $(GBAFIX)
 	$(MSG) OBJCOPY $@
@@ -214,6 +212,9 @@ $(LD_SCRIPT): linker.ld
 %.s: %.c
 	$(MSG) CC $@
 	$Q$(PREPROC) $< $(PREPROCFLAGS) | $(CPP) $(CPPFLAGS) | $(CC) -o $@ $(CFLAGS) && printf '\t.align 2, 0 @ dont insert nops\n' >> $@
+
+sound/%.bin: sound/%.aif
+	$Q$(AIF2PCM) $< $@
 
 src/dma.s: CFLAGS = -Werror -O1 -mthumb-interwork -fhex-asm -f2003-patch
 src/dma.s: src/dma.c
