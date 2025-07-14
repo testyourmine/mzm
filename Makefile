@@ -163,7 +163,7 @@ ifeq ($(DATA),1)
 endif
 	$(MSG) RM linker.ld.pp
 	$Q$(RM) linker.ld.pp
-	$(MSG) RM sound/direct_sound_samples/*.bin
+	$(MSG) RM sound/direct_sound_samples/\*.bin
 	$Q$(RM) sound/direct_sound_samples/*.bin
 
 .PHONY: help
@@ -181,6 +181,11 @@ help:
 	@echo '  V=1: enable verbose output'
 	@echo '  REGION=<region>: selects the region of the ROM, possible values are "us", "eu", "jp" and "cn"'
 	@echo '  DEBUG=1: enables the debug code'
+
+AIF_FILES := $(wildcard sound/direct_sound_samples/*.aif)
+BIN_FILES := $(patsubst %.aif,%.bin,$(AIF_FILES))
+
+sound/direct_sound_data.s: $(BIN_FILES)
 
 sound/%.bin: sound/%.aif ; $(AIF2PCM) $< $@
 
