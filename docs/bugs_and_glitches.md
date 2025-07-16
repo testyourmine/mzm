@@ -7,6 +7,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
 - [Bugs](#bugs)
   - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
   - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
+  - [Samus slow physics aren't properly applied when grabbed by a metroid in a liquid](#samus-slow-physics-arent-properly-applied-when-grabbed-by-a-metroid-in-a-liquid)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -20,7 +21,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 ### "Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors
 
-**Fix:** Edit `DessgeegaDeath` in [dessgeega.c](https://github.com/metroidret/mzm/blob/master/src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
+**Fix:** Edit `DessgeegaDeath` in [dessgeega.c](../src/sprites_AI/dessgeega.c) to check for the sprite id to run the event and door logic.
 
 ```diff
 + if (gCurrentSprite.spriteId == PSPRITE_DESSGEEGA_AFTER_LONG_BEAM)
@@ -36,7 +37,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
 
 Whenever there are too many (24) active sprites in the Mother Brain room, the block that is meant to prevent Samus from leaving the Mother Brain fight fails to spawn. This happens because the block is its own independent sprite, and needs an additional free sprite slot to spawn. The code tries to spawn the block only once, and does not check if it was successfully spawned. The fight continues regardless, and the next Mother Brain pose is set.
 
-**Fix:** Edit `MotherBrainSpawnBlock` in [mother_brain.c](../src/sprites_AI/mother_brain.c) to check if the block sprite was spawned successfully before changing to the next Mother Brain sprite pose. The `SpriteSpawnSecondary()` function returns `0xFF` if it failed to spawn the sprite. By not changing the pose, the game will keep trying to spawn the block until it succeeds. This usually happens just a few frames before the first attempt, so no side effects are noticeable in the Mother Brain fight.
+**Fix:** Edit `MotherBrainSpawnBlock` in [mother_brain.c](../src/sprites_AI/mother_brain.c) to check if the block sprite was spawned successfully before changing to the next Mother Brain sprite pose. The `SpriteSpawnSecondary()` function returns `0xFF` if it failed to spawn the sprite. By not changing the pose, the game will keep trying to spawn the block until it succeeds. This usually happens just a few frames after the first attempt, so no side effects are noticeable in the Mother Brain fight.
 
 ```diff
 - SpriteSpawnSecondary(SSPRITE_MOTHER_BRAIN_BLOCK, 0, SPRITE_GFX_SLOT_SPECIAL,
@@ -50,6 +51,28 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 + }
 ```
 
+### Samus slow physics aren't properly applied when grabbed by a metroid in a liquid
+
+The code skips the check for the "grabbed by Metroid" flag to apply the slowed physics if Samus is currently in a liquid.
+So when Samus is in a liquid that doesn't slow her, she also won't be slowed even if she's grabbed by a Metroid.
+
+**Fix:** Edit `SamusUpdatePhysics` in [mother_brain.c](../src/samus.c) and simply remove the break in the cases for the liquid check
+
+```diff
+  case HAZARD_TYPE_WATER:
+  case HAZARD_TYPE_STRONG_LAVA:
+  case HAZARD_TYPE_WEAK_LAVA:
+  case HAZARD_TYPE_ACID:
+      // In liquid, check has gravity to see if slowed
+      if (!(pEquipment->suitMiscActivation & SMF_GRAVITY_SUIT))
+          slowed++;
+-     break;
+  
+  default:
+      // Check grabbed by metroid
+      if (gEquipment.grabbedByMetroid)
+          slowed++;
+```
 
 ## Oversights and Design Flaws
 
