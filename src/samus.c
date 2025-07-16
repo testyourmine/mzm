@@ -2653,8 +2653,7 @@ void SamusUpdatePhysics(struct SamusData* pData)
             // In liquid, check has gravity to see if slowed
             if (!(pEquipment->suitMiscActivation & SMF_GRAVITY_SUIT))
                 slowed++;
-            #ifdef BUGFIX
-            #else
+            #ifndef BUGFIX
             break;
             #endif
 
