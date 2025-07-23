@@ -1163,6 +1163,10 @@ static void MechaRidleyRetractingAfterFireballAttack(void)
  */
 static void MechaRidleyDyingInit(void)
 {
+    #ifdef BUGFIX
+    struct SpriteData* pSprite;
+    #endif // BUGFIX
+
     // Set dying standing low
     gSubSpriteData1.pMultiOam = sMechaRidleyMultiSpriteData_DyingStandingLow;
     gSubSpriteData1.animationDurationCounter = 0;
@@ -1179,6 +1183,21 @@ static void MechaRidleyDyingInit(void)
     ParticleSet(gCurrentSprite.yPosition + BLOCK_SIZE, gCurrentSprite.xPosition, PE_MAIN_BOSS_DEATH);
     SoundPlay(SOUND_MECHA_RIDLEY_DEATH_EXPLOSIONS);
     FadeMusic(CONVERT_SECONDS(1.f));
+
+    #ifdef BUGFIX
+    // Destroy any remaining missiles or fireballs
+    for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
+    {
+        if (!(pSprite->status & SPRITE_STATUS_EXISTS))
+            continue;
+
+        if (!(pSprite->properties & SP_SECONDARY_SPRITE))
+            continue;
+
+        if (pSprite->spriteId == SSPRITE_MECHA_RIDLEY_MISSILE || pSprite->spriteId == SSPRITE_MECHA_RIDLEY_FIREBALL)
+            pSprite->pose = 0x44;
+    }
+    #endif // BUGFIX
 }
 
 /**

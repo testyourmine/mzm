@@ -8,6 +8,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
   - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
   - [Samus slow physics aren't properly applied when grabbed by a metroid in a liquid](#samus-slow-physics-arent-properly-applied-when-grabbed-by-a-metroid-in-a-liquid)
+  - [Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics](#mecha-ridleys-missiles-can-be-kept-alive-after-it-dies-which-get-corrupted-graphics)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -56,7 +57,7 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 The code skips the check for the "grabbed by Metroid" flag to apply the slowed physics if Samus is currently in a liquid.
 So when Samus is in a liquid that doesn't slow her, she also won't be slowed even if she's grabbed by a Metroid.
 
-**Fix:** Edit `SamusUpdatePhysics` in [mother_brain.c](../src/samus.c) and simply remove the break in the cases for the liquid check
+**Fix:** Edit `SamusUpdatePhysics` in [mother_brain.c](../src/samus.c) and simply remove the break in the cases for the liquid check.
 
 ```diff
   case HAZARD_TYPE_WATER:
@@ -73,6 +74,28 @@ So when Samus is in a liquid that doesn't slow her, she also won't be slowed eve
       if (gEquipment.grabbedByMetroid)
           slowed++;
 ```
+
+### Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics
+
+If there's a missile on screen when Mecha Ridley dies, you can jump in circles and keep the missile alive until the message box spawns, which will overwrite the missile's graphics. There's another issue where any fireballs or missiles won't animate after Mecha Ridley dies.
+
+**Fix:** Both issues can be avoided by destroying any remaining missiles or fireballs when Mecha Ridley dies. Add the following code to the end of `MechaRidleyDyingInit` in [mecha_ridley.c](../src/sprites_AI/mecha_ridley.c).
+
+```diff
++ // Destroy any remaining missiles or fireballs
++ for (pSprite = gSpriteData; pSprite < gSpriteData + MAX_AMOUNT_OF_SPRITES; pSprite++)
++ {
++     if (!(pSprite->status & SPRITE_STATUS_EXISTS))
++         continue;
++ 
++     if (!(pSprite->properties & SP_SECONDARY_SPRITE))
++         continue;
++ 
++     if (pSprite->spriteId == SSPRITE_MECHA_RIDLEY_MISSILE || pSprite->spriteId == SSPRITE_MECHA_RIDLEY_FIREBALL)
++         pSprite->pose = 0x44;
++ }
+```
+
 
 ## Oversights and Design Flaws
 
@@ -171,6 +194,3 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 - "Stop enemy" clipdata prevents bomb jumping
 
 ### Oversights and Design Flaws
-
-- Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics from the message box
-  - Potential fix: kill any missiles after mecha dies
