@@ -66,7 +66,7 @@ void PowerGrip(void)
                 gEquipment.suitMisc |= SMF_POWER_GRIP;
                 EventFunction(EVENT_ACTION_SETTING, EVENT_POWER_GRIP_OBTAINED);
 
-                SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_POWER_GRIP, 6,
+                SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_POWER_GRIP, 6,
                     gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
             }
             break;

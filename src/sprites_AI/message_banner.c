@@ -1,9 +1,9 @@
-#include "sprites_AI/item_banner.h"
+#include "sprites_AI/message_banner.h"
 #include "gba.h"
 #include "sprites_AI/ruins_test.h"
 #include "macros.h"
 
-#include "data/sprites/item_banner.h"
+#include "data/sprites/message_banner.h"
 
 #include "constants/audio.h"
 #include "constants/demo.h"
@@ -26,15 +26,15 @@
 #define SAVE_YES_NO_CURSOR_LEFT_POSITION ((u16)(SCREEN_SIZE_X * .225f))
 #define SAVE_YES_NO_CURSOR_RIGHT_POSITION ((u16)(SCREEN_SIZE_X * .625f))
 
-#define ITEM_BANNER_TIMER yPositionSpawn
-#define ITEM_BANNER_PROCESSING work0
-#define ITEM_BANNER_NEW_ITEM work2
+#define MESSAGE_BANNER_TIMER yPositionSpawn
+#define MESSAGE_BANNER_PROCESSING work0
+#define MESSAGE_BANNER_NEW_ITEM work2
 
 /**
- * @brief 1b6b8 | 110 | Initializes an item banner sprite
+ * @brief 1b6b8 | 110 | Initializes a message banner sprite
  * 
  */
-static void ItemBannerInit(void)
+static void MessageBannerInit(void)
 {
     u8 message;
     u8 gfxSlot;
@@ -65,13 +65,13 @@ static void ItemBannerInit(void)
     gCurrentSprite.hitboxLeft = -PIXEL_SIZE;
     gCurrentSprite.hitboxRight = PIXEL_SIZE;
 
-    gCurrentSprite.pOam = sItemBannerOam_TwoLinesSpawn;
+    gCurrentSprite.pOam = sMessageBannerOam_TwoLinesSpawn;
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
-    gCurrentSprite.ITEM_BANNER_TIMER = 9 * DELTA_TIME;
-    gCurrentSprite.ITEM_BANNER_PROCESSING = TRUE;
-    gCurrentSprite.ITEM_BANNER_NEW_ITEM = FALSE;
+    gCurrentSprite.MESSAGE_BANNER_TIMER = 9 * DELTA_TIME;
+    gCurrentSprite.MESSAGE_BANNER_PROCESSING = TRUE;
+    gCurrentSprite.MESSAGE_BANNER_NEW_ITEM = FALSE;
 
     // Flag if the message is the save prompt
     if (message == MESSAGE_SAVE_PROMPT)
@@ -81,10 +81,10 @@ static void ItemBannerInit(void)
 
     gfxSlot = 128; // Default
 
-    // Loop through sprites to try and find if an item banner is in the spriteset
+    // Loop through sprites to try and find if a message banner is in the spriteset
     for (i = 0; i < MAX_AMOUNT_OF_SPRITE_TYPES; i++)
     {
-        if (gSpritesetSpritesID[i] == PSPRITE_ITEM_BANNER)
+        if (gSpritesetSpritesID[i] == PSPRITE_MESSAGE_BANNER)
         {
             // Found area banner, load the gfx slot
             gfxSlot = gSpritesetGfxSlots[i];
@@ -95,12 +95,12 @@ static void ItemBannerInit(void)
     if (gfxSlot < SPRITE_GFX_SLOT_MAX)
     {
         // Found in the spriteset, skip gfx init
-        gCurrentSprite.pose = ITEM_BANNER_POSE_POP_UP;
+        gCurrentSprite.pose = MESSAGE_BANNER_POSE_POP_UP;
         gCurrentSprite.spritesetGfxSlot = gfxSlot;
     }
     else
     {
-        gCurrentSprite.pose = ITEM_BANNER_POSE_GFX_INIT;
+        gCurrentSprite.pose = MESSAGE_BANNER_POSE_GFX_INIT;
     }
 
     // Middle of the screen
@@ -111,23 +111,23 @@ static void ItemBannerInit(void)
 }
 
 /**
- * @brief 1b7c8 | 5c | Initializes the Gfx for an item banner
+ * @brief 1b7c8 | 5c | Initializes the Gfx for a message banner
  * 
  */
-static void ItemBannerGfxInit(void)
+static void MessageBannerGfxInit(void)
 {
     gPreventMovementTimer = SAMUS_ITEM_PMT;
 
-    APPLY_DELTA_TIME_DEC(gCurrentSprite.ITEM_BANNER_TIMER);
-    if (gCurrentSprite.ITEM_BANNER_TIMER == DELTA_TIME * 7)
-        SpriteLoadGfx(PSPRITE_ITEM_BANNER, gCurrentSprite.spritesetGfxSlot); // Load Gfx
-    else if (gCurrentSprite.ITEM_BANNER_TIMER == DELTA_TIME * 8)
-        SpriteLoadPal(PSPRITE_ITEM_BANNER, gCurrentSprite.spritesetGfxSlot, 1); // Load Pal
+    APPLY_DELTA_TIME_DEC(gCurrentSprite.MESSAGE_BANNER_TIMER);
+    if (gCurrentSprite.MESSAGE_BANNER_TIMER == DELTA_TIME * 7)
+        SpriteLoadGfx(PSPRITE_MESSAGE_BANNER, gCurrentSprite.spritesetGfxSlot); // Load Gfx
+    else if (gCurrentSprite.MESSAGE_BANNER_TIMER == DELTA_TIME * 8)
+        SpriteLoadPal(PSPRITE_MESSAGE_BANNER, gCurrentSprite.spritesetGfxSlot, 1); // Load Pal
     
-    if (gCurrentSprite.ITEM_BANNER_TIMER == 0)
+    if (gCurrentSprite.MESSAGE_BANNER_TIMER == 0)
     {
         // Loading done, set pop up behavior
-        gCurrentSprite.pose = ITEM_BANNER_POSE_POP_UP;
+        gCurrentSprite.pose = MESSAGE_BANNER_POSE_POP_UP;
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
     }
@@ -137,7 +137,7 @@ static void ItemBannerGfxInit(void)
  * @brief 1b824 | 184 | Handles the pop up animation and the custom behavior based on the current message
  * 
  */
-static void ItemBannerPopUp(void)
+static void MessageBannerPopUp(void)
 {
     u16 music;
     u8 msg;
@@ -147,19 +147,19 @@ static void ItemBannerPopUp(void)
     gPreventMovementTimer = SAMUS_ITEM_PMT;
 
     msg = gCurrentSprite.roomSlot;
-    if (gCurrentSprite.ITEM_BANNER_PROCESSING != 0)
+    if (gCurrentSprite.MESSAGE_BANNER_PROCESSING != 0)
     {
         APPLY_DELTA_TIME_DEC(gCurrentSprite.animationDurationCounter);
-        if (TextProcessItemBanner()) // Process text
+        if (TextProcessMessageBanner()) // Process text
         {
             // If done processing
-            gCurrentSprite.ITEM_BANNER_PROCESSING = FALSE;
+            gCurrentSprite.MESSAGE_BANNER_PROCESSING = FALSE;
             gCurrentSprite.status &= ~SPRITE_STATUS_NOT_DRAWN;
 
             if (MESSAGE_IS_ITEM(msg))
             {
                 // New item
-                gCurrentSprite.ITEM_BANNER_NEW_ITEM = TRUE;
+                gCurrentSprite.MESSAGE_BANNER_NEW_ITEM = TRUE;
                 BackupTrackData2SoundChannels();
 
                 // Play item jingle
@@ -171,7 +171,7 @@ static void ItemBannerPopUp(void)
             else if (MESSAGE_IS_FIRST_TANK(msg))
             {
                 // New tank
-                gCurrentSprite.ITEM_BANNER_NEW_ITEM = TRUE;
+                gCurrentSprite.MESSAGE_BANNER_NEW_ITEM = TRUE;
                 BackupTrackData2SoundChannels();
                 InsertMusicAndQueueCurrent(MUSIC_GETTING_ITEM_JINGLE, FALSE);
             }
@@ -191,10 +191,10 @@ static void ItemBannerPopUp(void)
             }
             
             // Check is one line message (new item/ability, save complete, map text)
-            if (gCurrentSprite.ITEM_BANNER_NEW_ITEM || msg == MESSAGE_SAVE_COMPLETE ||
+            if (gCurrentSprite.MESSAGE_BANNER_NEW_ITEM || msg == MESSAGE_SAVE_COMPLETE ||
                 (MESSAGE_IS_MAP(msg) || msg == MESSAGE_FULLY_POWERED_SUIT))
             {
-                gCurrentSprite.pOam = sItemBannerOam_OneLineSpawn;
+                gCurrentSprite.pOam = sMessageBannerOam_OneLineSpawn;
                 gCurrentSprite.animationDurationCounter = 0;
                 gCurrentSprite.currentAnimationFrame = 0;
             }
@@ -209,22 +209,22 @@ static void ItemBannerPopUp(void)
         // Spawning animation ended
         gCurrentSprite.animationDurationCounter = 0;
         gCurrentSprite.currentAnimationFrame = 0;
-        gCurrentSprite.pose = ITEM_BANNER_POSE_STATIC;
+        gCurrentSprite.pose = MESSAGE_BANNER_POSE_STATIC;
 
         // Set static OAM and timer for how long the banner stays
-        if (gCurrentSprite.pOam == sItemBannerOam_OneLineSpawn)
+        if (gCurrentSprite.pOam == sMessageBannerOam_OneLineSpawn)
         {
-            gCurrentSprite.pOam = sItemBannerOam_OneLineStatic;
+            gCurrentSprite.pOam = sMessageBannerOam_OneLineStatic;
 
             if (msg == MESSAGE_FULLY_POWERED_SUIT)
-                gCurrentSprite.ITEM_BANNER_TIMER = CONVERT_SECONDS(5) + TWO_THIRD_SECOND; // Long because jingle is long
+                gCurrentSprite.MESSAGE_BANNER_TIMER = CONVERT_SECONDS(5) + TWO_THIRD_SECOND; // Long because jingle is long
             else
-                gCurrentSprite.ITEM_BANNER_TIMER = CONVERT_SECONDS(1) + TWO_THIRD_SECOND;
+                gCurrentSprite.MESSAGE_BANNER_TIMER = CONVERT_SECONDS(1) + TWO_THIRD_SECOND;
         }
         else
         {
-            gCurrentSprite.pOam = sItemBannerOam_TwoLinesStatic;
-            gCurrentSprite.ITEM_BANNER_TIMER = CONVERT_SECONDS(1) + TWO_THIRD_SECOND;
+            gCurrentSprite.pOam = sMessageBannerOam_TwoLinesStatic;
+            gCurrentSprite.MESSAGE_BANNER_TIMER = CONVERT_SECONDS(1) + TWO_THIRD_SECOND;
 
             if (msg == MESSAGE_SAVE_PROMPT)
             {
@@ -241,10 +241,10 @@ static void ItemBannerPopUp(void)
 }
 
 /**
- * @brief 1b9a8 | 68 | Handles the item banner being static
+ * @brief 1b9a8 | 68 | Handles the message banner being static
  * 
  */
-static void ItemBannerStatic(void)
+static void MessageBannerStatic(void)
 {
     u8 message;
 
@@ -255,42 +255,42 @@ static void ItemBannerStatic(void)
         gPreventMovementTimer = SAMUS_ITEM_PMT;
 
     // Timer
-    if (gCurrentSprite.ITEM_BANNER_TIMER != 0)
+    if (gCurrentSprite.MESSAGE_BANNER_TIMER != 0)
     {
-        APPLY_DELTA_TIME_DEC(gCurrentSprite.ITEM_BANNER_TIMER);
+        APPLY_DELTA_TIME_DEC(gCurrentSprite.MESSAGE_BANNER_TIMER);
         return;
     }
 
     // Check if should remove (input or demo active, ignore for save prompt)
     if (message != MESSAGE_SAVE_PROMPT && (gButtonInput & (KEY_A | KEY_B | KEY_ALL_DIRECTIONS) || gDemoState != DEMO_STATE_NONE))
-        gCurrentSprite.pose = ITEM_BANNER_POSE_REMOVAL_INIT;
+        gCurrentSprite.pose = MESSAGE_BANNER_POSE_REMOVAL_INIT;
 }
 
 /**
- * @brief 1ba10 | 50 | Initializes the item banner to be removing
+ * @brief 1ba10 | 50 | Initializes the message banner to be removing
  * 
  */
-static void ItemBannerRemovalInit(void)
+static void MessageBannerRemovalInit(void)
 {
     if (gCollectingTank)
         BgClipFinishCollectingTank();
 
-    if (gCurrentSprite.pOam == sItemBannerOam_OneLineStatic)
-        gCurrentSprite.pOam = sItemBannerOam_OneLineRemoving;
+    if (gCurrentSprite.pOam == sMessageBannerOam_OneLineStatic)
+        gCurrentSprite.pOam = sMessageBannerOam_OneLineRemoving;
     else
-       gCurrentSprite.pOam = sItemBannerOam_TwoLinesRemoving;
+       gCurrentSprite.pOam = sMessageBannerOam_TwoLinesRemoving;
 
     gCurrentSprite.animationDurationCounter = 0;
     gCurrentSprite.currentAnimationFrame = 0;
 
-    gCurrentSprite.pose = ITEM_BANNER_POSE_REMOVAL_ANIMATION;
+    gCurrentSprite.pose = MESSAGE_BANNER_POSE_REMOVAL_ANIMATION;
 }
 
 /**
  * @brief 1ba60 | b4 | Handles behavior during the removal animation
  * 
  */
-static void ItemBannerRemovalAnimation(void)
+static void MessageBannerRemovalAnimation(void)
 {
     u8 msg;
 
@@ -323,43 +323,43 @@ static void ItemBannerRemovalAnimation(void)
 
         gPreventMovementTimer = 0;
 
-        if (gCurrentSprite.ITEM_BANNER_NEW_ITEM)
+        if (gCurrentSprite.MESSAGE_BANNER_NEW_ITEM)
             gPauseScreenFlag = PAUSE_SCREEN_ITEM_ACQUISITION;
     }
 }
 
 /**
- * @brief 1bb14 | e8 | Item banner AI
+ * @brief 1bb14 | e8 | Message banner AI
  * 
  */
-void ItemBanner(void)
+void MessageBanner(void)
 {
     gCurrentSprite.ignoreSamusCollisionTimer = DELTA_TIME;
 
     switch (gCurrentSprite.pose)
     {
         case SPRITE_POSE_UNINITIALIZED:
-            ItemBannerInit();
+            MessageBannerInit();
             break;
         
-        case ITEM_BANNER_POSE_GFX_INIT:
-            ItemBannerGfxInit();
+        case MESSAGE_BANNER_POSE_GFX_INIT:
+            MessageBannerGfxInit();
             break;
 
-        case ITEM_BANNER_POSE_POP_UP:
-            ItemBannerPopUp();
+        case MESSAGE_BANNER_POSE_POP_UP:
+            MessageBannerPopUp();
             break;
 
-        case ITEM_BANNER_POSE_STATIC:
-            ItemBannerStatic();
+        case MESSAGE_BANNER_POSE_STATIC:
+            MessageBannerStatic();
             break;
 
-        case ITEM_BANNER_POSE_REMOVAL_INIT:
-            ItemBannerRemovalInit();
+        case MESSAGE_BANNER_POSE_REMOVAL_INIT:
+            MessageBannerRemovalInit();
             break;
 
-        case ITEM_BANNER_POSE_REMOVAL_ANIMATION:
-            ItemBannerRemovalAnimation();
+        case MESSAGE_BANNER_POSE_REMOVAL_ANIMATION:
+            MessageBannerRemovalAnimation();
             break;
     }
 }
@@ -429,7 +429,7 @@ void SaveYesNoCursor(void)
             }
             else if (gChangedInput & KEY_A)
             {
-                gSpriteData[ramSlot].pose = ITEM_BANNER_POSE_REMOVAL_INIT;
+                gSpriteData[ramSlot].pose = MESSAGE_BANNER_POSE_REMOVAL_INIT;
                 if (gCurrentSprite.xPosition == SAVE_YES_NO_CURSOR_LEFT_POSITION)
                 {
                     // On left, "yes" option selected

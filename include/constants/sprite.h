@@ -52,7 +52,7 @@ MAKE_ENUM(u8, PrimarySprite) {
     PSPRITE_UNUSED14,
     PSPRITE_UNUSED15,
     PSPRITE_UNUSED16,
-    PSPRITE_ITEM_BANNER,
+    PSPRITE_MESSAGE_BANNER,
     PSPRITE_ZOOMER_YELLOW,
     PSPRITE_ZOOMER_RED,
     PSPRITE_ZEELA,
@@ -419,7 +419,7 @@ MAKE_ENUM(u16, SpriteWeakness) {
 
 // The maximum number of gfx slots for sprites
 #define SPRITE_GFX_SLOT_MAX 8
-// A special gfx slot, used to spawn generic sprites such as the item banner
+// A special gfx slot, used to spawn generic sprites such as the message banner
 #define SPRITE_GFX_SLOT_SPECIAL 6
 
 #define SPRITE_FREEZE_TIMER (CONVERT_SECONDS(4.f))

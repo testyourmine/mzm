@@ -252,7 +252,7 @@ const u16 sPrimarySpriteStats[PSPRITE_COUNT][9] = {
         0,
         0
     },
-    [PSPRITE_ITEM_BANNER] = {
+    [PSPRITE_MESSAGE_BANNER] = {
         0,
         0,
         WEAKNESS_NONE,

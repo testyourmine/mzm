@@ -869,11 +869,11 @@ void TextStartMessage(u8 textID, u8 gfxSlot)
 }
 
 /**
- * @brief 6f28c | 178 | Processes an item banner text
+ * @brief 6f28c | 178 | Processes a message banner text
  * 
  * @return u8 Current line
  */
-u8 TextProcessItemBanner(void)
+u8 TextProcessMessageBanner(void)
 {
     s32 i;
     u32 flag;

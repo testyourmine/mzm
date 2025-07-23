@@ -34143,7 +34143,7 @@
     "size": 2
   },
   {
-    "path": "sprites/ItemBanner.gfx.lz",
+    "path": "sprites/MessageBanner.gfx.lz",
     "count": 139,
     "addr": {
       "us": 2929412,
@@ -34154,7 +34154,7 @@
     "size": 4
   },
   {
-    "path": "sprites/ItemBanner.pal",
+    "path": "sprites/MessageBanner.pal",
     "count": 32,
     "addr": {
       "us": 2929968,

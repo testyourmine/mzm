@@ -560,11 +560,11 @@ void BgClipCheckTouchingTransitionOrTank(void)
                     }
                 }
 
-                // Spawn the item banner
+                // Spawn the message banner
                 i = sTankBehaviors[BEHAVIOR_TO_TANK(behaviors[j])].messageID + isFirstTank;
                 if (i != MESSAGE_NONE)
                 {
-                    SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, i, SPRITE_GFX_SLOT_SPECIAL,
+                    SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, i, SPRITE_GFX_SLOT_SPECIAL,
                         gSamusData.yPosition, gSamusData.xPosition, 0);
                 }
             }

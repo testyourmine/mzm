@@ -1044,13 +1044,13 @@ static void ChozoStatuePartArmRefill(void)
                 if (gEquipment.maxMissiles == 0 && gEquipment.maxSuperMissiles == 0 && gEquipment.maxPowerBombs == 0)
                 {
                     // Only energy
-                    SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_ENERGY_TANK_RECHARGE_COMPLETE, SPRITE_GFX_SLOT_SPECIAL,
+                    SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_ENERGY_TANK_RECHARGE_COMPLETE, SPRITE_GFX_SLOT_SPECIAL,
                         gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
                 }
                 else
                 {
                     // Energy and weapons
-                    SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED, SPRITE_GFX_SLOT_SPECIAL,
+                    SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED, SPRITE_GFX_SLOT_SPECIAL,
                         gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
                 }
             }

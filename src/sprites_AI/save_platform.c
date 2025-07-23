@@ -1,5 +1,5 @@
 #include "sprites_AI/save_platform.h"
-#include "sprites_AI/item_banner.h"
+#include "sprites_AI/message_banner.h"
 
 #include "data/sprites/save_platform.h"
 
@@ -252,14 +252,14 @@ static void SavePlatformSamusDetectionOut(void)
  */
 static void SavePlatformSavePrompt(void)
 {
-    u8 itemBannerSlot;
+    u8 msgBannerSlot;
 
     if (gCurrentSprite.work0 != 0)
     {
         APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
         if (gCurrentSprite.work0 == 0)
         {
-            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_PROMPT,
+            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_SAVE_PROMPT,
                 SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         }
 
@@ -267,11 +267,11 @@ static void SavePlatformSavePrompt(void)
     }
     else
 
-    // Item banner
-    itemBannerSlot = gCurrentSprite.work1;
-    if (gSpriteData[itemBannerSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    // Message banner
+    msgBannerSlot = gCurrentSprite.work1;
+    if (gSpriteData[msgBannerSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
-        if (gSpriteData[itemBannerSlot].work1 == TRUE)
+        if (gSpriteData[msgBannerSlot].work1 == TRUE)
         {
             gCurrentSprite.pOam = sSavePlatformOam_Saving;
             gCurrentSprite.animationDurationCounter = 0;
@@ -340,7 +340,7 @@ static void SavePlatformSpawnSaveDoneMessage(void)
     if (gCurrentSprite.work0 == 0)
     {
         gCurrentSprite.pose = SAVE_PLATFORM_POSE_WAIT_FOR_MESSAGE_OUT;
-        gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_COMPLETE, 
+        gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_SAVE_COMPLETE, 
             SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
     }
 }
@@ -354,7 +354,7 @@ static void SavePlatformCheckMessageBannerOut(void)
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.work1;
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         gCurrentSprite.pose = SAVE_PLATFORM_POSE_DELAY_BEFORE_RELEASING;
         gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);

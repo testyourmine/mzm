@@ -71,7 +71,7 @@ static void MorphBallGet(void)
         // Give morph ball
         gEquipment.suitMisc |= SMF_MORPH_BALL;
 
-        SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_MORPH_BALL, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+        SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_MORPH_BALL, SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
     }
 }
 

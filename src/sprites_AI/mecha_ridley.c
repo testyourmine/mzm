@@ -1458,7 +1458,7 @@ static void MechaRidleySecondEyeGlow(void)
             EventFunction(EVENT_ACTION_SETTING, EVENT_MECHA_RIDLEY_KILLED);
             
             // Start escape
-            SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_CHOZODIA_ESCAPE, 0, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+            SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_CHOZODIA_ESCAPE, 0, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
 
             // Save IGT
             gInGameTimerAtBosses[3] = gInGameTimer;

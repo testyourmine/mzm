@@ -446,7 +446,7 @@ SECTIONS {
         src/sprites_AI/zoomer.o(.text);
         src/sprites_AI/zeela.o(.text);
         src/sprites_AI/kraid.o(.text);
-        src/sprites_AI/item_banner.o(.text);
+        src/sprites_AI/message_banner.o(.text);
         src/sprites_AI/ripper.o(.text);
         src/sprites_AI/ripper2.o(.text);
         src/sprites_AI/zeb.o(.text);
@@ -649,7 +649,7 @@ SECTIONS {
         src/data/sprites/zoomer.o(.rodata);
         src/data/sprites/zeela.o(.rodata);
         src/data/sprites/kraid.o(.rodata);
-        src/data/sprites/item_banner.o(.rodata);
+        src/data/sprites/message_banner.o(.rodata);
         src/data/sprites/ripper.o(.rodata);
         src/data/sprites/ripper2.o(.rodata);
         src/data/sprites/zeb.o(.rodata);

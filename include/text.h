@@ -14,7 +14,7 @@ void TextDrawLocationTextCharacters(u8 param_1, const u16** ppText);
 void TextDrawLocation(u8 locationText, u8 gfxSlot);
 u8 unk_6f0a8(u8 textID, u8 gfxSlot, u8 param_3);
 void TextStartMessage(u8 textID, u8 gfxSlot);
-u8 TextProcessItemBanner(void);
+u8 TextProcessMessageBanner(void);
 void TextStartStory(StoryTextId textId);
 u8 TextProcessStory(void);
 void TextStartFileScreen(u8 textID);

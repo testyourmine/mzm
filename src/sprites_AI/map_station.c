@@ -1,7 +1,7 @@
 #include "sprites_AI/map_station.h"
 #include "gba.h"
 #include "macros.h"
-#include "sprites_AI/item_banner.h"
+#include "sprites_AI/message_banner.h"
 
 #include "data/sprites/map_station.h"
 
@@ -213,8 +213,8 @@ static void MapStationSpawnMessage(void)
             text = MESSAGE_ENEMY_LOCATION_ABNORMAL;
     }
 
-    // Spawn item banner
-    gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, text, SPRITE_GFX_SLOT_SPECIAL,
+    // Spawn message banner
+    gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, text, SPRITE_GFX_SLOT_SPECIAL,
         gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
 
     gCurrentSprite.hitboxBottom = -BLOCK_SIZE;
@@ -235,7 +235,7 @@ static void MapStationWaitForMessage(void)
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.work1;
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         // Message was removed, continue animation
         gCurrentSprite.pose = MAP_STATION_POSE_DELAY_BEFORE_RETRACTING;

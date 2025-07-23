@@ -16,11 +16,11 @@
 #define CHOZO_BALL_FLICKER_TIMER work0
 
 /**
- * 162b0 | 94 | Spawns an item banner depending on the chozo statue sprite ID
+ * 162b0 | 94 | Spawns an message banner depending on the chozo statue sprite ID
  * 
  * @param spriteId Chozo statue sprite ID
  */
-static void ChozoBallSpawnItemBanner(u8 spriteId)
+static void ChozoBallSpawnMessageBanner(u8 spriteId)
 {
     u8 text;
 
@@ -71,7 +71,7 @@ static void ChozoBallSpawnItemBanner(u8 spriteId)
             break;
     }
 
-    SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, text, SPRITE_GFX_SLOT_SPECIAL,
+    SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, text, SPRITE_GFX_SLOT_SPECIAL,
         gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
 }
 
@@ -263,7 +263,7 @@ static void ChozoBallCheckRevealingAnimEnded(void)
 }
 
 /**
- * 16594 | 1c | Registers the item grabbed and calls ChozoBallSpawnItemBanner
+ * 16594 | 1c | Registers the item grabbed and calls ChozoBallSpawnMessageBanner
  * 
  */
 static void ChozoBallRegisterItem(void)
@@ -281,7 +281,7 @@ static void ChozoBallRegisterItem(void)
 
         spriteId = gSpriteData[gCurrentSprite.primarySpriteRamSlot].spriteId;
         ChozoStatueRegisterItem(spriteId);
-        ChozoBallSpawnItemBanner(spriteId);
+        ChozoBallSpawnMessageBanner(spriteId);
     }
 }
 

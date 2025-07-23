@@ -138,7 +138,7 @@ static void ChargeBeamIdle(void)
         EventFunction(EVENT_ACTION_SETTING, EVENT_CHARGE_BEAM_OBTAINED);
 
         // Spawn banner
-        SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_CHARGE_BEAM, SPRITE_GFX_SLOT_SPECIAL,
+        SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_CHARGE_BEAM, SPRITE_GFX_SLOT_SPECIAL,
             gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
     }
 }

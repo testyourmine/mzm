@@ -19,7 +19,7 @@
 #include "data/sprites/imago_cocoon.h"
 #include "data/sprites/map_station.h"
 #include "data/sprites/metroid.h"
-#include "data/sprites/item_banner.h"
+#include "data/sprites/message_banner.h"
 #include "data/sprites/zoomer.h"
 #include "data/sprites/zeela.h"
 #include "data/sprites/ripper.h"
@@ -121,7 +121,7 @@ static Func_T sPrimarySpritesAIPointers[PSPRITE_COUNT] = {
     [PSPRITE_UNUSED14] = UnusedSprites,
     [PSPRITE_UNUSED15] = UnusedSprites,
     [PSPRITE_UNUSED16] = UnusedSprites,
-    [PSPRITE_ITEM_BANNER] = ItemBanner,
+    [PSPRITE_MESSAGE_BANNER] = MessageBanner,
     [PSPRITE_ZOOMER_YELLOW] = Zoomer,
     [PSPRITE_ZOOMER_RED] = Zoomer,
     [PSPRITE_ZEELA] = Zeela,
@@ -314,7 +314,7 @@ static Func_T sPrimarySpritesAIPointers[PSPRITE_COUNT] = {
 
 static const u32* sSpritesGraphicsPointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_COUNT)] = {
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_UNUSED16)] = sUnusedSpritesGfx,
-    [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ITEM_BANNER)] = sItemBannerGfx,
+    [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_MESSAGE_BANNER)] = sMessageBannerGfx,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZOOMER_YELLOW)] = sZoomerGfx,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZOOMER_RED)] = sZoomerGfx,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZEELA)] = sZeelaGfx,
@@ -507,7 +507,7 @@ static const u32* sSpritesGraphicsPointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_C
 
 static const u16* sSpritesPalettePointers[PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_COUNT)] = {
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_UNUSED16)] = sUnusedSpritesPal,
-    [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ITEM_BANNER)] = sItemBannerPal,
+    [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_MESSAGE_BANNER)] = sMessageBannerPal,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZOOMER_YELLOW)] = sZoomerPal,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZOOMER_RED)] = sZoomerPal,
     [PSPRITE_OFFSET_FOR_GRAPHICS(PSPRITE_ZEELA)] = sZeelaPal,

@@ -1,6 +1,6 @@
 #include "sprites_AI/gunship.h"
 #include "gba.h"
-#include "sprites_AI/item_banner.h"
+#include "sprites_AI/message_banner.h"
 
 #include "data/sprites/gunship.h"
 
@@ -451,11 +451,11 @@ static void GunshipRefill(void)
     }
     else
     {
-        // Spawn item banner
+        // Spawn message banner
         gCurrentSprite.pose = GUNSHIP_POSE_AFTER_REFILL;
         gCurrentSprite.work0 = CONVERT_SECONDS(.5f);
 
-        gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED,
+        gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED,
             SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         SoundFade(SOUND_GUNSHIP_REFILL, CONVERT_SECONDS(.25f));
     }
@@ -470,7 +470,7 @@ static void GunshipAfterRefill(void)
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.rotation;
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         if (gCurrentSprite.work0 != 0)
         {
@@ -478,7 +478,7 @@ static void GunshipAfterRefill(void)
             if (gCurrentSprite.work0 == 0)
             {
                 // Spawn save prompt
-                gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_PROMPT,
+                gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_SAVE_PROMPT,
                     SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
             }
         }
@@ -513,7 +513,7 @@ static void GunshipSaving(void)
     if (gCurrentSprite.work0 == 0)
     {
         gCurrentSprite.pose = GUNSHIP_POSE_AFTER_SAVE;
-        gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_COMPLETE,
+        gCurrentSprite.rotation = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_SAVE_COMPLETE,
             SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
     }
 }
@@ -527,7 +527,7 @@ static void GunshipAfterSave(void)
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.rotation;
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         // Eject samus
         gCurrentSprite.pose = GUNSHIP_POSE_SAMUS_LEAVE;

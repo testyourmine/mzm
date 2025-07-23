@@ -473,7 +473,7 @@ static void MotherBrainStartEscape(void)
         // Kill sprite
         gCurrentSprite.status = 0;
         // Spawn banner and effects
-        SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_ZEBES_ESCAPE, 0, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
+        SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_ZEBES_ESCAPE, 0, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         SpriteSpawnPrimary(PSPRITE_EXPLOSION_ZEBES_ESCAPE, 0, 0, gCurrentSprite.yPosition + BLOCK_SIZE * 4, gCurrentSprite.xPosition, 0);
         PlayMusic(MUSIC_ESCAPE, 0x40);
         SoundPlay(SOUND_ESCAPE_BEEP);

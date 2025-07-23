@@ -2200,7 +2200,7 @@ void RuinsTestSamusReflectionEnd(void)
                 gCurrentSprite.status = 0;
                 gSpriteData[gCurrentSprite.primarySpriteRamSlot].status = 0;
 
-                SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_FULLY_POWERED_SUIT, 6,
+                SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_FULLY_POWERED_SUIT, 6,
                     gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         }
         

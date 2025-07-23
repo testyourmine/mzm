@@ -1,5 +1,5 @@
 #include "sprites_AI/save_platform_chozodia.h"
-#include "sprites_AI/item_banner.h"
+#include "sprites_AI/message_banner.h"
 #include "gba.h"
 
 #include "data/sprites/save_platform_chozodia.h"
@@ -328,7 +328,7 @@ static void SavePlatformChozodiaRefill(void)
         else
         {
             gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_AFTER_REFILL;
-            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_ENERGY_TANK_RECHARGE_COMPLETE,
+            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_ENERGY_TANK_RECHARGE_COMPLETE,
                 SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         }
     }
@@ -395,7 +395,7 @@ static void SavePlatformChozodiaRefill(void)
         else
         {
             gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_AFTER_REFILL;
-            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED,
+            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_WEAPONS_AND_ENERGY_RESTORED,
                 SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         }
     }
@@ -410,7 +410,7 @@ static void SavePlatformChozodiaAfterRefill(void)
     u8 ramSlot;
 
     ramSlot = gCurrentSprite.work1;
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         gCurrentSprite.work0 = ONE_THIRD_SECOND;
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_SAVE_PROMPT;
@@ -430,7 +430,7 @@ static void SavePlatformChozodiaSavePrompt(void)
         APPLY_DELTA_TIME_DEC(gCurrentSprite.work0);
         if (gCurrentSprite.work0 == 0)
         {
-            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_PROMPT,
+            gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_SAVE_PROMPT,
                 SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0);
         }
 
@@ -438,7 +438,7 @@ static void SavePlatformChozodiaSavePrompt(void)
     }
 
     ramSlot = gCurrentSprite.work1;
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         if (gSpriteData[ramSlot].work1 == TRUE)
         {
@@ -511,7 +511,7 @@ static void SavePlatformChozodiaSpawnSaveDoneMessage(void)
     if (gCurrentSprite.work0 == 0)
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_WAIT_FOR_MESSAGE_OUT;
-        gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_ITEM_BANNER, MESSAGE_SAVE_COMPLETE,
+        gCurrentSprite.work1 = SpriteSpawnPrimary(PSPRITE_MESSAGE_BANNER, MESSAGE_SAVE_COMPLETE,
             SPRITE_GFX_SLOT_SPECIAL, gCurrentSprite.yPosition, gCurrentSprite.xPosition, 0x0);
     }
 }
@@ -526,7 +526,7 @@ static void SavePlatformChozodiaCheckMessageBannerOut(void)
 
     ramSlot = gCurrentSprite.work1;
 
-    if (gSpriteData[ramSlot].pose == ITEM_BANNER_POSE_REMOVAL_ANIMATION)
+    if (gSpriteData[ramSlot].pose == MESSAGE_BANNER_POSE_REMOVAL_ANIMATION)
     {
         gCurrentSprite.pose = SAVE_PLATFORM_CHOZODIA_POSE_DELAY_BEFORE_RELEASING;
         gCurrentSprite.work0 = CONVERT_SECONDS(1.f / 6);
