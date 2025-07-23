@@ -17,6 +17,7 @@
 #include "structs/game_state.h"
 #include "structs/sprite.h"
 #include "structs/samus.h"
+#include "structs/power_bomb_explosion.h"
 
 // Save yes no cursor
 
@@ -262,8 +263,18 @@ static void MessageBannerStatic(void)
     }
 
     // Check if should remove (input or demo active, ignore for save prompt)
-    if (message != MESSAGE_SAVE_PROMPT && (gButtonInput & (KEY_A | KEY_B | KEY_ALL_DIRECTIONS) || gDemoState != DEMO_STATE_NONE))
-        gCurrentSprite.pose = MESSAGE_BANNER_POSE_REMOVAL_INIT;
+    if (message != MESSAGE_SAVE_PROMPT &&
+        (gButtonInput & (KEY_A | KEY_B | KEY_ALL_DIRECTIONS) || gDemoState != DEMO_STATE_NONE))
+    {
+        #ifdef BUGFIX
+        // If the banner is for a new item, only remove the banner if no power bomb is active
+        if (!gCurrentSprite.MESSAGE_BANNER_NEW_ITEM ||
+            (!gCurrentPowerBomb.animationState && !gCurrentPowerBomb.powerBombPlaced))
+        #endif // BUGFIX
+        {
+            gCurrentSprite.pose = MESSAGE_BANNER_POSE_REMOVAL_INIT;
+        }
+    }
 }
 
 /**

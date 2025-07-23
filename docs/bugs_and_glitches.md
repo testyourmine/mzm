@@ -9,6 +9,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
   - [Samus slow physics aren't properly applied when grabbed by a metroid in a liquid](#samus-slow-physics-arent-properly-applied-when-grabbed-by-a-metroid-in-a-liquid)
   - [Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics](#mecha-ridleys-missiles-can-be-kept-alive-after-it-dies-which-get-corrupted-graphics)
+  - [Collecting an item while a power bomb is active allows Samus to move early](#collecting-an-item-while-a-power-bomb-is-active-allows-samus-to-move-early)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -94,6 +95,26 @@ If there's a missile on screen when Mecha Ridley dies, you can jump in circles a
 +     if (pSprite->spriteId == SSPRITE_MECHA_RIDLEY_MISSILE || pSprite->spriteId == SSPRITE_MECHA_RIDLEY_FIREBALL)
 +         pSprite->pose = 0x44;
 + }
+```
+
+### Collecting an item while a power bomb is active allows Samus to move early
+
+When the message banner for a new item closes, it sets `gPreventMovementTimer` to 0 and tries to open the status screen. However, if a power bomb is active, the status screen won't open because the game cannot be paused while a power bomb is active. This allows Samus to move for a short amount of time before the status screen opens.
+
+**Fix:** Edit `MessageBannerStatic` in [message_banner.c](../src/sprites_AI/message_banner.c) to check if a power bomb is active before setting the pose to remove the banner.
+
+```diff
+  // Check if should remove (input or demo active, ignore for save prompt)
+  if (message != MESSAGE_SAVE_PROMPT &&
+      (gButtonInput & (KEY_A | KEY_B | KEY_ALL_DIRECTIONS) || gDemoState != DEMO_STATE_NONE))
+  {
++     // If the banner is for a new item, only remove the banner if no power bomb is active
++     if (!gCurrentSprite.MESSAGE_BANNER_NEW_ITEM ||
++         (!gCurrentPowerBomb.animationState && !gCurrentPowerBomb.powerBombPlaced))
++     {
+          gCurrentSprite.pose = MESSAGE_BANNER_POSE_REMOVAL_INIT;
++     }
+  }
 ```
 
 
@@ -190,7 +211,6 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 - Frame perfect pause buffering on ziplines ignores collision
 - Clipping into slopes ([video](https://www.youtube.com/watch?v=XiZRJesXHWw))
 - Chozo statue refill glitch
-- Collecting an item during a power bomb explosion allows Samus to move early
 - "Stop enemy" clipdata prevents bomb jumping
 
 ### Oversights and Design Flaws
