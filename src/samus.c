@@ -6646,9 +6646,9 @@ SamusPose SamusExecutePoseSubroutine(struct SamusData* pData)
     pEquipment = &gEquipment;
     pHazard = &gSamusHazardDamage;
 
-    #ifdef REGION_EU
+    #if defined(REGION_EU) || defined(BUGFIX)
     if (gGameModeSub1 != 0)
-    #endif // REGION_EU
+    #endif // REGION_EU || BUGFIX
     {
         // Update hazard damage
         if (SamusTakeHazardDamage(pData, pEquipment, pHazard))

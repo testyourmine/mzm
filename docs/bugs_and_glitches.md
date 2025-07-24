@@ -11,6 +11,8 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics](#mecha-ridleys-missiles-can-be-kept-alive-after-it-dies-which-get-corrupted-graphics)
   - [Collecting an item while a power bomb is active allows Samus to move early](#collecting-an-item-while-a-power-bomb-is-active-allows-samus-to-move-early)
   - [Killing Imago with pseudo screw attack softlocks the game](#killing-imago-with-pseudo-screw-attack-softlocks-the-game)
+  - [Turning can trigger the fully powered suit cutscene without getting locked in place](#turning-can-trigger-the-fully-powered-suit-cutscene-without-getting-locked-in-place)
+  - [Dying during a door transition (from lava/acid) puts Samus in the no-clip state](#dying-during-a-door-transition-from-lavaacid-puts-samus-in-the-no-clip-state)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -156,6 +158,24 @@ After the Ruins Test fight, the game tries to lock you in place in the center of
       return SPOSE_UNCROUCHING_SUITLESS;
 
   return SPOSE_STANDING;
+```
+
+### Dying during a door transition (from lava/acid) puts Samus in the no-clip state
+
+During a door transition, the game calls various "update" routines for one frame in order to initialize data, such as Samus and sprites. When entering a door transition while submerged in lava or acid, it's possible for Samus to take damage during that one frame and die. This sets `gGameModeSub1` to `SUB_GAME_MODE_DYING`, which then gets incremented by one. This is supposed to change the mode from 0 to 1 (`SUB_GAME_MODE_DOOR_TRANSITION`), but instead changes it from 5 to 6 (`SUB_GAME_MODE_NO_CLIP`). This was fixed in the European release.
+
+**Fix:** Edit `SamusExecutePoseSubroutine` in [samus.c](../src/samus.c) to only check for hazard damage if `gGameModeSub1` isn't 0.
+
+```diff
++ if (gGameModeSub1 != 0)
++ {
+      // Update hazard damage
+      if (SamusTakeHazardDamage(pData, pEquipment, pHazard))
+      {
+          // Getting knocked back or died, abort
+          return SPOSE_HURT_REQUEST;
+      }
++ }
 ```
 
 
