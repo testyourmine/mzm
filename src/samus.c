@@ -6676,9 +6676,9 @@ SamusPose SamusExecutePoseSubroutine(struct SamusData* pData)
     // Update weapon highlight
     if (pEquipment->suitType != SUIT_SUITLESS)
     {
-        #ifdef REGION_EU
+        #if defined(REGION_EU) || defined(BUGFIX)
         if (pData->pose != SPOSE_DYING)
-        #endif // REGION_EU
+        #endif // REGION_EU || BUGFIX
         {
             SamusSetHighlightedWeapon(pData, pWeapon, pEquipment);
         }

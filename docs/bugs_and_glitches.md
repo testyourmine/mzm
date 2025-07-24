@@ -13,6 +13,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Killing Imago with pseudo screw attack softlocks the game](#killing-imago-with-pseudo-screw-attack-softlocks-the-game)
   - [Turning can trigger the fully powered suit cutscene without getting locked in place](#turning-can-trigger-the-fully-powered-suit-cutscene-without-getting-locked-in-place)
   - [Dying during a door transition (from lava/acid) puts Samus in the no-clip state](#dying-during-a-door-transition-from-lavaacid-puts-samus-in-the-no-clip-state)
+  - [Missiles can be highlighted and toggled while dying](#missiles-can-be-highlighted-and-toggled-while-dying)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -178,6 +179,23 @@ During a door transition, the game calls various "update" routines for one frame
 + }
 ```
 
+### Missiles can be highlighted and toggled while dying
+
+During Samus's death animation, missiles can be highlighted and super missiles can be toggled. Even though the HUD isn't displayed, the sound for each will still play. This was fixed in the European release.
+
+**Fix:** Edit `SamusExecutePoseSubroutine` in [samus.c](../src/samus.c) to check if Samus is dying before updating the highlighted weapon.
+
+```diff
+  // Update weapon highlight
+  if (pEquipment->suitType != SUIT_SUITLESS)
+  {
++     if (pData->pose != SPOSE_DYING)
++     {
+          SamusSetHighlightedWeapon(pData, pWeapon, pEquipment);
++     }
+  }
+```
+
 
 ## Oversights and Design Flaws
 
@@ -258,8 +276,6 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 
 - PowerBombExplosion doesn't check if out of bounds, which can lead to memory corruption
   - Fix: don't check collision with any blocks outside of the room
-- Dying during a door transition (from lava) puts Samus in the no-clip state
-  - Potential fixes: don't check lava damage during a door transition, or check the sub game mode value before incrementing it
 - Sidehoppers and dessgeegas don't initialize the delay (stored in work1) for their first jump
   - Potential fixes: initialize work1 in SidehopperInit, or call SidehopperIdleInit
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
