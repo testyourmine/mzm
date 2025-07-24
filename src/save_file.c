@@ -2110,7 +2110,7 @@ void unk_7584c(u8 param_1)
             break;
     }
 
-    gGameModeSub3 = 0;
+    gSubGameMode3 = 0;
     gMonochromeBgFading = 0;
     gDisableSoftReset = FALSE;
     gSubGameModeStage = 0;

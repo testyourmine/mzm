@@ -191,7 +191,7 @@ void ProjectileUpdate(void)
     BeamBombFlags beams;
     struct ProjectileData* pProj;
 
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     // Update the arm cannon position offset fields
@@ -542,7 +542,7 @@ void ProjectileDrawAllStatusFalse(void)
 {
     struct ProjectileData* pProj;
 
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     for (pProj = gProjectileData; pProj < gProjectileData + MAX_AMOUNT_OF_PROJECTILES; pProj++)
@@ -563,7 +563,7 @@ void ProjectileDrawAllStatusTrue(void)
 {
     struct ProjectileData* pProj;
 
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     for (pProj = gProjectileData; pProj < gProjectileData + MAX_AMOUNT_OF_PROJECTILES; pProj++)

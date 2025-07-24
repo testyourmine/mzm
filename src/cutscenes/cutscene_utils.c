@@ -73,8 +73,8 @@ u8 TourianEscapeSubroutine(void)
     {
         SET_BACKDROP_COLOR(COLOR_BLACK);
         gSubGameModeStage = 0;
-        gGameModeSub1 = 0;
-        gGameModeSub2 = 4;
+        gSubGameMode1 = 0;
+        gSubGameMode2 = 4;
 
         #ifdef DEBUG
         if (gBootDebugActive)
@@ -107,7 +107,7 @@ u8 TourianEscapeSubroutine(void)
             gCurrentRoom = 0;
             gLastDoorUsed = 0;
             gCurrentCutscene = CUTSCENE_COULD_I_SURVIVE;
-            gGameModeSub2 = 10;
+            gSubGameMode2 = 10;
         }
 
         return TRUE;
@@ -164,7 +164,7 @@ void CutsceneEnd(void)
                 gCurrentArea = AREA_BRINSTAR;
                 gCurrentRoom = 0;
                 gLastDoorUsed = 0;
-                gGameModeSub3 = 0;
+                gSubGameMode3 = 0;
                 gShipLandingFlag = FALSE;
             }
             break;

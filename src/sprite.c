@@ -910,7 +910,7 @@ void SpriteUpdate(void)
     rngParam1 = gFrameCounter8Bit;
     rngParam2 = gFrameCounter16Bit / 16;
 
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
     {
         // In normal gameplay
 
@@ -1015,7 +1015,7 @@ void SpriteUpdate(void)
             }
         }
     }
-    else if (gGameModeSub1 == SUB_GAME_MODE_NO_CLIP)
+    else if (gSubGameMode1 == SUB_GAME_MODE_NO_CLIP)
     {
         // In debug no-clip, update sprites normally but don't check for collision
         for (count = 0; count < MAX_AMOUNT_OF_SPRITES; count++)
@@ -1130,7 +1130,7 @@ void SpriteDrawAll_2(void)
     u32 checkStatus;
     u32 notPlaying;
 
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
         notPlaying = FALSE;
     else
         notPlaying = TRUE;
@@ -1711,7 +1711,7 @@ void SpriteLoadAllData(void)
     }
 
     // Check reset alarm timer
-    if (gGameModeSub3 == 0 && !gIsLoadingFile)
+    if (gSubGameMode3 == 0 && !gIsLoadingFile)
         gAlarmTimer = 0;
 
     // Clear

@@ -100,7 +100,7 @@ void CheckTransferFadedPalette_Unused(void)
  */
 void CheckTransferFadedPalette(void)
 {
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
     {
         if (gColorFading.status == 0)
             return;

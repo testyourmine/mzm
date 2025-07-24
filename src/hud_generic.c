@@ -44,7 +44,7 @@ void HudGenericResetHUDData(void)
 {
     struct ParticleEffect* pParticle;
 
-    if (gGameModeSub3 == 0 || gTourianEscapeCutsceneStage != 0)
+    if (gSubGameMode3 == 0 || gTourianEscapeCutsceneStage != 0)
     {
         for (pParticle = gParticleEffects; pParticle < gParticleEffects + MAX_AMOUNT_OF_PARTICLES; pParticle++)
             pParticle->status = 0;

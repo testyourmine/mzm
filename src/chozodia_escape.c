@@ -1226,11 +1226,11 @@ u32 ChozodiaEscapeSubroutine(void)
     ended = FALSE;
     gNextOamSlot = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             ChozodiaEscapeInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 1:
@@ -1242,7 +1242,7 @@ u32 ChozodiaEscapeSubroutine(void)
             }
 
             CHOZODIA_ESCAPE_DATA.bldcnt = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
@@ -1283,8 +1283,8 @@ u32 ChozodiaEscapeSubroutine(void)
             if (subroutineResult == 2)
             {
                 // Cutscene ended
-                gGameModeSub1++;
-                gGameModeSub2 = 0;
+                gSubGameMode1++;
+                gSubGameMode2 = 0;
             }
             
             ResetFreeOam();

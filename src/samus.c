@@ -2146,7 +2146,7 @@ void SamusChangeToHurtPose(struct SamusData* pData, struct SamusData* pCopy, str
         pData->yVelocity = yVelocity;
 
         // Change sub game move
-        gGameModeSub1 = SUB_GAME_MODE_DYING;
+        gSubGameMode1 = SUB_GAME_MODE_DYING;
     }
 
     // Set invincible
@@ -2772,7 +2772,7 @@ void SamusUpdate(void)
     pData = &gSamusData;
 
     // Update ADC
-    if (gGameModeSub1 >= SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 >= SUB_GAME_MODE_PLAYING)
         pData->animationDurationCounter++;
 
     // Update physics
@@ -2860,7 +2860,7 @@ void SamusCallGfxFunctions(void)
     pData = &gSamusData;
 
     // Update env effects if playing
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
         SamusUpdateEnvironmentalEffect(pData);
 
     // Get direction
@@ -6383,7 +6383,7 @@ SamusPose SamusDying(struct SamusData* pData)
 
             case 120:
                 gMainGameMode = GM_GAMEOVER;
-                gGameModeSub1 = 0;
+                gSubGameMode1 = 0;
         }
     }
 
@@ -6647,7 +6647,7 @@ SamusPose SamusExecutePoseSubroutine(struct SamusData* pData)
     pHazard = &gSamusHazardDamage;
 
     #if defined(REGION_EU) || defined(BUGFIX)
-    if (gGameModeSub1 != 0)
+    if (gSubGameMode1 != 0)
     #endif // REGION_EU || BUGFIX
     {
         // Update hazard damage
@@ -8052,7 +8052,7 @@ void SamusInit(void)
             gSamusEnvironmentalEffects[i] = sEnvironmentalEffect_Empty;
     }
 
-    if (gGameModeSub3 == 0)
+    if (gSubGameMode3 == 0)
     {
         if (!gIsLoadingFile)
         {

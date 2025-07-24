@@ -87,11 +87,11 @@ u32 EraseSramSubroutine(void)
     leaving = FALSE;
 
     APPLY_DELTA_TIME_INC(ERASE_SRAM_DATA.timer);
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             EraseSramInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 1:
@@ -104,20 +104,20 @@ u32 EraseSramSubroutine(void)
             ERASE_SRAM_DATA.bldcnt = (BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT) & ~BLDCNT_OBJ_FIRST_TARGET_PIXEL;
             ERASE_SRAM_DATA.bldyTarget = gWrittenToBldy_NonGameplay;
 
-            gGameModeSub1++;
+            gSubGameMode1++;
             ERASE_SRAM_DATA.timer = 0;
             break;
 
         case 2:
-            gGameModeSub2 = EraseSramProcessInput();
-            if (gGameModeSub2 == 0)
+            gSubGameMode2 = EraseSramProcessInput();
+            if (gSubGameMode2 == 0)
                 break;
 
             ERASE_SRAM_DATA.timer = 0;
-            if (gGameModeSub2 == ERASE_SRAM_INPUT_ACTION_ERASING)
-                gGameModeSub1 = 5;
+            if (gSubGameMode2 == ERASE_SRAM_INPUT_ACTION_ERASING)
+                gSubGameMode1 = 5;
             else
-                gGameModeSub1 = 3;
+                gSubGameMode1 = 3;
             break;
 
         case 3:
@@ -127,7 +127,7 @@ u32 EraseSramSubroutine(void)
             ERASE_SRAM_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
             ERASE_SRAM_DATA.timer = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 4:
@@ -148,7 +148,7 @@ u32 EraseSramSubroutine(void)
             ERASE_SRAM_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT;
 
             ERASE_SRAM_DATA.timer = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 6:
@@ -158,7 +158,7 @@ u32 EraseSramSubroutine(void)
                 break;
             }
 
-            gGameModeSub1++;
+            gSubGameMode1++;
             ERASE_SRAM_DATA.dispcnt = DCNT_BLANK;
             break;
 
@@ -416,7 +416,7 @@ static void EraseSramInit(void)
     gWrittenToBldalpha_H = 0;
     WRITE_16(REG_BLDALPHA, 0);
 
-    gGameModeSub3 = 0;
+    gSubGameMode3 = 0;
 
     gBg1HOFS_NonGameplay = 0;
     gBg1VOFS_NonGameplay = 0;

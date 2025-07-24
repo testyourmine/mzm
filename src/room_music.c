@@ -68,7 +68,7 @@ void CheckPlayLoadingJingle(void)
 {
     gMusicTrackInfo.currentRoomTrack = gCurrentRoomEntry.musicTrack;
 
-    if (!gGameModeSub3 && gDemoState == DEMO_STATE_NONE)
+    if (!gSubGameMode3 && gDemoState == DEMO_STATE_NONE)
     {
         if (gIsLoadingFile)
         {

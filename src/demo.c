@@ -195,22 +195,22 @@ void DemoEnd(void)
         DoSramOperation(SRAM_OPERATION_SAVE_RECORDED_DEMO);
 
         // Debug leftover
-        gGameModeSub2 = 16;
+        gSubGameMode2 = 16;
 
         // End demo
         gDemoState = DEMO_STATE_NONE;
         return;
     }
 
-    gGameModeSub2 = 11;
+    gSubGameMode2 = 11;
 
     if (gCurrentDemo.noDemoShuffle)
     {
         gDemoState = DEMO_STATE_NONE;
         #ifdef DEBUG
-        gGameModeSub2 = 16;
+        gSubGameMode2 = 16;
         #else // !DEBUG
-        gGameModeSub2 = 2;
+        gSubGameMode2 = 2;
         #endif // DEBUG
     }
     else if (gCurrentDemo.endedWithInput)
@@ -226,7 +226,7 @@ void DemoEnd(void)
 
         // Sets to no demo
         gDemoState = DEMO_STATE_NONE;
-        gGameModeSub2 = 2;
+        gSubGameMode2 = 2;
         return;
     }
     else
@@ -239,7 +239,7 @@ void DemoEnd(void)
         {
             gDemoState = DEMO_STATE_NONE;
             gCurrentDemo.number = 0;
-            gGameModeSub2 = 1;
+            gSubGameMode2 = 1;
         }
         else
         {
@@ -248,7 +248,7 @@ void DemoEnd(void)
             {
                 // End, go back to intro
                 gDemoState = DEMO_STATE_NONE;
-                gGameModeSub2 = 2;
+                gSubGameMode2 = 2;
             }
             else
             {

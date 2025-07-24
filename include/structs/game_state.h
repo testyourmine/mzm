@@ -52,9 +52,9 @@ extern u8 gNotPressingUp;
 extern u8 gEndingFlags;
 
 extern GameMode gMainGameMode;
-extern s16 gGameModeSub1;
-extern s8 gGameModeSub2;
-extern s8 gGameModeSub3;
+extern s16 gSubGameMode1;
+extern s8 gSubGameMode2;
+extern s8 gSubGameMode3;
 extern u8 gSubGameModeStage;
 
 extern boolu8 gHasSaved;

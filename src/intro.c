@@ -994,11 +994,11 @@ u32 IntroSubroutine(void)
     ended = FALSE;
     gNextOamSlot = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             IntroInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 1:
@@ -1009,21 +1009,21 @@ u32 IntroSubroutine(void)
             }
             
             INTRO_DATA.bldcnt = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
             if (gChangedInput & (KEY_A | KEY_B | KEY_START))
             {
-                gGameModeSub1++;
-                gGameModeSub2 = 1;
+                gSubGameMode1++;
+                gSubGameMode2 = 1;
                 FadeAllSounds(CONVERT_SECONDS(1.f / 6));
                 FadeMusic(CONVERT_SECONDS(1.f / 6));
             }
             else if (sIntroSubroutinesFunctionsPointer[INTRO_DATA.stage]())
             {
-                gGameModeSub1++;
-                gGameModeSub2 = 0;
+                gSubGameMode1++;
+                gSubGameMode2 = 0;
             }
 
             ResetFreeOam();

@@ -276,7 +276,7 @@ boolu32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
     DoorType doorType;
 
     // Don't care for doors if not in control of samus
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return FALSE;
 
     state = FALSE;
@@ -346,7 +346,7 @@ boolu32 ConnectionCheckEnterDoor(u16 yPosition, u16 xPosition)
             ConnectionProcessDoorType(pDoor->type);
 
             // Start the room loading behavior
-            gGameModeSub1 = SUB_GAME_MODE_LOADING_ROOM;
+            gSubGameMode1 = SUB_GAME_MODE_LOADING_ROOM;
 
             if (gHatchData[i].exists && gHatchData[i].state == HATCH_STATE_OPENING)
             {
@@ -385,7 +385,7 @@ boolu32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
     u8 state;
     DoorType doorType;
 
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return FALSE;
 
     #ifdef BUGFIX
@@ -478,7 +478,7 @@ boolu32 ConnectionCheckAreaConnection(u16 yPosition, u16 xPosition)
     }
 
     ColorFadingStart(COLOR_FADING_NO_TRANSITION);
-    gGameModeSub1 = SUB_GAME_MODE_LOADING_ROOM;
+    gSubGameMode1 = SUB_GAME_MODE_LOADING_ROOM;
 
     // Check for stuff during the transition
     pDoor = sAreaDoorsPointers[gCurrentArea] + gLastDoorUsed;
@@ -916,7 +916,7 @@ void ConnectionLoadDoors(void)
             ConnectionOverrideOpenedHatch(i, HATCH_NORMAL);
     }
 
-    if (currHatchId != UCHAR_MAX && gGameModeSub3 != 0)
+    if (currHatchId != UCHAR_MAX && gSubGameMode3 != 0)
     {
         // Check start lock animation
         if (gHatchData[currHatchId].exists && gHatchData[currHatchId].type != HATCH_NONE)

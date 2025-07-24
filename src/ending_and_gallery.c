@@ -1913,11 +1913,11 @@ u32 CreditsSubroutine(void)
     ENDING_DATA.unk_6 = 0;
     gNextOamSlot = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             CreditsInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
@@ -1927,7 +1927,7 @@ u32 CreditsSubroutine(void)
             if (gChangedInput & KEY_L)
             {
                 ENDING_DATA.bldcnt = UCHAR_MAX;
-                gGameModeSub1++;
+                gSubGameMode1++;
                 break;
             }
             #endif // DEBUG && !REGION_US_BETA
@@ -1940,7 +1940,7 @@ u32 CreditsSubroutine(void)
                 ENDING_DATA.timer = 0;
 
                 if (subroutineResult > 1)
-                    gGameModeSub1++;
+                    gSubGameMode1++;
             }
 
             ResetFreeOam();
@@ -1951,22 +1951,22 @@ u32 CreditsSubroutine(void)
             if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
                 gWrittenToBldy_NonGameplay++;
             else
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 4:
             EndScreenInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 6:
             if (sEndScreenFunctionPointers[ENDING_DATA.stage]())
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 8:
             EndingImageInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 5:
@@ -1977,7 +1977,7 @@ u32 CreditsSubroutine(void)
             else
             {
                 ENDING_DATA.bldcnt = 0;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
             break;
 
@@ -1990,7 +1990,7 @@ u32 CreditsSubroutine(void)
                     ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
                     gWrittenToBldy_NonGameplay = 0;
-                    gGameModeSub1++;
+                    gSubGameMode1++;
                 }
                 else
                 {
@@ -2004,14 +2004,14 @@ u32 CreditsSubroutine(void)
 
         case 1:
         case 3:
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 15:
             if (gEndingFlags & (ENDING_FLAG_UNKNOWN | ENDING_FLAG_FIRST_TIME_ATTACK_CLEAR |
                 ENDING_FLAG_FIRST_HARD_MODE_CLEAR | ENDING_FLAG_FIRST_CLEAR))
             {
-                gGameModeSub1++;
+                gSubGameMode1++;
                 break;
             }
 
@@ -2021,7 +2021,7 @@ u32 CreditsSubroutine(void)
 
         case 12:
             UnlockedOptionsInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 14:
@@ -2035,7 +2035,7 @@ u32 CreditsSubroutine(void)
                 ENDING_DATA.timer = 0;
 
                 if (subroutineResult > 1)
-                    gGameModeSub1++;
+                    gSubGameMode1++;
             }
 
             ResetFreeOam();
@@ -2067,7 +2067,7 @@ static void GalleryInit(void)
     CallbackSetVblank(GalleryVBlank);
     WRITE_16(REG_IME, TRUE);
 
-    if (gGameModeSub1 == 0)
+    if (gSubGameMode1 == 0)
     {
         ClearGfxRam();
         DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
@@ -2202,7 +2202,7 @@ static u32 GalleryDisplay(void)
         ENDING_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
         gWrittenToBldy_NonGameplay = 0;
-        gGameModeSub1 = 5;
+        gSubGameMode1 = 5;
     }
 
     change = FALSE;
@@ -2256,12 +2256,12 @@ u32 GallerySubroutine(void)
     ended = FALSE;
     ENDING_DATA.unk_6 = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
         case 4:
             GalleryInit();
-            gGameModeSub1 = 1;
+            gSubGameMode1 = 1;
             break;
 
         case 1:
@@ -2272,12 +2272,12 @@ u32 GallerySubroutine(void)
             }
 
             ENDING_DATA.bldcnt = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
             if (GalleryDisplay())
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 3:
@@ -2290,10 +2290,10 @@ u32 GallerySubroutine(void)
                 break;
             }
 
-            if (gGameModeSub1 == 3)
+            if (gSubGameMode1 == 3)
                 ended++;
             else
-                gGameModeSub1 = 4;
+                gSubGameMode1 = 4;
             break;
     }
 

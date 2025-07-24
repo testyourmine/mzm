@@ -565,7 +565,7 @@ void KraidStatue(void)
             break;
     }
 
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
     {
         if (SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE * 10, BLOCK_SIZE * 13) != NSLR_OUT_OF_RANGE)
             gCurrentSprite.status |= SPRITE_STATUS_UNKNOWN_10;
@@ -630,7 +630,7 @@ void RidleyStatue(void)
             break;
     }
 
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
     {
         if (SpriteUtilCheckSamusNearSpriteLeftRight(BLOCK_SIZE * 10, BLOCK_SIZE * 13) != NSLR_OUT_OF_RANGE)
             gCurrentSprite.status |= SPRITE_STATUS_UNKNOWN_10;

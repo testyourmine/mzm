@@ -474,11 +474,11 @@ s32 BootDebugSubroutine(void)
 
     changing = FALSE;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             BootDebugSetupMenu();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 1:
@@ -491,7 +491,7 @@ s32 BootDebugSubroutine(void)
             }
             else
             {
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
             break;
 
@@ -504,11 +504,11 @@ s32 BootDebugSubroutine(void)
                     WRITE_16(REG_BLDCNT, BLDCNT_BRIGHTNESS_INCREASE_EFFECT | BLDCNT_BACKDROP_FIRST_TARGET_PIXEL |
                             BLDCNT_OBJ_FIRST_TARGET_PIXEL | BLDCNT_BG3_FIRST_TARGET_PIXEL | BLDCNT_BG2_FIRST_TARGET_PIXEL |
                             BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_BG0_FIRST_TARGET_PIXEL);
-                    gGameModeSub1 = 4;
+                    gSubGameMode1 = 4;
                 }
                 else
                 {
-                    switch (gGameModeSub2)
+                    switch (gSubGameMode2)
                     {
                         case 1:
                         case 3:
@@ -533,7 +533,7 @@ s32 BootDebugSubroutine(void)
                     
                     BootDebugWriteSram(FALSE);
 
-                    if (gGameModeSub2 == 1)
+                    if (gSubGameMode2 == 1)
                     {
                         if (gIsLoadingFile == TRUE)
                         {
@@ -548,7 +548,7 @@ s32 BootDebugSubroutine(void)
                         }
                     }
                     
-                    gGameModeSub1++;
+                    gSubGameMode1++;
                 }
             }
             break;
@@ -564,7 +564,7 @@ s32 BootDebugSubroutine(void)
             {
                 WRITE_16(PALRAM_BASE, 0);
                 changing = TRUE;
-                gGameModeSub1 = 0;
+                gSubGameMode1 = 0;
             }
             break;
         case 4:
@@ -583,7 +583,7 @@ s32 BootDebugSubroutine(void)
                 gResetGame = TRUE;
                 WRITE_16(PALRAM_BASE, 0);
                 changing = TRUE;
-                gGameModeSub1 = 0;
+                gSubGameMode1 = 0;
             }
             break;
     }
@@ -642,7 +642,7 @@ void BootDebugSetupMenu(void)
         SOUND_ACTION_VOLUME(15) | SOUND_ACTION_MAX_CHANNELS(7) | SOUND_ACTION_ENABLE_REVERB);
     UpdateMusicPriority(0);
 
-    gGameModeSub2 = 0;
+    gSubGameMode2 = 0;
     gNextOamSlot = 0;
     ResetFreeOam();
     BitFill(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam), 32);
@@ -750,7 +750,7 @@ s32 BootDebugHandleInput(void)
 
     if (BOOT_DEBUG_DATA.menuDepth == BOOT_DEBUG_MENU_MAIN && gChangedInput & KEY_R)
     {
-        gGameModeSub2 = 2;
+        gSubGameMode2 = 2;
         return 1;
     }
 
@@ -759,7 +759,7 @@ s32 BootDebugHandleInput(void)
     {
         if (gSectionInfo.sectionIndex == BOOT_DEBUG_SECTION_TITLE)
         {
-            gGameModeSub2 = 2;
+            gSubGameMode2 = 2;
             result = 1;
         }
         else if (gSectionInfo.sectionIndex >= BOOT_DEBUG_SECTION_SAVE_A && gSectionInfo.sectionIndex <= BOOT_DEBUG_SECTION_SAVE_C)
@@ -775,14 +775,14 @@ s32 BootDebugHandleInput(void)
             {
                 gCurrentArea = gSectionInfo.sectionIndex;
                 gIsLoadingFile = TRUE;
-                gGameModeSub2 = 1;
+                gSubGameMode2 = 1;
                 result = 1;
             }
         }
         else if (gSectionInfo.sectionIndex != BOOT_DEBUG_SECTION_BLANK)
         {
             result = 1;
-            gGameModeSub2 = 1;
+            gSubGameMode2 = 1;
             gIsLoadingFile = FALSE;
         
             if (gCurrentArea != gSectionInfo.sectionIndex && !gSectionInfo.onMapScreen)
@@ -896,19 +896,19 @@ s32 BootDebugHandleInput(void)
                 {
                     if (tempResult == 1)
                     {
-                        gGameModeSub2 = 7;
+                        gSubGameMode2 = 7;
                         gBootDebugActive = GM_DEBUG_MENU;
                     }
                     else if (tempResult == 2)
                     {
-                        gGameModeSub2 = 8;
+                        gSubGameMode2 = 8;
                         gBootDebugActive = GM_DEBUG_MENU;
                     }
                     else
                     {
                         gCurrentDemo.noDemoShuffle = TRUE;
                         DemoInit();
-                        gGameModeSub2 = gDemoState != DEMO_STATE_NONE ? 6 : 1;
+                        gSubGameMode2 = gDemoState != DEMO_STATE_NONE ? 6 : 1;
                     }
                     result = 1;
                 }
@@ -918,7 +918,7 @@ s32 BootDebugHandleInput(void)
                 gBootDebugActive = BootDebugEtcSubroutine();
                 if (gBootDebugActive != 0)
                 {
-                    gGameModeSub2 = gBootDebugActive == 1 ? 4 : 5;
+                    gSubGameMode2 = gBootDebugActive == 1 ? 4 : 5;
                     gBootDebugActive = 1;
                     result = 1;
                 }

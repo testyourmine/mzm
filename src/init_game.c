@@ -35,8 +35,8 @@ void InitializeGame(void)
         | WAIT_BANK2_3CYCLES | WAIT_BANK2_SUBSEQUENT_1CYCLE
         | WAIT_GAMEPACK_CGB);
 
-    gGameModeSub1 = 0;
-    gGameModeSub2 = 0;
+    gSubGameMode1 = 0;
+    gSubGameMode2 = 0;
     gDebugMode = FALSE;
 
     gButtonInput = KEY_NONE;

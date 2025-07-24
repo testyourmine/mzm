@@ -287,7 +287,7 @@ void ScrollScreen(u16 screenX, u16 screenY)
     gCamera.xPosition = screenX;
     gCamera.yPosition = screenY;
 
-    if (gGameModeSub1 == 0)
+    if (gSubGameMode1 == 0)
         return;
 
     // Check needs to scroll
@@ -680,7 +680,7 @@ void ScrollProcessGeneral(void)
     if (!gDisableScrolling)
     {
         // Process scrolling
-        if (gNoClipLockCamera && gGameModeSub1 == SUB_GAME_MODE_NO_CLIP)
+        if (gNoClipLockCamera && gSubGameMode1 == SUB_GAME_MODE_NO_CLIP)
         {
             // Update camera lock movement
             ScrollNoClipDebugCameraLock(&coords);

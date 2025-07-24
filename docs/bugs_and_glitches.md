@@ -162,12 +162,12 @@ After the Ruins Test fight, the game tries to lock you in place in the center of
 
 ### Dying during a door transition (from lava/acid) puts Samus in the no-clip state
 
-During a door transition, the game calls various "update" routines for one frame in order to initialize data, such as Samus and sprites. When entering a door transition while submerged in lava or acid, it's possible for Samus to take damage during that one frame and die. This sets `gGameModeSub1` to `SUB_GAME_MODE_DYING`, which then gets incremented by one. This is supposed to change the mode from 0 to 1 (`SUB_GAME_MODE_DOOR_TRANSITION`), but instead changes it from 5 to 6 (`SUB_GAME_MODE_NO_CLIP`). This was fixed in the European release.
+During a door transition, the game calls various "update" routines for one frame in order to initialize data, such as Samus and sprites. When entering a door transition while submerged in lava or acid, it's possible for Samus to take damage during that one frame and die. This sets `gSubGameMode1` to `SUB_GAME_MODE_DYING`, which then gets incremented by one. This is supposed to change the mode from 0 to 1 (`SUB_GAME_MODE_DOOR_TRANSITION`), but instead changes it from 5 to 6 (`SUB_GAME_MODE_NO_CLIP`). This was fixed in the European release.
 
-**Fix:** Edit `SamusExecutePoseSubroutine` in [samus.c](../src/samus.c) to only check for hazard damage if `gGameModeSub1` isn't 0.
+**Fix:** Edit `SamusExecutePoseSubroutine` in [samus.c](../src/samus.c) to only check for hazard damage if `gSubGameMode1` isn't 0.
 
 ```diff
-+ if (gGameModeSub1 != 0)
++ if (gSubGameMode1 != 0)
 + {
       // Update hazard damage
       if (SamusTakeHazardDamage(pData, pEquipment, pHazard))

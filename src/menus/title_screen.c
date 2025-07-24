@@ -1050,11 +1050,11 @@ u32 TitleScreenSubroutine(void)
     leaving = FALSE;
     TITLE_SCREEN_DATA.timer++;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             TitleScreenInit();
-            gGameModeSub1 = 1;
+            gSubGameMode1 = 1;
             TITLE_SCREEN_DATA.timer = 0;
             break;
 
@@ -1065,35 +1065,35 @@ u32 TitleScreenSubroutine(void)
                 UpdateMusicPriority(2);
                 PlayMusic(MUSIC_TITLE_SCREEN, 2);
                 TITLE_SCREEN_DATA.timer = 0;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
             break;
 
         case 2:
             ret = TitleScreenIdle();
-            gGameModeSub2 = ret;
-            if (gGameModeSub2 != 0)
+            gSubGameMode2 = ret;
+            if (gSubGameMode2 != 0)
             {
                 TITLE_SCREEN_DATA.timer = 0;
-                if (gGameModeSub2 == 2)
+                if (gSubGameMode2 == 2)
                 {
                     UpdateMusicPriority(4);
-                    gGameModeSub1 = 3;
+                    gSubGameMode1 = 3;
                 }
                 #ifdef DEBUG
                 #ifdef REGION_EU
-                else if (gGameModeSub2 == 4)
+                else if (gSubGameMode2 == 4)
                 #else // !REGION_EU
-                else if (gGameModeSub2 == 3)
+                else if (gSubGameMode2 == 3)
                 #endif // REGION_EU
                 {
-                    gGameModeSub1 = 5;
+                    gSubGameMode1 = 5;
                 }
                 #endif // DEBUG
                 else
                 {
                     #ifdef REGION_EU
-                    if (gGameModeSub2 == 3)
+                    if (gSubGameMode2 == 3)
                     {
                         SoundPlay(SOUND_ACCEPT_CONFIRM_MENU);
                     }
@@ -1103,7 +1103,7 @@ u32 TitleScreenSubroutine(void)
                         SoundPlay(SOUND_TITLE_SCREEN_PRESSING_START);
                     }
                     TITLE_SCREEN_DATA.animatedPalettes[2] = sTitleScreenAnimatedPaletteTemplates[3];
-                    gGameModeSub1 = 3;
+                    gSubGameMode1 = 3;
                 }
 
                 if (TITLE_SCREEN_DATA.animatedPalettes[1].unk_4 != 0)
@@ -1123,7 +1123,7 @@ u32 TitleScreenSubroutine(void)
             if (TITLE_SCREEN_DATA.animatedPalettes[2].paletteRow == 0 && TITLE_SCREEN_DATA.timer > 40)
             {
                 unk_76710(TRUE);
-                gGameModeSub1++;
+                gSubGameMode1++;
                 TITLE_SCREEN_DATA.timer = 0;
             }
             break;
@@ -1339,7 +1339,7 @@ void TitleScreenInit(void)
         TitleScreenDrawDebugText();
     #endif // DEBUG
 
-    gGameModeSub3 = 0;
+    gSubGameMode3 = 0;
     gBg0HOFS_NonGameplay = gBg0VOFS_NonGameplay = 0;
     gBg1HOFS_NonGameplay = gBg1VOFS_NonGameplay = 0;
     gBg2HOFS_NonGameplay = gBg2VOFS_NonGameplay = 0;
@@ -1352,7 +1352,7 @@ void TitleScreenInit(void)
 
     TITLE_SCREEN_DATA.demoTimer = 0;
 
-    if (gGameModeSub2 == 0)
+    if (gSubGameMode2 == 0)
     {
         TITLE_SCREEN_DATA.oamTimings[2].stage = TITLE_SCREEN_IDLE_STAGE_COMETS;
     }

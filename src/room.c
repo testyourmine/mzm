@@ -161,7 +161,7 @@ void RoomLoad(void)
     MinimapCheckOnTransition();
 
     // Check using elevator
-    if (!gIsLoadingFile && gGameModeSub3 != 0 && gPauseScreenFlag == PAUSE_SCREEN_NONE && gSamusData.pose == SPOSE_USING_AN_ELEVATOR)
+    if (!gIsLoadingFile && gSubGameMode3 != 0 && gPauseScreenFlag == PAUSE_SCREEN_NONE && gSamusData.pose == SPOSE_USING_AN_ELEVATOR)
     {
         if (gSamusData.elevatorDirection == KEY_UP)
             gSamusData.yPosition += BLOCK_SIZE * 3;
@@ -353,7 +353,7 @@ void RoomLoadBackgrounds(void)
 
     if (gPauseScreenFlag == 0)
     {
-        if (gGameModeSub3 == 0 || gTourianEscapeCutsceneStage != 0)
+        if (gSubGameMode3 == 0 || gTourianEscapeCutsceneStage != 0)
             BitFill(3, 0x40, VRAM_BASE + 0x3000, 0x1000, 0x10);
 
         // Load BG0, either RLE or LZ77
@@ -435,7 +435,7 @@ void RoomReset(void)
     gScrollCounter = 0;
     gMusicTrackInfo.takingNormalTransition = FALSE;
 
-    if (gGameModeSub3 == 0)
+    if (gSubGameMode3 == 0)
     {
         gMusicTrackInfo.currentRoomTrack = MUSIC_NONE;
         gMusicTrackInfo.unk = FALSE;
@@ -911,9 +911,9 @@ void RoomUpdateAnimatedGraphicsAndPalettes(void)
     dontUpdateBgEffect = FALSE;
     dontUpdateGraphics = FALSE;
 
-    if (gGameModeSub1 == SUB_GAME_MODE_DOOR_TRANSITION || gGameModeSub1 == SUB_GAME_MODE_LOADING_ROOM)
+    if (gSubGameMode1 == SUB_GAME_MODE_DOOR_TRANSITION || gSubGameMode1 == SUB_GAME_MODE_LOADING_ROOM)
         dontUpdateBgEffect = TRUE;
-    else if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    else if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
     {
         dontUpdateBgEffect = TRUE;
         dontUpdateGraphics = TRUE;
@@ -950,7 +950,7 @@ void RoomUpdateHatchFlashingAnimation(void)
 {
     const u16* pPalette;
     
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     // Get palette pointer
@@ -1024,12 +1024,12 @@ void RoomUpdate(void)
     }
 
     #ifdef DEBUG
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING || gGameModeSub1 == SUB_GAME_MODE_NO_CLIP)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING || gSubGameMode1 == SUB_GAME_MODE_NO_CLIP)
     {
         BgClipCheckTouchingSpecialClipdata();
     }
     // Check still in "playing" mode
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING || gGameModeSub1 == SUB_GAME_MODE_NO_CLIP)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING || gSubGameMode1 == SUB_GAME_MODE_NO_CLIP)
     {
         BlockUpdateBrokenBlocks();
         BlockProcessBombChains();
@@ -1038,12 +1038,12 @@ void RoomUpdate(void)
         ConnectionUpdateHatches();
     }
     #else // !DEBUG
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
     {
         BgClipCheckTouchingSpecialClipdata();
 
         // Check still in "playing" mode
-        if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+        if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
         {
             BlockUpdateBrokenBlocks();
             BlockProcessBombChains();

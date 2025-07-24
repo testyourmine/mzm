@@ -261,13 +261,13 @@ void StartEffectForCutscene(u8 request)
             gSramOperationStage = 0;
             unk_5b340();
             ColorFadingStart(COLOR_FADING_CHOZODIA_ESCAPE);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
 
         case EFFECT_CUTSCENE_ESCAPE_FAILED:
             unk_5b340();
             ColorFadingStart(COLOR_FADING_ESCAPE_FAILED);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
 
         case EFFECT_CUTSCENE_EXITING_ZEBES:
@@ -277,19 +277,19 @@ void StartEffectForCutscene(u8 request)
         case EFFECT_CUTSCENE_GETTING_FULLY_POWERED:
             unk_5b340();
             ColorFadingStart(COLOR_FADING_GETTING_FULLY_POWERED);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
 
         case EFFECT_CUTSCENE_RIDLEY_SPAWN:
             unk_5b340();
             ColorFadingStart(COLOR_FADING_RIDLEY_SPAWN);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
 
         case EFFECT_CUTSCENE_STATUE_OPENING:
             unk_5b340();
             ColorFadingStart(COLOR_FADING_STATUE_CUTSCENE);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
 
         case EFFECT_CUTSCENE_INTRO_TEXT:
@@ -299,7 +299,7 @@ void StartEffectForCutscene(u8 request)
         case EFFECT_CUTSCENE_SAMUS_IN_BLUE_SHIP:
             unk_5b340();
             ColorFadingStart(COLOR_FADING_SAMUS_IN_BLUE_SHIP);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
     }
 }
@@ -326,7 +326,7 @@ void ColorFadingStart(u8 type)
  */
 void ColorFadingHideScreenDuringLoad(void)
 {
-    if (gGameModeSub3 == 0 || gPauseScreenFlag != 0 || gCurrentCutscene != 0 || gTourianEscapeCutsceneStage != 0)
+    if (gSubGameMode3 == 0 || gPauseScreenFlag != 0 || gCurrentCutscene != 0 || gTourianEscapeCutsceneStage != 0)
     {
         if (sColorFadingData[gColorFading.type].isWhite)
         {
@@ -717,7 +717,7 @@ u8 ColorFadingProcess_EscapeFailed(void)
             gColorFading.subroutineTimer++;
             if (gColorFading.subroutineTimer > CONVERT_SECONDS(1.f))
             {
-                gGameModeSub1 = 0;
+                gSubGameMode1 = 0;
                 gMainGameMode = GM_GAMEOVER;
                 return TRUE;
             }
@@ -763,7 +763,7 @@ u8 ColorFadingProcess_ChozodiaEscape(void)
                 gCompletedGameFlagCopy = 0x80;
             }
             #endif // DEBUG
-            gGameModeSub1 = 0;
+            gSubGameMode1 = 0;
             gMainGameMode = GM_CHOZODIA_ESCAPE;
             break;
     }

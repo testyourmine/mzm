@@ -226,9 +226,9 @@ void ParticleProcessAll(void)
     struct ParticleEffect* pParticle;
     ParticleStatus status;
 
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
     {
-        if (gGameModeSub1 != SUB_GAME_MODE_DOOR_TRANSITION && gGameModeSub1 != SUB_GAME_MODE_LOADING_ROOM)
+        if (gSubGameMode1 != SUB_GAME_MODE_DOOR_TRANSITION && gSubGameMode1 != SUB_GAME_MODE_LOADING_ROOM)
             return;
 
         for (pParticle = gParticleEffects; pParticle < gParticleEffects + MAX_AMOUNT_OF_PARTICLES; pParticle++)

@@ -77,8 +77,8 @@ void SoftReset(void)
     gMainGameMode = GM_INTRO;
     #endif // DEBUG
 
-    gGameModeSub1 = 0;
-    gGameModeSub2 = 0;
+    gSubGameMode1 = 0;
+    gSubGameMode2 = 0;
     gResetGame = 0;
     gStereoFlag = 0;
 
@@ -90,7 +90,7 @@ void SoftReset(void)
         if (INVALID_EU_LANGUAGE(gLanguage))
         {
             gMainGameMode = GM_SOFT_RESET;
-            gGameModeSub1 = sLanguageSelectGameModeSub1Values[1];
+            gSubGameMode1 = sLanguageSelectGameModeSub1Values[1];
         }
     }
     #endif // REGION_EU

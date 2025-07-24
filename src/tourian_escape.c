@@ -2512,11 +2512,11 @@ u8 TourianEscapeCallSubroutines(void)
     ended = FALSE;
     gNextOamSlot = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             TourianEscapeInit();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 1:
@@ -2527,7 +2527,7 @@ u8 TourianEscapeCallSubroutines(void)
             }
 
             TOURIAN_ESCAPE_DATA.bldcnt = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
@@ -2552,7 +2552,7 @@ u8 TourianEscapeCallSubroutines(void)
                 }
             }
             else if (result)
-                gGameModeSub1++;
+                gSubGameMode1++;
 
             ResetFreeOam();
             break;

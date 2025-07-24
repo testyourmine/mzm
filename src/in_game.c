@@ -46,21 +46,21 @@ u32 InGameMainLoop(void)
     SetVBlankCodeInGame();
     changing = FALSE;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             #ifdef DEBUG
             gDebugVCount_AudioMax = 0;
             #endif // DEBUG
 
-            if (gGameModeSub3 == 0)
+            if (gSubGameMode3 == 0)
                 DemoResetInputAndDuration();
 
             if (gDemoState == DEMO_STATE_PLAYING)
                 CopyDemoInput();
 
             InitAndLoadGenerics();
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case SUB_GAME_MODE_DOOR_TRANSITION:
@@ -68,7 +68,7 @@ u32 InGameMainLoop(void)
             IoWriteRegisters();
             #endif // !REGION_EU
             if (ColorFadingFinishDoorTransition()) // Undefined
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case SUB_GAME_MODE_PLAYING:
@@ -82,15 +82,15 @@ u32 InGameMainLoop(void)
             if (gDebugMode && gChangedInput & KEY_START &&
                 (gButtonInput & (KEY_L | KEY_B)) == (KEY_L | KEY_B) && !gPreventMovementTimer)
             {
-                gGameModeSub1 = SUB_GAME_MODE_NO_CLIP;
+                gSubGameMode1 = SUB_GAME_MODE_NO_CLIP;
             }
             else
             #endif // DEBUG
             {
                 if ((gChangedInput & gButtonAssignments.pause || gPauseScreenFlag != PAUSE_SCREEN_NONE) && ProcessPauseButtonPress())
-                    gGameModeSub1++;
+                    gSubGameMode1++;
     
-                if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+                if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
                 {
                     gPreviousXPosition = gSamusData.xPosition;
                     gPreviousYPosition = gSamusData.yPosition;
@@ -119,7 +119,7 @@ u32 InGameMainLoop(void)
             #endif // !REGION_EU
             if (ColorFadingProcess())
             {
-                gGameModeSub1 = 0;
+                gSubGameMode1 = 0;
                 if (gPauseScreenFlag != PAUSE_SCREEN_NONE || gCurrentCutscene != 0 || gTourianEscapeCutsceneStage != 0)
                     changing = TRUE;
             }
@@ -139,14 +139,14 @@ u32 InGameMainLoop(void)
             break;
     }
 
-    if (gGameModeSub1 == SUB_GAME_MODE_DYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_DYING)
     {
         SamusCallGfxFunctions();
         SamusDraw();
         ResetFreeOam();
         RoomUpdate();
     }
-    else if (gGameModeSub1 != 0)
+    else if (gSubGameMode1 != 0)
     {
         RoomUpdateAnimatedGraphicsAndPalettes();
         SpriteUpdate();
@@ -178,7 +178,7 @@ u32 InGameMainLoop(void)
         ResetFreeOam();
         RoomUpdate();
     
-        if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+        if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
             SamusCallCheckLowHealth();
     }
 
@@ -218,7 +218,7 @@ u32 InGameMainLoop(void)
  */
 void SetVBlankCodeInGame(void)
 {
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
         case SUB_GAME_MODE_DOOR_TRANSITION:
@@ -234,12 +234,12 @@ void SetVBlankCodeInGame(void)
 
 #ifdef REGION_EU
 /**
- * @brief Calls IoWriteRegisters based on gGameModeSub1
+ * @brief Calls IoWriteRegisters based on gSubGameMode1
  * 
  */
 void InGameIoWriteRegisters(void)
 {
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             break;
@@ -457,7 +457,7 @@ void InitAndLoadGenerics(void)
 
     CallbackSetVblank(VBlankInGame_Empty);
 
-    if (gGameModeSub3 == 0 || gTourianEscapeCutsceneStage != 0)
+    if (gSubGameMode3 == 0 || gTourianEscapeCutsceneStage != 0)
     {
         ClearGfxRam();
         HudGenericLoadCommonSpriteGfx();
@@ -484,7 +484,7 @@ void InitAndLoadGenerics(void)
     do {
     } while ((u16)(READ_16(REG_VCOUNT) - 21) < 140); // READ_16(REG_VCOUNT) <= SCREEN_SIZE_Y
 
-    if (gPauseScreenFlag == PAUSE_SCREEN_NONE && gGameModeSub3 != 0)
+    if (gPauseScreenFlag == PAUSE_SCREEN_NONE && gSubGameMode3 != 0)
     {
         SamusUpdate();
         SamusUpdateHitboxMovingDirection();
@@ -511,10 +511,10 @@ void InitAndLoadGenerics(void)
 
     unk_55f68();
 
-    if (gGameModeSub3 == 0)
+    if (gSubGameMode3 == 0)
     {
         SpriteUpdate();
-        gGameModeSub3 = 1;
+        gSubGameMode3 = 1;
         gPreventMovementTimer = 0;
     }
 
@@ -555,7 +555,7 @@ void UpdateNoClip_Debug(void)
 
     if (gChangedInput & (KEY_B | KEY_START))
     {
-        gGameModeSub1 = SUB_GAME_MODE_PLAYING;
+        gSubGameMode1 = SUB_GAME_MODE_PLAYING;
         gNoClipLockCamera = FALSE;
     }
 

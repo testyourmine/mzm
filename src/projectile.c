@@ -1683,7 +1683,7 @@ void ProjectileProcessPowerBomb(struct ProjectileData* pProj)
             break;
 
         case POWER_BOMB_STAGE_FAST_SPIN:
-            if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+            if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
             {
                 APPLY_DELTA_TIME_DEC(pProj->timer);
                 if (pProj->timer == 0)

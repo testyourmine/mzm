@@ -410,7 +410,7 @@ void TransparencyUpdateBldcnt(u8 action, u16 value)
             return;
     }
 
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING || effects != BLDCNT_BRIGHTNESS_INCREASE_EFFECT)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING || effects != BLDCNT_BRIGHTNESS_INCREASE_EFFECT)
         gWrittenToBldcnt = gIoRegistersBackup.Bldcnt_NonGameplay;
 }
 

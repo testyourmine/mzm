@@ -2097,10 +2097,10 @@ u32 PauseScreenSubroutine(void)
 
         case 4:
             gSubGameModeStage = 0;
-            gGameModeSub2 = 4;
+            gSubGameMode2 = 4;
             #ifdef DEBUG
             if ((gPauseScreenFlag == PAUSE_SCREEN_SUITLESS_ITEMS || gPauseScreenFlag == PAUSE_SCREEN_FULLY_POWERED_SUIT_ITEMS) && gBootDebugActive)
-                gGameModeSub2 = 10;
+                gSubGameMode2 = 10;
             #endif // DEBUG
             leaving = TRUE;
             break;
@@ -2128,7 +2128,7 @@ u32 PauseScreenSubroutine(void)
                 gButtonInput = gChangedInput = 0;
                 if (PauseScreenCallCurrentSubroutine())
                 {
-                    gGameModeSub2 = 11;
+                    gSubGameMode2 = 11;
                     leaving = TRUE;
                     gSubGameModeStage = 7;
                 }

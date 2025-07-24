@@ -170,7 +170,7 @@ void EscapeUpdateTimer(void)
         return;
     }
 
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     if (gPreventMovementTimer != 0)

@@ -195,9 +195,9 @@ SECTIONS {
         . = 0x00000c24; gSaveFilesInfo = .;
         . = 0x00000c6c; gSectionInfo = .;
         . = 0x00000c70; gMainGameMode = .;
-        . = 0x00000c72; gGameModeSub1 = .;
-        . = 0x00000c74; gGameModeSub2 = .;
-        . = 0x00000c75; gGameModeSub3 = .;
+        . = 0x00000c72; gSubGameMode1 = .;
+        . = 0x00000c74; gSubGameMode2 = .;
+        . = 0x00000c75; gSubGameMode3 = .;
         . = 0x00000c76; gVblankActive = .;
         . = 0x00000c77; gFrameCounter8Bit = .;
         . = 0x00000c78; gVBlankRequestFlag = .;

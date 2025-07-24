@@ -320,7 +320,7 @@ void FileSelectProcessOAM(void)
 {
     gNextOamSlot = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
         case 1:
@@ -2976,7 +2976,7 @@ static u8 FileSelectOptionTransition(u8 leavingOptions)
             gBg0HOFS_NonGameplay = BLOCK_SIZE * 32;
             gBg0VOFS_NonGameplay = BLOCK_SIZE * 32;
 
-            gGameModeSub2 = 0;
+            gSubGameMode2 = 0;
             return TRUE;
     }
 
@@ -3118,11 +3118,11 @@ static u8 OptionsSubroutine(void)
                 break;
 
             if (result == 2)
-                gGameModeSub2 = sOptionsSubroutineInfo[FILE_SELECT_DATA.optionsUnlocked[gOptionsOptionSelected]].gameMode;
+                gSubGameMode2 = sOptionsSubroutineInfo[FILE_SELECT_DATA.optionsUnlocked[gOptionsOptionSelected]].gameMode;
             else
-                gGameModeSub2 = 0;
+                gSubGameMode2 = 0;
 
-            if (gGameModeSub2)
+            if (gSubGameMode2)
             {
                 FILE_SELECT_DATA.currentSubMenu = 5;
             }
@@ -3137,7 +3137,7 @@ static u8 OptionsSubroutine(void)
         case 4:
             FILE_SELECT_DATA.soundTestId = 0;        
             CheckReplayFileSelectMusic(CONVERT_SECONDS(1.f / 6));
-            gGameModeSub2 = 0;
+            gSubGameMode2 = 0;
             return TRUE;
 
         case 5:
@@ -4370,13 +4370,13 @@ u32 FileSelectMenuSubroutine(void)
 {
     APPLY_DELTA_TIME_INC(FILE_SELECT_DATA.timer);
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
-            gGameModeSub2 = 0;
+            gSubGameMode2 = 0;
             gCutsceneToSkip = 0;
             FileSelectInit();
-            gGameModeSub1--;
+            gSubGameMode1--;
             break;
 
         case 1:
@@ -4384,8 +4384,8 @@ u32 FileSelectMenuSubroutine(void)
             FileSelectApplyFading();
             if (FileSelectUpdateFading())
             {
-                gGameModeSub1++;
-                gGameModeSub2 = 0;
+                gSubGameMode1++;
+                gSubGameMode2 = 0;
             }
             break;
 
@@ -4393,19 +4393,19 @@ u32 FileSelectMenuSubroutine(void)
             if (FileSelectUpdateSubMenu())
             {
                 FILE_SELECT_DATA.timer = 0;
-                if (gGameModeSub2 == 1)
-                    gGameModeSub1 = 7;
-                else if (gGameModeSub2 == 2)
-                    gGameModeSub1 = 4;
-                else if (gGameModeSub2 == 3)
-                    gGameModeSub1 = 3;
+                if (gSubGameMode2 == 1)
+                    gSubGameMode1 = 7;
+                else if (gSubGameMode2 == 2)
+                    gSubGameMode1 = 4;
+                else if (gSubGameMode2 == 3)
+                    gSubGameMode1 = 3;
                 else
                 {
                     FILE_SELECT_DATA.currentSubMenu = 0;
-                    gGameModeSub1 = 10;
+                    gSubGameMode1 = 10;
                 }
 
-                if (gGameModeSub2 == 0)
+                if (gSubGameMode2 == 0)
                     break;
 
                 FileSelectInitFading(TRUE);
@@ -4416,14 +4416,14 @@ u32 FileSelectMenuSubroutine(void)
         case 10:
             if (OptionsSubroutine())
             {
-                if (gGameModeSub2)
+                if (gSubGameMode2)
                 {
                     FileSelectInitFading(TRUE);
-                    gGameModeSub1 = 11;
+                    gSubGameMode1 = 11;
                 }
                 else
                 {
-                    gGameModeSub1 = 2;
+                    gSubGameMode1 = 2;
                     FILE_SELECT_DATA.currentSubMenu = 6;
                     FILE_SELECT_DATA.timer = 0;
                     FILE_SELECT_DATA.subroutineStage = 0;
@@ -4445,13 +4445,13 @@ u32 FileSelectMenuSubroutine(void)
             if (FileSelectUpdateFading())
             {
                 FILE_SELECT_DATA.timer = 0;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
             break;
 
         case 5:
             if (FILE_SELECT_DATA.timer > CONVERT_SECONDS(.5f))
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 6:
@@ -4748,7 +4748,7 @@ static void FileSelectInit(void)
     SramRead_SoundMode();
     FileSelectApplyStereo();
 
-    gGameModeSub1 = 2;
+    gSubGameMode1 = 2;
 
     if (gSaveFilesInfo[FILE_SELECT_CURSOR_POSITION_FILE_A].corruptionFlag || gSaveFilesInfo[FILE_SELECT_CURSOR_POSITION_FILE_B].corruptionFlag || gSaveFilesInfo[FILE_SELECT_CURSOR_POSITION_FILE_C].corruptionFlag)
     {
@@ -4758,7 +4758,7 @@ static void FileSelectInit(void)
     {
         if (FILE_SELECT_DATA.optionsUnlocked[gOptionsOptionSelected] && gOptionsOptionSelected > 0 && (u8)gOptionsOptionSelected < 7)
         {
-            gGameModeSub1 = 10;
+            gSubGameMode1 = 10;
             OptionsSoundTestCheckNotAlreadyPlaying();
             FILE_SELECT_DATA.currentSubMenu = 1;
         }
@@ -4799,7 +4799,7 @@ static void FileSelectInit(void)
     FileSelectResetOAM();
     FileSelectUpdateCursor(CURSOR_POSE_DEFAULT, FILE_SELECT_DATA.unk_24);
 
-    if (gGameModeSub1 == 2)
+    if (gSubGameMode1 == 2)
     {
         if (FILE_SELECT_DATA.currentSubMenu == 4)
         {
@@ -5414,7 +5414,7 @@ static u8 FileSelectUpdateSubMenu(void)
                     gLanguage = gSaveFilesInfo[FILE_SELECT_DATA.fileSelectCursorPosition].language;
                 }
                 #endif // REGION_JP
-                gGameModeSub2 = 3;
+                gSubGameMode2 = 3;
                 return TRUE;
             }
             else if (result == 3)
@@ -5504,7 +5504,7 @@ static u8 FileSelectUpdateSubMenu(void)
                     }
                 }
                 
-                gGameModeSub2 = gSaveFilesInfo[gMostRecentSaveFile].exists ? 1 : 2;
+                gSubGameMode2 = gSaveFilesInfo[gMostRecentSaveFile].exists ? 1 : 2;
                 FadeMusic(ONE_THIRD_SECOND);
                 return TRUE;
             }
@@ -5540,7 +5540,7 @@ static u8 FileSelectUpdateSubMenu(void)
         case 5:
             if (FileSelectOptionTransition(FALSE))
             {
-                gGameModeSub2 = 0;
+                gSubGameMode2 = 0;
                 return TRUE;
             }
             break;

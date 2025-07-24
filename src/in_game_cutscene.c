@@ -875,7 +875,7 @@ u32 InGameCutsceneTryQueue(InGameCutsceneScene cutscene)
     switch (cutscene)
     {
         case IGC_CLOSE_UP:
-            if (gCurrentRoom == 0 && gLastDoorUsed == 0 && !gIsLoadingFile && gGameModeSub3 == 0 && !gDebugMode && gDemoState == 0)
+            if (gCurrentRoom == 0 && gLastDoorUsed == 0 && !gIsLoadingFile && gSubGameMode3 == 0 && !gDebugMode && gDemoState == 0)
                 queued = TRUE;
             break;
 

@@ -27,17 +27,17 @@ static u32 LanguageSelectSubroutine(void);
  */
 u32 SoftResetSubroutine(void)
 {
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             SoftResetInit();
             #ifdef REGION_EU
             if (LANGUAGE_SELECT_DATA.loadLanguageSelect)
-                gGameModeSub1 = 3;
+                gSubGameMode1 = 3;
             else
-                gGameModeSub1++;
+                gSubGameMode1++;
             #else // !REGION_EU
-            gGameModeSub1++;
+            gSubGameMode1++;
             #endif // REGION_EU
             break;
 
@@ -48,7 +48,7 @@ u32 SoftResetSubroutine(void)
                 gWrittenToBldy_NonGameplay -= 4;
             
             if (gWrittenToBldy_NonGameplay == 0)
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 2:
@@ -65,7 +65,7 @@ u32 SoftResetSubroutine(void)
             if (gWrittenToBldy_NonGameplay == 0)
             {
                 LANGUAGE_SELECT_DATA.bldcnt = UCHAR_MAX;
-                gGameModeSub1 = 4;
+                gSubGameMode1 = 4;
             }
 
             LanguageSelectUpdateHighlightAnimation(&LANGUAGE_SELECT_DATA.languageAnimation);
@@ -76,7 +76,7 @@ u32 SoftResetSubroutine(void)
             {
                 LANGUAGE_SELECT_DATA.timer = 0;
                 LANGUAGE_SELECT_DATA.languageAnimation.interval = DELTA_TIME;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
 
             LanguageSelectUpdateHighlightAnimation(&LANGUAGE_SELECT_DATA.languageAnimation);
@@ -85,7 +85,7 @@ u32 SoftResetSubroutine(void)
         case 5:
             APPLY_DELTA_TIME_INC(LANGUAGE_SELECT_DATA.timer);
             if (LANGUAGE_SELECT_DATA.timer > CONVERT_SECONDS(1.f))
-                gGameModeSub1++;
+                gSubGameMode1++;
 
             LanguageSelectUpdateHighlightAnimation(&LANGUAGE_SELECT_DATA.languageAnimation);
             break;
@@ -97,7 +97,7 @@ u32 SoftResetSubroutine(void)
                 gWrittenToBldy_NonGameplay += 2;
             
             if (gWrittenToBldy_NonGameplay == 0x10)
-                gGameModeSub1 = 2;
+                gSubGameMode1 = 2;
 
             LanguageSelectUpdateHighlightAnimation(&LANGUAGE_SELECT_DATA.languageAnimation);
             break;
@@ -106,9 +106,9 @@ u32 SoftResetSubroutine(void)
         case 8:
             SoftResetInit();
             if (LANGUAGE_SELECT_DATA.loadLanguageSelect)
-                gGameModeSub1 = 3;
+                gSubGameMode1 = 3;
             else
-                gGameModeSub1 = 2;
+                gSubGameMode1 = 2;
             break;
 
         #endif // REGION_EU
@@ -279,7 +279,7 @@ void SoftResetInit(void)
     #endif
 
     #ifdef REGION_EU
-    if (gGameModeSub1 == 0)
+    if (gSubGameMode1 == 0)
         WRITE_16(REG_BLDCNT, LANGUAGE_SELECT_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
     else
         WRITE_16(REG_BLDCNT, LANGUAGE_SELECT_DATA.bldcnt = UCHAR_MAX);
@@ -302,7 +302,7 @@ void SoftResetInit(void)
     #ifndef REGION_EU
     SET_BACKDROP_COLOR(COLOR_BLACK);
     #endif // !REGION_EU
-    gGameModeSub3 = 0;
+    gSubGameMode3 = 0;
 
     gBg0HOFS_NonGameplay = gBg0VOFS_NonGameplay = 0;
     gBg1HOFS_NonGameplay = gBg1VOFS_NonGameplay = 0;
@@ -328,7 +328,7 @@ void SoftResetInit(void)
     }
     else
     {
-        LANGUAGE_SELECT_DATA.loadLanguageSelect = gGameModeSub1 == 7;
+        LANGUAGE_SELECT_DATA.loadLanguageSelect = gSubGameMode1 == 7;
     }
 
     if (LANGUAGE_SELECT_DATA.loadLanguageSelect)

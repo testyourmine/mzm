@@ -49,7 +49,7 @@ static void FusionGalleryInit(void)
     CallbackSetVblank(FusionGalleryVBlank);
     WRITE_16(REG_IME, TRUE);
 
-    if (gGameModeSub1 == 0)
+    if (gSubGameMode1 == 0)
     {
         ClearGfxRam();
         DMA_FILL_32(3, 0, &gNonGameplayRam, sizeof(gNonGameplayRam));
@@ -152,7 +152,7 @@ static u32 FusionGalleryDisplay(void)
         FUSION_GALLERY_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
 
         gWrittenToBldy_NonGameplay = 0;
-        gGameModeSub1 = 5;
+        gSubGameMode1 = 5;
     }
 
     change = FALSE;
@@ -206,12 +206,12 @@ u32 FusionGallerySubroutine(void)
     ended = FALSE;
     FUSION_GALLERY_DATA.stage = 0;
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
         case 4:
             FusionGalleryInit();
-            gGameModeSub1 = 1;
+            gSubGameMode1 = 1;
             break;
 
         case 1:
@@ -222,12 +222,12 @@ u32 FusionGallerySubroutine(void)
             }
 
             FUSION_GALLERY_DATA.bldcnt = 0;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
             if (FusionGalleryDisplay())
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 3:
@@ -240,10 +240,10 @@ u32 FusionGallerySubroutine(void)
                 break;
             }
 
-            if (gGameModeSub1 == 3)
+            if (gSubGameMode1 == 3)
                 ended++;
             else
-                gGameModeSub1 = 4;
+                gSubGameMode1 = 4;
             break;
     }
 

@@ -43,7 +43,7 @@ void PowerBombExplosionProcess(void)
                 PowerBombExplosionBegin();
             else if (gCurrentPowerBomb.animationState == PB_STATE_ENDING)
                 PowerBombExplosionEnd();
-            else if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+            else if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
                 PowerBombExplosion();
         }
     }
@@ -217,7 +217,7 @@ static void PowerBombExplosion(void)
  */
 void PowerBombExplosionStart(u16 xPosition, u16 yPosition, u8 owner)
 {
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     PowerBombExplosionSet0x12To0();
@@ -250,7 +250,7 @@ static void PowerBombExplosionSet0x12To0(void)
  */
 static void PowerBombExplosionBegin(void)
 {
-    if (gGameModeSub1 != SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 != SUB_GAME_MODE_PLAYING)
         return;
 
     gCurrentPowerBomb.animationState = PB_STATE_EXPLODING;

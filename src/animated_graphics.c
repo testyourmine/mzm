@@ -459,7 +459,7 @@ void AnimatedPaletteUpdate(void)
         row = -row;
 
     // Transfer palette
-    if (gGameModeSub1 == SUB_GAME_MODE_PLAYING)
+    if (gSubGameMode1 == SUB_GAME_MODE_PLAYING)
     {
         // Directly to palram if in game
         DMA_SET(3, &sAnimatedPaletteEntries[gAnimatedGraphicsEntry.palette].pPalette[row * PAL_ROW],
@@ -667,7 +667,7 @@ static u16 BackgroundEffectProcess(void)
 
             // Start appropriate color fading
             ColorFadingStart(COLOR_FADING_TOURIAN_ESCAPE);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
 
         case BACKGROUND_EFFECT_CMD_FINISH_BEFORE_INTRO_TEXT:
@@ -678,7 +678,7 @@ static u16 BackgroundEffectProcess(void)
 
             // Start appropriate color fading
             ColorFadingStart(COLOR_FADING_INTRO_TEXT);
-            gGameModeSub1 = 3;
+            gSubGameMode1 = 3;
             break;
     }
 

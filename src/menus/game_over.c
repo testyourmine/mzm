@@ -44,7 +44,7 @@ u32 GameOverSubroutine(void)
 
     APPLY_DELTA_TIME_INC(GAME_OVER_DATA.timer);
 
-    switch (gGameModeSub1)
+    switch (gSubGameMode1)
     {
         case 0:
             if (gCurrentDemo.active)
@@ -56,7 +56,7 @@ u32 GameOverSubroutine(void)
                 FadeAllSounds(CONVERT_SECONDS(1.f / 6));
                 FadeMusic(CONVERT_SECONDS(1.f / 6));
                 gDemoState = DEMO_STATE_NONE;
-                gGameModeSub2 = 2;
+                gSubGameMode2 = 2;
                 return TRUE;
             }
 
@@ -64,14 +64,14 @@ u32 GameOverSubroutine(void)
             if (gDebugMode && gSectionInfo.sectionIndex < BOOT_DEBUG_SECTION_SAVE_A)
             {
                 GameOverInit_Debug();
-                gGameModeSub1 = 9;
+                gSubGameMode1 = 9;
             }
             else
             #endif // DEBUG
             {
                 GameOverInit();
                 GAME_OVER_DATA.timer = 0;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
             break;
 
@@ -84,7 +84,7 @@ u32 GameOverSubroutine(void)
 
             GAME_OVER_DATA.dispcnt |= DCNT_WIN1;
             GAME_OVER_DATA.bldcnt = BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 2:
@@ -97,14 +97,14 @@ u32 GameOverSubroutine(void)
             }
             GAME_OVER_DATA.dynamicPalette.enableFlags = 0x80 | 1;
             PlayMusic(MUSIC_GAME_OVER, 0);
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 3:
             if (GameOverProcessInput())
             {
                 GAME_OVER_DATA.timer = 0;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
 
             GameOverUpdateLettersPalette();
@@ -114,7 +114,7 @@ u32 GameOverSubroutine(void)
             if (GAME_OVER_DATA.oam[0].ended)
             {
                 GAME_OVER_DATA.timer = 0;
-                gGameModeSub1++;
+                gSubGameMode1++;
             }
 
             GameOverUpdateLettersPalette();
@@ -126,30 +126,30 @@ u32 GameOverSubroutine(void)
             GAME_OVER_DATA.bldcnt = BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT;
             GAME_OVER_DATA.dispcnt ^= DCNT_WIN1;
             FadeMusic(ONE_THIRD_SECOND);
-            gGameModeSub1++;
+            gSubGameMode1++;
             break;
 
         case 6:
             if (gWrittenToBldy_NonGameplay < BLDY_MAX_VALUE)
                 gWrittenToBldy_NonGameplay++;
             else
-                gGameModeSub1++;
+                gSubGameMode1++;
             break;
 
         case 7:
             if (GAME_OVER_DATA.optionSelected == 1)
             {
                 #ifdef DEBUG
-                gGameModeSub2 = !gDebugMode ? 1 : 16;
+                gSubGameMode2 = !gDebugMode ? 1 : 16;
                 #else // !DEBUG
-                gGameModeSub2 = 1;
+                gSubGameMode2 = 1;
                 #endif
                 ended = TRUE;
                 break;
             }
 
-            gGameModeSub2 = 4;
-            gGameModeSub1++;
+            gSubGameMode2 = 4;
+            gSubGameMode1++;
             break;
 
         case 8:
@@ -172,7 +172,7 @@ u32 GameOverSubroutine(void)
                 gWrittenToBldy_NonGameplay++;
             else
             {
-                gGameModeSub2 = 0x10;
+                gSubGameMode2 = 0x10;
                 ended = TRUE;
             }
             break;
@@ -332,7 +332,7 @@ static void GameOverInit(void)
 
     GAME_OVER_DATA.dynamicPalette = sGameOverDynamicPalette_Empty;
 
-    gGameModeSub3 = 0;
+    gSubGameMode3 = 0;
 
     gBg0HOFS_NonGameplay = gBg0VOFS_NonGameplay = 0;
     gBg1HOFS_NonGameplay = gBg1VOFS_NonGameplay = 0;
@@ -384,7 +384,7 @@ static void GameOverInit_Debug(void)
     WRITE_16(REG_BG2CNT, 0);
     WRITE_16(REG_BG3CNT, 0);
 
-    gGameModeSub3 = 0;
+    gSubGameMode3 = 0;
 
     gBg0HOFS_NonGameplay = gBg0VOFS_NonGameplay = 0;
     gBg1HOFS_NonGameplay = gBg1VOFS_NonGameplay = 0;
