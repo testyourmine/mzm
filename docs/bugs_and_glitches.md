@@ -136,6 +136,28 @@ When a normal (non-boss) enemy is killed, its AI code usually has a default case
 +     break;
 ```
 
+### Turning can trigger the fully powered suit cutscene without getting locked in place
+
+After the Ruins Test fight, the game tries to lock you in place in the center of the room. If you turn in the opposite direction while Samus is turning toward the background, the timer for the cutscene will be triggered but you can move Samus freely before it starts. This is because the game sets the "running" pose if the opposite direction is pressed while Samus is turning to face the background. Normally, the "facing the background" pose should be set.
+
+**Fix:** Edit `SamusTurningFromFacingTheBackgroundGfx` in [samus.c](../src/samus.c) to remove the check for the opposite direction being pressed.
+
+```diff
+- // It's unclear what the purpose of this code is. If the opposite direction is held when Samus
+- // finishes turning, she will run in the current direction for one frame then turn toward the held
+- // direction. This can cause a bug after the Ruins Test fight (see docs/bugs_and_glitches.md).
+- if (gButtonInput & OPPOSITE_DIRECTION(pData->direction))
+-     return SPOSE_RUNNING;
+-
+  if (pData->lastWallTouchedMidAir != 0)
+      return SPOSE_FACING_THE_BACKGROUND_SUITLESS;
+  
+  if (gEquipment.suitType == SUIT_SUITLESS)
+      return SPOSE_UNCROUCHING_SUITLESS;
+
+  return SPOSE_STANDING;
+```
+
 
 ## Oversights and Design Flaws
 
@@ -220,8 +242,6 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
   - Potential fixes: don't check lava damage during a door transition, or check the sub game mode value before incrementing it
 - Sidehoppers and dessgeegas don't initialize the delay (stored in work1) for their first jump
   - Potential fixes: initialize work1 in SidehopperInit, or call SidehopperIdleInit
-- Turning when the game tries to lock you in place for the fully powered suit cutscene allows you to control Samus
-  - Potential fix: check lastWallTouchedMidAir first ([code](https://github.com/metroidret/mzm/blob/4d9b219990ad5cce9c35f495195fe6019fecbac1/src/samus.c#L6551-L6555))
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
 - Door clipping using frozen enemies ([video](https://www.youtube.com/watch?v=iMObZ5EbooE))
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))

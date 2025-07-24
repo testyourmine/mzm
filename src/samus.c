@@ -6594,9 +6594,13 @@ SamusPose SamusTurningFromFacingTheBackgroundGfx(struct SamusData* pData)
 {
     if (SamusUpdateAnimation(pData, FALSE) == SAMUS_ANIM_STATE_ENDED)
     {
-        // Check already running
+        #ifndef BUGFIX
+        // It's unclear what the purpose of this code is. If the opposite direction is held when Samus
+        // finishes turning, she will run in the current direction for one frame then turn toward the held
+        // direction. This can cause a bug after the Ruins Test fight (see docs/bugs_and_glitches.md).
         if (gButtonInput & OPPOSITE_DIRECTION(pData->direction))
             return SPOSE_RUNNING;
+        #endif // !BUGFIX
 
         if (pData->lastWallTouchedMidAir != 0)
             return SPOSE_FACING_THE_BACKGROUND_SUITLESS;
