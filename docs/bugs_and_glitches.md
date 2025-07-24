@@ -14,6 +14,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Turning can trigger the fully powered suit cutscene without getting locked in place](#turning-can-trigger-the-fully-powered-suit-cutscene-without-getting-locked-in-place)
   - [Dying during a door transition (from lava/acid) puts Samus in the no-clip state](#dying-during-a-door-transition-from-lavaacid-puts-samus-in-the-no-clip-state)
   - [Missiles can be highlighted and toggled while dying](#missiles-can-be-highlighted-and-toggled-while-dying)
+  - [Sidehoppers and Dessgeegas don't initialize the delay for their first jump](#sidehoppers-and-dessgeegas-dont-initialize-the-delay-for-their-first-jump)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -196,6 +197,23 @@ During Samus's death animation, missiles can be highlighted and super missiles c
   }
 ```
 
+### Sidehoppers and Dessgeegas don't initialize the delay for their first jump
+
+Sidehoppers and Dessgeegas use the `work1` variable to store the delay before jumping. However, this value isn't initialized when they spawn, so `work1` could potentially contain any value that was set by a previous sprite. Normally this is a value between 0-3, but if it's higher, it means their first jump won't happen for an abnormally long amount of time.
+
+**Fix:** Edit `SidehopperInit` in [sidehopper.c](../src/sprites_AI/sidehopper.c) and `DessgeegaInit` in [dessgeega.c](../src/sprites_AI/dessgeega.c) to initialize `work1`.
+
+```diff
+  gCurrentSprite.work0 = 0;
++ gCurrentSprite.work1 = MOD_AND(gSpriteRng, 4);
+  gCurrentSprite.pose = SIDEHOPPER_POSE_IDLE;
+```
+
+```diff
+  gCurrentSprite.work0 = 0;
++ gCurrentSprite.work1 = MOD_AND(gSpriteRng, 4);
+```
+
 
 ## Oversights and Design Flaws
 
@@ -276,8 +294,6 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 
 - PowerBombExplosion doesn't check if out of bounds, which can lead to memory corruption
   - Fix: don't check collision with any blocks outside of the room
-- Sidehoppers and dessgeegas don't initialize the delay (stored in work1) for their first jump
-  - Potential fixes: initialize work1 in SidehopperInit, or call SidehopperIdleInit
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
 - Door clipping using frozen enemies ([video](https://www.youtube.com/watch?v=iMObZ5EbooE))
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))

@@ -79,8 +79,12 @@ static void DessgeegaInit(void)
         gCurrentSprite.pose = DESSGEEGA_POSE_IDLE;
     }
 
-    // Set hitbox and draw distances based on direction
     gCurrentSprite.work0 = 0;
+    #ifdef BUGFIX
+    gCurrentSprite.work1 = MOD_AND(gSpriteRng, 4);
+    #endif // BUGFIX
+
+    // Set hitbox and draw distances based on direction
     if (gCurrentSprite.status & SPRITE_STATUS_Y_FLIP)
     {
         gCurrentSprite.drawDistanceTop = SUB_PIXEL_TO_PIXEL(HALF_BLOCK_SIZE);

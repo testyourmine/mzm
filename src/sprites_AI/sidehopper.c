@@ -61,6 +61,9 @@ static void SidehopperInit(void)
     }
 
     gCurrentSprite.work0 = 0;
+    #ifdef BUGFIX
+    gCurrentSprite.work1 = MOD_AND(gSpriteRng, 4);
+    #endif // BUGFIX
     gCurrentSprite.pose = SIDEHOPPER_POSE_IDLE;
 
     if (gCurrentSprite.status & SPRITE_STATUS_Y_FLIP)
