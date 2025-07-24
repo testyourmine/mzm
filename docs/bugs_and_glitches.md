@@ -10,6 +10,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Samus slow physics aren't properly applied when grabbed by a metroid in a liquid](#samus-slow-physics-arent-properly-applied-when-grabbed-by-a-metroid-in-a-liquid)
   - [Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics](#mecha-ridleys-missiles-can-be-kept-alive-after-it-dies-which-get-corrupted-graphics)
   - [Collecting an item while a power bomb is active allows Samus to move early](#collecting-an-item-while-a-power-bomb-is-active-allows-samus-to-move-early)
+  - [Killing Imago with pseudo screw attack softlocks the game](#killing-imago-with-pseudo-screw-attack-softlocks-the-game)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -117,6 +118,24 @@ When the message banner for a new item closes, it sets `gPreventMovementTimer` t
   }
 ```
 
+### Killing Imago with pseudo screw attack softlocks the game
+
+When a normal (non-boss) enemy is killed, its AI code usually has a default case for the pose that calls `SpriteUtilSpriteDeath`. This handles being killed via various methods, such as shinespark or pseudo screw attack. Imago can be damaged by pseudo screw attack, but its AI code doesn't have a default case or a case for pseudo screw attack. This will cause the game to softlock if the final hit is done using pseudo screw attack.
+
+**Fix:** Edit `Imago` in [imago.c](../src/sprites_AI/imago.c) to remove the `IMAGO_POSE_DYING_INIT` case and add a `default` case at the end that calls `ImagoDyingInit`.
+
+```diff
+- case IMAGO_POSE_DYING_INIT:
+-     ImagoDyingInit();
+-     break;
+
+  ...
+
++ default:
++     ImagoDyingInit();
++     break;
+```
+
 
 ## Oversights and Design Flaws
 
@@ -206,8 +225,6 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
 - Door clipping using frozen enemies ([video](https://www.youtube.com/watch?v=iMObZ5EbooE))
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))
-- Killing Imago with pseudo screw softlocks the game
-  - Fix: add a case in the AI for pseudo screw
 - Frame perfect pause buffering on ziplines ignores collision
 - Clipping into slopes ([video](https://www.youtube.com/watch?v=XiZRJesXHWw))
 - Chozo statue refill glitch

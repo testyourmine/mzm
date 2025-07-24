@@ -1426,9 +1426,11 @@ void Imago(void)
             ImagoAttackingGoingUp();
             break;
 
+        #ifndef BUGFIX
         case IMAGO_POSE_DYING_INIT:
             ImagoDyingInit();
             break;
+        #endif // !BUGFIX
 
         case IMAGO_POSE_CHECK_SAMUS_AT_SUPER_MISSILE:
             ImagoCheckSamusAtSuperMissile();
@@ -1449,6 +1451,12 @@ void Imago(void)
         case IMAGO_POSE_SET_EVENT:
             ImagoSetEvent();
             break;
+        
+        #ifdef BUGFIX
+        default:
+            ImagoDyingInit();
+            break;
+        #endif // BUGFIX
     }
 
     if (gCurrentSprite.pose <= IMAGO_POSE_DYING && gCurrentSprite.status)
