@@ -1064,11 +1064,11 @@ void ConnectionCheckPlayCutsceneDuringTransition(Area area, u8 dstRoomPlusOne)
             break;
 
         case AREA_CHOZODIA:
-            // Room 0x2A is the Charlie fight room
+            // Room 0x2A is the Ruins Test fight room
             if (dstRoomPlusOne == 0x2B)
             {
                 if (!EventFunction(EVENT_ACTION_CHECKING, EVENT_FULLY_POWERED_SUIT_OBTAINED))
-                    gCurrentCutscene = CUTSCENE_BEFORE_CHARLIE;
+                    gCurrentCutscene = CUTSCENE_BEFORE_RUINS_TEST;
             }
             // Room 0xA is the suitless entry of the mothership
             else if (dstRoomPlusOne == 0xB && !EventFunction(EVENT_ACTION_CHECKING, EVENT_ENTER_MOTHERSHIP_DEMO_PLAYED))

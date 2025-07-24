@@ -559,7 +559,7 @@ SECTIONS {
         src/cutscenes/ridley_spawn.o(.text);
         src/cutscenes/mecha_sees_samus.o(.text);
         src/cutscenes/getting_fully_powered_suit.o(.text);
-        src/cutscenes/before_charlie.o(.text);
+        src/cutscenes/before_ruins_test.o(.text);
         src/cutscenes/statue_opening.o(.text);
         src/cutscenes/enter_tourian.o(.text);
         src/cutscenes/samus_in_blue_ship.o(.text);
@@ -748,7 +748,7 @@ SECTIONS {
         src/data/cutscenes/ridley_spawn_data.o(.rodata);
         src/data/cutscenes/mecha_sees_samus_data.o(.rodata);
         src/data/cutscenes/getting_fully_powered_suit_data.o(.rodata);
-        src/data/cutscenes/before_charlie_data.o(.rodata);
+        src/data/cutscenes/before_ruins_test_data.o(.rodata);
         src/data/cutscenes/statue_opening_data.o(.rodata);
         src/data/cutscenes/enter_tourian_data.o(.rodata);
         src/data/cutscenes/samus_in_blue_ship_data.o(.rodata);
@@ -1167,7 +1167,7 @@ SECTIONS {
         src/cutscenes/ridley_spawn.o(.data);
         src/cutscenes/mecha_sees_samus.o(.data);
         src/cutscenes/getting_fully_powered_suit.o(.data);
-        src/cutscenes/before_charlie.o(.data);
+        src/cutscenes/before_ruins_test.o(.data);
         src/cutscenes/statue_opening.o(.data);
         src/cutscenes/enter_tourian.o(.data);
         src/cutscenes/samus_in_blue_ship.o(.data);

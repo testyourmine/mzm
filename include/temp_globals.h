@@ -19,7 +19,7 @@
 #include "structs/tourian_escape.h"
 
 #include "cutscenes/kraid_rising.h"
-#include "cutscenes/before_charlie.h"
+#include "cutscenes/before_ruins_test.h"
 
 struct InGameData {
     u8 clipdataCode[640];
@@ -50,7 +50,7 @@ union EwramData {
     struct PauseScreenEwramData pauseScreen;
     struct FileSelectEwramData fileSelect;
     struct KraidRisingEwramData kraidRising;
-    struct BeforeCharlieEwramData beforeCharlie;
+    struct BeforeRuinsTestEwramData beforeRuinsTest;
 };
 
 extern u16 gUnk_02035400;

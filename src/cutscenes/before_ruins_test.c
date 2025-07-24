@@ -1,4 +1,4 @@
-#include "cutscenes/before_charlie.h"
+#include "cutscenes/before_ruins_test.h"
 #include "cutscenes/cutscene_utils.h"
 #include "dma.h"
 #include "gba.h"
@@ -7,18 +7,18 @@
 #include "syscall_wrappers.h"
 
 #include "data/shortcut_pointers.h"
-#include "data/cutscenes/before_charlie_data.h"
+#include "data/cutscenes/before_ruins_test_data.h"
 
 #include "constants/cutscene.h"
 #include "constants/audio.h"
 
 #include "structs/display.h"
 
-static void BeforeCharlieWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGraphicsData* pGraphics);
-static void BeforeCharlieWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* pGraphics);
-static void BeforeCharlieWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphics);
+static void BeforeRuinsTestWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGraphicsData* pGraphics);
+static void BeforeRuinsTestWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* pGraphics);
+static void BeforeRuinsTestWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphics);
 
-static struct CutsceneGraphicsData sBeforeCharlieCutsceneGraphicsData = {
+static struct CutsceneGraphicsData sBeforeRuinsTestCutsceneGraphicsData = {
     .active = FALSE,
     .paletteStage = 0,
     .maxTimer = 4,
@@ -31,31 +31,31 @@ static struct CutsceneGraphicsData sBeforeCharlieCutsceneGraphicsData = {
  * 
  * @return u8 FALSE
  */
-static u8 BeforeCharlieSamusCloseUp(void)
+static u8 BeforeRuinsTestSamusCloseUp(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
         case 0:
-            SEND_TO_PALRAM(sBeforeCharlieSamusCloseUpPal, PALRAM_BASE);
+            SEND_TO_PALRAM(sBeforeRuinsTestSamusCloseUpPal, PALRAM_BASE);
             SET_BACKDROP_COLOR(COLOR_BLACK);
 
-            CallLZ77UncompVram(sBeforeCharlieYoungSamusCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[5].graphicsPage));
-            CallLZ77UncompVram(sBeforeCharlieSamusCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[6].graphicsPage));
+            CallLZ77UncompVram(sBeforeRuinsTestYoungSamusCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[5].graphicsPage));
+            CallLZ77UncompVram(sBeforeRuinsTestSamusCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[6].graphicsPage));
             
-            CallLZ77UncompVram(sBeforeCharlieYoungSamusCloseUpTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[5].tiletablePage));
-            CallLZ77UncompVram(sBeforeCharlieSamusCloseUpEyesClosedTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[8].tiletablePage));
-            CallLZ77UncompVram(sBeforeCharlieSamusCloseUpEyesOpenedTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[7].tiletablePage));
-            CallLZ77UncompVram(sBeforeCharlieSamusCloseUpOutlineTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[6].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestYoungSamusCloseUpTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[5].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestSamusCloseUpEyesClosedTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[8].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestSamusCloseUpEyesOpenedTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[7].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestSamusCloseUpOutlineTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[6].tiletablePage));
 
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[5]);
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[8]);
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[7]);
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[6]);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[5]);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[8]);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[7]);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[6]);
 
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[5].bg, NON_GAMEPLAY_START_BG_POS);
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[8].bg, NON_GAMEPLAY_START_BG_POS);
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[7].bg, NON_GAMEPLAY_START_BG_POS);
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[6].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[5].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[8].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[7].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[6].bg, NON_GAMEPLAY_START_BG_POS);
             CutsceneReset();
 
             // TODO: Fix enum instead of using ifdef here
@@ -64,7 +64,7 @@ static u8 BeforeCharlieSamusCloseUp(void)
             #else // !REGION_EU
             CutsceneStartBackgroundFading(10);
             #endif // REGION_EU
-            CUTSCENE_DATA.dispcnt = sBeforeCharliePageData[5].bg | sBeforeCharliePageData[8].bg |sBeforeCharliePageData[6].bg;
+            CUTSCENE_DATA.dispcnt = sBeforeRuinsTestPageData[5].bg | sBeforeRuinsTestPageData[8].bg |sBeforeRuinsTestPageData[6].bg;
             
             CUTSCENE_DATA.timeInfo.timer = 0;
             CUTSCENE_DATA.timeInfo.subStage++;
@@ -84,12 +84,12 @@ static u8 BeforeCharlieSamusCloseUp(void)
         case 2:
             if (CUTSCENE_DATA.specialEffect.status & CUTSCENE_SPECIAL_EFFECT_STATUS_BG_ENDED)
             {
-                CUTSCENE_DATA.dispcnt ^= sBeforeCharliePageData[5].bg;
+                CUTSCENE_DATA.dispcnt ^= sBeforeRuinsTestPageData[5].bg;
 
                 CutsceneStartBackgroundEffect(BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_SCREEN_SECOND_TARGET,
                     0, BLDALPHA_MAX_VALUE, 1, 16);
 
-                CUTSCENE_DATA.dispcnt |= sBeforeCharliePageData[7].bg;
+                CUTSCENE_DATA.dispcnt |= sBeforeRuinsTestPageData[7].bg;
                 CUTSCENE_DATA.timeInfo.timer = 0;
                 CUTSCENE_DATA.timeInfo.subStage++;
             }
@@ -109,7 +109,7 @@ static u8 BeforeCharlieSamusCloseUp(void)
         case 4:
             if (CUTSCENE_DATA.specialEffect.status & CUTSCENE_SPECIAL_EFFECT_STATUS_BG_ENDED)
             {
-                CUTSCENE_DATA.dispcnt ^= sBeforeCharliePageData[8].bg;
+                CUTSCENE_DATA.dispcnt ^= sBeforeRuinsTestPageData[8].bg;
                 CUTSCENE_DATA.timeInfo.timer = 0;
                 CUTSCENE_DATA.timeInfo.subStage++;
             }
@@ -158,45 +158,45 @@ static u8 BeforeCharlieSamusCloseUp(void)
  * 
  * @return u8 FALSE
  */
-static u8 BeforeCharlieWallAndGreyVoice(void)
+static u8 BeforeRuinsTestWallAndGreyVoice(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
         case 0:
-            SEND_TO_PALRAM(sBeforeCharlieChozoWallPal, PALRAM_BASE);
+            SEND_TO_PALRAM(sBeforeRuinsTestChozoWallPal, PALRAM_BASE);
             SET_BACKDROP_COLOR(COLOR_BLACK);
 
-            ApplyMonochromeToPalette(sBeforeCharlieChozoWallPal, BEFORE_CHARLIE_EWRAM.wallPalMonochrome, 0);
-            DmaTransfer(3, sBeforeCharlieChozoWallPal, BEFORE_CHARLIE_EWRAM.wallPal, sizeof(sBeforeCharlieChozoWallPal), 16);
+            ApplyMonochromeToPalette(sBeforeRuinsTestChozoWallPal, BEFORE_RUINS_TEST_EWRAM.wallPalMonochrome, 0);
+            DmaTransfer(3, sBeforeRuinsTestChozoWallPal, BEFORE_RUINS_TEST_EWRAM.wallPal, sizeof(sBeforeRuinsTestChozoWallPal), 16);
 
-            CallLZ77UncompVram(sBeforeCharlieChozoWallBackgroundGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[2].graphicsPage));
-            BitFill(3, 0, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[2].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
-            BitFill(3, 0, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[3].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
+            CallLZ77UncompVram(sBeforeRuinsTestChozoWallBackgroundGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[2].graphicsPage));
+            BitFill(3, 0, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[2].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
+            BitFill(3, 0, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[3].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
 
-            CallLZ77UncompVram(sBeforeCharlieChozoWallBackgroundTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[2].tiletablePage));
-            CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[3].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestChozoWallBackgroundTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[2].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestYoungSamusAndGreyVoiceTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[3].tiletablePage));
 
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[2]);
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[3]);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[2]);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[3]);
 
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[2].bg, NON_GAMEPLAY_START_BG_POS);
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[3].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[2].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[3].bg, NON_GAMEPLAY_START_BG_POS);
 
-            CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[4].graphicsPage));
-            CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceCloseUpTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[4].tiletablePage));
+            CallLZ77UncompVram(sBeforeRuinsTestYoungSamusAndGreyVoiceCloseUpGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[4].graphicsPage));
+            CallLZ77UncompVram(sBeforeRuinsTestYoungSamusAndGreyVoiceCloseUpTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[4].tiletablePage));
 
-            CutsceneSetBgcntPageData(sBeforeCharliePageData[4]);
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sBeforeCharliePageData[4].bg, NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 5);
-            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[4].bg, NON_GAMEPLAY_START_BG_POS);
+            CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[4]);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sBeforeRuinsTestPageData[4].bg, NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 5);
+            CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[4].bg, NON_GAMEPLAY_START_BG_POS);
             CutsceneReset();
 
             gWrittenToBldalpha_L = 0;
             gWrittenToBldalpha_H = BLDALPHA_MAX_VALUE;
 
             CUTSCENE_DATA.bldcnt = BLDCNT_BG1_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL;
-            DmaTransfer(3, &sBeforeCharlieCutsceneGraphicsData, &CUTSCENE_DATA.graphicsData[1], sizeof(CUTSCENE_DATA.graphicsData[1]), 16);
+            DmaTransfer(3, &sBeforeRuinsTestCutsceneGraphicsData, &CUTSCENE_DATA.graphicsData[1], sizeof(CUTSCENE_DATA.graphicsData[1]), 16);
 
-            CUTSCENE_DATA.dispcnt = sBeforeCharliePageData[2].bg | sBeforeCharliePageData[4].bg;
+            CUTSCENE_DATA.dispcnt = sBeforeRuinsTestPageData[2].bg | sBeforeRuinsTestPageData[4].bg;
             CUTSCENE_DATA.timeInfo.timer = 0;
             CUTSCENE_DATA.timeInfo.subStage++;
             break;
@@ -249,11 +249,11 @@ static u8 BeforeCharlieWallAndGreyVoice(void)
             break;
     }
 
-    BeforeCharlieWallAndGreyVoiceScrollAndLoadYoungSamusGfx(&CUTSCENE_DATA.graphicsData[0]);
-    BeforeCharlieWallAndGreyVoiceApplyMonochrome(&CUTSCENE_DATA.graphicsData[1]);
-    BeforeCharlieWallAndGreyScrollCloseUp(&CUTSCENE_DATA.graphicsData[2]);
+    BeforeRuinsTestWallAndGreyVoiceScrollAndLoadYoungSamusGfx(&CUTSCENE_DATA.graphicsData[0]);
+    BeforeRuinsTestWallAndGreyVoiceApplyMonochrome(&CUTSCENE_DATA.graphicsData[1]);
+    BeforeRuinsTestWallAndGreyScrollCloseUp(&CUTSCENE_DATA.graphicsData[2]);
 
-    *CutsceneGetBgVerticalPointer(sBeforeCharliePageData[3].bg) = *CutsceneGetBgVerticalPointer(sBeforeCharliePageData[2].bg);
+    *CutsceneGetBgVerticalPointer(sBeforeRuinsTestPageData[3].bg) = *CutsceneGetBgVerticalPointer(sBeforeRuinsTestPageData[2].bg);
 
     #ifdef DEBUG
     CutsceneCheckSkipStage(1);
@@ -267,14 +267,14 @@ static u8 BeforeCharlieWallAndGreyVoice(void)
  * 
  * @param pGraphics Cutscene graphics data pointer
  */
-void BeforeCharlieWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGraphicsData* pGraphics)
+void BeforeRuinsTestWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGraphicsData* pGraphics)
 {
     u16* pPosition;
 
     if (!(pGraphics->active & TRUE))
         return;
 
-    pPosition = CutsceneGetBgVerticalPointer(sBeforeCharliePageData[2].bg);
+    pPosition = CutsceneGetBgVerticalPointer(sBeforeRuinsTestPageData[2].bg);
     (*pPosition)++;
 
     if (*pPosition >= NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 10)
@@ -283,10 +283,10 @@ void BeforeCharlieWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGrap
         pGraphics->active = FALSE;
     }
 
-    if (!(CUTSCENE_DATA.dispcnt & sBeforeCharliePageData[3].bg) && *pPosition == NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 6)
+    if (!(CUTSCENE_DATA.dispcnt & sBeforeRuinsTestPageData[3].bg) && *pPosition == NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 6)
     {
-        CallLZ77UncompVram(sBeforeCharlieYoungSamusAndGreyVoiceGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[3].graphicsPage));
-        CUTSCENE_DATA.dispcnt |= sBeforeCharliePageData[3].bg;
+        CallLZ77UncompVram(sBeforeRuinsTestYoungSamusAndGreyVoiceGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[3].graphicsPage));
+        CUTSCENE_DATA.dispcnt |= sBeforeRuinsTestPageData[3].bg;
     }
 }
 
@@ -295,7 +295,7 @@ void BeforeCharlieWallAndGreyVoiceScrollAndLoadYoungSamusGfx(struct CutsceneGrap
  * 
  * @param pGraphics Cutscene graphics data pointer
  */
-void BeforeCharlieWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* pGraphics)
+void BeforeRuinsTestWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* pGraphics)
 {
     if (!(pGraphics->active & TRUE))
         return;
@@ -309,9 +309,9 @@ void BeforeCharlieWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* p
     pGraphics->timer = pGraphics->maxTimer;
     pGraphics->paletteStage++;
 
-    ApplySmoothMonochromeToPalette(BEFORE_CHARLIE_EWRAM.wallPal, BEFORE_CHARLIE_EWRAM.wallPalMonochrome,
-        BEFORE_CHARLIE_EWRAM.wallPalMonochromeTransition, pGraphics->paletteStage);
-    DmaTransfer(3, BEFORE_CHARLIE_EWRAM.wallPalMonochromeTransition, PALRAM_BASE, sizeof(BEFORE_CHARLIE_EWRAM.wallPalMonochromeTransition), 16);
+    ApplySmoothMonochromeToPalette(BEFORE_RUINS_TEST_EWRAM.wallPal, BEFORE_RUINS_TEST_EWRAM.wallPalMonochrome,
+        BEFORE_RUINS_TEST_EWRAM.wallPalMonochromeTransition, pGraphics->paletteStage);
+    DmaTransfer(3, BEFORE_RUINS_TEST_EWRAM.wallPalMonochromeTransition, PALRAM_BASE, sizeof(BEFORE_RUINS_TEST_EWRAM.wallPalMonochromeTransition), 16);
 
     if (pGraphics->paletteStage == 32)
         pGraphics->active = FALSE;
@@ -322,14 +322,14 @@ void BeforeCharlieWallAndGreyVoiceApplyMonochrome(struct CutsceneGraphicsData* p
  * 
  * @param pGraphics Cutscene graphics data pointer
  */
-void BeforeCharlieWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphics)
+void BeforeRuinsTestWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphics)
 {
     u16* pPosition;
 
     if (!(pGraphics->active & TRUE))
         return;
 
-    pPosition = CutsceneGetBgHorizontalPointer(sBeforeCharliePageData[4].bg);
+    pPosition = CutsceneGetBgHorizontalPointer(sBeforeRuinsTestPageData[4].bg);
     (*pPosition) -= PIXEL_SIZE / 2;
 
     if (*pPosition <= NON_GAMEPLAY_START_BG_POS)
@@ -344,7 +344,7 @@ void BeforeCharlieWallAndGreyScrollCloseUp(struct CutsceneGraphicsData* pGraphic
  * 
  * @return u8 FALSE
  */
-static u8 BeforeCharlieChozoWallSides(void)
+static u8 BeforeRuinsTestChozoWallSides(void)
 {
     switch (CUTSCENE_DATA.timeInfo.subStage)
     {
@@ -353,8 +353,8 @@ static u8 BeforeCharlieChozoWallSides(void)
             if (CUTSCENE_DATA.timeInfo.timer > CONVERT_SECONDS(2.f) + ONE_THIRD_SECOND)
             {
                 // Toggle viewed wall
-                CUTSCENE_DATA.dispcnt ^= sBeforeCharliePageData[0].bg;
-                CUTSCENE_DATA.dispcnt |= sBeforeCharliePageData[1].bg;
+                CUTSCENE_DATA.dispcnt ^= sBeforeRuinsTestPageData[0].bg;
+                CUTSCENE_DATA.dispcnt |= sBeforeRuinsTestPageData[1].bg;
                 CUTSCENE_DATA.timeInfo.timer = 0;
                 CUTSCENE_DATA.timeInfo.subStage++;
             }
@@ -384,38 +384,38 @@ static u8 BeforeCharlieChozoWallSides(void)
 }
 
 /**
- * @brief 66aa0 | 130 | Initializes the before charlie cutscene
+ * @brief 66aa0 | 130 | Initializes the before Ruins Test cutscene
  * 
  * @return u8 FALSE
  */
-static u8 BeforeCharlieInit(void)
+static u8 BeforeRuinsTestInit(void)
 {
     CutsceneFadeScreenToBlack();
 
-    SEND_TO_PALRAM(sBeforeCharlieChozoWallSidesPal, PALRAM_BASE);
+    SEND_TO_PALRAM(sBeforeRuinsTestChozoWallSidesPal, PALRAM_BASE);
     BitFill(3, 0, PALRAM_OBJ, PAL_SIZE, 32);
     SET_BACKDROP_COLOR(COLOR_BLACK);
 
-    CallLZ77UncompVram(sBeforeCharlieLeftSideOfChozoWallGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[0].graphicsPage));
-    CallLZ77UncompVram(sBeforeCharlieRightSideOfChozoWallGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeCharliePageData[1].graphicsPage));
+    CallLZ77UncompVram(sBeforeRuinsTestLeftSideOfChozoWallGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[0].graphicsPage));
+    CallLZ77UncompVram(sBeforeRuinsTestRightSideOfChozoWallGfx, BGCNT_TO_VRAM_CHAR_BASE(sBeforeRuinsTestPageData[1].graphicsPage));
 
-    BitFill(3, 0, BGCNT_VRAM_TILE_SIZE + BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[0].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
-    BitFill(3, 0, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[1].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
+    BitFill(3, 0, BGCNT_VRAM_TILE_SIZE + BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[0].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
+    BitFill(3, 0, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[1].tiletablePage), BGCNT_VRAM_TILE_SIZE, 32);
 
-    CallLZ77UncompVram(sBeforeCharlieLeftSideOfChozoWallTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[0].tiletablePage));
-    CallLZ77UncompVram(sBeforeCharlieRightSideOfChozoWallTileTable, BGCNT_VRAM_TILE_SIZE + BGCNT_TO_VRAM_TILE_BASE(sBeforeCharliePageData[1].tiletablePage));
+    CallLZ77UncompVram(sBeforeRuinsTestLeftSideOfChozoWallTileTable, BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[0].tiletablePage));
+    CallLZ77UncompVram(sBeforeRuinsTestRightSideOfChozoWallTileTable, BGCNT_VRAM_TILE_SIZE + BGCNT_TO_VRAM_TILE_BASE(sBeforeRuinsTestPageData[1].tiletablePage));
 
-    CutsceneSetBgcntPageData(sBeforeCharliePageData[0]);
-    CutsceneSetBgcntPageData(sBeforeCharliePageData[1]);
+    CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[0]);
+    CutsceneSetBgcntPageData(sBeforeRuinsTestPageData[1]);
     CutsceneReset();
 
-    CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[0].bg, NON_GAMEPLAY_START_BG_POS);
-    CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_VOFS, sBeforeCharliePageData[1].bg, NON_GAMEPLAY_START_BG_POS);
-    CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sBeforeCharliePageData[1].bg, NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 16);
+    CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS | CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[0].bg, NON_GAMEPLAY_START_BG_POS);
+    CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_VOFS, sBeforeRuinsTestPageData[1].bg, NON_GAMEPLAY_START_BG_POS);
+    CutsceneSetBackgroundPosition(CUTSCENE_BG_EDIT_HOFS, sBeforeRuinsTestPageData[1].bg, NON_GAMEPLAY_START_BG_POS + BLOCK_SIZE * 16);
 
     PlayMusic(MUSIC_CHOZO_STATUE_HINT_DELAY, 0);
 
-    CUTSCENE_DATA.dispcnt = sBeforeCharliePageData[0].bg;
+    CUTSCENE_DATA.dispcnt = sBeforeRuinsTestPageData[0].bg;
 
     CUTSCENE_DATA.timeInfo.timer = 0;
     CUTSCENE_DATA.timeInfo.subStage = 0;
@@ -424,21 +424,21 @@ static u8 BeforeCharlieInit(void)
     return FALSE;
 }
 
-static struct CutsceneSubroutineData sBeforeCharlieSubroutineData[5] = {
+static struct CutsceneSubroutineData sBeforeRuinsTestSubroutineData[5] = {
     [0] = {
-        .pFunction = BeforeCharlieInit,
+        .pFunction = BeforeRuinsTestInit,
         .oamLength = 0
     },
     [1] = {
-        .pFunction = BeforeCharlieChozoWallSides,
+        .pFunction = BeforeRuinsTestChozoWallSides,
         .oamLength = 0
     },
     [2] = {
-        .pFunction = BeforeCharlieWallAndGreyVoice,
+        .pFunction = BeforeRuinsTestWallAndGreyVoice,
         .oamLength = 0
     },
     [3] = {
-        .pFunction = BeforeCharlieSamusCloseUp,
+        .pFunction = BeforeRuinsTestSamusCloseUp,
         .oamLength = 0
     },
     [4] = {
@@ -448,15 +448,15 @@ static struct CutsceneSubroutineData sBeforeCharlieSubroutineData[5] = {
 };
 
 /**
- * @brief 66bd0 | 30 | Subroutine for the before charlie cutscene
+ * @brief 66bd0 | 30 | Subroutine for the before Ruins Test cutscene
  * 
  * @return u8 bool, ended
  */
-u8 BeforeCharlieSubroutine(void)
+u8 BeforeRuinsTestSubroutine(void)
 {
     u8 ended;
 
-    ended = sBeforeCharlieSubroutineData[CUTSCENE_DATA.timeInfo.stage].pFunction();
+    ended = sBeforeRuinsTestSubroutineData[CUTSCENE_DATA.timeInfo.stage].pFunction();
 
     CutsceneUpdateBackgroundsPosition(TRUE);
     return ended;
