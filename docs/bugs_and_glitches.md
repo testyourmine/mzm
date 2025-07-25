@@ -16,6 +16,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Missiles can be highlighted and toggled while dying](#missiles-can-be-highlighted-and-toggled-while-dying)
   - [Sidehoppers and Dessgeegas don't initialize the delay for their first jump](#sidehoppers-and-dessgeegas-dont-initialize-the-delay-for-their-first-jump)
   - ["Stop enemy" clipdata prevents bomb jumping](#stop-enemy-clipdata-prevents-bomb-jumping)
+  - [Samus can get refilled while collecting a Chozo statue item](#samus-can-get-refilled-while-collecting-a-chozo-statue-item)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -215,7 +216,7 @@ Sidehoppers and Dessgeegas use the `work1` variable to store the delay before ju
 + gCurrentSprite.work1 = MOD_AND(gSpriteRng, 4);
 ```
 
-## "Stop enemy" clipdata prevents bomb jumping
+### "Stop enemy" clipdata prevents bomb jumping
 
 The game checks for solid blocks above and below Samus to see if you can bomb jump. However, the bomb jump code calls `ClipdataProcess`, which sets the collision `actorType` to `CLIPDATA_ACTOR_SPRITE`. This means any "stop enemy" blocks will be considered solid, which can prevent bomb jumping. This bug also occurs in Fusion.
 
@@ -227,6 +228,24 @@ The game checks for solid blocks above and below Samus to see if you can bomb ju
 -     !(ClipdataProcess(samusY - (BLOCK_SIZE + HALF_BLOCK_SIZE), samusX) & CLIPDATA_TYPE_SOLID_FLAG))
 + if (!(ClipdataProcessForSamus(samusY + HALF_BLOCK_SIZE, samusX) & CLIPDATA_TYPE_SOLID_FLAG) ||
 +     !(ClipdataProcessForSamus(samusY - (BLOCK_SIZE + HALF_BLOCK_SIZE), samusX) & CLIPDATA_TYPE_SOLID_FLAG))
+```
+
+### Samus can get refilled while collecting a Chozo statue item
+
+By falling into a Chozo statue item and opening the orb as late as possible, you can reach the hand before Samus is stopped to collect the item. If you fall while morphed or morph on the last possible frame, Samus will be refilled and collect the item at the same time. This happens because the Chozo statue returns to the idle pose once the message box is open, which checks if Samus is in position to get refilled.
+
+**Fix:** Edit `ChozoStatuePartArmCheckGrabSamusRefill` in [chozo_statue.c](../src/sprites_AI/chozo_statue.c) to check if Samus's movement is prevented before setting the "grabbed" pose.
+
+```diff
+  if (gSamusData.pose == SPOSE_MORPH_BALL)
+  {
++     if (gPreventMovementTimer == 0)
++     {
+          // Set grabbed
+          SamusSetPose(SPOSE_GRABBED_BY_CHOZO_STATUE);
+          isGrabbed++;
++     }
+  }
 ```
 
 
@@ -314,6 +333,5 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))
 - Frame perfect pause buffering on ziplines ignores collision
 - Clipping into slopes ([video](https://www.youtube.com/watch?v=XiZRJesXHWw))
-- Chozo statue refill glitch
 
 ### Oversights and Design Flaws
