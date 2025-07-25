@@ -17,6 +17,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Sidehoppers and Dessgeegas don't initialize the delay for their first jump](#sidehoppers-and-dessgeegas-dont-initialize-the-delay-for-their-first-jump)
   - ["Stop enemy" clipdata prevents bomb jumping](#stop-enemy-clipdata-prevents-bomb-jumping)
   - [Samus can get refilled while collecting a Chozo statue item](#samus-can-get-refilled-while-collecting-a-chozo-statue-item)
+  - [Samus can clip into blocks on the right when uncrouching next to a frozen enemy](#samus-can-clip-into-blocks-on-the-right-when-uncrouching-next-to-a-frozen-enemy)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -248,6 +249,29 @@ By falling into a Chozo statue item and opening the orb as late as possible, you
   }
 ```
 
+### Samus can clip into blocks on the right when uncrouching next to a frozen enemy
+
+If Samus is up against a wall on the right and an enemy is frozen up against Samus on the left, uncrouching will push Samus one block to the right, clipping into the wall. When Samus is up against the right side of a solid sprite, she's moved 1 unit to the right, even if she's up against a wall. When Samus uncrouches, the game checks if Samus is slightly under a block in order to push her out to be flush with the block (this also happens when Samus unmorphs). However, the wrong hitbox side is used when collision is detected on the right side. This was likely missed because there aren't any normal situations where Samus can be crouched directly under a block.
+
+**Fix:** Edit `SamusCrouching` in [samus.c](../src/samus.c) to fix which hitbox value is used.
+
+```diff
+  // Smooth clamp the X position
+  if (collision == SAMUS_COLLISION_DETECTION_LEFT_MOST)
+  {
+      xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
+          sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT];
+  }
+  else if (collision == SAMUS_COLLISION_DETECTION_RIGHT_MOST)
+  {
+-     // BUG: Should use SAMUS_BLOCK_HITBOX_RIGHT, not SAMUS_BLOCK_HITBOX_LEFT
+-     xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
+-         sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
++     xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
++         sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_RIGHT] + SUB_PIXEL_POSITION_FLAG;
+  }
+```
+
 
 ## Oversights and Design Flaws
 
@@ -329,7 +353,6 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 - PowerBombExplosion doesn't check if out of bounds, which can lead to memory corruption
   - Fix: don't check collision with any blocks outside of the room
 - Bomb hover on frozen enemies ([video](https://youtu.be/UIK8YnT1sG4))
-- Door clipping using frozen enemies ([video](https://www.youtube.com/watch?v=iMObZ5EbooE))
 - Warping when Samus stands on multiple respawning enemies and kills one ([video](https://youtu.be/WfxkYSPTjWw))
 - Frame perfect pause buffering on ziplines ignores collision
 - Clipping into slopes ([video](https://www.youtube.com/watch?v=XiZRJesXHWw))
