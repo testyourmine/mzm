@@ -15,6 +15,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
   - [Dying during a door transition (from lava/acid) puts Samus in the no-clip state](#dying-during-a-door-transition-from-lavaacid-puts-samus-in-the-no-clip-state)
   - [Missiles can be highlighted and toggled while dying](#missiles-can-be-highlighted-and-toggled-while-dying)
   - [Sidehoppers and Dessgeegas don't initialize the delay for their first jump](#sidehoppers-and-dessgeegas-dont-initialize-the-delay-for-their-first-jump)
+  - ["Stop enemy" clipdata prevents bomb jumping](#stop-enemy-clipdata-prevents-bomb-jumping)
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -214,6 +215,20 @@ Sidehoppers and Dessgeegas use the `work1` variable to store the delay before ju
 + gCurrentSprite.work1 = MOD_AND(gSpriteRng, 4);
 ```
 
+## "Stop enemy" clipdata prevents bomb jumping
+
+The game checks for solid blocks above and below Samus to see if you can bomb jump. However, the bomb jump code calls `ClipdataProcess`, which sets the collision `actorType` to `CLIPDATA_ACTOR_SPRITE`. This means any "stop enemy" blocks will be considered solid, which can prevent bomb jumping. This bug also occurs in Fusion.
+
+**Fix:** Edit `ProjectileCheckSamusBombBounce` in [projectile.c](../src/projectile.c) to call `ClipdataProcessForSamus` instead of `ClipdataProcess`.
+
+```diff
+  // Check block below and block above Samus
+- if (!(ClipdataProcess(samusY + HALF_BLOCK_SIZE, samusX) & CLIPDATA_TYPE_SOLID_FLAG) ||
+-     !(ClipdataProcess(samusY - (BLOCK_SIZE + HALF_BLOCK_SIZE), samusX) & CLIPDATA_TYPE_SOLID_FLAG))
++ if (!(ClipdataProcessForSamus(samusY + HALF_BLOCK_SIZE, samusX) & CLIPDATA_TYPE_SOLID_FLAG) ||
++     !(ClipdataProcessForSamus(samusY - (BLOCK_SIZE + HALF_BLOCK_SIZE), samusX) & CLIPDATA_TYPE_SOLID_FLAG))
+```
+
 
 ## Oversights and Design Flaws
 
@@ -300,6 +315,5 @@ See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
 - Frame perfect pause buffering on ziplines ignores collision
 - Clipping into slopes ([video](https://www.youtube.com/watch?v=XiZRJesXHWw))
 - Chozo statue refill glitch
-- "Stop enemy" clipdata prevents bomb jumping
 
 ### Oversights and Design Flaws
