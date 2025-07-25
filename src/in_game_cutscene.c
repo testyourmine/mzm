@@ -33,43 +33,44 @@
  * 
  * @param cutsceneNumber [Unused] Cutscene number
  * @param cutsceneNumberNoFlag [Unused] Cutscene number (no start flag)
- * @return u8 bool, ended
+ * @return u32 result
  */
 u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutsceneScene cutsceneNumberNoFlag)
 {
     u32 result;
 
-    result = FALSE;
+    result = IGC_RESULT_NONE;
+
     switch (gInGameCutscene.stage)
     {
         case 0:
             if (gInGameCutscene.timer != 0)
             {
-                result = TRUE;
+                result = IGC_RESULT_NEXT_STAGE;
                 InGameCutsceneCheckFlag(TRUE, IGC_CLOSE_UP);
             }
             break;
 
         case 1:
             TransparencyUpdateBldalpha(16, 0, 7, 1);
-            result = 1;
+            result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 2:
             if (gIoRegistersBackup.BLDALPHA_NonGameplay_EVA == 16 && gIoRegistersBackup.BLDALPHA_NonGameplay_EVB == 0)
-                result = TRUE;
+                result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 5:
         case 7:
             if (gInGameCutscene.timer > 2 * DELTA_TIME)
-                result = TRUE;
+                result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 3:
         case 9:
             if (gInGameCutscene.timer > CONVERT_SECONDS(5.f / 3) + 2 * DELTA_TIME)
-                result = TRUE;
+                result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 4:
@@ -89,10 +90,9 @@ u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutscen
             DmaTransfer(3, &sSamusCloseUpEyesGfx_1[1024], VRAM_BASE + 0xC940, 0x140, 16);
             DmaTransfer(3, EWRAM_BASE + 0x2B100, VRAM_BASE + 0x394, 0x14, 16);
 
-          
             DmaTransfer(3, &sSamusCloseUpEyesGfx_1[1280], VRAM_BASE + 0xCD40, 0x140, 16);
             DmaTransfer(3, EWRAM_BASE + 0x2B140, VRAM_BASE + 0x3D4, 0x14, 16);
-            result = 1;
+            result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 6:
@@ -111,10 +111,9 @@ u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutscen
             DmaTransfer(3, &sSamusCloseUpEyesGfx_2[1024], VRAM_BASE + 0xC940, 0x140, 16);
             DmaTransfer(3, EWRAM_BASE + 0x2B114, VRAM_BASE + 0x394, 0x14, 16);
 
-
             DmaTransfer(3, &sSamusCloseUpEyesGfx_2[1280], VRAM_BASE + 0xCD40, 0x140, 16);
             DmaTransfer(3, EWRAM_BASE + 0x2B154, VRAM_BASE + 0x3D4, 0x14, 16);
-            result = 1;
+            result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 8:
@@ -135,12 +134,12 @@ u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutscen
             
             DmaTransfer(3, &sSamusCloseUpEyesGfx_3[1280], VRAM_BASE + 0xCD40, 0x140, 16);
             DmaTransfer(3, EWRAM_BASE + 0x2B168, VRAM_BASE + 0x3D4, 0x14, 16);
-            result = 1;
+            result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 10:
             TransparencyUpdateBldalpha(0, 16, 0, 16);
-            result = 1;
+            result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 11:
@@ -154,7 +153,7 @@ u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutscen
         case 12:
             DmaTransfer(3, EWRAM_BASE + 0x1E000, VRAM_BASE + 0x9000, 0x2000, 16);
             gSramOperationStage = 0;
-            result = 1;
+            result = IGC_RESULT_NEXT_STAGE;
             break;
 
         case 13:
@@ -163,7 +162,7 @@ u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutscen
                 #ifndef REGION_EU
                 SramWrite_Language();
                 #endif // !REGION_EU
-                result = 1;
+                result = IGC_RESULT_NEXT_STAGE;
             }
             break;
 
@@ -173,7 +172,7 @@ u32 InGameCutsceneSamusCloseUp(InGameCutsceneScene cutsceneNumber, InGameCutscen
                 InGameCutsceneCheckFlag(TRUE, IGC_CLOSE_UP);
                 gPreventMovementTimer = 0;
                 gDisablePause = FALSE;
-                result = 5;
+                result = IGC_RESULT_STOP;
             }
             break;
     }
@@ -215,12 +214,12 @@ void unk_5fd58(void)
  * 
  * @param cutsceneNumber [Unused] Cutscene number
  * @param cutsceneNumberNoFlag [Unused] Cutscene number (no start flag)
- * @return u8 bool, ended
+ * @return u32 result
  */
 u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsceneScene cutsceneNumberNoFlag)
 {
     s32 changeStage;
-    u8 ended;
+    u32 result;
 
     s32 left;
     s32 right;
@@ -230,7 +229,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
     u16 newValue;
 
     s32 temp;
-    u32 result;
+    u32 offset;
     u32 flag;
     
     u32 newStart;
@@ -238,7 +237,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
 
     s32 increment;
 
-    ended = FALSE;
+    result = IGC_RESULT_NONE;
     changeStage = FALSE;
 
     temp = gSamusData.xPosition - gBg1XPosition;
@@ -440,9 +439,9 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
 
         case 13:
             // Handle suit flash shrinking vertically
-            result = InGameCutsceneCalculateSuitFlashOffset(3, top - gSuitFlashEffect.top, gSuitFlashEffect.bottom - bottom);
-            newStart = LOW_BYTE(result);
-            newEnd = HIGH_BYTE(result);
+            offset = InGameCutsceneCalculateSuitFlashOffset(3, top - gSuitFlashEffect.top, gSuitFlashEffect.bottom - bottom);
+            newStart = LOW_BYTE(offset);
+            newEnd = HIGH_BYTE(offset);
                 
             if (gSuitFlashEffect.top < top)
             {
@@ -467,9 +466,9 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
 
         case 14:
             // Handle suit flash shrinking horizontally
-            result = InGameCutsceneCalculateSuitFlashOffset(9, left - gSuitFlashEffect.left, gSuitFlashEffect.right - right);
-            newStart = LOW_BYTE(result);
-            newEnd = HIGH_BYTE(result);
+            offset = InGameCutsceneCalculateSuitFlashOffset(9, left - gSuitFlashEffect.left, gSuitFlashEffect.right - right);
+            newStart = LOW_BYTE(offset);
+            newEnd = HIGH_BYTE(offset);
 
             if (gSuitFlashEffect.left < left)
             {
@@ -564,11 +563,11 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
             gDefaultTransparency.unk_0 = FALSE;
 
             #ifdef REGION_EU
-            ended = 5;
+            result = IGC_RESULT_STOP;
             #else // !REGION_EU
             // Since this cutscene never returns 5, this function is still called even after it ended
             // it's on stage 20 so technically nothing happens, but it's a weird oversight
-            ended = TRUE;
+            result = IGC_RESULT_NEXT_STAGE;
             #endif // REGION_EU
             break;
     }
@@ -583,7 +582,7 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
     gWrittenToWin1H = C_16_2_8(gSuitFlashEffect.left, gSuitFlashEffect.right);
     gWrittenToWin1V = C_16_2_8(gSuitFlashEffect.top, gSuitFlashEffect.bottom);
 
-    return ended;
+    return result;
 }
 
 /**
@@ -672,7 +671,7 @@ void InGameCutsceneStart(InGameCutsceneScene number)
  */
 void InGameCutsceneProcess(void)
 {
-    u32 ended;
+    u32 result;
     u8 cutsceneNumber;
 
     APPLY_DELTA_TIME_INC(gInGameCutscene.timer);
@@ -690,31 +689,30 @@ void InGameCutsceneProcess(void)
             return;
 
         // Execute subroutine
-        ended = gInGameCutscene.pSubroutine(cutsceneNumber & IGC_NO_STARTED_FLAG, cutsceneNumber);
+        result = gInGameCutscene.pSubroutine(cutsceneNumber & IGC_NO_STARTED_FLAG, cutsceneNumber);
 
-        if (ended)
+        if (result)
             gInGameCutscene.timer = 0;
 
-        // Weird
-        switch (ended)
+        // Most of these cases are unused
+        switch (result)
         {
-            case 1:
+            case IGC_RESULT_NEXT_STAGE:
                 gInGameCutscene.stage++;
                 break;
 
-            case 2:
+            case IGC_RESULT_PREV_STAGE:
                 gInGameCutscene.stage--;
                 break;
 
-            case 3:
+            case IGC_RESULT_BACK_3_STAGES:
                 gInGameCutscene.stage -= 3;
                 break;
 
-            case 4:
+            case IGC_RESULT_RESTART_STAGE:
                 break;
 
-            case 5:
-                // Stop cutscene
+            case IGC_RESULT_STOP:
                 gInGameCutscene.cutsceneNumber = IGC_STARTED_FLAG;
                 gInGameCutscene.stage = 0;
                 break;
