@@ -21,6 +21,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
 - [Oversights and Design Flaws](#oversights-and-design-flaws)
   - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
   - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
+  - [Upgrading suit cutscene code is still called after the cutscene ends](#upgrading-suit-cutscene-code-is-still-called-after-the-cutscene-ends)
 - [Uninitialized Variables](#uninitialized-variables)
 - [TODO](#todo)
   - [Bugs](#bugs-1)
@@ -321,6 +322,30 @@ Could also do `sRidleyLandingScrollingInfo[1].length * 2 / 3`
 **Fix:** Convert the switch statement to a series of if statements. Order them such that common block types (like solid and air) are checked first.
 
 See `ClipdataConvertToCollision` in [clipdata.c](../src/clipdata.c)
+
+### Upgrading suit cutscene code is still called after the cutscene ends
+
+The last cutscene stage for upgrading your suit (obtaining Varia or the fully powered suit) returns `IGC_RESULT_NEXT_STAGE` when it should return `IGC_RESULT_STOP`. This sets the stage to 20, which has no case for it and will just return `IGC_RESULT_NONE`. As a result, the in-game cutscene code will be called until a new room is loaded. This was fixed in the European release.
+
+**Fix:** Edit `InGameCutsceneUpgradingSuit` in [in_game_cutscene.c](../src/in_game_cutscene.c) to return `IGC_RESULT_STOP` instead of `IGC_RESULT_NEXT_STAGE`.
+
+```diff
+  case 19:
+      // Flag cutscene has ended
+      if (gCurrentItemBeingAcquired == ITEM_ACQUISITION_GRAVITY)
+          gSubSpriteData1.work3 = RUINS_TEST_FIGHT_STAGE_SUIT_ANIM_ENDED;
+
+      // Give control back to player
+      gSamusData.lastWallTouchedMidAir = FALSE;
+      gDisablePause = FALSE;
+      gDefaultTransparency.unk_0 = FALSE;
+
+-     // Since this cutscene doesn't return IGC_RESULT_STOP, this function is still called
+-     // even after the cutscene ends. It's on stage 20, so technically nothing happens.
+-     result = IGC_RESULT_NEXT_STAGE;
++     result = IGC_RESULT_STOP;
+      break;
+```
 
 
 ## Uninitialized Variables

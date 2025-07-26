@@ -562,13 +562,13 @@ u32 InGameCutsceneUpgradingSuit(InGameCutsceneScene cutsceneNumber, InGameCutsce
             gDisablePause = FALSE;
             gDefaultTransparency.unk_0 = FALSE;
 
-            #ifdef REGION_EU
+            #if defined(REGION_EU) || defined(BUGFIX)
             result = IGC_RESULT_STOP;
-            #else // !REGION_EU
-            // Since this cutscene never returns 5, this function is still called even after it ended
-            // it's on stage 20 so technically nothing happens, but it's a weird oversight
+            #else // !(REGION_EU || BUGFIX)
+            // Since this cutscene doesn't return IGC_RESULT_STOP, this function is still called
+            // even after the cutscene ends. It's on stage 20, so technically nothing happens.
             result = IGC_RESULT_NEXT_STAGE;
-            #endif // REGION_EU
+            #endif // REGION_EU || BUGFIX
             break;
     }
 
@@ -691,10 +691,10 @@ void InGameCutsceneProcess(void)
         // Execute subroutine
         result = gInGameCutscene.pSubroutine(cutsceneNumber & IGC_NO_STARTED_FLAG, cutsceneNumber);
 
-        if (result)
+        if (result != IGC_RESULT_NONE)
             gInGameCutscene.timer = 0;
 
-        // Most of these cases are unused
+        // NOTE: Only IGC_RESULT_NEXT_STAGE and IGC_RESULT_STOP are actually used
         switch (result)
         {
             case IGC_RESULT_NEXT_STAGE:
@@ -717,9 +717,13 @@ void InGameCutsceneProcess(void)
                 gInGameCutscene.stage = 0;
                 break;
         }
+
+        gEquipment.currentMissiles = gFrameCounter8Bit + 1;
     }
     else
+    {
         InGameCutsceneInit();
+    }
 }
 
 /**
