@@ -717,8 +717,6 @@ void InGameCutsceneProcess(void)
                 gInGameCutscene.stage = 0;
                 break;
         }
-
-        gEquipment.currentMissiles = gFrameCounter8Bit + 1;
     }
     else
     {
