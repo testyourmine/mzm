@@ -2617,16 +2617,20 @@ void PauseScreenDetermineMapsViewable(void)
     PauseScreenUpdateBottomVisorOverlay(1, 1);
 }
 
-#ifdef NON_MATCHING
+/**
+ * @brief 6b00c | ec | To document
+ * 
+ * @param param_1 To document
+ * @param param_2 To document
+ */
 void PauseScreenUpdateBottomVisorOverlay(u8 param_1, u8 param_2)
 {
-    // https://decomp.me/scratch/kHRx8
-    
     s32 var_0;
-    s16 var_1;
+    s32 var_1;
+    s32 var_2;
+    s32 var_3;
     u16* dst;
     u16* src;
-    s32 tmp;
 
     dst = VRAM_BASE + 0xCC40;
     src = &PAUSE_SCREEN_EWRAM.visorOverlayTilemap[0x380];
@@ -2661,141 +2665,20 @@ void PauseScreenUpdateBottomVisorOverlay(u8 param_1, u8 param_2)
         dst[0x17 + 32] = src[var_0 + 1 + 32];
     }
 
-    if (tmp >= 0)
+    if (var_1 >= 0)
     {
-        dst[0x2D] = src[var_1++];
-        dst[0x2E] = src[var_1++];
-        dst[0x2F] = src[var_1++];
-        dst[0x30] = src[var_1++];
+        // The code should look like this:
+        // dst[0x2D] = src[var_1++];
+        // dst[0x2E] = src[var_1++];
+        // dst[0x2F] = src[var_1++];
+        // dst[0x30] = src[var_1++];
+        // But this is what matches:
+        dst[0x2D] = (var_2 = var_1, var_3 = var_1 = (s16)(var_2 + 1), src[var_2]);
+        dst[0x2E] = (var_2 = var_1 = (s16)(var_3 + 1), src[var_3]);
+        dst[0x2F] = (var_1 = (s16)(var_2 + 1), src[var_2]);
+        dst[0x30] = src[var_1];
     }
 }
-#else
-NAKED_FUNCTION
-void PauseScreenUpdateBottomVisorOverlay(u8 param_1, u8 param_2)
-{
-    asm(" \n\
-    push {r4, r5, lr} \n\
-    sub sp, #4 \n\
-    lsl r0, r0, #0x18 \n\
-    lsr r2, r0, #0x18 \n\
-    lsl r1, r1, #0x18 \n\
-    lsr r1, r1, #0x18 \n\
-    ldr r0, lbl_0806b074 @ =0x0600cc40 \n\
-    mov ip, r0 \n\
-    ldr r0, lbl_0806b078 @ =sEwramPointer \n\
-    ldr r0, [r0] \n\
-    movs r3, #0x97 \n\
-    lsl r3, r3, #8 \n\
-    add r5, r0, r3 \n\
-    movs r4, #1 \n\
-    neg r4, r4 \n\
-    add r3, r4, #0 \n\
-    cmp r2, #0 \n\
-    beq lbl_0806b042 \n\
-    movs r3, #0 \n\
-    cmp r2, #1 \n\
-    bne lbl_0806b042 \n\
-    ldr r0, lbl_0806b07c @ =sNonGameplayRamPointer \n\
-    ldr r0, [r0] \n\
-    ldrb r0, [r0, #0x11] \n\
-    cmp r0, #0 \n\
-    bne lbl_0806b042 \n\
-    movs r3, #0x16 \n\
-lbl_0806b042: \n\
-    cmp r1, #0 \n\
-    beq lbl_0806b05a \n\
-    movs r4, #0 \n\
-    cmp r1, #1 \n\
-    bne lbl_0806b05a \n\
-    ldr r0, lbl_0806b07c @ =sNonGameplayRamPointer \n\
-    ldr r0, [r0] \n\
-    add r0, #0xbb \n\
-    ldrb r0, [r0] \n\
-    cmp r0, #1 \n\
-    bls lbl_0806b05a \n\
-    movs r4, #0x2d \n\
-lbl_0806b05a: \n\
-    cmp r3, #0 \n\
-    bne lbl_0806b080 \n\
-    cmp r4, #0 \n\
-    bne lbl_0806b080 \n\
-    movs r0, #0x20 \n\
-    str r0, [sp] \n\
-    movs r0, #3 \n\
-    movs r1, #0 \n\
-    mov r2, ip \n\
-    movs r3, #0x80 \n\
-    bl BitFill \n\
-    b lbl_0806b0ee \n\
-    .align 2, 0 \n\
-lbl_0806b074: .4byte 0x0600cc40 \n\
-lbl_0806b078: .4byte sEwramPointer \n\
-lbl_0806b07c: .4byte sNonGameplayRamPointer \n\
-lbl_0806b080: \n\
-    cmp r3, #0 \n\
-    blt lbl_0806b0a6 \n\
-    lsl r0, r3, #1 \n\
-    add r0, r0, r5 \n\
-    ldrh r1, [r0] \n\
-    mov r2, ip \n\
-    strh r1, [r2, #0x2c] \n\
-    ldrh r1, [r0, #2] \n\
-    strh r1, [r2, #0x2e] \n\
-    add r2, #0x6c \n\
-    add r1, r0, #0 \n\
-    add r1, #0x40 \n\
-    ldrh r1, [r1] \n\
-    strh r1, [r2] \n\
-    mov r1, ip \n\
-    add r1, #0x6e \n\
-    add r0, #0x42 \n\
-    ldrh r0, [r0] \n\
-    strh r0, [r1] \n\
-lbl_0806b0a6: \n\
-    cmp r4, #0 \n\
-    blt lbl_0806b0ee \n\
-    mov r3, ip \n\
-    add r3, #0x5a \n\
-    add r1, r4, #0 \n\
-    add r0, r1, #1 \n\
-    lsl r0, r0, #0x10 \n\
-    asr r4, r0, #0x10 \n\
-    add r2, r4, #0 \n\
-    lsl r1, r1, #1 \n\
-    add r1, r1, r5 \n\
-    ldrh r0, [r1] \n\
-    strh r0, [r3] \n\
-    add r3, #2 \n\
-    add r0, r2, #1 \n\
-    lsl r0, r0, #0x10 \n\
-    asr r4, r0, #0x10 \n\
-    add r1, r4, #0 \n\
-    lsl r2, r2, #1 \n\
-    add r2, r2, r5 \n\
-    ldrh r0, [r2] \n\
-    strh r0, [r3] \n\
-    mov r2, ip \n\
-    add r2, #0x5e \n\
-    add r0, r1, #1 \n\
-    lsl r0, r0, #0x10 \n\
-    lsl r1, r1, #1 \n\
-    add r1, r1, r5 \n\
-    ldrh r1, [r1] \n\
-    strh r1, [r2] \n\
-    mov r1, ip \n\
-    add r1, #0x60 \n\
-    asr r0, r0, #0xf \n\
-    add r0, r0, r5 \n\
-    ldrh r0, [r0] \n\
-    strh r0, [r1] \n\
-lbl_0806b0ee: \n\
-    add sp, #4 \n\
-    pop {r4, r5} \n\
-    pop {r0} \n\
-    bx r0 \n\
-    ");
-}
-#endif
 
 /**
  * @brief 6b0f8 | 148 | Gets the minimap for the provided area
