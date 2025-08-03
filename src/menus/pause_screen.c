@@ -2625,47 +2625,46 @@ void PauseScreenDetermineMapsViewable(void)
  */
 void PauseScreenUpdateBottomVisorOverlay(u8 param_1, u8 param_2)
 {
-    s32 var_0;
-    s32 var_1;
-    s32 var_2;
-    s32 var_3;
+    s32 idx0;
+    s32 idx1;
+    s32 oldIdx1;
     u16* dst;
     u16* src;
 
     dst = VRAM_BASE + 0xCC40;
     src = &PAUSE_SCREEN_EWRAM.visorOverlayTilemap[0x380];
-    var_1 = -1;
-    var_0 = -1;
+    idx1 = -1;
+    idx0 = -1;
 
     if (param_1)
     {
-        var_0 = 0;
+        idx0 = 0;
         if (param_1 == 1 && !PAUSE_SCREEN_DATA.onWorldMap)
-            var_0 = 0x16;
+            idx0 = 0x16;
     }
 
     if (param_2)
     {
-        var_1 = 0;
+        idx1 = 0;
         if (param_2 == 1 && PAUSE_SCREEN_DATA.areasViewableTotal > 1)
-            var_1 = 0x2D;
+            idx1 = 0x2D;
     }
 
-    if (var_0 == 0 && var_1 == 0)
+    if (idx0 == 0 && idx1 == 0)
     {
         BitFill(3, 0, dst, 0x80, 32);
         return;
     }
 
-    if (var_0 >= 0)
+    if (idx0 >= 0)
     {
-        dst[0x16] = src[var_0 + 0];
-        dst[0x17] = src[var_0 + 1];
-        dst[0x16 + 32] = src[var_0 + 0 + 32];
-        dst[0x17 + 32] = src[var_0 + 1 + 32];
+        dst[0x16] = src[idx0 + 0];
+        dst[0x17] = src[idx0 + 1];
+        dst[0x16 + 32] = src[idx0 + 0 + 32];
+        dst[0x17 + 32] = src[idx0 + 1 + 32];
     }
 
-    if (var_1 >= 0)
+    if (idx1 >= 0)
     {
         // The code should look like this:
         // dst[0x2D] = src[var_1++];
@@ -2673,10 +2672,10 @@ void PauseScreenUpdateBottomVisorOverlay(u8 param_1, u8 param_2)
         // dst[0x2F] = src[var_1++];
         // dst[0x30] = src[var_1++];
         // But this is what matches:
-        dst[0x2D] = (var_2 = var_1, var_3 = var_1 = (s16)(var_2 + 1), src[var_2]);
-        dst[0x2E] = (var_2 = var_1 = (s16)(var_3 + 1), src[var_3]);
-        dst[0x2F] = (var_1 = (s16)(var_2 + 1), src[var_2]);
-        dst[0x30] = src[var_1];
+        dst[0x2D] = (oldIdx1 = idx1, idx1 = idx1 = (s16)(oldIdx1 + 1), src[oldIdx1]);
+        dst[0x2E] = (oldIdx1 = idx1, idx1 = idx1 = (s16)(oldIdx1 + 1), src[oldIdx1]);
+        dst[0x2F] = (oldIdx1 = idx1, idx1 = idx1 = (s16)(oldIdx1 + 1), src[oldIdx1]);
+        dst[0x30] = (oldIdx1 = idx1, idx1 = idx1 = (s16)(oldIdx1 + 1), src[oldIdx1]);
     }
 }
 

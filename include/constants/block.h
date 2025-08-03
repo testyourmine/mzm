@@ -67,6 +67,8 @@ enum BlockSubType {
     BLOCK_SUB_TYPE_NO_REFORM,
     BLOCK_SUB_TYPE_SQUARE_NEVER_REFORM,
     BLOCK_SUB_TYPE_BOMB_CHAIN,
+
+    BLOCK_SUB_TYPE_COUNT
 };
 
 enum BombChainType {

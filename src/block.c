@@ -2,6 +2,7 @@
 #include "macros.h"
 #include "dma.h"
 #include "gba.h"
+#include "bg_clip.h"
 
 #include "data/block_data.h"
 
@@ -16,16 +17,8 @@
 #include "structs/samus.h"
 #include "structs/power_bomb_explosion.h"
 
-static BlockFunc_T sNonReformDestroyFunctionPointers[5] = {
-    BlockDestroySingleBreakableBlock,
-    BlockDestroySquareBlock,
-    BlockDestroySingleBreakableBlock,
-    BlockDestroySquareBlock,
-    BlockDestroyBombChainBlock
-};
-
 /**
- * @brief 590b0 | 214 | Checks if soemthing should happen to a block depending on the Ccaa
+ * @brief 590b0 | 214 | Checks if something should happen to a block depending on the Ccaa
  * 
  * @param pClipBlock Clipdata Block Data Pointer
  * @return u32 1 if detroyed, 0 otherwise
@@ -178,7 +171,7 @@ u32 BlockCheckCcaa(struct ClipdataBlockData* pClipBlock)
                 destroy = sTankBehaviors[BEHAVIOR_TO_TANK(pClipBlock->behavior)].revealedClipdata;
                 if (destroy != CLIPDATA_AIR)
                 {
-                    BgClipSetBg1BlockValue((u16)destroy, pClipBlock->yPosition, pClipBlock->xPosition);
+                    BgClipSetBg1BlockValue(destroy, pClipBlock->yPosition, pClipBlock->xPosition);
                     BgClipSetClipdataBlockValue(destroy, pClipBlock->yPosition, pClipBlock->xPosition);
                     result = TRUE;
                 }
@@ -187,6 +180,14 @@ u32 BlockCheckCcaa(struct ClipdataBlockData* pClipBlock)
 
     return result;
 }
+
+static BlockFunc_T sNonReformDestroyFunctionPointers[BLOCK_SUB_TYPE_COUNT] = {
+    [BLOCK_SUB_TYPE_REFORM] = BlockDestroySingleBreakableBlock,
+    [BLOCK_SUB_TYPE_SQUARE_NO_REFORM] = BlockDestroySquareBlock,
+    [BLOCK_SUB_TYPE_NO_REFORM] = BlockDestroySingleBreakableBlock,
+    [BLOCK_SUB_TYPE_SQUARE_NEVER_REFORM] = BlockDestroySquareBlock,
+    [BLOCK_SUB_TYPE_BOMB_CHAIN] = BlockDestroyBombChainBlock
+};
 
 /**
  * @brief 592c4 | 6c | Handles the destruction of non reform blocks

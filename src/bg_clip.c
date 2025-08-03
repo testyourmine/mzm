@@ -696,10 +696,10 @@ void BgClipCheckGrabbingCrumbleBlock(u8 dontDestroy)
  * @param yPosition Y Position
  * @return u8 Hatch opening action
  */
-u8 BgClipCheckOpeningHatch(u16 xPosition, u16 yPosition)
+u32 BgClipCheckOpeningHatch(u16 xPosition, u16 yPosition)
 {
     s32 i;
-    u8 action;
+    u32 action;
 
     #ifdef BUGFIX
     action = HATCH_OPENING_ACTION_NOT_OPENING;
