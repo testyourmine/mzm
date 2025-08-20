@@ -185,7 +185,7 @@ help:
 	@echo ''
 	@echo 'Flags:'
 	@echo '  V=1: enable verbose output'
-	@echo '  REGION=<region>: selects the region of the ROM, possible values are "us", "eu", "jp" and "cn"'
+	@echo '  REGION=<region>: selects the region of the ROM, possible values are "us", "eu", "jp", "cn", "us_beta", and "eu_beta"'
 	@echo '  DEBUG=1: enables the debug code'
 
 $(TARGET): $(ELF) $(GBAFIX)
@@ -224,7 +224,7 @@ tools/%: tools/%.c
 	$(MSG) HOSTCC $@
 	$Q$(HOSTCC) $< $(HOSTCFLAGS) $(HOSTCPPFLAGS) -o $@
 
-.PHONY: us us_debug us_beta jp jp_debug
+.PHONY: us us_debug us_beta eu eu_debug eu_beta jp jp_debug
 # cn cn_debug
 
 us:
