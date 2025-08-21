@@ -54,7 +54,7 @@ If you change any of the options, they will only take effect if you select "SAVE
 
 ### Samus
 
-"GetMap" lets you set which area maps are downloaded. The areas are in reverse order (first is Chozodia, last is Brinstar). Pressing `L` clears all values, pressing `R` sets all values, and pressing `A` toggles a value.
+"GetMap" lets you set which area maps are downloaded. The areas are in reverse order (first is Chozodia, last is Brinstar). Pressing `L` clears all values and pressing `R` sets all values. Pressing `Up` sets a value, pressing `Down` clears a value, and pressing `A` toggles a value.
 
 "H-SHOT" and "ナナメ-SHOT" refer to the button assignments for arming missiles and diagonal aim ("H" likely refers to 発射 - *hassha* - "firing (a missile)", "ナナメ" means "diagonal"). You can press `L` or `R` to set that button, or `A` to swap the buttons.
 

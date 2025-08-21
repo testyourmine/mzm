@@ -203,7 +203,7 @@ During Samus's death animation, missiles can be highlighted and super missiles c
 
 ### Sidehoppers and Dessgeegas don't initialize the delay for their first jump
 
-Sidehoppers and Dessgeegas use the `work1` variable to store the delay before jumping. However, this value isn't initialized when they spawn, so `work1` could potentially contain any value that was set by a previous sprite. Normally this is a value between 0-3, but if it's higher, it means their first jump won't happen for an abnormally long amount of time.
+Sidehoppers and Dessgeegas use the `work1` variable to store the delay before jumping. However, this value isn't initialized when they spawn, so `work1` could potentially contain any value that was set by a previous sprite. Normally this is a value between 0-3, but if it's higher, it means their first jump won't happen for an abnormally long amount of time. This bug also occurs in Fusion.
 
 **Fix:** Edit `SidehopperInit` in [sidehopper.c](../src/sprites_AI/sidehopper.c) and `DessgeegaInit` in [dessgeega.c](../src/sprites_AI/dessgeega.c) to initialize `work1`.
 
