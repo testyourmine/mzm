@@ -236,7 +236,7 @@ The game checks for solid blocks above and below Samus to see if you can bomb ju
 
 By falling into a Chozo statue item and opening the orb as late as possible, you can reach the hand before Samus is stopped to collect the item. If you fall while morphed or morph on the last possible frame, Samus will be refilled and collect the item at the same time. This happens because the Chozo statue returns to the idle pose once the message box is open, which checks if Samus is in position to get refilled.
 
-**Fix:** Edit `ChozoStatuePartArmCheckGrabSamusRefill` in [chozo_statue.c](../src/sprites_AI/chozo_statue.c) and `UnknownItemChozoStatuePartArmCheckGrabSamusRefill` in[unknown_item_chozo_statue.c](../src/sprites_AI/unknown_item_chozo_statue.c) to check if Samus's movement is prevented before setting the "grabbed" pose.
+**Fix:** Edit `ChozoStatuePartArmCheckGrabSamusRefill` in [chozo_statue.c](../src/sprites_AI/chozo_statue.c) and `UnknownItemChozoStatuePartArmCheckGrabSamusRefill` in [unknown_item_chozo_statue.c](../src/sprites_AI/unknown_item_chozo_statue.c) to check if Samus's movement is prevented before setting the "grabbed" pose.
 
 ```diff
   if (gSamusData.pose == SPOSE_MORPH_BALL)
