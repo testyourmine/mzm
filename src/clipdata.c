@@ -30,7 +30,7 @@ void ClipdataSetupCode(void)
 }
 
 /**
- * @brief Gets information on the clipdata block at the position in parameters, only used for samus
+ * @brief 57df8 | 84 | Gets information on the clipdata block at the position in parameters, only used for samus
  * 
  * @param yPosition Y position (in sub-pixels)
  * @param xPosition X position (in sub-pixels)
