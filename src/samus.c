@@ -4359,9 +4359,21 @@ SamusPose SamusTurningAroundAndCrouching(struct SamusData* pData)
 
     // Smooth clamp the X position
     if (collision == SAMUS_COLLISION_DETECTION_LEFT_MOST)
-        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT];
+    {    
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
+            sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT];
+    }
     else if (collision == SAMUS_COLLISION_DETECTION_RIGHT_MOST)
-        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) - sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
+    {    
+        #ifdef BUGFIX
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
+            sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_RIGHT] + SUB_PIXEL_POSITION_FLAG;
+        #else // !BUGFIX
+        // BUG: Should use SAMUS_BLOCK_HITBOX_RIGHT, not SAMUS_BLOCK_HITBOX_LEFT
+        xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
+            sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_LEFT] + SUB_PIXEL_POSITION_FLAG;
+        #endif // BUGFIX
+    }
 
     // Check can jump
     if (SamusCheckJumping(pData) && !(collision & SAMUS_COLLISION_DETECTION_MIDDILE))

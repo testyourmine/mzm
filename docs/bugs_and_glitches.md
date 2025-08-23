@@ -67,7 +67,7 @@ Whenever there are too many (24) active sprites in the Mother Brain room, the bl
 The code skips the check for the "grabbed by Metroid" flag to apply the slowed physics if Samus is currently in a liquid.
 So when Samus is in a liquid that doesn't slow her, she also won't be slowed even if she's grabbed by a Metroid.
 
-**Fix:** Edit `SamusUpdatePhysics` in [mother_brain.c](../src/samus.c) and simply remove the break in the cases for the liquid check.
+**Fix:** Edit `SamusUpdatePhysics` in [samus.c](../src/samus.c) and simply remove the break in the cases for the liquid check.
 
 ```diff
   case HAZARD_TYPE_WATER:
@@ -236,7 +236,7 @@ The game checks for solid blocks above and below Samus to see if you can bomb ju
 
 By falling into a Chozo statue item and opening the orb as late as possible, you can reach the hand before Samus is stopped to collect the item. If you fall while morphed or morph on the last possible frame, Samus will be refilled and collect the item at the same time. This happens because the Chozo statue returns to the idle pose once the message box is open, which checks if Samus is in position to get refilled.
 
-**Fix:** Edit `ChozoStatuePartArmCheckGrabSamusRefill` in [chozo_statue.c](../src/sprites_AI/chozo_statue.c) to check if Samus's movement is prevented before setting the "grabbed" pose.
+**Fix:** Edit `ChozoStatuePartArmCheckGrabSamusRefill` in [chozo_statue.c](../src/sprites_AI/chozo_statue.c) and `UnknownItemChozoStatuePartArmCheckGrabSamusRefill` in[unknown_item_chozo_statue.c](../src/sprites_AI/unknown_item_chozo_statue.c) to check if Samus's movement is prevented before setting the "grabbed" pose.
 
 ```diff
   if (gSamusData.pose == SPOSE_MORPH_BALL)
@@ -254,7 +254,7 @@ By falling into a Chozo statue item and opening the orb as late as possible, you
 
 If Samus is up against a wall on the right and an enemy is frozen up against Samus on the left, uncrouching will push Samus one block to the right, clipping into the wall. When Samus is up against the right side of a solid sprite, she's moved 1 unit to the right, even if she's up against a wall. When Samus uncrouches, the game checks if Samus is slightly under a block in order to push her out to be flush with the block (this also happens when Samus unmorphs). However, the wrong hitbox side is used when collision is detected on the right side. This was likely missed because there aren't any normal situations where Samus can be crouched directly under a block.
 
-**Fix:** Edit `SamusCrouching` in [samus.c](../src/samus.c) to fix which hitbox value is used.
+**Fix:** Edit `SamusCrouching` and `SamusTurningAroundAndCrouching` in [samus.c](../src/samus.c) to fix which hitbox value is used.
 
 ```diff
   // Smooth clamp the X position
@@ -272,7 +272,6 @@ If Samus is up against a wall on the right and an enemy is frozen up against Sam
 +         sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_RIGHT] + SUB_PIXEL_POSITION_FLAG;
   }
 ```
-
 
 ## Oversights and Design Flaws
 
