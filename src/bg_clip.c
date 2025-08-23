@@ -694,7 +694,7 @@ void BgClipCheckGrabbingCrumbleBlock(u8 dontDestroy)
  * 
  * @param xPosition X Position
  * @param yPosition Y Position
- * @return u8 Hatch opening action
+ * @return u32 Hatch opening action
  */
 u32 BgClipCheckOpeningHatch(u16 xPosition, u16 yPosition)
 {
