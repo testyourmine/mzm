@@ -714,9 +714,14 @@ static void UnknownItemChozoStatuePartArmCheckGrabSamusRefill(void)
 
     if (gSamusData.pose == SPOSE_MORPH_BALL)
     {
-        // Set grabbed
-        SamusSetPose(SPOSE_GRABBED_BY_CHOZO_STATUE);
-        isGrabbed++;
+        #ifdef BUGFIX
+        if (gPreventMovementTimer == 0)
+        #endif // BUGFIX
+        {
+            // Set grabbed
+            SamusSetPose(SPOSE_GRABBED_BY_CHOZO_STATUE);
+            isGrabbed++;
+        }
     }
     else if (gSamusData.pose == SPOSE_GRABBED_BY_CHOZO_STATUE)
     {
