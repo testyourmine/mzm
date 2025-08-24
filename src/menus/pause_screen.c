@@ -577,7 +577,7 @@ void PauseScreenDrawCompletionInfo(u8 dontDraw)
     priority = 3;
 
     // Setup oam data
-    for (i = 0; i < ARRAY_SIZE(sPauseScreenCompletionInfoOamData[0]); i++)
+    for (i = 0; i < ARRAY_SIZE(sPauseScreenCompletionInfoOamData) - 1; i++)
     {
         // Set oam id and priority
         PAUSE_SCREEN_DATA.miscOam[sPauseScreenCompletionInfoOamData[i][0]].oamID = sPauseScreenCompletionInfoOamData[i][1];
