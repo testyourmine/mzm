@@ -2070,7 +2070,7 @@ u32 PauseScreenSubroutine(void)
         case 0:
             if (gDemoState)
             {
-                gButtonInput = gChangedInput = 0;
+                gButtonInput = gChangedInput = KEY_NONE;
                 gSubGameModeStage = 5;
             }
             else
@@ -2125,7 +2125,7 @@ u32 PauseScreenSubroutine(void)
             }
             else
             {
-                gButtonInput = gChangedInput = 0;
+                gButtonInput = gChangedInput = KEY_NONE;
                 if (PauseScreenCallCurrentSubroutine())
                 {
                     gSubGameMode2 = 11;

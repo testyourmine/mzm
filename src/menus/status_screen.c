@@ -2675,7 +2675,7 @@ void StatusScreenEnableUnknownItem(u8 group, u8 row)
  */
 u32 StatusScreenCheckItemToggleInput(u16 button)
 {
-    return (gChangedInput & button) != 0;
+    return (gChangedInput & button) != KEY_NONE;
 }
 
 /**
