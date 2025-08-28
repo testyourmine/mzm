@@ -59,9 +59,9 @@ void InitializeGame(void)
         #endif // DEBUG
     }
 
-    gButtonInput = 0;
-    gPreviousButtonInput = 0;
-    gChangedInput = 0;
+    gButtonInput = KEY_NONE;
+    gPreviousButtonInput = KEY_NONE;
+    gChangedInput = KEY_NONE;
 
     gDisableSoftReset = FALSE;
     gStereoFlag = FALSE;
