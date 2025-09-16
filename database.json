@@ -12,7 +12,7 @@
     "size": 1
   },
   {
-    "path": "characters_graphics.gfx",
+    "path": "TextCharacters.gfx",
     "count": 180224,
     "addr": {
       "us": 4281440,
@@ -24,7 +24,7 @@
     "size": 1
   },
   {
-    "path": "nes_metroid.bin",
+    "path": "NesMetroid.bin",
     "count": {
       "us": 128642,
       "eu": 128642,
@@ -3198,7 +3198,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image0.pal",
+    "path": "fusion_gallery/Image0.pal",
     "count": 256,
     "addr": {
       "us": 4980452,
@@ -3210,7 +3210,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image1.pal",
+    "path": "fusion_gallery/Image1.pal",
     "count": 256,
     "addr": {
       "us": 4980964,
@@ -3222,7 +3222,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image2.pal",
+    "path": "fusion_gallery/Image2.pal",
     "count": 256,
     "addr": {
       "us": 4981476,
@@ -3234,7 +3234,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image3.pal",
+    "path": "fusion_gallery/Image3.pal",
     "count": 256,
     "addr": {
       "us": 4981988,
@@ -3246,7 +3246,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image4.pal",
+    "path": "fusion_gallery/Image4.pal",
     "count": 256,
     "addr": {
       "us": 4982500,
@@ -3258,7 +3258,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image11.pal",
+    "path": "fusion_gallery/Image11.pal",
     "count": 256,
     "addr": {
       "us": 4983012,
@@ -3270,7 +3270,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image12.pal",
+    "path": "fusion_gallery/Image12.pal",
     "count": 256,
     "addr": {
       "us": 4983524,
@@ -3282,7 +3282,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image5.pal",
+    "path": "fusion_gallery/Image5.pal",
     "count": 256,
     "addr": {
       "us": 4984036,
@@ -3294,7 +3294,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image6.pal",
+    "path": "fusion_gallery/Image6.pal",
     "count": 256,
     "addr": {
       "us": 4984548,
@@ -3306,7 +3306,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image7.pal",
+    "path": "fusion_gallery/Image7.pal",
     "count": 256,
     "addr": {
       "us": 4985060,
@@ -3318,7 +3318,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image8.pal",
+    "path": "fusion_gallery/Image8.pal",
     "count": 256,
     "addr": {
       "us": 4985572,
@@ -3330,7 +3330,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image9.pal",
+    "path": "fusion_gallery/Image9.pal",
     "count": 256,
     "addr": {
       "us": 4986084,
@@ -3342,7 +3342,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image10.pal",
+    "path": "fusion_gallery/Image10.pal",
     "count": 256,
     "addr": {
       "us": 4986596,
@@ -3354,7 +3354,7 @@
     "size": 2
   },
   {
-    "path": "fusion_gallery/image0_top.gfx.lz",
+    "path": "fusion_gallery/Image0_Top.gfx.lz",
     "count": 5628,
     "addr": {
       "us": 4987368,
@@ -3366,7 +3366,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image0_bottom.gfx.lz",
+    "path": "fusion_gallery/Image0_Bottom.gfx.lz",
     "count": 3191,
     "addr": {
       "us": 5009880,
@@ -3378,7 +3378,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image1_top.gfx.lz",
+    "path": "fusion_gallery/Image1_Top.gfx.lz",
     "count": 5900,
     "addr": {
       "us": 5022644,
@@ -3390,7 +3390,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image1_bottom.gfx.lz",
+    "path": "fusion_gallery/Image1_Bottom.gfx.lz",
     "count": 2986,
     "addr": {
       "us": 5046244,
@@ -3402,7 +3402,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image2_top.gfx.lz",
+    "path": "fusion_gallery/Image2_Top.gfx.lz",
     "count": 5731,
     "addr": {
       "us": 5058188,
@@ -3414,7 +3414,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image2_bottom.gfx.lz",
+    "path": "fusion_gallery/Image2_Bottom.gfx.lz",
     "count": 3293,
     "addr": {
       "us": 5081112,
@@ -3426,7 +3426,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image3_top.gfx.lz",
+    "path": "fusion_gallery/Image3_Top.gfx.lz",
     "count": 6364,
     "addr": {
       "us": 5094284,
@@ -3438,7 +3438,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image3_bottom.gfx.lz",
+    "path": "fusion_gallery/Image3_Bottom.gfx.lz",
     "count": 3818,
     "addr": {
       "us": 5119740,
@@ -3450,7 +3450,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image4_top.gfx.lz",
+    "path": "fusion_gallery/Image4_Top.gfx.lz",
     "count": 6851,
     "addr": {
       "us": 5135012,
@@ -3462,7 +3462,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image4_bottom.gfx.lz",
+    "path": "fusion_gallery/Image4_Bottom.gfx.lz",
     "count": 3504,
     "addr": {
       "us": 5162416,
@@ -3474,7 +3474,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image0_top.tt",
+    "path": "fusion_gallery/Image0_Top.tt",
     "count": 551,
     "addr": {
       "us": 5176432,
@@ -3486,7 +3486,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image0_bottom.tt",
+    "path": "fusion_gallery/Image0_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5178636,
@@ -3498,7 +3498,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image1_top.tt",
+    "path": "fusion_gallery/Image1_Top.tt",
     "count": 551,
     "addr": {
       "us": 5180108,
@@ -3510,7 +3510,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image1_bottom.tt",
+    "path": "fusion_gallery/Image1_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5182312,
@@ -3522,7 +3522,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image2_top.tt",
+    "path": "fusion_gallery/Image2_Top.tt",
     "count": 551,
     "addr": {
       "us": 5183784,
@@ -3534,7 +3534,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image2_bottom.tt",
+    "path": "fusion_gallery/Image2_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5185988,
@@ -3546,7 +3546,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image3_top.tt",
+    "path": "fusion_gallery/Image3_Top.tt",
     "count": 551,
     "addr": {
       "us": 5187460,
@@ -3558,7 +3558,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image3_bottom.tt",
+    "path": "fusion_gallery/Image3_Bottom.tt",
     "count": 369,
     "addr": {
       "us": 5189664,
@@ -3570,7 +3570,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image4_top.tt",
+    "path": "fusion_gallery/Image4_Top.tt",
     "count": 551,
     "addr": {
       "us": 5191140,
@@ -3582,7 +3582,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image4_bottom.tt",
+    "path": "fusion_gallery/Image4_Bottom.tt",
     "count": 369,
     "addr": {
       "us": 5193344,
@@ -3594,7 +3594,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image11_top.gfx.lz",
+    "path": "fusion_gallery/Image11_Top.gfx.lz",
     "count": 5936,
     "addr": {
       "us": 5194820,
@@ -3606,7 +3606,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image11_bottom.gfx.lz",
+    "path": "fusion_gallery/Image11_Bottom.gfx.lz",
     "count": 3930,
     "addr": {
       "us": 5218564,
@@ -3618,7 +3618,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image12_top.gfx.lz",
+    "path": "fusion_gallery/Image12_Top.gfx.lz",
     "count": 5604,
     "addr": {
       "us": 5234284,
@@ -3630,7 +3630,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image12_bottom.gfx.lz",
+    "path": "fusion_gallery/Image12_Bottom.gfx.lz",
     "count": 3582,
     "addr": {
       "us": 5256700,
@@ -3642,7 +3642,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image5_top.gfx.lz",
+    "path": "fusion_gallery/Image5_Top.gfx.lz",
     "count": 6633,
     "addr": {
       "us": 5271028,
@@ -3654,7 +3654,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image5_bottom.gfx.lz",
+    "path": "fusion_gallery/Image5_Bottom.gfx.lz",
     "count": 3277,
     "addr": {
       "us": 5297560,
@@ -3666,7 +3666,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image6_top.gfx.lz",
+    "path": "fusion_gallery/Image6_Top.gfx.lz",
     "count": 6754,
     "addr": {
       "us": 5310668,
@@ -3678,7 +3678,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image6_bottom.gfx.lz",
+    "path": "fusion_gallery/Image6_Bottom.gfx.lz",
     "count": 3419,
     "addr": {
       "us": 5337684,
@@ -3690,7 +3690,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image7_top.gfx.lz",
+    "path": "fusion_gallery/Image7_Top.gfx.lz",
     "count": 6977,
     "addr": {
       "us": 5351360,
@@ -3702,7 +3702,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image7_bottom.gfx.lz",
+    "path": "fusion_gallery/Image7_Bottom.gfx.lz",
     "count": 4372,
     "addr": {
       "us": 5379268,
@@ -3714,7 +3714,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image8_top.gfx.lz",
+    "path": "fusion_gallery/Image8_Top.gfx.lz",
     "count": 6417,
     "addr": {
       "us": 5396756,
@@ -3726,7 +3726,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image8_bottom.gfx.lz",
+    "path": "fusion_gallery/Image8_Bottom.gfx.lz",
     "count": 3919,
     "addr": {
       "us": 5422424,
@@ -3738,7 +3738,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image9_top.gfx.lz",
+    "path": "fusion_gallery/Image9_Top.gfx.lz",
     "count": 6918,
     "addr": {
       "us": 5438100,
@@ -3750,7 +3750,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image9_bottom.gfx.lz",
+    "path": "fusion_gallery/Image9_Bottom.gfx.lz",
     "count": 4360,
     "addr": {
       "us": 5465772,
@@ -3762,7 +3762,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image10_top.gfx.lz",
+    "path": "fusion_gallery/Image10_Top.gfx.lz",
     "count": 5764,
     "addr": {
       "us": 5483212,
@@ -3774,7 +3774,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image10_bottom.gfx.lz",
+    "path": "fusion_gallery/Image10_Bottom.gfx.lz",
     "count": 2273,
     "addr": {
       "us": 5506268,
@@ -3786,7 +3786,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image11_top.tt",
+    "path": "fusion_gallery/Image11_Top.tt",
     "count": 551,
     "addr": {
       "us": 5515360,
@@ -3798,7 +3798,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image11_bottom.tt",
+    "path": "fusion_gallery/Image11_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5517564,
@@ -3810,7 +3810,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image12_top.tt",
+    "path": "fusion_gallery/Image12_Top.tt",
     "count": 550,
     "addr": {
       "us": 5519036,
@@ -3822,7 +3822,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image12_bottom.tt",
+    "path": "fusion_gallery/Image12_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5521236,
@@ -3834,7 +3834,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image5_top.tt",
+    "path": "fusion_gallery/Image5_Top.tt",
     "count": 551,
     "addr": {
       "us": 5522708,
@@ -3846,7 +3846,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image5_bottom.tt",
+    "path": "fusion_gallery/Image5_Bottom.tt",
     "count": 369,
     "addr": {
       "us": 5524912,
@@ -3858,7 +3858,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image6_top.tt",
+    "path": "fusion_gallery/Image6_Top.tt",
     "count": 551,
     "addr": {
       "us": 5526388,
@@ -3870,7 +3870,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image6_bottom.tt",
+    "path": "fusion_gallery/Image6_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5528592,
@@ -3882,7 +3882,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image7_top.tt",
+    "path": "fusion_gallery/Image7_Top.tt",
     "count": 551,
     "addr": {
       "us": 5530064,
@@ -3894,7 +3894,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image7_bottom.tt",
+    "path": "fusion_gallery/Image7_Bottom.tt",
     "count": 369,
     "addr": {
       "us": 5532268,
@@ -3906,7 +3906,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image8_top.tt",
+    "path": "fusion_gallery/Image8_Top.tt",
     "count": 551,
     "addr": {
       "us": 5533744,
@@ -3918,7 +3918,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image8_bottom.tt",
+    "path": "fusion_gallery/Image8_Bottom.tt",
     "count": 369,
     "addr": {
       "us": 5535948,
@@ -3930,7 +3930,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image9_top.tt",
+    "path": "fusion_gallery/Image9_Top.tt",
     "count": 550,
     "addr": {
       "us": 5537424,
@@ -3942,7 +3942,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image9_bottom.tt",
+    "path": "fusion_gallery/Image9_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5539624,
@@ -3954,7 +3954,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image10_top.tt",
+    "path": "fusion_gallery/Image10_Top.tt",
     "count": 551,
     "addr": {
       "us": 5541096,
@@ -3966,7 +3966,7 @@
     "size": 4
   },
   {
-    "path": "fusion_gallery/image10_bottom.tt",
+    "path": "fusion_gallery/Image10_Bottom.tt",
     "count": 368,
     "addr": {
       "us": 5543300,
@@ -4836,7 +4836,7 @@
     "size": 1
   },
   {
-    "path": "io/rom.bin",
+    "path": "io/Rom.bin",
     "count": {
       "us": 32740,
       "eu": 32592,
@@ -6434,7 +6434,7 @@
     "size": 2
   },
   {
-    "path": "menus/PauseScreen/sMinimapTiles.gfx",
+    "path": "menus/PauseScreen/MinimapTiles.gfx",
     "count": 5120,
     "addr": {
       "us": 4251844,
@@ -6803,7 +6803,7 @@
     "size": 1
   },
   {
-    "path": "rooms/brinstar/map_room.rle",
+    "path": "rooms/brinstar/MapRoom.rle",
     "count": 988,
     "addr": {
       "us": 6167340,
@@ -36543,7 +36543,7 @@
     "size": 2
   },
   {
-    "path": "sprites/deorem.gfx.lz",
+    "path": "sprites/Deorem.gfx.lz",
     "count": 1569,
     "addr": {
       "us": 2972724,
@@ -36555,7 +36555,7 @@
     "size": 4
   },
   {
-    "path": "sprites/deorem.pal",
+    "path": "sprites/Deorem.pal",
     "count": 80,
     "addr": {
       "us": 2979000,
