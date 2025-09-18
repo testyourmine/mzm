@@ -1,8 +1,8 @@
 #include "data/sprites/security_laser.h"
 #include "macros.h"
 
-const u32 sSecurityLaserGfx[104] = INCBIN_U32("data/sprites/SecurityLaser.gfx.lz");
-const u16 sSecurityLaserPal[16] = INCBIN_U16("data/sprites/SecurityLaser.pal");
+const u32 sSecurityLaserGfx[104] = INCBIN_U32("data/sprites/security_laser.gfx.lz");
+const u16 sSecurityLaserPal[16] = INCBIN_U16("data/sprites/security_laser.pal");
 
 static const u16 sSecurityLaserOam_VerticalSmall_Frame0[OAM_DATA_SIZE(3)] = {
     3,

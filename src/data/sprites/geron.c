@@ -1,8 +1,8 @@
 #include "data/sprites/geron.h"
 #include "macros.h"
 
-const u32 sGeronGfx[711] = INCBIN_U32("data/sprites/Geron.gfx.lz");
-const u16 sGeronPal[48] = INCBIN_U16("data/sprites/Geron.pal");
+const u32 sGeronGfx[711] = INCBIN_U32("data/sprites/geron.gfx.lz");
+const u16 sGeronPal[48] = INCBIN_U16("data/sprites/geron.pal");
 
 static const u16 sGeronOam_Idle_Frame0[OAM_DATA_SIZE(13)] = {
     13,

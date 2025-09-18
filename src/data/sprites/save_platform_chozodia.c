@@ -1,8 +1,8 @@
 #include "data/sprites/save_platform_chozodia.h"
 #include "macros.h"
 
-const u32 sSavePlatformChozodiaGfx[552] = INCBIN_U32("data/sprites/SavePlatformChozodia.gfx.lz");
-const u16 sSavePlatformChozodiaPal[64] = INCBIN_U16("data/sprites/SavePlatformChozodia.pal");
+const u32 sSavePlatformChozodiaGfx[552] = INCBIN_U32("data/sprites/save_platform_chozodia.gfx.lz");
+const u16 sSavePlatformChozodiaPal[64] = INCBIN_U16("data/sprites/save_platform_chozodia.pal");
 
 static const u16 sSavePlatformChozodiaOam_Idle_Frame0[OAM_DATA_SIZE(20)] = {
     20,

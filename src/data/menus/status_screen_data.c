@@ -5,8 +5,8 @@
 
 #ifdef DEBUG
 
-const u16 sPauseDebugEventListBgPalette[2 * 16] = INCBIN_U16("data/menus/PauseScreen/PauseDebugEventListBg.pal");
-const u32 sPauseDebugEventListTextGfx[336] = INCBIN_U32("data/menus/PauseScreen/PauseDebugEventListText.gfx.lz");
+const u16 sPauseDebugEventListBgPalette[2 * 16] = INCBIN_U16("data/menus/pause_screen/pause_debug_event_list_bg.pal");
+const u32 sPauseDebugEventListTextGfx[336] = INCBIN_U32("data/menus/pause_screen/pause_debug_event_list_text.gfx.lz");
 
 const u8 sPauseDebug_Event4E_Text[32] = SHIFT_JIS("END         エンド            ");
 const u8 sPauseDebug_Event4D_Text[32] = SHIFT_JIS("BOMBGATE    アキ ボムゲート      ");
@@ -371,8 +371,8 @@ const struct PauseDebugEnergyAmmoInfo sPauseDebugEnergyAmmoInfo[8] = {
 
 #endif // DEBUG
 
-const u16 sStatusScreenUnknownItemsWhiteFlashingPal[6 * 16] = INCBIN_U16("data/menus/PauseScreen/MapScreenUnknownItemsFlashing.pal");
-const u16 sStatusScreenUnknownItemsNamesFlashingPal[4 * 16] = INCBIN_U16("data/menus/PauseScreen/MapScreenUnknownItemsNamesFlashing.pal");
+const u16 sStatusScreenUnknownItemsWhiteFlashingPal[6 * 16] = INCBIN_U16("data/menus/pause_screen/map_screen_unknown_items_flashing.pal");
+const u16 sStatusScreenUnknownItemsNamesFlashingPal[4 * 16] = INCBIN_U16("data/menus/pause_screen/map_screen_unknown_items_names_flashing.pal");
 
 const struct StatusScreenGroupPositions sStatusScreenGroupsPositions[ABILITY_GROUP_END] = {
     [ABILITY_GROUP_BEAMS] = {

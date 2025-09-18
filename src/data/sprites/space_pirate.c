@@ -21,8 +21,8 @@ const s16 sSpacePirate_2e1070[12] = {
     -32, -28, -24, -20, -16, -8, -4, 8, 16, 24, 28, 32
 };
 
-const u32 sSpacePirateGfx[810] = INCBIN_U32("data/sprites/SpacePirate.gfx.lz");
-const u16 sSpacePiratePal[48] = INCBIN_U16("data/sprites/SpacePirate.pal");
+const u32 sSpacePirateGfx[810] = INCBIN_U32("data/sprites/space_pirate.gfx.lz");
+const u16 sSpacePiratePal[48] = INCBIN_U16("data/sprites/space_pirate.pal");
 
 static const u16 sSpacePirateOam_Crouched_Frame0[OAM_DATA_SIZE(14)] = {
     14,

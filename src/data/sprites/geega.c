@@ -1,10 +1,10 @@
 #include "data/sprites/geega.h"
 #include "macros.h"
 
-const u32 sGeegaGfx[153] = INCBIN_U32("data/sprites/Geega.gfx.lz");
-const u16 sGeegaPal[16] = INCBIN_U16("data/sprites/Geega.pal");
-const u32 sGeegaWhiteGfx[153] = INCBIN_U32("data/sprites/GeegaWhite.gfx.lz");
-const u16 sGeegaWhitePal[16] = INCBIN_U16("data/sprites/GeegaWhite.pal");
+const u32 sGeegaGfx[153] = INCBIN_U32("data/sprites/geega.gfx.lz");
+const u16 sGeegaPal[16] = INCBIN_U16("data/sprites/geega.pal");
+const u32 sGeegaWhiteGfx[153] = INCBIN_U32("data/sprites/geega_white.gfx.lz");
+const u16 sGeegaWhitePal[16] = INCBIN_U16("data/sprites/geega_white.pal");
 
 static const u16 sGeegaOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,

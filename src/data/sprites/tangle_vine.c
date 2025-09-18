@@ -95,8 +95,8 @@ const struct MultiSpriteData sTangleVineGerutaMultiSpriteData_Idle[5] = {
     [4] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sTangleVineGfx[1298] = INCBIN_U32("data/sprites/TangleVine.gfx.lz");
-const u16 sTangleVinePal[80] = INCBIN_U16("data/sprites/TangleVine.pal");
+const u32 sTangleVineGfx[1298] = INCBIN_U32("data/sprites/tangle_vine.gfx.lz");
+const u16 sTangleVinePal[80] = INCBIN_U16("data/sprites/tangle_vine.pal");
 
 const u16 sTangleVineTallOam_OnGround_Frame3[OAM_DATA_SIZE(4)] = {
     4,

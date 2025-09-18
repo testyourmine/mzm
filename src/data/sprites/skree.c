@@ -12,10 +12,10 @@ const s16 sSkreeFallingSpeed[8] = {
     SHORT_MAX
 };
 
-const u32 sSkreeGreenGfx[264] = INCBIN_U32("data/sprites/SkreeGreen.gfx.lz");
-const u16 sSkreeGreenPal[16] = INCBIN_U16("data/sprites/SkreeGreen.pal");
-const u32 sSkreeBlueGfx[264] = INCBIN_U32("data/sprites/SkreeBlue.gfx.lz");
-const u16 sSkreeBluePal[16] = INCBIN_U16("data/sprites/SkreeBlue.pal");
+const u32 sSkreeGreenGfx[264] = INCBIN_U32("data/sprites/skree_green.gfx.lz");
+const u16 sSkreeGreenPal[16] = INCBIN_U16("data/sprites/skree_green.pal");
+const u32 sSkreeBlueGfx[264] = INCBIN_U32("data/sprites/skree_blue.gfx.lz");
+const u16 sSkreeBluePal[16] = INCBIN_U16("data/sprites/skree_blue.pal");
 
 static const u16 sSkreeOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

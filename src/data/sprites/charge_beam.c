@@ -10,8 +10,8 @@ const s16 sChargeBeamIdleYMovement[66] = {
     0, SHORT_MAX
 };
 
-const u32 sChargeBeamGfx[243] = INCBIN_U32("data/sprites/ChargeBeam.gfx.lz");
-const u16 sChargeBeamPal[16] = INCBIN_U16("data/sprites/ChargeBeam.pal");
+const u32 sChargeBeamGfx[243] = INCBIN_U32("data/sprites/charge_beam.gfx.lz");
+const u16 sChargeBeamPal[16] = INCBIN_U16("data/sprites/charge_beam.pal");
 
 static const u16 sChargeBeamOam_Visible_Frame0[OAM_DATA_SIZE(1)] = {
     1,

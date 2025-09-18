@@ -1,8 +1,8 @@
 #include "data/sprites/zebetite_and_cannon.h"
 #include "macros.h"
 
-const u32 sRinkaZebetiteAndCannonGfx[476] = INCBIN_U32("data/sprites/ZebetiteRinkaCannon.gfx.lz");
-const u16 sRinkaZebetiteAndCannonPal[32] = INCBIN_U16("data/sprites/ZebetiteRinkaCannon.pal");
+const u32 sRinkaZebetiteAndCannonGfx[476] = INCBIN_U32("data/sprites/zebetite_rinka_cannon.gfx.lz");
+const u16 sRinkaZebetiteAndCannonPal[32] = INCBIN_U16("data/sprites/zebetite_rinka_cannon.pal");
 
 static const u16 sRinkaMotherBrainOam_Moving_Frame0[OAM_DATA_SIZE(2)] = {
     2,

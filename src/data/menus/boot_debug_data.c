@@ -5,10 +5,10 @@
 
 #ifdef DEBUG
 
-const u16 sBootDebug_417e38[8 * 16] = INCBIN_U16("data/menus/BootDebug/BootDebug_417e38.pal");
-const u16 sBootDebugBgPal[8 * 16] = INCBIN_U16("data/menus/BootDebug/Background.pal");
-const u16 sBootDebugObjPal[3 * 16] = INCBIN_U16("data/menus/BootDebug/Objects.pal");
-const u32 sBootDebugObjGfx[222] = INCBIN_U32("data/menus/BootDebug/Objects.gfx.lz");
+const u16 sBootDebug_417e38[8 * 16] = INCBIN_U16("data/menus/boot_debug/boot_debug_417e38.pal");
+const u16 sBootDebugBgPal[8 * 16] = INCBIN_U16("data/menus/boot_debug/background.pal");
+const u16 sBootDebugObjPal[3 * 16] = INCBIN_U16("data/menus/boot_debug/objects.pal");
+const u32 sBootDebugObjGfx[222] = INCBIN_U32("data/menus/boot_debug/objects.gfx.lz");
 
 static const u16 sBootDebugOam_4185D8_Frame1[OAM_DATA_SIZE(1)] = {
     1,
@@ -184,7 +184,7 @@ static const struct FrameData sBootDebugOam_418610[5] = {
    [4] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sBootDebugBgGfx[771] = INCBIN_U32("data/menus/BootDebug/Background.gfx.lz");
+const u32 sBootDebugBgGfx[771] = INCBIN_U32("data/menus/boot_debug/background.gfx.lz");
 
 const u8 sBootDebug_CutsceneB_EscapeShip_Text[8] = SHIFT_JIS("コガタテイ");
 const u8 sBootDebug_CutsceneB_MechaRidley_Text[12] = SHIFT_JIS("メカ リドリー");

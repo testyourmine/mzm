@@ -9,12 +9,12 @@
 
 #include "constants/menus/status_screen.h"
 
-const u16 sPauseScreen_3fcef0[11 * 16] = INCBIN_U16("data/menus/PauseScreen/3fcef0.pal");
-const u16 sTankIconsPal[16 * 16] = INCBIN_U16("data/menus/PauseScreen/TankIcons.pal");
-const u16 sPauseScreen_3fd250[5 * 16] = INCBIN_U16("data/menus/PauseScreen/3fd250.pal");
+const u16 sPauseScreen_3fcef0[11 * 16] = INCBIN_U16("data/menus/pause_screen/3fcef0.pal");
+const u16 sTankIconsPal[16 * 16] = INCBIN_U16("data/menus/pause_screen/tank_icons.pal");
+const u16 sPauseScreen_3fd250[5 * 16] = INCBIN_U16("data/menus/pause_screen/3fd250.pal");
 
-const u16 sMinimapAnimatedPalette[1 * 16] = INCBIN_U16("data/menus/PauseScreen/MinimapAnimated.pal");
-const u16 sSamusWireframePal[4 * 16] = INCBIN_U16("data/menus/PauseScreen/SamusWireframe.pal");
+const u16 sMinimapAnimatedPalette[1 * 16] = INCBIN_U16("data/menus/pause_screen/minimap_animated.pal");
+const u16 sSamusWireframePal[4 * 16] = INCBIN_U16("data/menus/pause_screen/samus_wireframe.pal");
 
 
 static const u16 sSamusIconOam_Suit_Frame0[OAM_DATA_SIZE(1)] = {
@@ -2780,65 +2780,65 @@ static const struct FrameData sMiscOam_DebugSamusHeadAndArrows[2] = {
 };
 
 
-const u32 sMotifBehindWireframeSamusGfx[278] = INCBIN_U32("data/menus/PauseScreen/MotifBehindWireframeSamus.gfx.lz");
-const u32 sPauseScreenHudGfx[1404] = INCBIN_U32("data/menus/PauseScreen/PauseScreenHud.gfx.lz");
-const u32 sMinimapLettersGfx[60] = INCBIN_U32("data/menus/PauseScreen/MinimapLetters.gfx.lz");
+const u32 sMotifBehindWireframeSamusGfx[278] = INCBIN_U32("data/menus/pause_screen/motif_behind_wireframe_samus.gfx.lz");
+const u32 sPauseScreenHudGfx[1404] = INCBIN_U32("data/menus/pause_screen/pause_screen_hud.gfx.lz");
+const u32 sMinimapLettersGfx[60] = INCBIN_U32("data/menus/pause_screen/minimap_letters.gfx.lz");
 
-const u32 sMenuNamesJapaneseGfx[92] = INCBIN_U32("data/menus/PauseScreen/MenuNamesJapanese.gfx.lz");
-const u32 sEquipmentNamesJapaneseGfx[384] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesJapanese.gfx.lz");
+const u32 sMenuNamesJapaneseGfx[92] = INCBIN_U32("data/menus/pause_screen/menu_names_japanese.gfx.lz");
+const u32 sEquipmentNamesJapaneseGfx[384] = INCBIN_U32("data/menus/pause_screen/equipment_names_japanese.gfx.lz");
 
-const u32 sTankIconsGfx[1786] = INCBIN_U32("data/menus/PauseScreen/TankIcons.gfx.lz");
+const u32 sTankIconsGfx[1786] = INCBIN_U32("data/menus/pause_screen/tank_icons.gfx.lz");
 
-const u32 sMapScreenAreaNamesEnglishGfx[216] = INCBIN_U32("data/menus/PauseScreen/MapScreenAreaNamesEnglish.gfx.lz");
-const u32 sMapScreenUnknownItemsNamesJapaneseGfx[65] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesJapanese.gfx.lz");
-const u32 sMapScreenChozoStatueAreaNamesEnglishGfx[152] = INCBIN_U32("data/menus/PauseScreen/MapScreenChozoStatueAreaNamesEnglish.gfx.lz");
+const u32 sMapScreenAreaNamesEnglishGfx[216] = INCBIN_U32("data/menus/pause_screen/map_screen_area_names_english.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesJapaneseGfx[65] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_japanese.gfx.lz");
+const u32 sMapScreenChozoStatueAreaNamesEnglishGfx[152] = INCBIN_U32("data/menus/pause_screen/map_screen_chozo_statue_area_names_english.gfx.lz");
 
-const u32 sChozoHintBackgroundGfx[3618] = INCBIN_U32("data/menus/PauseScreen/ChozoHintBackground.gfx.lz");
+const u32 sChozoHintBackgroundGfx[3618] = INCBIN_U32("data/menus/pause_screen/chozo_hint_background.gfx.lz");
 
-const u32 sBrinstarMinimap[133] = INCBIN_U32("data/menus/PauseScreen/BrinstarMinimap.tt");
-const u32 sKraidMinimap[121] = INCBIN_U32("data/menus/PauseScreen/KraidMinimap.tt");
-const u32 sNorfairMinimap[153] = INCBIN_U32("data/menus/PauseScreen/NorfairMinimap.tt");
-const u32 sRidleyMinimap[120] = INCBIN_U32("data/menus/PauseScreen/RidleyMinimap.tt");
-const u32 sTourianMinimap[91] = INCBIN_U32("data/menus/PauseScreen/TourianMinimap.tt");
-const u32 sCrateriaMinimap[114] = INCBIN_U32("data/menus/PauseScreen/CrateriaMinimap.tt");
-const u32 sChozodiaMinimap[194] = INCBIN_U32("data/menus/PauseScreen/ChozodiaMinimap.tt");
-const u32 sTestMinimap[78] = INCBIN_U32("data/menus/PauseScreen/TestMinimap.tt");
+const u32 sBrinstarMinimap[133] = INCBIN_U32("data/menus/pause_screen/brinstar_minimap.tt");
+const u32 sKraidMinimap[121] = INCBIN_U32("data/menus/pause_screen/kraid_minimap.tt");
+const u32 sNorfairMinimap[153] = INCBIN_U32("data/menus/pause_screen/norfair_minimap.tt");
+const u32 sRidleyMinimap[120] = INCBIN_U32("data/menus/pause_screen/ridley_minimap.tt");
+const u32 sTourianMinimap[91] = INCBIN_U32("data/menus/pause_screen/tourian_minimap.tt");
+const u32 sCrateriaMinimap[114] = INCBIN_U32("data/menus/pause_screen/crateria_minimap.tt");
+const u32 sChozodiaMinimap[194] = INCBIN_U32("data/menus/pause_screen/chozodia_minimap.tt");
+const u32 sTestMinimap[78] = INCBIN_U32("data/menus/pause_screen/test_minimap.tt");
 
-const u32 sDebugMenuTileParts[175] = INCBIN_U32("data/menus/PauseScreen/DebugMenuTileParts.tt");
-const u32 sMapScreenVisorOverlayTilemap[122] = INCBIN_U32("data/menus/PauseScreen/MapScreenVisorOverlay.tt");
-const u32 sMapScreenOverlayTilemap[125] = INCBIN_U32("data/menus/PauseScreen/MapScreenOverlay.tt");
-const u32 sWorldMapOverlayTilemap[206] = INCBIN_U32("data/menus/PauseScreen/WorldMapOverlay.tt");
-const u32 sStatusScreenTilemap[264] = INCBIN_U32("data/menus/PauseScreen/StatusScreen.tt");
-const u32 sEasySleepTilemap[196] = INCBIN_U32("data/menus/PauseScreen/EasySleep.tt");
-const u32 sStatusScreenBackgroundTilemap[169] = INCBIN_U32("data/menus/PauseScreen/StatusScreenBackground.tt");
-const u32 sMapScreenTextBg0TileTable[92] = INCBIN_U32("data/menus/PauseScreen/MapScreenTextBg0.tt");
-const u32 sChozoHintBackgroundTileTable[577] = INCBIN_U32("data/menus/PauseScreen/ChozoHintBackground.tt");
+const u32 sDebugMenuTileParts[175] = INCBIN_U32("data/menus/pause_screen/debug_menu_tile_parts.tt");
+const u32 sMapScreenVisorOverlayTilemap[122] = INCBIN_U32("data/menus/pause_screen/map_screen_visor_overlay.tt");
+const u32 sMapScreenOverlayTilemap[125] = INCBIN_U32("data/menus/pause_screen/map_screen_overlay.tt");
+const u32 sWorldMapOverlayTilemap[206] = INCBIN_U32("data/menus/pause_screen/world_map_overlay.tt");
+const u32 sStatusScreenTilemap[264] = INCBIN_U32("data/menus/pause_screen/status_screen.tt");
+const u32 sEasySleepTilemap[196] = INCBIN_U32("data/menus/pause_screen/easy_sleep.tt");
+const u32 sStatusScreenBackgroundTilemap[169] = INCBIN_U32("data/menus/pause_screen/status_screen_background.tt");
+const u32 sMapScreenTextBg0TileTable[92] = INCBIN_U32("data/menus/pause_screen/map_screen_text_bg0.tt");
+const u32 sChozoHintBackgroundTileTable[577] = INCBIN_U32("data/menus/pause_screen/chozo_hint_background.tt");
 
-const u32 sEquipmentNamesHiraganaGfx[411] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesHiragana.gfx.lz");
-const u32 sEquipmentNamesEnglishGfx[380] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesEnglish.gfx.lz");
-const u32 sEquipmentNamesGermanGfx[] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesGerman.gfx.lz");
-const u32 sEquipmentNamesFrenchGfx[] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesFrench.gfx.lz");
-const u32 sEquipmentNamesItalianGfx[] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesItalian.gfx.lz");
-const u32 sEquipmentNamesSpanishGfx[] = INCBIN_U32("data/menus/PauseScreen/EquipmentNamesSpanish.gfx.lz");
+const u32 sEquipmentNamesHiraganaGfx[411] = INCBIN_U32("data/menus/pause_screen/equipment_names_hiragana.gfx.lz");
+const u32 sEquipmentNamesEnglishGfx[380] = INCBIN_U32("data/menus/pause_screen/equipment_names_english.gfx.lz");
+const u32 sEquipmentNamesGermanGfx[] = INCBIN_U32("data/menus/pause_screen/equipment_names_german.gfx.lz");
+const u32 sEquipmentNamesFrenchGfx[] = INCBIN_U32("data/menus/pause_screen/equipment_names_french.gfx.lz");
+const u32 sEquipmentNamesItalianGfx[] = INCBIN_U32("data/menus/pause_screen/equipment_names_italian.gfx.lz");
+const u32 sEquipmentNamesSpanishGfx[] = INCBIN_U32("data/menus/pause_screen/equipment_names_spanish.gfx.lz");
 
 
-const u32 sMapScreenAreaNamesHiraganaGfx[198] = INCBIN_U32("data/menus/PauseScreen/MapScreenAreaNamesHiragana.gfx.lz");
+const u32 sMapScreenAreaNamesHiraganaGfx[198] = INCBIN_U32("data/menus/pause_screen/map_screen_area_names_hiragana.gfx.lz");
 
-const u32 sMenuNamesHiraganaGfx[113] = INCBIN_U32("data/menus/PauseScreen/MenuNamesHiragana.gfx.lz");
-const u32 sMenuNamesEnglishGfx[92] = INCBIN_U32("data/menus/PauseScreen/MenuNamesEnglish.gfx.lz");
-const u32 sMenuNamesGermanGfx[97] = INCBIN_U32("data/menus/PauseScreen/MenuNamesGerman.gfx.lz");
-const u32 sMenuNamesFrenchGfx[91] = INCBIN_U32("data/menus/PauseScreen/MenuNamesFrench.gfx.lz");
-const u32 sMenuNamesItalianGfx[] = INCBIN_U32("data/menus/PauseScreen/MenuNamesItalian.gfx.lz");
-const u32 sMenuNamesSpanishGfx[] = INCBIN_U32("data/menus/PauseScreen/MenuNamesSpanish.gfx.lz");
+const u32 sMenuNamesHiraganaGfx[113] = INCBIN_U32("data/menus/pause_screen/menu_names_hiragana.gfx.lz");
+const u32 sMenuNamesEnglishGfx[92] = INCBIN_U32("data/menus/pause_screen/menu_names_english.gfx.lz");
+const u32 sMenuNamesGermanGfx[97] = INCBIN_U32("data/menus/pause_screen/menu_names_german.gfx.lz");
+const u32 sMenuNamesFrenchGfx[91] = INCBIN_U32("data/menus/pause_screen/menu_names_french.gfx.lz");
+const u32 sMenuNamesItalianGfx[] = INCBIN_U32("data/menus/pause_screen/menu_names_italian.gfx.lz");
+const u32 sMenuNamesSpanishGfx[] = INCBIN_U32("data/menus/pause_screen/menu_names_spanish.gfx.lz");
 
-const u32 sMapScreenUnknownItemsNamesHiraganaGfx[76] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesHiragana.gfx.lz");
-const u32 sMapScreenUnknownItemsNamesEnglishGfx[65] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesEnglish.gfx.lz");
-const u32 sMapScreenUnknownItemsNamesGermanGfx[] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesGerman.gfx.lz");
-const u32 sMapScreenUnknownItemsNamesFrenchGfx[] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesFrench.gfx.lz");
-const u32 sMapScreenUnknownItemsNamesItalianGfx[] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesItalian.gfx.lz");
-const u32 sMapScreenUnknownItemsNamesSpanishGfx[] = INCBIN_U32("data/menus/PauseScreen/MapScreenUnknownItemsNamesSpanish.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesHiraganaGfx[76] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_hiragana.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesEnglishGfx[65] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_english.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesGermanGfx[] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_german.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesFrenchGfx[] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_french.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesItalianGfx[] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_italian.gfx.lz");
+const u32 sMapScreenUnknownItemsNamesSpanishGfx[] = INCBIN_U32("data/menus/pause_screen/map_screen_unknown_items_names_spanish.gfx.lz");
 
-const u32 sMapScreenChozoStatueAreaNamesHiraganaGfx[154] = INCBIN_U32("data/menus/PauseScreen/MapScreenChozoStatueAreaNamesHiragana.gfx.lz");
+const u32 sMapScreenChozoStatueAreaNamesHiraganaGfx[154] = INCBIN_U32("data/menus/pause_screen/map_screen_chozo_statue_area_names_hiragana.gfx.lz");
 
 const struct MenuOamData sMenuOamData_Empty = {
     .yPosition = 0,
@@ -4006,8 +4006,8 @@ const struct MinimapAreaName sMinimapAreaNames[10] = {
     }
 };
 
-const u8 sPauseScreen_40d6fc[80] = INCBIN_U8("data/menus/PauseScreen/40d6fc.gfx");
-const u8 sPauseScreen_40d74c[80] = INCBIN_U8("data/menus/PauseScreen/40d74c.gfx");
+const u8 sPauseScreen_40d6fc[80] = INCBIN_U8("data/menus/pause_screen/40d6fc.gfx");
+const u8 sPauseScreen_40d74c[80] = INCBIN_U8("data/menus/pause_screen/40d74c.gfx");
 
 u8* const sPauseScreen_IgtAndTanksVramAddresses[IGT_AND_TANKS_VRAM_ADDRESS_END] = {
     [IGT_AND_TANKS_VRAM_ADDRESS_ENERGY_TANKS] = VRAM_BASE + 0x16360,
@@ -4232,9 +4232,9 @@ const struct Message sMessageDescription_Empty = {
     .messageEnded = FALSE
 };
 
-const u16 sPauseScreen_40dc90[1 * 16] = INCBIN_U16("data/menus/PauseScreen/40dc90.pal");
-const u16 sPauseScreen_40dcb0[1 * 16] = INCBIN_U16("data/menus/PauseScreen/40dcb0.pal");
-const u16 sPauseScreen_40dcd0[1 * 16] = INCBIN_U16("data/menus/PauseScreen/40dcd0.pal");
+const u16 sPauseScreen_40dc90[1 * 16] = INCBIN_U16("data/menus/pause_screen/40dc90.pal");
+const u16 sPauseScreen_40dcb0[1 * 16] = INCBIN_U16("data/menus/pause_screen/40dcb0.pal");
+const u16 sPauseScreen_40dcd0[1 * 16] = INCBIN_U16("data/menus/pause_screen/40dcd0.pal");
 
 const u8 sPauseScreen_40dcf0[4] = {
     32, 16, 16, 16

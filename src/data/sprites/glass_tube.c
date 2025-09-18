@@ -1,8 +1,8 @@
 #include "data/sprites/glass_tube.h"
 #include "macros.h"
 
-const u32 sGlassTubeGfx[514] = INCBIN_U32("data/sprites/GlassTube.gfx.lz");
-const u16 sGlassTubePal[80] = INCBIN_U16("data/sprites/GlassTube.pal");
+const u32 sGlassTubeGfx[514] = INCBIN_U32("data/sprites/glass_tube.gfx.lz");
+const u16 sGlassTubePal[80] = INCBIN_U16("data/sprites/glass_tube.pal");
 
 static const u16 sGlassTubeOam_Intact_Frame0[OAM_DATA_SIZE(12)] = {
     12,

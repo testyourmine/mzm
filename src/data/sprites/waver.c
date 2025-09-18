@@ -1,8 +1,8 @@
 #include "data/sprites/waver.h"
 #include "macros.h"
 
-const u32 sWaverGfx[289] = INCBIN_U32("data/sprites/Waver.gfx.lz");
-const u16 sWaverPal[16] = INCBIN_U16("data/sprites/Waver.pal");
+const u32 sWaverGfx[289] = INCBIN_U32("data/sprites/waver.gfx.lz");
+const u16 sWaverPal[16] = INCBIN_U16("data/sprites/waver.pal");
 
 static const u16 sWaverOam_Frame0[OAM_DATA_SIZE(2)] = {
     2,

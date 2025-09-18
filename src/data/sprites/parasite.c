@@ -1,8 +1,8 @@
 #include "data/sprites/parasite.h"
 #include "macros.h"
 
-const u32 sParasiteGfx[309] = INCBIN_U32("data/sprites/Parasite.gfx.lz");
-const u16 sParasitePal[16] = INCBIN_U16("data/sprites/Parasite.pal");
+const u32 sParasiteGfx[309] = INCBIN_U32("data/sprites/parasite.gfx.lz");
+const u16 sParasitePal[16] = INCBIN_U16("data/sprites/parasite.pal");
 
 static const u16 sParasiteOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,

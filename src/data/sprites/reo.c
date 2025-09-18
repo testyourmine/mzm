@@ -18,10 +18,10 @@ const s16 sReoIdleXMovement[81] = {
     0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, SHORT_MAX
 };
 
-const u32 sReoGreenWingsGfx[277] = INCBIN_U32("data/sprites/ReoGreenWings.gfx.lz");
-const u16 sReoGreenWingsPal[16] = INCBIN_U16("data/sprites/ReoGreenWings.pal");
-const u32 sReoPurpleWingsGfx[277] = INCBIN_U32("data/sprites/ReoPurpleWings.gfx.lz");
-const u16 sReoPurpleWingsPal[16] = INCBIN_U16("data/sprites/ReoPurpleWings.pal");
+const u32 sReoGreenWingsGfx[277] = INCBIN_U32("data/sprites/reo_green_wings.gfx.lz");
+const u16 sReoGreenWingsPal[16] = INCBIN_U16("data/sprites/reo_green_wings.pal");
+const u32 sReoPurpleWingsGfx[277] = INCBIN_U32("data/sprites/reo_purple_wings.gfx.lz");
+const u16 sReoPurpleWingsPal[16] = INCBIN_U16("data/sprites/reo_purple_wings.pal");
 
 static const u16 sReoOam_Idle_Frame0[OAM_DATA_SIZE(3)] = {
     3,

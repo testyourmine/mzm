@@ -14,8 +14,8 @@ const s16 sDragonFireballOamRotation[40] = {
     52, 56, 60, 64, 64, 64, 64, 64, SHORT_MAX
 };
 
-const u32 sDragonGfx[512] = INCBIN_U32("data/sprites/Dragon.gfx.lz");
-const u16 sDragonPal[16 * 2] = INCBIN_U16("data/sprites/Dragon.pal");
+const u32 sDragonGfx[512] = INCBIN_U32("data/sprites/dragon.gfx.lz");
+const u16 sDragonPal[16 * 2] = INCBIN_U16("data/sprites/dragon.pal");
 
 static const u16 sDragonOam_Spitting_Frame0[OAM_DATA_SIZE(2)] = {
     2,

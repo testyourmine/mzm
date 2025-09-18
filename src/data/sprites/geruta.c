@@ -1,10 +1,10 @@
 #include "data/sprites/geruta.h"
 #include "macros.h"
 
-const u32 sGerutaRedGfx[321] = INCBIN_U32("data/sprites/GerutaRed.gfx.lz");
-const u16 sGerutaRedPal[16] = INCBIN_U16("data/sprites/GerutaRed.pal");
-const u32 sGerutaGreenGfx[308] = INCBIN_U32("data/sprites/GerutaGreen.gfx.lz");
-const u16 sGerutaGreenPal[16] = INCBIN_U16("data/sprites/GerutaGreen.pal");
+const u32 sGerutaRedGfx[321] = INCBIN_U32("data/sprites/geruta_red.gfx.lz");
+const u16 sGerutaRedPal[16] = INCBIN_U16("data/sprites/geruta_red.pal");
+const u32 sGerutaGreenGfx[308] = INCBIN_U32("data/sprites/geruta_green.gfx.lz");
+const u16 sGerutaGreenPal[16] = INCBIN_U16("data/sprites/geruta_green.pal");
 
 static const u16 sGerutaOam_Idle_Frame0[OAM_DATA_SIZE(5)] = {
     5,

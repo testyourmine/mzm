@@ -1,8 +1,8 @@
 #include "data/sprites/morph_ball.h"
 #include "macros.h"
 
-const u32 sMorphBallGfx[168] = INCBIN_U32("data/sprites/MorphBall.gfx.lz");
-const u16 sMorphBallPal[16] = INCBIN_U16("data/sprites/MorphBall.pal");
+const u32 sMorphBallGfx[168] = INCBIN_U32("data/sprites/morph_ball.gfx.lz");
+const u16 sMorphBallPal[16] = INCBIN_U16("data/sprites/morph_ball.pal");
 
 static const u16 sMorphBallOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,

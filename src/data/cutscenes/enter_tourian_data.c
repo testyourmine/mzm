@@ -73,12 +73,12 @@ const struct FrameData sEnterTourianOAM_Empty[1] = {
     [0] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sEnterTourianBackgroundPal[10 * 16] = INCBIN_U16("data/cutscenes/EnterTourian/Background.pal");
-const u16 sEnterTourianMetroidPal[6 * 16] = INCBIN_U16("data/cutscenes/EnterTourian/Metroid.pal");
-const u32 sEnterTourianBackgroundGfx[3110] = INCBIN_U32("data/cutscenes/EnterTourian/Background.gfx.lz");
-const u32 sEnterTourianForegroundGfx[2483] = INCBIN_U32("data/cutscenes/EnterTourian/Foreground.gfx.lz");
-const u32 sEnterTourianDeadSpacePirateGfx_1[55] = INCBIN_U32("data/cutscenes/EnterTourian/DeadSpacePirate_1.gfx.lz");
-const u32 sEnterTourianDeadSpacePirateGfx_2[77] = INCBIN_U32("data/cutscenes/EnterTourian/DeadSpacePirate_2.gfx.lz");
-const u32 sEnterTourianDeadSpacePirateGfx_3[32] = INCBIN_U32("data/cutscenes/EnterTourian/DeadSpacePirate_3.gfx.lz");
-const u32 sEnterTourianBackgroundTileTable[385] = INCBIN_U32("data/cutscenes/EnterTourian/Background.tt");
-const u32 sEnterTourianForegroundTileTable[385] = INCBIN_U32("data/cutscenes/EnterTourian/Foreground.tt");
+const u16 sEnterTourianBackgroundPal[10 * 16] = INCBIN_U16("data/cutscenes/enter_tourian/background.pal");
+const u16 sEnterTourianMetroidPal[6 * 16] = INCBIN_U16("data/cutscenes/enter_tourian/metroid.pal");
+const u32 sEnterTourianBackgroundGfx[3110] = INCBIN_U32("data/cutscenes/enter_tourian/background.gfx.lz");
+const u32 sEnterTourianForegroundGfx[2483] = INCBIN_U32("data/cutscenes/enter_tourian/foreground.gfx.lz");
+const u32 sEnterTourianDeadSpacePirateGfx_1[55] = INCBIN_U32("data/cutscenes/enter_tourian/dead_space_pirate_1.gfx.lz");
+const u32 sEnterTourianDeadSpacePirateGfx_2[77] = INCBIN_U32("data/cutscenes/enter_tourian/dead_space_pirate_2.gfx.lz");
+const u32 sEnterTourianDeadSpacePirateGfx_3[32] = INCBIN_U32("data/cutscenes/enter_tourian/dead_space_pirate_3.gfx.lz");
+const u32 sEnterTourianBackgroundTileTable[385] = INCBIN_U32("data/cutscenes/enter_tourian/background.tt");
+const u32 sEnterTourianForegroundTileTable[385] = INCBIN_U32("data/cutscenes/enter_tourian/foreground.tt");

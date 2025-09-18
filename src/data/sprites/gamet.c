@@ -1,10 +1,10 @@
 #include "data/sprites/gamet.h"
 #include "macros.h"
 
-const u32 sGametBlueGfx[168] = INCBIN_U32("data/sprites/GametBlue.gfx.lz");
-const u16 sGametBluePal[16] = INCBIN_U16("data/sprites/GametBlue.pal");
-const u32 sGametRedGfx[168] = INCBIN_U32("data/sprites/GametRed.gfx.lz");
-const u16 sGametRedPal[16] = INCBIN_U16("data/sprites/GametRed.pal");
+const u32 sGametBlueGfx[168] = INCBIN_U32("data/sprites/gamet_blue.gfx.lz");
+const u16 sGametBluePal[16] = INCBIN_U16("data/sprites/gamet_blue.pal");
+const u32 sGametRedGfx[168] = INCBIN_U32("data/sprites/gamet_red.gfx.lz");
+const u16 sGametRedPal[16] = INCBIN_U16("data/sprites/gamet_red.pal");
 
 static const u16 sGametOam_Idle_Frame0[OAM_DATA_SIZE(3)] = {
     3,

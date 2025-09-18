@@ -366,24 +366,24 @@ const struct FrameData sMotherBrainCloseUpOam_ElevatorAnimation[4] = {
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sMotherBrainCloseUpPal[6 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/Palette.pal");
-const u16 sMotherBrainCloseUpBackgroundPal[5 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/Background.pal");
-const u16 sMotherBrainCloseUpSamusPal[5 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/Samus.pal");
-const u16 sMotherBrainCloseUpSamusVariaPal[5 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/SamusVaria.pal");
-const u16 sMotherBrainCloseUpEyePal[2 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/Eye.pal");
-const u16 sMotherBrainCloseUpBigEyePal[2 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/BigEye.pal");
+const u16 sMotherBrainCloseUpPal[6 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/palette.pal");
+const u16 sMotherBrainCloseUpBackgroundPal[5 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/background.pal");
+const u16 sMotherBrainCloseUpSamusPal[5 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/samus.pal");
+const u16 sMotherBrainCloseUpSamusVariaPal[5 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/samus_varia.pal");
+const u16 sMotherBrainCloseUpEyePal[2 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/eye.pal");
+const u16 sMotherBrainCloseUpBigEyePal[2 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/big_eye.pal");
 
-const u32 sMotherBrainCloseUpMotherBrainGfx[2722] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/MotherBrain.gfx.lz");
-const u32 sMotherBrainCloseUpBackgroundGfx[2422] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/Background.gfx.lz");
-const u32 sMotherBrainCloseUpSamusGfx[2999] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/Samus.gfx.lz");
-const u32 sMotherBrainCloseUpEyeGfx[1134] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/Eye.gfx.lz");
-const u32 sMotherBrainCloseUpBigEyeGfx[2309] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/BigEye.gfx.lz");
+const u32 sMotherBrainCloseUpMotherBrainGfx[2722] = INCBIN_U32("data/cutscenes/mother_brain_close_up/mother_brain.gfx.lz");
+const u32 sMotherBrainCloseUpBackgroundGfx[2422] = INCBIN_U32("data/cutscenes/mother_brain_close_up/background.gfx.lz");
+const u32 sMotherBrainCloseUpSamusGfx[2999] = INCBIN_U32("data/cutscenes/mother_brain_close_up/samus.gfx.lz");
+const u32 sMotherBrainCloseUpEyeGfx[1134] = INCBIN_U32("data/cutscenes/mother_brain_close_up/eye.gfx.lz");
+const u32 sMotherBrainCloseUpBigEyeGfx[2309] = INCBIN_U32("data/cutscenes/mother_brain_close_up/big_eye.gfx.lz");
 
-const u32 sMotherBrainCloseUpMotherBrainTileTable[369] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/MotherBrain.tt");
-const u32 sMotherBrainCloseUpBackgroundTileTable[369] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/Background.tt");
-const u32 sMotherBrainCloseUpSamusTileTable[368] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/Samus.tt");
-const u32 sMotherBrainCloseUpGlassTileTable[67] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/Glass.tt");
+const u32 sMotherBrainCloseUpMotherBrainTileTable[369] = INCBIN_U32("data/cutscenes/mother_brain_close_up/mother_brain.tt");
+const u32 sMotherBrainCloseUpBackgroundTileTable[369] = INCBIN_U32("data/cutscenes/mother_brain_close_up/background.tt");
+const u32 sMotherBrainCloseUpSamusTileTable[368] = INCBIN_U32("data/cutscenes/mother_brain_close_up/samus.tt");
+const u32 sMotherBrainCloseUpGlassTileTable[67] = INCBIN_U32("data/cutscenes/mother_brain_close_up/glass.tt");
 
-const u32 sMotherBrainCloseUpTankViewGfx[3944] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/TankView.gfx.lz");
-const u32 sMotherBrainCloseUpTankViewTileTable[368] = INCBIN_U32("data/cutscenes/MotherBrainCloseUp/TankView.tt");
-const u16 sMotherBrainCloseUpTankViewPal[8 * 16] = INCBIN_U16("data/cutscenes/MotherBrainCloseUp/TankView.pal");
+const u32 sMotherBrainCloseUpTankViewGfx[3944] = INCBIN_U32("data/cutscenes/mother_brain_close_up/tank_view.gfx.lz");
+const u32 sMotherBrainCloseUpTankViewTileTable[368] = INCBIN_U32("data/cutscenes/mother_brain_close_up/tank_view.tt");
+const u16 sMotherBrainCloseUpTankViewPal[8 * 16] = INCBIN_U16("data/cutscenes/mother_brain_close_up/tank_view.pal");

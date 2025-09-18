@@ -1440,8 +1440,8 @@ const u8 sImagoLarvaPaletteRows[4] = {
     1, 2, 1, 0
 };
 
-const u32 sImagoLarvaGfx[1195] = INCBIN_U32("data/sprites/ImagoLarva.gfx.lz");
-const u16 sImagoLarvaPal[80] = INCBIN_U16("data/sprites/ImagoLarva.pal");
+const u32 sImagoLarvaGfx[1195] = INCBIN_U32("data/sprites/imago_larva.gfx.lz");
+const u16 sImagoLarvaPal[80] = INCBIN_U16("data/sprites/imago_larva.pal");
 
 static const u16 sImagoLarvaPartOam_ShellAttacking_Frame0[OAM_DATA_SIZE(27)] = {
     27,

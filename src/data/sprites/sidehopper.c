@@ -10,8 +10,8 @@ const s16 sSidehopperLowJumpVelocity[10] = {
     -4, -8, -4, -2, 0, 4, 8, 16, 16, 16
 };
 
-const u32 sSidehopperGfx[303] = INCBIN_U32("data/sprites/Sidehopper.gfx.lz");
-const u16 sSidehopperPal[16] = INCBIN_U16("data/sprites/Sidehopper.pal");
+const u32 sSidehopperGfx[303] = INCBIN_U32("data/sprites/sidehopper.gfx.lz");
+const u16 sSidehopperPal[16] = INCBIN_U16("data/sprites/sidehopper.pal");
 
 static const u16 sSidehopperOam_Idle_Frame0[OAM_DATA_SIZE(6)] = {
     6,

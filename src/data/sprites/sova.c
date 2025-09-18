@@ -1,8 +1,8 @@
 #include "data/sprites/sova.h"
 #include "macros.h"
 
-const u32 sSovaGfx[851] = INCBIN_U32("data/sprites/Sova.gfx.lz");
-const u16 sSovaPal[3 * 16] = INCBIN_U16("data/sprites/Sova.pal");
+const u32 sSovaGfx[851] = INCBIN_U32("data/sprites/sova.gfx.lz");
+const u16 sSovaPal[3 * 16] = INCBIN_U16("data/sprites/sova.pal");
 
 static const u16 sSovaOam_OnGround_Frame0[OAM_DATA_SIZE(2)] = {
     2,

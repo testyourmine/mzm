@@ -2,8 +2,8 @@
 #include "macros.h"
 #include "constants/audio.h"
 
-const u16 sEraseSramMenuObjectsPal[7 * 16] = INCBIN_U16("data/menus/EraseSram/Objects.pal");
-const u16 sEraseSramMenuBackgroundPal[15 * 16 - 1] = INCBIN_U16("data/menus/EraseSram/Background.pal");
+const u16 sEraseSramMenuObjectsPal[7 * 16] = INCBIN_U16("data/menus/erase_sram/objects.pal");
+const u16 sEraseSramMenuBackgroundPal[15 * 16 - 1] = INCBIN_U16("data/menus/erase_sram/background.pal");
 
 static const u16 sEraseSramOam_ConfirmWindowNoSelected_Frame0[OAM_DATA_SIZE(17)] = {
     17,
@@ -329,25 +329,25 @@ static const struct FrameData sEraseSramOam_ConfirmWindowYesSelected[2] = {
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sEraseSramMenuObjectsGfx[477] = INCBIN_U32("data/menus/EraseSram/Objects.gfx.lz");
-const u32 sEraseSramMenuFirstBoxGfx[118] = INCBIN_U32("data/menus/EraseSram/FirstBox.gfx.lz");
+const u32 sEraseSramMenuObjectsGfx[477] = INCBIN_U32("data/menus/erase_sram/objects.gfx.lz");
+const u32 sEraseSramMenuFirstBoxGfx[118] = INCBIN_U32("data/menus/erase_sram/first_box.gfx.lz");
 
-const u32 sEraseSramMenuConfirmJapaneseGfx[245] = INCBIN_U32("data/menus/EraseSram/ConfirmJapanese.gfx.lz");
-const u32 sEraseSramMenuConfirmEnglishGfx[191] = INCBIN_U32("data/menus/EraseSram/ConfirmEnglish.gfx.lz");
-const u32 sEraseSramMenuConfirmFrenchGfx[209] = INCBIN_U32("data/menus/EraseSram/ConfirmFrench.gfx.lz");
-const u32 sEraseSramMenuConfirmGermanGfx[222] = INCBIN_U32("data/menus/EraseSram/ConfirmGerman.gfx.lz");
-const u32 sEraseSramMenuConfirmItalianGfx[201] = INCBIN_U32("data/menus/EraseSram/ConfirmItalian.gfx.lz");
-const u32 sEraseSramMenuConfirmSpanishGfx[204] = INCBIN_U32("data/menus/EraseSram/ConfirmSpanish.gfx.lz");
+const u32 sEraseSramMenuConfirmJapaneseGfx[245] = INCBIN_U32("data/menus/erase_sram/confirm_japanese.gfx.lz");
+const u32 sEraseSramMenuConfirmEnglishGfx[191] = INCBIN_U32("data/menus/erase_sram/confirm_english.gfx.lz");
+const u32 sEraseSramMenuConfirmFrenchGfx[209] = INCBIN_U32("data/menus/erase_sram/confirm_french.gfx.lz");
+const u32 sEraseSramMenuConfirmGermanGfx[222] = INCBIN_U32("data/menus/erase_sram/confirm_german.gfx.lz");
+const u32 sEraseSramMenuConfirmItalianGfx[201] = INCBIN_U32("data/menus/erase_sram/confirm_italian.gfx.lz");
+const u32 sEraseSramMenuConfirmSpanishGfx[204] = INCBIN_U32("data/menus/erase_sram/confirm_spanish.gfx.lz");
 
-const u32 sEraseSramMenuQuestionJapaneseGfx[245] = INCBIN_U32("data/menus/EraseSram/QuestionJapanese.gfx.lz");
-const u32 sEraseSramMenuQuestionEnglishGfx[185] = INCBIN_U32("data/menus/EraseSram/QuestionEnglish.gfx.lz");
-const u32 sEraseSramMenuQuestionFrenchGfx[187] = INCBIN_U32("data/menus/EraseSram/QuestionFrench.gfx.lz");
-const u32 sEraseSramMenuQuestionGermanGfx[205] = INCBIN_U32("data/menus/EraseSram/QuestionGerman.gfx.lz");
-const u32 sEraseSramMenuQuestionItalianGfx[221] = INCBIN_U32("data/menus/EraseSram/QuestionItalian.gfx.lz");
-const u32 sEraseSramMenuQuestionSpanishGfx[208] = INCBIN_U32("data/menus/EraseSram/QuestionSpanish.gfx.lz");
+const u32 sEraseSramMenuQuestionJapaneseGfx[245] = INCBIN_U32("data/menus/erase_sram/question_japanese.gfx.lz");
+const u32 sEraseSramMenuQuestionEnglishGfx[185] = INCBIN_U32("data/menus/erase_sram/question_english.gfx.lz");
+const u32 sEraseSramMenuQuestionFrenchGfx[187] = INCBIN_U32("data/menus/erase_sram/question_french.gfx.lz");
+const u32 sEraseSramMenuQuestionGermanGfx[205] = INCBIN_U32("data/menus/erase_sram/question_german.gfx.lz");
+const u32 sEraseSramMenuQuestionItalianGfx[221] = INCBIN_U32("data/menus/erase_sram/question_italian.gfx.lz");
+const u32 sEraseSramMenuQuestionSpanishGfx[208] = INCBIN_U32("data/menus/erase_sram/question_spanish.gfx.lz");
 
-const u32 sEraseSramMenuBoxTileTable[137] = INCBIN_U32("data/menus/EraseSram/Box.tt");
-const u32 sEraseSramMenuBackgroundTileTable[368] = INCBIN_U32("data/menus/EraseSram/Background.tt");
+const u32 sEraseSramMenuBoxTileTable[137] = INCBIN_U32("data/menus/erase_sram/box.tt");
+const u32 sEraseSramMenuBackgroundTileTable[368] = INCBIN_U32("data/menus/erase_sram/background.tt");
 
 const u8 sEraseSramQuestionWindowNoSelectedOamId = ERASE_SRAM_OAM_ID_QUESTION_WINDOW_NO_SELECTED;
 const u8 sEraseSramQuestionWindowYesSelectedOamId = ERASE_SRAM_OAM_ID_QUESTION_WINDOW_YES_SELECTED;
