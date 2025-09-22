@@ -26,7 +26,7 @@ extern const u8* gDataSentPointer;
 extern u32 gDataSentSize;
 
 extern u32 gMultibootErrorFlags;  // set but never read
-extern u8 gMultibootInProgress;   // set but never read
 extern u32 gMultibootUnk_3005880; // read but never set (always 0)
+extern u8 gMultibootInProgress;   // set but never read
 
 #endif /* CABLE_LINK_STRUCTS_H */

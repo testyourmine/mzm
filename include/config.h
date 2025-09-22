@@ -17,6 +17,12 @@
 // #define MODERN
 
 /**
+ * @brief Enables padding the ram with dummy values to get a matching rom
+ * 
+ */
+#define RAM_PADDING
+
+/**
  * @brief Enables various fixes to known bugs, issues, or bad code.
  * 
  * (see https://github.com/metroidret/mzm/blob/master/docs/bugs_and_glitches.md for reference)
@@ -29,5 +35,15 @@
  * 
  */
 // #define USE_EWRAM_SYMBOLS
+
+// Automatically change a few flags if modern is enabled
+#ifdef MODERN
+// We always want bug fixes if we're using a modern compiler
+#define BUGFIX
+// Proper ewram symbols are also preferable
+#define USE_EWRAM_SYMBOLS
+// Ram padding is no longer necessary
+#undef RAM_PADDING
+#endif
 
 #endif /* CONFIG_H*/

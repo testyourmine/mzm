@@ -274,15 +274,15 @@ extern char gUnk_Audio0x64[];
 extern char gUnk_Audio0x194F700[];
 extern char gUnk_Audio0x50[];
 
-extern struct TrackData gTrackData0;
-extern struct TrackData gTrackData1;
-extern struct TrackData gTrackData2;
-extern struct TrackData gTrackData3;
-extern struct TrackData gTrackData4;
-extern struct TrackData gTrackData5;
-extern struct TrackData gTrackData6;
-extern struct TrackData gTrackData7;
 extern struct TrackData gTrackData8;
+extern struct TrackData gTrackData3;
+extern struct TrackData gTrackData1;
+extern struct TrackData gTrackData6;
+extern struct TrackData gTrackData4;
+extern struct TrackData gTrackData0;
+extern struct TrackData gTrackData7;
+extern struct TrackData gTrackData2;
+extern struct TrackData gTrackData5;
 
 extern struct SoundChannelBackup gSoundChannelBackup[7];
 extern struct SoundChannelBackup gSoundChannelTrack2Backup[7];
@@ -312,4 +312,4 @@ extern u8 gSoundCodeC[176];
 extern struct PSGSoundData gUnk_300376C[];
 extern struct PSGSoundData gPsgSounds[4];
 
-#endif
+#endif /* AUDIO_STRUCT_H */

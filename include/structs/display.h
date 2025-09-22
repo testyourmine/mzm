@@ -26,8 +26,8 @@ extern u16 gWrittenToBldcnt_Internal;
 extern u16 gBackdropColor;
 
 extern u16 gWrittenToBldalpha;
-extern u16 gWrittenToBldalpha_H;
 extern u16 gWrittenToBldalpha_L;
+extern u16 gWrittenToBldalpha_H;
 extern s8 gWrittenToBldy;
 extern u16 gWrittenToBldy_NonGameplay;
 

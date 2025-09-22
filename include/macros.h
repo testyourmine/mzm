@@ -673,7 +673,21 @@
  * @brief Shorthand to specify that something should be in the .rodata section
  * 
  */
+#ifndef MODERN
 #define FORCE_RODATA __attribute__((section(".rodata")))
+#else
+#define FORCE_RODATA
+#endif
+
+/**
+ * @brief Shorthand to specify that something should be in the section allocated to IWRAM
+ * 
+ */
+#ifndef MODERN
+#define IWRAM_DATA __attribute__((section("iwram_data")))
+#else
+#define IWRAM_DATA
+#endif
 
 /**
  * @brief Shorthand to specify that a function is naked (no prologue and no epilogue)

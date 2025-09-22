@@ -39,7 +39,7 @@ struct ColorFadingColorInfo {
 // Globals
 
 extern struct ColorFading gColorFading;
-extern u16 gBg1CntDuringDoorTransition;
 extern u16 gBg3CntDuringDoorTransition;
+extern u16 gBg1CntDuringDoorTransition;
 
-#endif
+#endif /* COLOR_EFFECTS_STRUCT_H */

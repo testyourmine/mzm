@@ -148,4 +148,4 @@ extern struct Unused_3005504 gUnusedStruct_3005504;
 
 extern u8 gDestinationRoom;
 
-#endif
+#endif /* ROOM_STRUCT_H */

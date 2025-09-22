@@ -196,7 +196,7 @@ extern u16 gPreviousYPosition;
 extern u16 gPreventMovementTimer;
 extern u8 gDisableDrawingSamusAndScrolling;
 
-extern u16 gSamusPalette[16 * 2];
+extern u16 gSamusPalette[16 * 3];
 extern u16 gSamusPaletteSize;
 extern s16 gSamusDoorPositionOffset;
 

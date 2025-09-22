@@ -84,7 +84,7 @@ struct CameraScrollVelocityCaps {
 
 extern u8 gDisableScrolling;
 extern u16 gSlowScrollingTimer;
-extern u8 gSkipDoorTransition;
+extern boolu8 gSkipDoorTransition;
 extern struct Scroll gCurrentScrolls[2];
 extern struct Camera gCamera;
 extern struct LockScreen gLockScreen;

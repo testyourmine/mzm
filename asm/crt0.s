@@ -20,7 +20,7 @@ _start: @ 0x080000c0
     b _start
 
 @ pool
-gSpSys_ptr: .4byte gSpSys
-gSpIrq_ptr: .4byte gSpIrq
+gSpSys_ptr: .4byte 0x03007e60
+gSpIrq_ptr: .4byte 0x03007fa0
 gIntrVector_ptr: .4byte gIntrVector
 agbmain_ptr: .4byte agbmain

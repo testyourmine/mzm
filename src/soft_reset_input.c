@@ -83,7 +83,7 @@ void SoftReset(void)
 
     gSubGameMode1 = 0;
     gSubGameMode2 = 0;
-    gResetGame = 0;
+    gResetGame = FALSE;
     gStereoFlag = 0;
 
     #ifdef REGION_EU
