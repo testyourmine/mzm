@@ -10,6 +10,12 @@
 // #define DEBUG
 
 /**
+ * @brief Enables non matching code (mostly identical behavior)
+ * 
+ */
+// #define NON_MATCHING
+
+/**
  * @brief Indicates that the game is being compiled using a modern compiler
  * This enables certain features that agbcc lacks
  * 
@@ -42,6 +48,8 @@
 #define BUGFIX
 // Proper ewram symbols are also preferable
 #define USE_EWRAM_SYMBOLS
+// Enable fake matching code, behavior should be identical
+#define NON_MATCHING
 // Ram padding is no longer necessary
 #undef RAM_PADDING
 #endif
