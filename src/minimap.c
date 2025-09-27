@@ -128,8 +128,6 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
     s32 i;
     s32 j;
     u32 area;
-    u32 xPosition;
-    u32 yPosition;
     u16* pMap;
     u32 actualX;
     u32 actualY;
@@ -181,26 +179,18 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
     if (set == 1)
     {
         area = sMinimapAreaNames[i].area1;
-        xPosition = sMinimapAreaNames[i].mapX1;
-        actualX = xPosition + sMinimapAreaNames[i].xOffset1 - 1;
-        yPosition = sMinimapAreaNames[i].mapY1;
-        actualY = yPosition + sMinimapAreaNames[i].yOffset1 - 1;
-        do {
-        gLastAreaNameVisited.mapX = --xPosition;
-        }while(0);
-        gLastAreaNameVisited.mapY = --yPosition;
+        actualX = sMinimapAreaNames[i].mapX1 + sMinimapAreaNames[i].xOffset1 - 1;
+        actualY = sMinimapAreaNames[i].mapY1 + sMinimapAreaNames[i].yOffset1 - 1;
+        gLastAreaNameVisited.mapX = sMinimapAreaNames[i].mapX1 - 1;
+        gLastAreaNameVisited.mapY = sMinimapAreaNames[i].mapY1 - 1;
     }
     else if (set == 2)
     {
         area = sMinimapAreaNames[i].area2;
-        xPosition = sMinimapAreaNames[i].mapX2;
-        actualX = xPosition + sMinimapAreaNames[i].xOffset2 - 1;
-        yPosition = sMinimapAreaNames[i].mapY2;
-        actualY = yPosition + sMinimapAreaNames[i].yOffset2 - 1;
-        do {
-        gLastAreaNameVisited.mapX = --xPosition;
-        }while(0);
-        gLastAreaNameVisited.mapY = --yPosition;
+        actualX = sMinimapAreaNames[i].mapX2 + sMinimapAreaNames[i].xOffset2 - 1;
+        actualY = sMinimapAreaNames[i].mapY2 + sMinimapAreaNames[i].yOffset2 - 1;
+        gLastAreaNameVisited.mapX = sMinimapAreaNames[i].mapX2 - 1;
+        gLastAreaNameVisited.mapY = sMinimapAreaNames[i].mapY2 - 1;
     }
     else
     {
