@@ -7517,8 +7517,6 @@ void SamusUpdatePalette(struct SamusData* pData)
     struct WeaponInfo* pWeapon;
     u16 caf;
     u32 offset;
-    s32 rng;
-    u8 chargeCounter;
     u8 limit;
 
     pWeapon = &gSamusWeaponInfo;
@@ -7657,25 +7655,19 @@ void SamusUpdatePalette(struct SamusData* pData)
     
     if (pData->speedboostingShinesparking != 0 || pData->shinesparkTimer != 0)
     {
-        rng = gFrameCounter8Bit % 6;
-        
-        if (rng >= 0)
+        switch (gFrameCounter8Bit % 6)
         {
-            if (rng <= 1)
+            case 0:
+            case 1:
                 pBufferPal = pSpeedboostPal;
-            else if (rng > 3)
-                #ifdef NON_MATCHING
+                break;
+            case 2:
+            case 3:
+                pBufferPal = pSpeedboostPal + 16 * 1;
+                break;
+            default:
                 pBufferPal = pSpeedboostPal + 16 * 2;
-                #else // !NON_MATCHING
-                goto speedboostPal_outer_else; // Needed to produce matching ASM.
-                #endif // NON_MATCHING
-            else
-                pBufferPal = pSpeedboostPal + 16;
-        }
-        else
-        {
-            speedboostPal_outer_else:
-            pBufferPal = pSpeedboostPal + 16 * 2;
+                break;
         }
 
         SamusCopyPalette(pBufferPal, 0, 16);
@@ -7753,13 +7745,10 @@ void SamusUpdatePalette(struct SamusData* pData)
     pBufferPal = pDefaultPal;
     if (pEquipment->suitType != SUIT_SUITLESS)
     {
-        s32 tmp; // Needed to produce matching ASM.
-
-        chargeCounter = (tmp = pWeapon->chargeCounter);
         limit = CHARGE_BEAM_THRESHOLD;
-        if (chargeCounter >= limit)
+        if (pWeapon->chargeCounter >= limit)
         {
-            offset = (chargeCounter - limit) >> 2;
+            offset = DIV_SHIFT(pWeapon->chargeCounter - limit, 4);
     
             if (offset != 3)
             {
