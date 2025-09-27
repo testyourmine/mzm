@@ -117,11 +117,13 @@ static void MinimapSetTileAsExplored(void)
     }
 }
 
-#ifdef NON_MATCHING
+/**
+ * @brief 6c1c4 | 1d8 | To document
+ * 
+ * @param afterTransition To document
+ */
 static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
 {
-    // https://decomp.me/scratch/lc52R
-    
     u32 set;
     s32 i;
     s32 j;
@@ -131,7 +133,6 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
     u16* pMap;
     u32 actualX;
     u32 actualY;
-    u32 tile;
     u32 offset;
 
     if (gShipLandingFlag)
@@ -184,6 +185,10 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
         actualX = xPosition + sMinimapAreaNames[i].xOffset1 - 1;
         yPosition = sMinimapAreaNames[i].mapY1;
         actualY = yPosition + sMinimapAreaNames[i].yOffset1 - 1;
+        do {
+        gLastAreaNameVisited.mapX = --xPosition;
+        }while(0);
+        gLastAreaNameVisited.mapY = --yPosition;
     }
     else if (set == 2)
     {
@@ -192,17 +197,16 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
         actualX = xPosition + sMinimapAreaNames[i].xOffset2 - 1;
         yPosition = sMinimapAreaNames[i].mapY2;
         actualY = yPosition + sMinimapAreaNames[i].yOffset2 - 1;
+        do {
+        gLastAreaNameVisited.mapX = --xPosition;
+        }while(0);
+        gLastAreaNameVisited.mapY = --yPosition;
     }
     else
     {
         gLastAreaNameVisited.flags = 0;
         return;
     }
-
-    do {
-    gLastAreaNameVisited.mapX = --xPosition;
-    }while(0);
-    gLastAreaNameVisited.mapY = --yPosition;
 
     pMap = &gDecompressedMinimapData[actualX + actualY * MINIMAP_SIZE];
 
@@ -211,8 +215,7 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
     for (j = 0, i = 0; i < MINIMAP_SIZE; i++, pMap++)
     {
         set = *pMap & 0x3FF;
-        tile = set - 0x141;
-        if (tile <= 0x1D)
+        if (set >= 0x141 && set <= 0x15E)
         {
             sVisitedMinimapTilesPointer[offset] |= sExploredMinimapBitFlags[actualX + j];
             j++;
@@ -230,255 +233,6 @@ static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
         gLastAreaNameVisited.flags = 0;
     }
 }
-#else
-NAKED_FUNCTION
-static void MinimapCheckSetAreaNameAsExplored(u8 afterTransition)
-{
-    asm(" \n\
-    push {r4, r5, r6, r7, lr} \n\
-    mov r7, sl \n\
-    mov r6, sb \n\
-    mov r5, r8 \n\
-    push {r5, r6, r7} \n\
-    sub sp, #4 \n\
-    lsl r0, r0, #0x18 \n\
-    lsr r0, r0, #0x18 \n\
-    str r0, [sp] \n\
-    ldr r0, lbl_0806c21c @ =gShipLandingFlag \n\
-    ldrb r0, [r0] \n\
-    cmp r0, #0 \n\
-    beq lbl_0806c1e0 \n\
-    b lbl_0806c372 \n\
-lbl_0806c1e0: \n\
-    ldr r0, lbl_0806c220 @ =gLastAreaNameVisited \n\
-    ldrb r1, [r0] \n\
-    mov ip, r0 \n\
-    cmp r1, #0 \n\
-    bne lbl_0806c1ec \n\
-    b lbl_0806c372 \n\
-lbl_0806c1ec: \n\
-    movs r4, #0 \n\
-    movs r6, #0 \n\
-    ldr r0, [sp] \n\
-    cmp r0, #1 \n\
-    bne lbl_0806c236 \n\
-    movs r0, #0x80 \n\
-    and r0, r1 \n\
-    cmp r0, #0 \n\
-    beq lbl_0806c2a6 \n\
-    movs r6, #0x7f \n\
-    and r6, r1 \n\
-    ldr r1, lbl_0806c224 @ =sMinimapAreaNames \n\
-    lsl r0, r6, #1 \n\
-    add r0, r0, r6 \n\
-    lsl r0, r0, #2 \n\
-    add r3, r0, r1 \n\
-    ldr r0, lbl_0806c228 @ =gAreaBeforeTransition \n\
-    ldrb r1, [r3] \n\
-    ldrb r2, [r0] \n\
-    cmp r1, r2 \n\
-    bne lbl_0806c22c \n\
-    movs r4, #1 \n\
-    b lbl_0806c2a6 \n\
-    .align 2, 0 \n\
-lbl_0806c21c: .4byte gShipLandingFlag \n\
-lbl_0806c220: .4byte gLastAreaNameVisited \n\
-lbl_0806c224: .4byte sMinimapAreaNames \n\
-lbl_0806c228: .4byte gAreaBeforeTransition \n\
-lbl_0806c22c: \n\
-    ldrb r0, [r3, #5] \n\
-    cmp r0, r2 \n\
-    bne lbl_0806c2a6 \n\
-    movs r4, #2 \n\
-    b lbl_0806c2a6 \n\
-lbl_0806c236: \n\
-    ldr r1, lbl_0806c264 @ =sMinimapAreaNames \n\
-    mov r8, r1 \n\
-    ldrb r0, [r1] \n\
-    cmp r0, #0xff \n\
-    beq lbl_0806c294 \n\
-    mov r5, ip \n\
-    ldrb r2, [r5, #1] \n\
-    movs r3, #0 \n\
-lbl_0806c246: \n\
-    ldrb r0, [r1] \n\
-    cmp r0, r2 \n\
-    bne lbl_0806c268 \n\
-    mov r7, ip \n\
-    ldrb r0, [r7, #2] \n\
-    ldrb r7, [r1, #1] \n\
-    cmp r0, r7 \n\
-    bne lbl_0806c280 \n\
-    ldrb r0, [r5, #3] \n\
-    ldrb r7, [r1, #2] \n\
-    cmp r0, r7 \n\
-    bne lbl_0806c280 \n\
-    movs r4, #1 \n\
-    b lbl_0806c298 \n\
-    .align 2, 0 \n\
-lbl_0806c264: .4byte sMinimapAreaNames \n\
-lbl_0806c268: \n\
-    ldrb r0, [r1, #5] \n\
-    cmp r0, r2 \n\
-    bne lbl_0806c280 \n\
-    ldrb r0, [r5, #2] \n\
-    ldrb r7, [r1, #6] \n\
-    cmp r0, r7 \n\
-    bne lbl_0806c280 \n\
-    ldrb r0, [r5, #3] \n\
-    ldrb r7, [r1, #7] \n\
-    cmp r0, r7 \n\
-    bne lbl_0806c280 \n\
-    movs r4, #2 \n\
-lbl_0806c280: \n\
-    cmp r4, #0 \n\
-    bne lbl_0806c298 \n\
-    add r3, #0xc \n\
-    add r1, #0xc \n\
-    add r6, #1 \n\
-    mov r7, r8 \n\
-    add r0, r3, r7 \n\
-    ldrb r0, [r0] \n\
-    cmp r0, #0xff \n\
-    bne lbl_0806c246 \n\
-lbl_0806c294: \n\
-    cmp r4, #0 \n\
-    beq lbl_0806c2a6 \n\
-lbl_0806c298: \n\
-    movs r0, #0x80 \n\
-    neg r0, r0 \n\
-    add r1, r0, #0 \n\
-    add r0, r6, #0 \n\
-    orr r0, r1 \n\
-    mov r1, ip \n\
-    strb r0, [r1] \n\
-lbl_0806c2a6: \n\
-    cmp r4, #1 \n\
-    bne lbl_0806c2cc \n\
-    ldr r0, lbl_0806c2c8 @ =sMinimapAreaNames \n\
-    lsl r1, r6, #1 \n\
-    add r1, r1, r6 \n\
-    lsl r1, r1, #2 \n\
-    add r1, r1, r0 \n\
-    ldrb r5, [r1] \n\
-    ldrb r3, [r1, #1] \n\
-    movs r0, #3 \n\
-    ldrsb r0, [r1, r0] \n\
-    add r0, r3, r0 \n\
-    sub r4, r0, #1 \n\
-    ldrb r2, [r1, #2] \n\
-    movs r0, #4 \n\
-    ldrsb r0, [r1, r0] \n\
-    b lbl_0806c2f4 \n\
-    .align 2, 0 \n\
-lbl_0806c2c8: .4byte sMinimapAreaNames \n\
-lbl_0806c2cc: \n\
-    cmp r4, #2 \n\
-    beq lbl_0806c2d8 \n\
-    movs r0, #0 \n\
-    mov r1, ip \n\
-    strb r0, [r1] \n\
-    b lbl_0806c372 \n\
-lbl_0806c2d8: \n\
-    ldr r0, lbl_0806c384 @ =sMinimapAreaNames \n\
-    lsl r1, r6, #1 \n\
-    add r1, r1, r6 \n\
-    lsl r1, r1, #2 \n\
-    add r1, r1, r0 \n\
-    ldrb r5, [r1, #5] \n\
-    ldrb r3, [r1, #6] \n\
-    movs r0, #8 \n\
-    ldrsb r0, [r1, r0] \n\
-    add r0, r3, r0 \n\
-    sub r4, r0, #1 \n\
-    ldrb r2, [r1, #7] \n\
-    movs r0, #9 \n\
-    ldrsb r0, [r1, r0] \n\
-lbl_0806c2f4: \n\
-    add r0, r2, r0 \n\
-    sub r1, r0, #1 \n\
-    sub r3, #1 \n\
-    mov r7, ip \n\
-    strb r3, [r7, #2] \n\
-    sub r2, #1 \n\
-    strb r2, [r7, #3] \n\
-    lsl r0, r1, #5 \n\
-    add r0, r4, r0 \n\
-    lsl r0, r0, #1 \n\
-    ldr r2, lbl_0806c388 @ =0x02034800 \n\
-    add r3, r0, r2 \n\
-    lsl r0, r5, #5 \n\
-    add r5, r0, r1 \n\
-    movs r6, #0 \n\
-    mov sl, r0 \n\
-    ldr r1, lbl_0806c38c @ =sExploredMinimapBitFlags \n\
-    lsl r0, r4, #2 \n\
-    add r7, r0, r1 \n\
-    ldr r0, lbl_0806c390 @ =0xfffffebf \n\
-    mov sb, r0 \n\
-    ldr r1, lbl_0806c394 @ =sVisitedMinimapTilesPointer \n\
-    mov r8, r1 \n\
-lbl_0806c322: \n\
-    ldrh r0, [r3] \n\
-    ldr r4, lbl_0806c398 @ =0x000003ff \n\
-    and r4, r0 \n\
-    mov r2, sb \n\
-    add r0, r4, r2 \n\
-    cmp r0, #0x1d \n\
-    bhi lbl_0806c348 \n\
-    mov r1, r8 \n\
-    ldr r0, [r1] \n\
-    lsl r2, r5, #2 \n\
-    add r2, r2, r0 \n\
-    ldr r0, [r2] \n\
-    ldm r7!, {r1} \n\
-    orr r0, r1 \n\
-    str r0, [r2] \n\
-    add r6, #1 \n\
-    add r3, #2 \n\
-    cmp r6, #0x1f \n\
-    ble lbl_0806c322 \n\
-lbl_0806c348: \n\
-    ldr r2, [sp] \n\
-    cmp r2, #0 \n\
-    beq lbl_0806c372 \n\
-    mov r3, ip \n\
-    ldrb r0, [r3, #3] \n\
-    mov r7, sl \n\
-    add r5, r7, r0 \n\
-    ldr r0, lbl_0806c394 @ =sVisitedMinimapTilesPointer \n\
-    ldr r0, [r0] \n\
-    lsl r2, r5, #2 \n\
-    add r2, r2, r0 \n\
-    ldr r1, lbl_0806c38c @ =sExploredMinimapBitFlags \n\
-    ldrb r0, [r3, #2] \n\
-    lsl r0, r0, #2 \n\
-    add r0, r0, r1 \n\
-    ldr r1, [r2] \n\
-    ldr r0, [r0] \n\
-    orr r1, r0 \n\
-    str r1, [r2] \n\
-    movs r0, #0 \n\
-    strb r0, [r3] \n\
-lbl_0806c372: \n\
-    add sp, #4 \n\
-    pop {r3, r4, r5} \n\
-    mov r8, r3 \n\
-    mov sb, r4 \n\
-    mov sl, r5 \n\
-    pop {r4, r5, r6, r7} \n\
-    pop {r0} \n\
-    bx r0 \n\
-    .align 2, 0 \n\
-lbl_0806c384: .4byte sMinimapAreaNames \n\
-lbl_0806c388: .4byte 0x02034800 \n\
-lbl_0806c38c: .4byte sExploredMinimapBitFlags \n\
-lbl_0806c390: .4byte 0xfffffebf \n\
-lbl_0806c394: .4byte sVisitedMinimapTilesPointer \n\
-lbl_0806c398: .4byte 0x000003ff \n\
-    ");
-}
-#endif
 
 /**
  * @brief 6c39c | d8 | Checks if Samus is on an unexplored minimap tile
