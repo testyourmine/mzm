@@ -1,32 +1,34 @@
 # Bugs and Glitches
-These are known bugs and glitches in the game: code that clearly does not work as intended or was designed poorly. Some of them cause visible gameplay issues, while others are harmless. The bugs listed here can be fixed by compiling with the `BUGFIX` flag (bugs in the TODO section don't have a fix implemented yet). 
 
+These are known bugs and glitches in the game: code that clearly does not work as intended or was designed poorly. Some of them cause visible gameplay issues, while others are harmless. The bugs listed here can be fixed by compiling with the `BUGFIX` flag (bugs in the TODO section don't have a fix implemented yet). 
 
 ## Contents
 
-- [Bugs](#bugs)
-  - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
-  - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
-  - [Samus slow physics aren't properly applied when grabbed by a metroid in a liquid](#samus-slow-physics-arent-properly-applied-when-grabbed-by-a-metroid-in-a-liquid)
-  - [Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics](#mecha-ridleys-missiles-can-be-kept-alive-after-it-dies-which-get-corrupted-graphics)
-  - [Collecting an item while a power bomb is active allows Samus to move early](#collecting-an-item-while-a-power-bomb-is-active-allows-samus-to-move-early)
-  - [Killing Imago with pseudo screw attack softlocks the game](#killing-imago-with-pseudo-screw-attack-softlocks-the-game)
-  - [Turning can trigger the fully powered suit cutscene without getting locked in place](#turning-can-trigger-the-fully-powered-suit-cutscene-without-getting-locked-in-place)
-  - [Dying during a door transition (from lava/acid) puts Samus in the no-clip state](#dying-during-a-door-transition-from-lavaacid-puts-samus-in-the-no-clip-state)
-  - [Missiles can be highlighted and toggled while dying](#missiles-can-be-highlighted-and-toggled-while-dying)
-  - [Sidehoppers and Dessgeegas don't initialize the delay for their first jump](#sidehoppers-and-dessgeegas-dont-initialize-the-delay-for-their-first-jump)
-  - ["Stop enemy" clipdata prevents bomb jumping](#stop-enemy-clipdata-prevents-bomb-jumping)
-  - [Samus can get refilled while collecting a Chozo statue item](#samus-can-get-refilled-while-collecting-a-chozo-statue-item)
-  - [Samus can clip into blocks on the right when uncrouching next to a frozen enemy](#samus-can-clip-into-blocks-on-the-right-when-uncrouching-next-to-a-frozen-enemy)
-- [Oversights and Design Flaws](#oversights-and-design-flaws)
-  - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
-  - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
-  - [Upgrading suit cutscene code is still called after the cutscene ends](#upgrading-suit-cutscene-code-is-still-called-after-the-cutscene-ends)
-  - [Game always boots in mono even if stereo is enabled in settings](#game-always-boots-in-mono-even-if-stereo-is-enabled-in-settings)
-- [Uninitialized Variables](#uninitialized-variables)
-- [TODO](#todo)
-  - [Bugs](#bugs-1)
-  - [Oversights and Design Flaws](#oversights-and-design-flaws-1)
+- [Bugs and Glitches](#bugs-and-glitches)
+  - [Contents](#contents)
+  - [Bugs](#bugs)
+    - ["Ground" Dessgeegas always set the "Dessgeega long beam killed" event and unlock doors](#ground-dessgeegas-always-set-the-dessgeega-long-beam-killed-event-and-unlock-doors)
+    - [Mother Brain block does not spawn when there are too many sprites](#mother-brain-block-does-not-spawn-when-there-are-too-many-sprites)
+    - [Samus slow physics aren't properly applied when grabbed by a metroid in a liquid](#samus-slow-physics-arent-properly-applied-when-grabbed-by-a-metroid-in-a-liquid)
+    - [Mecha Ridley's missiles can be kept alive after it dies, which get corrupted graphics](#mecha-ridleys-missiles-can-be-kept-alive-after-it-dies-which-get-corrupted-graphics)
+    - [Collecting an item while a power bomb is active allows Samus to move early](#collecting-an-item-while-a-power-bomb-is-active-allows-samus-to-move-early)
+    - [Killing Imago with pseudo screw attack softlocks the game](#killing-imago-with-pseudo-screw-attack-softlocks-the-game)
+    - [Turning can trigger the fully powered suit cutscene without getting locked in place](#turning-can-trigger-the-fully-powered-suit-cutscene-without-getting-locked-in-place)
+    - [Dying during a door transition (from lava/acid) puts Samus in the no-clip state](#dying-during-a-door-transition-from-lavaacid-puts-samus-in-the-no-clip-state)
+    - [Missiles can be highlighted and toggled while dying](#missiles-can-be-highlighted-and-toggled-while-dying)
+    - [Sidehoppers and Dessgeegas don't initialize the delay for their first jump](#sidehoppers-and-dessgeegas-dont-initialize-the-delay-for-their-first-jump)
+    - ["Stop enemy" clipdata prevents bomb jumping](#stop-enemy-clipdata-prevents-bomb-jumping)
+    - [Samus can get refilled while collecting a Chozo statue item](#samus-can-get-refilled-while-collecting-a-chozo-statue-item)
+    - [Samus can clip into blocks on the right when uncrouching next to a frozen enemy](#samus-can-clip-into-blocks-on-the-right-when-uncrouching-next-to-a-frozen-enemy)
+  - [Oversights and Design Flaws](#oversights-and-design-flaws)
+    - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
+    - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
+    - [Upgrading suit cutscene code is still called after the cutscene ends](#upgrading-suit-cutscene-code-is-still-called-after-the-cutscene-ends)
+    - [Game always boots in mono even if stereo is enabled in settings](#game-always-boots-in-mono-even-if-stereo-is-enabled-in-settings)
+  - [Uninitialized Variables](#uninitialized-variables)
+  - [TODO](#todo)
+    - [Bugs](#bugs-1)
+    - [Oversights and Design Flaws](#oversights-and-design-flaws-1)
 
 
 ## Bugs

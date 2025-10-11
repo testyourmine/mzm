@@ -7276,14 +7276,14 @@ void SamusUpdateGraphicsOam(struct SamusData* pData, u8 direction)
 
     pPhysics->pBodyOam = pAnim->pOam;
 
-    // Offset by current frame
+    // Update head and upper body
     pGraphics = pAnim->pTopGfx;
     pPhysics->shoulderGfxSize = *pGraphics++ * SAMUS_GFX_PART_SIZE;
     pPhysics->torsoGfxSize = *pGraphics++ * SAMUS_GFX_PART_SIZE;
     pPhysics->pShouldersGfx = pGraphics;
     pPhysics->pTorsoGfx = &pGraphics[pPhysics->shoulderGfxSize];
 
-    // Update legs and body
+    // Update legs and lower body
     pGraphics = pAnim->pBottomGfx;
     pPhysics->legsGfxSize = *pGraphics++ * SAMUS_GFX_PART_SIZE;
     pPhysics->bodyLowerHalfGfxSize = *pGraphics++ * SAMUS_GFX_PART_SIZE;
@@ -7522,7 +7522,7 @@ void SamusUpdatePalette(struct SamusData* pData)
     pWeapon = &gSamusWeaponInfo;
     pEquipment = &gEquipment;
 
-    gSamusPaletteSize = 4 * 16;
+    gSamusPaletteSize = 2 * 16 * sizeof(u16);
 
     if (pWeapon->beamReleasePaletteTimer != 0)
         pWeapon->beamReleasePaletteTimer--;
@@ -7559,7 +7559,6 @@ void SamusUpdatePalette(struct SamusData* pData)
     }
     else if (pEquipment->suitType == SUIT_NORMAL)
     {
-
         if (pEquipment->suitMiscActivation & SMF_VARIA_SUIT)
         {
             pDefaultPal = sSamusPal_VariaSuit_Default;
@@ -7661,10 +7660,12 @@ void SamusUpdatePalette(struct SamusData* pData)
             case 1:
                 pBufferPal = pSpeedboostPal;
                 break;
+
             case 2:
             case 3:
                 pBufferPal = pSpeedboostPal + 16 * 1;
                 break;
+
             default:
                 pBufferPal = pSpeedboostPal + 16 * 2;
                 break;
@@ -7696,7 +7697,7 @@ void SamusUpdatePalette(struct SamusData* pData)
         SamusCopyPalette(pBufferPal, 16, 16);
         return;
     }
-    
+
     if (pData->pose == SPOSE_DOWNLOADING_MAP_DATA)
     {
         if (pData->timer)
