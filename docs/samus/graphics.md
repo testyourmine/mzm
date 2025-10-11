@@ -110,7 +110,7 @@ They are stored almost exactly the same as Samus' graphics and animations, with 
 
 ## Tables
 
-All of the elements above are grouped into a of tables, and tables of pointers to tables.
+All of the elements above are grouped into tables, and tables of pointers to tables.
 
 ### Animation pointers table
 
@@ -197,7 +197,7 @@ The echo re-draws the body oam only, it draws it using the previous positions ov
 
 ### VRAM layout
 
-All graphics are sent to VRAM is pre-allocated space at the same time :
+All graphics are sent to VRAM in pre-allocated space at the same time :
 
 ```
 Shoulders         : Offset 0x000 in object VRAM (0x6010000).
