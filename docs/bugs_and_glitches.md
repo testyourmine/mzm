@@ -20,6 +20,7 @@ These are known bugs and glitches in the game: code that clearly does not work a
     - ["Stop enemy" clipdata prevents bomb jumping](#stop-enemy-clipdata-prevents-bomb-jumping)
     - [Samus can get refilled while collecting a Chozo statue item](#samus-can-get-refilled-while-collecting-a-chozo-statue-item)
     - [Samus can clip into blocks on the right when uncrouching next to a frozen enemy](#samus-can-clip-into-blocks-on-the-right-when-uncrouching-next-to-a-frozen-enemy)
+    - [Ridley updates sub sprite data even if he's dead](#ridley-updates-sub-sprite-data-even-if-hes-dead)
   - [Oversights and Design Flaws](#oversights-and-design-flaws)
     - [Floating point math is used when fixed point could have been used](#floating-point-math-is-used-when-fixed-point-could-have-been-used)
     - [`ClipdataConvertToCollision` is copied to RAM but still runs in ROM](#clipdataconverttocollision-is-copied-to-ram-but-still-runs-in-rom)
@@ -274,6 +275,20 @@ If Samus is up against a wall on the right and an enemy is frozen up against Sam
 +     xPosition = (pData->xPosition & BLOCK_POSITION_FLAG) -
 +         sSamusBlockHitboxData[SAMUS_HITBOX_TYPE_STANDING][SAMUS_BLOCK_HITBOX_RIGHT] + SUB_PIXEL_POSITION_FLAG;
   }
+```
+
+### Ridley updates sub sprite data even if he's dead
+
+Ridley constantly updates sub sprite data at the end of its main function. However, it's possible for the sub sprite data to be uninitialized at this point if Ridley is killed during initialization (Samus doesn't have gravity suit, or Ridley has already been killed). As such, sub sprite data is updated using invalid data (either an old pointer or a null pointer).
+
+**Fix:** Edit `Ridley` in [ridley.c](../src/sprites_AI/samus.c) to check if Ridley is still alive.
+
+```diff
++ if (gCurrentSprite.status & SPRITE_STATUS_EXISTS)
++ {
+        SpriteUtilUpdateSubSprite1Anim();
+        RidleySyncSubSprites();
++ }
 ```
 
 ## Oversights and Design Flaws

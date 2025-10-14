@@ -3003,8 +3003,13 @@ void Ridley(void)
         gLockScreen.lock = LOCK_SCREEN_TYPE_NONE;
     }
 
-    SpriteUtilUpdateSubSprite1Anim();
-    RidleySyncSubSprites();
+    #ifdef BUGFIX
+    if (gCurrentSprite.status & SPRITE_STATUS_EXISTS)
+    #endif
+    {
+        SpriteUtilUpdateSubSprite1Anim();
+        RidleySyncSubSprites();
+    }
 }
 
 /**
