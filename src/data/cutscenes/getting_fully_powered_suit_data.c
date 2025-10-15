@@ -93,122 +93,122 @@ const struct OamArray sGettingFullyPoweredSuitCutsceneOam[GETTING_FULLY_POWERED_
 
 const u16 sGettingFullyPoweredSuitOam_SparkleGoingUp_Frame0[OAM_DATA_SIZE(2)] = {
     2,
-    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 128, 10, 0),
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 64, 10, 0),
+    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x80, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x40, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleGoingUp_Frame1[OAM_DATA_SIZE(2)] = {
     2,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0, 10, 0),
-    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 192, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x0, 10, 0),
+    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 0xc0, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleGoingUp_Frame2[OAM_DATA_SIZE(2)] = {
     2,
-    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 256, 10, 0),
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 64, 10, 0),
+    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x100, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x40, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleGoingUp_Frame3[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 320, 10, 0),
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0, 10, 0),
-    OAM_ENTRY(-8, -2, OAM_DIMS_16x16, OAM_NO_FLIP, 128, 10, 0),
+    OAM_ENTRY(-8, 8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x140, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x0, 10, 0),
+    OAM_ENTRY(-8, -2, OAM_DIMS_16x16, OAM_NO_FLIP, 0x80, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleGoingUp_Frame4[OAM_DATA_SIZE(2)] = {
     2,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 64, 10, 0),
-    OAM_ENTRY(-8, 2, OAM_DIMS_16x16, OAM_NO_FLIP, 192, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x40, 10, 0),
+    OAM_ENTRY(-8, 2, OAM_DIMS_16x16, OAM_NO_FLIP, 0xc0, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleGoingUp_Frame5[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0, 10, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 256, 10, 0),
-    OAM_ENTRY(-8, 3, OAM_DIMS_8x16, OAM_NO_FLIP, 320, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x0, 10, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x100, 10, 0),
+    OAM_ENTRY(-8, 3, OAM_DIMS_8x16, OAM_NO_FLIP, 0x140, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing1_Frame2[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 82, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x52, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing1_Frame3[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-16, -16, OAM_DIMS_32x32, OAM_NO_FLIP, 2, 10, 0),
+    OAM_ENTRY(-16, -16, OAM_DIMS_32x32, OAM_NO_FLIP, 0x2, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing1_Frame4[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-16, -16, OAM_DIMS_32x32, OAM_NO_FLIP, 6, 10, 0),
+    OAM_ENTRY(-16, -16, OAM_DIMS_32x32, OAM_NO_FLIP, 0x6, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing1_Frame9[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-16, -16, OAM_DIMS_32x32, OAM_NO_FLIP, 10, 10, 0),
+    OAM_ENTRY(-16, -16, OAM_DIMS_32x32, OAM_NO_FLIP, 0xa, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_RingBottom_Frame0[OAM_DATA_SIZE(5)] = {
     5,
-    OAM_ENTRY(-80, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 195, 10, 0),
-    OAM_ENTRY(-48, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 199, 10, 0),
-    OAM_ENTRY(-16, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 203, 10, 0),
-    OAM_ENTRY(16, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 207, 10, 0),
-    OAM_ENTRY(48, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 211, 10, 0),
+    OAM_ENTRY(-80, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0xc3, 10, 0),
+    OAM_ENTRY(-48, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0xc7, 10, 0),
+    OAM_ENTRY(-16, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0xcb, 10, 0),
+    OAM_ENTRY(16, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0xcf, 10, 0),
+    OAM_ENTRY(48, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0xd3, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_RingBottom_Frame1[OAM_DATA_SIZE(5)] = {
     5,
-    OAM_ENTRY(-72, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 324, 10, 0),
-    OAM_ENTRY(-40, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 328, 10, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 332, 10, 0),
-    OAM_ENTRY(24, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 336, 10, 0),
-    OAM_ENTRY(56, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 340, 10, 0),
+    OAM_ENTRY(-72, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0x144, 10, 0),
+    OAM_ENTRY(-40, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0x148, 10, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0x14c, 10, 0),
+    OAM_ENTRY(24, 0, OAM_DIMS_32x16, OAM_NO_FLIP, 0x150, 10, 0),
+    OAM_ENTRY(56, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x154, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_RingTop_Frame0[OAM_DATA_SIZE(6)] = {
     6,
-    OAM_ENTRY(-88, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 130, 10, 0),
-    OAM_ENTRY(-56, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 134, 10, 0),
-    OAM_ENTRY(-24, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 138, 10, 0),
-    OAM_ENTRY(8, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 142, 10, 0),
-    OAM_ENTRY(40, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 146, 10, 0),
-    OAM_ENTRY(72, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 150, 10, 0),
+    OAM_ENTRY(-88, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x82, 10, 0),
+    OAM_ENTRY(-56, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x86, 10, 0),
+    OAM_ENTRY(-24, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x8a, 10, 0),
+    OAM_ENTRY(8, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x8e, 10, 0),
+    OAM_ENTRY(40, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x92, 10, 0),
+    OAM_ENTRY(72, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x96, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_RingTop_Frame1[OAM_DATA_SIZE(5)] = {
     5,
-    OAM_ENTRY(-80, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 259, 10, 0),
-    OAM_ENTRY(-48, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 263, 10, 0),
-    OAM_ENTRY(-16, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 267, 10, 0),
-    OAM_ENTRY(16, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 271, 10, 0),
-    OAM_ENTRY(48, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 275, 10, 0),
+    OAM_ENTRY(-80, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x103, 10, 0),
+    OAM_ENTRY(-48, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x107, 10, 0),
+    OAM_ENTRY(-16, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x10b, 10, 0),
+    OAM_ENTRY(16, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x10f, 10, 0),
+    OAM_ENTRY(48, -16, OAM_DIMS_32x16, OAM_NO_FLIP, 0x113, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing1_Frame0[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 18, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x12, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing1_Frame1[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 20, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x14, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing2_Frame2[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 22, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x16, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing2_Frame4[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 24, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x18, 10, 0),
 };
 
 const u16 sGettingFullyPoweredSuitOam_SparkleAroundRing2_Frame3[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 26, 10, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x1a, 10, 0),
 };
 
 const struct FrameData sGettingFullyPoweredSuitOam_SparkleGoingUp[7] = {

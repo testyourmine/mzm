@@ -6,124 +6,124 @@ const u16 sSearchlightEyePal[16] = INCBIN_U16("data/sprites/searchlight_eye.pal"
 
 static const u16 sSearchlightEyeOam_Idle_Frame0[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 512, 8, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 514, 8, 0),
-    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 516, 8, 0),
+    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x200, 8, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x202, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 0x204, 8, 0),
 };
 
 static const u16 sSearchlightEyeOam_Idle_Frame1[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 519, 8, 0),
-    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 516, 8, 0),
-    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 512, 8, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x207, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 0x204, 8, 0),
+    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x200, 8, 0),
 };
 
 static const u16 sSearchlightEyeOam_Idle_Frame2[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 517, 8, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 519, 8, 0),
-    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 516, 8, 0),
+    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x205, 8, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x207, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 0x204, 8, 0),
 };
 
 static const u16 sSearchlightEyeOam_Idle_Frame10[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 516, 8, 0),
-    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 521, 8, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 523, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 0x204, 8, 0),
+    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x209, 8, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x20b, 8, 0),
 };
 
 static const u16 sSearchlightEyeBeamOAM_Idle_Frame0[OAM_DATA_SIZE(7)] = {
     7,
-    OAM_ENTRY(-16, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
-    OAM_ENTRY(-48, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
-    OAM_ENTRY(-80, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
-    OAM_ENTRY(-112, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
-    OAM_ENTRY(16, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
-    OAM_ENTRY(48, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
-    OAM_ENTRY(80, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 540, 8, 0),
+    OAM_ENTRY(-16, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(-48, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(-80, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(-112, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(16, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(48, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(80, -8, OAM_DIMS_32x16, OAM_NO_FLIP, 0x21c, 8, 0),
 };
 
 static const u16 sSearchlightEyeBeamOAM_Idle_Frame2[OAM_DATA_SIZE(7)] = {
     7,
-    OAM_ENTRY(-16, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
-    OAM_ENTRY(-48, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
-    OAM_ENTRY(-80, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
-    OAM_ENTRY(-112, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
-    OAM_ENTRY(16, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
-    OAM_ENTRY(48, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
-    OAM_ENTRY(80, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 540, 8, 0),
+    OAM_ENTRY(-16, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(-48, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(-80, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(-112, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(16, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(48, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
+    OAM_ENTRY(80, -8, OAM_DIMS_32x16, OAM_Y_FLIP, 0x21c, 8, 0),
 };
 
 static const u16 sSearchlightEyeBeamOAM_Idle_Frame1[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 512, 8, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x200, 8, 0),
 };
 
 static const u16 sSearchlightEyeBeamOAM_Unused_Frame0[OAM_DATA_SIZE(1)] = {
     1,
-    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 540, 8, 0),
+    OAM_ENTRY(-8, -8, OAM_DIMS_16x16, OAM_NO_FLIP, 0x21c, 8, 0),
 };
 
 static const u16 sSearchlightEyeProjectileOAM_Moving_Frame0[OAM_DATA_SIZE(8)] = {
     8,
-    OAM_ENTRY(-10, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 537, 8, 0),
-    OAM_ENTRY(-10, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 537, 8, 0),
-    OAM_ENTRY(0, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 569, 8, 0),
-    OAM_ENTRY(0, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 569, 8, 0),
-    OAM_ENTRY(8, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 570, 8, 0),
-    OAM_ENTRY(8, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 570, 8, 0),
-    OAM_ENTRY(-4, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 571, 8, 0),
-    OAM_ENTRY(-4, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 571, 8, 0),
+    OAM_ENTRY(-10, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(-10, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(0, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(0, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(8, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(-4, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23b, 8, 0),
+    OAM_ENTRY(-4, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23b, 8, 0),
 };
 
 static const u16 sSearchlightEyeProjectileOAM_Moving_Frame2[OAM_DATA_SIZE(8)] = {
     8,
-    OAM_ENTRY(-9, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 537, 8, 0),
-    OAM_ENTRY(-9, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 537, 8, 0),
-    OAM_ENTRY(3, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 569, 8, 0),
-    OAM_ENTRY(3, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 569, 8, 0),
-    OAM_ENTRY(11, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 570, 8, 0),
-    OAM_ENTRY(11, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 570, 8, 0),
-    OAM_ENTRY(-2, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 571, 8, 0),
-    OAM_ENTRY(-2, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 571, 8, 0),
+    OAM_ENTRY(-9, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(-9, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(3, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(3, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(11, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(11, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(-2, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23b, 8, 0),
+    OAM_ENTRY(-2, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23b, 8, 0),
 };
 
 static const u16 sSearchlightEyeProjectileOAM_Moving_Frame4[OAM_DATA_SIZE(8)] = {
     8,
-    OAM_ENTRY(-10, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 537, 8, 0),
-    OAM_ENTRY(-10, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 537, 8, 0),
-    OAM_ENTRY(7, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 569, 8, 0),
-    OAM_ENTRY(7, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 569, 8, 0),
-    OAM_ENTRY(-3, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 570, 8, 0),
-    OAM_ENTRY(-3, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 570, 8, 0),
-    OAM_ENTRY(0, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 571, 8, 0),
-    OAM_ENTRY(0, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 571, 8, 0),
+    OAM_ENTRY(-10, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(-10, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(7, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(7, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(-3, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(-3, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(0, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23b, 8, 0),
+    OAM_ENTRY(0, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23b, 8, 0),
 };
 
 static const u16 sSearchlightEyeProjectileOAM_Moving_Frame6[OAM_DATA_SIZE(8)] = {
     8,
-    OAM_ENTRY(-9, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 537, 8, 0),
-    OAM_ENTRY(-9, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 537, 8, 0),
-    OAM_ENTRY(-2, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 569, 8, 0),
-    OAM_ENTRY(-2, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 569, 8, 0),
-    OAM_ENTRY(3, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 570, 8, 0),
-    OAM_ENTRY(3, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 570, 8, 0),
-    OAM_ENTRY(13, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 571, 8, 0),
-    OAM_ENTRY(13, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 571, 8, 0),
+    OAM_ENTRY(-9, -8, OAM_DIMS_16x8, OAM_NO_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(-9, 0, OAM_DIMS_16x8, OAM_Y_FLIP, 0x219, 8, 0),
+    OAM_ENTRY(-2, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(-2, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x239, 8, 0),
+    OAM_ENTRY(3, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(3, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23a, 8, 0),
+    OAM_ENTRY(13, -8, OAM_DIMS_8x8, OAM_NO_FLIP, 0x23b, 8, 0),
+    OAM_ENTRY(13, 0, OAM_DIMS_8x8, OAM_Y_FLIP, 0x23b, 8, 0),
 };
 
 static const u16 sSearchlightEyeOam_Shooting_Frame1[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 516, 8, 0),
-    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 525, 8, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 527, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 0x204, 8, 0),
+    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x20d, 8, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x20f, 8, 0),
 };
 
 static const u16 sSearchlightEyeOam_Shooting_Frame2[OAM_DATA_SIZE(3)] = {
     3,
-    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 533, 8, 0),
-    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 535, 8, 0),
-    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 516, 8, 0),
+    OAM_ENTRY(-8, -16, OAM_DIMS_16x16, OAM_NO_FLIP, 0x215, 8, 0),
+    OAM_ENTRY(-8, 0, OAM_DIMS_16x16, OAM_NO_FLIP, 0x217, 8, 0),
+    OAM_ENTRY(8, -8, OAM_DIMS_8x16, OAM_NO_FLIP, 0x204, 8, 0),
 };
 
 const struct FrameData sSearchlightEyeOam_Idle[13] = {
