@@ -10,24 +10,6 @@ from pathlib import Path
 
 rom: BufferedReader = open("../mzm_us_baserom.gba", "rb")
 
-subDirs: array = []
-
-# Get the file path of the desired file name
-def GetFile(filename: str):
-    for root, dirs, files in os.walk(".."):
-        if filename in files:
-            filepath = os.path.join(root, filename)
-            return filepath
-    return ""
-
-# Get all file paths of the desired file extension
-def GetAllFileExtensions(fileextension: str):
-    for root, dirs, files in os.walk(".."):
-        for file in files:
-            if file.endswith(fileextension):
-                file_path = os.path.join(root, file)
-                subDirs.append(file_path)
-
 # Convert the GBA GFX file to PNG file
 def ConvertGbaGfxToPng(
     sprite_file: BufferedReader, # The sprite data to read from
@@ -58,6 +40,20 @@ def ConvertGbaGfxToPng(
             # Little endian, so low then high
             sprite_array.append(low_index)
             sprite_array.append(high_index)
+
+# Convert the PNG file to GBA GFX file
+def ConvertPngToGbaGfx(
+    png_file: Image, # The PNG image to read from
+    sprite_array: array, # The sprite data to write to
+    png_mode: int # 0: Truecolor, 1: Indexed
+):
+    width, height = png_file.size
+    for y in range(height):
+        for x in range(width):
+            pixel = png_file.getpixel(x, y)
+            sprite_array.append(pixel)
+            
+    pass
 
 # Create PNG image of sprite
 def CreateSpritePng(
@@ -103,7 +99,7 @@ def CreateSpritePng(
             # Get the RGB values as a tuple, since that's what it expects
             r = (color >> 16) & 0xFF
             g = (color >> 8) & 0xFF
-            b = color & 0xFF
+            b = (color >> 0) & 0xFF
             rgb = (r, g, b)
         elif png_mode == 1:
             rgb = color
@@ -172,7 +168,7 @@ ImageConverter(
     input_palette="../data/sprites/Multiviola.pal",
     palette_offset=0,
     png_flag=1,
-    png_mode=0,
+    png_mode=1,
     sprites_per_row=32,
     scale=2,
     output_image="sprite.png"
@@ -203,38 +199,4 @@ def ConvertAllImages():
             
         line = db.readline()
 
-def TempConvertDatabaseToImageDatabase():
-    db: BufferedReader = open("../database.txt", "r")
-
-    line: str = db.readline()
-    while line != '':
-        # Formatted as follows : image_name;palette_name;palette_offset;sprites_per_row
-        # The symbol # can be used as the first character of a line to make the extractor ignore it
-        if line[0] != '\n' and line[0] != '#':
-            info: array = line.split(";")
-            image_name: str = info[0]
-            if image_name.endswith(".lz") or image_name.endswith(".gfx"):
-                palette_name: str = Path(image_name.rstrip(".lz")).with_suffix(".pal")
-                palette_offset = 0
-                sprites_per_row = 32
-                sprite_size = int(info[1])
-                if image_name.endswith(".lz"):
-                    input_sprite = image_name.split("/")[-1]
-                    sprite_file_path = GetFile(input_sprite)
-                    sprite_file: BufferedReader = open(sprite_file_path, "rb")
-                    content = sprite_file.read()
-                    e, sprite_size = comp.decomp_lz77(content, 0)
-                    sprite_file.close()
-                sprites_per_row = sprite_size // 64
-                if sprite_size // 64 == 0:
-                    sprites_per_row = ceil(sprite_size / 8)
-
-                print(f'{image_name};{palette_name};{palette_offset};{sprites_per_row}')
-        
-        else:
-            print(line, end="")
-            
-        line = db.readline()
-
-#TempConvertDatabaseToImageDatabase()
 #ConvertAllImages()

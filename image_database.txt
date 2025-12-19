@@ -1,3 +1,5 @@
+# Formatted as follows : image_name;palette_name;palette_offset;sprites_per_row
+
 # Unused sprites
 
 sprites/UnusedSprites.gfx.lz;sprites/UnusedSprites.pal;0;4
