@@ -2,6 +2,7 @@
 /data/*
 
 *.gba
+*.gba.lz
 *.elf
 *.dump
 *.o
