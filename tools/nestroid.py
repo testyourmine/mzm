@@ -170,11 +170,12 @@ if __name__ == "__main__":
     with open(in_path, "rb") as f:
         in_data = bytearray(f.read())
     
-    # Compress the file
-    comp_data = comp_lz(in_data)
+    # Decompress the file
+    decomp_data, comp_size = decomp_lz(in_data, 0, 0x8524)
+    print(comp_size)
 
     with open(out_path, "wb") as f:
-        f.write(comp_data)
+        f.write(decomp_data)
 
     # parser = argparse.ArgumentParser()
     # parser.add_argument("zm_path", type=str, help="Path to a Zero Mission ROM")
