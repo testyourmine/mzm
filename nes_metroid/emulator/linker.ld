@@ -6,43 +6,6 @@ MEMORY {
 }
 
 SECTIONS {
-    /*
-    . = 0x00000000;
-    .text : ALIGN(2) {
-        asm/asm.o(.text);
-    } =0
-
-    . = 0x06006000;
-    .text : ALIGN(2) {
-        asm/part1.o(.text);
-    } =0
-
-    . = 0x03000000;
-    .text : ALIGN(2) {
-        asm/part2.o(.text);
-    } =0
-
-    . = 0x0600B000;
-    .text : ALIGN(2) {
-        asm/part3.o(.text);
-    } =0
-
-    . = 0x0600C000;
-    .text : ALIGN(2) {
-        asm/part4.o(.text);
-    } =0
-
-    . = 0x0600E000;
-    .text : ALIGN(2) {
-        asm/part5.o(.text);
-    } =0
-
-    . = 0x0203E000;
-    .text : ALIGN(2) {
-        asm/part6.o(.text);
-    } =0
-    */
-
     . = ORIGIN(rom);
     __rom_cursor = .;
 
@@ -87,19 +50,6 @@ SECTIONS {
         asm/part6.o(.text)
     } > ewram
     __rom_cursor += SIZEOF(.ewram_text);
-    
-    /*
-    . = 0x06000000;
-    .text : ALIGN(2) {
-        asm/asm.o(.text);
-        asm/part1.o(.text);
-        asm/part2.o(.text);
-        asm/part3.o(.text);
-        asm/part4.o(.text);
-        asm/part5.o(.text);
-        asm/part6.o(.text);
-    } =0
-    */
 
     /* DWARF debug sections.
        Symbols in the DWARF debugging sections are relative to the beginning
