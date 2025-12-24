@@ -131,7 +131,7 @@ _0203E0EA:
 	adds r5, #1
 	cmp r5, #0x17
 	bls _0203E07E
-	ldr r0, _0203E110 @ =0x0203E43C
+	ldr r0, _0203E110 @ =_0203E43C
 	mov r1, sp
 	movs r2, #0x12
 	bl sub_0203E314
@@ -148,7 +148,7 @@ _0203E108:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0203E110: .4byte 0x0203E43C
+_0203E110: .4byte _0203E43C
 _0203E114: .4byte 0x00000904
 
 	thumb_func_start sub_0203E118
@@ -213,7 +213,7 @@ _0203E164:
 	movs r1, #0x18
 	str r1, [r0]
 	movs r6, #0
-	ldr r1, _0203E1D4 @ =0x0203E43C
+	ldr r1, _0203E1D4 @ =_0203E43C
 	ldrb r0, [r1]
 	cmp r0, #0
 	bne _0203E1A8
@@ -233,7 +233,7 @@ _0203E1A8:
 	ldr r0, _0203E1D8 @ =0x0000084C
 	adds r0, r0, r7
 	mov ip, r0
-	ldr r3, _0203E1D4 @ =0x0203E43C
+	ldr r3, _0203E1D4 @ =_0203E43C
 _0203E1B8:
 	movs r0, #3
 	ands r0, r6
@@ -248,7 +248,7 @@ _0203E1B8:
 	b _0203E1F8
 	.align 2, 0
 _0203E1D0: .4byte 0x00000212
-_0203E1D4: .4byte 0x0203E43C
+_0203E1D4: .4byte _0203E43C
 _0203E1D8: .4byte 0x0000084C
 _0203E1DC:
 	ldrb r4, [r3]
@@ -487,14 +487,14 @@ _0203E36E:
 sub_0203E374: @ 0x0203E374
 	push {lr}
 	adds r0, r1, #0
-	ldr r1, _0203E388 @ =0x0203E43C
+	ldr r1, _0203E388 @ =_0203E43C
 	movs r2, #0x12
 	bl sub_0203E2C4
 	movs r0, #0x18
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0203E388: .4byte 0x0203E43C
+_0203E388: .4byte _0203E43C
 
 	thumb_func_start sub_0203E38C
 sub_0203E38C: @ 0x0203E38C
@@ -509,14 +509,14 @@ sub_0203E390: @ 0x0203E390
 	thumb_func_start sub_0203E394
 sub_0203E394: @ 0x0203E394
 	push {lr}
-	ldr r0, _0203E3A4 @ =0x0203E43C
+	ldr r0, _0203E3A4 @ =_0203E43C
 	adds r1, #0x10
 	movs r2, #0x12
 	bl sub_0203E314
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0203E3A4: .4byte 0x0203E43C
+_0203E3A4: .4byte _0203E43C
 
 	thumb_func_start sub_0203E3A8
 sub_0203E3A8: @ 0x0203E3A8
@@ -531,13 +531,13 @@ sub_0203E3AC: @ 0x0203E3AC
 	ldr r1, _0203E3D4 @ =0x0E007FB0
 	adds r0, r4, #0
 	movs r2, #0x10
-	bl sub_0203E850
+	bl SramWriteChecked
 	cmp r0, #0
 	bne _0203E3CC
 	ldr r1, _0203E3D8 @ =0x0E007FD8
 	adds r0, r4, #0
 	movs r2, #0x10
-	bl sub_0203E850
+	bl SramWriteChecked
 _0203E3CC:
 	pop {r4}
 	pop {r1}
@@ -561,13 +561,13 @@ _0203E3EC:
 	adds r1, r4, #0
 	adds r1, #0x10
 	movs r2, #0x18
-	bl sub_0203E850
+	bl SramWriteChecked
 	cmp r0, #0
 	bne _0203E408
 	adds r0, r5, #0
 	adds r1, r4, #0
 	movs r2, #0x10
-	bl sub_0203E850
+	bl SramWriteChecked
 _0203E408:
 	pop {r4, r5}
 	pop {r1}
@@ -589,13 +589,15 @@ _0203E426:
 	adds r0, r4, #0
 	adds r1, r5, #0
 	movs r2, #0x28
-	bl sub_0203E718
+	bl SramWriteUnchecked
 	movs r0, #0x28
 	pop {r4, r5}
 	pop {r1}
 	bx r1
 	.align 2, 0
 _0203E438: .4byte 0x0E007FB0
+
+	.section .rodata
 _0203E43C:
 	.byte 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x00
@@ -642,303 +644,3 @@ _0203E43C:
 	.byte 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEE, 0xFF, 0xFF, 0xFF, 0xEE, 0xFE, 0xFF
 	.byte 0xFF, 0xEE, 0xEE, 0xFF, 0xFF, 0xEE, 0xFE, 0xFF, 0xFF, 0xEE, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 	.byte 0xFF, 0xFF, 0xFF, 0xFF
-
-	thumb_func_start sub_0203E6F4
-sub_0203E6F4: @ 0x0203E6F4
-	push {r4, lr}
-	adds r4, r0, #0
-	subs r3, r2, #1
-	cmp r2, #0
-	beq _0203E710
-	movs r2, #1
-	rsbs r2, r2, #0
-_0203E702:
-	ldrb r0, [r4]
-	strb r0, [r1]
-	adds r4, #1
-	adds r1, #1
-	subs r3, #1
-	cmp r3, r2
-	bne _0203E702
-_0203E710:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-
-	thumb_func_start sub_0203E718
-sub_0203E718: @ 0x0203E718
-	push {r4, r5, r6, lr}
-	sub sp, #0x80
-	adds r4, r0, #0
-	adds r5, r1, #0
-	adds r6, r2, #0
-	ldr r2, _0203E744 @ =0x04000204
-	ldrh r0, [r2]
-	ldr r1, _0203E748 @ =0x0000FFFC
-	ands r0, r1
-	movs r1, #3
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r3, _0203E74C @ =sub_0203E6F4
-	movs r0, #1
-	bics r3, r0
-	mov r2, sp
-	ldr r0, _0203E750 @ =sub_0203E718
-	ldr r1, _0203E74C @ =sub_0203E6F4
-	subs r0, r0, r1
-	lsls r0, r0, #0xf
-	b _0203E760
-	.align 2, 0
-_0203E744: .4byte 0x04000204
-_0203E748: .4byte 0x0000FFFC
-_0203E74C: .4byte sub_0203E6F4
-_0203E750: .4byte sub_0203E718
-_0203E754:
-	ldrh r0, [r3]
-	strh r0, [r2]
-	adds r3, #2
-	adds r2, #2
-	subs r0, r1, #1
-	lsls r0, r0, #0x10
-_0203E760:
-	lsrs r1, r0, #0x10
-	cmp r1, #0
-	bne _0203E754
-	mov r3, sp
-	adds r3, #1
-	adds r0, r4, #0
-	adds r1, r5, #0
-	adds r2, r6, #0
-	bl sub_0203E8B0
-	add sp, #0x80
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-
-	thumb_func_start sub_0203E77C
-sub_0203E77C: @ 0x0203E77C
-	push {r4, r5, lr}
-	adds r5, r0, #0
-	adds r4, r1, #0
-	adds r3, r2, #0
-	ldr r2, _0203E7B4 @ =0x04000204
-	ldrh r0, [r2]
-	ldr r1, _0203E7B8 @ =0x0000FFFC
-	ands r0, r1
-	movs r1, #3
-	orrs r0, r1
-	strh r0, [r2]
-	subs r3, #1
-	movs r0, #1
-	rsbs r0, r0, #0
-	cmp r3, r0
-	beq _0203E7AC
-	adds r1, r0, #0
-_0203E79E:
-	ldrb r0, [r5]
-	strb r0, [r4]
-	adds r5, #1
-	adds r4, #1
-	subs r3, #1
-	cmp r3, r1
-	bne _0203E79E
-_0203E7AC:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0203E7B4: .4byte 0x04000204
-_0203E7B8: .4byte 0x0000FFFC
-
-	thumb_func_start sub_0203E7BC
-sub_0203E7BC: @ 0x0203E7BC
-	push {r4, r5, lr}
-	adds r5, r0, #0
-	adds r3, r1, #0
-	subs r4, r2, #1
-	cmp r2, #0
-	beq _0203E7E2
-	movs r2, #1
-	rsbs r2, r2, #0
-_0203E7CC:
-	ldrb r1, [r3]
-	ldrb r0, [r5]
-	adds r5, #1
-	adds r3, #1
-	cmp r1, r0
-	beq _0203E7DC
-	subs r0, r3, #1
-	b _0203E7E4
-_0203E7DC:
-	subs r4, #1
-	cmp r4, r2
-	bne _0203E7CC
-_0203E7E2:
-	movs r0, #0
-_0203E7E4:
-	pop {r4, r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-
-	thumb_func_start sub_0203E7EC
-sub_0203E7EC: @ 0x0203E7EC
-	push {r4, r5, r6, lr}
-	sub sp, #0xc0
-	adds r4, r0, #0
-	adds r5, r1, #0
-	adds r6, r2, #0
-	ldr r2, _0203E818 @ =0x04000204
-	ldrh r0, [r2]
-	ldr r1, _0203E81C @ =0x0000FFFC
-	ands r0, r1
-	movs r1, #3
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r3, _0203E820 @ =sub_0203E7BC
-	movs r0, #1
-	bics r3, r0
-	mov r2, sp
-	ldr r0, _0203E824 @ =sub_0203E7EC
-	ldr r1, _0203E820 @ =sub_0203E7BC
-	subs r0, r0, r1
-	lsls r0, r0, #0xf
-	b _0203E834
-	.align 2, 0
-_0203E818: .4byte 0x04000204
-_0203E81C: .4byte 0x0000FFFC
-_0203E820: .4byte sub_0203E7BC
-_0203E824: .4byte sub_0203E7EC
-_0203E828:
-	ldrh r0, [r3]
-	strh r0, [r2]
-	adds r3, #2
-	adds r2, #2
-	subs r0, r1, #1
-	lsls r0, r0, #0x10
-_0203E834:
-	lsrs r1, r0, #0x10
-	cmp r1, #0
-	bne _0203E828
-	mov r3, sp
-	adds r3, #1
-	adds r0, r4, #0
-	adds r1, r5, #0
-	adds r2, r6, #0
-	bl sub_0203E8B0
-	add sp, #0xc0
-	pop {r4, r5, r6}
-	pop {r1}
-	bx r1
-
-	thumb_func_start sub_0203E850
-sub_0203E850: @ 0x0203E850
-	push {r4, r5, r6, r7, lr}
-	adds r6, r0, #0
-	adds r5, r1, #0
-	adds r4, r2, #0
-	movs r7, #0
-	b _0203E862
-_0203E85C:
-	adds r0, r7, #1
-	lsls r0, r0, #0x18
-	lsrs r7, r0, #0x18
-_0203E862:
-	cmp r7, #2
-	bhi _0203E880
-	adds r0, r6, #0
-	adds r1, r5, #0
-	adds r2, r4, #0
-	bl sub_0203E77C
-	adds r0, r6, #0
-	adds r1, r5, #0
-	adds r2, r4, #0
-	bl sub_0203E7EC
-	adds r3, r0, #0
-	cmp r3, #0
-	bne _0203E85C
-_0203E880:
-	adds r0, r3, #0
-	pop {r4, r5, r6, r7}
-	pop {r1}
-	bx r1
-_0203E888:
-	.byte 0x53, 0x52, 0x41, 0x4D, 0x5F, 0x56, 0x31, 0x31
-	.byte 0x33, 0x00, 0x00, 0x00, 0xF5, 0xE6, 0x03, 0x02, 0x19, 0xE7, 0x03, 0x02, 0xBD, 0xE7, 0x03, 0x02
-	.byte 0xED, 0xE7, 0x03, 0x02
-
-	thumb_func_start sub_0203E8A4
-sub_0203E8A4: @ 0x0203E8A4
-	bx r0
-	nop
-
-	thumb_func_start sub_0203E8A8
-sub_0203E8A8: @ 0x0203E8A8
-	bx r1
-	nop
-
-	thumb_func_start sub_0203E8AC
-sub_0203E8AC: @ 0x0203E8AC
-	bx r2
-	nop
-
-	thumb_func_start sub_0203E8B0
-sub_0203E8B0: @ 0x0203E8B0
-	bx r3
-	nop
-
-	thumb_func_start sub_0203E8B4
-sub_0203E8B4: @ 0x0203E8B4
-	bx r4
-	nop
-
-	thumb_func_start sub_0203E8B8
-sub_0203E8B8: @ 0x0203E8B8
-	bx r5
-	nop
-
-	thumb_func_start sub_0203E8BC
-sub_0203E8BC: @ 0x0203E8BC
-	bx r6
-	nop
-
-	thumb_func_start sub_0203E8C0
-sub_0203E8C0: @ 0x0203E8C0
-	bx r7
-	nop
-
-	thumb_func_start sub_0203E8C4
-sub_0203E8C4: @ 0x0203E8C4
-	bx r8
-	nop
-
-	thumb_func_start sub_0203E8C8
-sub_0203E8C8: @ 0x0203E8C8
-	bx sb
-	nop
-
-	thumb_func_start sub_0203E8CC
-sub_0203E8CC: @ 0x0203E8CC
-	bx sl
-	nop
-
-	thumb_func_start sub_0203E8D0
-sub_0203E8D0: @ 0x0203E8D0
-	bx fp
-	nop
-
-	thumb_func_start sub_0203E8D4
-sub_0203E8D4: @ 0x0203E8D4
-	bx ip
-	nop
-
-	thumb_func_start sub_0203E8D8
-sub_0203E8D8: @ 0x0203E8D8
-	bx sp
-	nop
-
-	thumb_func_start sub_0203E8DC
-sub_0203E8DC: @ 0x0203E8DC
-	bx lr
-	nop

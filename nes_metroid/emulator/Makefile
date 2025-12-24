@@ -218,8 +218,8 @@ $(LD_SCRIPT): linker.ld
 # src/dma.s: CFLAGS = -Werror -O1 -mthumb-interwork -fhex-asm -f2003-patch
 # src/dma.s: src/dma.c
 
-# src/sram/%.s: CFLAGS = -Werror -O1 -mthumb-interwork -fhex-asm -f2003-patch
-# src/sram/%.s: src/sram/%.c
+src/sram/%.s: CFLAGS = -Werror -O1 -mthumb-interwork -fhex-asm -f2003-patch
+src/sram/%.s: src/sram/%.c
 
 ../tools/%: ../tools/%.c
 	$(MSG) HOSTCC $@

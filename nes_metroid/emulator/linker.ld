@@ -11,43 +11,47 @@ SECTIONS {
 
     .rom_text 0x08000000 : AT(__rom_cursor)
     {
-        asm/asm.o(.text)
+        asm/asm.o(.text);
     } > rom
     __rom_cursor += SIZEOF(.rom_text);
 
     .vram_text_1 0x06006000 : AT(__rom_cursor)
     {
-        asm/part1.o(.text)
+        asm/part1.o(.text);
     } > vram
     __rom_cursor += SIZEOF(.vram_text_1);
 
     .iwram_text 0x03000000 : AT(__rom_cursor)
     {
-        asm/part2.o(.text)
+        asm/part2.o(.text);
     } > iwram
     __rom_cursor += SIZEOF(.iwram_text);
 
     .vram_text_2 0x0600B000 : AT(__rom_cursor)
     {
-        asm/part3.o(.text)
+        asm/part3.o(.text);
     } > vram
     __rom_cursor += SIZEOF(.vram_text_2);
 
     .vram_text_3 0x0600C000 : AT(__rom_cursor)
     {
-        asm/part4.o(.text)
+        asm/part4.o(.text);
     } > vram
     __rom_cursor += SIZEOF(.vram_text_3);
 
     .vram_text_4 0x0600E000 : AT(__rom_cursor)
     {
-        asm/part5.o(.text)
+        asm/part5.o(.text);
     } > vram
     __rom_cursor += SIZEOF(.vram_text_4);
 
     .ewram_text 0x0203E000 : AT(__rom_cursor)
     {
-        asm/part6.o(.text)
+        asm/part6.o(.text);
+        asm/part6.o(.rodata);
+        src/sram/sram.o(.text);
+        src/sram/sram.o(.rodata);
+        *libgcc.a:_call_via_rX.o(.text);
     } > ewram
     __rom_cursor += SIZEOF(.ewram_text);
 
