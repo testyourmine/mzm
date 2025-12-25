@@ -188,13 +188,13 @@ help:
 	@echo '  REGION=<region>: selects the region of the ROM, possible values are "us", "eu", "jp", "cn", "us_beta", and "eu_beta"'
 	@echo '  DEBUG=1: enables the debug code'
 
-asm/data.o: payload/payload.gba.lz
+# asm/data.o: payload/payload.gba.lz
 
-payload/payload.gba:
-	@$(MAKE) -C payload
+# payload/payload.gba:
+# 	@$(MAKE) -C payload
 
-payload/payload.gba.lz: payload/payload.gba
-	$Q python3 ../tools/compress.py comp_lz payload/mzm_us.gba 0x0 payload/payload.gba.lz
+# payload/payload.gba.lz: payload/payload.gba
+# 	$Q python3 ../tools/compress.py comp_lz payload/mzm_us.gba 0x0 payload/payload.gba.lz
 
 $(TARGET): $(ELF) $(GBAFIX)
 	$(MSG) OBJCOPY $@
