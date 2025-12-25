@@ -17,23 +17,7 @@ struct Unk_0203E000 {
     s32 unk904;
 };
 
-struct Unk_06002000 {
-    u8 pad_0[0x212 - 0x0];
-    u16 unk212[13];
-    u8 pad_214[0x292 - 0x22C];
-    u16 unk292[13];
-    u8 pad_294[0x352 - 0x2AC];
-    u8 unk352[1]; // length?
-    u8 pad_353[0x4CE - 0x353];
-    u16 unk4CE[1]; // length?
-    u8 pad_4D0[0x716 - 0x4D0];
-    u16 unk716[1]; // length?
-};
-extern struct Unk_06002000 gUnk_06002000;
-
-#define Unk_0203E43C CAST_TO_ARRAY(u8, [], EWRAM_BASE + 0x3E43C)
-
-u8 sUnk_0203E43C[] = {
+const u8 sUnk_0203E43C[] = {
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x00,
     0x0A, 0x00, 0x1C, 0x00, 0x1C, 0x00, 0x20, 0x00, 0x18, 0x00, 0x1B, 0x00, 0x0D, 0x00, 0x19, 0x00,
@@ -103,12 +87,12 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
 {
     s32 var_r4;
     u32 var_r5;
-    u8 temp_r3;
-    u8* var_r2;
-    struct Unk_06002000 *unk_06002000;
+    u32 temp_r3;
+    u8* unk_06002000;
+    s32 var_0;
     u8 subroutine_arg0[0x14];
 
-    unk_06002000 = &gUnk_06002000;
+    unk_06002000 = (u8*)0x06002000;
     if (sub_0203E34C((u16*)0x06002298, (u16*)0x0203E44E, 0x10) != 0)
     {
         arg0->unk904 &= ~4;
@@ -123,15 +107,15 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
         return 0;
 
     arg0->unk830 = 0x30;
-    if (!(READ_16(REG_DISPCNT) & DCNT_BG3)) // DCNT_BG3
+    if (!(READ_16(REG_DISPCNT) & DCNT_BG3))
         return 0;
 
+    var_0 = 0;
     var_r4 = 0;
-    var_r5 = 0;
-    var_r2 = (u8*)subroutine_arg0;
-    for (; var_r5 < 0x18; var_r5++)
+    for (var_r5 = 0; var_r5 < 0x18; var_r5++)
     {
-        temp_r3 = (var_r4 * 2)[unk_06002000->unk352];
+        temp_r3 = unk_06002000[0x6A4/2 + (var_r4 * 2)];
+
         var_r4 += 1;
         if (var_r4 == 6 || var_r4 == 0x46)
         {
@@ -145,48 +129,45 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
         if (temp_r3 >= 0x40)
             return 0;
 
+        switch (var_r5 & 3)
         {
-            switch (var_r5 & 3)
-            {
-                case 0:
-                    *var_r2 = temp_r3;
-                    break;
+            case 0:
+                subroutine_arg0[var_0] = temp_r3;
+                break;
 
-                case 1:
-                    *var_r2 |= temp_r3 << 6;
-                    var_r2++;
-                    *var_r2 = temp_r3 >> 2;
-                    break;
+            case 1:
+                subroutine_arg0[var_0] |= temp_r3 << 6;
+                var_0++;
+                subroutine_arg0[var_0] = temp_r3 >> 2;
+                break;
 
-                case 2:
-                    *var_r2 |= temp_r3 << 4;
-                    var_r2++;
-                    *var_r2 = temp_r3 >> 4;
-                    break;
+            case 2:
+                subroutine_arg0[var_0] |= temp_r3 << 4;
+                var_0++;
+                subroutine_arg0[var_0] = temp_r3 >> 4;
+                break;
 
-                case 3:
-                    *var_r2 |= temp_r3 * 4;
-                    var_r2++;
-                    break;
-            }
+            case 3:
+                subroutine_arg0[var_0] |= temp_r3 << 2;
+                var_0++;
+                break;
         }
     }
+
     sub_0203E314((u8*)0x0203E43C, subroutine_arg0, 0x12);
     arg0->unk904 |= 4;
     return 1;
 }
 
-// https://decomp.me/scratch/Bv12j
 void sub_0203E118(struct Unk_0203E000* arg0)
 {
     s32 var_r5;
+    s32 var_r3;
     u32 var_r4;
     u32 var_r6;
-    u8* var_r3_2;
-    struct Unk_06002000* var_r2;
-    struct Unk_0203E000_unk84C **unk84C;
+    u16* unk_06002000;
 
-    var_r2 = &gUnk_06002000;
+    unk_06002000 = (u16*)0x06002000;
     if (sub_0203E34C((u16*)0x06002150, (u16*)0x0203E45E, 0x1E) != 0)
     {
         if (arg0->unk830 == 0x18)
@@ -196,46 +177,44 @@ void sub_0203E118(struct Unk_0203E000* arg0)
         return;
     }
 
-    for (var_r6 = 0; var_r6 < 0xD; var_r6 += 1)
+    for (var_r6 = 0; var_r6 < 13; var_r6 += 1)
     {
-        if ((var_r6[var_r2->unk212] & 0xFF) < 0x40)
+        if ((unk_06002000[0x212/2 + var_r6] & 0xFF) < 0x40)
             return;
 
-        if ((var_r6[var_r2->unk292] & 0xFF) < 0x40)
+        if ((unk_06002000[0x292/2 + var_r6] & 0xFF) < 0x40)
             return;
     }
 
     arg0->unk830 = 0x18;
     for (var_r6 = 0; var_r6 < 0x12; var_r6++)
     {
-        if (Unk_0203E43C[var_r6] != 0)
+        if (sUnk_0203E43C[var_r6] != 0)
             break;
     }
 
     if (var_r6 == 0x12)
         return;
 
+    var_r3 = 0;
     var_r5 = 0;
-    var_r6 = 0;
-    unk84C = (struct Unk_0203E000_unk84C **)&arg0->unk84C;
-    var_r3_2 = Unk_0203E43C;
-    for (; var_r6 < 0x18; var_r6++)
+    for (var_r6 = 0; var_r6 < 0x18; var_r6++)
     {
         switch (var_r6 & 3)
         {
             case 0:
-                var_r4 = *var_r3_2;
-                var_r3_2 += 1;
+                var_r4 = sUnk_0203E43C[var_r3];
+                var_r3++;
                 break;
 
             case 1:
-                var_r4 = (var_r4 >> 6) | (*var_r3_2 << 2);
-                var_r3_2 += 1;
+                var_r4 = (var_r4 >> 6) | (sUnk_0203E43C[var_r3] << 2);
+                var_r3++;
                 break;
 
             case 2:
-                var_r4 = (var_r4 >> 6) | (*var_r3_2 << 4);
-                var_r3_2 += 1;
+                var_r4 = (var_r4 >> 6) | (sUnk_0203E43C[var_r3] << 4);
+                var_r3++;
                 break;
 
             case 3:
@@ -243,8 +222,8 @@ void sub_0203E118(struct Unk_0203E000* arg0)
                 break;
         }
 
-        var_r6[unk84C[0]->unk99A] = var_r4 & 0x3F;
-        var_r5[var_r2->unk212] = (var_r4 & 0x3F) | 0x1000;
+        var_r6[arg0->unk84C->unk99A] = var_r4 & 0x3F;
+        unk_06002000[0x212/2 + var_r5] = (var_r4 & 0x3F) | 0x1000;
 
         var_r5 += 1;
         if (var_r5 == 0x6 || var_r5 == 0x46)
@@ -264,19 +243,18 @@ u8* sub_0203E24C(u8* arg0)
     return arg0;
 }
 
-// https://decomp.me/scratch/eSloX
 void sub_0203E260(void)
 {
-    struct Unk_06002000 *unk_06002000;
+    u16* unk_06002000;
 
-    unk_06002000 = &gUnk_06002000;
-    if (sub_0203E34C((u16*)0x060024D6, (u16*)0x0203E47C, 8) == 0)
+    unk_06002000 = (u16*)0x06002000;
+    if (sub_0203E34C(unk_06002000 + 0x4D6/2, (u16*)0x0203E47C, 8) == 0)
     {
-        sub_0203E2C4(gUnk_06002000.unk4CE, (u8*)0x0203E48C, 0x26);
+        sub_0203E2C4(unk_06002000 + 0x4CE/2, (u8*)0x0203E48C, 0x26);
     }
-    else if (sub_0203E34C((u16*)0x0600271C, (u16*)0x0203E484, 8) == 0)
+    else if (sub_0203E34C(unk_06002000 + 0x71C/2, (u16*)0x0203E484, 8) == 0)
     {
-        sub_0203E2C4(unk_06002000->unk716, (u8*)0x0203E4B2, 0x12);
+        sub_0203E2C4(unk_06002000 + 0x716/2, (u8*)0x0203E4B2, 0x12);
     }
 }
 
@@ -312,7 +290,7 @@ void sub_0203E2E4(u8* dst, u8* src, s32 size)
         *dst++ = var_r2;
         src += 1;
     }
-    while ((u32) src < (u32) end);
+    while ((u32)src < (u32)end);
 }
 
 void sub_0203E314(u8* dst, u8* src, s32 size)
@@ -362,7 +340,7 @@ u32 sub_0203E34C(u16* src1, u16* src2, s32 count)
 
 s32 sub_0203E374(u32 arg0, u16* dst)
 {
-    sub_0203E2C4(dst, (u8* )0x0203E43C, 0x12);
+    sub_0203E2C4(dst, (u8*)0x0203E43C, 0x12);
     return 0x18;
 }
 
@@ -378,7 +356,7 @@ s32 sub_0203E390(void)
 
 void sub_0203E394(s32 arg0, u8* src)
 {
-    sub_0203E314((u8* )0x0203E43C, src + 0x10, 0x12);
+    sub_0203E314((u8*)0x0203E43C, src + 0x10, 0x12);
 }
 
 void sub_0203E3A8(u8* arg0)

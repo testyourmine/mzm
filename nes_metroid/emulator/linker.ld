@@ -47,8 +47,8 @@ SECTIONS {
 
     .ewram_text 0x0203E000 : AT(__rom_cursor)
     {
-        asm/part6.o(.text);
-        asm/part6.o(.rodata);
+        src/part6.o(.text);
+        src/part6.o(.rodata);
         src/sram/sram.o(.text);
         src/sram/sram.o(.rodata);
         *libgcc.a:_call_via_rX.o(.text);
