@@ -17,17 +17,60 @@ struct Unk_0203E000 {
     s32 unk904;
 };
 
+s32 sub_0203E000(struct Unk_0203E000* arg0);
+void sub_0203E118(struct Unk_0203E000* arg0);
+u8* sub_0203E24C(u8* arg0);
+void sub_0203E260(void);
+void sub_0203E2C4(u16* dst, u8* src, s32 size);
+void sub_0203E2E4(u8* dst, u8* src, s32 size);
+void sub_0203E314(u8* dst, u8* src, s32 size);
+u32 sub_0203E32C(u8* src1, u8* src2, s32 size);
+u32 sub_0203E34C(u16* src1, u16* src2, s32 size);
+s32 sub_0203E374(u32 arg0, u16* dst);
+s32 sub_0203E38C(void);
+s32 sub_0203E390(void);
+void sub_0203E394(s32 arg0, u8* src);
+void sub_0203E3A8(u8* arg0);
+u8* sub_0203E3AC(u8* src);
+u8* sub_0203E3DC(u8* arg0, u8* src, u8* dst);
+s32 sub_0203E414(u8* src, u8* dst, u8* arg2);
+
 const u8 sUnk_0203E43C[] = {
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x00,
-    0x0A, 0x00, 0x1C, 0x00, 0x1C, 0x00, 0x20, 0x00, 0x18, 0x00, 0x1B, 0x00, 0x0D, 0x00, 0x19, 0x00,
-    0x0A, 0x00, 0x1C, 0x00, 0x1C, 0x00, 0x20, 0x00, 0x18, 0x00, 0x1B, 0x00, 0x0D, 0x00, 0xFF, 0x00,
-    0x19, 0x00, 0x15, 0x00, 0x0E, 0x00, 0x0A, 0x00, 0x1C, 0x00, 0x0E, 0x00, 0x01, 0x20, 0x09, 0x20,
-    0x08, 0x20, 0x06, 0x20, 0x01, 0x00, 0x09, 0x00, 0x08, 0x00, 0x06, 0x00, 0x8F, 0x30, 0x01, 0x20,
-    0x09, 0x20, 0x08, 0x20, 0x06, 0x20, 0x3F, 0x40, 0x02, 0x20, 0x00, 0x20, 0x00, 0x20, 0x04, 0x20,
-    0xFF, 0x20, 0x17, 0x30, 0x12, 0x30, 0x17, 0x30, 0x1D, 0x30, 0x0E, 0x30, 0x17, 0x30, 0x0D, 0x30,
-    0x18, 0x30, 0x01, 0x00, 0x09, 0x00, 0x08, 0x00, 0x06, 0x00, 0xA9, 0x00, 0xAA, 0x00, 0xA8, 0x00,
-    0xA8, 0x00, 0xAB, 0x00, 0x50, 0x3A, 0x00, 0x06, 0x2D, 0x4B, 0x4D, 0x4B, 0x6D, 0x20, 0x2C, 0x4B,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+const u16 sUnk_0203E44E[] = {
+    0x19, 0x0A, 0x1C, 0x1C, 0x20, 0x18, 0x1B, 0x0D
+};
+
+const u16 sUnk_0203E45E[] = {
+    0x19, 0x0A, 0x1C, 0x1C, 0x20, 0x18, 0x1B, 0x0D,
+    0xFF, 0x19, 0x15, 0x0E, 0x0A, 0x1C, 0x0E
+};
+
+const u8 sUnk_0203E47C[] = {
+    0x01, 0x20, 0x09, 0x20, 0x08, 0x20, 0x06, 0x20
+};
+
+const u16 sUnk_0203E484[] = {
+    0x01, 0x09, 0x08, 0x06
+};
+
+const u8 sUnk_0203E48C[] = {
+    0x8F, 0x30, 0x01, 0x20, 0x09, 0x20, 0x08, 0x20,
+    0x06, 0x20, 0x3F, 0x40, 0x02, 0x20, 0x00, 0x20,
+    0x00, 0x20, 0x04, 0x20, 0xFF, 0x20, 0x17, 0x30,
+    0x12, 0x30, 0x17, 0x30, 0x1D, 0x30, 0x0E, 0x30,
+    0x17, 0x30, 0x0D, 0x30, 0x18, 0x30
+};
+
+const u16 sUnk_0203E4B2[] = {
+    0x01, 0x09, 0x08, 0x06, 0xA9, 0xAA, 0xA8, 0xA8, 0xAB
+};
+
+const u8 sUnk_0203E4C4[] = {
+    0x50, 0x3A, 0x00, 0x06, 0x2D, 0x4B, 0x4D, 0x4B, 0x6D, 0x20, 0x2C, 0x4B,
     0x6D, 0x2D, 0x6C, 0x6B, 0x67, 0x66, 0x00, 0x00, 0x06, 0x3B, 0x00, 0x06, 0x68, 0x2D, 0x6C, 0x25,
     0x2D, 0x4B, 0x4D, 0x4D, 0x20, 0x4D, 0x6B, 0x4C, 0x2B, 0x4B, 0x20, 0x6D, 0x28, 0x4B, 0x20, 0x48,
     0x27, 0x4D, 0x6D, 0x00, 0x46, 0x3B, 0x00, 0x06, 0x20, 0x20, 0x20, 0x4D, 0x27, 0x26, 0x4B, 0x20,
@@ -65,24 +108,6 @@ const u8 sUnk_0203E43C[] = {
     0xFF, 0xFF, 0xFF, 0xFF
 };
 
-s32 sub_0203E000(struct Unk_0203E000* arg0);
-void sub_0203E118(struct Unk_0203E000* arg0);
-u8* sub_0203E24C(u8* arg0);
-void sub_0203E260(void);
-void sub_0203E2C4(u16* dst, u8* src, s32 size);
-void sub_0203E2E4(u8* dst, u8* src, s32 size);
-void sub_0203E314(u8* dst, u8* src, s32 size);
-u32 sub_0203E32C(u8* src1, u8* src2, s32 size);
-u32 sub_0203E34C(u16* src1, u16* src2, s32 count);
-s32 sub_0203E374(u32 arg0, u16* dst);
-s32 sub_0203E38C(void);
-s32 sub_0203E390(void);
-void sub_0203E394(s32 arg0, u8* src);
-void sub_0203E3A8(u8* arg0);
-u8* sub_0203E3AC(u8* src);
-u8* sub_0203E3DC(u8* arg0, u8* src, u8* dst);
-s32 sub_0203E414(u8* src, u8* dst, u8* arg2);
-
 s32 sub_0203E000(struct Unk_0203E000* arg0)
 {
     s32 var_r4;
@@ -93,7 +118,7 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
     u8 subroutine_arg0[0x14];
 
     unk_06002000 = (u8*)0x06002000;
-    if (sub_0203E34C((u16*)0x06002298, (u16*)0x0203E44E, 0x10) != 0)
+    if (sub_0203E34C((void*)unk_06002000 + 0x298, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
     {
         arg0->unk904 &= ~4;
         if (arg0->unk830 == 0x30)
@@ -154,7 +179,7 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
         }
     }
 
-    sub_0203E314((u8*)0x0203E43C, subroutine_arg0, 0x12);
+    sub_0203E314((u8*)sUnk_0203E43C, subroutine_arg0, sizeof(sUnk_0203E43C));
     arg0->unk904 |= 4;
     return 1;
 }
@@ -168,7 +193,7 @@ void sub_0203E118(struct Unk_0203E000* arg0)
     u16* unk_06002000;
 
     unk_06002000 = (u16*)0x06002000;
-    if (sub_0203E34C((u16*)0x06002150, (u16*)0x0203E45E, 0x1E) != 0)
+    if (sub_0203E34C((void*)unk_06002000 + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
     {
         if (arg0->unk830 == 0x18)
         {
@@ -187,7 +212,7 @@ void sub_0203E118(struct Unk_0203E000* arg0)
     }
 
     arg0->unk830 = 0x18;
-    for (var_r6 = 0; var_r6 < 0x12; var_r6++)
+    for (var_r6 = 0; var_r6 < sizeof(sUnk_0203E43C); var_r6++)
     {
         if (sUnk_0203E43C[var_r6] != 0)
             break;
@@ -248,13 +273,13 @@ void sub_0203E260(void)
     u16* unk_06002000;
 
     unk_06002000 = (u16*)0x06002000;
-    if (sub_0203E34C(unk_06002000 + 0x4D6/2, (u16*)0x0203E47C, 8) == 0)
+    if (sub_0203E34C(unk_06002000 + 0x4D6/2, (u16*)sUnk_0203E47C, sizeof(sUnk_0203E47C)) == 0)
     {
-        sub_0203E2C4(unk_06002000 + 0x4CE/2, (u8*)0x0203E48C, 0x26);
+        sub_0203E2C4(unk_06002000 + 0x4CE/2, (u8*)sUnk_0203E48C, sizeof(sUnk_0203E48C));
     }
-    else if (sub_0203E34C(unk_06002000 + 0x71C/2, (u16*)0x0203E484, 8) == 0)
+    else if (sub_0203E34C(unk_06002000 + 0x71C/2, (u16*)sUnk_0203E484, sizeof(sUnk_0203E484)) == 0)
     {
-        sub_0203E2C4(unk_06002000 + 0x716/2, (u8*)0x0203E4B2, 0x12);
+        sub_0203E2C4(unk_06002000 + 0x716/2, (u8*)sUnk_0203E4B2, sizeof(sUnk_0203E4B2));
     }
 }
 
@@ -281,11 +306,11 @@ void sub_0203E2E4(u8* dst, u8* src, s32 size)
     {
         if ((u32)src & 1)
         {
-            var_r2 = READ_16(src - 1) >> 8;
+            var_r2 = *(u16*)(src - 1) >> 8;
         }
         else
         {
-            var_r2 = READ_16(src) & 0xFF;
+            var_r2 = *(u16*)src & 0xFF;
         }
         *dst++ = var_r2;
         src += 1;
@@ -319,28 +344,28 @@ u32 sub_0203E32C(u8* src1, u8* src2, s32 size)
     return temp_r0;
 }
 
-u32 sub_0203E34C(u16* src1, u16* src2, s32 count)
+u32 sub_0203E34C(u16* src1, u16* src2, s32 size)
 {
     u32 temp_r0;
 
     do
     {
     }
-    while (count & 1);
+    while (size & 1);
 
     do
     {
         temp_r0 = *src1++ - *src2++;
-        count -= 2;
+        size -= 2;
     }
-    while (temp_r0 == 0 && count != 0);
+    while (temp_r0 == 0 && size != 0);
 
     return temp_r0;
 }
 
 s32 sub_0203E374(u32 arg0, u16* dst)
 {
-    sub_0203E2C4(dst, (u8*)0x0203E43C, 0x12);
+    sub_0203E2C4(dst, (u8*)sUnk_0203E43C, sizeof(sUnk_0203E43C));
     return 0x18;
 }
 
@@ -356,7 +381,7 @@ s32 sub_0203E390(void)
 
 void sub_0203E394(s32 arg0, u8* src)
 {
-    sub_0203E314((u8*)0x0203E43C, src + 0x10, 0x12);
+    sub_0203E314((u8*)sUnk_0203E43C, src + 0x10, sizeof(sUnk_0203E43C));
 }
 
 void sub_0203E3A8(u8* arg0)
