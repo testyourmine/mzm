@@ -26,6 +26,7 @@ SECTIONS {
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);
         *libgcc.a:_udivsi3.o(.text);
+        src/part2.o(.data);
         asm/part2_2.o(.text);
     } > iwram
     __rom_cursor += SIZEOF(.iwram_text);
@@ -39,7 +40,14 @@ SECTIONS {
         . = 0x00005A5E; gUnk_03005A5E = .;
         . = 0x00005A60; gUnk_03005A60 = .;
         . = 0x00005A64; gUnk_03005A64 = .;
+        . = 0x00005A68; gUnk_03005A68 = .;
+        . = 0x00005FB0; gUnk_03005FB0 = .;
+        . = 0x00005FB4; gUnk_03005FB4 = .;
         . = 0x00005FBC; gUnk_03005FBC = .;
+        . = 0x00005FC0; gUnk_03005FC0 = .;
+        . = 0x00005FC8; gUnk_03005FC8 = .;
+        . = 0x00005FCC; gUnk_03005FCC = .;
+        . = 0x00005FD8; gUnk_03005FD8 = .;
     } > iwram
 
     .vram_text_2 0x0600B000 : AT(__rom_cursor) {
