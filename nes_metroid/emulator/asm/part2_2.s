@@ -306,7 +306,9 @@ _03002F94:
 	tst r0, #2
 	orrne r3, r3, #4
 	mov pc, lr
-_03002FAC:
+
+    arm_func_start sub_03002FAC
+sub_03002FAC:
 	lsl r1, r0, #0x1c
 	add r2, pc, r1, lsr #27
 	ldrh r3, [r2, #0x18]
@@ -610,7 +612,7 @@ _03003444:
 	ldr r0, [lr, #0x130]
 	mvn r0, r0, lsl #24
 	lsr r0, r0, #0x18
-	bl _03002FAC
+	bl sub_03002FAC
 	ldr r3, [sp, #0x92c]
 	ldr r4, [sp, #0x930]
 	add r0, sp, #0x820
@@ -3044,9 +3046,9 @@ _03005778:
 	bne _03005778
 	sub r1, ip, #0x480
 	str r1, [sp, #0x8f0]
-	ldr pc, _03005790 @ =0x0600E2C4
+	ldr pc, _03005790 @ =sub_0600E2C4
 	.align 2, 0
-_03005790: .4byte 0x0600E2C4
+_03005790: .4byte sub_0600E2C4
 _03005794:
 	ldr r7, _030057A4 @ =0x0000C401
 	mov r0, #0x1000000
