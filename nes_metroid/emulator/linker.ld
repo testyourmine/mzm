@@ -21,7 +21,9 @@ SECTIONS {
 
     .iwram_text 0x03000000 : AT(__rom_cursor) {
         src/part2/part2.o(.text);
-        asm/part2/part2.o(.text);
+        asm/part2/part2_2.o(.text);
+        asm/part2/part2_3.o(.text);
+        asm/part2/part2_4.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);
