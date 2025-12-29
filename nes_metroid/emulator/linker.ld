@@ -20,14 +20,14 @@ SECTIONS {
     __rom_cursor += SIZEOF(.vram_text_1);
 
     .iwram_text 0x03000000 : AT(__rom_cursor) {
-        src/part2.o(.text);
-        asm/part2.o(.text);
+        src/part2/part2.o(.text);
+        asm/part2/part2.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);
         *libgcc.a:_udivsi3.o(.text);
-        src/part2.o(.data);
-        asm/part2_2.o(.text);
+        src/part2/part2.o(.data);
+        asm/part2/part2_handwritten.o(.text);
     } > iwram
     __rom_cursor += SIZEOF(.iwram_text);
 
