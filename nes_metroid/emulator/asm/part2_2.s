@@ -308,7 +308,7 @@ _03002F94:
 	mov pc, lr
 
     arm_func_start sub_03002FAC
-sub_03002FAC:
+sub_03002FAC: @ 0x03002FAC
 	lsl r1, r0, #0x1c
 	add r2, pc, r1, lsr #27
 	ldrh r3, [r2, #0x18]

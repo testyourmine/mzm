@@ -16,7 +16,7 @@ extern u32 gUnk_03005FB4;
 extern u32 gUnk_03005FBC;
 extern u8 gUnk_03005FC0;
 extern u32 gUnk_03005FC8;
-extern u8 gUnk_03005FCC;
+extern u16 gUnk_03005FCC;
 extern u8 gUnk_03005FD8;
 
 void sub_03000000(u16 arg0);
@@ -34,7 +34,7 @@ void sub_0300033C(u32 arg0);
 void sub_03000348(u32 arg0);
 void sub_03000354(u32 arg0, u32 arg1);
 void sub_03000368(u32 arg0);
-u8 sub_03000380(u32 arg0);
+u8 sub_03000380(u16 arg0);
 void sub_03000404(u8 arg0);
 void sub_03000408(u16 arg0, u8 arg1);
 void sub_0300047C(u8* arg0, u8 arg1);
@@ -69,7 +69,7 @@ u32 sUnk_03002330[] = {
     0x24CC, 0x2BB2, 0x313C, 0x369F, 0x41F5, 0x5268, 0x611A, 0x8178
 };
 
-u32 sUnk_03002370 = 0x440;
+u32 sUnk_03002370 = DMA_32BIT | DMA_DEST_FIXED;
 
 u8 sUnk_03002374 = 0;
 
@@ -100,7 +100,7 @@ void (*sUnk_03002378[0x18])(u8) = {
     sub_03001C58,
 };
 
-u32 sUnk_030023D8 = 0x440;
+u32 sUnk_030023D8 = DMA_32BIT | DMA_DEST_FIXED;
 
 void sub_03000000(u16 arg0)
 {
@@ -134,7 +134,7 @@ u16 sub_03000050(u16 arg0)
 
 void sub_03000080(void)
 {
-    WRITE_32(REG_DMA1_CNT, 0x84400004);
+    WRITE_32(REG_DMA1_CNT, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_DEST_FIXED, 1 * sizeof(u32)));
     WRITE_16(REG_DMA1_CNT_H, sUnk_03002370);
 
     if (gUnk_03005A5C != 0)
@@ -213,15 +213,16 @@ void sub_030001C4(u32 arg0)
     WRITE_16(REG_DMA1_SRC, arg0);
     WRITE_16(REG_DMA1_SRC + 2, arg0 >> 0x10);
 
-    WRITE_16(REG_DMA1_DST, 0xA0);
-    WRITE_16(REG_DMA1_DST + 2, 0x400);
+    // REG_FIFO_A
+    WRITE_16(REG_DMA1_DST, 0xA0); 
+    WRITE_16(REG_DMA1_DST + 2, 0x400); 
 
-    WRITE_16(REG_DMA1_CNT_H, 0xB200);
+    WRITE_16(REG_DMA1_CNT_H, DMA_ENABLE | DMA_START_SPECIAL | DMA_REPEAT);
 }
 
 void sub_030001F0(u32 arg0, u16 arg1, u32 arg2, u8 arg3)
 {
-    WRITE_16(REG_SOUNDCNT_H, 0xB06);
+    WRITE_16(REG_SOUNDCNT_H, 0xB06); // DMA Sound A Enable Left/Right, Timer 0, Reset FIFO, 100% Vol, Sound 100% Vol
 
     gUnk_03005FBC = arg2;
     gUnk_03005A5C = arg3;
@@ -234,7 +235,7 @@ void sub_030001F0(u32 arg0, u16 arg1, u32 arg2, u8 arg3)
 
 void sub_0300023C(s32 arg0, s32 arg1, u16 arg2, s32 arg3, void* arg4)
 {
-    WRITE_16(REG_SOUNDCNT_H, 0xB06);
+    WRITE_16(REG_SOUNDCNT_H, 0xB06); // DMA Sound A Enable Left/Right, Timer 0, Reset FIFO, 100% Vol, Sound 100% Vol
 
     gUnk_03005FBC = arg3;
     gUnk_03005A5C = 1;
@@ -250,10 +251,10 @@ void sub_0300023C(s32 arg0, s32 arg1, u16 arg2, s32 arg3, void* arg4)
 
 void sub_030002A4(s32 arg0, s32 arg1, s32 arg2, u16 arg3, s32 arg4, void* arg5)
 {
-    WRITE_16(REG_SOUNDCNT_X, 0x80);
+    WRITE_16(REG_SOUNDCNT_X, 0x80); // FIFO enable
     WRITE_16(REG_SOUNDCNT_L, 0);
-    WRITE_16(REG_SOUNDCNT_H, 0xB00);
-    WRITE_16(REG_SOUNDCNT_H, 0xB04);
+    WRITE_16(REG_SOUNDCNT_H, 0xB00); // DMA Sound A Enable Left/Right, Timer 0, Reset FIFO, 50% Vol, Sound 25% Vol
+    WRITE_16(REG_SOUNDCNT_H, 0xB04); // DMA Sound A Enable Left/Right, Timer 0, Reset FIFO, 100% Vol, Sound 25% Vol
 
     gUnk_03005FBC = arg4;
     gUnk_03005A5C = 1;
@@ -296,18 +297,17 @@ void sub_03000368(u32 arg0)
     gUnk_03005FC8 = arg0 + 0x2000;
 }
 
-u8 sub_03000380(u32 arg0) 
+u8 sub_03000380(u16 arg0) 
 {
     u8 var_r3;
     u8 var_r4;
     u16 subroutine_arg0[5];
 
-    arg0 <<= 0x10;
     var_r3 = 0;
 
-    if (arg0 == 0x40150000)
+    if (arg0 == 0x4015)
     {
-        subroutine_arg0[0] = gUnk_03005FCC;
+        subroutine_arg0[0] = (u8)gUnk_03005FCC;
         subroutine_arg0[1] = gUnk_03005FD8;
         subroutine_arg0[2] = gUnk_03005FB0;
         subroutine_arg0[3] = gUnk_03005FC0;
@@ -324,7 +324,7 @@ u8 sub_03000380(u32 arg0)
             }
         }
 
-        var_r3 |= (u8)subroutine_arg0[4] * 0x10; // what?
+        do { var_r3 |= (u8)subroutine_arg0[4] * 0x10; } while(0); // what?
     }
 
     return var_r3;
@@ -380,10 +380,10 @@ void sub_03000488(void)
     sUnk_03002374 = 0;
     sub_03000564();
 
-    sub_0300047C(REG_SOUNDCNT_X, 0xFF); // NR52
-    sub_0300047C(REG_SOUNDCNT_L, 0x77); // NR50
-    sub_0300047C(REG_SOUNDCNT_L + 1, 0xFF); // NR51
-    WRITE_16(REG_SOUNDBIAS, (READ_16(REG_SOUNDBIAS) & 0x3FF) | 0x4000);
+    sub_0300047C(REG_SOUNDCNT_X, 0xFF); // FIFO enable
+    sub_0300047C(REG_SOUNDCNT_L, 0x77); // Sound 1-4 Master Volume Left/Right Enable
+    sub_0300047C(REG_SOUNDCNT_L + 1, 0xFF); // Sound 1-4 Flags Left/Right Enable
+    WRITE_16(REG_SOUNDBIAS, (READ_16(REG_SOUNDBIAS) & 0x3FF) | 0x4000); // Set Resolution / Sampling to 8bit / 65.536kHz
 
     sub_0300203C();
 }
@@ -406,7 +406,7 @@ void sub_03000500(void)
     sUnk_03002374 = 1;
     sub_03000330();
 
-    WRITE_32(REG_DMA1_CNT, 0x84400004);
+    WRITE_32(REG_DMA1_CNT, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_DEST_FIXED, 1 * sizeof(u32)));
     WRITE_16(REG_DMA1_CNT_H, sUnk_030023D8);
 }
 

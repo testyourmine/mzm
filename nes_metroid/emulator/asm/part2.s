@@ -486,6 +486,8 @@ _03000994: .4byte 0x03005A84
 _03000998: .4byte 0x03005A88
 _0300099C: .4byte 0x03005A8C
 
+@ file split
+
 	thumb_func_start sub_030009A0
 sub_030009A0: @ 0x030009A0
 	push {lr}
@@ -1353,6 +1355,8 @@ _0300130C: .4byte 0x03005AB0
 _03001310: .4byte 0x03005AC4
 _03001314: .4byte 0x03005AC4
 
+@ file split
+
 	thumb_func_start sub_03001318
 sub_03001318: @ 0x03001318
 	push {lr}
@@ -1812,6 +1816,8 @@ _03001720: .4byte 0x03005FDC
 _03001724: .4byte 0x03005AD0
 _03001728: .4byte 0x03005AD8
 _0300172C: .4byte 0x03005ADA
+
+@ file split
 
 	thumb_func_start sub_03001730
 sub_03001730: @ 0x03001730
@@ -3009,6 +3015,8 @@ _030021D4: .4byte 0x03005AF4
 _030021D8: .4byte 0x03005AE8
 _030021DC: .4byte 0x03005AEC
 _030021E0: .4byte 0x03005AFE
+
+@ file split
 
 @ 	thumb_func_start _call_via_r0
 @ _call_via_r0: @ 0x030021E4
