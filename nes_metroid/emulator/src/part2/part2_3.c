@@ -38,7 +38,7 @@ extern u8 gUnk_03005ACD;
 extern u32 gUnk_03005FC4;
 extern u16 gUnk_03005FCC;
 extern u32 gUnk_03005FD0;
-extern u8 gUnk_03005FD8;
+extern u16 gUnk_03005FD8;
 
 extern void sub_03000778(void);
 extern void sub_03000790(void);
