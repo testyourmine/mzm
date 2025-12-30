@@ -44,12 +44,29 @@ SECTIONS {
         . = 0x00005A60; gUnk_03005A60 = .;
         . = 0x00005A64; gUnk_03005A64 = .;
         . = 0x00005A68; gUnk_03005A68 = .;
+        . = 0x00005A7A; gUnk_03005A7A = .;
+        . = 0x00005A90; gUnk_03005A90 = .;
+        . = 0x00005A94; gUnk_03005A94 = .;
+        . = 0x00005A98; gUnk_03005A98 = .;
+        . = 0x00005A9A; gUnk_03005A9A = .;
+        . = 0x00005A9C; gUnk_03005A9C = .;
+        . = 0x00005A9E; gUnk_03005A9E = .;
+        . = 0x00005AA0; gUnk_03005AA0 = .;
+        . = 0x00005AA2; gUnk_03005AA2 = .;
+        . = 0x00005AA4; gUnk_03005AA4 = .;
+        . = 0x00005AA6; gUnk_03005AA6 = .;
+        . = 0x00005AA8; gUnk_03005AA8 = .;
+        . = 0x00005AAA; gUnk_03005AAA = .;
+        . = 0x00005AAC; gUnk_03005AAC = .;
+        . = 0x00005AAD; gUnk_03005AAD = .;
         . = 0x00005FB0; gUnk_03005FB0 = .;
         . = 0x00005FB4; gUnk_03005FB4 = .;
         . = 0x00005FBC; gUnk_03005FBC = .;
         . = 0x00005FC0; gUnk_03005FC0 = .;
+        . = 0x00005FC4; gUnk_03005FC4 = .;
         . = 0x00005FC8; gUnk_03005FC8 = .;
         . = 0x00005FCC; gUnk_03005FCC = .;
+        . = 0x00005FD0; gUnk_03005FD0 = .;
         . = 0x00005FD8; gUnk_03005FD8 = .;
     } > iwram
 

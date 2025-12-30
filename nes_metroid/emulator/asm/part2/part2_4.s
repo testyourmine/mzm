@@ -44,7 +44,7 @@ sub_03001340: @ 0x03001340
 	ands r0, r1
 	cmp r0, #0
 	beq _03001382
-	ldr r0, _030013B0 @ =0x03005A7A
+	ldr r0, _030013B0 @ =gUnk_03005A7A
 	ldrh r1, [r0]
 	movs r0, #4
 	ands r0, r1
@@ -83,7 +83,7 @@ _03001382:
 _030013A4: .4byte 0x030023DC
 _030013A8: .4byte 0x03005AE2
 _030013AC: .4byte 0x03005ADE
-_030013B0: .4byte 0x03005A7A
+_030013B0: .4byte gUnk_03005A7A
 _030013B4: .4byte gUnk_03005FB0
 _030013B8: .4byte 0x03005AD8
 _030013BC: .4byte 0x03005AD6
