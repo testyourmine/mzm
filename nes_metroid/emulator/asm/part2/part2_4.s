@@ -30,7 +30,7 @@ _0300133C: .4byte 0x03005AD4
 	thumb_func_start sub_03001340
 sub_03001340: @ 0x03001340
 	push {r4, lr}
-	ldr r1, _030013A4 @ =0x030023DC
+	ldr r1, _030013A4 @ =sUnk_030023DC
 	ldr r0, _030013A8 @ =0x03005AE2
 	ldrh r0, [r0]
 	lsrs r0, r0, #3
@@ -80,7 +80,7 @@ _03001382:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_030013A4: .4byte 0x030023DC
+_030013A4: .4byte sUnk_030023DC
 _030013A8: .4byte 0x03005AE2
 _030013AC: .4byte 0x03005ADE
 _030013B0: .4byte gUnk_03005A7A
@@ -297,7 +297,7 @@ _0300154C: .4byte 0x03005AE4
 _03001550: .4byte 0x03005AE0
 _03001554: .4byte gUnk_03005FB0
 _03001558:
-	ldr r1, _03001584 @ =0x030023DC
+	ldr r1, _03001584 @ =sUnk_030023DC
 	ldrh r0, [r4]
 	lsrs r0, r0, #3
 	adds r0, r0, r1
@@ -319,7 +319,7 @@ _0300157C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_03001584: .4byte 0x030023DC
+_03001584: .4byte sUnk_030023DC
 _03001588: .4byte 0x03005AD6
 _0300158C: .4byte 0x03005ADE
 _03001590: .4byte 0x03005AD8

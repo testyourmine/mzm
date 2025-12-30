@@ -266,7 +266,7 @@ _030007D0:
 	ldr r1, _0300080C @ =gUnk_03005AA2
 	movs r0, #0xf
 	strh r0, [r1]
-	ldr r1, _03000810 @ =0x030023DC
+	ldr r1, _03000810 @ =sUnk_030023DC
 	ldr r0, _03000814 @ =gUnk_03005A9E
 	ldrh r0, [r0]
 	lsrs r0, r0, #3
@@ -293,7 +293,7 @@ _03000802:
 	.align 2, 0
 _03000808: .4byte gUnk_03005A94
 _0300080C: .4byte gUnk_03005AA2
-_03000810: .4byte 0x030023DC
+_03000810: .4byte sUnk_030023DC
 _03000814: .4byte gUnk_03005A9E
 _03000818: .4byte gUnk_03005A7A
 _0300081C: .4byte gUnk_03005FCC
