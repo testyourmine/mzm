@@ -75,6 +75,16 @@ SECTIONS {
         . = 0x00005ACA; gUnk_03005ACA = .;
         . = 0x00005ACC; gUnk_03005ACC = .;
         . = 0x00005ACD; gUnk_03005ACD = .;
+        . = 0x00005AD0; gUnk_03005AD0 = .;
+        . = 0x00005AD4; gUnk_03005AD4 = .;
+        . = 0x00005AD6; gUnk_03005AD6 = .;
+        . = 0x00005AD8; gUnk_03005AD8 = .;
+        . = 0x00005ADA; gUnk_03005ADA = .;
+        . = 0x00005ADC; gUnk_03005ADC = .;
+        . = 0x00005ADE; gUnk_03005ADE = .;
+        . = 0x00005AE0; gUnk_03005AE0 = .;
+        . = 0x00005AE2; gUnk_03005AE2 = .;
+        . = 0x00005AE4; gUnk_03005AE4 = .;
         . = 0x00005FB0; gUnk_03005FB0 = .;
         . = 0x00005FB4; gUnk_03005FB4 = .;
         . = 0x00005FBC; gUnk_03005FBC = .;
@@ -83,7 +93,9 @@ SECTIONS {
         . = 0x00005FC8; gUnk_03005FC8 = .;
         . = 0x00005FCC; gUnk_03005FCC = .;
         . = 0x00005FD0; gUnk_03005FD0 = .;
+        . = 0x00005FD4; gUnk_03005FD4 = .;
         . = 0x00005FD8; gUnk_03005FD8 = .;
+        . = 0x00005FDC; gUnk_03005FDC = .;
     } > iwram
 
     .vram_text_2 0x0600B000 : AT(__rom_cursor) {
