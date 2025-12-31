@@ -76,6 +76,7 @@ extern u32 gUnk_03005FDC;
 
 extern void sub_03000000(u16 arg0);
 extern u16 sub_03000050(u16 arg0);
+extern void sub_030002A4(void* arg0, void* arg1, void* arg2, u16 arg3, s32 arg4, void* arg5);
 extern void sub_03000790(void);
 extern void sub_03000824(void);
 extern void sub_03000848(u16 arg0);
@@ -100,7 +101,7 @@ void sub_03001990(void);
 void sub_03001C10(u8 arg0);
 void sub_03001C58(u8 arg0);
 void sub_03001D24(u32 arg0);
-void sub_03001D30(u32 arg0, u32 arg1);
+void sub_03001D30(void* arg0, u32 arg1);
 void sub_0300203C(void);
 
 void sub_03001730(void)
@@ -345,7 +346,7 @@ void sub_03001D24(u32 arg0)
     gUnk_03005FB8 = arg0;
 }
 
-void sub_03001D30(u32 arg0, u32 arg1)
+void sub_03001D30(void* arg0, u32 arg1)
 {
     u32 var_r5;
     void* var_0;
@@ -362,7 +363,7 @@ void sub_03001D30(u32 arg0, u32 arg1)
 
     if (gUnk_03005FB8 != 0)
     {
-        sub_03000634(0xF0000000);
+        sub_03000634(0xF0000000, arg1);
         sub_03000704(arg0, arg1);
         return;
     }

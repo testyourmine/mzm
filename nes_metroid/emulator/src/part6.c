@@ -302,7 +302,7 @@ void sub_0203E2C4(u16* dst, u8* src, s32 size)
 
 void sub_0203E2E4(u8* dst, u8* src, s32 size)
 {
-    u32 var_r2;
+    u32 srcByte;
     void* end;
 
     end = src + size;
@@ -310,13 +310,13 @@ void sub_0203E2E4(u8* dst, u8* src, s32 size)
     {
         if ((u32)src & 1)
         {
-            var_r2 = *(u16*)(src - 1) >> 8;
+            srcByte = *(u16*)(src - 1) >> 8;
         }
         else
         {
-            var_r2 = *(u16*)src & 0xFF;
+            srcByte = *(u16*)src & 0xFF;
         }
-        *dst++ = var_r2;
+        *dst++ = srcByte;
         src += 1;
     }
     while ((u32)src < (u32)end);
@@ -336,35 +336,32 @@ void sub_0203E314(u8* dst, u8* src, s32 size)
 
 u32 sub_0203E32C(u8* src1, u8* src2, s32 size)
 {
-    u32 temp_r0;
+    u32 diff;
 
     do
     {
-        temp_r0 = *src1++ - *src2++;
+        diff = *src1++ - *src2++;
         size -= 1;
     }
-    while (temp_r0 == 0 && size != 0);
+    while (diff == 0 && size != 0);
 
-    return temp_r0;
+    return diff;
 }
 
 u32 sub_0203E34C(u16* src1, u16* src2, s32 size)
 {
-    u32 temp_r0;
+    u32 diff;
 
-    do
-    {
-    }
     while (size & 1);
 
     do
     {
-        temp_r0 = *src1++ - *src2++;
+        diff = *src1++ - *src2++;
         size -= 2;
     }
-    while (temp_r0 == 0 && size != 0);
+    while (diff == 0 && size != 0);
 
-    return temp_r0;
+    return diff;
 }
 
 s32 sub_0203E374(u32 arg0, u16* dst)

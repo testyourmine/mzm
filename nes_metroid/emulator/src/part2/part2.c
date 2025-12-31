@@ -2,14 +2,14 @@
 #include "gba.h"
 #include "macros.h"
 
-extern u32 gUnk_03005A50;
-extern u32 gUnk_03005A54;
-extern u32 gUnk_03005A58;
+extern void* gUnk_03005A50;
+extern void* gUnk_03005A54;
+extern void* gUnk_03005A58;
 extern u8 gUnk_03005A5C;
 extern u8 gUnk_03005A5D;
 extern u8 gUnk_03005A5E;
 extern u16 gUnk_03005A60;
-extern void (*gUnk_03005A64)(s32, s32);
+extern void (*gUnk_03005A64)(void*, u32);
 extern u16 gUnk_03005A68[]; // length?
 extern u16 gUnk_03005FB0;
 extern u32 gUnk_03005FB4;
@@ -25,10 +25,10 @@ u16 sub_03000050(u16 arg0);
 void sub_03000080(void);
 void sub_03000188(u16 arg0);
 void sub_030001B4(void);
-void sub_030001C4(u32 arg0);
-void sub_030001F0(u32 arg0, u16 arg1, u32 arg2, u8 arg3);
-void sub_0300023C(s32 arg0, s32 arg1, u16 arg2, s32 arg3, void* arg4);
-void sub_030002A4(s32 arg0, s32 arg1, s32 arg2, u16 arg3, s32 arg4, void* arg5);
+void sub_030001C4(void* arg0);
+void sub_030001F0(void* arg0, u16 arg1, u32 arg2, u8 arg3);
+void sub_0300023C(void* arg0, void* arg1, u16 arg2, s32 arg3, void* arg4);
+void sub_030002A4(void* arg0, void* arg1, void* arg2, u16 arg3, s32 arg4, void* arg5);
 void sub_03000330(void);
 void sub_0300033C(u32 arg0);
 void sub_03000348(u32 arg0);
@@ -208,10 +208,10 @@ void sub_030001B4(void)
     WRITE_32(REG_TM1CNT_H, 0);
 }
 
-void sub_030001C4(u32 arg0)
+void sub_030001C4(void* arg0)
 {
-    WRITE_16(REG_DMA1_SRC, arg0);
-    WRITE_16(REG_DMA1_SRC + 2, arg0 >> 0x10);
+    WRITE_16(REG_DMA1_SRC, (u32)arg0);
+    WRITE_16(REG_DMA1_SRC + 2, (u32)arg0 >> 0x10);
 
     // REG_FIFO_A
     WRITE_16(REG_DMA1_DST, 0xA0); 
@@ -220,7 +220,7 @@ void sub_030001C4(u32 arg0)
     WRITE_16(REG_DMA1_CNT_H, DMA_ENABLE | DMA_START_SPECIAL | DMA_REPEAT);
 }
 
-void sub_030001F0(u32 arg0, u16 arg1, u32 arg2, u8 arg3)
+void sub_030001F0(void* arg0, u16 arg1, u32 arg2, u8 arg3)
 {
     WRITE_16(REG_SOUNDCNT_H, 0xB06); // DMA Sound A Enable Left/Right, Timer 0, Reset FIFO, 100% Vol, Sound 100% Vol
 
@@ -233,7 +233,7 @@ void sub_030001F0(u32 arg0, u16 arg1, u32 arg2, u8 arg3)
     sub_03000188(arg1);
 }
 
-void sub_0300023C(s32 arg0, s32 arg1, u16 arg2, s32 arg3, void* arg4)
+void sub_0300023C(void* arg0, void* arg1, u16 arg2, s32 arg3, void* arg4)
 {
     WRITE_16(REG_SOUNDCNT_H, 0xB06); // DMA Sound A Enable Left/Right, Timer 0, Reset FIFO, 100% Vol, Sound 100% Vol
 
@@ -249,7 +249,7 @@ void sub_0300023C(s32 arg0, s32 arg1, u16 arg2, s32 arg3, void* arg4)
     sub_03000188(arg2);
 }
 
-void sub_030002A4(s32 arg0, s32 arg1, s32 arg2, u16 arg3, s32 arg4, void* arg5)
+void sub_030002A4(void* arg0, void* arg1, void* arg2, u16 arg3, s32 arg4, void* arg5)
 {
     WRITE_16(REG_SOUNDCNT_X, 0x80); // FIFO enable
     WRITE_16(REG_SOUNDCNT_L, 0);
