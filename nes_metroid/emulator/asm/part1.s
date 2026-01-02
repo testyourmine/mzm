@@ -1,5 +1,6 @@
     .include "asm/constants.inc"
     .include "asm/macros.inc"
+	.include "asm/emulator_constants.inc"
 
     .syntax unified
 
@@ -26,6 +27,7 @@ _06006008:
 	str r8, [r6], #-0x4
 	subs r7, r7, #1
 	bhs _06006008
+
 	mov r6, #0x100
 	orr r6, r6, #0x82
 	orr r6, r6, r6, lsl #16
@@ -36,6 +38,7 @@ _06006064:
 	str r6, [r7], #4
 	tst r7, #0x3c
 	bne _06006064
+
 	mov r7, #0x6700
 	orr r7, r7, #0x6000000
 	strh r6, [r7]
@@ -51,6 +54,7 @@ _06006098:
 	str r0, [r4], #4
 	teq r3, r2
 	bne _06006098
+
 	add r2, r3, #0xe0
 _060060B0:
 	ldrb r0, [r3], #1
@@ -59,6 +63,7 @@ _060060B0:
 	str r0, [r4], #4
 	teq r3, r2
 	bne _060060B0
+
 	mov r2, #0xe000
 	orr r2, r2, #0x6000000
 	sub r3, r2, #0x20
@@ -67,6 +72,7 @@ _060060D8:
 	str r0, [r3], #4
 	teq r3, r2
 	bne _060060D8
+
 	ldr r4, _0600610C @ =0x06011400
 	add r3, pc, #0x20 @ =_06006110
 	add r2, r3, #0x50
@@ -77,6 +83,7 @@ _060060F0:
 	str r0, [r4], #4
 	teq r3, r2
 	bne _060060F0
+
 	b sub_0600E1C4
 	.align 2, 0
 _0600610C: .4byte 0x06011400
@@ -118,6 +125,7 @@ _06006310:
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xEE, 0xFF, 0xFF, 0xFF, 0xEE, 0xFE, 0xFF, 0xFF, 0xEE, 0xEE, 0xFF
 	.byte 0xFF, 0xEE, 0xFE, 0xFF, 0xFF, 0xEE, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+_06006350:
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -148,6 +156,7 @@ _06006310:
 	.byte 0x11, 0x51, 0x25, 0x02, 0x33, 0x50, 0x35, 0x02, 0x31, 0x62, 0x37, 0x01, 0x00, 0x00, 0x00, 0x00
 	.byte 0x11, 0x00, 0x10, 0x01, 0x11, 0x00, 0x10, 0x01, 0x31, 0x22, 0x32, 0x01, 0x31, 0x22, 0x32, 0x01
 	.byte 0x11, 0x00, 0x10, 0x01, 0x11, 0x00, 0x10, 0x01, 0x10, 0x11, 0x11, 0x00, 0x00, 0x00, 0x00, 0x00
+_06006530:
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x1F, 0x00, 0x00, 0x00
 _06006548: .4byte 0x060038CC
@@ -157,6 +166,7 @@ _0600654C:
 
 	arm_func_start sub_06006558
 sub_06006558: @ 0x06006558
+	@ Copy 0x40 bytes from _06006310 to 0x06003040
 	ldr r5, _0600699C @ =_06006310
 	ldr r4, _060069A0 @ =0x06003040
 	add r6, r5, #0x40
@@ -165,6 +175,8 @@ _06006564:
 	stm r4!, {r1, r2, r3, fp}
 	cmp r5, r6
 	blo _06006564
+
+	@ Copy 0x400 bytes from _06006350 to 0x06003080, ORing each word with 0x88888888
 	add r6, r4, #0x400
 	ldr r7, _060069A4 @ =0x88888888
 _0600657C:
@@ -176,11 +188,14 @@ _0600657C:
 	stm r4!, {r1, r2, r3, fp}
 	cmp r4, r6
 	blo _0600657C
+
 	mov ip, #0x4000000
 	mov fp, #0x700
-	strh fp, [ip, #8]
+	strh fp, [ip, #8] @ BG0CNT = 0x700 (Screen Base Block = 7)
 	mov fp, #0x80000
-	str fp, [ip, #0x10]
+	str fp, [ip, #0x10] @ BG0HOFS = 0, BG0VOFS = 8
+
+	@ OR 0x7c0 bytes from 0x06003840 with 0x01820182
 	ldr r4, _060069A8 @ =0x06003840
 	add r5, r4, #0x7c0
 	ldr fp, _060069AC @ =0x01820182
@@ -188,6 +203,8 @@ _060065BC:
 	str fp, [r4], #4
 	cmp r4, r5
 	blo _060065BC
+
+	@ Copy 24 bytes _06006530 to 0x05000008 (transfer 12 colors to first entry of PALRAM)
 	mov r4, #0x5000000
 	add r4, r4, #8
 	sub r1, pc, #0xa8
@@ -196,176 +213,189 @@ _060065D4:
 	str fp, [r4], #4
 	tst r4, #0x1e
 	bne _060065D4
-	mov fp, #0
-	mvn r1, #0x8000
+
+	@ Write following color pattern to PALRAM, where B is black, and X is the color:
+	@ BBBBBBBBBXBXBXBX
+	@ BBXXBBXXBBXXBBXX
+	@ BBBBXXXXBBBBXXXX
+	@ This is done for white, then black (implied), then gray, then red
+	mov fp, #0 @ fp = 0 (black)
+	mvn r1, #0x8000 @ r1 = 0x7FFF (white)
 	mov r3, #1
 _060065F0:
-	add r4, r4, #0x10
-	strh fp, [r4], #2
+	add r4, r4, #0x10 @ advance r4 by 8 colors
+	strh fp, [r4], #2 @ write black
 	mov r5, #3
 _060065FC:
 	lsr r2, r4, #5
-	and r2, r2, #3
+	and r2, r2, #3 @ r2 = (r4 >> 5) & 3
 	tst r4, r3, lsl r2
-	strhne r1, [r4], #2
-	strheq fp, [r4], #2
+	strhne r1, [r4], #2 @ if r4 & (1 << r2), write r1
+	strheq fp, [r4], #2 @ else, write fp
 	tst r4, #0x1e
-	bne _060065FC
+	bne _060065FC @ continue until start of next palette row
 	subs r5, r5, #1
 	bne _060065FC
 	cmp r1, #0x1f
-	beq _06006648
-	tst r1, #1
-	moveq r1, #0x1f
-	addeq r4, r4, #0x20
-	beq _060065F0
+	beq _06006648 @ exit loop when red finished
+	tst r1, #1          @ if !(r1 & 1) (r1 is gray):
+	moveq r1, #0x1f         @ set color to red
+	addeq r4, r4, #0x20     @ advance r4 to next palette row
+	beq _060065F0           @ goto _060065F0
 	mov r1, #0x7300
-	orr r1, r1, #0x9c
-	add r4, r4, #0xa0
+	orr r1, r1, #0x9c @ r1 = 0x739C (gray)
+	add r4, r4, #0xa0 @ advance r4 by 10 palette rows
 	b _060065F0
+
 _06006648:
-	mov r6, sp
+	mov r6, sp @ r6 = original sp (0x03007EF8)
 	mov r5, #0xb00
 	orr r5, r5, #0x58
 	sub sp, sp, r5
-	bic sp, sp, #0x1fc
+	bic sp, sp, #0x1fc @ sp = (sp - 0xB58) & ~0x1FC (0x03007200)
 	mov r7, sp
-	ldr fp, _060069B0 @ =_03005808
-	stm fp!, {r7}
+	ldr fp, _060069B0 @ =sUnk_03005808
+	stm fp!, {r7} @ sUnk_03005808 = 0x03007200
+
+	@ Clear 0x03007200 to 0x03007EF8 (stack scratch)
 	mov fp, #0
 _0600666C:
 	stm r7!, {fp}
 	cmp r7, r6
 	blo _0600666C
-	str r6, [sp, #0x920]
+
+	str r6, [sp, #SP_920]
 	ldr fp, _060069B4 @ =_030029AC
-	str fp, [sp, #0x8a4]
+	str fp, [sp, #SP_8A4]
 	ldr r0, _060069B8 @ =_030029F0
-	str r0, [sp, #0x8a8]
+	str r0, [sp, #SP_8A8]
 	ldr r0, _06006548 @ =0x060038CC
-	str r0, [sp, #0x934]
+	str r0, [sp, #SP_934]
 	ldr r2, _06006998 @ =0x0D110001
 	tst r2, #0x4000
 	ldr r3, _060069BC @ =0x01010000
 	eoreq r3, r3, r3, lsr #8
-	str r3, [sp, #0x8b0]
+	str r3, [sp, #SP_8B0]
 	ldr r3, _06006994 @ =0x0201C000
-	str r3, [sp, #0x854]
+	str r3, [sp, #SP_854]
 	mov r4, #0x6000000
 	ldr r6, _060069C0 @ =0x0203C000
-	str r6, [sp, #0x84c]
+	str r6, [sp, #SP_84C]
 	sub r6, r6, #0x6000
 	orr r6, r4, r6, lsr #8
-	str r6, [sp, #0x858]
+	str r6, [sp, #SP_858]
 	str r6, [fp, #0xc]
 	sub r5, r3, #0x8000
 	orr r5, r4, r5, lsr #8
-	str r5, [sp, #0x85c]
+	str r5, [sp, #SP_85C]
 	str r5, [fp, #0x10]
 	str r5, [fp, #0x14]
 	sub r5, r5, #0x20
-	str r5, [sp, #0x860]
+	str r5, [sp, SP_860]
 	orr r6, r4, sp, lsr #8
 	str r6, [fp]
 	sub r5, r5, #0x20
-	str r5, [sp, #0x864]
+	str r5, [sp, #SP_864]
 	sub r6, r6, #0x100
 	str r6, [fp, #0x20]
 	sub r5, r5, #0x20
-	str r5, [sp, #0x868]
+	str r5, [sp, #SP_868]
 	lsr r0, r2, #0x10
 	mov r1, #1
 	lsl r4, r1, r0
-	str r4, [sp, #0x870]
+	str r4, [sp, #SP_870]
 	sub r5, r5, #0x20
 	add r5, r5, r4, lsr #8
 	str r5, [fp, #0x18]
 	str r5, [fp, #0x1c]
 	lsl r6, r5, #8
 	add r6, r6, #0xc000
-	str r6, [sp, #0x91c]
+	str r6, [sp, #SP_91C]
 	cmp r4, #0x80000
 	addne r5, r5, #0x400
-	str r5, [sp, #0x86c]
+	str r5, [sp, #SP_86C]
 	sub r5, r4, #1
 	lsr r5, r5, #8
-	str r5, [sp, #0x874]
+	str r5, [sp, #SP_874]
 	lsr r0, r0, #8
 	lsl r5, r1, r0
-	str r5, [sp, #0x878]
+	str r5, [sp, #SP_878]
 	sub r6, r5, #1
 	lsr r6, r6, #0xa
-	str r6, [sp, #0x87c]
+	str r6, [sp, #SP_87C]
 	ldr r6, _06006990 @ =0x0203C000
-	str r6, [sp, #0x844]
+	str r6, [sp, #SP_844]
 	add r6, r6, r5
-	str r6, [sp, #0x848]
+	str r6, [sp, #SP_848]
 	tst r2, #0x8000
 	ldr r7, _060069C4 @ =_03002E68
 	ldr r8, _0600698C @ =0xE1A0F00E
 	strne r8, [r7]
 	and r0, r2, #0xf00
 	lsr r0, r0, #8
-	strb r0, [sp, #0xa38]
+	strb r0, [sp, #SP_A38]
 	ldr r3, _060069C8 @ =0x44444444
-	str r3, [sp, #0x8fc]
+	str r3, [sp, #SP_8FC]
 	ldr r3, _060069CC @ =sub_06006000
-	str r3, [sp, #0x900]
-	strb r2, [sp, #0xa4e]
+	str r3, [sp, #SP_900]
+	strb r2, [sp, #SP_A4E]
 	mov r0, #0x6800
 	orr r0, r0, #0x6000000
-	str r0, [sp, #0x8ec]
+	str r0, [sp, #SP_8EC]
 	add r1, r0, #0xe00
 	add r1, r1, r0
-	str r1, [sp, #0x8f8]
+	str r1, [sp, #SP_8F8]
 	mvn r0, #0xf3
 	eor r0, r0, #0x360
 	add r1, sp, #0x200
 	stmdb r1!, {r0}
-	str r1, [sp, #0x88c]
+	str r1, [sp, #SP_88C]
 	add r0, r1, #3
-	str r0, [sp, #0x890]
+	str r0, [sp, #SP_890]
 	mov r0, #0x820000
-	str r0, [sp, #0x8ac]
+	str r0, [sp, #SP_8AC]
 	ldr r0, _060069D0 @ =sub_03000408
-	str r0, [sp, #0x9b4]
+	str r0, [sp, #SP_9B4]
 	mov r0, #0xef
-	str r0, [sp, #0x8b4]
+	str r0, [sp, #SP_8B4]
 	ldr r0, _060069D4 @ =0x03020100
 	ldr r1, _060069D8 @ =0x07060504
-	str r0, [sp, #0x8e4]
-	str r1, [sp, #0x8e8]
-	str r0, [sp, #0x95c]
-	str r1, [sp, #0x960]
+	str r0, [sp, #SP_8E4]
+	str r1, [sp, #SP_8E8]
+	str r0, [sp, #SP_95C]
+	str r1, [sp, #SP_960]
 	eor r2, r0, r1
 	eor r0, r0, r2, lsl #1
 	eor r1, r1, r2, lsl #1
-	str r0, [sp, #0x964]
-	str r1, [sp, #0x968]
+	str r0, [sp, #SP_964]
+	str r1, [sp, #SP_968]
+
 	add r1, sp, #0x20
 	mov r0, #0x1e
 _06006824:
 	sub r1, r1, #1
-	strb r0, [r1, #0x8c4]
+	strb r0, [r1, #SP_8C4]
 	cmp r1, sp
 	bne _06006824
+
 	mvn r0, #0
 	add r1, sp, #0xf
 _0600683C:
-	strb r0, [r1, #0x94c]
-	strb r0, [r1, #0x95c]
+	strb r0, [r1, #SP_94C]
+	strb r0, [r1, #SP_95C]
 	sub r1, r1, #1
 	cmp r1, sp
 	bhs _0600683C
+
 	mov r0, #0x40
-	strb r0, [sp, #0xa3c]
+	strb r0, [sp, #SP_A3C]
 	lsl r0, r0, #8
-	str r0, [sp, #0x9d0]
-	str r0, [sp, #0x9d4]
+	str r0, [sp, #SP_9D0]
+	str r0, [sp, #SP_9D4]
 	ldr r0, _060069DC @ =sub_03005568
-	str r0, [sp, #0x9bc]
+	str r0, [sp, #SP_9BC]
 	sub lr, lr, #4
-	str lr, [sp, #0x924]
+	str lr, [sp, #SP_924]
 	ldr r1, _060069E0 @ =sub_030057A8
 	ldr r2, _060069E4 @ =0x03007000
 	str r1, [r2, #0xffc]
@@ -373,17 +403,17 @@ _06006880:
 	bl sub_0600E754
 _06006884:
 	mov r0, #0
-	strb r0, [sp, #0xa2f]
+	strb r0, [sp, #SP_A2F]
 	bl sub_0600E4D0
-	strb r0, [sp, #0xa2e]
+	strb r0, [sp, #SP_A2E]
 	cmp r0, #2
 	ldr r0, _060069E8 @ =0x0E007FD8
 	bhs _060068D0
 	bl sub_0600E4D0
-	strb r0, [sp, #0xa2f]
+	strb r0, [sp, #SP_A2F]
 	cmp r0, #2
 	bhs _060068BC
-	ldrb r1, [sp, #0xa2e]
+	ldrb r1, [sp, #SP_A2E]
 	eors r0, r0, r1
 	bne _0600694C
 _060068BC:
@@ -394,18 +424,18 @@ _060068BC:
 	b _06006884
 _060068D0:
 	bl sub_0600E4D0
-	strb r0, [sp, #0xa2f]
+	strb r0, [sp, #SP_A2F]
 	cmp r0, #2
 	blo _0600694C
 	cmp r0, #3
-	ldrblo r0, [sp, #0xa2e]
+	ldrblo r0, [sp, #SP_A2E]
 	cmplo r0, #3
 	mov r0, #0
-	strb r0, [sp, #0xa2e]
-	strb r0, [sp, #0xa2f]
+	strb r0, [sp, #SP_A2E]
+	strb r0, [sp, #SP_A2F]
 	ldr r1, _06006948 @ =0x0600A000
 	str r0, [r1]
-	ldr r1, [sp, #0x84c]
+	ldr r1, [sp, #SP_84C]
 	add r2, r1, #0x2000
 _06006908:
 	str r0, [r1], #4
@@ -430,7 +460,7 @@ _06006934:
 	.align 2, 0
 _06006948: .4byte 0x0600A000
 _0600694C:
-	ldr r0, [sp, #0x854]
+	ldr r0, [sp, #SP_854]
 	ldr r3, _06006948 @ =0x0600A000
 	stm r4, {r0, r3, r5}
 	add lr, pc, #0x4 @ =_06006964
@@ -458,7 +488,7 @@ _060069A0: .4byte 0x06003040
 _060069A4: .4byte 0x88888888
 _060069A8: .4byte 0x06003840
 _060069AC: .4byte 0x01820182
-_060069B0: .4byte _03005808
+_060069B0: .4byte sUnk_03005808
 _060069B4: .4byte _030029AC
 _060069B8: .4byte _030029F0
 _060069BC: .4byte 0x01010000
@@ -742,32 +772,32 @@ sub_0600713C: @ 0x0600713C
 	mov r0, #0x12
 	bl sub_06006E08
 	mov r0, #0
-	strb r0, [sp, #0xa43]
+	strb r0, [sp, #SP_A43]
 _06007154:
 	bl sub_06007210
 	beq _06007154
 	cmp r0, #2
 	moveq r0, #0
-	strbeq r0, [sp, #0xa43]
+	strbeq r0, [sp, #SP_A43]
 	beq _060071F0
 	cmp r0, #0x10
 	bne _06007188
 	mov r0, #0
-	strb r0, [sp, #0xa43]
+	strb r0, [sp, #SP_A43]
 	mov r0, #0x12
 	bl sub_06006E08
 	b _06007154
 _06007188:
 	cmp r0, #0x20
 	bne _060071A0
-	strb r0, [sp, #0xa43]
+	strb r0, [sp, #SP_A43]
 	mov r0, #0x13
 	bl sub_06006E08
 	b _06007154
 _060071A0:
 	cmp r0, #1
 	bne _06007154
-	ldrb r0, [sp, #0xa43]
+	ldrb r0, [sp, #SP_A43]
 	cmp r0, #0
 	beq _060071F0
 	add lr, pc, #0x8 @ =_060071C4
@@ -778,7 +808,7 @@ _060071C4:
 	cmp r0, #0
 	moveq r0, #0x54
 	movne r0, #0
-	strbne r0, [sp, #0xa43]
+	strbne r0, [sp, #SP_A43]
 	movne r0, #0x55
 	bl sub_06006E08
 _060071DC:
@@ -793,7 +823,7 @@ _060071F0:
 	bne _060071F0
 	mov r0, #0x80
 	bl sub_06006E08
-	ldrb r0, [sp, #0xa43]
+	ldrb r0, [sp, #SP_A43]
 	cmp r0, #0
 	beq _06006880
 	bne _06006968

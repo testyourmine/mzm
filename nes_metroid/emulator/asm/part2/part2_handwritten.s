@@ -1,5 +1,6 @@
     .include "asm/constants.inc"
     .include "asm/macros.inc"
+	.include "asm/emulator_constants.inc"
 
     .syntax unified
 
@@ -501,17 +502,17 @@ _03002DF8:
 	arm_func_start sub_03002E0C
 sub_03002E0C: @ 0x03002E0C
 	ldrb r1, [r5], #1
-	ldrb r0, [sp, #0xa33]
+	ldrb r0, [sp, #SP_A33]
 	cmp r0, #0
-	ldrbne r1, [sp, #0xa32]
+	ldrbne r1, [sp, #SP_A32]
 	movne r0, #0
-	strbne r0, [sp, #0xa32]
-	strbne r0, [sp, #0xa33]
+	strbne r0, [sp, #SP_A32]
+	strbne r0, [sp, #SP_A33]
 	ldr pc, [ip, r1, lsl #2]
 
 	arm_func_start sub_03002E2C
 sub_03002E2C: @ 0x03002E2C
-	ldr r1, [sp, #0x858]
+	ldr r1, [sp, #SP_858]
 	ldrb r3, [r0, r1, lsl #8]
 	mov pc, lr
 
@@ -529,28 +530,28 @@ sub_03002E44: @ 0x03002E44
 	cmp r1, #7
 	beq _03002E84
 	bic fp, fp, #0xe00000
-	ldr r1, [sp, #0x9b0]
+	ldr r1, [sp, #SP_9B0]
 	cmp r1, r5
-	strne r5, [sp, #0x9b0]
+	strne r5, [sp, #SP_9B0]
 	.global _03002E68
 _03002E68:
 	movne pc, lr
 _03002E6C:
-	ldr r1, [sp, #0x8b4]
-	ldrb r2, [sp, #0xa35]
+	ldr r1, [sp, #SP_8B4]
+	ldrb r2, [sp, #SP_A35]
 	cmp r1, r2
 	movhs pc, lr
 _03002E7C:
 	bic r4, r4, #0xff000000
 	mov pc, lr
 _03002E84:
-	ldr r1, [sp, #0x8b8]
+	ldr r1, [sp, #SP_8B8]
 	cmp r1, #0x3000
 	bge _03002EC8
 	cmp r1, #0x2000
 	blt _03002EE4
 	add r2, sp, r1, lsr #10 @ WARNING: disassembler produces wrong instruction here
-	ldrb r2, [r2, #0x8a8]
+	ldrb r2, [r2, #SP_8A8]
 	tst r2, #0xfe
 	bne _03002EC8
 	bic ip, r1, #0x2c00
@@ -559,22 +560,22 @@ _03002E84:
 	add ip, ip, #0x6000000
 	add ip, ip, #0x2000
 	ldrh r2, [ip]
-	ldrb r3, [sp, #0xa3f]
-	strb r2, [sp, #0xa3f]
+	ldrb r3, [sp, #SP_A3F]
+	strb r2, [sp, #SP_A3F]
 _03002EC8:
-	ldrb r2, [sp, #0x8bc]
+	ldrb r2, [sp, #SP_8BC]
 	tst r2, #4
 	addeq r1, r1, #1
 	addne r1, r1, #0x20
-	str r1, [sp, #0x8b8]
+	str r1, [sp, #SP_8B8]
 	add ip, fp, #0x44
 	mov pc, lr
 _03002EE4:
 	add r2, r1, #0x6000000
 	add r2, r2, #0x14000
 	ldrh r2, [r2, r1]
-	ldrb r3, [sp, #0xa3f]
-	strb r2, [sp, #0xa3f]
+	ldrb r3, [sp, #SP_A3F]
+	strb r2, [sp, #SP_A3F]
 	b _03002EC8
 
 	arm_func_start sub_03002EFC
@@ -595,38 +596,38 @@ _03002F2C:
 	lsr r3, r0, #8
 	mov pc, lr
 _03002F34:
-	str r0, [sp, #0x93c]
-	str lr, [sp, #0x938]
+	str r0, [sp, #SP_93C]
+	str lr, [sp, #SP_938]
 	add lr, pc, #0x4 @ =_03002F48
 	ldr r2, _030031C8 @ =sub_03000380
 	bx r2
 _03002F48:
 	add ip, fp, #0x44
 	mov r3, r0
-	ldr r0, [sp, #0x93c]
-	ldr pc, [sp, #0x938]
+	ldr r0, [sp, #SP_93C]
+	ldr pc, [sp, #SP_938]
 _03002F58:
-	ldr r3, [sp, #0x908]
+	ldr r3, [sp, #SP_908]
 	bic r2, r3, #0xc0
-	str r2, [sp, #0x908]
+	str r2, [sp, #SP_908]
 	mov pc, lr
 _03002F68:
-	ldr r2, [sp, #0x828]
+	ldr r2, [sp, #SP_828]
 	mov r3, #0x40
 	orr r3, r3, r2, lsr #31
-	ldrb r1, [sp, #0xa3b]
+	ldrb r1, [sp, #SP_A3B]
 	tst r1, #1
 	movne pc, lr
 _03002F80:
 	lsl r2, r2, #1
-	str r2, [sp, #0x828]
-	ldr r0, [sp, #0x820]
+	str r2, [sp, #SP_828]
+	ldr r0, [sp, #SP_820]
 	tst r0, #0x20000000
 	moveq pc, lr
 _03002F94:
-	ldrb r0, [sp, #0xa34]
+	ldrb r0, [sp, #SP_A34]
 	add r0, r0, #1
-	strb r0, [sp, #0xa34]
+	strb r0, [sp, #SP_A34]
 	tst r0, #2
 	orrne r3, r3, #4
 	mov pc, lr
@@ -640,7 +641,7 @@ sub_03002FAC: @ 0x03002FAC
 	add r2, pc, r1, lsr #3
 	ldrh r4, [r2, #0x2c]
 	orr r3, r3, r4
-	strb r3, [sp, #0x823]
+	strb r3, [sp, #SP_823]
 	bx lr
 _03002FD0:
 	.byte 0x00, 0x00, 0x80, 0x00, 0x40, 0x00, 0xC0, 0x00, 0x20, 0x00, 0xA0, 0x00, 0x60, 0x00, 0xE0, 0x00
@@ -648,15 +649,15 @@ _03002FD0:
 	.byte 0x00, 0x00, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x08, 0x00, 0x09, 0x00, 0x0A, 0x00, 0x00, 0x00
 	.byte 0x04, 0x00, 0x05, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 _03003010:
-	ldr r2, [sp, #0x82c]
+	ldr r2, [sp, #SP_82C]
 	mov r3, #0x40
 	orr r3, r3, r2, lsr #31
-	ldrb r1, [sp, #0xa3b]
+	ldrb r1, [sp, #SP_A3B]
 	tst r1, #1
 	movne pc, lr
 _03003028:
 	lsl r2, r2, #1
-	str r2, [sp, #0x82c]
+	str r2, [sp, #SP_82C]
 	mov pc, lr
 _03003034:
 	cmp r4, #0
@@ -664,7 +665,7 @@ _03003034:
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 _03003044:
-	ldr r2, [sp, #0x858]
+	ldr r2, [sp, #SP_858]
 	strb r1, [r0, r2, lsl #8]
 	cmp r4, #0
 	ldrblt r1, [r5], #1
@@ -679,7 +680,7 @@ _03003068:
 	.byte 0x34, 0x30, 0x00, 0x03, 0x78, 0xB0, 0x00, 0x06, 0x68, 0xB0, 0x00, 0x06, 0x90, 0xB0, 0x00, 0x06
 	.byte 0xD4, 0x31, 0x00, 0x03, 0x88, 0x30, 0x00, 0x03
 _03003088:
-	ldr r0, [sp, #0x8b8]
+	ldr r0, [sp, #SP_8B8]
 	cmp r0, #0x3000
 	bge _03003348
 	cmp r0, #0x2000
@@ -688,10 +689,10 @@ _03003088:
 	add r2, r2, #0x14000
 	strh r1, [r2, r0]!
 	bic r2, r2, #0x1e
-	ldr r1, [sp, #0x9b8]
+	ldr r1, [sp, #SP_9B8]
 	cmp r1, r2
 	beq _03003260
-	str r2, [sp, #0x9b8]
+	str r2, [sp, #SP_9B8]
 	cmp r1, #0
 	beq _03003260
 	add lr, sp, #0x900
@@ -772,18 +773,18 @@ _030031D4:
 	eor fp, fp, #0x200000
 	bne _030031F8
 	bic r1, r1, #0xc0
-	strb r1, [sp, #0x8b9]
+	strb r1, [sp, #SP_8B9]
 	cmp r4, #0
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 _030031F8:
-	strb r1, [sp, #0x8b8]
-	ldr r0, [sp, #0x8b8]
+	strb r1, [sp, #SP_8B8]
+	ldr r0, [sp, #SP_8B8]
 	lsr r2, r0, #2
 	and r2, r2, #0x3f8
 	orr r2, r2, r0, lsr #12
-	str r2, [sp, #0x9c0]
+	str r2, [sp, #SP_9C0]
 	cmp r4, #0
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
@@ -805,13 +806,13 @@ _03003220:
 	lsr lr, lr, #1
 	bge _03003284
 _0300325C:
-	ldr r0, [sp, #0x8b8]
+	ldr r0, [sp, #SP_8B8]
 _03003260:
-	ldrb r1, [sp, #0x8bc]
+	ldrb r1, [sp, #SP_8BC]
 	tst r1, #4
 	addeq r0, r0, #1
 	addne r0, r0, #0x20
-	str r0, [sp, #0x8b8]
+	str r0, [sp, #SP_8B8]
 	cmp r4, #0
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
@@ -879,17 +880,17 @@ _03003348:
 	beq _03003260
 	and r2, r0, #0x1f
 	add r2, r2, sp
-	strb r1, [r2, #0x8c4]
+	strb r1, [r2, #SP_8C4]
 	b _03003260
 _03003380:
-	strb r1, [sp, #0x8c4]
-	strb r1, [sp, #0x8c8]
-	strb r1, [sp, #0x8cc]
-	strb r1, [sp, #0x8d0]
-	strb r1, [sp, #0x8d4]
-	strb r1, [sp, #0x8d8]
-	strb r1, [sp, #0x8dc]
-	strb r1, [sp, #0x8e0]
+	strb r1, [sp, #SP_8C4]
+	strb r1, [sp, #SP_8C8]
+	strb r1, [sp, #SP_8CC]
+	strb r1, [sp, #SP_8D0]
+	strb r1, [sp, #SP_8D4]
+	strb r1, [sp, #SP_8D8]
+	strb r1, [sp, #SP_8DC]
+	strb r1, [sp, #SP_8E0]
 	b _03003260
 _030033A4:
 	tst r0, #0x1fc0
@@ -918,27 +919,27 @@ _030033F8:
 	mov r2, #-0x7c000000
 	orr r2, r2, #0x40
 	stm lr, {r0, r1, r2}
-	ldr r0, [sp, #0x8b4]
+	ldr r0, [sp, #SP_8B4]
 	cmp r0, #0x80
 	addlt r0, r0, #4
-	str r0, [sp, #0x8b4]
+	str r0, [sp, #SP_8B4]
 	adds r4, r4, #0x38000000
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 _03003444:
-	strb r1, [sp, #0xa3b]
+	strb r1, [sp, #SP_A3B]
 	tst r1, #1
 	beq _03003484
-	str r3, [sp, #0x92c]
-	str r4, [sp, #0x930]
+	str r3, [sp, #SP_92C]
+	str r4, [sp, #SP_930]
 	mov lr, #0x4000000
 	ldr r0, [lr, #0x130]
 	mvn r0, r0, lsl #24
 	lsr r0, r0, #0x18
 	bl sub_03002FAC
-	ldr r3, [sp, #0x92c]
-	ldr r4, [sp, #0x930]
+	ldr r3, [sp, #SP_92C]
+	ldr r4, [sp, #SP_930]
 	add r0, sp, #0x820
 	add r1, r0, #8
 	ldm r0!, {r2, lr}
@@ -950,16 +951,16 @@ _03003484:
 	b _03005398
 _03003494:
 	ands r2, r1, #0xc0
-	strb r2, [sp, #0xa3c]
+	strb r2, [sp, #SP_A3C]
 	bne _030034A8
 	mov r2, #0x40
-	str r2, [sp, #0x9d0]
+	str r2, [sp, #SP_9D0]
 _030034A8:
-	str r3, [sp, #0x884]
-	ldr r3, [sp, #0x9b4]
+	str r3, [sp, #SP_884]
+	ldr r3, [sp, #SP_9B4]
 	add lr, pc, #0x0 @ =0x030034B8
 	bx r3
-	ldr r3, [sp, #0x884]
+	ldr r3, [sp, #SP_884]
 	add ip, fp, #0x44
 	cmp r4, #0
 	ldrblt r1, [r5], #1
@@ -2818,17 +2819,17 @@ _03004F24:
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 _03004F64:
-	str r3, [sp, #0x884]
+	str r3, [sp, #SP_884]
 	add lr, pc, #0x0 @ =0x03004F70
 	ldr pc, [fp, -r2, lsl #2]
-	strb r3, [sp, #0xa3e]
+	strb r3, [sp, #SP_A3E]
 	add r0, r0, #1
 	lsrs r2, r0, #0xd
 	add lr, pc, #0x0 @ =0x03004F84
 	ldr pc, [fp, -r2, lsl #2]
-	ldrb r0, [sp, #0xa3e]
+	ldrb r0, [sp, #SP_A3E]
 	orr r0, r0, r3, lsl #8
-	ldr r3, [sp, #0x884]
+	ldr r3, [sp, #SP_884]
 	lsr r1, r0, #0xd
 	ldr r1, [fp, r1, lsl #2]
 	adds r5, r0, r1, lsl #8
@@ -2950,7 +2951,7 @@ _0300512C:
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 _0300513C:
-	strb r1, [sp, #0xa32]
+	strb r1, [sp, #SP_A32]
 	sub r5, r5, #1
 	adds r4, r4, #0x7000000
 	ldrblt r1, [r5], #1
@@ -2958,7 +2959,7 @@ _0300513C:
 	b _03005398
 _03005154:
 	add ip, ip, #1
-	str ip, [sp, #0x8b4]
+	str ip, [sp, #SP_8B4]
 	add ip, fp, #0x44
 	adds r4, r4, #-0x72000000
 	mvn r0, #5
@@ -2995,17 +2996,17 @@ _0300516C:
 _030051D8:
 	mov lr, #0x4000000
 	ldrh r1, [lr]
-	ldrb r2, [sp, #0x8bd]
-	ldrb r0, [sp, #0xa41]
+	ldrb r2, [sp, #SP_8BD]
+	ldrb r0, [sp, #SP_A41]
 	subs r0, r0, #1
-	strbpl r0, [sp, #0xa41]
+	strbpl r0, [sp, #SP_A41]
 	bhs _030051FC
 	tst r2, #8
 	orrne r1, r1, #0x800
 _030051FC:
-	ldrb r0, [sp, #0xa42]
+	ldrb r0, [sp, #SP_A42]
 	subs r0, r0, #1
-	strbpl r0, [sp, #0xa42]
+	strbpl r0, [sp, #SP_A42]
 	bhs _03005214
 	tst r2, #0x10
 	orrne r1, r1, #0x1000
@@ -3014,9 +3015,9 @@ _03005214:
 	bic fp, fp, #0x400000
 	orr fp, fp, #0x800000
 	mov r1, #0xff
-	strb r1, [sp, #0xa35]
+	strb r1, [sp, #SP_A35]
 	mvn ip, #0x15
-	str ip, [sp, #0x8b4]
+	str ip, [sp, #SP_8B4]
 	adds r4, r4, #-0x72000000
 	add r0, sp, #0x800
 	add r0, r0, #0x84
@@ -3024,7 +3025,7 @@ _03005214:
 	and r1, sp, #0xfe0000
 	str r1, [r0, #4]
 	mov r0, #0
-	ldr pc, [sp, #0x9bc]
+	ldr pc, [sp, #SP_9BC]
 
 	arm_func_start sub_03005250
 sub_03005250: @ 0x03005250
@@ -3032,7 +3033,8 @@ sub_03005250: @ 0x03005250
 	ldrb r3, [sp, r0]
 	mov pc, lr
 
-_0300525C:
+	arm_func_start sub_0300525C
+sub_0300525C: @ 0x0300525C
 	add ip, r0, #0x800
 	stm ip, {r4, r5, r6, r7, r8, lr}
 	ldr r4, [r0, #0x840]
@@ -3118,61 +3120,61 @@ _03005394: .4byte 0xA2600002
 
     arm_func_start _03005398
 _03005398: @ 0x03005398
-	ldr ip, [sp, #0x8b4]
+	ldr ip, [sp, #SP_8B4]
 	cmp ip, #0xf0
 	bhs _0300552C
 	cmp ip, #0xe2
 	bhs _03005478
 	subs r0, ip, #0xc
-	ldrlo r0, [sp, #0x9c0]
+	ldrlo r0, [sp, #SP_9C0]
 	blo _03005478
 	bne _03005418
 	mov lr, #0x4000000
 	ldrh r1, [lr]
-	ldrb r2, [sp, #0x8bd]
+	ldrb r2, [sp, #SP_8BD]
 	tst r2, #8
 	biceq r1, r1, #0x800
 	moveq r2, #2
-	strbeq r2, [sp, #0xa41]
-	ldrbeq r2, [sp, #0x8bd]
+	strbeq r2, [sp, #SP_A41]
+	ldrbeq r2, [sp, #SP_8BD]
 	tst r2, #0x10
 	biceq r1, r1, #0x1000
 	moveq r2, #2
-	strbeq r2, [sp, #0xa42]
+	strbeq r2, [sp, #SP_A42]
 	strh r1, [lr]
 	bic fp, fp, #0xc0000
-	ldr r1, [sp, #0x8e4]
-	ldr r2, [sp, #0x8e8]
-	str r1, [sp, #0x96c]
-	str r2, [sp, #0x970]
+	ldr r1, [sp, #SP_8E4]
+	ldr r2, [sp, #SP_8E8]
+	str r1, [sp, #SP_96C]
+	str r2, [sp, #SP_970]
 	tst fp, #0x100000
-	streq r1, [sp, #0x94c]
-	strne r2, [sp, #0x94c]
+	streq r1, [sp, #SP_94C]
+	strne r2, [sp, #SP_94C]
 	mov r1, #0
-	strb r1, [sp, #0xa40]
+	strb r1, [sp, #SP_A40]
 _03005418:
 	mov lr, #0x6000
 	orr lr, lr, #0x6000000
 	add lr, lr, r0, lsl #3
-	ldrb r0, [sp, #0x8e4]
+	ldrb r0, [sp, #SP_8E4]
 	cmp r0, #0
 	movne r0, #0xa
 	tst fp, #0x100000
 	orrne r0, r0, #5
 	strh r0, [lr, #2]
-	ldrb r0, [sp, #0x9c1]
+	ldrb r0, [sp, #SP_9C1]
 	add r1, sp, r0 @ WARNING: disassembler produces wrong instruction here
-	ldrb r1, [r1, #0x8b0]
+	ldrb r1, [r1, #SP_8B0]
 	eor r0, r0, #1
 	add r0, sp, r0 @ WARNING: disassembler produces wrong instruction here
-	ldrb r0, [r0, #0x8b0]
+	ldrb r0, [r0, #SP_8B0]
 	orr r0, r0, r1, lsl #6
-	ldr r1, [sp, #0x8bc]
+	ldr r1, [sp, #SP_8BC]
 	bic r1, r1, #0xc3
 	orr r1, r1, r0
 	strh r1, [lr]
-	ldr r0, [sp, #0x9c0]
-	ldrb r1, [sp, #0xa39]
+	ldr r0, [sp, #SP_9C0]
+	ldrb r1, [sp, #SP_A39]
 	orr r1, r1, r0, lsl #8
 	strh r1, [lr, #4]
 _03005478:
@@ -3182,45 +3184,45 @@ _03005478:
 	cmp r1, #0xf0
 	addeq r0, r0, #0x110
 	bic r0, r0, #0xfc00
-	str r0, [sp, #0x9c0]
+	str r0, [sp, #SP_9C0]
 	mov r2, #0x6700
 	orr r2, r2, #0x6000000
 	ldrh r2, [r2]
 	and r2, r2, #0xff
 	cmp r2, ip
 	bne _030054B0
-	strb r2, [sp, #0xa35]
+	strb r2, [sp, #SP_A35]
 _030054B0:
-	ldrb r2, [sp, #0xa35]
+	ldrb r2, [sp, #SP_A35]
 	cmp ip, r2
 	orreq fp, fp, #0x400000
-	ldr r2, [sp, #0x9d0]
+	ldr r2, [sp, #SP_9D0]
 	cmp ip, r2
 	bne _03005504
-	ldrb r0, [sp, #0xa3c]
+	ldrb r0, [sp, #SP_A3C]
 	tst r0, #0xc0
 	bne _03005504
-	ldrb r0, [sp, #0x908]
+	ldrb r0, [sp, #SP_908]
 	orr r0, r0, #0x40
-	strb r0, [sp, #0x908]
+	strb r0, [sp, #SP_908]
 	tst sp, #0x20000
 	bicne sp, sp, #0x800000
 	bne _03005504
 	orr sp, sp, #0x800000
 	add ip, ip, #1
-	str ip, [sp, #0x8b4]
+	str ip, [sp, #SP_8B4]
 	add ip, fp, #0x44
 	adds r4, r4, #-0x72000000
 	b _030050BC
 _03005504:
 	add ip, ip, #1
-	str ip, [sp, #0x8b4]
+	str ip, [sp, #SP_8B4]
 	add ip, fp, #0x44
 	adds r4, r4, #-0x72000000
 	ldrb r1, [r5], #1
 	ldr pc, [ip, r1, lsl #2]
 _0300551C:
-	ldrb r0, [sp, #0x8bc]
+	ldrb r0, [sp, #SP_8BC]
 	tst r0, #0x80
 	bne _03005154
 	b _03005504
@@ -3231,10 +3233,10 @@ _0300552C:
 	cmn ip, #1
 	bne _03005504
 	bic fp, fp, #0xc00000
-	ldr r1, [sp, #0x9c4]
-	ldr r0, [sp, #0x830]
+	ldr r1, [sp, #SP_9C4]
+	ldr r0, [sp, #SP_830]
 	add r1, r1, r0
-	str r1, [sp, #0x9c0]
+	str r1, [sp, #SP_9C0]
 	b _03005504
 _03005558: .4byte 0x040000D4
 _0300555C: .4byte sUnk_0203E634
@@ -3243,34 +3245,34 @@ _03005564: .4byte 0x80000010
 
 	arm_func_start sub_03005568
 sub_03005568: @ 0x03005568
-	ldrb r0, [sp, #0xa46]
+	ldrb r0, [sp, #SP_A46]
 	cmp r0, #0x18
 	movhs r0, #0
 	lsr r1, r0, #2
 	add r0, r0, #1
-	strb r0, [sp, #0xa46]
+	strb r0, [sp, #SP_A46]
 	sub r0, pc, #0x30
 	ldm r0, {r2, r3, r4, r5}
 	add r3, r3, r1, lsl #5
 	stm r2, {r3, r4, r5}
 _03005590:
-	ldr ip, [sp, #0x8ec]
-	ldr r0, [sp, #0x8f4]
+	ldr ip, [sp, #SP_8EC]
+	ldr r0, [sp, #SP_8F4]
 	cmp r0, ip
 	svceq #0x20000
 	beq _03005590
-	ldr r0, [sp, #0x830]
+	ldr r0, [sp, #SP_830]
 	cmp r0, #0
 	moveq r0, #0x9600000
 	lslne r0, r0, #0x18
 	addne r0, r0, #0xc000000
-	str r0, [sp, #0x838]
+	str r0, [sp, #SP_838]
 	moveq r0, #0xc00000
 	movne r0, #0x1000000
-	str r0, [sp, #0x834]
-	ldr r1, [sp, #0x8f8]
+	str r0, [sp, #SP_834]
+	ldr r1, [sp, #SP_8F8]
 	sub r1, r1, ip
-	str r1, [sp, #0x8ec]
+	str r1, [sp, #SP_8EC]
 	mov r7, #0x6700
 	orr r7, r7, #0x6000000
 	add r6, ip, #0x200
@@ -3294,9 +3296,9 @@ _030055E4:
 	sub r1, r1, #0x4000000
 	lsr r1, r1, #7
 	orr r0, r0, r1
-	ldr r2, [sp, #0x834]
+	ldr r2, [sp, #SP_834]
 	mul r1, sb, r2
-	ldr r2, [sp, #0x838]
+	ldr r2, [sp, #SP_838]
 	sub r1, r1, r2
 	orr r0, r0, r1, lsr #24
 	and r1, sl, #0x30000
@@ -3324,18 +3326,18 @@ _03005688:
 	blo _03005688
 	add sb, ip, #0x280
 	mov sl, #0
-	ldr lr, [sp, #0x900]
-	ldr r0, [sp, #0x830]
+	ldr lr, [sp, #SP_900]
+	ldr r0, [sp, #SP_830]
 	cmp r0, #0
 	beq _030056B4
 	mov r4, #0
 	b _030056E8
 _030056B4:
-	ldr r0, [sp, #0x8fc]
+	ldr r0, [sp, #SP_8FC]
 	ror r0, r0, #0x10
 	lsl r0, r0, #0x10
 	orr r4, r0, r0, lsr #16
-	ldr r0, [sp, #0x9c4]
+	ldr r0, [sp, #SP_9C4]
 	and r0, r0, #3
 	rsb r0, r0, #0x20
 	rors r4, r4, r0
@@ -3359,7 +3361,7 @@ _030056E8:
 	orrne r7, r7, #0x4000
 	ldrh r0, [lr, #2]
 	and r0, r0, #0xc
-	ldr r1, [sp, #0x830]
+	ldr r1, [sp, #SP_830]
 	cmp r1, #0
 	movne r0, #0xc
 	orr r7, r7, r0
@@ -3384,11 +3386,11 @@ _03005754:
 	cmp sl, #0xa0
 	blo _030056E8
 _03005778:
-	ldr r0, [sp, #0x8f0]
+	ldr r0, [sp, #SP_8F0]
 	cmp r0, #0
 	bne _03005778
 	sub r1, ip, #0x480
-	str r1, [sp, #0x8f0]
+	str r1, [sp, #SP_8F0]
 	ldr pc, _03005790 @ =sub_0600E2C4
 	.align 2, 0
 _03005790: .4byte sub_0600E2C4
@@ -3420,17 +3422,19 @@ sub_030057A8: @ 0x030057A8
 _030057E4:
 	add ip, ip, #0x200
 	strh r0, [ip, #2]
-	ldr r0, _03005808 @ =0x00000000
+	ldr r0, sUnk_03005808
 	ldr ip, [pc, r2]
 	bx ip
 _030057F8:
-	.byte 0xE1, 0x04, 0x00, 0x03, 0x5C, 0x52, 0x00, 0x03
-	.byte 0x2C, 0x58, 0x00, 0x03, 0x3C, 0x58, 0x00, 0x03
-    .global _03005808
-_03005808: .4byte 0x00000000
+	.4byte sub_030004E0
+	.4byte sub_0300525C
+	.4byte sub_0300582C
+	.4byte sub_0300583C
+    .global sUnk_03005808
+sUnk_03005808: .4byte 0x00000000
 _0300580C:
 	strb r2, [ip, #0x84]
-	ldr r0, _03005808 @ =0x00000000
+	ldr r0, sUnk_03005808
 	ldr r1, [r0, #0x928]
 	strh r1, [ip]
 	mov ip, #0x5000000
@@ -3456,39 +3460,39 @@ sub_03005840: @ 0x03005840
 _03005844:
 	tst r1, #0x80
 	bne _03005880
-	ldrb r2, [sp, #0xa55]
+	ldrb r2, [sp, #SP_A55]
 	tst r1, #1
 	orrne r2, r2, #0x20
 	lsr r2, r2, #1
-	ldrb r1, [sp, #0xa54]
+	ldrb r1, [sp, #SP_A54]
 	subs r1, r1, #1
 	beq _0300588C
-	strb r2, [sp, #0xa55]
-	strb r1, [sp, #0xa54]
+	strb r2, [sp, #SP_A55]
+	strb r1, [sp, #SP_A54]
 _03005870:
 	cmp r4, #0
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 _03005880:
-	ldrb r2, [sp, #0xa4f]
+	ldrb r2, [sp, #SP_A4F]
 	orr r2, r2, #0xc
 	movs r0, #0x8000
 _0300588C:
 	mov r1, #5
-	strb r1, [sp, #0xa54]
+	strb r1, [sp, #SP_A54]
 	add r0, sp, r0, lsr #13 @ WARNING: disassembler produces wrong instruction here
-	ldrb r1, [r0, #0xa4b]
+	ldrb r1, [r0, #SP_A4B]
 	cmp r1, r2
 	beq _03005870
-	strb r2, [r0, #0xa4b]
-	ldrb r0, [sp, #0xa4f]
-	ldr r2, [sp, #0x874]
-	ldrb lr, [sp, #0xa52]
+	strb r2, [r0, #SP_A4B]
+	ldrb r0, [sp, #SP_A4F]
+	ldr r2, [sp, #SP_874]
+	ldrb lr, [sp, #SP_A52]
 	tst r0, #8
 	biceq lr, lr, #1
 	and lr, r2, lr, lsl #6
-	ldr r2, [sp, #0x85c]
+	ldr r2, [sp, #SP_85C]
 	bne _030058E0
 	add r2, r2, lr
 	str r2, [fp, #0x10]
@@ -3499,39 +3503,39 @@ _0300588C:
 _030058E0:
 	tst r0, #4
 	bne _0300591C
-	ldrb r1, [sp, #0xa53]
+	ldrb r1, [sp, #SP_A53]
 	cmp r1, #0
-	ldrbne r1, [sp, #0xa50]
+	ldrbne r1, [sp, #SP_A50]
 	tstne r1, #0x10
 	addne r2, r2, #0x400
 	str r2, [fp, #0x10]
 	str r2, [fp, #0x14]
-	ldr r2, [sp, #0x86c]
+	ldr r2, [sp, #SP_86C]
 	subeq r2, r2, #0x400
 	add r2, r2, lr
 	str r2, [fp, #0x18]
 	str r2, [fp, #0x1c]
 	b _0300594C
 _0300591C:
-	ldrb r1, [sp, #0xa53]
+	ldrb r1, [sp, #SP_A53]
 	cmp r1, #0
-	ldrbne r1, [sp, #0xa50]
+	ldrbne r1, [sp, #SP_A50]
 	tstne r1, #0x10
 	addne r2, r2, #0x400
 	add r2, r2, lr
 	str r2, [fp, #0x10]
 	str r2, [fp, #0x14]
-	ldr r2, [sp, #0x86c]
+	ldr r2, [sp, #SP_86C]
 	subeq r2, r2, #0x400
 	str r2, [fp, #0x18]
 	str r2, [fp, #0x1c]
 _0300594C:
-	ldr r1, [sp, #0x878]
+	ldr r1, [sp, #SP_878]
 	cmp r1, #0
 	beq _030059F8
 	tst r0, #0x10
-	ldrb r1, [sp, #0xa50]
-	ldr r2, [sp, #0x87c]
+	ldrb r1, [sp, #SP_A50]
+	ldr r2, [sp, #SP_87C]
 	bne _030059AC
 	bic r1, r1, #1
 	and r1, r2, r1, lsl #2
@@ -3539,16 +3543,16 @@ _0300594C:
 	orr r1, r1, r1, lsl #16
 	ldr lr, _03005A34 @ =0x03020100
 	orr lr, lr, r1
-	ldr r2, [sp, #0x8e4]
+	ldr r2, [sp, #SP_8E4]
 	cmp r2, lr
 	orrne fp, fp, #0xc0000
-	strne lr, [sp, #0x8e4]
+	strne lr, [sp, #SP_8E4]
 	ldr lr, _03005A38 @ =0x07060504
 	orr lr, lr, r1
-	ldreq r2, [sp, #0x8e8]
+	ldreq r2, [sp, #SP_8E8]
 	cmpeq r2, lr
 	orrne fp, fp, #0xc0000
-	strne lr, [sp, #0x8e8]
+	strne lr, [sp, #SP_8E8]
 	b _030059F8
 _030059AC:
 	and r1, r2, r1, lsl #2
@@ -3556,25 +3560,25 @@ _030059AC:
 	orr r1, r1, r1, lsl #16
 	ldr lr, _03005A34 @ =0x03020100
 	orr lr, lr, r1
-	ldr r1, [sp, #0x8e4]
+	ldr r1, [sp, #SP_8E4]
 	cmp r1, lr
 	orrne fp, fp, #0xc0000
-	strne lr, [sp, #0x8e4]
-	ldrb r1, [sp, #0xa51]
+	strne lr, [sp, #SP_8E4]
+	ldrb r1, [sp, #SP_A51]
 	and r1, r2, r1, lsl #2
 	orr r1, r1, r1, lsl #8
 	orr r1, r1, r1, lsl #16
 	ldr lr, _03005A34 @ =0x03020100
 	orr lr, lr, r1
-	ldr r1, [sp, #0x8e8]
+	ldr r1, [sp, #SP_8E8]
 	cmp r1, lr
 	orrne fp, fp, #0xc0000
-	strne lr, [sp, #0x8e8]
+	strne lr, [sp, #SP_8E8]
 _030059F8:
 	add r1, pc, #0x3C @ =_03005A3C
 	and r0, r0, #3
 	ldr r0, [r1, r0, lsl #2]
-	str r0, [sp, #0x8b0]
+	str r0, [sp, #SP_8B0]
 	sub r2, r5, r4, lsl #8
 	lsr r1, r2, #0xd
 	ldr r1, [fp, r1, lsl #2]

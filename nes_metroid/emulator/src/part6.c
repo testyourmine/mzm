@@ -3,22 +3,17 @@
 #include "macros.h"
 #include "sram/sram.h"
 
-struct Unk_0203E000_unk84C {
-    u8 pad_0[0x99A - 0x0];
-    u8 unk99A[1]; // length?
-};
-
-struct Unk_0203E000 {
+struct EmulatorSP {
     u8 pad_0[0x830 - 0x0];
-    s32 unk830;
+    s32 SP_830;
     u8 pad_834[0x84C - 0x834];
-    struct Unk_0203E000_unk84C *unk84C; // ptr to struct Unk_0203E000?
+    u8* SP_84C;
     u8 pad_850[0x904 - 0x850];
-    s32 unk904;
+    s32 SP_904;
 };
 
-s32 sub_0203E000(struct Unk_0203E000* arg0);
-void sub_0203E118(struct Unk_0203E000* arg0);
+s32 sub_0203E000(struct EmulatorSP* arg0);
+void sub_0203E118(struct EmulatorSP* arg0);
 u8* sub_0203E24C(u8* arg0);
 void sub_0203E260(void);
 void sub_0203E2C4(u16* dst, u8* src, s32 size);
@@ -112,7 +107,7 @@ const u8 sUnk_0203E634[] = {
     0xFF, 0xFF, 0xFF, 0xFF
 };
 
-s32 sub_0203E000(struct Unk_0203E000* arg0)
+s32 sub_0203E000(struct EmulatorSP* arg0)
 {
     s32 var_r4;
     u32 var_r5;
@@ -124,18 +119,18 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
     unk_06002000 = (u8*)0x06002000;
     if (sub_0203E34C((void*)unk_06002000 + 0x298, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
     {
-        arg0->unk904 &= ~4;
-        if (arg0->unk830 == 0x30)
+        arg0->SP_904 &= ~4;
+        if (arg0->SP_830 == 0x30)
         {
-            arg0->unk830 = 0;
+            arg0->SP_830 = 0;
         }
         return 0;
     }
 
-    if (arg0->unk904 & 4)
+    if (arg0->SP_904 & 4)
         return 0;
 
-    arg0->unk830 = 0x30;
+    arg0->SP_830 = 0x30;
     if (!(READ_16(REG_DISPCNT) & DCNT_BG3))
         return 0;
 
@@ -184,11 +179,11 @@ s32 sub_0203E000(struct Unk_0203E000* arg0)
     }
 
     sub_0203E314((u8*)sUnk_0203E43C, subroutine_arg0, sizeof(sUnk_0203E43C));
-    arg0->unk904 |= 4;
+    arg0->SP_904 |= 4;
     return 1;
 }
 
-void sub_0203E118(struct Unk_0203E000* arg0)
+void sub_0203E118(struct EmulatorSP* arg0)
 {
     s32 var_r5;
     s32 var_r3;
@@ -199,9 +194,9 @@ void sub_0203E118(struct Unk_0203E000* arg0)
     unk_06002000 = (u16*)0x06002000;
     if (sub_0203E34C((void*)unk_06002000 + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
     {
-        if (arg0->unk830 == 0x18)
+        if (arg0->SP_830 == 0x18)
         {
-            arg0->unk830 = 0;
+            arg0->SP_830 = 0;
         }
         return;
     }
@@ -215,7 +210,7 @@ void sub_0203E118(struct Unk_0203E000* arg0)
             return;
     }
 
-    arg0->unk830 = 0x18;
+    arg0->SP_830 = 0x18;
     for (var_r6 = 0; var_r6 < sizeof(sUnk_0203E43C); var_r6++)
     {
         if (sUnk_0203E43C[var_r6] != 0)
@@ -251,7 +246,7 @@ void sub_0203E118(struct Unk_0203E000* arg0)
                 break;
         }
 
-        var_r6[arg0->unk84C->unk99A] = var_r4 & 0x3F;
+        arg0->SP_84C[0x99A + var_r6] = var_r4 & 0x3F;
         unk_06002000[0x212/2 + var_r5] = (var_r4 & 0x3F) | 0x1000;
 
         var_r5 += 1;
