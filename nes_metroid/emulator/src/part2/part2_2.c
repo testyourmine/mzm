@@ -31,6 +31,7 @@ void sub_03000848(u16 arg0);
 void sub_0300089C(u8 arg0);
 void sub_030008B4(u8 arg0);
 void sub_03000918(u8 arg0);
+void sub_03000930(u8 arg0);
 void sub_03000948(void);
 
 void sub_03000778(void)
@@ -132,6 +133,12 @@ void sub_03000918(u8 arg0)
 {
     gUnk_03005A9A = arg0;
     gUnk_03005AAA = 1;
+}
+
+void sub_03000930(u8 arg0)
+{
+    gUnk_03005A9C = arg0;
+    gUnk_03005AAC = 1;
 }
 
 void sub_03000948(void)
