@@ -221,11 +221,12 @@ _030029C0: .4byte 0x00000000
 _030029C4: .4byte 0x00000000
 _030029C8: .4byte 0x00000000
 _030029CC: .4byte 0x00000000
+
 _030029D0: .4byte sub_0600B000
-_030029D4: .4byte _03005844
-_030029D8: .4byte _03005844
-_030029DC: .4byte _03005844
-_030029E0: .4byte _03005844
+_030029D4: .4byte sub_03005844
+_030029D8: .4byte sub_03005844
+_030029DC: .4byte sub_03005844
+_030029E0: .4byte sub_03005844
 _030029E4: .4byte _03003044
 _030029E8: .4byte _030033A4
 _030029EC: .4byte _0300305C
@@ -791,7 +792,7 @@ _030031F8:
 	b _03005398
 _03003220:
 	add r2, sp, r0, lsr #10 @ WARNING: disassembler produces wrong instruction here
-	ldrb r2, [r2, #0x8a8]
+	ldrb r2, [r2, #SP_8A8]
 	tst r2, #0xfe
 	bne _03003260
 	bic lr, r0, #0x2c00
@@ -3454,10 +3455,12 @@ sub_0300582C: @ 0x0300582C
 sub_0300583C: @ 0x0300583C
 	bx lr
 
-	arm_func_start sub_03005840
-sub_03005840: @ 0x03005840
-	streq fp, [r0], -r0, lsl #16
-_03005844:
+	.global sUnk_03005840
+sUnk_03005840: @ 0x03005840
+	.4byte 0x0600B800
+
+	arm_func_start sub_03005844
+sub_03005844: @ 0x03005844
 	tst r1, #0x80
 	bne _03005880
 	ldrb r2, [sp, #SP_A55]

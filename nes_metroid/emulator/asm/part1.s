@@ -264,112 +264,113 @@ _0600666C:
 	cmp r7, r6
 	blo _0600666C
 
-	str r6, [sp, #SP_920]
+	str r6, [sp, #SP_920] @ SP_920 = r6 (original sp (0x03007EF8))
 	ldr fp, _060069B4 @ =_030029AC
-	str fp, [sp, #SP_8A4]
+	str fp, [sp, #SP_8A4] @ SP_8A4 = _030029AC
 	ldr r0, _060069B8 @ =_030029F0
-	str r0, [sp, #SP_8A8]
+	str r0, [sp, #SP_8A8] @ SP_8A8 = _030029F0
 	ldr r0, _06006548 @ =0x060038CC
-	str r0, [sp, #SP_934]
+	str r0, [sp, #SP_934] @ SP_934 = 0x060038CC
 	ldr r2, _06006998 @ =0x0D110001
 	tst r2, #0x4000
 	ldr r3, _060069BC @ =0x01010000
 	eoreq r3, r3, r3, lsr #8
-	str r3, [sp, #SP_8B0]
+	str r3, [sp, #SP_8B0] @ SP_8B0 = 0x01000100
 	ldr r3, _06006994 @ =0x0201C000
-	str r3, [sp, #SP_854]
+	str r3, [sp, #SP_854] @ SP_854 = 0x0201C000
 	mov r4, #0x6000000
 	ldr r6, _060069C0 @ =0x0203C000
-	str r6, [sp, #SP_84C]
+	str r6, [sp, #SP_84C] @ SP_84C = 0x0203C000
 	sub r6, r6, #0x6000
 	orr r6, r4, r6, lsr #8
-	str r6, [sp, #SP_858]
-	str r6, [fp, #0xc]
+	str r6, [sp, #SP_858] @ SP_858 = 0x06020360
+	str r6, [fp, #0xc] @ _030029B8 = 0x06020360
 	sub r5, r3, #0x8000
 	orr r5, r4, r5, lsr #8
-	str r5, [sp, #SP_85C]
-	str r5, [fp, #0x10]
-	str r5, [fp, #0x14]
+	str r5, [sp, #SP_85C] @ SP_85C = 0x06020140
+	str r5, [fp, #0x10] @ _030029BC = 0x06020140
+	str r5, [fp, #0x14] @ _030029C0 = 0x06020140
 	sub r5, r5, #0x20
-	str r5, [sp, SP_860]
+	str r5, [sp, #SP_860] @ SP_860 = 0x06020120
 	orr r6, r4, sp, lsr #8
-	str r6, [fp]
+	str r6, [fp] @ _030029AC = 0x06030072
 	sub r5, r5, #0x20
-	str r5, [sp, #SP_864]
+	str r5, [sp, #SP_864] @ SP_864 = 0x06020100
 	sub r6, r6, #0x100
-	str r6, [fp, #0x20]
+	str r6, [fp, #0x20] @ _030029CC = 0x0602FF72
 	sub r5, r5, #0x20
-	str r5, [sp, #SP_868]
+	str r5, [sp, #SP_868] @ SP_868 = 0x060200E0
 	lsr r0, r2, #0x10
 	mov r1, #1
 	lsl r4, r1, r0
-	str r4, [sp, #SP_870]
+	str r4, [sp, #SP_870] @ SP_870 = 0x00020000
 	sub r5, r5, #0x20
 	add r5, r5, r4, lsr #8
-	str r5, [fp, #0x18]
-	str r5, [fp, #0x1c]
+	str r5, [fp, #0x18] @ _030029C4 = 0x060202C0
+	str r5, [fp, #0x1c] @ _030029C8 = 0x060202C0
 	lsl r6, r5, #8
 	add r6, r6, #0xc000
-	str r6, [sp, #SP_91C]
+	str r6, [sp, #SP_91C] @ SP_91C = 0x02038000
 	cmp r4, #0x80000
 	addne r5, r5, #0x400
-	str r5, [sp, #SP_86C]
+	str r5, [sp, #SP_86C] @ SP_86C = 0x060206C0
 	sub r5, r4, #1
 	lsr r5, r5, #8
-	str r5, [sp, #SP_874]
+	str r5, [sp, #SP_874] @ SP_874 = 0x000001FF
 	lsr r0, r0, #8
 	lsl r5, r1, r0
-	str r5, [sp, #SP_878]
+	str r5, [sp, #SP_878] @ SP_878 = 0x00002000
 	sub r6, r5, #1
 	lsr r6, r6, #0xa
-	str r6, [sp, #SP_87C]
+	str r6, [sp, #SP_87C] @ SP_87C = 0x00000007
 	ldr r6, _06006990 @ =0x0203C000
-	str r6, [sp, #SP_844]
+	str r6, [sp, #SP_844] @ SP_844 = 0x0203C000
 	add r6, r6, r5
-	str r6, [sp, #SP_848]
-	tst r2, #0x8000
+	str r6, [sp, #SP_848] @ SP_848 = 0x0203E000
+	tst r2, #0x8000 @ this tst is always false here
 	ldr r7, _060069C4 @ =_03002E68
 	ldr r8, _0600698C @ =0xE1A0F00E
 	strne r8, [r7]
 	and r0, r2, #0xf00
 	lsr r0, r0, #8
-	strb r0, [sp, #SP_A38]
+	strb r0, [sp, #SP_A38] @ SP_A38 = 0x00
 	ldr r3, _060069C8 @ =0x44444444
-	str r3, [sp, #SP_8FC]
+	str r3, [sp, #SP_8FC] @ SP_8FC = 0x44444444
 	ldr r3, _060069CC @ =sub_06006000
-	str r3, [sp, #SP_900]
-	strb r2, [sp, #SP_A4E]
+	str r3, [sp, #SP_900] @ SP_900 = sub_06006000
+	strb r2, [sp, #SP_A4E] @ SP_A4E = 0x01
 	mov r0, #0x6800
 	orr r0, r0, #0x6000000
-	str r0, [sp, #SP_8EC]
+	str r0, [sp, #SP_8EC] @ SP_8EC = 0x06006800
 	add r1, r0, #0xe00
 	add r1, r1, r0
-	str r1, [sp, #SP_8F8]
+	str r1, [sp, #SP_8F8] @ SP_8F8 = 0x0C00DE00
 	mvn r0, #0xf3
 	eor r0, r0, #0x360
 	add r1, sp, #0x200
-	stmdb r1!, {r0}
-	str r1, [sp, #SP_88C]
+	stmdb r1!, {r0} @ SP_1FC (0x030073FC) = 0xFFFFFC6C (-0x394)
+	str r1, [sp, #SP_88C] @ SP_88C = SP_1FC (0x030073FC)
 	add r0, r1, #3
-	str r0, [sp, #SP_890]
+	str r0, [sp, #SP_890] @ SP_890 = 0x030073FF
 	mov r0, #0x820000
-	str r0, [sp, #SP_8AC]
+	str r0, [sp, #SP_8AC] @ SP_8AC = 0x00820000
 	ldr r0, _060069D0 @ =sub_03000408
-	str r0, [sp, #SP_9B4]
+	str r0, [sp, #SP_9B4] @ SP_9B4 = sub_03000408
 	mov r0, #0xef
-	str r0, [sp, #SP_8B4]
+	str r0, [sp, #SP_8B4] @ SP_8B4 = 0x000000EF
 	ldr r0, _060069D4 @ =0x03020100
 	ldr r1, _060069D8 @ =0x07060504
-	str r0, [sp, #SP_8E4]
-	str r1, [sp, #SP_8E8]
-	str r0, [sp, #SP_95C]
-	str r1, [sp, #SP_960]
-	eor r2, r0, r1
+	str r0, [sp, #SP_8E4] @ SP_8E4 = 0x03020100
+	str r1, [sp, #SP_8E8] @ SP_8E8 = 0x07060504
+	str r0, [sp, #SP_95C] @ SP_95C = 0x03020100
+	str r1, [sp, #SP_960] @ SP_960 = 0x07060504
+	eor r2, r0, r1 @ r2 = 0x04040404
 	eor r0, r0, r2, lsl #1
 	eor r1, r1, r2, lsl #1
-	str r0, [sp, #SP_964]
-	str r1, [sp, #SP_968]
+	str r0, [sp, #SP_964] @ SP_964 = 0x0B0A0908
+	str r1, [sp, #SP_968] @ SP_968 = 0x0F0E0D0C
 
+	@ Set SP_8C4 to SP_8E3 to 0x1E
 	add r1, sp, #0x20
 	mov r0, #0x1e
 _06006824:
@@ -378,6 +379,7 @@ _06006824:
 	cmp r1, sp
 	bne _06006824
 
+	@ Set SP_94C to SP_96B to 0xFF
 	mvn r0, #0
 	add r1, sp, #0xf
 _0600683C:
@@ -388,22 +390,22 @@ _0600683C:
 	bhs _0600683C
 
 	mov r0, #0x40
-	strb r0, [sp, #SP_A3C]
+	strb r0, [sp, #SP_A3C] @ SP_A3C = 0x40
 	lsl r0, r0, #8
-	str r0, [sp, #SP_9D0]
-	str r0, [sp, #SP_9D4]
+	str r0, [sp, #SP_9D0] @ SP_9D0 = 0x00004000
+	str r0, [sp, #SP_9D4] @ SP_9D4 = 0x00004000
 	ldr r0, _060069DC @ =sub_03005568
-	str r0, [sp, #SP_9BC]
+	str r0, [sp, #SP_9BC] @ SP_9BC = sub_03005568
 	sub lr, lr, #4
-	str lr, [sp, #SP_924]
+	str lr, [sp, #SP_924] @ SP_924 = 0x087D8000
 	ldr r1, _060069E0 @ =sub_030057A8
 	ldr r2, _060069E4 @ =0x03007000
-	str r1, [r2, #0xffc]
+	str r1, [r2, #0xffc] @ 0x03007FFC = sub_030057A8
 _06006880:
 	bl sub_0600E754
 _06006884:
 	mov r0, #0
-	strb r0, [sp, #SP_A2F]
+	strb r0, [sp, #SP_A2F] @ SP_A2F = 0x00
 	bl sub_0600E4D0
 	strb r0, [sp, #SP_A2E]
 	cmp r0, #2

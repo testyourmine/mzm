@@ -37,7 +37,7 @@ sub_0600E048: @ 0x0600E048
 	sub sp, #0xc
 	adds r2, r0, #0
 	str r1, [sp]
-	ldr r5, _0600E0E0 @ =sub_03005840
+	ldr r5, _0600E0E0 @ =sUnk_03005840
 _0600E05A:
 	movs r0, #0x92
 	lsls r0, r0, #4
@@ -109,7 +109,7 @@ _0600E0AA:
 	adds r1, r1, r2
 	b _0600E0FE
 	.align 2, 0
-_0600E0E0: .4byte sub_03005840
+_0600E0E0: .4byte sUnk_03005840
 _0600E0E4: .4byte 0x00000924
 _0600E0E8: .4byte 0x0600B800
 _0600E0EC:
@@ -480,15 +480,19 @@ _0600E4C0:
 	arm_func_start sub_0600E4D0
 sub_0600E4D0: @ 0x0600E4D0
 	mov r7, lr
+	@ r0 = sub_0203E414(r0, SP_854, SP)
 	ldr r1, [sp, #SP_854]
 	mov r2, sp
 	add lr, pc, #0x4 @ =_0600E4E8
 	ldr ip, _0600E57C @ =sub_0203E414
 	bx ip
 _0600E4E8:
-	cmp r0, #0
-	moveq r0, #4
-	bxeq r7
+	cmp r0, #0   @ if r0 == 0: (never true?)
+	moveq r0, #4     @ r0 = 0
+	bxeq r7          @ return r0
+
+	@ Compare 0xC bytes between [SP_924 + 0xC0] and [SP_854]
+	@ Return r0 = 2 if they're not equal
 	ldr r3, [sp, #SP_924]
 	add r3, r3, #0xc0
 	add r1, r3, #0xc
@@ -501,11 +505,13 @@ _0600E504:
 	bxne r7
 	cmp r3, r1
 	blo _0600E504
+
 	ldr r2, [sp, #SP_854]
-	ldrh r6, [r2, #0xe]
+	ldrh r6, [r2, #0xe] @ r6 = [SP_854 + 0xE]
 	mov r1, #0
-	strh r1, [r2, #0xe]
+	strh r1, [r2, #0xe] @ [SP_854 + 0xE] = 0
 	mov lr, r7
+	@ TODO: continue commenting from here
 
 	arm_func_start sub_0600E534
 sub_0600E534: @ 0x0600E534
@@ -520,6 +526,7 @@ _0600E548:
 	ldr pc, _0600E580 @ =sub_03002DF0
 	cmp r2, fp
 	blo _0600E548
+
 	cmp r8, r6
 	movne r0, #3
 	bxne r7
