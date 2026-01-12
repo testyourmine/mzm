@@ -1,68 +1,9 @@
+#include "part2.h"
 #include "types.h"
 #include "gba.h"
 #include "macros.h"
 
-extern void* gUnk_03005A50;
-extern void* gUnk_03005A54;
-extern void* gUnk_03005A58;
-extern u8 gUnk_03005A5C;
-extern u8 gUnk_03005A5D;
-extern u8 gUnk_03005A5E;
-extern u16 gUnk_03005A60;
-extern void (*gUnk_03005A64)(void*, u32);
-extern u16 gUnk_03005A68[]; // length?
-extern u16 gUnk_03005FB0;
-extern u32 gUnk_03005FB4;
-extern u32 gUnk_03005FBC;
-extern u16 gUnk_03005FC0;
-extern u32 gUnk_03005FC8;
-extern u16 gUnk_03005FCC;
-extern u16 gUnk_03005FD8;
-
-void sub_03000000(u16 arg0);
-u16 sub_03000024(u8 arg0);
-u16 sub_03000050(u16 arg0);
-void sub_03000080(void);
-void sub_03000188(u16 arg0);
-void sub_030001B4(void);
-void sub_030001C4(void* arg0);
-void sub_030001F0(void* arg0, u16 arg1, u32 arg2, u8 arg3);
-void sub_0300023C(void* arg0, void* arg1, u16 arg2, s32 arg3, void* arg4);
-void sub_030002A4(void* arg0, void* arg1, void* arg2, u16 arg3, s32 arg4, void* arg5);
-void sub_03000330(void);
-void sub_0300033C(u32 arg0);
-void sub_03000348(u32 arg0);
-void sub_03000354(u32 arg0, u32 arg1);
-void sub_03000368(u32 arg0);
-u8 sub_03000380(u16 arg0);
-void sub_03000404(u8 arg0);
-void sub_03000408(u16 arg0, u8 arg1);
-void sub_0300047C(u8* arg0, u8 arg1);
-u8 sub_03000484(u8* arg0);
-void sub_03000488(void);
-void sub_030004E0(void);
-void sub_03000500(void);
-void sub_0300053C(void);
-void sub_03000564(void);
-
-extern void sub_030008B4(u8 arg0);
-extern void sub_03000918(u8 arg0);
-extern void sub_03000930(u8 arg0);
-extern void sub_030009A0(u8 arg0);
-extern void sub_03000EAC(u8 arg0);
-extern void sub_03000F10(u8 arg0);
-extern void sub_03000F28(u8 arg0);
-extern void sub_03000F40(u8 arg0);
-extern void sub_03001458(u8 arg0);
-extern void sub_030014C8(u8 arg0);
-extern void sub_03001518(u8 arg0);
-extern void sub_0300187C(u8 arg0);
-extern void sub_030018E0(u8 arg0);
-extern void sub_03001944(u8 arg0);
-extern void sub_03001C10(u8 arg0);
-extern void sub_03001C58(u8 arg0);
-
-extern void sub_0300203C(void);
+#include "structs/part2.h"
 
 u32 sUnk_03002330[] = {
     0x1056, 0x1266, 0x1490, 0x15D9, 0x1872, 0x1B86, 0x1EEF, 0x20AB,
