@@ -1,5 +1,6 @@
 /src/**/*.s
 /data/*
+/sound/direct_sound_samples/*
 
 *.gba
 *.gba.lz
