@@ -228,8 +228,8 @@ _030029D8: .4byte sub_03005844
 _030029DC: .4byte sub_03005844
 _030029E0: .4byte sub_03005844
 _030029E4: .4byte _03003044
-_030029E8: .4byte _030033A4
-_030029EC: .4byte _0300305C
+_030029E8: .4byte sub_030033A4
+_030029EC: .4byte sub_0300305C
 
 	.global _030029F0
 _030029F0: .4byte _03004FB0
@@ -489,26 +489,34 @@ _03002DE4: .4byte _030040E4
 _03002DE8: .4byte _03004770
 _03002DEC: .4byte _0300512C
 
+	@ Potentially some sort of checksum/CRC function
 	arm_func_start sub_03002DF0
 sub_03002DF0: @ 0x03002DF0
-	eor r8, r8, sb
+	eor r8, r8, sb   @ r8 ^= sb
+
+	@ loop 20 times:
 	mov ip, #0x20
 _03002DF8:
-	lsrs r8, r8, #1
-	eorhs r8, r8, sl
+	lsrs r8, r8, #1  @ r8 >>= 1
+	eorhs r8, r8, sl @ if (r8 & 1): r8 ^= sl
 	subs ip, ip, #1
 	bne _03002DF8
+
 	bx lr
 
+	@ Seems to be the opcode handler
+	@ r5 = 0x030073FC (is it always?)
+	@ ip = 0x030029F0 (is it always?)
 	arm_func_start sub_03002E0C
 sub_03002E0C: @ 0x03002E0C
-	ldrb r1, [r5], #1
+	ldrb r1, [r5], #1 @ r1 = *r5++
 	ldrb r0, [sp, #SP_A33]
-	cmp r0, #0
-	ldrbne r1, [sp, #SP_A32]
+	cmp r0, #0               @ if SP_A33 != 0:
+	ldrbne r1, [sp, #SP_A32]     @ r1 = SP_A32
 	movne r0, #0
-	strbne r0, [sp, #SP_A32]
-	strbne r0, [sp, #SP_A33]
+	strbne r0, [sp, #SP_A32]     @ SP_A32 = 0
+	strbne r0, [sp, #SP_A33]     @ SP_A33 = 0
+	@ Goto ip[r1]
 	ldr pc, [ip, r1, lsl #2]
 
 	arm_func_start sub_03002E2C
@@ -523,6 +531,7 @@ sub_03002E38: @ 0x03002E38
 	ldrb r3, [r0, r1, lsl #8]
 	mov pc, lr
 
+	@ TODO: continue commenting from here
 	arm_func_start sub_03002E44
 sub_03002E44: @ 0x03002E44
 	and r1, r0, #7
@@ -660,7 +669,9 @@ _03003028:
 	lsl r2, r2, #1
 	str r2, [sp, #SP_82C]
 	mov pc, lr
-_03003034:
+
+	arm_func_start sub_03003034
+sub_03003034: @ 0x03003034
 	cmp r4, #0
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
@@ -672,15 +683,26 @@ _03003044:
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
-_0300305C:
+
+	arm_func_start sub_0300305C
+sub_0300305C: @ 0x0300305C
+	@ Goto _0300306C[r0]
 	and r0, r0, #7
 	ldr pc, [pc, r0, lsl #2]
-	andeq r0, r0, r0
 _03003068:
-	.byte 0x18, 0xB0, 0x00, 0x06, 0x78, 0xB0, 0x00, 0x06
-	.byte 0x34, 0x30, 0x00, 0x03, 0x78, 0xB0, 0x00, 0x06, 0x68, 0xB0, 0x00, 0x06, 0x90, 0xB0, 0x00, 0x06
-	.byte 0xD4, 0x31, 0x00, 0x03, 0x88, 0x30, 0x00, 0x03
-_03003088:
+	.byte 0x00, 0x00, 0x00, 0x00
+_0300306C:
+	.4byte sub_0600B018
+	.4byte sub_0600B078
+	.4byte sub_03003034
+	.4byte sub_0600B078
+	.4byte sub_0600B068
+	.4byte sub_0600B090
+	.4byte sub_030031D4
+	.4byte sub_03003088
+
+	arm_func_start sub_03003088
+sub_03003088: @ 0x03003088
 	ldr r0, [sp, #SP_8B8]
 	cmp r0, #0x3000
 	bge _03003348
@@ -769,7 +791,9 @@ _03003100:
 _030031C8: .4byte sub_03000380
 _030031CC: .4byte 0x06015400
 _030031D0: .4byte 0x06015540
-_030031D4:
+
+	arm_func_start sub_030031D4
+sub_030031D4: @ 0x030031D4
 	tst fp, #0x200000
 	eor fp, fp, #0x200000
 	bne _030031F8
@@ -893,7 +917,9 @@ _03003380:
 	strb r1, [sp, #SP_8DC]
 	strb r1, [sp, #SP_8E0]
 	b _03003260
-_030033A4:
+
+	arm_func_start sub_030033A4
+sub_030033A4: @ 0x030033A4
 	tst r0, #0x1fc0
 	bne _030034A8
 	and r2, r0, #0x3f
@@ -901,13 +927,23 @@ _030033A4:
 	bge _030034A8
 	subs r2, r2, #0x14
 	blt _030034A8
+	@ goto _030033C8[r2]
 	ldr pc, [pc, r2, lsl #2]
-	andeq r0, r0, r0
+
+	.4byte 0x000000
 _030033C8:
-	.byte 0xF8, 0x33, 0x00, 0x03, 0xA8, 0x34, 0x00, 0x03
-	.byte 0x44, 0x34, 0x00, 0x03, 0x94, 0x34, 0x00, 0x03, 0x34, 0x30, 0x00, 0x03, 0x34, 0x30, 0x00, 0x03
-	.byte 0x34, 0x30, 0x00, 0x03, 0x34, 0x30, 0x00, 0x03, 0x34, 0x30, 0x00, 0x03, 0x34, 0x30, 0x00, 0x03
-	.byte 0x34, 0x30, 0x00, 0x03, 0x34, 0x30, 0x00, 0x03
+	.4byte _030033F8
+	.4byte _030034A8
+	.4byte _03003444
+	.4byte _03003494
+	.4byte sub_03003034
+	.4byte sub_03003034
+	.4byte sub_03003034
+	.4byte sub_03003034
+	.4byte sub_03003034
+	.4byte sub_03003034
+	.4byte sub_03003034
+	.4byte sub_03003034
 _030033F8:
 	mov lr, #0x4000000
 	add lr, lr, #0xd4
@@ -1050,6 +1086,7 @@ _030035D8:
 	add lr, pc, #0x4 @ =0x030035F4
 	ldrne pc, [fp, -r2, lsl #2]
 	ldrb r3, [sp, r0]
+_030035F4:
 	and r7, r3, #0xff
 	adds r4, r4, #0x4000000
 	ldrblt r1, [r5], #1
@@ -2821,13 +2858,15 @@ _03004F24:
 	b _03005398
 _03004F64:
 	str r3, [sp, #SP_884]
-	add lr, pc, #0x0 @ =0x03004F70
+	add lr, pc, #0x0 @ =_03004F70
 	ldr pc, [fp, -r2, lsl #2]
+_03004F70:
 	strb r3, [sp, #SP_A3E]
 	add r0, r0, #1
 	lsrs r2, r0, #0xd
-	add lr, pc, #0x0 @ =0x03004F84
+	add lr, pc, #0x0 @ =_03004F84
 	ldr pc, [fp, -r2, lsl #2]
+_03004F84:
 	ldrb r0, [sp, #SP_A3E]
 	orr r0, r0, r3, lsl #8
 	ldr r3, [sp, #SP_884]
@@ -3122,14 +3161,14 @@ _03005394: .4byte 0xA2600002
     arm_func_start _03005398
 _03005398: @ 0x03005398
 	ldr ip, [sp, #SP_8B4]
-	cmp ip, #0xf0
-	bhs _0300552C
-	cmp ip, #0xe2
-	bhs _03005478
-	subs r0, ip, #0xc
-	ldrlo r0, [sp, #SP_9C0]
-	blo _03005478
-	bne _03005418
+	cmp ip, #0xf0 @ if SP_8B4 > 0xF0:
+	bhs _0300552C     @ goto _0300552C
+	cmp ip, #0xe2 @ if SP_8B4 > 0xE2:
+	bhs _03005478     @ goto _03005478
+	subs r0, ip, #0xc @ r0 = SP_8B4 - 0xC
+	ldrlo r0, [sp, #SP_9C0] @ if r0 < 0: r0 = SP_9C0
+	blo _03005478			    @ goto _03005478
+	bne _03005418 @ if r0 != 0: goto _03005418
 	mov lr, #0x4000000
 	ldrh r1, [lr]
 	ldrb r2, [sp, #SP_8BD]
