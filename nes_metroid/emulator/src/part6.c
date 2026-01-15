@@ -37,12 +37,12 @@ const u8 sPasswordBytes[] = {
 
 const u16 sUnk_0203E44E[] = {
     0x19, 0x0A, 0x1C, 0x1C, 0x20, 0x18, 0x1B, 0x0D
-};
+}; // PASSWORD
 
 const u16 sUnk_0203E45E[] = {
     0x19, 0x0A, 0x1C, 0x1C, 0x20, 0x18, 0x1B, 0x0D,
     0xFF, 0x19, 0x15, 0x0E, 0x0A, 0x1C, 0x0E
-};
+}; // PASSWORD PLEASE
 
 const u8 sUnk_0203E47C[] = {
     0x01, 0x20, 0x09, 0x20, 0x08, 0x20, 0x06, 0x20
@@ -111,13 +111,14 @@ s32 sub_0203E000(struct EmulatorSP* sp)
 {
     u32 nametableIndex;
     u32 i;
-    u32 temp_r3;
-    u8* unk_06002000;
+    u32 passwordChar;
+    u8* nametable;
     u32 byteIndex;
     u8 passwordBytes[0x14];
 
-    unk_06002000 = (u8*)0x06002000;
-    if (MemoryCompareAlign16((void*)unk_06002000 + 0x298, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
+    nametable = (u8*)0x06002000;
+    // Check for tiles to say "PASSWORD" for game over screen (off by 1???)
+    if (MemoryCompareAlign16((void*)nametable + 0x14C*2, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
     {
         sp->SP_904 &= ~4;
         if (sp->SP_830 == 0x30)
@@ -138,7 +139,7 @@ s32 sub_0203E000(struct EmulatorSP* sp)
     nametableIndex = 0;
     for (i = 0; i < 0x18; i++)
     {
-        temp_r3 = unk_06002000[0x6A4/2 + (nametableIndex * 2)];
+        passwordChar = nametable[0x1A9*2 + (nametableIndex * 2)];
 
         nametableIndex += 1;
         if (nametableIndex == 6 || nametableIndex == 0x46)
@@ -150,29 +151,29 @@ s32 sub_0203E000(struct EmulatorSP* sp)
             nametableIndex = 0x40;
         }
 
-        if (temp_r3 >= 0x40)
+        if (passwordChar >= 0x40)
             return 0;
 
         switch (i & 3)
         {
             case 0:
-                passwordBytes[byteIndex] = temp_r3;
+                passwordBytes[byteIndex] = passwordChar;
                 break;
 
             case 1:
-                passwordBytes[byteIndex] |= temp_r3 << 6;
+                passwordBytes[byteIndex] |= passwordChar << 6;
                 byteIndex++;
-                passwordBytes[byteIndex] = temp_r3 >> 2;
+                passwordBytes[byteIndex] = passwordChar >> 2;
                 break;
 
             case 2:
-                passwordBytes[byteIndex] |= temp_r3 << 4;
+                passwordBytes[byteIndex] |= passwordChar << 4;
                 byteIndex++;
-                passwordBytes[byteIndex] = temp_r3 >> 4;
+                passwordBytes[byteIndex] = passwordChar >> 4;
                 break;
 
             case 3:
-                passwordBytes[byteIndex] |= temp_r3 << 2;
+                passwordBytes[byteIndex] |= passwordChar << 2;
                 byteIndex++;
                 break;
         }
@@ -189,10 +190,11 @@ void sub_0203E118(struct EmulatorSP* sp)
     u32 byteIndex;
     u32 passwordChar;
     u32 i;
-    u16* unk_06002000;
+    u16* nametable;
 
-    unk_06002000 = (u16*)0x06002000;
-    if (MemoryCompareAlign16((void*)unk_06002000 + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
+    nametable = (u16*)0x06002000;
+    // 0x06002150 is the 4th set of password characters
+    if (MemoryCompareAlign16((void*)nametable + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
     {
         if (sp->SP_830 == 0x18)
         {
@@ -203,10 +205,12 @@ void sub_0203E118(struct EmulatorSP* sp)
 
     for (i = 0; i < 13; i += 1)
     {
-        if ((unk_06002000[0x212/2 + i] & 0xFF) < 0x40)
+        // 0x06002109 is the 1st set of password characters
+        if ((nametable[0x109 + i] & 0xFF) < 0x40)
             return;
 
-        if ((unk_06002000[0x292/2 + i] & 0xFF) < 0x40)
+        // 0x06002149 is the 3rd set of password characters
+        if ((nametable[0x149 + i] & 0xFF) < 0x40)
             return;
     }
 
@@ -246,14 +250,16 @@ void sub_0203E118(struct EmulatorSP* sp)
                 break;
         }
 
-        sp->SP_84C[0x99A + i] = passwordChar & 0x3F;
-        unk_06002000[0x212/2 + nametableIndex] = (passwordChar & 0x3F) | 0x1000;
+        sp->SP_84C[0x99A + i] = passwordChar & 0x3F; // Save to NES RAM $699A (PasswordChar)
+        nametable[0x109 + nametableIndex] = (passwordChar & 0x3F) | 0x1000; // Display to screen, | 0x1000 to set tile address
 
         nametableIndex += 1;
+        // Skip space between 1st/2nd and 3rd/4th password character sets
         if (nametableIndex == 0x6 || nametableIndex == 0x46)
         {
             nametableIndex += 1;
         }
+        // Wrap to 3rd set of password characters
         else if (nametableIndex == 0xD)
         {
             nametableIndex = 0x40;
