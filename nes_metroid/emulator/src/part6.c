@@ -12,25 +12,25 @@ struct EmulatorSP {
     s32 SP_904;
 };
 
-s32 sub_0203E000(struct EmulatorSP* arg0);
-void sub_0203E118(struct EmulatorSP* arg0);
-u8* sub_0203E24C(u8* arg0);
+s32 sub_0203E000(struct EmulatorSP* sp);
+void sub_0203E118(struct EmulatorSP* sp);
+u8* sub_0203E24C(u8* src);
 void sub_0203E260(void);
-void sub_0203E2C4(u16* dst, u8* src, s32 size);
-void sub_0203E2E4(u8* dst, u8* src, s32 size);
-void sub_0203E314(u8* dst, u8* src, s32 size);
-u32 sub_0203E32C(u8* src1, u8* src2, s32 size);
-u32 sub_0203E34C(u16* src1, u16* src2, s32 size);
-s32 sub_0203E374(u32 arg0, u16* dst);
+void MemoryCopy8To16(u16* dst, u8* src, s32 size);
+void MemoryCopyAligned16(u8* dst, u8* src, s32 size);
+void MemoryCopy(u8* dst, u8* src, s32 size);
+u32 MemoryCompare(u8* src1, u8* src2, s32 size);
+u32 MemoryCompareAlign16(u16* src1, u16* src2, s32 size);
+s32 sub_0203E374(struct EmulatorSP* sp, u16* dst);
 s32 sub_0203E38C(void);
 s32 sub_0203E390(void);
 void sub_0203E394(s32 arg0, u8* src);
-void sub_0203E3A8(u8* arg0);
-u8* sub_0203E3AC(u8* src);
-u8* sub_0203E3DC(u8* arg0, u8* src, u8* dst);
-s32 sub_0203E414(u8* src, u8* dst, u8* arg2);
+void sub_0203E3A8(struct EmulatorSP* sp);
+u8* sub_0203E3AC(struct EmulatorSP* sp);
+u8* sub_0203E3DC(struct EmulatorSP* sp, u8* src, u8* dst);
+s32 sub_0203E414(u8* src, u8* dst, struct EmulatorSP* sp);
 
-const u8 sUnk_0203E43C[] = {
+const u8 sPasswordBytes[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
@@ -107,164 +107,164 @@ const u8 sUnk_0203E634[] = {
     0xFF, 0xFF, 0xFF, 0xFF
 };
 
-s32 sub_0203E000(struct EmulatorSP* arg0)
+s32 sub_0203E000(struct EmulatorSP* sp)
 {
-    s32 var_r4;
-    u32 var_r5;
+    u32 nametableIndex;
+    u32 i;
     u32 temp_r3;
     u8* unk_06002000;
-    s32 var_0;
-    u8 subroutine_arg0[0x14];
+    u32 byteIndex;
+    u8 passwordBytes[0x14];
 
     unk_06002000 = (u8*)0x06002000;
-    if (sub_0203E34C((void*)unk_06002000 + 0x298, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
+    if (MemoryCompareAlign16((void*)unk_06002000 + 0x298, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
     {
-        arg0->SP_904 &= ~4;
-        if (arg0->SP_830 == 0x30)
+        sp->SP_904 &= ~4;
+        if (sp->SP_830 == 0x30)
         {
-            arg0->SP_830 = 0;
+            sp->SP_830 = 0;
         }
         return 0;
     }
 
-    if (arg0->SP_904 & 4)
+    if (sp->SP_904 & 4)
         return 0;
 
-    arg0->SP_830 = 0x30;
+    sp->SP_830 = 0x30;
     if (!(READ_16(REG_DISPCNT) & DCNT_BG3))
         return 0;
 
-    var_0 = 0;
-    var_r4 = 0;
-    for (var_r5 = 0; var_r5 < 0x18; var_r5++)
+    byteIndex = 0;
+    nametableIndex = 0;
+    for (i = 0; i < 0x18; i++)
     {
-        temp_r3 = unk_06002000[0x6A4/2 + (var_r4 * 2)];
+        temp_r3 = unk_06002000[0x6A4/2 + (nametableIndex * 2)];
 
-        var_r4 += 1;
-        if (var_r4 == 6 || var_r4 == 0x46)
+        nametableIndex += 1;
+        if (nametableIndex == 6 || nametableIndex == 0x46)
         {
-            var_r4 += 1;
+            nametableIndex += 1;
         }
-        else if (var_r4 == 0xD)
+        else if (nametableIndex == 0xD)
         {
-            var_r4 = 0x40;
+            nametableIndex = 0x40;
         }
 
         if (temp_r3 >= 0x40)
             return 0;
 
-        switch (var_r5 & 3)
+        switch (i & 3)
         {
             case 0:
-                subroutine_arg0[var_0] = temp_r3;
+                passwordBytes[byteIndex] = temp_r3;
                 break;
 
             case 1:
-                subroutine_arg0[var_0] |= temp_r3 << 6;
-                var_0++;
-                subroutine_arg0[var_0] = temp_r3 >> 2;
+                passwordBytes[byteIndex] |= temp_r3 << 6;
+                byteIndex++;
+                passwordBytes[byteIndex] = temp_r3 >> 2;
                 break;
 
             case 2:
-                subroutine_arg0[var_0] |= temp_r3 << 4;
-                var_0++;
-                subroutine_arg0[var_0] = temp_r3 >> 4;
+                passwordBytes[byteIndex] |= temp_r3 << 4;
+                byteIndex++;
+                passwordBytes[byteIndex] = temp_r3 >> 4;
                 break;
 
             case 3:
-                subroutine_arg0[var_0] |= temp_r3 << 2;
-                var_0++;
+                passwordBytes[byteIndex] |= temp_r3 << 2;
+                byteIndex++;
                 break;
         }
     }
 
-    sub_0203E314((u8*)sUnk_0203E43C, subroutine_arg0, sizeof(sUnk_0203E43C));
-    arg0->SP_904 |= 4;
+    MemoryCopy((u8*)sPasswordBytes, passwordBytes, sizeof(sPasswordBytes));
+    sp->SP_904 |= 4;
     return 1;
 }
 
-void sub_0203E118(struct EmulatorSP* arg0)
+void sub_0203E118(struct EmulatorSP* sp)
 {
-    s32 var_r5;
-    s32 var_r3;
-    u32 var_r4;
-    u32 var_r6;
+    u32 nametableIndex;
+    u32 byteIndex;
+    u32 passwordChar;
+    u32 i;
     u16* unk_06002000;
 
     unk_06002000 = (u16*)0x06002000;
-    if (sub_0203E34C((void*)unk_06002000 + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
+    if (MemoryCompareAlign16((void*)unk_06002000 + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
     {
-        if (arg0->SP_830 == 0x18)
+        if (sp->SP_830 == 0x18)
         {
-            arg0->SP_830 = 0;
+            sp->SP_830 = 0;
         }
         return;
     }
 
-    for (var_r6 = 0; var_r6 < 13; var_r6 += 1)
+    for (i = 0; i < 13; i += 1)
     {
-        if ((unk_06002000[0x212/2 + var_r6] & 0xFF) < 0x40)
+        if ((unk_06002000[0x212/2 + i] & 0xFF) < 0x40)
             return;
 
-        if ((unk_06002000[0x292/2 + var_r6] & 0xFF) < 0x40)
+        if ((unk_06002000[0x292/2 + i] & 0xFF) < 0x40)
             return;
     }
 
-    arg0->SP_830 = 0x18;
-    for (var_r6 = 0; var_r6 < sizeof(sUnk_0203E43C); var_r6++)
+    sp->SP_830 = 0x18;
+    for (i = 0; i < sizeof(sPasswordBytes); i++)
     {
-        if (sUnk_0203E43C[var_r6] != 0)
+        if (sPasswordBytes[i] != 0)
             break;
     }
 
-    if (var_r6 == 0x12)
+    if (i == sizeof(sPasswordBytes))
         return;
 
-    var_r3 = 0;
-    var_r5 = 0;
-    for (var_r6 = 0; var_r6 < 0x18; var_r6++)
+    byteIndex = 0;
+    nametableIndex = 0;
+    for (i = 0; i < 0x18; i++)
     {
-        switch (var_r6 & 3)
+        switch (i & 3)
         {
             case 0:
-                var_r4 = sUnk_0203E43C[var_r3];
-                var_r3++;
+                passwordChar = sPasswordBytes[byteIndex];
+                byteIndex++;
                 break;
 
             case 1:
-                var_r4 = (var_r4 >> 6) | (sUnk_0203E43C[var_r3] << 2);
-                var_r3++;
+                passwordChar = (passwordChar >> 6) | (sPasswordBytes[byteIndex] << 2);
+                byteIndex++;
                 break;
 
             case 2:
-                var_r4 = (var_r4 >> 6) | (sUnk_0203E43C[var_r3] << 4);
-                var_r3++;
+                passwordChar = (passwordChar >> 6) | (sPasswordBytes[byteIndex] << 4);
+                byteIndex++;
                 break;
 
             case 3:
-                var_r4 = var_r4 >> 6;
+                passwordChar = passwordChar >> 6;
                 break;
         }
 
-        arg0->SP_84C[0x99A + var_r6] = var_r4 & 0x3F;
-        unk_06002000[0x212/2 + var_r5] = (var_r4 & 0x3F) | 0x1000;
+        sp->SP_84C[0x99A + i] = passwordChar & 0x3F;
+        unk_06002000[0x212/2 + nametableIndex] = (passwordChar & 0x3F) | 0x1000;
 
-        var_r5 += 1;
-        if (var_r5 == 0x6 || var_r5 == 0x46)
+        nametableIndex += 1;
+        if (nametableIndex == 0x6 || nametableIndex == 0x46)
         {
-            var_r5 += 1;
+            nametableIndex += 1;
         }
-        else if (var_r5 == 0xD)
+        else if (nametableIndex == 0xD)
         {
-            var_r5 = 0x40;
+            nametableIndex = 0x40;
         }
     }
 }
 
-u8* sub_0203E24C(u8* arg0)
+u8* sub_0203E24C(u8* src)
 {
-    sub_0203E394(0, arg0);
-    return arg0;
+    sub_0203E394(0, src);
+    return src;
 }
 
 void sub_0203E260(void)
@@ -272,17 +272,24 @@ void sub_0203E260(void)
     u16* unk_06002000;
 
     unk_06002000 = (u16*)0x06002000;
-    if (sub_0203E34C(unk_06002000 + 0x4D6/2, (u16*)sUnk_0203E47C, sizeof(sUnk_0203E47C)) == 0)
+    if (MemoryCompareAlign16(unk_06002000 + 0x4D6/2, (u16*)sUnk_0203E47C, sizeof(sUnk_0203E47C)) == 0)
     {
-        sub_0203E2C4(unk_06002000 + 0x4CE/2, (u8*)sUnk_0203E48C, sizeof(sUnk_0203E48C));
+        MemoryCopy8To16(unk_06002000 + 0x4CE/2, (u8*)sUnk_0203E48C, sizeof(sUnk_0203E48C));
     }
-    else if (sub_0203E34C(unk_06002000 + 0x71C/2, (u16*)sUnk_0203E484, sizeof(sUnk_0203E484)) == 0)
+    else if (MemoryCompareAlign16(unk_06002000 + 0x71C/2, (u16*)sUnk_0203E484, sizeof(sUnk_0203E484)) == 0)
     {
-        sub_0203E2C4(unk_06002000 + 0x716/2, (u8*)sUnk_0203E4B2, sizeof(sUnk_0203E4B2));
+        MemoryCopy8To16(unk_06002000 + 0x716/2, (u8*)sUnk_0203E4B2, sizeof(sUnk_0203E4B2));
     }
 }
 
-void sub_0203E2C4(u16* dst, u8* src, s32 size)
+/**
+ * @brief Copy two bytes at a time in little endian from src to dst
+ * 
+ * @param dst Destination
+ * @param src Source
+ * @param size Size in bytes
+ */
+void MemoryCopy8To16(u16* dst, u8* src, s32 size)
 {
     void* end;
 
@@ -295,7 +302,14 @@ void sub_0203E2C4(u16* dst, u8* src, s32 size)
     while ((u32)src < (u32)end);
 }
 
-void sub_0203E2E4(u8* dst, u8* src, s32 size)
+/**
+ * @brief Copy bytes using 16-bit alignment from src to dst
+ * 
+ * @param dst Destination
+ * @param src Source
+ * @param size Size in bytes
+ */
+void MemoryCopyAligned16(u8* dst, u8* src, s32 size)
 {
     u32 srcByte;
     void* end;
@@ -317,7 +331,14 @@ void sub_0203E2E4(u8* dst, u8* src, s32 size)
     while ((u32)src < (u32)end);
 }
 
-void sub_0203E314(u8* dst, u8* src, s32 size)
+/**
+ * @brief Copy bytes from src to dst
+ * 
+ * @param dst Destination
+ * @param src Source
+ * @param size Size in bytes
+ */
+void MemoryCopy(u8* dst, u8* src, s32 size)
 {
     void* end;
 
@@ -329,7 +350,15 @@ void sub_0203E314(u8* dst, u8* src, s32 size)
     while ((u32)src < (u32)end);
 }
 
-u32 sub_0203E32C(u8* src1, u8* src2, s32 size)
+/**
+ * @brief Compare bytes from src1 and src2
+ * 
+ * @param src1 First source
+ * @param src2 Second source
+ * @param size Size in bytes
+ * @return u32 0 if same, otherwise difference in bytes
+ */
+u32 MemoryCompare(u8* src1, u8* src2, s32 size)
 {
     u32 diff;
 
@@ -343,7 +372,15 @@ u32 sub_0203E32C(u8* src1, u8* src2, s32 size)
     return diff;
 }
 
-u32 sub_0203E34C(u16* src1, u16* src2, s32 size)
+/**
+ * @brief Compare two bytes at a time at 16-bit aligned boundary from src1 and src2
+ * 
+ * @param src1 First source
+ * @param src2 Second source
+ * @param size Size in bytes
+ * @return u32 0 if same, otherwise difference in bytes
+ */
+u32 MemoryCompareAlign16(u16* src1, u16* src2, s32 size)
 {
     u32 diff;
 
@@ -359,9 +396,9 @@ u32 sub_0203E34C(u16* src1, u16* src2, s32 size)
     return diff;
 }
 
-s32 sub_0203E374(u32 arg0, u16* dst)
+s32 sub_0203E374(struct EmulatorSP* sp, u16* dst)
 {
-    sub_0203E2C4(dst, (u8*)sUnk_0203E43C, sizeof(sUnk_0203E43C));
+    MemoryCopy8To16(dst, (u8*)sPasswordBytes, sizeof(sPasswordBytes));
     return 0x18;
 }
 
@@ -377,32 +414,32 @@ s32 sub_0203E390(void)
 
 void sub_0203E394(s32 arg0, u8* src)
 {
-    sub_0203E314((u8*)sUnk_0203E43C, src + 0x10, sizeof(sUnk_0203E43C));
+    MemoryCopy((u8*)sPasswordBytes, src + 0x10, sizeof(sPasswordBytes));
 }
 
-void sub_0203E3A8(u8* arg0)
+void sub_0203E3A8(struct EmulatorSP* sp)
 {
     return;
 }
 
-u8* sub_0203E3AC(u8* src)
+u8* sub_0203E3AC(struct EmulatorSP* sp)
 {
     u8* ret;
 
-    sub_0203E3A8(src);
-    ret = SramWriteChecked(src, SRAM_BASE + 0x7FB0, 0x10);
+    sub_0203E3A8(sp);
+    ret = SramWriteChecked((u8*)sp, SRAM_BASE + 0x7FB0, 0x10);
     if (ret == 0)
     {
-        ret = SramWriteChecked(src, SRAM_BASE + 0x7FD8, 0x10);
+        ret = SramWriteChecked((u8*)sp, SRAM_BASE + 0x7FD8, 0x10);
     }
     return ret;
 }
 
-u8* sub_0203E3DC(u8* arg0, u8* src, u8* dst)
+u8* sub_0203E3DC(struct EmulatorSP* sp, u8* src, u8* dst)
 {
     u8* ret;
 
-    sub_0203E3A8(arg0);
+    sub_0203E3A8(sp);
     if (dst == NULL)
     {
         dst = SRAM_BASE + 0x7FB0;
@@ -416,9 +453,9 @@ u8* sub_0203E3DC(u8* arg0, u8* src, u8* dst)
     return ret;
 }
 
-s32 sub_0203E414(u8* src, u8* dst, u8* arg2)
+s32 sub_0203E414(u8* src, u8* dst, struct EmulatorSP* sp)
 {
-    sub_0203E3A8(arg2);
+    sub_0203E3A8(sp);
     if (src == NULL)
     {
         src = SRAM_BASE + 0x7FB0;
