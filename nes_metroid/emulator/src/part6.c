@@ -30,29 +30,35 @@ u8* sub_0203E3AC(struct EmulatorSP* sp);
 u8* sub_0203E3DC(struct EmulatorSP* sp, u8* src, u8* dst);
 s32 sub_0203E414(u8* src, u8* dst, struct EmulatorSP* sp);
 
+// Password bytes buffer
 const u8 sPasswordBytes[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-const u16 sUnk_0203E44E[] = {
+// PASSWORD
+const u16 sPasswordCharacters[] = {
     0x19, 0x0A, 0x1C, 0x1C, 0x20, 0x18, 0x1B, 0x0D
-}; // PASSWORD
+};
 
-const u16 sUnk_0203E45E[] = {
+// PASSWORD PLEASE
+const u16 sPasswordPleaseCharacters[] = {
     0x19, 0x0A, 0x1C, 0x1C, 0x20, 0x18, 0x1B, 0x0D,
     0xFF, 0x19, 0x15, 0x0E, 0x0A, 0x1C, 0x0E
-}; // PASSWORD PLEASE
+};
 
-const u8 sUnk_0203E47C[] = {
+// 1986
+const u8 sTitleScreenOriginalCopyrightText[] = {
     0x01, 0x20, 0x09, 0x20, 0x08, 0x20, 0x06, 0x20
 };
 
-const u16 sUnk_0203E484[] = {
+ // 1986
+const u16 sCreditsOriginalCopyrightYear[] = {
     0x01, 0x09, 0x08, 0x06
 };
 
-const u8 sUnk_0203E48C[] = {
+ // ©1986-2004 NINTENDO
+const u8 sTitleScreenNewCopyrightText[] = {
     0x8F, 0x30, 0x01, 0x20, 0x09, 0x20, 0x08, 0x20,
     0x06, 0x20, 0x3F, 0x40, 0x02, 0x20, 0x00, 0x20,
     0x00, 0x20, 0x04, 0x20, 0xFF, 0x20, 0x17, 0x30,
@@ -60,7 +66,8 @@ const u8 sUnk_0203E48C[] = {
     0x17, 0x30, 0x0D, 0x30, 0x18, 0x30
 };
 
-const u16 sUnk_0203E4B2[] = {
+ // 1986-2004 TODO:verify
+const u16 sCreditsNewCopyrightYear[] = {
     0x01, 0x09, 0x08, 0x06, 0xA9, 0xAA, 0xA8, 0xA8, 0xAB
 };
 
@@ -117,8 +124,8 @@ s32 sub_0203E000(struct EmulatorSP* sp)
     u8 passwordBytes[0x14];
 
     nametable = (u8*)0x06002000;
-    // Check for tiles to say "PASSWORD" for game over screen (off by 1???)
-    if (MemoryCompareAlign16((void*)nametable + 0x14C*2, (u16*)sUnk_0203E44E, sizeof(sUnk_0203E44E)) != 0)
+    // Check for tiles to say "PASSWORD" on game over screen
+    if (MemoryCompareAlign16((void*)nametable + 0x14C*2, (u16*)sPasswordCharacters, sizeof(sPasswordCharacters)) != 0)
     {
         sp->SP_904 &= ~4;
         if (sp->SP_830 == 0x30)
@@ -142,10 +149,12 @@ s32 sub_0203E000(struct EmulatorSP* sp)
         passwordChar = nametable[0x1A9*2 + (nametableIndex * 2)];
 
         nametableIndex += 1;
+        // Skip space between 1st/2nd and 3rd/4th password character sets
         if (nametableIndex == 6 || nametableIndex == 0x46)
         {
             nametableIndex += 1;
         }
+        // Wrap to 3rd set of password characters
         else if (nametableIndex == 0xD)
         {
             nametableIndex = 0x40;
@@ -179,6 +188,7 @@ s32 sub_0203E000(struct EmulatorSP* sp)
         }
     }
 
+    // Save to sPasswordBytes buffer
     MemoryCopy((u8*)sPasswordBytes, passwordBytes, sizeof(sPasswordBytes));
     sp->SP_904 |= 4;
     return 1;
@@ -193,8 +203,8 @@ void sub_0203E118(struct EmulatorSP* sp)
     u16* nametable;
 
     nametable = (u16*)0x06002000;
-    // 0x06002150 is the 4th set of password characters
-    if (MemoryCompareAlign16((void*)nametable + 0x150, (u16*)sUnk_0203E45E, sizeof(sUnk_0203E45E)) != 0)
+    // Check for "PASSWORD PLEASE" tiles at password entry screen
+    if (MemoryCompareAlign16((void*)nametable + 0xA8*2, (u16*)sPasswordPleaseCharacters, sizeof(sPasswordPleaseCharacters)) != 0)
     {
         if (sp->SP_830 == 0x18)
         {
@@ -205,16 +215,18 @@ void sub_0203E118(struct EmulatorSP* sp)
 
     for (i = 0; i < 13; i += 1)
     {
-        // 0x06002109 is the 1st set of password characters
+        // Check if first row already has password characters
         if ((nametable[0x109 + i] & 0xFF) < 0x40)
             return;
 
-        // 0x06002149 is the 3rd set of password characters
+        // Check if second row already has password characters
         if ((nametable[0x149 + i] & 0xFF) < 0x40)
             return;
     }
 
     sp->SP_830 = 0x18;
+
+    // Check for sPasswordBytes already filled
     for (i = 0; i < sizeof(sPasswordBytes); i++)
     {
         if (sPasswordBytes[i] != 0)
@@ -275,16 +287,20 @@ u8* sub_0203E24C(u8* src)
 
 void sub_0203E260(void)
 {
-    u16* unk_06002000;
+    u16* nametable;
 
-    unk_06002000 = (u16*)0x06002000;
-    if (MemoryCompareAlign16(unk_06002000 + 0x4D6/2, (u16*)sUnk_0203E47C, sizeof(sUnk_0203E47C)) == 0)
+    nametable = (u16*)0x06002000;
+    // Check for original Nintendo copyright on title screen
+    if (MemoryCompareAlign16(nametable + 0x26B, (u16*)sTitleScreenOriginalCopyrightText, sizeof(sTitleScreenOriginalCopyrightText)) == 0)
     {
-        MemoryCopy8To16(unk_06002000 + 0x4CE/2, (u8*)sUnk_0203E48C, sizeof(sUnk_0203E48C));
+        // Replace with new Nintendo copyright
+        MemoryCopy8To16(nametable + 0x267, (u8*)sTitleScreenNewCopyrightText, sizeof(sTitleScreenNewCopyrightText));
     }
-    else if (MemoryCompareAlign16(unk_06002000 + 0x71C/2, (u16*)sUnk_0203E484, sizeof(sUnk_0203E484)) == 0)
+    // Check for original Nintendo copyright year in credits
+    else if (MemoryCompareAlign16(nametable + 0x38E, (u16*)sCreditsOriginalCopyrightYear, sizeof(sCreditsOriginalCopyrightYear)) == 0)
     {
-        MemoryCopy8To16(unk_06002000 + 0x716/2, (u8*)sUnk_0203E4B2, sizeof(sUnk_0203E4B2));
+        // Replace with new Nintendo copyright year
+        MemoryCopy8To16(nametable + 0x38B, (u8*)sCreditsNewCopyrightYear, sizeof(sCreditsNewCopyrightYear));
     }
 }
 
