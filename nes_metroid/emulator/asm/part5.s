@@ -231,24 +231,24 @@ sub_0600E1C4: @ 0x0600E1C4
 	mov r4, #0x4000000
 	mov r1, #0x1000
 	orr r1, r1, #0x60
-	strh r1, [r4] @ DISPCNT = 0x1060 (H-Blank Interval Free, One dimension OBJ Character VRAM Mapping, Screen Display OBJ=on)
+	strh r1, [r4] @ REG_DISPCNT = 0x1060 (H-Blank Interval Free, One dimension OBJ Character VRAM Mapping, Screen Display OBJ=on)
 	add r5, r4, #0x208
 	mov r0, #0
-	strh r0, [r5] @ IME = 0 (disable interrupts)
+	strh r0, [r5] @ REG_IME = 0 (disable interrupts)
 	add r6, r4, #0x100
-	strh r0, [r6, #2]   @ TM0CNT_H = 0
-	strh r0, [r6, #6]   @ TM1CNT_H = 0
-	strh r0, [r6, #0xa] @ TM2CNT_H = 0
-	strh r0, [r6, #0xe] @ TM3CNT_H = 0
+	strh r0, [r6, #2]   @ REG_TM0CNT_H = 0
+	strh r0, [r6, #6]   @ REG_TM1CNT_H = 0
+	strh r0, [r6, #0xa] @ REG_TM2CNT_H = 0
+	strh r0, [r6, #0xe] @ REG_TM3CNT_H = 0
 	mov r1, #8
-	strh r1, [r4, #4] @ DISPSTAT = 8 (V-Blank IRQ Enable) (why does debugger say 0xA?)
+	strh r1, [r4, #4] @ REG_DISPSTAT = 8 (V-Blank IRQ Enable) (why does debugger say 0xA?)
 	mov r1, #0x31
 	orr r1, r1, #0x2000
-	strh r1, [r5, #-8] @ IE = 0x2031 (Game Pak, Timer 1 Overflow, Timer 0 Overflow, LCD V-Blank)
+	strh r1, [r5, #-8] @ REG_IE = 0x2031 (Game Pak, Timer 1 Overflow, Timer 0 Overflow, LCD V-Blank)
 	mvn r1, #0
-	strh r1, [r5, #-6] @ IF = 0xFFFF (acknowledge all interrupt requests)
+	strh r1, [r5, #-6] @ REG_IF = 0xFFFF (acknowledge all interrupt requests)
 	mov r1, #1
-	strh r1, [r5] @ IME = 1 (enable interrupts)
+	strh r1, [r5] @ REG_IME = 1 (enable interrupts)
 	@ sub_03000488()
 	ldr r4, _0600E234 @ =sub_03000488
 	add lr, pc, #0x0 @ =_0600E224

@@ -208,9 +208,9 @@ _0600657C:
 
 	mov ip, #0x4000000
 	mov fp, #0x700
-	strh fp, [ip, #8] @ BG0CNT = 0x700 (Screen Base Block = 7)
+	strh fp, [ip, #8] @ REG_BG0CNT = 0x700 (Screen Base Block = 7)
 	mov fp, #0x80000
-	str fp, [ip, #0x10] @ BG0HOFS = 0, BG0VOFS = 8
+	str fp, [ip, #0x10] @ REG_BG0HOFS = 0, REG_BG0VOFS = 8
 
 	@ OR 0x7c0 bytes from 0x06003840 with 0x01820182
 	ldr r4, _060069A8 @ =0x06003840
@@ -417,7 +417,7 @@ _0600683C:
 	str lr, [sp, #SP_924] @ SP_924 = 0x087D8000
 	ldr r1, _060069E0 @ =sub_030057A8
 	ldr r2, _060069E4 @ =0x03007000
-	str r1, [r2, #0xffc] @ 0x03007FFC = sub_030057A8
+	str r1, [r2, #0xffc] @ 0x03007FFC = sub_030057A8 (Interrupt handler)
 
 _06006880:
 	bl sub_0600E754
@@ -498,7 +498,7 @@ _06006964:
 _06006968:
 	mov ip, #0x4000000
 	mov r0, #0
-	strh r0, [ip] @ DISPCNT = 0 (Display off)
+	strh r0, [ip] @ REG_DISPCNT = 0 (Display off)
 	@ sub_0600E048(0x920, SP)
 	@ goto sub_0600C00C() (does not return)
 	mov r0, #0x900
