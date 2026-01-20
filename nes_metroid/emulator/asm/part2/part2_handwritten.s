@@ -1031,6 +1031,18 @@ _030034A8:
 	ldrlt pc, [r12, r1, lsl #2]
 	b _03005398
 
+@ Register usage:
+@ r0-r3 are scratch
+@ r4 seems to be a set of flags (TODO: possibly status register?)
+@ r5 points to code execution (ROM)
+@ r6 is likely the NES stack pointer (TODO: confirm)
+@ r7 is used for Register A
+@ r8 is used for Register X
+@ r9 is used for Register Y
+@ r10 is likely the carry flag (TODO: confirm)
+@ r11 is the pointer to _030029AC (TODO: figure out positive indexes, negative indexes into read addresses)
+@ r12 is the pointer to _030029F0 (positive indexes into opcode addresses, negative indexes into write addresses)
+
 Opcode_LDA_Immediate: @ 0x030034D0
 	ldrb r3, [r5], #1
 	and r7, r3, #0xff
