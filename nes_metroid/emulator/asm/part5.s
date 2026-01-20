@@ -4,6 +4,8 @@
 
     .syntax unified
 
+	.section .rodata
+
 	.4byte 0x006D3D34
 	.4byte 0x001B4F4D
 
@@ -26,6 +28,8 @@ sUnk_0600E008:
 	.4byte 0x000006E2
 	.4byte 0x00000370
 	.4byte 0x0000036B
+
+	.section .text
 
 	thumb_func_start sub_0600E048
 sub_0600E048: @ 0x0600E048

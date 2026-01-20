@@ -4,6 +4,8 @@
 
     .syntax unified
 
+	.section .data
+
     .global sUnk_030023DC
 sUnk_030023DC:
     .byte 0x05, 0x7F, 0x0A, 0x01
@@ -202,14 +204,15 @@ sUnk_03002948:
 sUnk_03002988:
 	.4byte 0x00000000
 
-_0300298C: .4byte sub_03005250
-_03002990: .4byte sub_03002E38
-_03002994: .4byte sub_03002E38
-_03002998: .4byte sub_03002E38
-_0300299C: .4byte sub_03002E38
-_030029A0: .4byte sub_03002E2C
-_030029A4: .4byte sub_03002EFC
-_030029A8: .4byte sub_03002E44
+	@ Loads
+_0300298C: .4byte sub_03005250 @ Addresses $1XXXX-$11XXX (Is this possible?)
+_03002990: .4byte sub_03002E38 @ Addresses $EXXX-$FXXX (ROM)
+_03002994: .4byte sub_03002E38 @ Addresses $CXXX-$DXXX (ROM)
+_03002998: .4byte sub_03002E38 @ Addresses $AXXX-$BXXX (ROM)
+_0300299C: .4byte sub_03002E38 @ Addresses $8XXX-$9XXX (ROM)
+_030029A0: .4byte sub_03002E2C @ Addresses $6XXX-$7XXX (RAM)
+_030029A4: .4byte sub_03002EFC @ Addresses $4XXX-$5XXX (APU/2A03)
+_030029A8: .4byte sub_03002E44 @ Addresses $2XXX-$3XXX (PPU)
 
 	.global _030029AC
 _030029AC: .4byte 0x00000000
@@ -222,14 +225,15 @@ _030029C4: .4byte 0x00000000
 _030029C8: .4byte 0x00000000
 _030029CC: .4byte 0x00000000
 
-_030029D0: .4byte sub_0600B000
-_030029D4: .4byte sub_03005844
-_030029D8: .4byte sub_03005844
-_030029DC: .4byte sub_03005844
-_030029E0: .4byte sub_03005844
-_030029E4: .4byte _03003044
-_030029E8: .4byte sub_030033A4
-_030029EC: .4byte sub_0300305C
+	@ Writes
+_030029D0: .4byte sub_0600B000 @ Addresses $1XXXX-$11XXX (Is this possible?)
+_030029D4: .4byte sub_03005844 @ Addresses $EXXX-$FXXX (ROM)
+_030029D8: .4byte sub_03005844 @ Addresses $CXXX-$DXXX (ROM)
+_030029DC: .4byte sub_03005844 @ Addresses $AXXX-$BXXX (ROM)
+_030029E0: .4byte sub_03005844 @ Addresses $8XXX-$9XXX (ROM)
+_030029E4: .4byte sub_03003044 @ Addresses $6XXX-$7XXX (RAM)
+_030029E8: .4byte sub_030033A4 @ Addresses $4XXX-$5XXX (APU/2A03)
+_030029EC: .4byte sub_0300305C @ Addresses $2XXX-$3XXX (PPU)
 
 	.global _030029F0
 _030029F0: .4byte Opcode_BRK @ 0x00
@@ -489,6 +493,8 @@ _03002DE4: .4byte Opcode_SBC_AbsoluteX @ 0xFD
 _03002DE8: .4byte Opcode_INC_AbsoluteX @ 0xFE
 _03002DEC: .4byte Opcode_NOP @ 0xFF
 
+	.section .text
+
 	@ Potentially some sort of checksum/CRC function
 	arm_func_start sub_03002DF0
 sub_03002DF0: @ 0x03002DF0
@@ -519,18 +525,21 @@ sub_03002E0C: @ 0x03002E0C
 	@ Goto ip[r1]
 	ldr pc, [ip, r1, lsl #2]
 
+	@ Reads from RAM
 	arm_func_start sub_03002E2C
 sub_03002E2C: @ 0x03002E2C
 	ldr r1, [sp, #SP_858]
 	ldrb r3, [r0, r1, lsl #8]
 	mov pc, lr
 
+	@ Reads from ROM
 	arm_func_start sub_03002E38
 sub_03002E38: @ 0x03002E38
 	ldr r1, [fp, r2, lsl #2]
 	ldrb r3, [r0, r1, lsl #8]
 	mov pc, lr
 
+	@ Reads from PPU registers
 	@ TODO: continue commenting from here
 	arm_func_start sub_03002E44
 sub_03002E44: @ 0x03002E44
@@ -588,6 +597,7 @@ _03002EE4:
 	strb r2, [sp, #SP_A3F]
 	b _03002EC8
 
+	@ Reads from APU/2A03 registers
 	arm_func_start sub_03002EFC
 sub_03002EFC: @ 0x03002EFC
 	tst r0, #0x1f00
@@ -670,13 +680,17 @@ _03003028:
 	str r2, [sp, #SP_82C]
 	mov pc, lr
 
+	@ Invalid/Unused/Dontcare register
 	arm_func_start sub_03003034
 sub_03003034: @ 0x03003034
 	cmp r4, #0
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
-_03003044:
+
+	@ Writes to RAM
+	arm_func_start sub_03003044
+sub_03003044: @ 0x03003044
 	ldr r2, [sp, #SP_858]
 	strb r1, [r0, r2, lsl #8]
 	cmp r4, #0
@@ -684,23 +698,25 @@ _03003044:
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
 
+	@ Writes to PPU registers
 	arm_func_start sub_0300305C
 sub_0300305C: @ 0x0300305C
 	@ Goto _0300306C[r0]
 	and r0, r0, #7
 	ldr pc, [pc, r0, lsl #2]
 _03003068:
-	.byte 0x00, 0x00, 0x00, 0x00
+	.4byte 0x00000000
 _0300306C:
-	.4byte sub_0600B018
-	.4byte sub_0600B078
-	.4byte sub_03003034
-	.4byte sub_0600B078
-	.4byte sub_0600B068
-	.4byte sub_0600B090
-	.4byte sub_030031D4
-	.4byte sub_03003088
+	.4byte sub_0600B018 @ PPUCTRL
+	.4byte sub_0600B078 @ PPUMASK
+	.4byte sub_03003034 @ PPUSTATUS
+	.4byte sub_0600B078 @ OAMADDR
+	.4byte sub_0600B068 @ OAMDATA
+	.4byte sub_0600B090 @ PPUSCROLL
+	.4byte sub_030031D4 @ PPUADDR
+	.4byte sub_03003088 @ PPUDATA
 
+	@ Writes to PPUDATA
 	arm_func_start sub_03003088
 sub_03003088: @ 0x03003088
 	ldr r0, [sp, #SP_8B8]
@@ -792,6 +808,7 @@ _030031C8: .4byte sub_03000380
 _030031CC: .4byte 0x06015400
 _030031D0: .4byte 0x06015540
 
+	@ Writes to PPUADDR
 	arm_func_start sub_030031D4
 sub_030031D4: @ 0x030031D4
 	tst fp, #0x200000
@@ -918,6 +935,7 @@ _03003380:
 	strb r1, [sp, #SP_8E0]
 	b _03003260
 
+	@ Writes to APU/2A03 registers
 	arm_func_start sub_030033A4
 sub_030033A4: @ 0x030033A4
 	tst r0, #0x1fc0
@@ -929,13 +947,14 @@ sub_030033A4: @ 0x030033A4
 	blt _030034A8
 	@ goto _030033C8[r2]
 	ldr pc, [pc, r2, lsl #2]
-
+_030033C4:
 	.4byte 0x000000
 _030033C8:
-	.4byte _030033F8
-	.4byte _030034A8
-	.4byte _03003444
-	.4byte _03003494
+	.4byte sub_030033F8 @ OAMDMA
+	.4byte _030034A8 @ SND_CHN
+	.4byte sub_03003444 @ JOY1
+	.4byte sub_03003494 @ JOY2
+	.4byte sub_03003034 @ Invalid/Unused/Dontcare registers
 	.4byte sub_03003034
 	.4byte sub_03003034
 	.4byte sub_03003034
@@ -943,8 +962,10 @@ _030033C8:
 	.4byte sub_03003034
 	.4byte sub_03003034
 	.4byte sub_03003034
-	.4byte sub_03003034
-_030033F8:
+
+	@ Writes to OAMDMA
+	arm_func_start sub_030033F8
+sub_030033F8: @ 0x030033F8
 	mov lr, #0x4000000
 	add lr, lr, #0xd4
 	lsr r0, r1, #0xd
@@ -964,7 +985,10 @@ _030033F8:
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
-_03003444:
+
+	@ Writes to JOY1
+	arm_func_start sub_03003444
+sub_03003444: @ 0x03003444
 	strb r1, [sp, #SP_A3B]
 	tst r1, #1
 	beq _03003484
@@ -986,7 +1010,10 @@ _03003484:
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
-_03003494:
+
+	@ Writes to JOY2
+	arm_func_start sub_03003494
+sub_03003494: @ 0x03003494
 	ands r2, r1, #0xc0
 	strb r2, [sp, #SP_A3C]
 	bne _030034A8
@@ -1003,6 +1030,7 @@ _030034A8:
 	ldrblt r1, [r5], #1
 	ldrlt pc, [ip, r1, lsl #2]
 	b _03005398
+
 Opcode_LDA_Immediate: @ 0x030034D0
 	ldrb r3, [r5], #1
 	and r7, r3, #0xff
@@ -3445,6 +3473,7 @@ _03005794:
 	.align 2, 0
 _030057A4: .4byte 0x0000C401
 
+	@ Interrupt handler
 	arm_func_start sub_030057A8
 sub_030057A8: @ 0x030057A8
 	mov ip, #0x4000000
@@ -3503,6 +3532,7 @@ sub_0300583C: @ 0x0300583C
 sUnk_03005840: @ 0x03005840
 	.4byte 0x0600B800
 
+	@ Writes to ROM (invalid?)
 	arm_func_start sub_03005844
 sub_03005844: @ 0x03005844
 	tst r1, #0x80
