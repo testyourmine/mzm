@@ -7,10 +7,11 @@
 
 extern u8 sUnk_030023DC[];
 
+// SQ1_HI
 void sub_030009A0(u8 arg0)
 {
-    gUnk_03005A9E = arg0;
-    sub_03000848(((arg0 & 7) << 8) | gUnk_03005A9C);
+    gEmuAudio_Pulse1_Hi = arg0;
+    sub_03000848(((arg0 & 7) << 8) | gEmuAudio_Pulse1_Lo);
     if (gUnk_03005FCC == 0)
     {
         sub_03000778();
@@ -24,10 +25,10 @@ void sub_030009DC(void)
     gUnk_03005FD0 = 0;
     gUnk_03005A94 = 0;
     gUnk_03005A96 = 0;
-    gUnk_03005A98 = 0;
-    gUnk_03005A9A = 0;
-    gUnk_03005A9C = 0;
-    gUnk_03005A9E = 0;
+    gEmuAudio_Pulse1_Vol = 0;
+    gEmuAudio_Pulse1_Sweep = 0;
+    gEmuAudio_Pulse1_Lo = 0;
+    gEmuAudio_Pulse1_Hi = 0;
     gUnk_03005AA0 = 0;
     gUnk_03005AA2 = 0;
     gUnk_03005FCC = 0;
@@ -60,9 +61,9 @@ void sub_03000D38(void)
     }
 
     gUnk_03005AC6 = 0;
-    if (gUnk_03005AB8 & 0x10)
+    if (gEmuAudio_Pulse2_Vol & 0x10)
     {
-        gUnk_03005AB4 = gUnk_03005AB8 & 0xF;
+        gUnk_03005AB4 = gEmuAudio_Pulse2_Vol & 0xF;
     }
     else
     {
@@ -79,8 +80,8 @@ void sub_03000D38(void)
         gUnk_03005ACA = 4;
     }
 
-    sub_03000D2C(sUnk_030023DC[gUnk_03005ABE >> 3] * 4);
-    if (gUnk_03005A7A & 2)
+    sub_03000D2C(sUnk_030023DC[gEmuAudio_Pulse2_Hi >> 3] * 4);
+    if (gEmuAudio_SndChn & 2)
     {
         gUnk_03005FD8 = 1;
         gUnk_03005AC4 = 0;
@@ -99,7 +100,7 @@ void sub_03000E10(void)
 {
     if (gUnk_03005ACC != 0)
     {
-        sub_03000E40((gUnk_03005AC0 & 0xF00) | gUnk_03005ABC);
+        sub_03000E40((gUnk_03005AC0 & 0xF00) | gEmuAudio_Pulse2_Lo);
     }
 }
 
@@ -115,7 +116,7 @@ void sub_03000E40(u16 arg0)
         return;
     }
 
-    gUnk_03005FC4 = 0x1B4F4DU / (arg0 + 1);
+    gUnk_03005FC4 = NES_CLOCK_SPEED / (arg0 + 1);
     tmp = gUnk_03005FD0; // fake
     if (tmp == gUnk_03005FC4)
     {
@@ -130,20 +131,21 @@ void sub_03000E94(u8 arg0)
     gUnk_03005AC2 = 1;
 }
 
+// SQ2_VOL
 void sub_03000EAC(u8 arg0)
 {
     u8 var_0;
     u8 var_1;
 
-    var_0 = gUnk_03005AB8 & 0x10;
+    var_0 = gEmuAudio_Pulse2_Vol & 0x10;
     var_1 = arg0 & 0x10;
 
-    gUnk_03005AB8 = arg0;
+    gEmuAudio_Pulse2_Vol = arg0;
     gUnk_03005ACD = 0;
 
     if ((arg0 & 0xC0) == 0xC0)
     {
-        gUnk_03005AB8 = arg0 & 0x7F;
+        gEmuAudio_Pulse2_Vol = arg0 & 0x7F;
     }
 
     if ((var_0 != 0) && (var_1 == 0) && (gUnk_03005FD8 != 0))
@@ -153,22 +155,25 @@ void sub_03000EAC(u8 arg0)
     }
 }
 
+// SQ2_SWEEP
 void sub_03000F10(u8 arg0)
 {
-    gUnk_03005ABA = arg0;
+    gEmuAudio_Pulse2_Sweep = arg0;
     gUnk_03005ACA = 1;
 }
 
+// SQ2_LO
 void sub_03000F28(u8 arg0)
 {
-    gUnk_03005ABC = arg0;
+    gEmuAudio_Pulse2_Lo = arg0;
     gUnk_03005ACC = 1;
 }
 
+// SQ2_HI
 void sub_03000F40(u8 arg0)
 {
-    gUnk_03005ABE = arg0;
-    sub_03000E40(((arg0 & 7) << 8) | gUnk_03005ABC);
+    gEmuAudio_Pulse2_Hi = arg0;
+    sub_03000E40(((arg0 & 7) << 8) | gEmuAudio_Pulse2_Lo);
     if (gUnk_03005FD8 == 0)
     {
         sub_03000D20();
@@ -182,10 +187,10 @@ void sub_03000F7C(void)
     gUnk_03005FC4 = 0;
     gUnk_03005AB4 = 0;
     gUnk_03005AB6 = 0;
-    gUnk_03005AB8 = 0;
-    gUnk_03005ABA = 0;
-    gUnk_03005ABC = 0;
-    gUnk_03005ABE = 0;
+    gEmuAudio_Pulse2_Vol = 0;
+    gEmuAudio_Pulse2_Sweep = 0;
+    gEmuAudio_Pulse2_Lo = 0;
+    gEmuAudio_Pulse2_Hi = 0;
     gUnk_03005AC0 = 0;
     gUnk_03005AC2 = 0;
     gUnk_03005FD8 = 0;

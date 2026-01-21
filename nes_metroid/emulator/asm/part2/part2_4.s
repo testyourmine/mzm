@@ -31,20 +31,20 @@ _0300133C: .4byte gUnk_03005AD4
 sub_03001340: @ 0x03001340
 	push {r4, lr}
 	ldr r1, _030013A4 @ =sUnk_030023DC
-	ldr r0, _030013A8 @ =gUnk_03005AE2
+	ldr r0, _030013A8 @ =gEmuAudio_Triangle_Hi
 	ldrh r0, [r0]
 	lsrs r0, r0, #3
 	adds r0, r0, r1
 	ldrb r0, [r0]
 	lsls r0, r0, #2
 	bl sub_03001334
-	ldr r0, _030013AC @ =gUnk_03005ADE
+	ldr r0, _030013AC @ =gEmuAudio_Triangle_Linear
 	ldrh r1, [r0]
 	movs r0, #0x7f
 	ands r0, r1
 	cmp r0, #0
 	beq _03001382
-	ldr r0, _030013B0 @ =gUnk_03005A7A
+	ldr r0, _030013B0 @ =gEmuAudio_SndChn
 	ldrh r1, [r0]
 	movs r0, #4
 	ands r0, r1
@@ -63,7 +63,7 @@ _03001378:
 	strh r0, [r1]
 _03001382:
 	ldr r2, _030013BC @ =gUnk_03005AD6
-	ldr r0, _030013AC @ =gUnk_03005ADE
+	ldr r0, _030013AC @ =gEmuAudio_Triangle_Linear
 	ldrh r1, [r0]
 	movs r0, #0x7f
 	ands r0, r1
@@ -81,9 +81,9 @@ _03001382:
 	bx r0
 	.align 2, 0
 _030013A4: .4byte sUnk_030023DC
-_030013A8: .4byte gUnk_03005AE2
-_030013AC: .4byte gUnk_03005ADE
-_030013B0: .4byte gUnk_03005A7A
+_030013A8: .4byte gEmuAudio_Triangle_Hi
+_030013AC: .4byte gEmuAudio_Triangle_Linear
+_030013B0: .4byte gEmuAudio_SndChn
 _030013B4: .4byte gUnk_03005FB0
 _030013B8: .4byte gUnk_03005AD8
 _030013BC: .4byte gUnk_03005AD6
@@ -173,7 +173,7 @@ sub_03001458: @ 0x03001458
 	lsrs r0, r0, #0x18
 	ldr r3, _03001488 @ =gUnk_03005AD6
 	ldrh r2, [r3]
-	ldr r1, _0300148C @ =gUnk_03005ADE
+	ldr r1, _0300148C @ =gEmuAudio_Triangle_Linear
 	strh r0, [r1]
 	movs r1, #0x7f
 	ands r1, r0
@@ -193,7 +193,7 @@ sub_03001458: @ 0x03001458
 	b _030014BC
 	.align 2, 0
 _03001488: .4byte gUnk_03005AD6
-_0300148C: .4byte gUnk_03005ADE
+_0300148C: .4byte gEmuAudio_Triangle_Linear
 _03001490: .4byte gUnk_03005AE4
 _03001494:
 	bl sub_030013C8
@@ -228,14 +228,14 @@ _030014C4: .4byte gUnk_03005AE4
 sub_030014C8: @ 0x030014C8
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	ldr r1, _030014D8 @ =gUnk_03005AE0
+	ldr r1, _030014D8 @ =gEmuAudio_Triangle_Lo
 	strh r0, [r1]
 	ldr r1, _030014DC @ =sUnk_03002845
 	movs r0, #1
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_030014D8: .4byte gUnk_03005AE0
+_030014D8: .4byte gEmuAudio_Triangle_Lo
 _030014DC: .4byte sUnk_03002845
 
 	thumb_func_start sub_030014E0
@@ -250,12 +250,12 @@ sub_030014E0: @ 0x030014E0
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	bne _03001508
-	ldr r0, _03001510 @ =gUnk_03005AE2
+	ldr r0, _03001510 @ =gEmuAudio_Triangle_Hi
 	ldrh r1, [r0]
 	movs r0, #7
 	ands r0, r1
 	lsls r0, r0, #8
-	ldr r1, _03001514 @ =gUnk_03005AE0
+	ldr r1, _03001514 @ =gEmuAudio_Triangle_Lo
 	ldrh r1, [r1]
 	orrs r0, r1
 	bl sub_030013F0
@@ -264,8 +264,8 @@ _03001508:
 	bx r0
 	.align 2, 0
 _0300150C: .4byte sUnk_03002845
-_03001510: .4byte gUnk_03005AE2
-_03001514: .4byte gUnk_03005AE0
+_03001510: .4byte gEmuAudio_Triangle_Hi
+_03001514: .4byte gEmuAudio_Triangle_Lo
 
 	thumb_func_start sub_03001518
 sub_03001518: @ 0x03001518
@@ -273,7 +273,7 @@ sub_03001518: @ 0x03001518
 	adds r1, r0, #0
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
-	ldr r4, _03001548 @ =gUnk_03005AE2
+	ldr r4, _03001548 @ =gEmuAudio_Triangle_Hi
 	strh r1, [r4]
 	ldr r2, _0300154C @ =gUnk_03005AE4
 	movs r0, #1
@@ -281,7 +281,7 @@ sub_03001518: @ 0x03001518
 	movs r0, #7
 	ands r0, r1
 	lsls r0, r0, #8
-	ldr r1, _03001550 @ =gUnk_03005AE0
+	ldr r1, _03001550 @ =gEmuAudio_Triangle_Lo
 	ldrh r1, [r1]
 	orrs r0, r1
 	bl sub_030013F0
@@ -292,9 +292,9 @@ sub_03001518: @ 0x03001518
 	bl sub_03001340
 	b _0300157C
 	.align 2, 0
-_03001548: .4byte gUnk_03005AE2
+_03001548: .4byte gEmuAudio_Triangle_Hi
 _0300154C: .4byte gUnk_03005AE4
-_03001550: .4byte gUnk_03005AE0
+_03001550: .4byte gEmuAudio_Triangle_Lo
 _03001554: .4byte gUnk_03005FB0
 _03001558:
 	ldr r1, _03001584 @ =sUnk_030023DC
@@ -305,7 +305,7 @@ _03001558:
 	lsls r0, r0, #2
 	bl sub_03001334
 	ldr r2, _03001588 @ =gUnk_03005AD6
-	ldr r0, _0300158C @ =gUnk_03005ADE
+	ldr r0, _0300158C @ =gEmuAudio_Triangle_Linear
 	ldrh r1, [r0]
 	movs r0, #0x7f
 	ands r0, r1
@@ -321,7 +321,7 @@ _0300157C:
 	.align 2, 0
 _03001584: .4byte sUnk_030023DC
 _03001588: .4byte gUnk_03005AD6
-_0300158C: .4byte gUnk_03005ADE
+_0300158C: .4byte gEmuAudio_Triangle_Linear
 _03001590: .4byte gUnk_03005AD8
 
 	thumb_func_start sub_03001594
@@ -344,11 +344,11 @@ sub_03001594: @ 0x03001594
 	strh r1, [r0]
 	ldr r0, _030015F0 @ =gUnk_03005ADC
 	strh r1, [r0]
-	ldr r0, _030015F4 @ =gUnk_03005ADE
+	ldr r0, _030015F4 @ =gEmuAudio_Triangle_Linear
 	strh r1, [r0]
-	ldr r0, _030015F8 @ =gUnk_03005AE0
+	ldr r0, _030015F8 @ =gEmuAudio_Triangle_Lo
 	strh r1, [r0]
-	ldr r0, _030015FC @ =gUnk_03005AE2
+	ldr r0, _030015FC @ =gEmuAudio_Triangle_Hi
 	strh r1, [r0]
 	ldr r0, _03001600 @ =gUnk_03005AE4
 	strh r1, [r0]
@@ -366,9 +366,9 @@ _030015E4: .4byte gUnk_03005FB0
 _030015E8: .4byte gUnk_03005AD8
 _030015EC: .4byte gUnk_03005ADA
 _030015F0: .4byte gUnk_03005ADC
-_030015F4: .4byte gUnk_03005ADE
-_030015F8: .4byte gUnk_03005AE0
-_030015FC: .4byte gUnk_03005AE2
+_030015F4: .4byte gEmuAudio_Triangle_Linear
+_030015F8: .4byte gEmuAudio_Triangle_Lo
+_030015FC: .4byte gEmuAudio_Triangle_Hi
 _03001600: .4byte gUnk_03005AE4
 _03001604: .4byte gUnk_03005FD4
 _03001608: .4byte sUnk_03002845
@@ -399,7 +399,7 @@ _03001634:
 	ldr r2, _0300170C @ =gUnk_03005AE4
 	mov r3, #0
 	strh r3, [r2]
-	ldr r2, _03001710 @ =gUnk_03005ADE
+	ldr r2, _03001710 @ =gEmuAudio_Triangle_Linear
 	ldrh r2, [r2]
 	tst r2, #0x80
 	beq _030016E8
@@ -455,7 +455,7 @@ _03001700: .4byte gUnk_03005AD8
 _03001704: .4byte sUnk_03002645
 _03001708: .4byte gUnk_03005AD6
 _0300170C: .4byte gUnk_03005AE4
-_03001710: .4byte gUnk_03005ADE
+_03001710: .4byte gEmuAudio_Triangle_Linear
 _03001714: .4byte sUnk_03002645
 _03001718: .4byte gUnk_03005ADA
 _0300171C: .4byte gUnk_03005AD0

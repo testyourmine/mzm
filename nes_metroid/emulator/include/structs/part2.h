@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define NES_CLOCK_SPEED 1789773u
+
 extern void* gUnk_03005A50;
 extern void* gUnk_03005A54;
 extern void* gUnk_03005A58;
@@ -12,8 +14,8 @@ extern u8 gUnk_03005A5E;
 extern u16 gUnk_03005A60;
 extern void (*gUnk_03005A64)(void*, u32);
 extern u16 gUnk_03005A68[]; // length?
-extern u16 gUnk_03005A7A;
-extern u16 gUnk_03005A7C;
+extern u16 gEmuAudio_SndChn;
+extern u16 gEmuAudio_FrameCtr;
 extern u32* gUnk_03005A80;
 extern u32* gUnk_03005A84;
 extern u32* gUnk_03005A88;
@@ -21,10 +23,10 @@ extern u32* gUnk_03005A8C;
 extern u32 gUnk_03005A90;
 extern u16 gUnk_03005A94;
 extern u16 gUnk_03005A96;
-extern u16 gUnk_03005A98;
-extern u16 gUnk_03005A9A;
-extern u16 gUnk_03005A9C;
-extern u16 gUnk_03005A9E;
+extern u16 gEmuAudio_Pulse1_Vol;
+extern u16 gEmuAudio_Pulse1_Sweep;
+extern u16 gEmuAudio_Pulse1_Lo;
+extern u16 gEmuAudio_Pulse1_Hi;
 extern u16 gUnk_03005AA0;
 extern u16 gUnk_03005AA2;
 extern u16 gUnk_03005AA4;
@@ -36,10 +38,10 @@ extern u8 gUnk_03005AAD;
 extern u32 gUnk_03005AB0;
 extern u16 gUnk_03005AB4;
 extern u16 gUnk_03005AB6;
-extern u16 gUnk_03005AB8;
-extern u16 gUnk_03005ABA;
-extern u16 gUnk_03005ABC;
-extern u16 gUnk_03005ABE;
+extern u16 gEmuAudio_Pulse2_Vol;
+extern u16 gEmuAudio_Pulse2_Sweep;
+extern u16 gEmuAudio_Pulse2_Lo;
+extern u16 gEmuAudio_Pulse2_Hi;
 extern u16 gUnk_03005AC0;
 extern u16 gUnk_03005AC2;
 extern u16 gUnk_03005AC4;
@@ -54,9 +56,9 @@ extern u16 gUnk_03005AD6;
 extern u16 gUnk_03005AD8;
 extern u16 gUnk_03005ADA;
 extern u16 gUnk_03005ADC;
-extern u16 gUnk_03005ADE;
-extern u16 gUnk_03005AE0;
-extern u16 gUnk_03005AE2;
+extern u16 gEmuAudio_Triangle_Linear;
+extern u16 gEmuAudio_Triangle_Lo;
+extern u16 gEmuAudio_Triangle_Hi;
 extern u16 gUnk_03005AE4;
 extern u32 gUnk_03005AE8;
 extern u32 gUnk_03005AEC;
@@ -67,10 +69,10 @@ extern u16 gUnk_03005AF8;
 extern u16 gUnk_03005AFA;
 extern u16 gUnk_03005AFC;
 extern u16 gUnk_03005AFE;
-extern u16 gUnk_03005B00;
+extern u16 gEmuAudio_Noise_Vol;
 extern u16 gUnk_03005B02;
-extern u16 gUnk_03005B04;
-extern u16 gUnk_03005B06;
+extern u16 gEmuAudio_Noise_Lo;
+extern u16 gEmuAudio_Noise_Hi;
 extern u8 gUnk_03005B08;
 extern u32 gUnk_03005B10[];
 extern u32 gUnk_03005B50[];

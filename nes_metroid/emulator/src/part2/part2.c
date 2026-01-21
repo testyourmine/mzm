@@ -15,30 +15,30 @@ u32 sUnk_03002370 = DMA_32BIT | DMA_DEST_FIXED;
 u8 sUnk_03002374 = 0;
 
 void (*sUnk_03002378[0x18])(u8) = {
-    sub_030008B4,
-    sub_03000918,
-    sub_03000930,
-    sub_030009A0,
-    sub_03000EAC,
-    sub_03000F10,
-    sub_03000F28,
-    sub_03000F40,
-    sub_03001458,
-    sub_03000404,
-    sub_030014C8,
-    sub_03001518,
-    sub_0300187C,
-    sub_03000404,
-    sub_030018E0,
-    sub_03001944,
-    sub_03000404,
-    sub_03000404,
-    sub_03000404,
-    sub_03000404,
-    sub_03000404,
-    sub_03001C10,
-    sub_03000404,
-    sub_03001C58,
+    sub_030008B4, // SQ1_VOL
+    sub_03000918, // SQ1_SWEEP
+    sub_03000930, // SQ1_LO
+    sub_030009A0, // SQ1_HI
+    sub_03000EAC, // SQ2_VOL
+    sub_03000F10, // SQ2_SWEEP
+    sub_03000F28, // SQ2_LO
+    sub_03000F40, // SQ2_HI
+    sub_03001458, // TRI_LINEAR
+    sub_03000404, // 
+    sub_030014C8, // TRI_LO
+    sub_03001518, // TRI_HI
+    sub_0300187C, // NOISE_VOL
+    sub_03000404, // 
+    sub_030018E0, // NOISE_LO
+    sub_03001944, // NOISE_HI
+    sub_03000404, // 
+    sub_03000404, // 
+    sub_03000404, // 
+    sub_03000404, // 
+    sub_03000404, // 
+    sub_03001C10, // SND_CHN
+    sub_03000404, // 
+    sub_03001C58, // JOY2 (frame counter)
 };
 
 u32 sUnk_030023D8 = DMA_32BIT | DMA_DEST_FIXED;

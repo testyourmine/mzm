@@ -244,7 +244,7 @@ _030007A4: .4byte gUnk_03005AA6
 _030007A8:
 	ldr r0, _030007C0 @ =gUnk_03005AA6
 	strh r1, [r0]
-	ldr r0, _030007C4 @ =gUnk_03005A98
+	ldr r0, _030007C4 @ =gEmuAudio_Pulse1_Vol
 	ldrh r2, [r0]
 	movs r0, #0x10
 	ands r0, r2
@@ -256,7 +256,7 @@ _030007A8:
 	b _030007D0
 	.align 2, 0
 _030007C0: .4byte gUnk_03005AA6
-_030007C4: .4byte gUnk_03005A98
+_030007C4: .4byte gEmuAudio_Pulse1_Vol
 _030007C8: .4byte gUnk_03005A94
 _030007CC:
 	ldr r1, _03000808 @ =gUnk_03005A94
@@ -267,14 +267,14 @@ _030007D0:
 	movs r0, #0xf
 	strh r0, [r1]
 	ldr r1, _03000810 @ =sUnk_030023DC
-	ldr r0, _03000814 @ =gUnk_03005A9E
+	ldr r0, _03000814 @ =gEmuAudio_Pulse1_Hi
 	ldrh r0, [r0]
 	lsrs r0, r0, #3
 	adds r0, r0, r1
 	ldrb r0, [r0]
 	lsls r0, r0, #2
 	bl sub_03000784
-	ldr r0, _03000818 @ =gUnk_03005A7A
+	ldr r0, _03000818 @ =gEmuAudio_SndChn
 	ldrh r1, [r0]
 	movs r2, #1
 	adds r0, r2, #0
@@ -294,8 +294,8 @@ _03000802:
 _03000808: .4byte gUnk_03005A94
 _0300080C: .4byte gUnk_03005AA2
 _03000810: .4byte sUnk_030023DC
-_03000814: .4byte gUnk_03005A9E
-_03000818: .4byte gUnk_03005A7A
+_03000814: .4byte gEmuAudio_Pulse1_Hi
+_03000818: .4byte gEmuAudio_SndChn
 _0300081C: .4byte gUnk_03005FCC
 _03000820: .4byte gUnk_03005AA4
 
@@ -378,7 +378,7 @@ sub_030008B4: @ 0x030008B4
 	push {r4, r5, lr}
 	lsls r0, r0, #0x18
 	lsrs r3, r0, #0x18
-	ldr r4, _03000908 @ =gUnk_03005A98
+	ldr r4, _03000908 @ =gEmuAudio_Pulse1_Vol
 	ldrb r1, [r4]
 	movs r2, #0x10
 	adds r0, r2, #0
@@ -419,7 +419,7 @@ _03000900:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_03000908: .4byte gUnk_03005A98
+_03000908: .4byte gEmuAudio_Pulse1_Vol
 _0300090C: .4byte gUnk_03005AAD
 _03000910: .4byte gUnk_03005FCC
 _03000914: .4byte gUnk_03005AA2
@@ -428,28 +428,28 @@ _03000914: .4byte gUnk_03005AA2
 sub_03000918: @ 0x03000918
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	ldr r1, _03000928 @ =gUnk_03005A9A
+	ldr r1, _03000928 @ =gEmuAudio_Pulse1_Sweep
 	strh r0, [r1]
 	ldr r1, _0300092C @ =gUnk_03005AAA
 	movs r0, #1
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_03000928: .4byte gUnk_03005A9A
+_03000928: .4byte gEmuAudio_Pulse1_Sweep
 _0300092C: .4byte gUnk_03005AAA
 
 	thumb_func_start sub_03000930
 sub_03000930: @ 0x03000930
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
-	ldr r1, _03000940 @ =gUnk_03005A9C
+	ldr r1, _03000940 @ =gEmuAudio_Pulse1_Lo
 	strh r0, [r1]
 	ldr r1, _03000944 @ =gUnk_03005AAC
 	movs r0, #1
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_03000940: .4byte gUnk_03005A9C
+_03000940: .4byte gEmuAudio_Pulse1_Lo
 _03000944: .4byte gUnk_03005AAC
 
 	thumb_func_start sub_03000948
@@ -464,7 +464,7 @@ sub_03000948: @ 0x03000948
 	movs r0, #0xf0
 	lsls r0, r0, #4
 	ands r0, r1
-	ldr r1, _03000974 @ =gUnk_03005A9C
+	ldr r1, _03000974 @ =gEmuAudio_Pulse1_Lo
 	ldrh r1, [r1]
 	orrs r0, r1
 	bl sub_03000848
@@ -474,7 +474,7 @@ _03000966:
 	.align 2, 0
 _0300096C: .4byte gUnk_03005AAC
 _03000970: .4byte gUnk_03005AA0
-_03000974: .4byte gUnk_03005A9C
+_03000974: .4byte gEmuAudio_Pulse1_Lo
 
 _03000978: .4byte gUnk_03005A80
 _0300097C: .4byte gUnk_03005A84
