@@ -10,7 +10,7 @@ endif
 MAKEFLAGS += --no-print-directory
 
 TOOLS_DIR := tools
-# Tool executables tu build
+# Tool executables to build
 TOOLS := gbafix preproc
 
 TOOLDIRS := $(TOOLS:%=$(TOOLS_DIR)/%)
