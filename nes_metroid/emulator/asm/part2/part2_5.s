@@ -26,7 +26,7 @@ _03001746:
 	bls _03001746
 	movs r3, #3
 	ldr r0, _0300177C @ =gUnk_03005B10
-	ldr r1, _03001780 @ =sUnk_0600E008
+	ldr r1, _03001780 @ =sEmulatorAudio_NoiseSampleRateTable
 	ldr r5, _03001784 @ =0x0000FFFF
 	movs r4, #0x80
 	lsls r4, r4, #9
@@ -50,16 +50,16 @@ _0300176A:
 	bx r0
 	.align 2, 0
 _0300177C: .4byte gUnk_03005B10
-_03001780: .4byte sUnk_0600E008
+_03001780: .4byte sEmulatorAudio_NoiseSampleRateTable
 _03001784: .4byte 0x0000FFFF
 
-	thumb_func_start sub_03001788
-sub_03001788: @ 0x03001788
-	ldr r1, _03001790 @ =gUnk_03005AFA
+	thumb_func_start EmulatorAudio_Noise_SetLengthCounter
+EmulatorAudio_Noise_SetLengthCounter: @ 0x03001788
+	ldr r1, _03001790 @ =gEmuAudio_Noise_LengthCounter
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_03001790: .4byte gUnk_03005AFA
+_03001790: .4byte gEmuAudio_Noise_LengthCounter
 
 	thumb_func_start sub_03001794
 sub_03001794: @ 0x03001794
@@ -70,7 +70,7 @@ sub_03001794: @ 0x03001794
 	ands r0, r1
 	cmp r0, #0
 	beq _030017A8
-	ldr r1, _030017C4 @ =gUnk_03005FC0
+	ldr r1, _030017C4 @ =gEmuAudio_Noise_Enable
 	movs r0, #1
 	strh r0, [r1]
 _030017A8:
@@ -87,7 +87,7 @@ _030017A8:
 	b _030017D4
 	.align 2, 0
 _030017C0: .4byte gEmuAudio_SndChn
-_030017C4: .4byte gUnk_03005FC0
+_030017C4: .4byte gEmuAudio_Noise_Enable
 _030017C8: .4byte gEmuAudio_Noise_Vol
 _030017CC: .4byte gUnk_03005AF4
 _030017D0:
@@ -100,7 +100,7 @@ _030017D4:
 	movs r0, #0xf
 	ands r0, r1
 	strh r0, [r2]
-	ldr r1, _03001830 @ =sUnk_030023DC
+	ldr r1, _03001830 @ =sEmulatorAudio_LengthCounterTable
 	ldr r2, _03001834 @ =gEmuAudio_Noise_Hi
 	ldrh r0, [r2]
 	lsrs r0, r0, #3
@@ -127,19 +127,19 @@ _03001806:
 	ldrb r0, [r0]
 	lsls r0, r0, #2
 	adds r0, r0, r5
-	bl sub_03001788
+	bl EmulatorAudio_Noise_SetLengthCounter
 	ldr r0, _03001838 @ =sUnk_03002988
 	str r4, [r0]
 	lsls r0, r4, #2
 	adds r0, r0, r5
-	bl sub_03001788
+	bl EmulatorAudio_Noise_SetLengthCounter
 	pop {r4, r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _03001828: .4byte gUnk_03005AF4
 _0300182C: .4byte gUnk_03005AF8
-_03001830: .4byte sUnk_030023DC
+_03001830: .4byte sEmulatorAudio_LengthCounterTable
 _03001834: .4byte gEmuAudio_Noise_Hi
 _03001838: .4byte sUnk_03002988
 _0300183C: .4byte gUnk_03005AF6
@@ -147,7 +147,7 @@ _0300183C: .4byte gUnk_03005AF6
 	thumb_func_start sub_03001840
 sub_03001840: @ 0x03001840
 	push {lr}
-	ldr r0, _0300185C @ =gUnk_03005FC0
+	ldr r0, _0300185C @ =gEmuAudio_Noise_Enable
 	ldrh r0, [r0]
 	cmp r0, #0
 	beq _03001856
@@ -161,7 +161,7 @@ _03001856:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0300185C: .4byte gUnk_03005FC0
+_0300185C: .4byte gEmuAudio_Noise_Enable
 _03001860: .4byte gUnk_03005AFE
 
 	thumb_func_start sub_03001864
@@ -178,8 +178,8 @@ sub_03001864: @ 0x03001864
 _03001874: .4byte gUnk_03005AF4
 _03001878: .4byte gUnk_03005AF8
 
-	thumb_func_start sub_0300187C
-sub_0300187C: @ 0x0300187C
+	thumb_func_start EmulatorAudio_Noise_WriteVolume
+EmulatorAudio_Noise_WriteVolume: @ 0x0300187C
 	push {r4, r5, r6, lr}
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -211,7 +211,7 @@ _030018B4: .4byte gUnk_03005AF4
 _030018B8:
 	cmp r6, #0
 	beq _030018D0
-	ldr r0, _030018D8 @ =gUnk_03005FC0
+	ldr r0, _030018D8 @ =gEmuAudio_Noise_Enable
 	ldrh r0, [r0]
 	cmp r0, #0
 	beq _030018D0
@@ -226,11 +226,11 @@ _030018D0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_030018D8: .4byte gUnk_03005FC0
+_030018D8: .4byte gEmuAudio_Noise_Enable
 _030018DC: .4byte gUnk_03005AF8
 
-	thumb_func_start sub_030018E0
-sub_030018E0: @ 0x030018E0
+	thumb_func_start EmulatorAudio_Noise_WriteLo
+EmulatorAudio_Noise_WriteLo: @ 0x030018E0
 	push {r4, lr}
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
@@ -278,8 +278,8 @@ _0300193A:
 	.align 2, 0
 _03001940: .4byte sUnk_03002846
 
-	thumb_func_start sub_03001944
-sub_03001944: @ 0x03001944
+	thumb_func_start EmulatorAudio_Noise_WriteHi
+EmulatorAudio_Noise_WriteHi: @ 0x03001944
 	push {lr}
 	lsls r0, r0, #0x18
 	lsrs r2, r0, #0x18
@@ -316,8 +316,8 @@ _0300197A:
 _03001988: .4byte sUnk_03002846
 _0300198C: .4byte gEmuAudio_Noise_Hi
 
-	thumb_func_start sub_03001990
-sub_03001990: @ 0x03001990
+	thumb_func_start EmulatorAudio_Noise_ClearVariables
+EmulatorAudio_Noise_ClearVariables: @ 0x03001990
 	push {r4, lr}
 	ldr r1, _030019E4 @ =gUnk_03005AE8
 	movs r0, #1
@@ -334,7 +334,7 @@ sub_03001990: @ 0x03001990
 	strh r1, [r0]
 	ldr r0, _030019F8 @ =gUnk_03005AF8
 	strh r1, [r0]
-	ldr r0, _030019FC @ =gUnk_03005AFA
+	ldr r0, _030019FC @ =gEmuAudio_Noise_LengthCounter
 	strh r1, [r0]
 	ldr r0, _03001A00 @ =gUnk_03005AFC
 	strh r1, [r0]
@@ -343,7 +343,7 @@ sub_03001990: @ 0x03001990
 	lsls r4, r4, #8
 	adds r0, r4, #0
 	strh r0, [r2]
-	ldr r0, _03001A08 @ =gUnk_03005FC0
+	ldr r0, _03001A08 @ =gEmuAudio_Noise_Enable
 	strh r1, [r0]
 	ldr r0, _03001A0C @ =gUnk_03005AFE
 	strh r1, [r0]
@@ -367,10 +367,10 @@ _030019EC: .4byte gUnk_03005AF0
 _030019F0: .4byte gUnk_03005AF4
 _030019F4: .4byte gUnk_03005AF6
 _030019F8: .4byte gUnk_03005AF8
-_030019FC: .4byte gUnk_03005AFA
+_030019FC: .4byte gEmuAudio_Noise_LengthCounter
 _03001A00: .4byte gUnk_03005AFC
 _03001A04: .4byte sUnk_03002846
-_03001A08: .4byte gUnk_03005FC0
+_03001A08: .4byte gEmuAudio_Noise_Enable
 _03001A0C: .4byte gUnk_03005AFE
 _03001A10: .4byte gEmuAudio_Noise_Vol
 _03001A14: .4byte gUnk_03005B02
@@ -520,8 +520,8 @@ sub_03001C0C: @ 0x03001C0C
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_03001C10
-sub_03001C10: @ 0x03001C10
+	thumb_func_start EmulatorAudio_SoundChannel_Write
+EmulatorAudio_SoundChannel_Write: @ 0x03001C10
 	push {r4, r5, lr}
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
@@ -558,8 +558,8 @@ _03001C4C:
 	.align 2, 0
 _03001C54: .4byte gEmuAudio_SndChn
 
-	thumb_func_start sub_03001C58
-sub_03001C58: @ 0x03001C58
+	thumb_func_start EmulatorAudio_FrameCounter_Write
+EmulatorAudio_FrameCounter_Write: @ 0x03001C58
 	push {lr}
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
@@ -570,13 +570,13 @@ sub_03001C58: @ 0x03001C58
 	cmp r1, #0
 	beq _03001C78
 	movs r0, #0xa0
-	bl sub_03000000
+	bl EmulatorAudio_SetTimer1Reload
 	b _03001C7E
 	.align 2, 0
 _03001C74: .4byte gEmuAudio_FrameCtr
 _03001C78:
 	movs r0, #0x80
-	bl sub_03000000
+	bl EmulatorAudio_SetTimer1Reload
 _03001C7E:
 	ldr r1, _03001CFC @ =gUnk_03005AA2
 	ldrh r0, [r1]
@@ -620,28 +620,28 @@ _03001CBA:
 	subs r0, #1
 	strh r0, [r1]
 _03001CC6:
-	ldr r1, _03001D14 @ =gUnk_03005AA8
+	ldr r1, _03001D14 @ =gEmuAudio_Pulse1_LengthCounter
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _03001CD2
 	subs r0, #1
 	strh r0, [r1]
 _03001CD2:
-	ldr r1, _03001D18 @ =gUnk_03005AC8
+	ldr r1, _03001D18 @ =gEmuAudio_Pulse2_LengthCounter
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _03001CDE
 	subs r0, #1
 	strh r0, [r1]
 _03001CDE:
-	ldr r1, _03001D1C @ =gUnk_03005AD4
+	ldr r1, _03001D1C @ =gEmuAudio_Triangle_LengthCounter
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _03001CEA
 	subs r0, #1
 	strh r0, [r1]
 _03001CEA:
-	ldr r1, _03001D20 @ =gUnk_03005AFA
+	ldr r1, _03001D20 @ =gEmuAudio_Noise_LengthCounter
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _03001CF6
@@ -657,10 +657,10 @@ _03001D04: .4byte gUnk_03005AF8
 _03001D08: .4byte gUnk_03005AD6
 _03001D0C: .4byte gUnk_03005AAA
 _03001D10: .4byte gUnk_03005ACA
-_03001D14: .4byte gUnk_03005AA8
-_03001D18: .4byte gUnk_03005AC8
-_03001D1C: .4byte gUnk_03005AD4
-_03001D20: .4byte gUnk_03005AFA
+_03001D14: .4byte gEmuAudio_Pulse1_LengthCounter
+_03001D18: .4byte gEmuAudio_Pulse2_LengthCounter
+_03001D1C: .4byte gEmuAudio_Triangle_LengthCounter
+_03001D20: .4byte gEmuAudio_Noise_LengthCounter
 
 	thumb_func_start sub_03001D24
 sub_03001D24: @ 0x03001D24
@@ -670,8 +670,8 @@ sub_03001D24: @ 0x03001D24
 	.align 2, 0
 _03001D2C: .4byte gUnk_03005FB8
 
-	thumb_func_start sub_03001D30
-sub_03001D30: @ 0x03001D30
+	thumb_func_start EmulatorAudio_ProcessApuAndMixBuffers
+EmulatorAudio_ProcessApuAndMixBuffers: @ 0x03001D30
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -679,12 +679,12 @@ sub_03001D30: @ 0x03001D30
 	push {r5, r6, r7}
 	adds r7, r0, #0
 	adds r4, r1, #0
-	ldr r6, _03001D68 @ =gUnk_03005B50
-	ldr r0, _03001D6C @ =gUnk_03005BF0
+	ldr r6, _03001D68 @ =gEmuAudio_Pulse1_Buffer
+	ldr r0, _03001D6C @ =gEmuAudio_Pulse2_Buffer
 	mov r8, r0
-	ldr r0, _03001D70 @ =gUnk_03005C90
+	ldr r0, _03001D70 @ =gEmuAudio_Triangle_Buffer
 	mov sb, r0
-	ldr r0, _03001D74 @ =gUnk_03005D30
+	ldr r0, _03001D74 @ =gEmuAudio_Noise_Buffer
 	mov sl, r0
 	movs r5, #0
 	ldr r0, _03001D78 @ =gUnk_03005FB8
@@ -699,13 +699,13 @@ sub_03001D30: @ 0x03001D30
 	bl sub_03000704
 	b _0300202E
 	.align 2, 0
-_03001D68: .4byte gUnk_03005B50
-_03001D6C: .4byte gUnk_03005BF0
-_03001D70: .4byte gUnk_03005C90
-_03001D74: .4byte gUnk_03005D30
+_03001D68: .4byte gEmuAudio_Pulse1_Buffer
+_03001D6C: .4byte gEmuAudio_Pulse2_Buffer
+_03001D70: .4byte gEmuAudio_Triangle_Buffer
+_03001D74: .4byte gEmuAudio_Noise_Buffer
 _03001D78: .4byte gUnk_03005FB8
 _03001D7C:
-	ldr r0, _03001EAC @ =gUnk_03005FCC
+	ldr r0, _03001EAC @ =gEmuAudio_Pulse1_Enable
 	ldrh r0, [r0]
 	cmp r0, #0
 	beq _03001DD6
@@ -728,11 +728,11 @@ _03001DA0:
 	ands r0, r1
 	cmp r0, #0
 	beq _03001DB4
-	ldr r0, _03001EBC @ =gUnk_03005AA0
+	ldr r0, _03001EBC @ =gEmuAudio_Pulse1_Timer
 	ldrh r0, [r0]
 	bl sub_03000848
 _03001DB4:
-	ldr r2, _03001EC0 @ =gUnk_03005AA8
+	ldr r2, _03001EC0 @ =gEmuAudio_Pulse1_LengthCounter
 	ldrh r0, [r2]
 	cmp r0, #0
 	beq _03001DC0
@@ -763,7 +763,7 @@ _03001DD6:
 	movs r0, #0x80
 	lsls r0, r0, #0x18
 	orrs r5, r0
-	ldr r0, _03001EAC @ =gUnk_03005FCC
+	ldr r0, _03001EAC @ =gEmuAudio_Pulse1_Enable
 	strh r1, [r0]
 	ldr r0, _03001ECC @ =gUnk_03005AA6
 	ldrh r0, [r0]
@@ -771,7 +771,7 @@ _03001DD6:
 	beq _03001E00
 	bl sub_03000790
 _03001E00:
-	ldr r0, _03001ED0 @ =gUnk_03005FD8
+	ldr r0, _03001ED0 @ =gEmuAudio_Pulse2_Enable
 	ldrh r0, [r0]
 	cmp r0, #0
 	beq _03001E5C
@@ -795,11 +795,11 @@ _03001E26:
 	ands r0, r1
 	cmp r0, #0
 	beq _03001E3A
-	ldr r0, _03001EE0 @ =gUnk_03005AC0
+	ldr r0, _03001EE0 @ =gEmuAudio_Pulse2_Timer
 	ldrh r0, [r0]
 	bl sub_03000E40
 _03001E3A:
-	ldr r2, _03001EE4 @ =gUnk_03005AC8
+	ldr r2, _03001EE4 @ =gEmuAudio_Pulse2_LengthCounter
 	ldrh r0, [r2]
 	cmp r0, #0
 	beq _03001E46
@@ -830,7 +830,7 @@ _03001E5C:
 	movs r0, #0x80
 	lsls r0, r0, #0x17
 	orrs r5, r0
-	ldr r0, _03001ED0 @ =gUnk_03005FD8
+	ldr r0, _03001ED0 @ =gEmuAudio_Pulse2_Enable
 	strh r1, [r0]
 	ldr r0, _03001EF0 @ =gUnk_03005AC6
 	ldrh r0, [r0]
@@ -838,7 +838,7 @@ _03001E5C:
 	beq _03001E86
 	bl sub_03000D38
 _03001E86:
-	ldr r0, _03001EF4 @ =gUnk_03005FB0
+	ldr r0, _03001EF4 @ =gEmuAudio_Triangle_Enable
 	ldrh r0, [r0]
 	cmp r0, #0
 	beq _03001F5E
@@ -856,25 +856,25 @@ _03001E86:
 	orrs r5, r0
 	b _03001F08
 	.align 2, 0
-_03001EAC: .4byte gUnk_03005FCC
+_03001EAC: .4byte gEmuAudio_Pulse1_Enable
 _03001EB0: .4byte gUnk_03005AAD
 _03001EB4: .4byte gUnk_03005A94
 _03001EB8: .4byte gEmuAudio_Pulse1_Sweep
-_03001EBC: .4byte gUnk_03005AA0
-_03001EC0: .4byte gUnk_03005AA8
+_03001EBC: .4byte gEmuAudio_Pulse1_Timer
+_03001EC0: .4byte gEmuAudio_Pulse1_LengthCounter
 _03001EC4: .4byte gEmuAudio_Pulse1_Vol
 _03001EC8: .4byte gUnk_03005AA4
 _03001ECC: .4byte gUnk_03005AA6
-_03001ED0: .4byte gUnk_03005FD8
+_03001ED0: .4byte gEmuAudio_Pulse2_Enable
 _03001ED4: .4byte gUnk_03005ACD
 _03001ED8: .4byte gUnk_03005AB4
 _03001EDC: .4byte gEmuAudio_Pulse2_Sweep
-_03001EE0: .4byte gUnk_03005AC0
-_03001EE4: .4byte gUnk_03005AC8
+_03001EE0: .4byte gEmuAudio_Pulse2_Timer
+_03001EE4: .4byte gEmuAudio_Pulse2_LengthCounter
 _03001EE8: .4byte gEmuAudio_Pulse2_Vol
 _03001EEC: .4byte gUnk_03005AC4
 _03001EF0: .4byte gUnk_03005AC6
-_03001EF4: .4byte gUnk_03005FB0
+_03001EF4: .4byte gEmuAudio_Triangle_Enable
 _03001EF8: .4byte gUnk_03005FD4
 _03001EFC: .4byte gUnk_03005ADA
 _03001F00:
@@ -882,7 +882,7 @@ _03001F00:
 	adds r1, r4, #0
 	bl sub_0300160C
 _03001F08:
-	ldr r0, _03001F30 @ =gUnk_03005AD4
+	ldr r0, _03001F30 @ =gEmuAudio_Triangle_LengthCounter
 	ldrh r1, [r0]
 	adds r6, r0, #0
 	cmp r1, #0
@@ -904,7 +904,7 @@ _03001F16:
 	adds r0, r1, #1
 	b _03001F46
 	.align 2, 0
-_03001F30: .4byte gUnk_03005AD4
+_03001F30: .4byte gEmuAudio_Triangle_LengthCounter
 _03001F34: .4byte gUnk_03005AD8
 _03001F38: .4byte gUnk_03005ADC
 _03001F3C: .4byte gUnk_03005ADA
@@ -941,10 +941,10 @@ _03001F5E:
 	movs r0, #0x80
 	lsls r0, r0, #0x16
 	orrs r5, r0
-	ldr r0, _03001FF0 @ =gUnk_03005FB0
+	ldr r0, _03001FF0 @ =gEmuAudio_Triangle_Enable
 	strh r1, [r0]
 _03001F80:
-	ldr r0, _03001FF4 @ =gUnk_03005FC0
+	ldr r0, _03001FF4 @ =gEmuAudio_Noise_Enable
 	ldrh r0, [r0]
 	cmp r0, #0
 	beq _03001FC4
@@ -961,7 +961,7 @@ _03001F80:
 	movs r0, #0
 	strb r0, [r2]
 _03001FA2:
-	ldr r2, _03002000 @ =gUnk_03005AFA
+	ldr r2, _03002000 @ =gEmuAudio_Noise_LengthCounter
 	ldrh r0, [r2]
 	cmp r0, #0
 	beq _03001FAE
@@ -992,18 +992,18 @@ _03001FC4:
 	movs r0, #0x80
 	lsls r0, r0, #0x15
 	orrs r5, r0
-	ldr r0, _03001FF4 @ =gUnk_03005FC0
+	ldr r0, _03001FF4 @ =gEmuAudio_Noise_Enable
 	strh r1, [r0]
 	b _03002016
 	.align 2, 0
 _03001FE4: .4byte gEmuAudio_Triangle_Linear
 _03001FE8: .4byte gUnk_03005AD8
 _03001FEC: .4byte gUnk_03005ADA
-_03001FF0: .4byte gUnk_03005FB0
-_03001FF4: .4byte gUnk_03005FC0
+_03001FF0: .4byte gEmuAudio_Triangle_Enable
+_03001FF4: .4byte gEmuAudio_Noise_Enable
 _03001FF8: .4byte gUnk_03005B08
 _03001FFC: .4byte gUnk_03005AF4
-_03002000: .4byte gUnk_03005AFA
+_03002000: .4byte gEmuAudio_Noise_LengthCounter
 _03002004: .4byte gEmuAudio_Noise_Vol
 _03002008: .4byte gUnk_03005AFE
 _0300200C:
@@ -1030,21 +1030,21 @@ _0300202E:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_0300203C
-sub_0300203C: @ 0x0300203C
+	thumb_func_start EmulatorAudio_SetupEngine
+EmulatorAudio_SetupEngine: @ 0x0300203C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #8
-	ldr r0, _03002154 @ =gUnk_03005B50
+	ldr r0, _03002154 @ =gEmuAudio_Pulse1_Buffer
 	mov r8, r0
 	bl sub_0300173C
 	movs r3, #0
 	movs r2, #0
 	mov sl, r8
-	ldr r1, _03002158 @ =gUnk_03005BF0
+	ldr r1, _03002158 @ =gEmuAudio_Pulse2_Buffer
 	mov sb, r1
 	mov ip, r8
 	mov r4, sb
@@ -1056,40 +1056,40 @@ _0300205E:
 	subs r0, #4
 	stm r0!, {r2}
 	stm r4!, {r2}
-	ldr r0, _0300215C @ =gUnk_03005C90
+	ldr r0, _0300215C @ =gEmuAudio_Triangle_Buffer
 	adds r0, r1, r0
 	str r2, [r0]
-	ldr r0, _03002160 @ =gUnk_03005D30
+	ldr r0, _03002160 @ =gEmuAudio_Noise_Buffer
 	adds r0, r1, r0
 	str r2, [r0]
-	ldr r7, _03002164 @ =gUnk_03005DD0
+	ldr r7, _03002164 @ =gEmuAudio_OutputBuffer0
 	adds r0, r1, r7
 	str r2, [r0]
-	ldr r6, _03002168 @ =gUnk_03005E70
+	ldr r6, _03002168 @ =gEmuAudio_OutputBuffer1
 	adds r0, r1, r6
 	str r2, [r0]
-	ldr r5, _0300216C @ =gUnk_03005F10
+	ldr r5, _0300216C @ =gEmuAudio_OutputBuffer2
 	adds r1, r1, r5
 	str r2, [r1]
 	adds r3, #1
 	cmp r3, #0x27
 	bls _0300205E
-	ldr r0, _03002170 @ =gUnk_03005A80
+	ldr r0, _03002170 @ =gEmuAudio_Pulse1_BufferPtr
 	mov r1, sl
 	str r1, [r0]
-	ldr r0, _03002174 @ =gUnk_03005A84
+	ldr r0, _03002174 @ =gEmuAudio_Pulse2_BufferPtr
 	mov r1, sb
 	str r1, [r0]
-	ldr r0, _03002178 @ =gUnk_03005A88
-	ldr r1, _0300215C @ =gUnk_03005C90
+	ldr r0, _03002178 @ =gEmuAudio_Triangle_BufferPtr
+	ldr r1, _0300215C @ =gEmuAudio_Triangle_Buffer
 	str r1, [r0]
-	ldr r0, _0300217C @ =gUnk_03005A8C
-	ldr r1, _03002160 @ =gUnk_03005D30
+	ldr r0, _0300217C @ =gEmuAudio_Noise_BufferPtr
+	ldr r1, _03002160 @ =gEmuAudio_Noise_Buffer
 	str r1, [r0]
 	ldr r0, _03002180 @ =gUnk_03005A90
 	movs r4, #0
 	str r4, [r0]
-	ldr r0, _03002184 @ =gUnk_03005FD0
+	ldr r0, _03002184 @ =gEmuAudio_Pulse1_Frequency
 	str r4, [r0]
 	ldr r0, _03002188 @ =gUnk_03005AD0
 	str r4, [r0]
@@ -1144,12 +1144,12 @@ _0300205E:
 	lsrs r3, r3, #0x10
 	movs r0, #0xa0
 	str r0, [sp]
-	ldr r0, _030021A4 @ =sub_03001D30
+	ldr r0, _030021A4 @ =EmulatorAudio_ProcessApuAndMixBuffers
 	str r0, [sp, #4]
 	adds r0, r7, #0
 	adds r1, r6, #0
 	adds r2, r5, #0
-	bl sub_030002A4
+	bl EmulatorAudio_SetupOutput
 	add sp, #8
 	pop {r3, r4, r5}
 	mov r8, r3
@@ -1159,19 +1159,19 @@ _0300205E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_03002154: .4byte gUnk_03005B50
-_03002158: .4byte gUnk_03005BF0
-_0300215C: .4byte gUnk_03005C90
-_03002160: .4byte gUnk_03005D30
-_03002164: .4byte gUnk_03005DD0
-_03002168: .4byte gUnk_03005E70
-_0300216C: .4byte gUnk_03005F10
-_03002170: .4byte gUnk_03005A80
-_03002174: .4byte gUnk_03005A84
-_03002178: .4byte gUnk_03005A88
-_0300217C: .4byte gUnk_03005A8C
+_03002154: .4byte gEmuAudio_Pulse1_Buffer
+_03002158: .4byte gEmuAudio_Pulse2_Buffer
+_0300215C: .4byte gEmuAudio_Triangle_Buffer
+_03002160: .4byte gEmuAudio_Noise_Buffer
+_03002164: .4byte gEmuAudio_OutputBuffer0
+_03002168: .4byte gEmuAudio_OutputBuffer1
+_0300216C: .4byte gEmuAudio_OutputBuffer2
+_03002170: .4byte gEmuAudio_Pulse1_BufferPtr
+_03002174: .4byte gEmuAudio_Pulse2_BufferPtr
+_03002178: .4byte gEmuAudio_Triangle_BufferPtr
+_0300217C: .4byte gEmuAudio_Noise_BufferPtr
 _03002180: .4byte gUnk_03005A90
-_03002184: .4byte gUnk_03005FD0
+_03002184: .4byte gEmuAudio_Pulse1_Frequency
 _03002188: .4byte gUnk_03005AD0
 _0300218C: .4byte gUnk_03005FDC
 _03002190: .4byte gUnk_03005AE8
@@ -1179,7 +1179,7 @@ _03002194: .4byte gUnk_03005A96
 _03002198: .4byte gUnk_03005AB6
 _0300219C: .4byte gEmuAudio_SndChn
 _030021A0: .4byte gEmuAudio_FrameCtr
-_030021A4: .4byte sub_03001D30
+_030021A4: .4byte EmulatorAudio_ProcessApuAndMixBuffers
 
 	thumb_func_start sub_030021A8
 sub_030021A8: @ 0x030021A8
